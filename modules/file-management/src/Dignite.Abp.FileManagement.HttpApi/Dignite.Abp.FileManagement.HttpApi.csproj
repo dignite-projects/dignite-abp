@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.3.3" />
+    <ProjectReference Include="..\Dignite.Abp.FileManagement.Application.Contracts\Dignite.Abp.FileManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

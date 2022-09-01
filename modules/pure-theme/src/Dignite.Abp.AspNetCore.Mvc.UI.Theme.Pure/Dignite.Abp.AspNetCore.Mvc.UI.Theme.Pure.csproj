@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AssemblyName>Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure</AssemblyName>
+    <PackageId>Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\**\*.*" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="5.3.3" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="5.3.3" />
+	</ItemGroup>
+
+</Project>

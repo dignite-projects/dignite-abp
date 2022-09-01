@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.3.3" />
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.BlobStoring.InfoPersistent\Dignite.Abp.BlobStoring.InfoPersistent.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.FileManagement.Domain.Shared\Dignite.Abp.FileManagement.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dignite\Abp\FileManagement\Directories\" />
+  </ItemGroup>
+
+
+</Project>

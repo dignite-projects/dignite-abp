@@ -1,0 +1,63 @@
+﻿@using Dignite.Abp.FieldCustomizing.Blazor
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.DataDictionary
+@using Dignite.Abp.FieldCustomizing
+@inherits FieldControlComponentBase<DataDictionaryFieldProvider,DataDictionaryConfiguration>
+
+    <Field Horizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">@CustomizeField.Definition.DisplayName</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHeaderCell>名称</TableHeaderCell>
+                        <TableHeaderCell>是否激活</TableHeaderCell>
+                        <TableHeaderCell>
+                            <Button @onclick="@(e => AddDataDictionary())"><Icon Name="IconName.PlusCircle" /></Button>
+                        </TableHeaderCell>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    @foreach(var item in dataDictionaries)
+                    {
+                        <DataDictionaryTableRowComponent DataDictionaries="@dataDictionaries" Item="@item" OnChanageCallback="DataDictionaryChanage" Level="1"></DataDictionaryTableRowComponent>
+                    }
+                </TableBody>
+            </Table>
+        </FieldBody>
+    </Field>
+
+
+@code{
+
+    private List<DataDictionary> dataDictionaries;
+
+    protected override void OnParametersSet()
+    {
+        //
+        var value = CustomizeField.Entity.GetField(CustomizeField.Definition.Name);
+        if (value == null)
+        {
+            AddDataDictionary();
+        }
+        else
+        {
+            dataDictionaries = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DataDictionary>>(value.ToString());
+        }
+    }
+
+    private void AddDataDictionary()
+    {
+        if (dataDictionaries == null)
+        {
+            dataDictionaries = new List<DataDictionary>();
+        }
+        dataDictionaries.Add(new DataDictionary(Guid.NewGuid(), ""));
+        CustomizeField.Entity.SetField(CustomizeField.Definition.Name, Newtonsoft.Json.JsonConvert.SerializeObject(dataDictionaries) );
+    }
+
+    private void DataDictionaryChanage(MouseEventArgs e)
+    {
+        CustomizeField.Entity.SetField(CustomizeField.Definition.Name, Newtonsoft.Json.JsonConvert.SerializeObject(dataDictionaries) );
+    }
+}

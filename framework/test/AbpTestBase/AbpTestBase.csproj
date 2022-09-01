@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\common.test.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>AbpTestBase</AssemblyName>
+    <PackageId>AbpTestBase</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.TestBase" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+    <PackageReference Include="NSubstitute" Version="$(NSubstitutePackageVersion)" />
+    <PackageReference Include="Shouldly" Version="$(ShouldlyPackageVersion)" />
+    <PackageReference Include="xunit" Version="$(xUnitPackageVersion)" />
+    <PackageReference Include="xunit.extensibility.execution" Version="$(xUnitExtensibilityExecutionPackageVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitRunnerVisualStudioPackageVersion)" />
+  </ItemGroup>
+
+</Project>

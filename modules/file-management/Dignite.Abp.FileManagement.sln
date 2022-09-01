@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.Domain.Shared", "src\Dignite.Abp.FileManagement.Domain.Shared\Dignite.Abp.FileManagement.Domain.Shared.csproj", "{D64C1577-4929-4B60-939E-96DE1534891A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.Application.Contracts", "src\Dignite.Abp.FileManagement.Application.Contracts\Dignite.Abp.FileManagement.Application.Contracts.csproj", "{BD65D04F-08D5-40C1-8C24-77CA0BACB877}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.Application", "src\Dignite.Abp.FileManagement.Application\Dignite.Abp.FileManagement.Application.csproj", "{78040F9E-3501-4A40-82DF-00A597710F35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{649A3FFA-182F-4E56-9717-E6A9A2BEC545}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.EntityFrameworkCore", "src\Dignite.Abp.FileManagement.EntityFrameworkCore\Dignite.Abp.FileManagement.EntityFrameworkCore.csproj", "{0CE86223-D31D-4315-A1F5-87BA3EE1B844}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.HttpApi", "src\Dignite.Abp.FileManagement.HttpApi\Dignite.Abp.FileManagement.HttpApi.csproj", "{077AA5F8-8B61-420C-A6B5-0150A66FDB34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileManagement.Domain", "src\Dignite.Abp.FileManagement.Domain\Dignite.Abp.FileManagement.Domain.csproj", "{5ED05811-0062-4A04-8ECA-64C1A47DDAE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "framework", "framework", "{2518807D-B8F9-4472-826C-8C54CC0A1EEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.BlobStoring.InfoPersistent", "..\..\framework\src\Dignite.Abp.BlobStoring.InfoPersistent\Dignite.Abp.BlobStoring.InfoPersistent.csproj", "{D9D9C224-52DB-4BDA-9CDF-5047D106B200}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D64C1577-4929-4B60-939E-96DE1534891A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64C1577-4929-4B60-939E-96DE1534891A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64C1577-4929-4B60-939E-96DE1534891A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64C1577-4929-4B60-939E-96DE1534891A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD65D04F-08D5-40C1-8C24-77CA0BACB877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD65D04F-08D5-40C1-8C24-77CA0BACB877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD65D04F-08D5-40C1-8C24-77CA0BACB877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD65D04F-08D5-40C1-8C24-77CA0BACB877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78040F9E-3501-4A40-82DF-00A597710F35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78040F9E-3501-4A40-82DF-00A597710F35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78040F9E-3501-4A40-82DF-00A597710F35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78040F9E-3501-4A40-82DF-00A597710F35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE86223-D31D-4315-A1F5-87BA3EE1B844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE86223-D31D-4315-A1F5-87BA3EE1B844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE86223-D31D-4315-A1F5-87BA3EE1B844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE86223-D31D-4315-A1F5-87BA3EE1B844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077AA5F8-8B61-420C-A6B5-0150A66FDB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077AA5F8-8B61-420C-A6B5-0150A66FDB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077AA5F8-8B61-420C-A6B5-0150A66FDB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077AA5F8-8B61-420C-A6B5-0150A66FDB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED05811-0062-4A04-8ECA-64C1A47DDAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED05811-0062-4A04-8ECA-64C1A47DDAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED05811-0062-4A04-8ECA-64C1A47DDAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED05811-0062-4A04-8ECA-64C1A47DDAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D9C224-52DB-4BDA-9CDF-5047D106B200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D9C224-52DB-4BDA-9CDF-5047D106B200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D9C224-52DB-4BDA-9CDF-5047D106B200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D9C224-52DB-4BDA-9CDF-5047D106B200}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D64C1577-4929-4B60-939E-96DE1534891A} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{BD65D04F-08D5-40C1-8C24-77CA0BACB877} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{78040F9E-3501-4A40-82DF-00A597710F35} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{0CE86223-D31D-4315-A1F5-87BA3EE1B844} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{077AA5F8-8B61-420C-A6B5-0150A66FDB34} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{5ED05811-0062-4A04-8ECA-64C1A47DDAE5} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{D9D9C224-52DB-4BDA-9CDF-5047D106B200} = {2518807D-B8F9-4472-826C-8C54CC0A1EEC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}
+	EndGlobalSection
+EndGlobal

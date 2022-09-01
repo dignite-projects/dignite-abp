@@ -1,0 +1,505 @@
+{
+  "modules": {
+    "FileManagement": {
+      "rootPath": "FileManagement",
+      "remoteServiceName": "DigniteAbpFileManagement",
+      "controllers": {
+        "Dignite.Abp.FileManagement.FilesController": {
+          "controllerName": "Files",
+          "controllerGroupName": "Files",
+          "isRemoteService": true,
+          "apiVersion": null,
+          "type": "Dignite.Abp.FileManagement.FilesController",
+          "interfaces": [
+            {
+              "type": "Dignite.Abp.FileManagement.IFilesAppService"
+            }
+          ],
+          "actions": {
+            "SaveUrlAsyncByContainerNameAndInput": {
+              "uniqueName": "SaveUrlAsyncByContainerNameAndInput",
+              "name": "SaveUrlAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/files/save/{containerName}/remote-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.FileManagement.SaveRemoteFileInput, Dignite.Abp.FileManagement.Application.Contracts",
+                  "type": "Dignite.Abp.FileManagement.SaveRemoteFileInput",
+                  "typeSimple": "Dignite.Abp.FileManagement.SaveRemoteFileInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dignite.Abp.FileManagement.SaveRemoteFileInput",
+                  "typeSimple": "Dignite.Abp.FileManagement.SaveRemoteFileInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dignite.Abp.FileManagement.FileDto",
+                "typeSimple": "Dignite.Abp.FileManagement.FileDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "SaveAsyncByContainerNameAndInput": {
+              "uniqueName": "SaveAsyncByContainerNameAndInput",
+              "name": "SaveAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/files/save/{containerName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.FileManagement.SaveStreamInput, Dignite.Abp.FileManagement.Application.Contracts",
+                  "type": "Dignite.Abp.FileManagement.SaveStreamInput",
+                  "typeSimple": "Dignite.Abp.FileManagement.SaveStreamInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "File",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EntityType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EntityId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Dignite.Abp.FileManagement.FileDto",
+                "typeSimple": "Dignite.Abp.FileManagement.FileDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "GetBlobContainerConfigurationAsyncByContainerName": {
+              "uniqueName": "GetBlobContainerConfigurationAsyncByContainerName",
+              "name": "GetBlobContainerConfigurationAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/files/{containerName}/configuration",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dignite.Abp.FileManagement.BlobContainerConfigurationDto",
+                "typeSimple": "Dignite.Abp.FileManagement.BlobContainerConfigurationDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "DownloadAsyncByContainerNameAndBlobNameAndFileName": {
+              "uniqueName": "DownloadAsyncByContainerNameAndBlobNameAndFileName",
+              "name": "DownloadAsync",
+              "httpMethod": "POST",
+              "url": "api/file-management/files/{containerName}/{blobName}/download",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "blobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "fileName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "blobName",
+                  "name": "blobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "fileName",
+                  "name": "fileName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.FileResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.FileResult"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.FilesController"
+            },
+            "GetFileAsyncByContainerNameAndBlobName": {
+              "uniqueName": "GetFileAsyncByContainerNameAndBlobName",
+              "name": "GetFileAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/files/{containerName}/{blobName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "blobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "blobName",
+                  "name": "blobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "GetListAsyncByEntityTypeAndEntityId": {
+              "uniqueName": "GetListAsyncByEntityTypeAndEntityId",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/file-management/files",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "entityType",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "entityId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "entityType",
+                  "name": "entityType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "entityId",
+                  "name": "entityId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.ListResultDto<Dignite.Abp.FileManagement.FileDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.ListResultDto<Dignite.Abp.FileManagement.FileDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "DeleteAsyncByContainerNameAndBlobName": {
+              "uniqueName": "DeleteAsyncByContainerNameAndBlobName",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/file-management/files/{containerName}/{blobName}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "containerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "blobName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "containerName",
+                  "name": "containerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "blobName",
+                  "name": "blobName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            },
+            "DeleteByEntityAsyncByEntityTypeAndEntityId": {
+              "uniqueName": "DeleteByEntityAsyncByEntityTypeAndEntityId",
+              "name": "DeleteByEntityAsync",
+              "httpMethod": "DELETE",
+              "url": "api/file-management/files/delete-by-entity",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "entityType",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "entityId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "entityType",
+                  "name": "entityType",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "entityId",
+                  "name": "entityId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.FileManagement.IFilesAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

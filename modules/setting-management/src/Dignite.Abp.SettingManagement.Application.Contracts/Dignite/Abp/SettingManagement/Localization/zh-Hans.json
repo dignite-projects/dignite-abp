@@ -1,0 +1,16 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "SettingManagement": "设置管理",
+    "OrganizationUnits": "组织机构",
+    "NewRootUnit": "新建根机构",
+    "NewSubUnit": "新建子机构",
+    "UnitProperties": "机构属性",
+    "Members": "用户",
+    "AddMembers": "添加人员",
+    "SelectMembers": "选择用户",
+    "SelectedMembers": "已选用户",
+    "NoUserSelected": "尚未选择用户。",
+    "UsernameOrEmailOrNameOrPhoneNumber": "用户名/Email/姓名/手机号"
+  }
+}

@@ -1,0 +1,57 @@
+﻿@using Dignite.Abp.FieldCustomizing.Blazor
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.DateEdit
+@using Dignite.Abp.FieldCustomizing
+@inherits FieldControlComponentBase<DateEditFieldProvider,DateEditConfiguration>
+
+<Validation Validator="@ValidateIsRequired">
+    <Field Horizontal="@(!HideFieldLable)">
+        <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+            <DateEdit TValue="DateTime?" 
+            InputMode="(Blazorise.DateInputMode)Enum.Parse(typeof(Blazorise.DateInputMode),Configuration.InputMode.ToString())"
+            Max="@Configuration.Max"
+            Min="@Configuration.Min"
+            Date="@value" 
+            DateChanged="@OnValueChanged"
+            />
+            <FieldHelp>@Configuration.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+
+@code{
+    private DateTime? value = null;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null) != null)
+        {
+            DateTime convertValue;
+            if (DateTime.TryParse(CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null).ToString(), out convertValue))
+            {
+                value = convertValue;
+            }
+        }
+    }
+
+
+    void ValidateIsRequired( ValidatorEventArgs e )
+    {
+        var value = Convert.ToString( e.Value );
+        if(Configuration.Required)
+        {
+            e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
+    }
+
+    Task OnValueChanged(DateTime? value )
+    {
+        this.value = value;
+        CustomizeField.Entity.SetField(CustomizeField.Definition.Name, value);
+
+        return Task.CompletedTask;
+    }
+
+}

@@ -1,0 +1,19 @@
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Http.Extensions
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch
+@model LanguageSwitchViewComponentModel
+@if (Model.OtherLanguages.Any())
+{
+<div class="btn-group">
+    <button class="btn rounded-circle btn-outline-dark border-0" type="button" id="currentLanguage" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-language" aria-hidden="true"></i>
+    </button>
+
+        <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="currentLanguage">
+            @foreach (var language in Model.OtherLanguages)
+            {
+                <a class="dropdown-item" href="~/Abp/Languages/Switch?culture=@(language.CultureName)&uiCulture=@(language.UiCultureName)&returnUrl=@(System.Net.WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery()))">@language.DisplayName</a>
+            }
+        </div>
+    </div> 
+}

@@ -1,0 +1,143 @@
+@page "/setting-management/global-settings"
+@using Dignite.Abp.FieldCustomizing
+@using Dignite.Abp.FieldCustomizing.Blazor
+@using Dignite.Abp.SettingManagement.Localization
+@using Volo.Abp.AspNetCore.Components
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+
+@inject IGlobalSettingsAppService settingsAppService
+@inject IFieldControlComponentSelector fieldControlComponentSelector
+@inherits AbpComponentBase
+@code
+{
+    private IReadOnlyList<SettingNavigationDto> SettingNavigations;
+    protected Validations ValidationsRef;
+    string selectedTab;
+    private SettingObject settingObject= new SettingObject();
+
+    public GlobalSettings()
+    {
+        LocalizationResource = typeof(DigniteAbpSettingManagementResource);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        SettingNavigations = (await settingsAppService.GetAllAsync()).Items;
+        foreach (var settingNav in SettingNavigations)
+        {
+            foreach (var setting in settingNav.Settings)
+            {
+                settingObject.CustomizedFields.Add(setting.Name,setting.Value);
+            }
+        }
+        if (SettingNavigations.Any())
+        {
+            selectedTab = SettingNavigations[0].Name;
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private Task OnSelectedTabChanged( string name )
+    {
+        selectedTab = name;
+
+        return Task.CompletedTask;
+    }
+
+    private async Task SaveAsync()
+    {        
+        try
+        {
+            var validate = true;
+            if (ValidationsRef != null)
+            {
+                validate = await ValidationsRef.ValidateAll();
+            }
+            if (validate)
+            {
+                var settingNav = SettingNavigations.Single(m => m.Name == selectedTab);
+                var input = new UpdateGlobalSettingsInputForClientProxy(settingNav.Settings);
+                input.NavigationName = settingNav.Name;
+                input.CustomizedFields = settingObject.CustomizedFields;
+
+                await settingsAppService.UpdateAsync(input);
+            }
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }
+    }
+
+    Dictionary<string, object> GetSettingFormControlComponentParameters(SettingDto setting)
+    { 
+        var parameters = new Dictionary<string, object>();
+        parameters.Add("CustomizeField", 
+            new Abp.FieldCustomizing.CustomizeField(
+                settingObject, 
+                new BasicCustomizeFieldDefinition(setting.Name,setting.DisplayName,setting.FieldProviderName,setting.Value,setting.FieldConfiguration)
+            ));
+
+        return parameters;
+    }
+}
+
+<PageHeader Title="@L["SettingManagement"]"></PageHeader>
+<Blazorise.Form>
+    <Blazorise.Validations @ref="@ValidationsRef" Model="@settingObject" ValidateOnLoad="false">  
+@if(SettingNavigations!=null)
+{
+<Tabs TabPosition="TabPosition.Start" Pills="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
+    <Items>
+        @foreach(var settingNav in SettingNavigations)
+        {
+            <Tab Name="@settingNav.Name">@settingNav.DisplayName</Tab>
+        }
+    </Items>
+    <Content>
+            @foreach(var settingNav in SettingNavigations)
+            {
+                var groups = settingNav.Settings.Where(s => s.Group != null).Select(s=>s.Group).Distinct().ToList();
+                var ungroupedSettings = settingNav.Settings.Where(s => s.Group == null);
+                <TabPanel Name="@settingNav.Name">   
+                    @if (groups.Any())
+                    {
+                        foreach (var group in groups)
+                        {
+                            <h5>
+                                @group
+                            </h5>                 
+                            <Card Class="mb-3">
+                                <CardBody>
+                            @foreach(var setting in settingNav.Settings.Where(s=>s.Group==group).ToList())
+                            {
+                                var component = fieldControlComponentSelector.Get(setting.FieldProviderName);
+                                var parameters = GetSettingFormControlComponentParameters(setting);
+                                <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                            }
+                                </CardBody>
+                            </Card>
+                        }
+                    }
+                    @if (ungroupedSettings.Any())
+                    {
+                    <Card Class="mb-3">
+                        <CardBody>
+                        @foreach (var setting in ungroupedSettings)
+                        {
+                            var component = fieldControlComponentSelector.Get(setting.FieldProviderName);
+                            var parameters = GetSettingFormControlComponentParameters(setting);
+                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                        }     
+                        </CardBody>
+                    </Card>  
+                    }
+                                            
+                </TabPanel>
+            }
+        <Button Color="Color.Primary" Clicked="@SaveAsync">@L["Save"]</Button>
+    </Content>
+</Tabs>
+}
+    </Blazorise.Validations>
+</Blazorise.Form>

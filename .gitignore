@@ -350,5 +350,8 @@ MigrationBackup/
 .ionide/
 /modules/BlobStoringManagement/MSBuild_Logs
 
+# vs for Mac
+.DS_Store
+
 # 
 */wwwroot/libs/*

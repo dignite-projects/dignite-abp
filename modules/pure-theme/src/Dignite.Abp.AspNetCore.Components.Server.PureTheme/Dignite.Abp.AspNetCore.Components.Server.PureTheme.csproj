@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="5.3.3" />
+		<ProjectReference Include="..\Dignite.Abp.AspNetCore.Components.Web.PureTheme\Dignite.Abp.AspNetCore.Components.Web.PureTheme.csproj" />
+	</ItemGroup>
+</Project>

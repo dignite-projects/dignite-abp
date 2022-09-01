@@ -1,0 +1,50 @@
+﻿
+@if (RootMenuItem != null && !RootMenuItem.IsLeaf)
+{
+<Bar @ref="@Sidebar" Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" ThemeContrast="ThemeContrast.Light"
+     Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide">    
+    <BarMenu>
+        <BarStart>
+                @foreach (var item in RootMenuItem.Items)
+                {
+                    if (item.Url.IsNullOrEmpty() && !item.IsLeaf)
+                    {
+                        <BarItem>
+                            <BarDropdown Visible="true">
+                            <BarDropdownToggle>
+                                @item.DisplayName
+                            </BarDropdownToggle>
+                            <BarDropdownMenu>
+                                @foreach (var cItem in item.Items)
+                                {
+                                <BarDropdownItem To="@cItem.Url.TrimStart('/', '~')" Target="new Target(cItem.Target)">
+                                @if (cItem.Icon != null)
+                                    {
+                                        <i class="nav-link-icon @cItem.Icon"></i> 
+                                    }
+                                 @cItem.DisplayName    
+                                </BarDropdownItem>
+                                }
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
+                    }
+                    else
+                    {
+                        <BarItem>
+                            <BarLink To="@item.Url.TrimStart('/', '~')" Target="new Target(item.Target)">
+                                @if (item.Icon != null)
+                                {
+                                    <i class="nav-link-icon @item.Icon"></i> 
+                                }
+                             @item.DisplayName
+                            </BarLink>
+                        </BarItem>                        
+                    }                    
+                }
+        </BarStart>
+        <BarEnd>
+        </BarEnd>
+    </BarMenu>
+</Bar>
+}

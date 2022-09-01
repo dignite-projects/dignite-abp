@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.FileExplorer.Domain.Shared": {
+      "path": "src/Dignite.FileExplorer.Domain.Shared/Dignite.FileExplorer.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.Domain": {
+      "path": "src/Dignite.FileExplorer.Domain/Dignite.FileExplorer.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.Application.Contracts": {
+      "path": "src/Dignite.FileExplorer.Application.Contracts/Dignite.FileExplorer.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.Application": {
+      "path": "src/Dignite.FileExplorer.Application/Dignite.FileExplorer.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.EntityFrameworkCore": {
+      "path": "src/Dignite.FileExplorer.EntityFrameworkCore/Dignite.FileExplorer.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.MongoDB": {
+      "path": "src/Dignite.FileExplorer.MongoDB/Dignite.FileExplorer.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.HttpApi": {
+      "path": "src/Dignite.FileExplorer.HttpApi/Dignite.FileExplorer.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.HttpApi.Client": {
+      "path": "src/Dignite.FileExplorer.HttpApi.Client/Dignite.FileExplorer.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.FileExplorer.TestBase": {
+      "path": "test/Dignite.FileExplorer.TestBase/Dignite.FileExplorer.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.FileExplorer.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.FileExplorer.EntityFrameworkCore.Tests/Dignite.FileExplorer.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.FileExplorer.MongoDB.Tests": {
+      "path": "test/Dignite.FileExplorer.MongoDB.Tests/Dignite.FileExplorer.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.FileExplorer.Domain.Tests": {
+      "path": "test/Dignite.FileExplorer.Domain.Tests/Dignite.FileExplorer.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.FileExplorer.Application.Tests": {
+      "path": "test/Dignite.FileExplorer.Application.Tests/Dignite.FileExplorer.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.FileExplorer.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Dignite.FileExplorer.HttpApi.Client.ConsoleTestApp/Dignite.FileExplorer.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

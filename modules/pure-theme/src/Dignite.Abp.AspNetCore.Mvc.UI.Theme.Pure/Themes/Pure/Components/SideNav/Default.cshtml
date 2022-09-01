@@ -1,0 +1,27 @@
+﻿@using Volo.Abp.UI.Navigation
+@model ApplicationMenuItem
+
+    @if(Model!=null && !Model.IsLeaf)
+    {
+<div class="side-navbar" id="sideNavbar">
+    <div class="side-navbar-container">
+    <nav class="nav nav-pills flex-column">
+        @foreach (var item in Model.Items)
+        {
+            if (item.Url.IsNullOrEmpty() && !item.IsLeaf)
+            {
+                <h3 class="side-nav-group-title">@item.DisplayName</h3>
+                @foreach (var cItem in item.Items)
+                {
+                    @await Html.PartialAsync("_MenuItem.cshtml", cItem)
+                }
+            }
+            else
+            {
+                @await Html.PartialAsync("_MenuItem.cshtml", item)
+            }
+       }
+    </nav>
+    </div>
+</div>
+    }

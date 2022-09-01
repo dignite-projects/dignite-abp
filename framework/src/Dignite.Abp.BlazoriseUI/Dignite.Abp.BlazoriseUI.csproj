@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<Import Project="..\..\..\configureawait.props" />
+	<Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+	  <PackageReference Include="Volo.Abp.BlazoriseUI" Version="5.3.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="wwwroot\libs\abp\js\blazorise.js">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+
+</Project>

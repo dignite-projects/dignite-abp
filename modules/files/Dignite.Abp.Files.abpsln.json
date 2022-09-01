@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.Abp.Files": {
+      "path": "Dignite.Abp.Files.abpmdl.json"
+    }
+  }
+}

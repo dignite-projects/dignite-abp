@@ -1,0 +1,46 @@
+﻿@using Volo.Abp.UI.Navigation
+@model ApplicationMenu
+@functions{    
+    private string GetNavUrl(ApplicationMenuItem menuItem)
+    {
+        string url = string.Empty;
+        if (menuItem.Url.IsNullOrEmpty())
+        {
+            if (menuItem.Items.Any())
+            {
+                foreach (var children in menuItem.Items)
+                {
+                    return GetNavUrl(children);
+                }
+            }
+        }
+        else
+            url = menuItem.Url;
+
+
+        return Url.Content(url);
+    }
+}
+
+@if (Model != null)
+{
+<ul class="navbar-nav mx-auto main-navbar-nav">
+@foreach (var menuItem in Model.Items)
+{
+    var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";
+    var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+    var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+    var url = GetNavUrl(menuItem);
+    
+    <li class="nav-item @cssClass @disabled" @elementId>
+        <a class="nav-link" href="@url" target="@menuItem.Target">
+            @if (menuItem.Icon != null)
+            {
+                <i class="nav-link-icon @menuItem.Icon"></i>
+            }
+            @menuItem.DisplayName
+        </a>
+    </li>
+}
+</ul>
+}

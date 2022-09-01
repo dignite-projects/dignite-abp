@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Dignite.Abp.NotificationCenter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.3" />
+    <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Domain\Dignite.Abp.NotificationCenter.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

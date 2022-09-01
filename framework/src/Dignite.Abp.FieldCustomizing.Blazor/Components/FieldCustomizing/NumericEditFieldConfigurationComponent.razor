@@ -1,0 +1,56 @@
+﻿@using Dignite.Abp.FieldCustomizing.Blazor
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.NumericEdit
+@inherits FieldConfigurationComponentBase<NumericEditFieldProvider,NumericEditConfiguration>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit @bind-Text="@Definition.DisplayName" />
+    </Field>
+</Validation>
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+    </Field>
+</Validation>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["Description"]</FieldLabel>
+        <TextEdit @bind-Text="@Configuration.Description" />
+    </Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@Configuration.Required">@L["IsRequired"]</Check>
+</Field>
+<Field>
+    <FieldLabel>@L["Max"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@Configuration.Max" />
+</Field>
+<Field>
+    <FieldLabel>@L["Min"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@Configuration.Min" />
+</Field>
+<Field>
+    <FieldLabel>@L["NumericDecimals"]</FieldLabel>
+    <NumericEdit TValue="int"  @bind-Value="@Configuration.Decimals" />
+</Field>
+<Field>
+    <FieldLabel>@L["NumericStep"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@Configuration.Step" />    
+    <FieldHelp>
+        微调器按钮递增或递减值
+    </FieldHelp>
+</Field>
+
+<Field>
+    <FieldLabel>@L["FormatSpecifier"]</FieldLabel>
+    <TextEdit MaxLength="8" @bind-Text="@Configuration.FormatSpecifier">
+        <FieldHelp>
+            参见:<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings#standard-format-specifiers" target="_blank">https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings</a>
+        </FieldHelp>
+    </TextEdit>
+</Field>
+

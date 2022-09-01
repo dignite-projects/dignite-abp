@@ -1,0 +1,29 @@
+{
+  "folders": {
+    "items": {
+      "src": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.Files.Domain.Shared": {
+      "path": "src/Dignite.Abp.Files.Domain.Shared/Dignite.Abp.Files.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.Files.Domain": {
+      "path": "src/Dignite.Abp.Files.Domain/Dignite.Abp.Files.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.Files.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.Files.EntityFrameworkCore/Dignite.Abp.Files.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.Files.MongoDB": {
+      "path": "src/Dignite.Abp.Files.MongoDB/Dignite.Abp.Files.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.Files.Installer": {
+      "path": "src/Dignite.Abp.Files.Installer/Dignite.Abp.Files.Installer.abppkg.json",
+      "folder": "src"
+    }
+  }
+}

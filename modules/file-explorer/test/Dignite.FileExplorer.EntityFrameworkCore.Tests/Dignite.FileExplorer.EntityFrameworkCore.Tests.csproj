@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Dignite.FileExplorer.EntityFrameworkCore.Tests</AssemblyName>
+		<PackageId>Dignite.FileExplorer.EntityFrameworkCore.Tests</PackageId>
+		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<RootNamespace />
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.5" />
+    <ProjectReference Include="..\..\src\Dignite.FileExplorer.EntityFrameworkCore\Dignite.FileExplorer.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Dignite.FileExplorer.TestBase\Dignite.FileExplorer.TestBase.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.4" />
+  </ItemGroup>
+
+</Project>

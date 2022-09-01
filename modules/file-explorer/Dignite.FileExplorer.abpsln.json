@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.FileExplorer": {
+      "path": "Dignite.FileExplorer.abpmdl.json"
+    }
+  }
+}

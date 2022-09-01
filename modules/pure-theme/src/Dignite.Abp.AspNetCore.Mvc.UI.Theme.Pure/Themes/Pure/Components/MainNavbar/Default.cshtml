@@ -1,0 +1,16 @@
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Brand
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Menu
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.SideNav
+
+@(await Component.InvokeAsync<MainNavbarSideNavViewComponent>())
+<nav class="navbar navbar-expand-md navbar-light px-md-3 shadow-sm main-navbar" id="main-navbar">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" onclick="sideNavToggle()" id="navbarToggler" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
+        @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
+        @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
+    </div>
+</nav>

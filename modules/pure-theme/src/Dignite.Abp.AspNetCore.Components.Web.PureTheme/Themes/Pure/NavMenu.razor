@@ -1,0 +1,18 @@
+﻿@if (Menu != null)
+{
+    <BarStart Class="main-navbar-nav" ElementId="main-navbar-nav">
+        @foreach (var menuItem in Menu.Items)
+        {        
+            var elementId = menuItem.ElementId ?? "MenuItem_" + menuItem.Name.Replace(".", "_");                
+            <BarItem Class="@menuItem.CssClass" Disabled="@menuItem.IsDisabled" ElementId="@elementId">
+                <BarLink To="@GetNavUrl(menuItem)" Target="new Target(menuItem.Target)">
+                    @if (menuItem.Icon != null)
+                    {
+                        <i class="nav-link-icon @menuItem.Icon"></i>
+                    }
+                    @menuItem.DisplayName    
+                </BarLink>
+            </BarItem>
+        }
+    </BarStart>
+}

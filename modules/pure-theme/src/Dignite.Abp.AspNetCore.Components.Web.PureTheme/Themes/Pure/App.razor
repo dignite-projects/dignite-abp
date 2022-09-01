@@ -1,0 +1,76 @@
+@using Microsoft.Extensions.Options
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Routing
+@inject IOptions<AbpRouterOptions> RouterOptions
+<Blazorise.ThemeProvider Theme="@theme">
+<CascadingAuthenticationState>
+    <Router AppAssembly="RouterOptions.Value.AppAssembly"
+            AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (!context.User.Identity.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p>You are not authorized to access this resource.</p>
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
+<MessageAlert />
+
+</Blazorise.ThemeProvider>
+@code{
+    static string primary = "#0d6efd";
+    private Theme theme = new()
+    {
+        LuminanceThreshold = 170,
+        BarOptions = new()
+        {
+            VerticalWidth="256px",
+            HorizontalHeight = "64px",
+            LightColors = new()
+            {
+                ItemColorOptions = new()
+                {
+                    ActiveBackgroundColor = "#dedede",
+                    ActiveColor = "#000000",
+                    HoverBackgroundColor = "#dedede",
+                    HoverColor = "#000000",
+                },
+                DropdownColorOptions=new()
+                {                    
+                    BackgroundColor="#fff"
+                }
+            }
+        },
+        ColorOptions = new()
+        {
+            Primary = primary,
+            Secondary = "#a5a5a5",
+        },
+        BackgroundOptions = new()
+        {
+            Primary = primary,
+            Secondary = "#a5a5a5",
+        },
+        TextColorOptions = new()
+        {
+            Primary = primary,
+            Secondary = "#a5a5a5",
+        },
+        InputOptions = new()
+        {
+            CheckColor = "#0288D1",
+        },
+    };
+}

@@ -1,0 +1,306 @@
+#main-navbar-tools a.dropdown-toggle {
+    text-decoration: none;
+    color: #fff;
+}
+ 
+.navbar .dropdown-submenu {
+    position: relative;
+}
+.navbar .dropdown-menu {
+    margin: 0;
+    padding: 0;
+}
+    .navbar .dropdown-menu a {
+        font-size: .9em;
+        padding: 10px 15px;
+        display: block;
+        min-width: 210px;
+        text-align: left;
+        border-radius: 0.25rem;
+        min-height: 44px;
+    }
+.navbar .dropdown-submenu a::after {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 16px;
+    top: 18px;
+} 
+.navbar .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%; 
+} 
+
+.card-header .btn {
+    padding: 2px 6px;
+} 
+.card-header h5 {
+    margin: 0;
+} 
+.container > .card { 
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+@media screen and (min-width: 768px) { 
+    .navbar .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .navbar .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+}
+.input-validation-error {
+    border-color: #dc3545;
+}
+.field-validation-error {
+    font-size: 0.8em;
+}
+
+.dataTables_scrollBody {
+    min-height: 248px;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    padding-top: 11px;
+    white-space: nowrap;
+}
+
+div.dataTables_wrapper div.dataTables_length label {
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+.rtl .dropdown-menu-right {
+    right: auto;
+    left: 0; 
+}
+
+    .rtl .dropdown-menu-right a { 
+        text-align: right;
+    }
+
+.rtl .navbar .dropdown-menu a {
+    text-align: right;
+}
+.rtl .navbar .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: auto;
+    right: 100%;
+}
+
+/* body style*/
+.abp-account-layout {
+    padding-top: 64px;
+}
+.abp-application-layout {
+    padding-top: 64px;
+    padding-left: 300px;
+}
+
+.abp-application-layout.no-side-navbar {
+    padding-left: 0px;
+}
+
+.abp-application-layout.no-side-navbar .side-navbar {
+    /*无子菜单时隐藏侧边栏*/
+    left: -300px;
+}
+
+.abp-application-layout.no-side-navbar .main-navbar .navbar-toggler {
+    /*无子菜单时隐藏侧边栏的切换按钮*/
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .abp-application-layout {
+        padding-left: 0px;
+    }
+}
+/*侧边栏*/
+.side-navbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 64px 15px 15px;
+    width: 300px;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.side-navbar-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.side-nav-group-title {
+    font-size: 0.9rem;
+    padding: 30px 15px 0px 15px;
+    color: rgba(0,0,0,.54);
+}
+
+.side-navbar hr {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.side-navbar .nav-pills .nav-link {
+    color: #000;
+    margin-bottom: 3px;
+}
+
+    .side-navbar .nav-pills .nav-link:hover,
+    .side-navbar .nav-pills .nav-link.active,
+    .side-navbar .nav-pills .show > .nav-link {
+        color: #000;
+        background-color: rgba(0,0,0,.05);
+    }
+
+@media (max-width: 576px) {
+    .side-navbar {
+        background-color: #fff;
+        border-right: 1px solid #ccc;
+        width: 75vw;
+        left: -75vw;
+    }
+
+    .side-navbar.show {
+        left: 0vw;
+    }
+}
+/*branding*/
+.navbar-brand {
+    margin-right: 0rem;
+    padding: 0rem;
+}
+
+.navbar-brand > img {
+    max-height: 40px;
+}
+
+
+.navbar-brand,
+.nav-toolbar {
+    /*品牌和导航工具栏宽度设定为300，确保主导航位于屏幕中间*/
+    width: 256px;
+}
+
+    .nav-toolbar > .nav-item {
+        margin-left: 1rem;
+    }
+
+        .nav-toolbar > .nav-item > .btn,
+        .nav-toolbar > .nav-item > .btn-group > .btn {
+            padding: 0rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        width: auto;
+    }
+
+    .nav-toolbar {
+        width: 56px;
+        flex-direction: row;
+    }
+}
+/*主导航*/
+.main-navbar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 64px;
+    z-index: 1030;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 1);
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link.active {
+    color:#000;
+    border-bottom:solid 1px #000;
+}
+
+.main-navbar-nav > .nav-item {
+    text-align: center;
+}
+
+.main-navbar-nav > .nav-item > .nav-link {
+    font-size: 0.75rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+}
+
+.main-navbar-nav i.nav-link-icon {
+    display: block;
+    font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand > img {
+        margin-right: 10px;
+    }
+
+    .main-navbar-nav {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand-title {
+        display: none;
+    }
+
+    .main-navbar-nav {
+        position: fixed;
+        background-color: #fff;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover,
+    .navbar-light .navbar-nav .nav-link:focus,
+    .navbar-light .navbar-nav .nav-link.active,
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-nav .nav-link:focus,
+    .navbar-dark .navbar-nav .nav-link.active {
+        border: none;
+    }
+
+    .navbar-nav .nav-link:focus > .nav-link-icon,
+    .navbar-nav .nav-link.active > .nav-link-icon {
+        color:#0048bf;
+    }
+}
+/*page container*/
+.page-container {
+    padding-top: 20px;
+    padding-bottom: 64px;
+}
+
+.page-header {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    background-color: #f8f9fa;
+}
+
+.page-footer {
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+}

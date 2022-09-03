@@ -5,11 +5,13 @@ using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 using Dignite.FileExplorer.Localization;
+using Dignite.Abp.Files;
 
 namespace Dignite.FileExplorer;
 
 [DependsOn(
-    typeof(AbpValidationModule)
+    typeof(AbpValidationModule),
+    typeof(AbpFilesDomainSharedModule)
 )]
 public class FileExplorerDomainSharedModule : AbpModule
 {

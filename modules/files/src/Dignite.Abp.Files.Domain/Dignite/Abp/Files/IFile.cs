@@ -1,5 +1,5 @@
 using System;
-using JetBrains.Annotations;
+using Dignite.Abp.BlobStoring;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
@@ -13,25 +13,31 @@ public interface IFile : IAggregateRoot<Guid>, IMultiTenant
     /// <summary>
     /// Container name of blob
     /// </summary>
-    [NotNull] string ContainerName { get; }
+    string ContainerName { get; }
 
     /// <summary>
     /// Blob name
     /// </summary>
-    [NotNull] string BlobName { get; }
+    string BlobName { get; }
 
     /// <summary>
     /// Blob binary size
     /// </summary>
-    long Size { get; set; }
+    long Size { get; }
 
     /// <summary>
     /// File name
     /// </summary>
-    public string Name { get; set; }
+    string Name { get; }
 
     /// <summary>
     /// File mime type
     /// </summary>
-    public string MimeType { get; set; }
+    string MimeType { get; }
+
+    /// <summary>
+    /// Reset the file size <see cref="IBlobHandler.ExecuteAsync(BlobHandlerContext)"/>
+    /// </summary>
+    /// <param name="size"></param>
+    void Resize(long size);
 }

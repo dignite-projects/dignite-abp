@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Dignite.Abp.FileStoring;
+using Dignite.Abp.BlobStoring;
 using JetBrains.Annotations;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -14,13 +14,13 @@ namespace Dignite.FileExplorer.Files;
 public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppService
 {
     private readonly IFileDescriptorRepository _blobRepository;
-    private readonly FileManager _fileManager;
+    private readonly FileDescriptorManager _fileManager;
     private readonly IBlobContainerConfigurationProvider _blobContainerConfigurationProvider;
     private readonly IBlobContainerFactory _blobContainerFactory;
 
     public FileDescriptorAppService(
         IFileDescriptorRepository blobRepository, 
-        FileManager fileManager, 
+        FileDescriptorManager fileManager, 
         IBlobContainerConfigurationProvider blobContainerConfigurationProvider, 
         IBlobContainerFactory blobContainerFactory)
     {

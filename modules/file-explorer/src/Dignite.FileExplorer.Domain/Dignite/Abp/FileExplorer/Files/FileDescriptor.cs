@@ -6,40 +6,58 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.FileExplorer.Files;
 
-public class FileDescriptor : BasicAggregateRoot<Guid>, IFile, ICreationAuditedObject, IDeletionAuditedObject, IMultiTenant
+public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject, IDeletionAuditedObject, IMultiTenant
 {
     protected FileDescriptor()
     { }
 
-    public FileDescriptor(Guid id, string entityTypeFullName, string entityId, BasicFile blobInfo, string name, string mineType, Guid? tenantId)
+    public FileDescriptor(Guid id, string containerName, string blobName, long size, string name, string mineType, string entityTypeFullName, string entityId, Guid? tenantId)
     {
         Id = id;
-        EntityTypeFullName = entityTypeFullName;
-        EntityId = entityId;
-        SetBlobInfo(blobInfo);
+        ContainerName = containerName;
+        BlobName = blobName;
+        Size = size;
         Name = name;
         MimeType = mineType;
+        EntityTypeFullName = entityTypeFullName;
+        EntityId = entityId;
         TenantId = tenantId;
     }
 
-    #region blob info
-    public string ContainerName { get; set; }
+    /// <summary>
+    /// Container name of blob
+    /// </summary>
+    public string ContainerName { get; protected set; }
 
-    public string BlobName { get; set; }
+    /// <summary>
+    /// Blob name
+    /// </summary>
+    public string BlobName { get; protected set; }
 
-    public long Size { get; set; }
-    #endregion
+    /// <summary>
+    /// Blob binary size
+    /// </summary>
+    public long Size { get; protected set; }
 
-    public string EntityTypeFullName { get; set; }
+    /// <summary>
+    /// File name
+    /// </summary>
+    public string Name { get; protected set; }
 
-    public string EntityId { get; set; }
+    /// <summary>
+    /// File mime type
+    /// </summary>
+    public string MimeType { get; protected set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string Name { get; set; }
+    public string EntityTypeFullName { get; protected set; }
 
-    public string MimeType { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    public string EntityId { get; protected set; }
 
     public DateTime CreationTime { get; set; }
 
@@ -51,10 +69,8 @@ public class FileDescriptor : BasicAggregateRoot<Guid>, IFile, ICreationAuditedO
 
     public Guid? TenantId { get; protected set; }
 
-    private void SetBlobInfo(BasicFile blobInfo)
+    public void Resize(long size)
     {
-        ContainerName = blobInfo.ContainerName;
-        BlobName = blobInfo.BlobName;
-        Size = blobInfo.Size;
+        this.Size= size;
     }
 }

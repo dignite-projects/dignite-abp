@@ -3,69 +3,113 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Dignite.Abp.FileStoring;
+using Dignite.Abp.BlobStoring;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+using Volo.Abp;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Collections;
-using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Services;
 
 namespace Dignite.Abp.Files;
 
-public abstract class FileManager<TBlobInfo,TBlobInfoStore> 
-    where TBlobInfo : IFile
-    where TBlobInfoStore:IFileStore<TBlobInfo>
+public abstract class FileManager<TFile, TFileStore> : DomainService
+    where TFile : IFile
+    where TFileStore : IFileStore<TFile>
 {
-    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
-    protected IServiceProvider ServiceProvider => LazyServiceProvider.LazyGetRequiredService<IServiceProvider>();
-    protected IBlobContainerConfigurationProvider BlobContainerConfigurationProvider=> LazyServiceProvider.LazyGetRequiredService<IBlobContainerConfigurationProvider>();
+    protected IBlobContainerConfigurationProvider BlobContainerConfigurationProvider => LazyServiceProvider.LazyGetRequiredService<IBlobContainerConfigurationProvider>();
+    protected IBlobContainerFactory BlobContainerFactory => LazyServiceProvider.LazyGetRequiredService<IBlobContainerFactory>();
+    protected ICurrentFile CurrentFile => LazyServiceProvider.LazyGetRequiredService<ICurrentFile>();
+    protected IFileStore<TFile> FileStore => LazyServiceProvider.LazyGetService(typeof(TFileStore)).As<IFileStore<TFile>>();
 
-    protected IBlobContainerFactory BlobContainerFactory=> LazyServiceProvider.LazyGetRequiredService<IBlobContainerFactory>();
-    protected ICurrentFile CurrentBlobInfo=> LazyServiceProvider.LazyGetRequiredService<ICurrentFile>();
 
-    protected ILoggerFactory LoggerFactory => LazyServiceProvider.LazyGetRequiredService<ILoggerFactory>();
-
-    protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider => LoggerFactory?.CreateLogger(GetType().FullName) ?? NullLogger.Instance);
-
-    protected IFileStore<TBlobInfo> BlobInfoStore => LazyServiceProvider.LazyGetRequiredService(typeof(TBlobInfoStore)).As<IFileStore<TBlobInfo>>();
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="blobInfo"></param>
+    /// <param name="file"></param>
     /// <param name="stream"></param>
     /// <param name="overrideExisting"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public virtual async Task<TBlobInfo> CreateAsync(
-        [NotNull] TBlobInfo blobInfo, 
-        [NotNull] Stream stream,
-        bool overrideExisting = false, 
-        CancellationToken cancellationToken = default)
+    public virtual async Task<TFile> CreateAsync(
+            [NotNull] TFile file,
+            [NotNull] Stream stream,
+            bool overrideExisting = false,
+            CancellationToken cancellationToken = default)
     {
-        using (CurrentBlobInfo.Current(blobInfo))
+        await CheckFileAsync(file);
+
+        using (CurrentFile.Current(file))
         {
-            //
-            await BlobHandlers(blobInfo.ContainerName, stream);
-            blobInfo.Size = stream.Length;
+            await OnCreatingEntityAsync(file, stream);
 
-            await BlobInfoStore.CreateAsync(blobInfo, false, cancellationToken);
+            await FileStore.CreateAsync(file, false, cancellationToken);
 
-            var blobContainer = BlobContainerFactory.Create(blobInfo.ContainerName);
-            await blobContainer.SaveAsync(blobInfo.BlobName, stream, overrideExisting, cancellationToken);
+            var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+            await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
+
+            await OnCreatedEntityAsync(file);
         }
 
+        return file;
+    }
+
+    protected virtual async Task OnCreatingEntityAsync(
+        [NotNull] TFile file,
+        [NotNull] Stream stream)
+    {
+        await FileHandlers(file.ContainerName, stream);
+    }
+
+    protected virtual Task OnCreatedEntityAsync([NotNull] TFile file)
+    {
+        return Task.CompletedTask;
+    }
+
+
+    public virtual async Task<TFile> GetOrNullAsync([NotNull] string containerName, [NotNull] string blobName, CancellationToken cancellationToken = default)
+    {
+        var blobInfo = await FileStore.FindAsync(containerName, blobName, cancellationToken);
         return blobInfo;
     }
+
+    public virtual async Task<bool> DeleteAsync([NotNull] TFile file, CancellationToken cancellationToken = default)
+    {
+        await OnDeletingEntityAsync(file);
+
+        await FileStore.DeleteAsync(file, false, cancellationToken);
+
+        //delete blob
+        if (!await FileStore.BlobNameExistsAsync(file.ContainerName, file.BlobName, file.Id, cancellationToken))
+        {
+            var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+            return await blobContainer.DeleteAsync(file.BlobName, cancellationToken);
+        }
+
+        await OnDeletedEntityAsync(file);
+
+        return true;
+    }
+
+
+    protected virtual Task OnDeletingEntityAsync([NotNull] TFile file)
+    {
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task OnDeletedEntityAsync([NotNull] TFile file)
+    {
+        return Task.CompletedTask;
+    }
+
 
     /// <summary>
     /// Generate blobname using the configured <see cref="IBlobNameGenerator"/>
     /// </summary>
     /// <param name="containerName"></param>
     /// <returns></returns>
-    public virtual async Task<string> GeneratorBlobNameAsync(string containerName)
+    public virtual async Task<string> GenerateBlobNameAsync(string containerName)
     {
         var configuration = BlobContainerConfigurationProvider.Get(containerName);
         var namingGeneratorType = configuration.GetConfigurationOrDefault(
@@ -80,36 +124,22 @@ public abstract class FileManager<TBlobInfo,TBlobInfoStore>
         return blobName;
     }
 
-
-    public virtual async Task<TBlobInfo> GetOrNullAsync([NotNull] string containerName, [NotNull] string blobName, CancellationToken cancellationToken = default)
-    {
-        var blobInfo = await BlobInfoStore.FindAsync(containerName, blobName, cancellationToken);
-        return blobInfo;
-    }
-
-    public virtual async Task<bool> DeleteAsync([NotNull] TBlobInfo blobInfo, CancellationToken cancellationToken = default)
-    {
-        await BlobInfoStore.DeleteAsync(blobInfo,true, cancellationToken); //Delete blob info
-
-        if (!await BlobInfoStore.ExistsAsync(blobInfo.ContainerName, blobInfo.BlobName, cancellationToken))
-        {
-            var blobContainer = BlobContainerFactory.Create(blobInfo.ContainerName);
-            return await blobContainer.DeleteAsync(blobInfo.BlobName, cancellationToken);
-        }
-
-        return true;
-    }
-
-
-    protected virtual async Task BlobHandlers(string containerName, Stream stream)
+    /// <summary>
+    /// file handlers
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="stream"></param>
+    /// <returns></returns>
+    private async Task FileHandlers(string containerName, Stream stream)
     {
         var configuration = BlobContainerConfigurationProvider.Get(containerName);
         // blob process handlers
         var processHandlers = configuration.GetConfigurationOrDefault<ITypeList<IBlobHandler>>(BlobContainerConfigurationNames.BlobHandlers, null);
         if (processHandlers != null && processHandlers.Any())
         {
-            var context = new BlobHandlerContext(stream, configuration, ServiceProvider);
-            using (var scope = ServiceProvider.CreateScope())
+            var serviceProvider = LazyServiceProvider.LazyGetRequiredService<IServiceProvider>();
+            var context = new BlobHandlerContext(stream, configuration);
+            using (var scope = serviceProvider.CreateScope())
             {
                 foreach (var handlerType in processHandlers)
                 {
@@ -121,5 +151,15 @@ public abstract class FileManager<TBlobInfo,TBlobInfoStore>
                 }
             }
         }
+    }
+
+    protected virtual Task CheckFileAsync([NotNull] TFile file)
+    {
+        Check.NotNullOrWhiteSpace(file.ContainerName, nameof(IFile.ContainerName), AbpFileConsts.MaxContainerNameLength);
+        Check.NotNullOrWhiteSpace(file.BlobName, nameof(IFile.BlobName), AbpFileConsts.MaxBlobNameLength);
+        Check.Length(file.Name, nameof(IFile.Name), AbpFileConsts.MaxNameLength);
+        Check.Length(file.Name, nameof(IFile.MimeType), AbpFileConsts.MaxMimeTypeLength);
+
+        return Task.CompletedTask;
     }
 }

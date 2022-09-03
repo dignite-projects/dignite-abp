@@ -1,13 +1,13 @@
-﻿using Dignite.FileExplorer.Files;
+﻿using Dignite.Abp.Files.EntityFrameworkCore;
+using Dignite.FileExplorer.Files;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
 namespace Dignite.FileExplorer.EntityFrameworkCore;
 
 [DependsOn(
     typeof(FileExplorerDomainModule),
-    typeof(AbpEntityFrameworkCoreModule)
+    typeof(AbpFilesEntityFrameworkCoreModule)
 )]
 public class FileExplorerEntityFrameworkCoreModule : AbpModule
 {

@@ -6,8 +6,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyName>Dignite.Abp.FileExplorer.Domain.Shared</AssemblyName>
-		<PackageId>Dignite.Abp.FileExplorer.Domain.Shared</PackageId>
+		<AssemblyName>Dignite.FileExplorer.Domain.Shared</AssemblyName>
+		<PackageId>Dignite.FileExplorer.Domain.Shared</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

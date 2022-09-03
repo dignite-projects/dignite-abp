@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dignite.Abp.Files.MongoDB;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
-using Volo.Abp.MongoDB;
 
 namespace Dignite.FileExplorer.MongoDB;
 
 [DependsOn(
     typeof(FileExplorerDomainModule),
-    typeof(AbpMongoDbModule)
+    typeof(AbpFilesMongoDbModule)
     )]
 public class FileExplorerMongoDbModule : AbpModule
 {

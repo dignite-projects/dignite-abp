@@ -6,7 +6,7 @@ public interface ICurrentFile
 {
     bool IsAvailable { get; }
 
-    IFile FileDescriptor { get; }
+    IFile File { get; }
 
     IDisposable Current(IFile fileDescriptor);
 }

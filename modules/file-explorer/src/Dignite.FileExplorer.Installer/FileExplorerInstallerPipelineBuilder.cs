@@ -9,8 +9,8 @@ namespace Dignite.FileExplorer;
 [ExposeServices(typeof(IModuleInstallingPipelineBuilder))]
 public class FileExplorerInstallerPipelineBuilder : ModuleInstallingPipelineBuilderBase, IModuleInstallingPipelineBuilder, ITransientDependency
 {
-    public async Task<ModuleInstallingPipeline> BuildAsync(ModuleInstallingContext context)
+    public Task<ModuleInstallingPipeline> BuildAsync(ModuleInstallingContext context)
     {
-        return GetBasePipeline(context);
+        return Task.FromResult(GetBasePipeline(context));
     }
 }

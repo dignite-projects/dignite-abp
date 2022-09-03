@@ -1,4 +1,5 @@
-﻿using Dignite.FileExplorer.Files;
+﻿using Dignite.Abp.Files.EntityFrameworkCore;
+using Dignite.FileExplorer.Files;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -7,8 +8,7 @@ namespace Dignite.FileExplorer.EntityFrameworkCore;
 
 public static class FileExplorerDbContextModelCreatingExtensions
 {
-    public static void ConfigureFileExplorer(
-        this ModelBuilder builder)
+    public static void ConfigureFileExplorer(this ModelBuilder builder)
     {
         Check.NotNull(builder, nameof(builder));
 
@@ -19,14 +19,11 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.ToTable(FileExplorerDbProperties.DbTablePrefix + "FileDescriptors", FileExplorerDbProperties.DbSchema);
 
             b.ConfigureByConvention();
-            
+            b.ConfigureAbpFiles();
+
             //Properties
-            b.Property(q => q.ContainerName).IsRequired().HasMaxLength(FileDescriptorConsts.MaxContainerNameLength);
-            b.Property(q => q.BlobName).IsRequired().HasMaxLength(FileDescriptorConsts.MaxBlobNameLength);
             b.Property(q => q.EntityTypeFullName).HasMaxLength(FileDescriptorConsts.MaxEntityTypeFullNameLength);
             b.Property(q => q.EntityId).HasMaxLength(FileDescriptorConsts.MaxEntityIdLength);
-            b.Property(q => q.Name).HasMaxLength(FileDescriptorConsts.MaxNameLength);
-            b.Property(q => q.MimeType).HasMaxLength(FileDescriptorConsts.MaxMimeTypeLength);
 
 
 
@@ -34,6 +31,8 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.HasIndex(q => new { q.TenantId, q.EntityTypeFullName, q.EntityId });
             b.HasIndex(q => new { q.TenantId, q.ContainerName, q.BlobName });
             b.HasIndex(q => new { q.TenantId, q.CreatorId });
+
+            b.ApplyObjectExtensionMappings();
         });
         
     }

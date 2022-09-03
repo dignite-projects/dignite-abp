@@ -20,12 +20,13 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     {
     }
 
-
-    public async Task<bool> ExistsAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
+    public async Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
+                   .WhereIf(ignoredId != null, ct => ct.Id != ignoredId)
                    .AnyAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
+
     public async Task<FileDescriptor> FindAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
@@ -48,7 +49,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     public async Task<List<FileDescriptor>> GetListAsync(
         string containerName,
         string filter = null,
-        string entityType = null,
+        string entityTypeFullName = null,
         string entityId = null,
         string sorting = null,
         int maxResultCount = int.MaxValue,
@@ -58,7 +59,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityType, entityId,
+            containerName, filter, entityTypeFullName, entityId,
             cancellationToken
         );
 
@@ -71,14 +72,14 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
         string filter = null,
-        string entityType = null,
+        string entityTypeFullName = null,
         string entityId = null,
           CancellationToken cancellationToken = default)
     {
         return (await GetDbSetAsync()).AsNoTracking()
             .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains( filter))
-            .WhereIf(!entityType.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityType)
+            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

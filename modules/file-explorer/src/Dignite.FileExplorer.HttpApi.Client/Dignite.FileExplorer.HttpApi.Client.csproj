@@ -5,8 +5,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyName>Dignite.Abp.FileExplorer.HttpApi.Client</AssemblyName>
-		<PackageId>Dignite.Abp.FileExplorer.HttpApi.Client</PackageId>
+		<AssemblyName>Dignite.FileExplorer.HttpApi.Client</AssemblyName>
+		<PackageId>Dignite.FileExplorer.HttpApi.Client</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

@@ -8,7 +8,7 @@ namespace Dignite.Abp.Files;
 public interface IFileStore<TBlobInfo> : ITransientDependency
     where TBlobInfo : IFile
 {
-    Task<bool> ExistsAsync(string containerName, string blobName, CancellationToken cancellationToken = default);
+    Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default);
 
     Task<TBlobInfo> FindAsync(string containerName, string blobName, CancellationToken cancellationToken = default);
 

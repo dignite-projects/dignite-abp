@@ -16,9 +16,9 @@ public class FileDescriptorStore : DomainService, IFileStore<FileDescriptor>
         _blobRepository = blobRepository;
     }
 
-    public async Task<bool> ExistsAsync(string containerName, string blobName,  CancellationToken cancellationToken = default)
+    public async Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default)
     {
-        return await _blobRepository.ExistsAsync(containerName, blobName, cancellationToken);
+        return await _blobRepository.BlobNameExistsAsync(containerName, blobName, ignoredId, cancellationToken);
     }
 
 

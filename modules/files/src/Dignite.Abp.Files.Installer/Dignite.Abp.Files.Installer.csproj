@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+		<RootNamespace />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Studio.ModuleInstaller" Version="5.3.4" />
+        <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="5.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="..\..\Dignite.Abp.Files.abpmdl.json" />
+      <EmbeddedResource Include="..\..\Dignite.Abp.Files.abpmdl.json" />
+    </ItemGroup>
+
+</Project>

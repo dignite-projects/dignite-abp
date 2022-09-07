@@ -16,10 +16,10 @@ namespace Dignite.Abp.FieldCustomizing
         /// Default value of the field.
         /// </summary>
         [CanBeNull]
-        public string DefaultValue { get; set; }
+        string DefaultValue { get; set; }
 
         [NotNull]
-        public string FieldProviderName { get; set; }
+        string FieldProviderName { get; set; }
 
         [NotNull]
         FieldConfigurationDictionary Configuration { get; set; }

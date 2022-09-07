@@ -11,23 +11,17 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-	  <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <RootNamespace />
   </PropertyGroup>
   
   <ItemGroup>
 	  <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.3.3" />
 	  <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="5.3.3" />
-	  <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="5.3.3" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />
-		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.GroupingSettings\Dignite.Abp.GroupingSettings.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Dignite\Abp\SettingManagement\Localization\*.json" />
-		<Content Remove="Dignite\Abp\SettingManagement\Localization\*.json" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj" />
+		<ProjectReference Include="..\Dignite.Abp.SettingManagement.Domain.Shared\Dignite.Abp.SettingManagement.Domain.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

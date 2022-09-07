@@ -8,7 +8,7 @@ namespace Dignite.Abp.FieldCustomizing;
 [DependsOn(
     typeof(AbpTestBaseModule),
     typeof(AbpAutofacModule),
-    typeof(DigniteAbpFieldCustomizingModule)
+    typeof(AbpFieldCustomizingModule)
     )]
 public class AbpBlobStoringTestModule : AbpModule
 {

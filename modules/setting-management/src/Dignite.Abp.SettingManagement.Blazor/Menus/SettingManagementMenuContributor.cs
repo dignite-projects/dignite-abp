@@ -18,7 +18,7 @@ namespace Dignite.Abp.SettingManagement.Blazor.Menus
         private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
         {
             var administrationMenu = context.Menu.GetAdministration();
-            var l = context.GetLocalizer<DigniteAbpSettingManagementResource>();
+            var l = context.GetLocalizer<AbpSettingManagementResource>();
 
             administrationMenu.AddItem(new ApplicationMenuItem(
                     SettingManagementMenus.Prefix,

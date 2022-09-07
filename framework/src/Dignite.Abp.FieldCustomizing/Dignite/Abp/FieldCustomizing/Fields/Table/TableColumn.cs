@@ -13,7 +13,8 @@ namespace Dignite.Abp.FieldCustomizing.Fields.Table
         }
 
         public TableColumn(
-        [NotNull] BasicCustomizeFieldDefinition fieldDefinition)
+            TableColumnFieldDefinition fieldDefinition
+            )
         {
             FieldDefinition = fieldDefinition;
         }
@@ -30,6 +31,6 @@ namespace Dignite.Abp.FieldCustomizing.Fields.Table
 
         [NotNull]
         [Required]
-        public BasicCustomizeFieldDefinition FieldDefinition { get;  set; }
+        public TableColumnFieldDefinition FieldDefinition { get;  set; }
     }
 }

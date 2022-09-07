@@ -12,7 +12,7 @@ namespace Dignite.Abp.FieldCustomizing.Blazor
     {
         protected FieldComponentBase()
         {
-            LocalizationResource = typeof(DigniteAbpFieldCustomizingModule);
+            LocalizationResource = typeof(AbpFieldCustomizingModule);
             HideFieldLable = false;
             FieldProviderType = typeof(TFieldProvider);
         }

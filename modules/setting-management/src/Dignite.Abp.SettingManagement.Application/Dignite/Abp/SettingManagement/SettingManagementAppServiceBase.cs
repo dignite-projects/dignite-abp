@@ -1,15 +1,14 @@
 ﻿
+using Dignite.Abp.SettingManagement.Localization;
 using Volo.Abp.Application.Services;
-using Volo.Abp.SettingManagement.Localization;
 
-namespace Dignite.Abp.SettingManagement
+namespace Dignite.Abp.SettingManagement;
+
+public class SettingManagementAppServiceBase : ApplicationService
 {
-    public class SettingManagementAppServiceBase : ApplicationService
+    protected SettingManagementAppServiceBase()
     {
-        protected SettingManagementAppServiceBase()
-        {
-            ObjectMapperContext = typeof(DigniteAbpSettingManagementApplicationModule);
-            LocalizationResource = typeof(AbpSettingManagementResource);
-        }
+        ObjectMapperContext = typeof(AbpSettingManagementApplicationModule);
+        LocalizationResource = typeof(AbpSettingManagementResource);
     }
 }

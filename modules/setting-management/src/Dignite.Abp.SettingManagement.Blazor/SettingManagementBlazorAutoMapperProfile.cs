@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 
-namespace Dignite.Abp.SettingManagement.Blazor
+namespace Dignite.Abp.SettingManagement.Blazor;
+
+public class SettingManagementBlazorAutoMapperProfile : Profile
 {
-    public class SettingManagementBlazorAutoMapperProfile : Profile
+    public SettingManagementBlazorAutoMapperProfile()
     {
-        public SettingManagementBlazorAutoMapperProfile()
-        {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
-        }
+        /* You can configure your AutoMapper mapping configuration here.
+         * Alternatively, you can split your mapping configurations
+         * into multiple profile classes for a better organization. */
     }
 }

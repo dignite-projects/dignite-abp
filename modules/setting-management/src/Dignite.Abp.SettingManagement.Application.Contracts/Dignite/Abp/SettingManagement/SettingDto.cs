@@ -1,37 +1,39 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
+﻿using Dignite.Abp.FieldCustomizing;
+using Dignite.Abp.FieldCustomizing.Fields;
 
-namespace Dignite.Abp.SettingManagement
+namespace Dignite.Abp.SettingManagement;
+
+public class SettingDto : ICustomizeFieldDefinition
 {
-    public class SettingDto
+    public SettingDto(
+        string section,
+        string name,
+        string displayName,
+        string description,
+        string value,
+        string fieldProviderName,
+        FieldConfigurationDictionary configuration)
     {
-        public SettingDto(
-            string group, 
-            string name, 
-            string displayName, 
-            string description, 
-            string value,
-            string fieldProviderName,
-            FieldConfigurationDictionary fieldConfiguration)
-        {
-            Group = group;
-            Name = name;
-            DisplayName = displayName;
-            Description = description;
-            Value = value;
-            FieldProviderName = fieldProviderName;
-            FieldConfiguration = fieldConfiguration;
-        }
-
-        public string Group { get;  }
-
-        public string Name { get; }
-        public string DisplayName { get; }
-        public string Description { get; }
-
-        public string Value { get;  }
-
-        public string FieldProviderName { get; }
-
-        public FieldConfigurationDictionary FieldConfiguration { get; }
+        Section = section;
+        Name = name;
+        DisplayName = displayName;
+        Description = description;
+        Value = value;
+        FieldProviderName = fieldProviderName;
+        Configuration = configuration;
     }
+
+    public string Section { get; set; }
+
+    public string Name { get; set; }
+    public string DisplayName { get; set; }
+    public string Description { get; set; }
+
+    public string Value { get; set; }
+
+    public string DefaultValue { get; set; }
+
+    public string FieldProviderName { get; set; }
+
+    public FieldConfigurationDictionary Configuration { get; set; }
 }

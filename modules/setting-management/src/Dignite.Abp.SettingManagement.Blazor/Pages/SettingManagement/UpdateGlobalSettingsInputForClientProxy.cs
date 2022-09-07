@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dignite.Abp.SettingManagement.Blazor.Pages.SettingManagement
+namespace Dignite.Abp.SettingManagement.Blazor.Pages.SettingManagement;
+
+internal class UpdateGlobalSettingsInputForClientProxy : UpdateGlobalSettingsInput
 {
-    internal class UpdateGlobalSettingsInputForClientProxy : UpdateGlobalSettingsInput
+    IReadOnlyList<SettingDto> _settings;
+
+    public UpdateGlobalSettingsInputForClientProxy(IReadOnlyList<SettingDto> settings)
     {
-        IReadOnlyList<SettingDto> _settings;
+        _settings = settings;
+    }
 
-        public UpdateGlobalSettingsInputForClientProxy(IReadOnlyList<SettingDto> settings)
-        {
-            _settings = settings;
-        }
-
-        public override IReadOnlyList<SettingDto> GetSettings(ValidationContext validationContext)
-        {
-            return _settings;
-        }
+    public override IReadOnlyList<SettingDto> GetSettings(ValidationContext validationContext)
+    {
+        return _settings;
     }
 }

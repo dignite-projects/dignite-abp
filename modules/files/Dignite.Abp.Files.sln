@@ -15,10 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.MongoDB",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.Installer", "src\Dignite.Abp.Files.Installer\Dignite.Abp.Files.Installer.csproj", "{BE39FD00-745B-4049-8161-FC129817CBE4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{835E4605-EAB0-4961-B071-AF8DF9A7DFAD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FileStoring", "..\..\framework\src\Dignite.Abp.FileStoring\Dignite.Abp.FileStoring.csproj", "{F9DA039E-558D-433D-8195-14811217A2A5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,10 +41,6 @@ Global
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9DA039E-558D-433D-8195-14811217A2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9DA039E-558D-433D-8195-14811217A2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9DA039E-558D-433D-8195-14811217A2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9DA039E-558D-433D-8195-14811217A2A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,7 +51,6 @@ Global
 		{0CE86223-D31D-4315-A1F5-87BA3EE1B844} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
 		{F1C58097-4C08-4D88-8976-6B3389391481} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
 		{BE39FD00-745B-4049-8161-FC129817CBE4} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
-		{F9DA039E-558D-433D-8195-14811217A2A5} = {835E4605-EAB0-4961-B071-AF8DF9A7DFAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

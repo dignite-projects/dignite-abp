@@ -10,7 +10,8 @@ using Volo.Abp.Content;
 namespace Dignite.Abp.FieldCustomizing
 {
     [Serializable]
-    public abstract class CustomizableObject : IHasCustomizableFields, IValidatableObject
+    public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatableObject
+        where T : class, ICustomizeFieldDefinition
     {
         protected CustomizableObject()
         {
@@ -62,6 +63,6 @@ namespace Dignite.Abp.FieldCustomizing
         /// 
         /// </summary>
         /// <returns></returns>
-        public abstract IReadOnlyList<BasicCustomizeFieldDefinition> GetFieldDefinitions(ValidationContext validationContext);
+        public abstract IReadOnlyList<T> GetFieldDefinitions(ValidationContext validationContext);
     }
 }

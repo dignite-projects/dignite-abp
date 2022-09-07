@@ -9,7 +9,7 @@ namespace Dignite.Abp.SettingsGrouping;
 
 [DependsOn(
     typeof(AbpSettingsModule),
-    typeof(DigniteAbpFieldCustomizingModule)
+    typeof(AbpFieldCustomizingModule)
     )]
 public class AbpSettingsGroupingModule : AbpModule
 {

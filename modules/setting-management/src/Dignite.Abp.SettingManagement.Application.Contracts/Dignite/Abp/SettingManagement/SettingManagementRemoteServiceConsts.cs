@@ -1,10 +1,9 @@
 ﻿
-namespace Dignite.Abp.SettingManagement
-{
-    public static class SettingManagementRemoteServiceConsts
-    {
-        public const string RemoteServiceName = "DigniteAbpSettings";
+namespace Dignite.Abp.SettingManagement;
 
-        public const string ModuleName = "digniteAbpSettings";
-    }
+public static class SettingManagementRemoteServiceConsts
+{
+    public const string RemoteServiceName = "SettingManagement";
+
+    public const string ModuleName = "settingManagement";
 }

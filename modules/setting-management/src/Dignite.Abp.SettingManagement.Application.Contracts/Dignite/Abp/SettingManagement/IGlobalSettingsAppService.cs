@@ -4,12 +4,11 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace Dignite.Abp.SettingManagement
-{
-    public interface IGlobalSettingsAppService: IApplicationService
-    {
-        Task<ListResultDto<SettingNavigationDto>> GetAllAsync();
+namespace Dignite.Abp.SettingManagement;
 
-        Task UpdateAsync(UpdateGlobalSettingsInput input);
-    }
+public interface IGlobalSettingsAppService : IApplicationService
+{
+    Task<ListResultDto<SettingGroupDto>> GetAllAsync();
+
+    Task UpdateAsync(UpdateGlobalSettingsInput input);
 }

@@ -67,7 +67,7 @@ namespace Dignite.Abp.FieldCustomizing
             return source;
         }
 
-        public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<BasicCustomizeFieldDefinition> fieldDefinitions)
+        public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<ICustomizeFieldDefinition> fieldDefinitions)
             where TSource : IHasCustomizableFields
         {
             foreach (var fieldDefinition in fieldDefinitions)

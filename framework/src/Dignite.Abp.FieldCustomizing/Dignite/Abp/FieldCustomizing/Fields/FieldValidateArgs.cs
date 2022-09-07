@@ -6,14 +6,14 @@ namespace Dignite.Abp.FieldCustomizing.Fields
 {
     public class FieldValidateArgs
     {
-        public BasicCustomizeFieldDefinition FieldDefinition { get; }
+        public ICustomizeFieldDefinition FieldDefinition { get; }
 
         public object Value { get; }
 
         public List<ValidationResult> ValidationErrors { get; }
 
         public FieldValidateArgs(
-            [NotNull] BasicCustomizeFieldDefinition fieldDefinition,
+            [NotNull] ICustomizeFieldDefinition fieldDefinition,
             object value,
             List<ValidationResult> validationErrors)
         {

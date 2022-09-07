@@ -1,0 +1,8 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "Permission:SettingManagement": "設定管理",
+    "Permission:GlobalSettings": "全局设定",
+    "Permission:TenantSettings": "租户设定"
+  }
+}

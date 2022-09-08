@@ -1,18 +1,17 @@
-﻿namespace Dignite.Abp.FieldCustomizing.Fields
+﻿namespace Dignite.Abp.FieldCustomizing.Fields;
+
+public interface IFieldProvider
 {
-    public interface IFieldProvider
-    {
-        /// <summary>
-        /// Unique name of the field provider.
-        /// </summary>
-        string Name { get; }
+    /// <summary>
+    /// Unique name of the field provider.
+    /// </summary>
+    string Name { get; }
 
-        string DisplayName { get; }
+    string DisplayName { get; }
 
-        FieldType ControlType { get; }
+    FieldType ControlType { get; }
 
-        void Validate(FieldValidateArgs args);
+    void Validate(FieldValidateArgs args);
 
-        FieldConfigurationBase GetConfiguration(FieldConfigurationDictionary fieldConfiguration);
-    }
+    FieldConfigurationBase GetConfiguration(FieldConfigurationDictionary fieldConfiguration);
 }

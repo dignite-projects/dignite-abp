@@ -1,10 +1,9 @@
 ﻿
 
-namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor
+namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor;
+
+public static class RichTextEditorConfigurationNames
 {
-    public static class RichTextEditorConfigurationNames
-    {
-        public const string Placeholder = "RichTextEditorField.Placeholder";
-        public const string Mode = "RichTextEditorField.Mode";
-    }
+    public const string Placeholder = "RichTextEditorField.Placeholder";
+    public const string Mode = "RichTextEditorField.Mode";
 }

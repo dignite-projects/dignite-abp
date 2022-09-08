@@ -2,44 +2,43 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Dignite.Abp.FieldCustomizing.Fields
+namespace Dignite.Abp.FieldCustomizing.Fields;
+
+public static class FieldConfigurationDictionaryExtensions
 {
-    public static class FieldConfigurationDictionaryExtensions
+    public static bool HasConfiguration(this FieldConfigurationDictionary source, string name)
     {
-        public static bool HasConfiguration(this FieldConfigurationDictionary source, string name)
-        {
-            return source.ContainsKey(name);
-        }
+        return source.ContainsKey(name);
+    }
 
-        public static TConfiguration GetConfigurationOrDefault<TConfiguration>(this FieldConfigurationDictionary source, string name, TConfiguration defaultValue = default)
+    public static TConfiguration GetConfigurationOrDefault<TConfiguration>(this FieldConfigurationDictionary source, string name, TConfiguration defaultValue = default)
+    {
+        if (!source.HasConfiguration(name))
         {
-            if (!source.HasConfiguration(name))
-            {
-                return defaultValue;
-            }
-            var configurationAsJson = source[name];
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new JsonStringEnumConverter());
-            return JsonSerializer.Deserialize<TConfiguration>(configurationAsJson,options);
+            return defaultValue;
         }
+        var configurationAsJson = source[name];
+        var options = new JsonSerializerOptions();
+        options.Converters.Add(new JsonStringEnumConverter());
+        return JsonSerializer.Deserialize<TConfiguration>(configurationAsJson, options);
+    }
 
-        public static void SetConfiguration<TConfiguration>(
-            this FieldConfigurationDictionary source,
-            string name,
-            TConfiguration value)
+    public static void SetConfiguration<TConfiguration>(
+        this FieldConfigurationDictionary source,
+        string name,
+        TConfiguration value)
+    {
+        JsonSerializerOptions options = new JsonSerializerOptions
         {
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                WriteIndented = true
-            };
-            var configurationAsJson=JsonSerializer.Serialize(value, options);
-            source[name]=configurationAsJson;
-        }
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+        var configurationAsJson = JsonSerializer.Serialize(value, options);
+        source[name] = configurationAsJson;
+    }
 
-        public static void RemoveConfiguration(this FieldConfigurationDictionary source, string name)
-        {
-            source.Remove(name);
-        }
+    public static void RemoveConfiguration(this FieldConfigurationDictionary source, string name)
+    {
+        source.Remove(name);
     }
 }

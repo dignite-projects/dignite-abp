@@ -1,25 +1,24 @@
 ﻿
 
-namespace Dignite.Abp.FieldCustomizing.Fields.Table
+namespace Dignite.Abp.FieldCustomizing.Fields.Table;
+
+public class TableFieldProvider : FieldProviderBase
 {
-    public class TableFieldProvider : FieldProviderBase
+
+    public const string ProviderName = "Table";
+
+    public override string Name => ProviderName;
+
+    public override string DisplayName => L["TableControl"];
+
+    public override FieldType ControlType => FieldType.Complex;
+
+    public override void Validate(FieldValidateArgs args)
     {
+    }
 
-        public const string ProviderName = "Table";
-
-        public override string Name => ProviderName;
-
-        public override string DisplayName => L["TableControl"];
-
-        public override FieldType ControlType => FieldType.Complex;
-
-        public override void Validate(FieldValidateArgs args)
-        {
-        }
-
-        public override FieldConfigurationBase GetConfiguration(FieldConfigurationDictionary fieldConfiguration)
-        {
-            return new TableConfiguration(fieldConfiguration);
-        }
+    public override FieldConfigurationBase GetConfiguration(FieldConfigurationDictionary fieldConfiguration)
+    {
+        return new TableConfiguration(fieldConfiguration);
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace Dignite.Abp.FieldCustomizing.Fields.Textbox
-{
-    public enum TextboxMode
-    {
-        SingleLine,
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Textbox;
 
-        MultipleLine
-    }
+public enum TextboxMode
+{
+    SingleLine,
+
+    MultipleLine
 }

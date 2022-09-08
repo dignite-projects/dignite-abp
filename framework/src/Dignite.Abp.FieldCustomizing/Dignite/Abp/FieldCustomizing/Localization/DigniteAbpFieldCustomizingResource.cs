@@ -1,9 +1,8 @@
 ﻿using Volo.Abp.Localization;
 
-namespace Dignite.Abp.FieldCustomizing.Localization
+namespace Dignite.Abp.FieldCustomizing.Localization;
+
+[LocalizationResourceName("AbpFieldCustomizing")]
+public class DigniteAbpFieldCustomizingResource
 {
-    [LocalizationResourceName("DigniteAbpFieldCustomizing")]
-    public class DigniteAbpFieldCustomizingResource
-    {
-    }
 }

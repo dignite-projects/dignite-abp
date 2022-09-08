@@ -1,8 +1,7 @@
 ﻿
-namespace Dignite.Abp.FieldCustomizing
+namespace Dignite.Abp.FieldCustomizing;
+
+public interface IHasCustomizableFields
 {
-    public interface IHasCustomizableFields
-    {
-        CustomizeFieldDictionary CustomizedFields { get; }
-    }
+    CustomizeFieldDictionary CustomizedFields { get; }
 }

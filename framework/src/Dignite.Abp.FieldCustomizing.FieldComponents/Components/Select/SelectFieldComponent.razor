@@ -1,0 +1,39 @@
+﻿@using Dignite.Abp.FieldCustomizing.FieldComponents
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.Select
+@using Dignite.Abp.FieldCustomizing
+@inherits FieldComponentBase<SelectFieldProvider,SelectConfiguration>
+
+    <Field Horizontal="@(!HideFieldLable)">
+        <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+            @if (Values != null)
+            {
+                @Configuration.Options.Where(o=>Values.Contains( o.Value)).Select(o=>o.Text).JoinAsString(",")
+            }
+    </FieldBody>
+    </Field>
+
+
+@code{
+    private IReadOnlyList<string> Values = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null) != null)
+        {
+            var values = CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null);
+            if (values != null)
+            {
+                try
+                {
+                    Values = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(values.ToString());
+                }
+                catch
+                { }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,72 @@
+﻿@using Dignite.Abp.FieldCustomizing.FieldComponents
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.Table
+@using Dignite.Abp.FieldCustomizing
+@using Microsoft.AspNetCore.Components.Forms
+@inject IFieldComponentSelector fieldComponentSelector
+@inherits FieldComponentBase<TableFieldProvider,TableConfiguration>
+
+<Field Horizontal="@(!HideFieldLable)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">      
+        @if (Configuration.TableColumns.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        @foreach(var column in Configuration.TableColumns)
+                        {
+                        <TableHeaderCell>@column.DisplayName</TableHeaderCell>
+                        }
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <TableBody>
+                    @if(TableRows.Any())
+                    {
+                        @foreach(var row in TableRows)
+                        {
+                        <Blazorise.TableRow>
+                            @foreach(var column in Configuration.TableColumns)
+                            {
+                                if (!column.FieldDefinition.FieldProviderName.IsNullOrEmpty())
+                                {
+                                    var component = fieldComponentSelector.Get(column.FieldDefinition.FieldProviderName);
+                                    var parameters = new Dictionary<string, object>();
+                                    parameters.Add("CustomizeField", new Abp.FieldCustomizing.CustomizeField(row, column.FieldDefinition));
+                                    parameters.Add("HideFieldLable", true);
+                                    <TableRowCell>
+                                        <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                </TableRowCell>
+                                }
+                            }
+                        </Blazorise.TableRow>
+                        }
+                    }
+                    else
+                    {
+                        <Blazorise.TableRow>
+                                <TableRowCell ColumnSpan="Configuration.TableColumns.Count">
+                                    无数据
+                                </TableRowCell>
+                        </Blazorise.TableRow>                        
+                    }
+                </TableBody>
+            </Table>
+            }
+    </FieldBody>
+</Field>
+@code{
+    public List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow> TableRows = new List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var value = CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null);
+        if (value != null)
+        {
+            TableRows = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow>>(value.ToString());
+        }
+
+    }
+
+}

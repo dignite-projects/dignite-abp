@@ -1,0 +1,94 @@
+﻿@using Dignite.Abp.FieldCustomizing.FieldComponents
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.Table
+@using Dignite.Abp.FieldCustomizing
+@using Microsoft.AspNetCore.Components.Forms
+@inject IFieldControlComponentSelector fieldControlComponentSelector
+@inherits FieldControlComponentBase<TableFieldProvider,TableConfiguration>
+
+<Field Horizontal="@(!HideFieldLable)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        @if (Configuration.TableColumns.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        @foreach (var column in Configuration.TableColumns)
+                        {
+                            <TableHeaderCell>@column.DisplayName</TableHeaderCell>
+                        }
+                        <TableHeaderCell Style="width:100px;">
+                            <Button @onclick="@AddTableRow"><Icon Name="IconName.PlusCircle" /></Button>
+                        </TableHeaderCell>
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <TableBody>
+                    @foreach (var row in TableRows)
+                    {
+                        <Blazorise.TableRow>
+                            @foreach (var column in Configuration.TableColumns)
+                            {
+                                if (!column.FieldDefinition.FieldProviderName.IsNullOrEmpty())
+                                {
+                                    var component = fieldControlComponentSelector.Get(column.FieldDefinition.FieldProviderName);
+                                    var parameters = new Dictionary<string, object>();
+                                    parameters.Add("CustomizeField", new Abp.FieldCustomizing.CustomizeField(row, column.FieldDefinition));
+                                    parameters.Add("HideFieldLable", true);
+                                    <TableRowCell>
+                                        <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                </TableRowCell>
+                                }
+                            }
+                            <TableRowCell>
+                                <Button @onclick="@(val => RemoveTableRow(row))"><Icon Name="IconName.Remove" /></Button>
+                            </TableRowCell>
+                        </Blazorise.TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
+        <FieldHelp>@Configuration.Description</FieldHelp>
+    </FieldBody>
+</Field>
+@code {
+    public List<Abp.FieldCustomizing.Fields.Table.TableRow> TableRows = new List<Abp.FieldCustomizing.Fields.Table.TableRow>();
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var value = CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null);
+        if (value != null)
+        {
+            try
+            {
+                TableRows = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Abp.FieldCustomizing.Fields.Table.TableRow>>(value.ToString());
+            }
+            catch
+            {
+            }
+            CustomizeField.Entity.SetField(CustomizeField.Definition.Name, TableRows);
+        }
+        else
+        {
+            CustomizeField.Entity.SetField(CustomizeField.Definition.Name, TableRows);
+        }
+    }
+    private void AddTableRow()
+    {
+        var row = new Abp.FieldCustomizing.Fields.Table.TableRow();
+        foreach (var column in Configuration.TableColumns)
+        {
+            row.CustomizedFields.Add(column.Name, column.FieldDefinition.DefaultValue);
+        }
+        TableRows.Add(row);
+        CustomizeField.Entity.SetField(CustomizeField.Definition.Name, TableRows);
+    }
+    private void RemoveTableRow(Abp.FieldCustomizing.Fields.Table.TableRow row)
+    {
+        TableRows.Remove(row);
+        CustomizeField.Entity.SetField(CustomizeField.Definition.Name, TableRows);
+    }
+}

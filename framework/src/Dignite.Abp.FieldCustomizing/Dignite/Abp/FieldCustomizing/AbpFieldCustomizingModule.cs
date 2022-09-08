@@ -6,28 +6,27 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Threading;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Dignite.Abp.FieldCustomizing
-{
-    [DependsOn(
-        typeof(AbpLocalizationModule),
-        typeof(AbpThreadingModule),
-        typeof(AbpJsonModule)
-        )]
-    public class AbpFieldCustomizingModule:AbpModule
-    {
-        public override void ConfigureServices(ServiceConfigurationContext context)
-        {
-            Configure<AbpVirtualFileSystemOptions>(options =>
-            {
-                options.FileSets.AddEmbedded<AbpFieldCustomizingModule>();
-            });
+namespace Dignite.Abp.FieldCustomizing;
 
-            Configure<AbpLocalizationOptions>(options =>
-            {
-                options.Resources
-                    .Add<DigniteAbpFieldCustomizingResource>("en")
-                    .AddVirtualJson("/Dignite/Abp/FieldCustomizing/Localization/Resources");
-            });
-        }
+[DependsOn(
+    typeof(AbpLocalizationModule),
+    typeof(AbpThreadingModule),
+    typeof(AbpJsonModule)
+    )]
+public class AbpFieldCustomizingModule : AbpModule
+{
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpVirtualFileSystemOptions>(options =>
+        {
+            options.FileSets.AddEmbedded<AbpFieldCustomizingModule>();
+        });
+
+        Configure<AbpLocalizationOptions>(options =>
+        {
+            options.Resources
+                .Add<DigniteAbpFieldCustomizingResource>("en")
+                .AddVirtualJson("/Dignite/Abp/FieldCustomizing/Localization/Resources");
+        });
     }
 }

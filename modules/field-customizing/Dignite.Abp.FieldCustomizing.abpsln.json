@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.Abp.FieldCustomizing": {
+      "path": "Dignite.Abp.FieldCustomizing.abpmdl.json"
+    }
+  }
+}

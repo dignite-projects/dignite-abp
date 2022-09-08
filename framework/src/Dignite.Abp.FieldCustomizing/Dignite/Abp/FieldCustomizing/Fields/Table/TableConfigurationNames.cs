@@ -1,9 +1,8 @@
 ﻿
 
-namespace Dignite.Abp.FieldCustomizing.Fields.Table
+namespace Dignite.Abp.FieldCustomizing.Fields.Table;
+
+public static class TableConfigurationNames
 {
-    public static class TableConfigurationNames
-    {
-        public const string TableColumns = "TableField.TableColumns";
-    }
+    public const string TableColumns = "TableField.TableColumns";
 }

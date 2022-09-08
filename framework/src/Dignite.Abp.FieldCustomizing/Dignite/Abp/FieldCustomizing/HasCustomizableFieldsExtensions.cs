@@ -7,123 +7,122 @@ using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Reflection;
 
-namespace Dignite.Abp.FieldCustomizing
+namespace Dignite.Abp.FieldCustomizing;
+
+public static class HasCustomizableFieldsExtensions
 {
-    public static class HasCustomizableFieldsExtensions
+    public static bool HasField([NotNull] this IHasCustomizableFields source, [NotNull] string name)
     {
-        public static bool HasField([NotNull] this IHasCustomizableFields source, [NotNull] string name)
+        return source.CustomizedFields.ContainsKey(name);
+    }
+
+    public static object GetField([NotNull] this IHasCustomizableFields source, [NotNull] string name, object defaultValue = null)
+    {
+        return source.CustomizedFields?.GetOrDefault(name)
+               ?? defaultValue;
+    }
+
+    public static TField GetField<TField>([NotNull] this IHasCustomizableFields source, [NotNull] string name, TField defaultValue = default)
+    {
+        var value = source.GetField(name);
+        if (value == null)
         {
-            return source.CustomizedFields.ContainsKey(name);
+            return defaultValue;
         }
 
-        public static object GetField([NotNull] this IHasCustomizableFields source, [NotNull] string name, object defaultValue = null)
+        if (TypeHelper.IsPrimitiveExtended(typeof(TField), includeEnums: true))
         {
-            return source.CustomizedFields?.GetOrDefault(name)
-                   ?? defaultValue;
-        }
-
-        public static TField GetField<TField>([NotNull] this IHasCustomizableFields source, [NotNull] string name, TField defaultValue = default)
-        {
-            var value = source.GetField(name);
-            if (value == null)
+            var conversionType = typeof(TField);
+            if (TypeHelper.IsNullable(conversionType))
             {
-                return defaultValue;
+                conversionType = conversionType.GetFirstGenericArgumentIfNullable();
             }
 
-            if (TypeHelper.IsPrimitiveExtended(typeof(TField), includeEnums: true))
+            if (conversionType == typeof(Guid))
             {
-                var conversionType = typeof(TField);
-                if (TypeHelper.IsNullable(conversionType))
-                {
-                    conversionType = conversionType.GetFirstGenericArgumentIfNullable();
-                }
-
-                if (conversionType == typeof(Guid))
-                {
-                    return (TField)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString());
-                }
-
-                return (TField)Convert.ChangeType(value, conversionType, CultureInfo.InvariantCulture);
+                return (TField)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString());
             }
 
-            throw new AbpException("GetField<TField> does not support non-primitive types. Use non-generic GetField method and handle type casting manually.");
+            return (TField)Convert.ChangeType(value, conversionType, CultureInfo.InvariantCulture);
         }
 
-        public static TSource SetField<TSource>(
-            this TSource source,
-            string name,
-            object value)
-            where TSource : IHasCustomizableFields
-        {
-            source.CustomizedFields[name] = value;
+        throw new AbpException("GetField<TField> does not support non-primitive types. Use non-generic GetField method and handle type casting manually.");
+    }
 
-            return source;
-        }
+    public static TSource SetField<TSource>(
+        this TSource source,
+        string name,
+        object value)
+        where TSource : IHasCustomizableFields
+    {
+        source.CustomizedFields[name] = value;
 
-        public static TSource RemoveField<TSource>(this TSource source, string name)
-            where TSource : IHasCustomizableFields
-        {
-            source.CustomizedFields.Remove(name);
-            return source;
-        }
+        return source;
+    }
 
-        public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<ICustomizeFieldDefinition> fieldDefinitions)
-            where TSource : IHasCustomizableFields
+    public static TSource RemoveField<TSource>(this TSource source, string name)
+        where TSource : IHasCustomizableFields
+    {
+        source.CustomizedFields.Remove(name);
+        return source;
+    }
+
+    public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<ICustomizeFieldDefinition> fieldDefinitions)
+        where TSource : IHasCustomizableFields
+    {
+        foreach (var fieldDefinition in fieldDefinitions)
         {
-            foreach (var fieldDefinition in fieldDefinitions)
+            if (source.HasField(fieldDefinition.Name))
             {
-                if (source.HasField(fieldDefinition.Name))
-                {
-                    continue;
-                }
-
-                source.CustomizedFields[fieldDefinition.Name] = fieldDefinition.DefaultValue;
+                continue;
             }
 
-            return source;
+            source.CustomizedFields[fieldDefinition.Name] = fieldDefinition.DefaultValue;
         }
 
-        public static void SetCustomizeFieldsToRegularProperties([NotNull] this IHasCustomizableFields source)
+        return source;
+    }
+
+    public static void SetCustomizeFieldsToRegularProperties([NotNull] this IHasCustomizableFields source)
+    {
+        var properties = source.GetType().GetProperties()
+            .Where(x => source.CustomizedFields.ContainsKey(x.Name)
+                        && x.GetSetMethod(true) != null)
+            .ToList();
+
+        foreach (var property in properties)
         {
-            var properties = source.GetType().GetProperties()
-                .Where(x => source.CustomizedFields.ContainsKey(x.Name)
-                            && x.GetSetMethod(true) != null)
-                .ToList();
-
-            foreach (var property in properties)
-            {
-                property.SetValue(source, source.CustomizedFields[property.Name]);
-                source.RemoveField(property.Name);
-            }
+            property.SetValue(source, source.CustomizedFields[property.Name]);
+            source.RemoveField(property.Name);
         }
+    }
 
 
-        /// <summary>
-        /// Copies customized fields from the <paramref name="source"/> object
-        /// to the <paramref name="destination"/> object.
-        /// </summary>
-        /// <typeparam name="TSource">Source class type</typeparam>
-        /// <typeparam name="TDestination">Destination class type</typeparam>
-        /// <param name="source">The source object</param>
-        /// <param name="destination">The destination object</param>
-        /// <param name="fields">Used to map fields;When the value is null, all fields are mapped</param>
-        /// <param name="ignoredFields">Used to ignore some fields</param>
-        public static void MapCustomizeFieldsTo<TSource, TDestination>(
-            [NotNull] this TSource source,
-            [NotNull] TDestination destination,
-            string[] fields = null,
-            string[] ignoredFields = null)
-            where TSource : IHasCustomizableFields
-            where TDestination : IHasCustomizableFields
-        {
-            CustomizableObjectMapper.MapCustomizeFieldsTo(
-                typeof(TSource),
-                typeof(TDestination),
-                source.CustomizedFields,
-                destination.CustomizedFields,
-                fields,
-                ignoredFields
-                );
-        }
+    /// <summary>
+    /// Copies customized fields from the <paramref name="source"/> object
+    /// to the <paramref name="destination"/> object.
+    /// </summary>
+    /// <typeparam name="TSource">Source class type</typeparam>
+    /// <typeparam name="TDestination">Destination class type</typeparam>
+    /// <param name="source">The source object</param>
+    /// <param name="destination">The destination object</param>
+    /// <param name="fields">Used to map fields;When the value is null, all fields are mapped</param>
+    /// <param name="ignoredFields">Used to ignore some fields</param>
+    public static void MapCustomizeFieldsTo<TSource, TDestination>(
+        [NotNull] this TSource source,
+        [NotNull] TDestination destination,
+        string[] fields = null,
+        string[] ignoredFields = null)
+        where TSource : IHasCustomizableFields
+        where TDestination : IHasCustomizableFields
+    {
+        CustomizableObjectMapper.MapCustomizeFieldsTo(
+            typeof(TSource),
+            typeof(TDestination),
+            source.CustomizedFields,
+            destination.CustomizedFields,
+            fields,
+            ignoredFields
+            );
     }
 }

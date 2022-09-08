@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.FieldCustomizing.Domain.Shared": {
+      "path": "src/Dignite.Abp.FieldCustomizing.Domain.Shared/Dignite.Abp.FieldCustomizing.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.Domain": {
+      "path": "src/Dignite.Abp.FieldCustomizing.Domain/Dignite.Abp.FieldCustomizing.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.Application.Contracts": {
+      "path": "src/Dignite.Abp.FieldCustomizing.Application.Contracts/Dignite.Abp.FieldCustomizing.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.Application": {
+      "path": "src/Dignite.Abp.FieldCustomizing.Application/Dignite.Abp.FieldCustomizing.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.FieldCustomizing.EntityFrameworkCore/Dignite.Abp.FieldCustomizing.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.MongoDB": {
+      "path": "src/Dignite.Abp.FieldCustomizing.MongoDB/Dignite.Abp.FieldCustomizing.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.HttpApi": {
+      "path": "src/Dignite.Abp.FieldCustomizing.HttpApi/Dignite.Abp.FieldCustomizing.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.HttpApi.Client": {
+      "path": "src/Dignite.Abp.FieldCustomizing.HttpApi.Client/Dignite.Abp.FieldCustomizing.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.FieldCustomizing.TestBase": {
+      "path": "test/Dignite.Abp.FieldCustomizing.TestBase/Dignite.Abp.FieldCustomizing.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Abp.FieldCustomizing.EntityFrameworkCore.Tests/Dignite.Abp.FieldCustomizing.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.MongoDB.Tests": {
+      "path": "test/Dignite.Abp.FieldCustomizing.MongoDB.Tests/Dignite.Abp.FieldCustomizing.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.Domain.Tests": {
+      "path": "test/Dignite.Abp.FieldCustomizing.Domain.Tests/Dignite.Abp.FieldCustomizing.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.Application.Tests": {
+      "path": "test/Dignite.Abp.FieldCustomizing.Application.Tests/Dignite.Abp.FieldCustomizing.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.HttpApi.Host": {
+      "path": "host/Dignite.Abp.FieldCustomizing.HttpApi.Host/Dignite.Abp.FieldCustomizing.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Dignite.Abp.FieldCustomizing.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Dignite.Abp.FieldCustomizing.HttpApi.Client.ConsoleTestApp/Dignite.Abp.FieldCustomizing.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.FieldCustomizing.IdentityServer": {
+      "path": "host/Dignite.Abp.FieldCustomizing.IdentityServer/Dignite.Abp.FieldCustomizing.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Dignite.Abp.FieldCustomizing.Host.Shared": {
+      "path": "host/Dignite.Abp.FieldCustomizing.Host.Shared/Dignite.Abp.FieldCustomizing.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

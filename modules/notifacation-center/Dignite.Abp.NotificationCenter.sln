@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{649A3FFA-182
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{E400416D-2895-4512-9D17-90681EEC7E0A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.EntityFrameworkCore", "src\Dignite.Abp.NotificationCenter.EntityFrameworkCore\Dignite.Abp.NotificationCenter.EntityFrameworkCore.csproj", "{0CE86223-D31D-4315-A1F5-87BA3EE1B844}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.HttpApi", "src\Dignite.Abp.NotificationCenter.HttpApi\Dignite.Abp.NotificationCenter.HttpApi.csproj", "{077AA5F8-8B61-420C-A6B5-0150A66FDB34}"
@@ -31,29 +29,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Application.Tests", "test\Dignite.Abp.NotificationCenter.Application.Tests\Dignite.Abp.NotificationCenter.Application.Tests.csproj", "{90CB5DC4-C040-45C7-8900-9688B26405BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.HttpApi.Host", "host\Dignite.Abp.NotificationCenter.HttpApi.Host\Dignite.Abp.NotificationCenter.HttpApi.Host.csproj", "{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp", "test\Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp\Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp.csproj", "{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.IdentityServer", "host\Dignite.Abp.NotificationCenter.IdentityServer\Dignite.Abp.NotificationCenter.IdentityServer.csproj", "{690203F4-3CD5-4569-88D9-EE831EEA5F5F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Host.Shared", "host\Dignite.Abp.NotificationCenter.Host.Shared\Dignite.Abp.NotificationCenter.Host.Shared.csproj", "{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor", "src\Dignite.Abp.NotificationCenter.Blazor\Dignite.Abp.NotificationCenter.Blazor.csproj", "{827FCC18-A22B-4175-82CD-1233F6DEE8FB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor.Host", "host\Dignite.Abp.NotificationCenter.Blazor.Host\Dignite.Abp.NotificationCenter.Blazor.Host.csproj", "{D7E0F672-F5E2-4338-AFF4-4E5091C55A62}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor.Server", "src\Dignite.Abp.NotificationCenter.Blazor.Server\Dignite.Abp.NotificationCenter.Blazor.Server.csproj", "{299BE52E-823F-408E-9C6D-7E2F81BA34FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor.WebAssembly", "src\Dignite.Abp.NotificationCenter.Blazor.WebAssembly\Dignite.Abp.NotificationCenter.Blazor.WebAssembly.csproj", "{F0EE5760-262D-456A-AA7C-E84F484A05F6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor.Server.Host", "host\Dignite.Abp.NotificationCenter.Blazor.Server.Host\Dignite.Abp.NotificationCenter.Blazor.Server.Host.csproj", "{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Installer", "src\Dignite.Abp.NotificationCenter.Installer\Dignite.Abp.NotificationCenter.Installer.csproj", "{BE39FD00-745B-4049-8161-FC129817CBE4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications", "..\..\framework\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj", "{44409F64-47A3-4129-A2DF-62AC7BE35E6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.SignalR.Notifications", "..\..\framework\src\Dignite.Abp.AspNetCore.SignalR.Notifications\Dignite.Abp.AspNetCore.SignalR.Notifications.csproj", "{00E03138-4BBF-455B-9D90-B0159E079033}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{A6458654-A086-4E47-9BB3-13FA2F0D7AA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Notifications.Shared", "..\..\framework\src\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj", "{93847DE4-AD1E-4E33-84DB-D2F646B1C10B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,30 +97,14 @@ Global
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{827FCC18-A22B-4175-82CD-1233F6DEE8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{827FCC18-A22B-4175-82CD-1233F6DEE8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{827FCC18-A22B-4175-82CD-1233F6DEE8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{827FCC18-A22B-4175-82CD-1233F6DEE8FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7E0F672-F5E2-4338-AFF4-4E5091C55A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7E0F672-F5E2-4338-AFF4-4E5091C55A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7E0F672-F5E2-4338-AFF4-4E5091C55A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7E0F672-F5E2-4338-AFF4-4E5091C55A62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{299BE52E-823F-408E-9C6D-7E2F81BA34FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{299BE52E-823F-408E-9C6D-7E2F81BA34FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{299BE52E-823F-408E-9C6D-7E2F81BA34FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -137,10 +113,6 @@ Global
 		{F0EE5760-262D-456A-AA7C-E84F484A05F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0EE5760-262D-456A-AA7C-E84F484A05F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0EE5760-262D-456A-AA7C-E84F484A05F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -153,6 +125,10 @@ Global
 		{00E03138-4BBF-455B-9D90-B0159E079033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00E03138-4BBF-455B-9D90-B0159E079033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00E03138-4BBF-455B-9D90-B0159E079033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93847DE4-AD1E-4E33-84DB-D2F646B1C10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93847DE4-AD1E-4E33-84DB-D2F646B1C10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93847DE4-AD1E-4E33-84DB-D2F646B1C10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93847DE4-AD1E-4E33-84DB-D2F646B1C10B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,16 +145,14 @@ Global
 		{527F645C-C1FC-406E-8479-81386C8ECF13} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
 		{E60895E5-79C4-447D-88B7-85CB5BA336A4} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
 		{90CB5DC4-C040-45C7-8900-9688B26405BC} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{1EDCD6D4-DF3A-4E3B-ABB6-C0D0B373EAB8} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F} = {E400416D-2895-4512-9D17-90681EEC7E0A}
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{827FCC18-A22B-4175-82CD-1233F6DEE8FB} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
-		{D7E0F672-F5E2-4338-AFF4-4E5091C55A62} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{299BE52E-823F-408E-9C6D-7E2F81BA34FF} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
 		{F0EE5760-262D-456A-AA7C-E84F484A05F6} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
-		{FEA752A1-5B4E-49E9-B1F3-DDC25E41BB52} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{BE39FD00-745B-4049-8161-FC129817CBE4} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{44409F64-47A3-4129-A2DF-62AC7BE35E6C} = {A6458654-A086-4E47-9BB3-13FA2F0D7AA7}
+		{00E03138-4BBF-455B-9D90-B0159E079033} = {A6458654-A086-4E47-9BB3-13FA2F0D7AA7}
+		{93847DE4-AD1E-4E33-84DB-D2F646B1C10B} = {A6458654-A086-4E47-9BB3-13FA2F0D7AA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

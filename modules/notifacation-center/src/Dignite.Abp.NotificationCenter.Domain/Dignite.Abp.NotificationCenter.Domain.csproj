@@ -1,14 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Dignite.Abp.NotificationCenter</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Dignite.Abp.NotificationCenter.Domain</AssemblyName>
+		<PackageId>Dignite.Abp.NotificationCenter.Domain</PackageId>
+		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<RootNamespace />
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.3.3" />
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Domain.Shared\Dignite.Abp.NotificationCenter.Domain.Shared.csproj" />
   </ItemGroup>
 

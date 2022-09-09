@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
-namespace Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp
+namespace Dignite.Abp.NotificationCenter
 {
     public class ConsoleTestAppHostedService : IHostedService
     {
@@ -18,7 +18,7 @@ namespace Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var application = AbpApplicationFactory.Create<NotificationCenterConsoleApiClientModule>(options=>
+            using (var application = AbpApplicationFactory.Create<AbpNotificationCenterConsoleApiClientModule>(options =>
             {
                 options.Services.ReplaceConfiguration(_configuration);
                 options.UseAutofac();

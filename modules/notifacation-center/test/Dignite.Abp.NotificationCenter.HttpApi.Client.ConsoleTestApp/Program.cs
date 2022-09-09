@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Dignite.Abp.NotificationCenter.HttpApi.Client.ConsoleTestApp
+namespace Dignite.Abp.NotificationCenter
 {
     class Program
     {

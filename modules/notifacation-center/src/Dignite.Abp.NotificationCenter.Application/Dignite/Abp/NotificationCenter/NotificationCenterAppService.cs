@@ -1,14 +1,13 @@
 ﻿using Dignite.Abp.NotificationCenter.Localization;
 using Volo.Abp.Application.Services;
 
-namespace Dignite.Abp.NotificationCenter
+namespace Dignite.Abp.NotificationCenter;
+
+public abstract class NotificationCenterAppService : ApplicationService
 {
-    public abstract class NotificationCenterAppService : ApplicationService
+    protected NotificationCenterAppService()
     {
-        protected NotificationCenterAppService()
-        {
-            LocalizationResource = typeof(NotificationCenterResource);
-            ObjectMapperContext = typeof(NotificationCenterApplicationModule);
-        }
+        LocalizationResource = typeof(NotificationCenterResource);
+        ObjectMapperContext = typeof(AbpNotificationCenterApplicationModule);
     }
 }

@@ -1,11 +1,10 @@
-﻿namespace Dignite.Abp.NotificationCenter
+﻿namespace Dignite.Abp.NotificationCenter;
+
+public static class NotificationCenterDbProperties
 {
-    public static class NotificationCenterDbProperties
-    {
-        public static string DbTablePrefix { get; set; } = "Di";
+    public static string DbTablePrefix { get; set; } = "Abp";
 
-        public static string DbSchema { get; set; } = null;
+    public static string DbSchema { get; set; } = null;
 
-        public const string ConnectionStringName = "NotificationCenter";
-    }
+    public const string ConnectionStringName = "NotificationCenter";
 }

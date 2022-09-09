@@ -1,7 +1,6 @@
-﻿namespace Dignite.Abp.NotificationCenter
+﻿namespace Dignite.Abp.NotificationCenter;
+
+public static class NotificationCenterErrorCodes
 {
-    public static class NotificationCenterErrorCodes
-    {
-        //Add your business exception error codes here...
-    }
+    //Add your business exception error codes here...
 }

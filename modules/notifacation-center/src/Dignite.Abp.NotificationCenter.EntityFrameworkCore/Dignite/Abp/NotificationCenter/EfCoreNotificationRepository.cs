@@ -3,14 +3,13 @@ using System;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace Dignite.Abp.NotificationCenter
+namespace Dignite.Abp.NotificationCenter;
+
+public class EfCoreNotificationRepository : EfCoreRepository<INotificationCenterDbContext, Notification, Guid>, INotificationRepository
 {
-    public class EfCoreNotificationRepository : EfCoreRepository<INotificationCenterDbContext, Notification,Guid>, INotificationRepository
+    public EfCoreNotificationRepository(
+        IDbContextProvider<INotificationCenterDbContext> dbContextProvider)
+        : base(dbContextProvider)
     {
-        public EfCoreNotificationRepository(
-            IDbContextProvider<INotificationCenterDbContext> dbContextProvider)
-            : base(dbContextProvider)
-        {
-        }
     }
 }

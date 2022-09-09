@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.NotificationCenter.Domain.Shared": {
+      "path": "src/Dignite.NotificationCenter.Domain.Shared/Dignite.NotificationCenter.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.Domain": {
+      "path": "src/Dignite.NotificationCenter.Domain/Dignite.NotificationCenter.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.Application.Contracts": {
+      "path": "src/Dignite.NotificationCenter.Application.Contracts/Dignite.NotificationCenter.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.Application": {
+      "path": "src/Dignite.NotificationCenter.Application/Dignite.NotificationCenter.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.EntityFrameworkCore": {
+      "path": "src/Dignite.NotificationCenter.EntityFrameworkCore/Dignite.NotificationCenter.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.MongoDB": {
+      "path": "src/Dignite.NotificationCenter.MongoDB/Dignite.NotificationCenter.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.HttpApi": {
+      "path": "src/Dignite.NotificationCenter.HttpApi/Dignite.NotificationCenter.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.HttpApi.Client": {
+      "path": "src/Dignite.NotificationCenter.HttpApi.Client/Dignite.NotificationCenter.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.NotificationCenter.TestBase": {
+      "path": "test/Dignite.NotificationCenter.TestBase/Dignite.NotificationCenter.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.NotificationCenter.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.NotificationCenter.EntityFrameworkCore.Tests/Dignite.NotificationCenter.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.NotificationCenter.MongoDB.Tests": {
+      "path": "test/Dignite.NotificationCenter.MongoDB.Tests/Dignite.NotificationCenter.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.NotificationCenter.Domain.Tests": {
+      "path": "test/Dignite.NotificationCenter.Domain.Tests/Dignite.NotificationCenter.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.NotificationCenter.Application.Tests": {
+      "path": "test/Dignite.NotificationCenter.Application.Tests/Dignite.NotificationCenter.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.NotificationCenter.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Dignite.NotificationCenter.HttpApi.Client.ConsoleTestApp/Dignite.NotificationCenter.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    }
+  }
+}

@@ -3,15 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Studio.ModuleInstalling;
 
-namespace MyCompany.NotificationCenter
+namespace Dignite.Abp.NotificationCenter;
+
+[Dependency(ServiceLifetime.Transient, ReplaceServices = true)]
+[ExposeServices(typeof(IModuleInstallingPipelineBuilder))]
+public class NotificationCenterInstallerPipelineBuilder : ModuleInstallingPipelineBuilderBase, IModuleInstallingPipelineBuilder, ITransientDependency
 {
-    [Dependency(ServiceLifetime.Transient, ReplaceServices = true)]
-    [ExposeServices(typeof(IModuleInstallingPipelineBuilder))]
-    public class NotificationCenterInstallerPipelineBuilder : ModuleInstallingPipelineBuilderBase, IModuleInstallingPipelineBuilder, ITransientDependency
+    public async Task<ModuleInstallingPipeline> BuildAsync(ModuleInstallingContext context)
     {
-        public async Task<ModuleInstallingPipeline> BuildAsync(ModuleInstallingContext context)
-        {
-            return GetBasePipeline(context);
-        }
+        return GetBasePipeline(context);
     }
 }

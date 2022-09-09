@@ -1,9 +1,8 @@
 ﻿
 
-namespace Dignite.Abp.Notifications
+namespace Dignite.Abp.Notifications;
+
+public interface INotificationDefinitionProvider
 {
-    public interface INotificationDefinitionProvider
-    {
-        void Define(INotificationDefinitionContext context);
-    }
+    void Define(INotificationDefinitionContext context);
 }

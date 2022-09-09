@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Dignite.Abp.Notifications
+namespace Dignite.Abp.Notifications;
+
+/// <summary>
+/// Used as a context while defining notifications.
+/// </summary>
+public interface INotificationDefinitionContext
 {
-    /// <summary>
-    /// Used as a context while defining notifications.
-    /// </summary>
-    public interface INotificationDefinitionContext
-    {
-        NotificationDefinition GetOrNull(string name);
+    NotificationDefinition GetOrNull(string name);
 
-        IReadOnlyList<NotificationDefinition> GetAll();
+    IReadOnlyList<NotificationDefinition> GetAll();
 
-        void Add(params NotificationDefinition[] definitions);
-    }
+    void Add(params NotificationDefinition[] definitions);
 }

@@ -1,13 +1,12 @@
 ﻿using Dignite.Abp.NotificationCenter.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Dignite.Abp.NotificationCenter
+namespace Dignite.Abp.NotificationCenter;
+
+public abstract class NotificationCenterController : AbpControllerBase
 {
-    public abstract class NotificationCenterController : AbpControllerBase
+    protected NotificationCenterController()
     {
-        protected NotificationCenterController()
-        {
-            LocalizationResource = typeof(NotificationCenterResource);
-        }
+        LocalizationResource = typeof(NotificationCenterResource);
     }
 }

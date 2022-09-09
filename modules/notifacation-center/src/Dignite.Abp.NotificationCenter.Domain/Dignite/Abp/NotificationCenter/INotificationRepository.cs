@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
-namespace Dignite.Abp.NotificationCenter
+namespace Dignite.Abp.NotificationCenter;
+
+public interface INotificationRepository : IBasicRepository<Notification, Guid>
 {
-    public interface INotificationRepository : IBasicRepository<Notification,Guid>
-    {
-    }
 }

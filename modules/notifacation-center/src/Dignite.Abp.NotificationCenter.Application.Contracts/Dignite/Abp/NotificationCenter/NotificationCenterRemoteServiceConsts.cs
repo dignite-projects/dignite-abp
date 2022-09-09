@@ -1,9 +1,8 @@
-﻿namespace Dignite.Abp.NotificationCenter
-{
-    public class NotificationCenterRemoteServiceConsts
-    {
-        public const string RemoteServiceName = "NotificationCenter";
+﻿namespace Dignite.Abp.NotificationCenter;
 
-        public const string ModuleName = "notificationCenter";
-    }
+public class NotificationCenterRemoteServiceConsts
+{
+    public const string RemoteServiceName = "NotificationCenter";
+
+    public const string ModuleName = "notificationCenter";
 }

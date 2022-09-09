@@ -1,10 +1,9 @@
 ﻿using Volo.Abp.Localization;
 
-namespace Dignite.Abp.NotificationCenter.Localization
+namespace Dignite.Abp.NotificationCenter.Localization;
+
+[LocalizationResourceName("AbpNotificationCenter")]
+public class NotificationCenterResource
 {
-    [LocalizationResourceName("NotificationCenter")]
-    public class NotificationCenterResource
-    {
-        
-    }
+
 }

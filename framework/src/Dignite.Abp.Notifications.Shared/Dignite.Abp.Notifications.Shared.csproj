@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<Import Project="..\..\..\configureawait.props" />
+	<Import Project="..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>Dignite.Abp.Notifications.Shared</AssemblyName>
+		<PackageId>Dignite.Abp.Notifications.Shared</PackageId>
+		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Volo.Abp.Localization" Version="5.3.3" />
+	</ItemGroup>
+
+</Project>

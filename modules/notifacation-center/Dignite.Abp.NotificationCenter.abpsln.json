@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.Abp.NotificationCenter": {
+      "path": "Dignite.Abp.NotificationCenter.abpmdl.json"
+    }
+  }
+}

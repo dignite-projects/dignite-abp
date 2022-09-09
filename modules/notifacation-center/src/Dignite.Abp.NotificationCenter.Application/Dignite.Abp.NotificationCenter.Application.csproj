@@ -1,11 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
 
-  <PropertyGroup>
+	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Dignite.Abp.NotificationCenter</RootNamespace>
-  </PropertyGroup>
+		<AssemblyName>Dignite.Abp.NotificationCenter.Application</AssemblyName>
+		<PackageId>Dignite.Abp.NotificationCenter.Application</PackageId>
+		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<RootNamespace />
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AutoMapper" Version="5.3.3" />

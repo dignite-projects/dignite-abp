@@ -22,5 +22,9 @@
 	  <PackageReference Include="Volo.Abp.Guids" Version="5.3.3" />
 	  <PackageReference Include="Volo.Abp.EventBus" Version="5.3.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj" />
+  </ItemGroup>
   
 </Project>

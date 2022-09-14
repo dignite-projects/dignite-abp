@@ -13,6 +13,8 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+    <None Remove="Themes\Pure\Components\Toolbar\" />
+    <None Remove="Toolbars\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,4 +29,8 @@
     <ProjectReference Include="..\..\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Themes\Pure\Components\Toolbar\" />
+    <Folder Include="Toolbars\" />
+  </ItemGroup>
 </Project>

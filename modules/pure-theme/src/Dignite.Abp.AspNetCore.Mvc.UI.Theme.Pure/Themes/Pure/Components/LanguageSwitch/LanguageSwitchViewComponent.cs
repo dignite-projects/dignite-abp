@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.LanguageSwitch;
 
 public class LanguageSwitchViewComponent : AbpViewComponent
 {
@@ -52,6 +52,6 @@ public class LanguageSwitchViewComponent : AbpViewComponent
             OtherLanguages = languages.Where(l => l != currentLanguage).ToList()
         };
 
-        return View("LanguageSwitch/Default.cshtml", model);
+        return View(model);
     }
 }

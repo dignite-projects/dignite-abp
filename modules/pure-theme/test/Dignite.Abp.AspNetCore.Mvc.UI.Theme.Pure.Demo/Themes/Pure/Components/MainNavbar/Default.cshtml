@@ -12,9 +12,9 @@
             <ul class="navbar-nav me-auto">
                 @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
             </ul>
-            <ul class="navbar-nav">
-                @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
-            </ul>
         </div>
+        <ul class="navbar-nav">
+            @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
+        </ul>
     </div>
 </nav>

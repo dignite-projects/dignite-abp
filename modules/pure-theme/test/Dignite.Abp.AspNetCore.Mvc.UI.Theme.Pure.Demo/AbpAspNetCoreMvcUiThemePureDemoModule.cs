@@ -1,4 +1,6 @@
 ﻿using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Toolbars;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -6,6 +8,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
@@ -33,6 +36,11 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new PureThemeDemoMenuContributor());
+        });
+
+        Configure<AbpToolbarOptions>(options =>
+        {
+            options.Contributors.Add(new PureThemeDemoToolbarContributor());
         });
     }
 

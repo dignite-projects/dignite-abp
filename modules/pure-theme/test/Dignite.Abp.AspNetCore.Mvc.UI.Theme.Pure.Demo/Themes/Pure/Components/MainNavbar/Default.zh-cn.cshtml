@@ -1,20 +1,19 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Brand
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Menu
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main-navbar">
     <div class="container">
-        @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar-collapse" aria-controls="main-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
         <div class="collapse navbar-collapse" id="main-navbar-collapse">
             <ul class="navbar-nav me-auto">
                 @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
             </ul>
+        </div>
             <ul class="navbar-nav">
                 @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
             </ul>
-        </div>
     </div>
 </nav>

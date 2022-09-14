@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Volo.Abp.Localization;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.LanguageSwitch;
 
 public class LanguageSwitchViewComponentModel
 {

@@ -29,7 +29,6 @@ public interface IUserNotificationManager
     /// <param name="endDate">List notifications published before startDateTime</param>
     Task<int> GetUserNotificationCountAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null);
 
-
     /// <summary>
     /// Updates a user notification state.
     /// </summary>
@@ -60,5 +59,4 @@ public interface IUserNotificationManager
     /// <param name="startDate">Delete notifications published after startDateTime</param>
     /// <param name="endDate">Delete notifications published before startDateTime</param>
     Task DeleteAllUserNotificationsAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null);
-
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.FileExplorer.Files;
+﻿namespace Dignite.FileExplorer.Files;
 
 public class FileTypeCheckHandlerConfigurationDto
 {

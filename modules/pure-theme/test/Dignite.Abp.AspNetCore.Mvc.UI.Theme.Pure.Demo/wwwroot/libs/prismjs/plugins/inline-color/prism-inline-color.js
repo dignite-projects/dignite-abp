@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -80,7 +79,6 @@
 		validateColor
 	];
 
-
 	Prism.hooks.add('wrap', function (env) {
 		if (env.type === 'color' || env.classes.indexOf('color') >= 0) {
 			var content = env.content;
@@ -101,5 +99,4 @@
 			env.content = previewElement + content;
 		}
 	});
-
 }());

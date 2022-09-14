@@ -11,11 +11,9 @@ public class CustomizeFieldDefinitionEto : ICustomizeFieldDefinition
 
     public Guid? TenantId { get; set; }
 
-
     public string Name { get; set; }
 
     public string DisplayName { get; set; }
-
 
     public string DefaultValue { get; set; }
 

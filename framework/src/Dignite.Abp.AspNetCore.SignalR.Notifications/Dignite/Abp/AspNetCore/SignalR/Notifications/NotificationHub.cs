@@ -1,5 +1,4 @@
-﻿
-using Volo.Abp.AspNetCore.SignalR;
+﻿using Volo.Abp.AspNetCore.SignalR;
 
 namespace Dignite.Abp.AspNetCore.SignalR.Notifications;
 

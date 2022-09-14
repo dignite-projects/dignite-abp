@@ -1,9 +1,7 @@
-
 namespace Dignite.Abp.FieldCustomizing;
 
 public class CustomizeFieldDefinitionConsts
 {
-
     /// <summary>
     /// Maximum length of the <see cref="ICustomizeFieldDefinition.Name"/> property.
     /// Default value: 64
@@ -14,7 +12,6 @@ public class CustomizeFieldDefinitionConsts
     /// Regular Expression of the <see cref="ICustomizeFieldDefinition.Name"/> property.
     /// </summary>
     public static string NameRegularExpression = "^[a-zA-Z][A-Za-z0-9_-]+$";
-
 
     /// <summary>
     /// Maximum length of the <see cref="ICustomizeFieldDefinition.DisplayName"/> property.
@@ -27,6 +24,4 @@ public class CustomizeFieldDefinitionConsts
     /// Default value: 128
     /// </summary>
     public static int MaxFieldProviderNameLength = 128;
-
-
 }

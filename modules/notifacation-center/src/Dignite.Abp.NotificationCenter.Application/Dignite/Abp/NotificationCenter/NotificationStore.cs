@@ -1,9 +1,9 @@
-﻿using Dignite.Abp.Notifications;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.Notifications;
+using Newtonsoft.Json;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
 
@@ -58,7 +58,6 @@ public class NotificationStore : INotificationStore, ITransientDependency
     public async Task InsertNotificationAsync(NotificationInfo notificationInfo)
     {
         await _notificationRepository.InsertAsync(new Notification(notificationInfo), false);
-
     }
 
     /// <summary>

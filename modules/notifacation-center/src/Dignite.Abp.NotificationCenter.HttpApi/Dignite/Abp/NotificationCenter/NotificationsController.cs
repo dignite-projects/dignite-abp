@@ -116,5 +116,4 @@ public class NotificationsController : NotificationCenterController, INotificati
     {
         return await _notificationsAppService.GetCountAsync(state, startDate, endDate);
     }
-
 }

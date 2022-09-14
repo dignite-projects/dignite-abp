@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined') {
 		return;
 	}
@@ -29,7 +28,6 @@
 	/** @type {string} */
 	var prefixString = '';
 
-
 	/**
 	 * @param {string} className
 	 * @param {string} language
@@ -37,7 +35,6 @@
 	function apply(className, language) {
 		return prefixString + (mapper ? mapper(className, language) : className);
 	}
-
 
 	Prism.plugins.customClass = {
 		/**
@@ -106,5 +103,4 @@
 			return apply(c, env.language);
 		});
 	});
-
 }());

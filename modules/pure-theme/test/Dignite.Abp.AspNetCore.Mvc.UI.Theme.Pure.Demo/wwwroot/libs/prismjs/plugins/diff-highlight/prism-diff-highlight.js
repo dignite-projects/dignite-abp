@@ -1,9 +1,7 @@
 (function () {
-
 	if (typeof Prism === 'undefined') {
 		return;
 	}
-
 
 	var LANGUAGE_REGEX = /^diff-([\w-]+)/i;
 	var HTML_TAG = /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/g;
@@ -86,5 +84,4 @@
 			}
 		}
 	});
-
 }());

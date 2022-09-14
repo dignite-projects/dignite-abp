@@ -14,9 +14,9 @@ public class FileExplorerMongoDbModule : AbpModule
     {
         context.Services.AddMongoDbContext<FileExplorerMongoDbContext>(options =>
         {
-                /* Add custom repositories here. Example:
-                 * options.AddRepository<Question, MongoQuestionRepository>();
-                 */
+            /* Add custom repositories here. Example:
+             * options.AddRepository<Question, MongoQuestionRepository>();
+             */
         });
     }
 }

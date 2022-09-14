@@ -8,5 +8,4 @@ namespace Dignite.Abp.Notifications;
     )]
 public class AbpNotificationsSharedModule : AbpModule
 {
-
 }

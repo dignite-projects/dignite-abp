@@ -1,5 +1,4 @@
 Prism.languages.ini = {
-
 	/**
 	 * The component mimics the behavior of the Win32 API parser.
 	 *

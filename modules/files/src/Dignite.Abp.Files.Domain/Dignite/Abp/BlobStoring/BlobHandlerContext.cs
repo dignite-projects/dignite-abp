@@ -14,8 +14,6 @@ public class BlobHandlerContext
         ContainerConfiguration = containerConfiguration;
     }
 
-
-
     public Stream BlobStream { get; set; }
 
     public BlobContainerConfiguration ContainerConfiguration { get; }

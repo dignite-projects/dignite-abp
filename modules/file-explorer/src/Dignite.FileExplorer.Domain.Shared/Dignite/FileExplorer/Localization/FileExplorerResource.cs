@@ -5,5 +5,4 @@ namespace Dignite.FileExplorer.Localization;
 [LocalizationResourceName("FileExplorer")]
 public class FileExplorerResource
 {
-
 }

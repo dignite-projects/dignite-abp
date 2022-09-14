@@ -230,7 +230,6 @@
    * @param params
    */
 
-
   const showWarningsForParams = params => {
     if (!params.backdrop && params.allowOutsideClick) {
       warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
@@ -590,7 +589,6 @@
     }
   }; // Restore previous active (focused) element
 
-
   const restoreActiveElement = returnFocus => {
     return new Promise(resolve => {
       if (!returnFocus) {
@@ -672,7 +670,6 @@
   /*
    * Add modal + backdrop to DOM
    */
-
 
   const init = params => {
     // Clean up the old popup container if it exists
@@ -756,7 +753,6 @@
       WebkitAnimation: 'webkitAnimationEnd',
       // Chrome, Safari and Opera
       animation: 'animationend' // Standard syntax
-
     };
 
     for (const i in transEndEventNames) {
@@ -788,7 +784,6 @@
     } else {
       show(actions);
     } // Custom class
-
 
     applyCustomClass(actions, params, 'actions'); // Render all the buttons
 
@@ -935,7 +930,6 @@
         showInput(params);
       } // set custom class
 
-
       setCustomClass(params);
     }
   };
@@ -1080,7 +1074,6 @@
 
     const getMargin = el => parseInt(window.getComputedStyle(el).marginLeft) + parseInt(window.getComputedStyle(el).marginRight); // https://github.com/sweetalert2/sweetalert2/issues/2291
 
-
     setTimeout(() => {
       // https://github.com/sweetalert2/sweetalert2/issues/1699
       if ('MutationObserver' in window) {
@@ -1131,7 +1124,6 @@
     if (params.footer) {
       parseHtmlToContainer(params.footer, footer);
     } // Custom class
-
 
     applyCustomClass(footer, params, 'footer');
   };
@@ -1188,7 +1180,6 @@
 
     applyCustomClass(icon, params, 'icon');
   }; // Adjust success icon background color to match the popup background color
-
 
   const adjustSuccessIconBackgroundColor = () => {
     const popup = getPopup();
@@ -1317,7 +1308,6 @@
       title.innerText = params.titleText;
     } // Custom class
 
-
     applyCustomClass(title, params, 'title');
   };
 
@@ -1334,13 +1324,11 @@
       applyNumericalStyle(popup, 'width', params.width);
     } // Padding
 
-
     applyNumericalStyle(popup, 'padding', params.padding); // Color
 
     if (params.color) {
       popup.style.color = params.color;
     } // Background
-
 
     if (params.background) {
       popup.style.background = params.background;
@@ -1362,13 +1350,11 @@
       addClass(popup, swalClasses.modal);
     } // Custom class
 
-
     applyCustomClass(popup, params, 'popup');
 
     if (typeof params.customClass === 'string') {
       addClass(popup, params.customClass);
     } // Icon class (#1842)
-
 
     if (params.icon) {
       addClass(popup, swalClasses["icon-".concat(params.icon)]);
@@ -1439,7 +1425,6 @@
     }
     /** @type {DocumentFragment} */
 
-
     const templateContent = template.content;
     showWarningsForElements(templateContent);
     const result = Object.assign(getSwalParams(templateContent), getSwalButtons(templateContent), getSwalImage(templateContent), getSwalIcon(templateContent), getSwalInput(templateContent), getSwalStringParams(templateContent, swalStringParams));
@@ -1470,7 +1455,6 @@
    * @param {DocumentFragment} templateContent
    */
 
-
   const getSwalButtons = templateContent => {
     const result = {};
     toArray(templateContent.querySelectorAll('swal-button')).forEach(button => {
@@ -1492,7 +1476,6 @@
   /**
    * @param {DocumentFragment} templateContent
    */
-
 
   const getSwalImage = templateContent => {
     const result = {};
@@ -1526,7 +1509,6 @@
    * @param {DocumentFragment} templateContent
    */
 
-
   const getSwalIcon = templateContent => {
     const result = {};
     /** @type {HTMLElement} */
@@ -1552,7 +1534,6 @@
   /**
    * @param {DocumentFragment} templateContent
    */
-
 
   const getSwalInput = templateContent => {
     const result = {};
@@ -1596,7 +1577,6 @@
    * @param {string[]} paramNames
    */
 
-
   const getSwalStringParams = (templateContent, paramNames) => {
     const result = {};
 
@@ -1618,7 +1598,6 @@
    * @param {DocumentFragment} templateContent
    */
 
-
   const showWarningsForElements = templateContent => {
     const allowedElements = swalStringParams.concat(['swal-param', 'swal-button', 'swal-image', 'swal-icon', 'swal-input', 'swal-input-option']);
     toArray(templateContent.children).forEach(el => {
@@ -1633,7 +1612,6 @@
    * @param {HTMLElement} el
    * @param {string[]} allowedAttributes
    */
-
 
   const showWarningsForAttributes = (el, allowedAttributes) => {
     toArray(el.attributes).forEach(attribute => {
@@ -1676,7 +1654,6 @@
    *
    * @param params
    */
-
 
   function setParameters(params) {
     setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
@@ -1750,7 +1727,6 @@
     isRunning() {
       return this.running;
     }
-
   }
 
   const fixScrollbar = () => {
@@ -1758,7 +1734,6 @@
     if (states.previousBodyPadding !== null) {
       return;
     } // if the body has overflow
-
 
     if (document.body.scrollHeight > window.innerHeight) {
       // add padding so the content doesn't shift after removal of scrollbar
@@ -1809,7 +1784,6 @@
    * https://github.com/sweetalert2/sweetalert2/issues/1246
    */
 
-
   const lockBodyScroll = () => {
     const container = getContainer();
     let preventTouchMove;
@@ -1854,7 +1828,6 @@
    * @returns {boolean}
    */
 
-
   const isStylus = event => {
     return event.touches && event.touches.length && event.touches[0].touchType === 'stylus';
   };
@@ -1864,7 +1837,6 @@
    * @param {TouchEvent} event
    * @returns {boolean}
    */
-
 
   const isZoom = event => {
     return event.touches && event.touches.length > 1;
@@ -1945,7 +1917,6 @@
     if (scrollbarPadding && initialBodyOverflow !== 'hidden') {
       fixScrollbar();
     } // sweetalert2/issues/1247
-
 
     setTimeout(() => {
       container.scrollTop = 0;
@@ -2541,12 +2512,10 @@
       return; // This instance has already been destroyed
     } // Check if there is another Swal closing
 
-
     if (domCache.popup && globalState.swalCloseEventFinishedCallback) {
       globalState.swalCloseEventFinishedCallback();
       delete globalState.swalCloseEventFinishedCallback;
     } // Check if there is a swal disposal defer timer
-
 
     if (globalState.deferDisposalTimer) {
       clearTimeout(globalState.deferDisposalTimer);
@@ -2587,8 +2556,6 @@
       obj[i].delete(instance);
     }
   };
-
-
 
   var instanceMethods = /*#__PURE__*/Object.freeze({
     hideLoading: hideLoading,
@@ -2778,7 +2745,6 @@
    * @returns {boolean}
    */
 
-
   const isAnyButtonShown = innerParams => {
     return innerParams.showConfirmButton || innerParams.showDenyButton || innerParams.showCancelButton || innerParams.showCloseButton;
   };
@@ -2883,7 +2849,6 @@
       return focusableElements[index].focus();
     } // no visible focusable elements, focus the popup
 
-
     getPopup().focus();
   };
   const arrowKeysNextButton = ['ArrowRight', 'ArrowDown'];
@@ -2899,7 +2864,6 @@
     // https://github.com/sweetalert2/sweetalert2/issues/720
     // https://github.com/sweetalert2/sweetalert2/issues/2406
 
-
     if (e.isComposing || e.keyCode === 229) {
       return;
     }
@@ -2907,7 +2871,6 @@
     if (innerParams.stopKeydownPropagation) {
       e.stopPropagation();
     } // ENTER
-
 
     if (e.key === 'Enter') {
       handleEnter(instance, e, innerParams);
@@ -2950,7 +2913,6 @@
         break;
       }
     } // Cycle to the next button
-
 
     if (!e.shiftKey) {
       setFocus(innerParams, btnIndex, 1);
@@ -3056,7 +3018,6 @@
       _main(params, priorityMixinParams) {
         return super._main(params, Object.assign({}, mixinParams, priorityMixinParams));
       }
-
     }
 
     return MixinSwal;
@@ -3151,8 +3112,6 @@
     }
   };
 
-
-
   var staticMethods = /*#__PURE__*/Object.freeze({
     isValidParameter: isValidParameter,
     isUpdatableParameter: isUpdatableParameter,
@@ -3245,14 +3204,12 @@
         delete globalState.timeout;
       } // clear the restore focus timeout
 
-
       clearTimeout(globalState.restoreFocusTimeout);
       const domCache = populateDomCache(this);
       render(this, innerParams);
       privateProps.innerParams.set(this, innerParams);
       return swalPromise(this, domCache, innerParams);
     } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
-
 
     then(onFulfilled) {
       const promise = privateProps.promise.get(this);
@@ -3263,7 +3220,6 @@
       const promise = privateProps.promise.get(this);
       return promise.finally(onFinally);
     }
-
   }
 
   const swalPromise = (instance, domCache, innerParams) => {
@@ -3388,7 +3344,6 @@
     }
   }; // Assign instance methods from src/instanceMethods/*.js to prototype
 
-
   Object.assign(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
 
   Object.assign(SweetAlert, staticMethods); // Proxy to instance methods to constructor, for now, for backwards compatibility
@@ -3408,6 +3363,5 @@
   Swal.default = Swal;
 
   return Swal;
-
 }));
 if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}

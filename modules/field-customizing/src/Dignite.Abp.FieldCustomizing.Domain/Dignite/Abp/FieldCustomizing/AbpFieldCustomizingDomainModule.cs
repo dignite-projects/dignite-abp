@@ -9,5 +9,4 @@ namespace Dignite.Abp.FieldCustomizing;
 )]
 public class AbpFieldCustomizingDomainModule : AbpModule
 {
-
 }

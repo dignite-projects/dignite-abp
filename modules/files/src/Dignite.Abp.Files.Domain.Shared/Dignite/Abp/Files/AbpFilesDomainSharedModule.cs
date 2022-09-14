@@ -1,7 +1,7 @@
-﻿using Volo.Abp.Modularity;
+﻿using Dignite.Abp.Files.Localization;
 using Volo.Abp.Localization;
-using Dignite.Abp.Files.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
+using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;

@@ -24,5 +24,4 @@ public class AbpNotificationCenterBlazorWebAssemblyModule : AbpModule
             options.Contributors.Add(new NotificationCenterToolbarContributor());
         });
     }
-
 }

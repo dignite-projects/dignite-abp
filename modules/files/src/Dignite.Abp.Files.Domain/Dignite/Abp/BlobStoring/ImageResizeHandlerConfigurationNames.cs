@@ -1,4 +1,3 @@
-
 namespace Dignite.Abp.BlobStoring;
 
 public class ImageResizeHandlerConfigurationNames

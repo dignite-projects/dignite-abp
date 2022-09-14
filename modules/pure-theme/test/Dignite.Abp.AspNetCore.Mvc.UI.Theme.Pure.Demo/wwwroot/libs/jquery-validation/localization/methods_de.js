@@ -7,7 +7,6 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
-
 /*
  * Localized default methods for the jQuery validation plugin.
  * Locale: DE

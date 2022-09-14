@@ -53,5 +53,4 @@
 			greedy: true
 		}
 	});
-
 }(Prism));

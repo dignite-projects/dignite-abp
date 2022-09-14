@@ -1,12 +1,12 @@
-﻿using Dignite.Abp.NotificationCenter.EntityFrameworkCore;
-using Dignite.Abp.Notifications;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
+using Dignite.Abp.NotificationCenter.EntityFrameworkCore;
+using Dignite.Abp.Notifications;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -57,7 +57,6 @@ public class EfCoreUserNotificationRepository : EfCoreRepository<INotificationCe
             )
             .CountAsync(GetCancellationToken(cancellationToken));
     }
-
 
     public async Task<bool> AnyAsync(Guid notificationId, Guid ignoredUserId, CancellationToken cancellationToken = default)
     {

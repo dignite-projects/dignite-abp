@@ -26,5 +26,4 @@ public class CurrentFile : ICurrentFile, ITransientDependency
             _currentTenantAccessor.Current = parentScope;
         });
     }
-
 }

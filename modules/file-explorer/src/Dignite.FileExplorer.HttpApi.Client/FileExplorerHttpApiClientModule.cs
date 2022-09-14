@@ -21,6 +21,5 @@ public class FileExplorerHttpApiClientModule : AbpModule
         {
             options.FileSets.AddEmbedded<FileExplorerHttpApiClientModule>();
         });
-
     }
 }

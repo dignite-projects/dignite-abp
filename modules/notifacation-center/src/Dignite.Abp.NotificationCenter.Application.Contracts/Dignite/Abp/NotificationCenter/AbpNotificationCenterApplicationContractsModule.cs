@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Application;
-using Volo.Abp.Modularity;
 using Volo.Abp.Authorization;
+using Volo.Abp.Modularity;
 
 namespace Dignite.Abp.NotificationCenter;
 
@@ -11,5 +11,4 @@ namespace Dignite.Abp.NotificationCenter;
     )]
 public class AbpNotificationCenterApplicationContractsModule : AbpModule
 {
-
 }

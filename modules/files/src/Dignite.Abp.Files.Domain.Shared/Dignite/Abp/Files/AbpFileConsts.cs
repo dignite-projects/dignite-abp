@@ -21,5 +21,4 @@ public static class AbpFileConsts
     /// Default value: 128
     /// </summary>
     public static int MaxMimeTypeLength { get; set; } = 128;
-
 }

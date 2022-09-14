@@ -14,7 +14,6 @@ public class NotificationEntityIdentifier
     /// </summary>
     public string Id { get; private set; }
 
-
     /// <summary>
     /// Initializes a new instance of the <see cref="NotificationEntityIdentifier"/> class.
     /// </summary>

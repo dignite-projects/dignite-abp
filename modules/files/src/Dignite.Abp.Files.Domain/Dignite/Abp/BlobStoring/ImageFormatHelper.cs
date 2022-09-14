@@ -36,13 +36,12 @@ public class ImageFormatHelper
         try
         {
             var imageFormat = GetImageRawFormat(stream);
-                
+
             return validFormats.Contains(imageFormat);
         }
-        catch 
+        catch
         {
             return false;
         }
     }
 }
-

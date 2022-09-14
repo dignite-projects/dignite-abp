@@ -1,5 +1,4 @@
-﻿
-namespace Dignite.Abp.SettingManagement;
+﻿namespace Dignite.Abp.SettingManagement;
 
 public static class SettingManagementRemoteServiceConsts
 {

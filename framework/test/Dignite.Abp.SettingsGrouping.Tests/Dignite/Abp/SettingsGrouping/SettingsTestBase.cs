@@ -9,5 +9,4 @@ public class SettingsTestBase : AbpIntegratedTest<AbpSettingsGroupingTestModule>
     {
         options.UseAutofac();
     }
-
 }

@@ -40,7 +40,6 @@ public class NotificationPublisher_Tests : NotificationsTestBase
 
         //Act
         await _notificationPublisher.PublishAsync("TestNotification", notificationData, severity: NotificationSeverity.Success);
-
     }
 
     private static NotificationData CreateNotificationData()

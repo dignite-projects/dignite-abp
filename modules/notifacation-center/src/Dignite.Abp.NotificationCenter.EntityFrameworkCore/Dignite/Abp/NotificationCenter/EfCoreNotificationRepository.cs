@@ -1,5 +1,5 @@
-﻿using Dignite.Abp.NotificationCenter.EntityFrameworkCore;
-using System;
+﻿using System;
+using Dignite.Abp.NotificationCenter.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 

@@ -7,7 +7,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  // Brazilian Portuguese 
+  // Brazilian Portuguese
   jQuery.timeago.settings.strings = {
      prefixAgo: "há",
      prefixFromNow: "em",

@@ -9,5 +9,4 @@ public class NotificationsTestBase : AbpIntegratedTest<AbpNotificationsTestModul
     {
         options.UseAutofac();
     }
-
 }

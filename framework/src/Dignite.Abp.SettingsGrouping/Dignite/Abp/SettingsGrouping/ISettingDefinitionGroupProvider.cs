@@ -1,5 +1,4 @@
-﻿
-namespace Dignite.Abp.SettingsGrouping;
+﻿namespace Dignite.Abp.SettingsGrouping;
 
 public interface ISettingDefinitionGroupProvider
 {

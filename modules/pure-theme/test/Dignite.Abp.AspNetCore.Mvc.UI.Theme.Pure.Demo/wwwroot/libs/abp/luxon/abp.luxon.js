@@ -1,6 +1,5 @@
 var abp = abp || {};
 (function () {
-
     if (!luxon) {
         throw "abp/luxon library requires the luxon library included to the page!";
     }
@@ -42,5 +41,4 @@ var abp = abp || {};
 
         return form;
     }
-
 })(jQuery);

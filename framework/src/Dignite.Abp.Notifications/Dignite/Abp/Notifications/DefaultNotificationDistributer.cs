@@ -1,10 +1,10 @@
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.MultiTenancy;
@@ -24,7 +24,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     protected ICurrentTenant CurrentTenant { get; }
     protected IUnitOfWorkManager UnitOfWorkManager { get; }
     protected IDistributedEventBus DistributedEventBus { get; }
-
 
     public DefaultNotificationDistributer(
         IOptions<NotificationOptions> notificationOptions,
@@ -107,8 +106,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         return distributeUserIds.ToArray();
     }
 
-
-
     [UnitOfWork]
     protected virtual async Task<List<UserNotificationInfo>> SaveUserNotificationsAsync(Guid[] users, NotificationInfo notificationInfo)
     {
@@ -126,7 +123,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         return userNotifications;
     }
 
-
     /// <summary>
     /// Publish notify event
     /// </summary>
@@ -137,5 +133,4 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     {
         await DistributedEventBus.PublishAsync(new RealTimeNotifyEto(notificationInfo, userNotifications));
     }
-
 }

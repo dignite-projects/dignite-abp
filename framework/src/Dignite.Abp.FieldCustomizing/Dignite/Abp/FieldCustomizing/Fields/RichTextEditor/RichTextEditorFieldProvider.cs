@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor;
 
 public class RichTextEditorFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "RichTextEditor";
 
     public override string Name => ProviderName;

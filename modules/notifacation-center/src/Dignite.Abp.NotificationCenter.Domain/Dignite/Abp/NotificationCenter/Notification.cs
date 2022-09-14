@@ -1,6 +1,6 @@
-﻿using Dignite.Abp.Notifications;
-using System;
+﻿using System;
 using System.Text.Json;
+using Dignite.Abp.Notifications;
 using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
@@ -44,7 +44,6 @@ public class Notification : BasicAggregateRoot<Guid>, IHasCreationTime, IMultiTe
     /// </summary>
     public string NotificationName { get; set; }
 
-
     /// <summary>
     /// Notification data  as JSON string.
     /// </summary>
@@ -61,7 +60,6 @@ public class Notification : BasicAggregateRoot<Guid>, IHasCreationTime, IMultiTe
     /// It's FullName of the entity type.
     /// </summary>
     public string EntityTypeName { get; set; }
-
 
     /// <summary>
     /// Gets/sets primary key of the entity, if this is an entity level notification.

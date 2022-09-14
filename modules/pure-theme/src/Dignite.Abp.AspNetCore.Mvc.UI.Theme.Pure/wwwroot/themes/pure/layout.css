@@ -2,14 +2,16 @@
     text-decoration: none;
     color: #fff;
 }
- 
+
 .navbar .dropdown-submenu {
     position: relative;
 }
+
 .navbar .dropdown-menu {
     margin: 0;
     padding: 0;
 }
+
     .navbar .dropdown-menu a {
         font-size: .9em;
         padding: 10px 15px;
@@ -19,28 +21,32 @@
         border-radius: 0.25rem;
         min-height: 44px;
     }
+
 .navbar .dropdown-submenu a::after {
     transform: rotate(-90deg);
     position: absolute;
     right: 16px;
     top: 18px;
-} 
+}
+
 .navbar .dropdown-submenu .dropdown-menu {
     top: 0;
-    left: 100%; 
-} 
+    left: 100%;
+}
 
 .card-header .btn {
     padding: 2px 6px;
-} 
+}
+
 .card-header h5 {
     margin: 0;
-} 
-.container > .card { 
+}
+
+.container > .card {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 
-@media screen and (min-width: 768px) { 
+@media screen and (min-width: 768px) {
     .navbar .dropdown:hover > .dropdown-menu {
         display: block;
     }
@@ -49,9 +55,11 @@
         display: block;
     }
 }
+
 .input-validation-error {
     border-color: #dc3545;
 }
+
 .field-validation-error {
     font-size: 0.8em;
 }
@@ -72,16 +80,17 @@ div.dataTables_wrapper div.dataTables_length label {
 
 .rtl .dropdown-menu-right {
     right: auto;
-    left: 0; 
+    left: 0;
 }
 
-    .rtl .dropdown-menu-right a { 
+    .rtl .dropdown-menu-right a {
         text-align: right;
     }
 
 .rtl .navbar .dropdown-menu a {
     text-align: right;
 }
+
 .rtl .navbar .dropdown-submenu .dropdown-menu {
     top: 0;
     left: auto;
@@ -92,24 +101,25 @@ div.dataTables_wrapper div.dataTables_length label {
 .abp-account-layout {
     padding-top: 64px;
 }
+
 .abp-application-layout {
     padding-top: 64px;
     padding-left: 300px;
 }
 
-.abp-application-layout.no-side-navbar {
-    padding-left: 0px;
-}
+    .abp-application-layout.no-side-navbar {
+        padding-left: 0px;
+    }
 
-.abp-application-layout.no-side-navbar .side-navbar {
-    /*无子菜单时隐藏侧边栏*/
-    left: -300px;
-}
+        .abp-application-layout.no-side-navbar .side-navbar {
+            /*无子菜单时隐藏侧边栏*/
+            left: -300px;
+        }
 
-.abp-application-layout.no-side-navbar .main-navbar .navbar-toggler {
-    /*无子菜单时隐藏侧边栏的切换按钮*/
-    display: none;
-}
+        .abp-application-layout.no-side-navbar .main-navbar .navbar-toggler {
+            /*无子菜单时隐藏侧边栏的切换按钮*/
+            display: none;
+        }
 
 @media (max-width: 576px) {
     .abp-application-layout {
@@ -163,9 +173,9 @@ div.dataTables_wrapper div.dataTables_length label {
         left: -75vw;
     }
 
-    .side-navbar.show {
-        left: 0vw;
-    }
+        .side-navbar.show {
+            left: 0vw;
+        }
 }
 /*branding*/
 .navbar-brand {
@@ -173,10 +183,9 @@ div.dataTables_wrapper div.dataTables_length label {
     padding: 0rem;
 }
 
-.navbar-brand > img {
-    max-height: 40px;
-}
-
+    .navbar-brand > img {
+        max-height: 40px;
+    }
 
 .navbar-brand,
 .nav-toolbar {
@@ -221,25 +230,27 @@ div.dataTables_wrapper div.dataTables_length label {
     height: 64px;
     z-index: 1030;
 }
+
 .navbar-light .navbar-nav .nav-link {
     color: rgba(0, 0, 0, 1);
 }
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus,
-.navbar-light .navbar-nav .nav-link.active {
-    color:#000;
-    border-bottom:solid 1px #000;
-}
+
+    .navbar-light .navbar-nav .nav-link:hover,
+    .navbar-light .navbar-nav .nav-link:focus,
+    .navbar-light .navbar-nav .nav-link.active {
+        color: #000;
+        border-bottom: solid 1px #000;
+    }
 
 .main-navbar-nav > .nav-item {
     text-align: center;
 }
 
-.main-navbar-nav > .nav-item > .nav-link {
-    font-size: 0.75rem;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-}
+    .main-navbar-nav > .nav-item > .nav-link {
+        font-size: 0.75rem;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
 
 .main-navbar-nav i.nav-link-icon {
     display: block;
@@ -283,7 +294,7 @@ div.dataTables_wrapper div.dataTables_length label {
 
     .navbar-nav .nav-link:focus > .nav-link-icon,
     .navbar-nav .nav-link.active > .nav-link-icon {
-        color:#0048bf;
+        color: #0048bf;
     }
 }
 /*page container*/

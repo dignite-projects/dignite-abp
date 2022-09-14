@@ -12,7 +12,6 @@ public static class FileExplorerDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-
         builder.Entity<FileDescriptor>(b =>
         {
             //Configure table & schema name
@@ -25,8 +24,6 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.Property(q => q.EntityTypeFullName).HasMaxLength(FileDescriptorConsts.MaxEntityTypeFullNameLength);
             b.Property(q => q.EntityId).HasMaxLength(FileDescriptorConsts.MaxEntityIdLength);
 
-
-
             //Indexes
             b.HasIndex(q => new { q.TenantId, q.EntityTypeFullName, q.EntityId });
             b.HasIndex(q => new { q.TenantId, q.ContainerName, q.BlobName });
@@ -34,6 +31,5 @@ public static class FileExplorerDbContextModelCreatingExtensions
 
             b.ApplyObjectExtensionMappings();
         });
-        
     }
 }

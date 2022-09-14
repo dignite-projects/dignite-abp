@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var id = /(?:\B-|\b_|\b)[A-Za-z][\w-]*(?![\w-])/.source;
 	var type =
 		'(?:' +
@@ -97,5 +96,4 @@
 	}
 
 	Prism.languages['webidl'] = Prism.languages['web-idl'];
-
 }(Prism));

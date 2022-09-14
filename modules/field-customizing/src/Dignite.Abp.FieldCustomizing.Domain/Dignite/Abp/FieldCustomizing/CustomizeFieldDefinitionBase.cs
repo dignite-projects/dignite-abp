@@ -5,9 +5,8 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.FieldCustomizing;
 
-public abstract class CustomizeFieldDefinitionBase :Entity<Guid>, ICustomizeFieldDefinition, IMultiTenant
+public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFieldDefinition, IMultiTenant
 {
-
     public Guid? TenantId { get; set; }
 
     /// <summary>

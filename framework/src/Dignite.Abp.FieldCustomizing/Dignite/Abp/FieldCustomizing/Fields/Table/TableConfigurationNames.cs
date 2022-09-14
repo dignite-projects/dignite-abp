@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Table;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Table;
 
 public static class TableConfigurationNames
 {

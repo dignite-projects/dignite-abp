@@ -15,12 +15,10 @@ public class TextboxConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(TextboxConfigurationNames.Mode, value);
     }
 
-
     public int CharLimit {
         get => ConfigurationDictionary.GetConfigurationOrDefault(TextboxConfigurationNames.CharLimit, Mode == TextboxMode.SingleLine ? 256 : 1024);
         set => ConfigurationDictionary.SetConfiguration(TextboxConfigurationNames.CharLimit, value);
     }
-
 
     public TextboxConfiguration(FieldConfigurationDictionary fieldConfiguration)
         : base(fieldConfiguration)

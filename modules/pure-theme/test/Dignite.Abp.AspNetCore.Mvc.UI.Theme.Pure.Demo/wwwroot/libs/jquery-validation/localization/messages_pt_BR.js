@@ -7,14 +7,12 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
-
 /*
  * Translated default messages for the jQuery validation plugin.
  * Locale: PT (Portuguese; português)
  * Region: BR (Brazil)
  */
 $.extend( $.validator.messages, {
-
 	// Core
 	required: "Este campo &eacute; requerido.",
 	remote: "Por favor, corrija este campo.",

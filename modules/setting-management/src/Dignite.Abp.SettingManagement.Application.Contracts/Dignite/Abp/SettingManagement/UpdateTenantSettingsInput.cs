@@ -1,13 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dignite.Abp.SettingManagement;
 
 public class UpdateTenantSettingsInput : UpdateSettingsInput
 {
-
     public override IReadOnlyList<SettingDto> GetSettings(ValidationContext validationContext)
     {
         var settingsAppService = validationContext.GetRequiredService<ITenantSettingsAppService>();

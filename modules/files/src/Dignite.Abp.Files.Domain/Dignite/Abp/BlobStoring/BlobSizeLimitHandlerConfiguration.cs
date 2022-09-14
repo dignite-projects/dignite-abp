@@ -4,7 +4,6 @@ namespace Dignite.Abp.BlobStoring;
 
 public class BlobSizeLimitHandlerConfiguration
 {
-
     /// <summary>
     /// Limit file size(KB)
     /// </summary>

@@ -1,13 +1,13 @@
-﻿using Dignite.Abp.SettingsGrouping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.SettingsGrouping;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
-using Dignite.Abp.FieldCustomizing.Fields;
 
 namespace Dignite.Abp.SettingManagement;
 
@@ -26,7 +26,6 @@ public abstract class SettingsAppServiceBase : SettingManagementAppServiceBase
         SettingManager = settingManager;
         ControlProviders = controlProviders;
     }
-
 
     public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
     {

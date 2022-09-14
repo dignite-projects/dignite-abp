@@ -15,7 +15,6 @@ public class UploadConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(UploadConfigurationNames.Multiple, value);
     }
 
-
     [Required]
     public string Filter {
         get => ConfigurationDictionary.GetConfigurationOrDefault<string>(UploadConfigurationNames.Filter);

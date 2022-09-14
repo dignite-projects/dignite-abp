@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Dignite.Abp.FieldCustomizing.Fields.Select;
 
@@ -9,6 +8,7 @@ public class SelectConfiguration : FieldConfigurationBase
         get => ConfigurationDictionary.GetConfigurationOrDefault<string>(SelectConfigurationNames.NullText, null);
         set => ConfigurationDictionary.SetConfiguration(SelectConfigurationNames.NullText, value);
     }
+
     public List<SelectListItem> Options {
         get => ConfigurationDictionary.GetConfigurationOrDefault(SelectConfigurationNames.Options, new List<SelectListItem>());
         set => ConfigurationDictionary.SetConfiguration(SelectConfigurationNames.Options, value);
@@ -19,12 +19,10 @@ public class SelectConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(SelectConfigurationNames.Multiple, value);
     }
 
-
     public int? Size {
         get => ConfigurationDictionary.GetConfigurationOrDefault<int?>(SelectConfigurationNames.Size);
         set => ConfigurationDictionary.SetConfiguration(SelectConfigurationNames.Size, value);
     }
-
 
     public SelectConfiguration(FieldConfigurationDictionary fieldConfiguration)
         : base(fieldConfiguration)

@@ -8,11 +8,11 @@ namespace Dignite.Abp.NotificationCenter;
  * You can switch to MongoDB, however your domain tests should be
  * database independent anyway.
  */
+
 [DependsOn(
     typeof(AbpBackgroundJobsModule),
     typeof(AbpNotificationCenterEntityFrameworkCoreTestModule)
     )]
 public class AbpNotificationCenterDomainTestModule : AbpModule
 {
-
 }

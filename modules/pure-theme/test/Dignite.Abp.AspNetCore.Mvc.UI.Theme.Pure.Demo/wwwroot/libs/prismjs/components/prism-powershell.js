@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var powershell = Prism.languages.powershell = {
 		'comment': [
 			{
@@ -54,5 +53,4 @@
 		'boolean': powershell.boolean,
 		'variable': powershell.variable,
 	};
-
 }(Prism));

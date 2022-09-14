@@ -20,7 +20,7 @@ public class AbpAspNetCoreComponentsServerPureThemeModule : AbpModule
         {
             options.Contributors.Add(new PureThemeToolbarContributor());
         });
-        
+
         Configure<AbpBundlingOptions>(options =>
         {
             options

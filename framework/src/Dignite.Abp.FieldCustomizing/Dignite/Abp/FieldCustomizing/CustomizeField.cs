@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing;
+﻿namespace Dignite.Abp.FieldCustomizing;
 
 public class CustomizeField
 {
-
     public CustomizeField(IHasCustomizableFields entity, ICustomizeFieldDefinition definition)
     {
         Entity = entity;

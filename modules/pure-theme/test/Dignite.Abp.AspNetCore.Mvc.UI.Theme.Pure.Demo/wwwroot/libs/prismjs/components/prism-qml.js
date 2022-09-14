@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var jsString = /"(?:\\.|[^\\"\r\n])*"|'(?:\\.|[^\\'\r\n])*'/.source;
 	var jsComment = /\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))*\*\//.source;
 
@@ -11,7 +10,6 @@
 		jsExpr = jsExpr.replace(/<expr>/g, function () { return jsExpr; });
 	}
 	jsExpr = jsExpr.replace(/<expr>/g, '[^\\s\\S]');
-
 
 	Prism.languages.qml = {
 		'comment': {
@@ -57,5 +55,4 @@
 		'keyword': /\b(?:as|import|on)\b/,
 		'punctuation': /[{}[\]:;,]/
 	};
-
 }(Prism));

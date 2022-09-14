@@ -6,7 +6,6 @@ namespace Dignite.Abp.SettingsGrouping;
 
 public static class SettingDefinitionExtensions
 {
-
     /// <summary>
     /// Gets the section name of the setting
     /// </summary>
@@ -24,7 +23,7 @@ public static class SettingDefinitionExtensions
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="setting"></param>
     /// <param name="sectionName"></param>

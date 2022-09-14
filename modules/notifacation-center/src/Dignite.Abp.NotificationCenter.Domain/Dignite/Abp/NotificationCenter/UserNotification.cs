@@ -1,5 +1,5 @@
-﻿using Dignite.Abp.Notifications;
-using System;
+﻿using System;
+using Dignite.Abp.Notifications;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
@@ -10,6 +10,7 @@ public class UserNotification : BasicAggregateRoot, IMultiTenant
     public UserNotification()
     {
     }
+
     public UserNotification(UserNotificationInfo userNotification)
     : this(
          userNotification.UserId,
@@ -43,7 +44,7 @@ public class UserNotification : BasicAggregateRoot, IMultiTenant
     public UserNotificationState State { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public Notification Notification { get; set; }
 

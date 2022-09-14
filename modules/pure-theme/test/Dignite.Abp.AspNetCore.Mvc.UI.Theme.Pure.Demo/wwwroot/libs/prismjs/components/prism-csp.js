@@ -10,7 +10,6 @@
  */
 
 (function (Prism) {
-
 	/**
 	 * @param {string} source
 	 * @returns {RegExp}
@@ -72,5 +71,4 @@
 		],
 		'punctuation': /;/
 	};
-
 }(Prism));

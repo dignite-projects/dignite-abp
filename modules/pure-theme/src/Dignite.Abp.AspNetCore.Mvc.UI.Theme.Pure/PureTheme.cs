@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using System;
+﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
-
 
 [ThemeName(Name)]
 public class PureTheme : ITheme, ITransientDependency
@@ -15,6 +14,7 @@ public class PureTheme : ITheme, ITransientDependency
 
     private readonly Lazy<IWebHostEnvironment> _hostingEnvironmentLazy;
     private readonly Lazy<ICurrentTenant> _currentTenantLazy;
+
     public PureTheme(
         Lazy<IWebHostEnvironment> hostingEnvironmentLazy,
         Lazy<ICurrentTenant> currentTenantLazy)

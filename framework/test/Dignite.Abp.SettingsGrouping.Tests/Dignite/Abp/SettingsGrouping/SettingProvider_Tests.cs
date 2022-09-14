@@ -1,5 +1,5 @@
-﻿using Shouldly;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Shouldly;
 using Volo.Abp.Settings;
 using Xunit;
 
@@ -8,7 +8,6 @@ namespace Dignite.Abp.SettingsGrouping;
 public class SettingProvider_Tests : SettingsTestBase
 {
     private readonly ISettingProvider _settingProvider;
-
 
     public SettingProvider_Tests()
     {

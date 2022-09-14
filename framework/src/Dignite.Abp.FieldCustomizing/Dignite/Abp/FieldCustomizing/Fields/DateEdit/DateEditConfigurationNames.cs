@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.DateEdit;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.DateEdit;
 
 public static class DateEditConfigurationNames
 {

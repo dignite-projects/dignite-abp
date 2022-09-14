@@ -1,9 +1,9 @@
-﻿using Localization.Resources.AbpUi;
-using Dignite.Abp.NotificationCenter.Localization;
+﻿using Dignite.Abp.NotificationCenter.Localization;
+using Localization.Resources.AbpUi;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Dignite.Abp.NotificationCenter;
 

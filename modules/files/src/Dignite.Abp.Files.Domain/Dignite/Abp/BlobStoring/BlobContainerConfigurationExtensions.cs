@@ -2,7 +2,6 @@ using System;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Collections;
 
-
 namespace Dignite.Abp.BlobStoring;
 
 public static class BlobContainerConfigurationExtensions
@@ -17,6 +16,7 @@ public static class BlobContainerConfigurationExtensions
     }
 
     #region Blob size limit handler configuration extenisions
+
     public static BlobSizeLimitHandlerConfiguration GetBlobSizeLimitConfiguration(
         this BlobContainerConfiguration containerConfiguration)
     {
@@ -31,7 +31,6 @@ public static class BlobContainerConfigurationExtensions
             BlobContainerConfigurationNames.BlobHandlers,
             new TypeList<IBlobHandler>());
 
-
         if (blobProcessHandlers.TryAdd<BlobSizeLimitHandler>())
         {
             configureAction(new BlobSizeLimitHandlerConfiguration(containerConfiguration));
@@ -41,9 +40,11 @@ public static class BlobContainerConfigurationExtensions
                 blobProcessHandlers);
         }
     }
-    #endregion
+
+    #endregion Blob size limit handler configuration extenisions
 
     #region File type check handler configuration extenisions
+
     public static FileTypeCheckHandlerConfiguration GetFileTypeCheckConfiguration(
         this BlobContainerConfiguration containerConfiguration)
     {
@@ -67,9 +68,11 @@ public static class BlobContainerConfigurationExtensions
                 blobProcessHandlers);
         }
     }
-    #endregion
+
+    #endregion File type check handler configuration extenisions
 
     #region Image resize handler configuration extenisions
+
     public static ImageResizeHandlerConfiguration GetImageResizeConfiguration(
         this BlobContainerConfiguration containerConfiguration)
     {
@@ -93,5 +96,6 @@ public static class BlobContainerConfigurationExtensions
                 blobProcessHandlers);
         }
     }
-    #endregion
+
+    #endregion Image resize handler configuration extenisions
 }

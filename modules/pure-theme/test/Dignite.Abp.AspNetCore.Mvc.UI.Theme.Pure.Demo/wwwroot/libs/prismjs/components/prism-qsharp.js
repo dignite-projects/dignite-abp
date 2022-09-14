@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	/**
 	 * Replaces all placeholders "<<n>>" of given pattern with the n-th replacement (zero based).
 	 *
@@ -126,7 +125,6 @@
 			}
 		}
 	});
-
 }(Prism));
 
 Prism.languages.qs = Prism.languages.qsharp;

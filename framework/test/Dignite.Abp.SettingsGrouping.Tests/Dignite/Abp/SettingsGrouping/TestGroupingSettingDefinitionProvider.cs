@@ -1,6 +1,4 @@
-﻿
-
-using Volo.Abp.Localization;
+﻿using Volo.Abp.Localization;
 
 namespace Dignite.Abp.SettingsGrouping;
 
@@ -9,7 +7,7 @@ public class TestGroupingSettingDefinitionProvider : SettingDefinitionGroupProvi
     public override void Define(ISettingDefinitionGroupContext context)
     {
         context.Add(
-            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName,null),
+            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName, null),
             new SettingDefinitionSection(
                 new FixedLocalizableString("testSection"),
                 new Volo.Abp.Settings.SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue),

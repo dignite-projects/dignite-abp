@@ -110,5 +110,4 @@
 	}, Prism.languages.xeora['function-block']);
 
 	Prism.languages.xeoracube = Prism.languages.xeora;
-
 }(Prism));

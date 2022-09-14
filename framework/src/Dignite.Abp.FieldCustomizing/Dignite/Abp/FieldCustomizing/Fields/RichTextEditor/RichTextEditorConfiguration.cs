@@ -16,7 +16,6 @@ public class RichTextEditorConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(RichTextEditorConfigurationNames.Mode, value);
     }
 
-
     public RichTextEditorConfiguration(FieldConfigurationDictionary fieldConfiguration)
         : base(fieldConfiguration)
     {

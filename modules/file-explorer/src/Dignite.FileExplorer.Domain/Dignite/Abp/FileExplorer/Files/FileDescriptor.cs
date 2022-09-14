@@ -50,12 +50,12 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     public string MimeType { get; protected set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public string EntityTypeFullName { get; protected set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public string EntityId { get; protected set; }
 
@@ -71,6 +71,6 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
 
     public void Resize(long size)
     {
-        this.Size= size;
+        this.Size = size;
     }
 }

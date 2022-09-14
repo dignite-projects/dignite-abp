@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	// https://mc-stan.org/docs/2_28/reference-manual/bnf-grammars.html
 
 	var higherOrderFunctions = /\b(?:algebra_solver|algebra_solver_newton|integrate_1d|integrate_ode|integrate_ode_bdf|integrate_ode_rk45|map_rect|ode_(?:adams|bdf|ckrk|rk45)(?:_tol)?|ode_adjoint_tol_ctl|reduce_sum|reduce_sum_static)\b/;
@@ -61,5 +60,4 @@
 	};
 
 	Prism.languages.stan.constraint.inside.expression.inside = Prism.languages.stan;
-
 }(Prism));

@@ -23,19 +23,17 @@ public class SettingDefinitionGroup
     public string Name { get; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     private ILocalizableString _displayName;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public ILocalizableString DisplayName {
         get => _displayName;
         set => _displayName = Check.NotNull(value, nameof(value));
     }
-
-
 
     public IReadOnlyList<SettingDefinition> SettingDefinitions { get; private set; }
 

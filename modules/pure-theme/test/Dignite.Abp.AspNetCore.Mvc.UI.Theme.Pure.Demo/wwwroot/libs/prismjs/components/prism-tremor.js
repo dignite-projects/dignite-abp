@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	Prism.languages.tremor = {
 		'comment': {
 			pattern: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|(?:--|\/\/|#).*)/,
@@ -68,5 +67,4 @@
 
 	Prism.languages.troy = Prism.languages['tremor'];
 	Prism.languages.trickle = Prism.languages['tremor'];
-
 }(Prism));

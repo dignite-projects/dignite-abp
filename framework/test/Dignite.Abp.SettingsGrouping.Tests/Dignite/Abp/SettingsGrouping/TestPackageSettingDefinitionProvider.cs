@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
-using Volo.Abp.Settings;
-using Volo.Abp.DependencyInjection;
 using System.Linq;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.Localization;
+using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
 
@@ -31,7 +31,6 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
                 settings.Values.ToImmutableArray().ToArray()
             )
         );
-
 
         settings.GetValueOrDefault(TestSettingNames.TestSettingPackager)
             .UseTextboxControl(tb =>

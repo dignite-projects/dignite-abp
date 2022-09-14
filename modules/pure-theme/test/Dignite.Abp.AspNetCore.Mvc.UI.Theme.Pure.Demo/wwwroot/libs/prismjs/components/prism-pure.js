@@ -78,5 +78,4 @@
 	if (Prism.languages.c) {
 		Prism.languages.pure['inline-lang'].inside.rest = Prism.util.clone(Prism.languages.c);
 	}
-
 }(Prism));

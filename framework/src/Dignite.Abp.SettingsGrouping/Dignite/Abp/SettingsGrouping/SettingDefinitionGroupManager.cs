@@ -13,6 +13,7 @@ public class SettingDefinitionGroupManager : SettingDefinitionManager, ISettingD
 {
     protected Lazy<IReadOnlyList<SettingDefinitionGroup>> Groups { get; }
     protected AbpSettingGroupOptions GroupingSettingOptions { get; }
+
     public SettingDefinitionGroupManager(
         IOptions<AbpSettingGroupOptions> groupingSettingOptions,
         IOptions<AbpSettingOptions> settingOptions,
@@ -58,7 +59,6 @@ public class SettingDefinitionGroupManager : SettingDefinitionManager, ISettingD
 
         return group.SettingDefinitions;
     }
-
 
     protected virtual IReadOnlyList<SettingDefinitionGroup> CreateSettingDefinitionGroups()
     {

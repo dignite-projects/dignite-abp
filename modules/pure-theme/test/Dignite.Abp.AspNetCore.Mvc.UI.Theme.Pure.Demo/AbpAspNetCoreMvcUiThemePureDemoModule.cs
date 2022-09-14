@@ -1,17 +1,14 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
+﻿using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
+using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.VirtualFileSystem;
-using Volo.Abp;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo;
 

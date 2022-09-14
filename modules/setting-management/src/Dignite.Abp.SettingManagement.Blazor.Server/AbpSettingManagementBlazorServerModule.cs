@@ -9,5 +9,4 @@ namespace Dignite.Abp.SettingManagement.Blazor.Server;
     )]
 public class AbpSettingManagementBlazorServerModule : AbpModule
 {
-
 }

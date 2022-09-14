@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	Prism.languages.handlebars = {
 		'comment': /\{\{![\s\S]*?\}\}/,
 		'delimiter': {
@@ -35,5 +34,4 @@
 	});
 
 	Prism.languages.hbs = Prism.languages.handlebars;
-
 }(Prism));

@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Table;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Table;
 
 public class TableFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "Table";
 
     public override string Name => ProviderName;

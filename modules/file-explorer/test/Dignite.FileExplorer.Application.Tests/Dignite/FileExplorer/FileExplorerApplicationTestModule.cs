@@ -8,5 +8,4 @@ namespace Dignite.FileExplorer;
     )]
 public class FileExplorerApplicationTestModule : AbpModule
 {
-
 }

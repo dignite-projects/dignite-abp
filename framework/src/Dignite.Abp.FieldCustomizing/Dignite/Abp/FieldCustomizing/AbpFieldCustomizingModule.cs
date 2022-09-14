@@ -1,5 +1,4 @@
-﻿
-using Dignite.Abp.FieldCustomizing.Localization;
+﻿using Dignite.Abp.FieldCustomizing.Localization;
 using Volo.Abp.Json;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;

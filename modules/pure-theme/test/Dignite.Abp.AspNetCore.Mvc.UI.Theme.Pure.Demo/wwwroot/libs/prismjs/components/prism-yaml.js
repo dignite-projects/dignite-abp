@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	// https://yaml.org/spec/1.2/spec.html#c-ns-anchor-property
 	// https://yaml.org/spec/1.2/spec.html#c-ns-alias-node
 	var anchorOrAlias = /[*&][^\s[\]{},]+/;
@@ -79,5 +78,4 @@
 	};
 
 	Prism.languages.yml = Prism.languages.yaml;
-
 }(Prism));

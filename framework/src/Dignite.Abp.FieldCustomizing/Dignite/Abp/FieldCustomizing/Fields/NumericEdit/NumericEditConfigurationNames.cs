@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.NumericEdit;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.NumericEdit;
 
 public static class NumericEditConfigurationNames
 {

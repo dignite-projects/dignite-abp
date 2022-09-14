@@ -1,5 +1,4 @@
-﻿
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 using Volo.Abp.MongoDB;
 
 namespace Dignite.Abp.Files.MongoDB;

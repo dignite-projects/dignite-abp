@@ -11,24 +11,23 @@ public static class NotificationCenterDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-
         builder.Entity<NotificationSubscription>(b =>
         {
-                //Configure table & schema name
-                b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "NotificationSubscriptions", NotificationCenterDbProperties.DbSchema);
+            //Configure table & schema name
+            b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "NotificationSubscriptions", NotificationCenterDbProperties.DbSchema);
 
             b.ConfigureByConvention();
 
-                //Properties
-                b.Property(ns => ns.NotificationName).IsRequired().HasMaxLength(NotificationConsts.MaxNotificationNameLength);
+            //Properties
+            b.Property(ns => ns.NotificationName).IsRequired().HasMaxLength(NotificationConsts.MaxNotificationNameLength);
             b.Property(ns => ns.EntityTypeName).HasMaxLength(NotificationConsts.MaxEntityTypeNameLength);
             b.Property(ns => ns.EntityId).HasMaxLength(NotificationConsts.MaxEntityIdLength);
 
-                //Keys
-                b.HasKey(x => new { x.UserId, x.NotificationName, x.EntityTypeName, x.EntityId });
+            //Keys
+            b.HasKey(x => new { x.UserId, x.NotificationName, x.EntityTypeName, x.EntityId });
 
-                //Indexes
-                b.HasIndex(ns => new {
+            //Indexes
+            b.HasIndex(ns => new {
                 ns.CreationTime,
                 ns.UserId
             });
@@ -36,43 +35,40 @@ public static class NotificationCenterDbContextModelCreatingExtensions
 
         builder.Entity<Notification>(b =>
         {
-                //Configure table & schema name
-                b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "Notifications", NotificationCenterDbProperties.DbSchema);
+            //Configure table & schema name
+            b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "Notifications", NotificationCenterDbProperties.DbSchema);
 
             b.ConfigureByConvention();
 
-                //Properties
-                b.Property(n => n.NotificationName).IsRequired().HasMaxLength(NotificationConsts.MaxNotificationNameLength);
+            //Properties
+            b.Property(n => n.NotificationName).IsRequired().HasMaxLength(NotificationConsts.MaxNotificationNameLength);
             b.Property(n => n.EntityTypeName).HasMaxLength(NotificationConsts.MaxEntityTypeNameLength);
             b.Property(n => n.EntityId).HasMaxLength(NotificationConsts.MaxEntityIdLength);
             b.Property(n => n.Data).IsRequired().HasMaxLength(NotificationConsts.MaxDataLength);
             b.Property(n => n.DataTypeName).IsRequired().HasMaxLength(NotificationConsts.MaxDataTypeNameLength);
 
-                //Indexes
-                b.HasIndex(n => new {
+            //Indexes
+            b.HasIndex(n => new {
                 n.CreationTime,
                 n.Id
             });
         });
 
-
-
         builder.Entity<UserNotification>(b =>
         {
-                //Configure table & schema name
-                b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "UserNotifications", NotificationCenterDbProperties.DbSchema);
+            //Configure table & schema name
+            b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "UserNotifications", NotificationCenterDbProperties.DbSchema);
 
             b.ConfigureByConvention();
 
+            //Relations
+            b.HasOne(un => un.Notification).WithOne().IsRequired().HasForeignKey<UserNotification>(un => un.NotificationId);
 
-                //Relations
-                b.HasOne(un => un.Notification).WithOne().IsRequired().HasForeignKey<UserNotification>(un => un.NotificationId);
+            //Keys
+            b.HasKey(x => new { x.UserId, x.NotificationId });
 
-                //Keys
-                b.HasKey(x => new { x.UserId, x.NotificationId });
-
-                //Indexes
-                b.HasIndex(un => un.UserId);
+            //Indexes
+            b.HasIndex(un => un.UserId);
         });
     }
 }

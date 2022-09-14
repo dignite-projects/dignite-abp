@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var key = /(?:[\w-]+|'[^'\n\r]*'|"(?:\\.|[^\\"\r\n])*")/.source;
 
 	/**

@@ -1,15 +1,12 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace Dignite.Abp.FieldCustomizing.Fields.DateEdit;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class DateEditFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "DateEdit";
 
     public override string Name => ProviderName;
@@ -22,7 +19,6 @@ public class DateEditFieldProvider : FieldProviderBase
     {
         var configuration = new DateEditConfiguration(args.FieldDefinition.Configuration);
         DateTime value = DateTime.MinValue;
-
 
         if (configuration.Required && (args.Value == null || args.Value.ToString().Length == 0))
         {

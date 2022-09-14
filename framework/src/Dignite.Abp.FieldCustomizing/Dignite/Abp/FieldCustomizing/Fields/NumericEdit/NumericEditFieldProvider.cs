@@ -1,12 +1,10 @@
-﻿
-namespace Dignite.Abp.FieldCustomizing.Fields.NumericEdit;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.NumericEdit;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class NumericEditFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "NumericEdit";
 
     public override string Name => ProviderName;
@@ -19,7 +17,6 @@ public class NumericEditFieldProvider : FieldProviderBase
     {
         var configuration = new NumericEditConfiguration(args.FieldDefinition.Configuration);
         decimal value = decimal.MinValue;
-
 
         if (configuration.Required && (args.Value == null || args.Value.ToString().Length == 0))
         {

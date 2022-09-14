@@ -1,7 +1,7 @@
-﻿using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
@@ -23,8 +23,6 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         _blobAppService = blobAppService;
     }
 
-
-
     [HttpGet]
     [Route("{containerName}/configuration")]
     public virtual Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName)
@@ -40,7 +38,7 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -52,14 +50,12 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         return result;
     }
 
-
     [HttpDelete]
     [Route("{id}")]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _blobAppService.DeleteAsync(id);
     }
-
 
     [HttpGet]
     [Route("download/{containerName}/{*blobName}")]

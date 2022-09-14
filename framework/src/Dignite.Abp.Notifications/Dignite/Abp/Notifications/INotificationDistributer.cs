@@ -13,8 +13,8 @@ public interface INotificationDistributer
     /// </summary>
     /// <param name="notification">The notification info.</param>
     /// <param name="userIds">
-    /// Target user id(s). 
-    /// Used to send notification to specific user(s) (without checking the subscription). 
+    /// Target user id(s).
+    /// Used to send notification to specific user(s) (without checking the subscription).
     /// If this is null/empty, the notification is sent to subscribed users.
     /// </param>
     /// <param name="excludedUserIds">

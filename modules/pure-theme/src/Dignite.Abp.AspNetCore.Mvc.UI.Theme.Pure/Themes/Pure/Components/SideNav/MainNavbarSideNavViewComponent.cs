@@ -33,7 +33,7 @@ public class MainNavbarSideNavViewComponent : AbpViewComponent
         {
             foreach (var topMenuItem in mainMenu.Items)
             {
-                rootMenuItem= FindRootMenuItemWithChildren(topMenuItem, topMenuItem.Items, location);
+                rootMenuItem = FindRootMenuItemWithChildren(topMenuItem, topMenuItem.Items, location);
                 if (rootMenuItem != null)
                     return rootMenuItem;
             }
@@ -54,7 +54,7 @@ public class MainNavbarSideNavViewComponent : AbpViewComponent
             foreach (var menuItem in menuItems)
             {
                 var rootMenuItem = FindRootMenuItemWithChildren(topMenuItem, menuItem.Items, location);
-                if(rootMenuItem!=null)
+                if (rootMenuItem != null)
                     return rootMenuItem;
             }
         }
@@ -62,4 +62,3 @@ public class MainNavbarSideNavViewComponent : AbpViewComponent
         return null;
     }
 }
-

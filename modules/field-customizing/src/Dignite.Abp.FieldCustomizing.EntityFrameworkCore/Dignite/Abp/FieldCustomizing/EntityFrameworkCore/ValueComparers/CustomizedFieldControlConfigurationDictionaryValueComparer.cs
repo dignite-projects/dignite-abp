@@ -1,8 +1,7 @@
-﻿
+﻿using System;
+using System.Linq;
 using Dignite.Abp.FieldCustomizing.Fields;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Linq;
 
 namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueComparers
 {

@@ -17,8 +17,7 @@ public class FileDescriptorAppService_Tests : FileExplorerApplicationTestBase
     [Fact]
     public async Task GetAsync()
     {
-        var result = await _fileDescriptorAppService.GetListAsync(new GetFilesInput ());
+        var result = await _fileDescriptorAppService.GetListAsync(new GetFilesInput());
         result.TotalCount.ShouldBe(42);
     }
-
 }

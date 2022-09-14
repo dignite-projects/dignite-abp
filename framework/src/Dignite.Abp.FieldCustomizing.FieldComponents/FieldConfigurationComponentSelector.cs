@@ -1,7 +1,7 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
-using JetBrains.Annotations;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Dignite.Abp.FieldCustomizing.Fields;
+using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 
@@ -17,7 +17,6 @@ public class FieldConfigurationComponentSelector : IFieldConfigurationComponentS
         _fieldConfigurationComponents = fieldConfigurationComponents;
         _fieldProviderSelector = fieldProviderSelector;
     }
-
 
     /// <summary>
     /// Get blazor component using field control provider name

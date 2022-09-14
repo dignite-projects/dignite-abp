@@ -10,7 +10,6 @@ public class NumericEditConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Decimals, value);
     }
 
-
     public decimal? Max {
         get => ConfigurationDictionary.GetConfigurationOrDefault<decimal?>(NumericEditConfigurationNames.Max);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Max, value);

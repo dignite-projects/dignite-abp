@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Textbox;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Textbox;
 
 public static class TextboxConfigurationNames
 {

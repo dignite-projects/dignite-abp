@@ -42,5 +42,5 @@
           return numpf(value, ["%d let", "%d leto", "%d leti", "%d leta"]);
       },
       wordSeparator: " "
-  };  
+  };
 }));

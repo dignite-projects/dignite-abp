@@ -29,7 +29,6 @@ public class LocalizableMessageNotificationData : NotificationData
     /// </summary>
     private LocalizableMessageNotificationData()
     {
-
     }
 
     /// <summary>

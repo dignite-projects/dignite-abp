@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Upload;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Upload;
 
 public static class UploadConfigurationNames
 {

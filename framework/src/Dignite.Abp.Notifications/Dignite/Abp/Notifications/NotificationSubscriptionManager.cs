@@ -66,7 +66,6 @@ public class NotificationSubscriptionManager : INotificationSubscriptionManager,
         }
     }
 
-
     public async Task UnsubscribeAsync(Guid userId, string notificationName, NotificationEntityIdentifier entityIdentifier = null)
     {
         await _store.DeleteSubscriptionAsync(

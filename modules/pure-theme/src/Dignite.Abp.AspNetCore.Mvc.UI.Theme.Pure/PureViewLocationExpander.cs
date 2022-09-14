@@ -1,10 +1,10 @@
-﻿using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
@@ -22,7 +22,7 @@ public class PureViewLocationExpander : IViewLocationExpander
         _currentTenantLazy = currentTenantLazy;
     }
 
-    public void PopulateValues([NotNull]ViewLocationExpanderContext context)
+    public void PopulateValues([NotNull] ViewLocationExpanderContext context)
     {
         // Using CurrentUICulture so it loads the locale specific resources for the views.
         if (!string.IsNullOrEmpty(CultureInfo.CurrentUICulture.Name))
@@ -37,7 +37,7 @@ public class PureViewLocationExpander : IViewLocationExpander
 
         // If viewname is a WebComponent then add the WebComponent path
         /* Regex result
-         * If successful, 
+         * If successful,
          * Group 0 = FullMatch (ex "Components/MyComponent/Default")
          * Group 1 = Components (ex "Components")
          * Group 2 = Component Name (ex "MyComponent")
@@ -49,11 +49,11 @@ public class PureViewLocationExpander : IViewLocationExpander
         if (defaultComponentMatch.Success)
         {
             // Will render Components/ComponentName as the new view name
-            context.Values[_webComponentPathKey]=
+            context.Values[_webComponentPathKey] =
                 string.Format(
-                    "{0}/{1}/{2}", 
-                    defaultComponentMatch.Groups[1].Value, 
-                    defaultComponentMatch.Groups[2].Value, 
+                    "{0}/{1}/{2}",
+                    defaultComponentMatch.Groups[1].Value,
+                    defaultComponentMatch.Groups[2].Value,
                     defaultComponentMatch.Groups[3].Value
                     );
         }
@@ -84,11 +84,11 @@ public class PureViewLocationExpander : IViewLocationExpander
 
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
-        string language = "."+context.Values.GetOrDefault(_languageKey);
+        string language = "." + context.Values.GetOrDefault(_languageKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;
 
-        // 
+        //
         if (!string.IsNullOrEmpty(webComponentPath))
         {
             _viewLocations = new string[] {

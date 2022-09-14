@@ -11,7 +11,7 @@ namespace Dignite.Abp.Files;
     typeof(AbpFilesDomainSharedModule)
 )]
 public class AbpFilesDomainModule : AbpModule
-{    
+{
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddSingleton<ICurrentFileAccessor>(AsyncLocalCurrentFileAccessor.Instance);

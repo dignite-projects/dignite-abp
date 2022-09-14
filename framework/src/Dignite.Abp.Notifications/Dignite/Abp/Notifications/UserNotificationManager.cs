@@ -30,12 +30,10 @@ public class UserNotificationManager : IUserNotificationManager, ISingletonDepen
         return _store.GetUserNotificationCountAsync(userId, state, startDate, endDate);
     }
 
-
     public Task UpdateUserNotificationStateAsync(Guid userId, Guid notificationId, UserNotificationState state)
     {
         return _store.UpdateUserNotificationStateAsync(userId, notificationId, state);
     }
-
 
     public Task UpdateAllUserNotificationStatesAsync(Guid userId, UserNotificationState state)
     {
@@ -47,10 +45,8 @@ public class UserNotificationManager : IUserNotificationManager, ISingletonDepen
         return _store.DeleteUserNotificationAsync(userId, notificationId);
     }
 
-
     public Task DeleteAllUserNotificationsAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null)
     {
         return _store.DeleteAllUserNotificationsAsync(userId, state, startDate, endDate);
     }
-
 }

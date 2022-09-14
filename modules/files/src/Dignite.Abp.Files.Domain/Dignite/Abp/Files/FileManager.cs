@@ -22,10 +22,8 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     protected ICurrentFile CurrentFile => LazyServiceProvider.LazyGetRequiredService<ICurrentFile>();
     protected IFileStore<TFile> FileStore => LazyServiceProvider.LazyGetService(typeof(TFileStore)).As<IFileStore<TFile>>();
 
-
-
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="file"></param>
     /// <param name="stream"></param>
@@ -67,7 +65,6 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         return Task.CompletedTask;
     }
 
-
     public virtual async Task<TFile> GetOrNullAsync([NotNull] string containerName, [NotNull] string blobName, CancellationToken cancellationToken = default)
     {
         var blobInfo = await FileStore.FindAsync(containerName, blobName, cancellationToken);
@@ -92,7 +89,6 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         return true;
     }
 
-
     protected virtual Task OnDeletingEntityAsync([NotNull] TFile file)
     {
         return Task.CompletedTask;
@@ -102,7 +98,6 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     {
         return Task.CompletedTask;
     }
-
 
     /// <summary>
     /// Generate blobname using the configured <see cref="IBlobNameGenerator"/>

@@ -1,4 +1,3 @@
-
 namespace Dignite.Abp.BlobStoring;
 
 public class BlobContainerConfigurationNames
@@ -12,5 +11,4 @@ public class BlobContainerConfigurationNames
     ///
     /// </summary>
     public const string BlobHandlers = "BlobHandlers";
-
 }

@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -17,7 +16,6 @@
 	 * @type {RegExp}
 	 */
 	var NEW_LINE_EXP = /\n(?!$)/g;
-
 
 	/**
 	 * Global exports
@@ -248,5 +246,4 @@
 		env.plugins = env.plugins || {};
 		env.plugins.lineNumbers = true;
 	});
-
 }());

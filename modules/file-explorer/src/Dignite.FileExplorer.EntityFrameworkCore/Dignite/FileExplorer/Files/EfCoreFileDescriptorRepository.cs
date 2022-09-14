@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Dignite.FileExplorer.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -33,13 +33,12 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
                    .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
-
     public async Task<int> GetCountAsync(string containerName, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName,filter,entityType,entityId,
+            containerName, filter, entityType, entityId,
             cancellationToken
         );
 
@@ -68,7 +67,6 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
             .ToListAsync(cancellationToken);
     }
 
-
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
         string filter = null,
@@ -78,7 +76,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     {
         return (await GetDbSetAsync()).AsNoTracking()
             .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName)
-            .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains( filter))
+            .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
             .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }

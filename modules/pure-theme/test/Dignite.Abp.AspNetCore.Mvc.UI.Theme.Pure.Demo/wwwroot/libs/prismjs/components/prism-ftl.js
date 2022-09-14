@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	// https://freemarker.apache.org/docs/dgui_template_exp.html
 
 	// FTL expression with 4 levels of nesting supported
@@ -94,5 +93,4 @@
 	Prism.hooks.add('after-tokenize', function (env) {
 		Prism.languages['markup-templating'].tokenizePlaceholders(env, 'ftl');
 	});
-
 }(Prism));

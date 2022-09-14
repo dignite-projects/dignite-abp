@@ -5,5 +5,4 @@ namespace Dignite.Abp.SettingManagement.Localization;
 [LocalizationResourceName("AbpSettingManagement")]
 public class AbpSettingManagementResource
 {
-
 }

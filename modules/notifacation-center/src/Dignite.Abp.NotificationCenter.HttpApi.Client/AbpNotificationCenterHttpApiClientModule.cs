@@ -21,6 +21,5 @@ public class AbpNotificationCenterHttpApiClientModule : AbpModule
         {
             options.FileSets.AddEmbedded<AbpNotificationCenterHttpApiClientModule>();
         });
-
     }
 }

@@ -2,7 +2,6 @@
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
-
 namespace Dignite.Abp.FieldCustomizing;
 
 [DependsOn(

@@ -1,15 +1,15 @@
 ﻿using System;
-using Blazorise.Extensions;
-using Blazorise.DataGrid;
-using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Blazorise;
+using Blazorise.DataGrid;
+using Blazorise.Extensions;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
 using Volo.Abp.BlazoriseUI.Components;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
-using Blazorise;
 
 namespace Dignite.Abp.BlazoriseUI.Components;
 
@@ -22,9 +22,9 @@ public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
 
     protected Regex ExtensionPropertiesRegex = new Regex(@"ExtraProperties\[(.*?)\]");
 
-    string DataGridHeight { get; set; }
+    private string DataGridHeight { get; set; }
 
-    string ElementId { get; set; }
+    private string ElementId { get; set; }
     public TItem SelectedItem { get; set; }
     public List<TItem> SelectedItems { get; set; }
 
@@ -50,7 +50,6 @@ public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
     public IJSRuntime JsRuntime { get; set; }
 
     [Inject] public IIdGenerator IdGenerator { get; set; }
-
 
     protected virtual RenderFragment RenderCustomTableColumnComponent(Type type, object data)
     {
@@ -88,5 +87,4 @@ public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
             StateHasChanged();
         }
     }
-
 }

@@ -1,7 +1,6 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Authorization;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.EventBus;
@@ -27,7 +26,6 @@ public class AbpNotificationsModule : AbpModule
     {
         AutoAddDefinitionProviders(context.Services);
     }
-
 
     private static void AutoAddDefinitionProviders(IServiceCollection services)
     {

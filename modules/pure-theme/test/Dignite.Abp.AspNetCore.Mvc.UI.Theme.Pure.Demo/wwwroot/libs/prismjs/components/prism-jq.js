@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var interpolation = /\\\((?:[^()]|\([^()]*\))*\)/.source;
 	var string = RegExp(/(^|[^\\])"(?:[^"\r\n\\]|\\[^\r\n(]|__)*"/.source.replace(/__/g, function () { return interpolation; }));
 	var stringInterpolation = {
@@ -65,5 +64,4 @@
 	};
 
 	stringInterpolation.interpolation.inside.content.inside = jq;
-
 }(Prism));

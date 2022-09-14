@@ -8,6 +8,7 @@ namespace Dignite.FileExplorer.Samples;
  * Then inherit these abstract classes from EF Core & MongoDB test projects.
  * In this way, both database providers are tests with the same set tests.
  */
+
 public abstract class FileDescriptorRepository_Tests<TStartupModule> : FileExplorerTestBase<TStartupModule>
     where TStartupModule : IAbpModule
 {
@@ -21,6 +22,5 @@ public abstract class FileDescriptorRepository_Tests<TStartupModule> : FileExplo
     [Fact]
     public async Task Method1Async()
     {
-
     }
 }

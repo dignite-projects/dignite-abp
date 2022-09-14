@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Features;
@@ -96,6 +96,7 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
 
         return settings;
     }
+
     public async Task<bool> IsAvailableAsync(string name, Guid userId)
     {
         var notificationDefinition = GetOrNull(name);
@@ -108,7 +109,6 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
             && await PermissionCheckAsync(notificationDefinition, userId)
             );
     }
-
 
     protected async Task<bool> FeatureCheckAsync(NotificationDefinition notificationDefinition)
     {
@@ -170,6 +170,4 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
         }
         return availableDefinitions.ToImmutableList();
     }
-
-
 }

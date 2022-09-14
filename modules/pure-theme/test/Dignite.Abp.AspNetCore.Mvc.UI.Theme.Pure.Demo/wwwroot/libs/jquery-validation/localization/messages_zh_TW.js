@@ -7,7 +7,6 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
-
 /*
  * Translated default messages for the jQuery validation plugin.
  * Locale: ZH (Chinese; 中文 (Zhōngwén), 汉语, 漢語)

@@ -1,6 +1,5 @@
 var abp = abp || {};
 (function($) {
-
     if (!$) {
         throw "abp/jquery library requires the jquery library included to the page!";
     }
@@ -87,7 +86,7 @@ var abp = abp || {};
                 childList: true
             }
         );
-    });    
+    });
 
     // AJAX ///////////////////////////////////////////////////////////////////
 
@@ -333,7 +332,6 @@ var abp = abp || {};
     /* ResourceLoader API */
 
     abp.ResourceLoader = (function () {
-
         var _urlInfos = {};
 
         function getCacheKey(url) {
@@ -341,7 +339,6 @@ var abp = abp || {};
         }
 
         function appendTimeToUrl(url) {
-
             if (url.indexOf('?') < 0) {
                 url += '?';
             } else {
@@ -354,7 +351,6 @@ var abp = abp || {};
         }
 
         var _loadFromUrl = function (url, loadCallback, failCallback, serverLoader) {
-
             var cacheKey = getCacheKey(url);
 
             var urlInfo = _urlInfos[cacheKey];
@@ -388,7 +384,6 @@ var abp = abp || {};
 
         var _loadStyle = function (url) {
             _loadFromUrl(url, undefined, undefined, function (urlInfo) {
-
                 $('<link/>', {
                     rel: 'stylesheet',
                     type: 'text/css',
@@ -402,5 +397,4 @@ var abp = abp || {};
             loadStyle: _loadStyle
         }
     })();
-
 })(jQuery);

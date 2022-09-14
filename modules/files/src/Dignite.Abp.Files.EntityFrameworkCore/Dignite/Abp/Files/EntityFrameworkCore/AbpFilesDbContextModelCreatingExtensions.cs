@@ -6,7 +6,7 @@ namespace Dignite.Abp.Files.EntityFrameworkCore;
 public static class AbpFilesDbContextModelCreatingExtensions
 {
     public static void ConfigureAbpFiles<TFile>(this EntityTypeBuilder<TFile> b)
-        where TFile : class,IFile
+        where TFile : class, IFile
     {
         b.Property(u => u.TenantId).HasColumnName(nameof(IFile.TenantId));
         b.Property(u => u.ContainerName).IsRequired().HasMaxLength(AbpFileConsts.MaxContainerNameLength).HasColumnName(nameof(IFile.ContainerName));

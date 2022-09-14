@@ -14,7 +14,6 @@ public interface ICustomizeFieldDefinition
     [NotNull]
     string DisplayName { get; set; }
 
-
     /// <summary>
     /// Default value of the field.
     /// </summary>

@@ -10,7 +10,7 @@ namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore;
 public static class AbpFieldCustomizingDbContextModelCreatingExtensions
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="b"></param>
@@ -38,7 +38,7 @@ public static class AbpFieldCustomizingDbContextModelCreatingExtensions
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="b"></param>

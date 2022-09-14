@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Switch;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Switch;
 
 public class SwitchFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "Switch";
 
     public override string Name => ProviderName;

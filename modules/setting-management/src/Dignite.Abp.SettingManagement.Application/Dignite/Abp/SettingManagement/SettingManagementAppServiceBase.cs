@@ -1,5 +1,4 @@
-﻿
-using Dignite.Abp.SettingManagement.Localization;
+﻿using Dignite.Abp.SettingManagement.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Dignite.Abp.SettingManagement;

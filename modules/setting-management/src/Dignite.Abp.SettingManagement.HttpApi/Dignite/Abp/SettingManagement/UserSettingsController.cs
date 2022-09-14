@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
@@ -17,7 +17,6 @@ public class UserSettingsController : AbpControllerBase, IUserSettingsAppService
     {
         _userSettingsAppService = userSettingsAppService;
     }
-
 
     [HttpGet]
     public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()

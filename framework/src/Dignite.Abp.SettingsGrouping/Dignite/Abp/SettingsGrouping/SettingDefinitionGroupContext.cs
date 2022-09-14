@@ -16,7 +16,6 @@ public class SettingDefinitionGroupContext : SettingDefinitionContext, ISettingD
     /// </summary>
     public SettingDefinitionGroup Group { get; set; }
 
-
     public void Add(
         [NotNull] SettingDefinitionGroup group,
         [NotNull] params SettingDefinitionSection[] definitions)

@@ -15,7 +15,6 @@ public class NotificationDistributionJobArgs
     /// </summary>
     public NotificationInfo Notification { get; set; }
 
-
     public Guid[] UserIds { get; set; }
     public Guid[] ExcludedUserIds { get; set; }
 

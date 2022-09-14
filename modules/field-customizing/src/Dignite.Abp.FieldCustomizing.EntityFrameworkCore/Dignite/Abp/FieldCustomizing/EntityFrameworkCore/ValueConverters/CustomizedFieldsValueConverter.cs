@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.Json.SystemTextJson.JsonConverters;
 
@@ -16,7 +14,6 @@ namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters
                 d => SerializeObject(d),
                 s => DeserializeObject(s))
         {
-
         }
 
         private static string SerializeObject(CustomizeFieldDictionary extraFields)
@@ -46,6 +43,5 @@ namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters
 
             return dictionary;
         }
-
     }
 }

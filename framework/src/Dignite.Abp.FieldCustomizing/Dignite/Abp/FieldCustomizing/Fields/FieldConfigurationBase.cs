@@ -1,8 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-
-namespace Dignite.Abp.FieldCustomizing.Fields;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields;
 
 public abstract class FieldConfigurationBase
 {

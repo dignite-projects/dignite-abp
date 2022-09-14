@@ -1,4 +1,3 @@
-
 /* **********************************************
      Begin prism-core.js
 ********************************************** */
@@ -22,14 +21,12 @@ var _self = (typeof window !== 'undefined')
  * @public
  */
 var Prism = (function (_self) {
-
 	// Private helper vars
 	var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
 	var uniqueId = 0;
 
 	// The grammar object for plaintext
 	var plainTextGrammar = {};
-
 
 	var _ = {
 		/**
@@ -431,7 +428,6 @@ var Prism = (function (_self) {
 
 				for (var token in grammar) {
 					if (grammar.hasOwnProperty(token)) {
-
 						if (token == before) {
 							for (var newToken in insert) {
 								if (insert.hasOwnProperty(newToken)) {
@@ -768,7 +764,6 @@ var Prism = (function (_self) {
 	};
 	_self.Prism = _;
 
-
 	// Typescript note:
 	// The following can be used to import the Token type in JSDoc:
 	//
@@ -952,7 +947,6 @@ var Prism = (function (_self) {
 					currentNode !== tokenList.tail;
 					pos += currentNode.value.length, currentNode = currentNode.next
 				) {
-
 					if (rematch && pos >= rematch.reach) {
 						break;
 					}
@@ -1144,7 +1138,6 @@ var Prism = (function (_self) {
 		return array;
 	}
 
-
 	if (!_self.document) {
 		if (!_self.addEventListener) {
 			// in Node.js
@@ -1206,7 +1199,6 @@ var Prism = (function (_self) {
 	}
 
 	return _;
-
 }(_self));
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -1266,7 +1258,6 @@ if (typeof global !== 'undefined') {
  * @global
  * @public
  */
-
 
 /* **********************************************
      Begin prism-markup.js
@@ -1336,7 +1327,6 @@ Prism.languages.markup = {
 					'namespace': /^[^\s>\/:]+:/
 				}
 			}
-
 		}
 	},
 	'entity': [
@@ -1354,7 +1344,6 @@ Prism.languages.markup['doctype'].inside['internal-subset'].inside = Prism.langu
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
 Prism.hooks.add('wrap', function (env) {
-
 	if (env.type === 'entity') {
 		env.attributes['title'] = env.content.replace(/&amp;/, '&');
 	}
@@ -1456,13 +1445,11 @@ Prism.languages.ssml = Prism.languages.xml;
 Prism.languages.atom = Prism.languages.xml;
 Prism.languages.rss = Prism.languages.xml;
 
-
 /* **********************************************
      Begin prism-css.js
 ********************************************** */
 
 (function (Prism) {
-
 	var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 
 	Prism.languages.css = {
@@ -1523,9 +1510,7 @@ Prism.languages.rss = Prism.languages.xml;
 		markup.tag.addInlined('style', 'css');
 		markup.tag.addAttribute('style', 'css');
 	}
-
 }(Prism));
-
 
 /* **********************************************
      Begin prism-clike.js
@@ -1562,7 +1547,6 @@ Prism.languages.clike = {
 	'operator': /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
 	'punctuation': /[{}[\];(),.:]/
 };
-
 
 /* **********************************************
      Begin prism-javascript.js
@@ -1725,13 +1709,11 @@ if (Prism.languages.markup) {
 
 Prism.languages.js = Prism.languages.javascript;
 
-
 /* **********************************************
      Begin prism-file-highlight.js
 ********************************************** */
 
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -1923,5 +1905,4 @@ Prism.languages.js = Prism.languages.javascript;
 		}
 		Prism.plugins.fileHighlight.highlight.apply(this, arguments);
 	};
-
 }());

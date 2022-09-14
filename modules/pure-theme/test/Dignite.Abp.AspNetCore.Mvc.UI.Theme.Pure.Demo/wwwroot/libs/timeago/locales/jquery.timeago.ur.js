@@ -7,7 +7,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  // Urdu 
+  // Urdu
   jQuery.timeago.settings.strings = {
     prefixAgo: null,
     prefixFromNow: null,

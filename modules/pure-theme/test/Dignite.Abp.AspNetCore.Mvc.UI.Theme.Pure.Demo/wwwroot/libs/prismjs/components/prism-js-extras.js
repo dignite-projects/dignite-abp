@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	Prism.languages.insertBefore('javascript', 'function-variable', {
 		'method-variable': {
 			pattern: RegExp('(\\.\\s*)' + Prism.languages.javascript['function-variable'].pattern.source),
@@ -109,7 +108,6 @@
 		}
 	});
 
-
 	// add 'maybe-class-name' to tokens which might be a class name
 	var maybeClassNameTokens = ['function', 'function-variable', 'method', 'method-variable', 'property-access'];
 
@@ -131,5 +129,4 @@
 
 		inside['maybe-class-name'] = /^[A-Z][\s\S]*/;
 	}
-
 }(Prism));

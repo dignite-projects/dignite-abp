@@ -7,7 +7,7 @@ namespace Dignite.FileExplorer.Files;
 
 [EventName("Dignite.FileExplorer.Files.FileDescriptor")]
 [Serializable]
-public class FileDescriptorEto: IMultiTenant, IHasExtraProperties
+public class FileDescriptorEto : IMultiTenant, IHasExtraProperties
 {
     public string ContainerName { get; set; }
 
@@ -20,7 +20,7 @@ public class FileDescriptorEto: IMultiTenant, IHasExtraProperties
     public string EntityId { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public string Name { get; set; }
 

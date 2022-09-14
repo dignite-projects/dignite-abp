@@ -9,7 +9,6 @@ namespace Dignite.Abp.Notifications;
 /// </summary>
 public interface INotificationDefinitionManager
 {
-
     /// <summary>
     /// Gets a notification definition by name.
     /// Throws exception if there is no notification definition with given name.

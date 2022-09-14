@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.Notifications;
+﻿namespace Dignite.Abp.Notifications;
 
 public interface INotificationDefinitionProvider
 {

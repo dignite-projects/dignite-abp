@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields;
 
 public class SelectListItem
 {

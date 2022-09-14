@@ -8,5 +8,4 @@ namespace Dignite.Abp.NotificationCenter;
     )]
 public class AbpNotificationCenterApplicationTestModule : AbpModule
 {
-
 }

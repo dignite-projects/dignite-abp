@@ -30,6 +30,5 @@ public class UserNotificationInfo
     /// </summary>
     public UserNotificationState State { get; set; }
 
-
     public Guid? TenantId { get; set; }
 }

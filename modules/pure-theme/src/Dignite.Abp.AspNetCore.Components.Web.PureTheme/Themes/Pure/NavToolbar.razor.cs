@@ -28,5 +28,4 @@ public partial class NavToolbar
             });
         }
     }
-
 }

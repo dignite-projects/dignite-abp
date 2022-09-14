@@ -18,7 +18,6 @@ $(function () {
     sideNavbarToggle();
 });
 
-
 //Ö÷²Ëµ¥µÄÇĞ»»
 window.sideNavbarToggle = () => {
     var $sideNavbar = $('#sideNavbar');

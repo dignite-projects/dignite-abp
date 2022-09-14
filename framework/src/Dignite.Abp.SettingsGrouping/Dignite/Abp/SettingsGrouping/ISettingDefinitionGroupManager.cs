@@ -19,7 +19,7 @@ public interface ISettingDefinitionGroupManager : ISettingDefinitionManager
     IReadOnlyList<SettingDefinition> GetList(string groupName);
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="groupName"></param>
     /// <returns></returns>

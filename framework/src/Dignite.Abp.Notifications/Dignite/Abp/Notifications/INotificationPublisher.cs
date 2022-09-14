@@ -1,6 +1,6 @@
-using JetBrains.Annotations;
 using System;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace Dignite.Abp.Notifications;
 
@@ -17,8 +17,8 @@ public interface INotificationPublisher
     /// <param name="entityIdentifier">The entity identifier if this notification is related to an entity</param>
     /// <param name="severity">Notification severity</param>
     /// <param name="userIds">
-    /// Target user id(s). 
-    /// Used to send notification to specific user(s) (without checking the subscription). 
+    /// Target user id(s).
+    /// Used to send notification to specific user(s) (without checking the subscription).
     /// If this is null/empty, the notification is sent to subscribed users.
     /// </param>
     /// <param name="excludedUserIds">

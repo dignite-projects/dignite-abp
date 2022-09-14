@@ -1,6 +1,6 @@
-﻿using Dignite.Abp.Notifications;
+﻿using System;
+using Dignite.Abp.Notifications;
 using JetBrains.Annotations;
-using System;
 using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
@@ -11,7 +11,6 @@ public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IM
 {
     public NotificationSubscription()
     { }
-
 
     public NotificationSubscription(NotificationSubscriptionInfo subscription)
         : this(subscription.UserId,
@@ -33,7 +32,6 @@ public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IM
         TenantId = tenantId;
     }
 
-
     /// <summary>
     /// User Id.
     /// </summary>
@@ -45,7 +43,6 @@ public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IM
     /// </summary>
     [NotNull]
     public string NotificationName { get; set; }
-
 
     /// <summary>
     /// Name of the entity type (including namespaces).

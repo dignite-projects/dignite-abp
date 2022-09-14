@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -85,7 +84,6 @@
 	}
 
 	Prism.hooks.add('complete', function (env) {
-
 		/** @type {HTMLElement} */
 		var code = env.element;
 		var pre = code.parentElement;
@@ -186,5 +184,4 @@
 			}
 		});
 	});
-
 }());

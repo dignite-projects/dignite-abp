@@ -1,9 +1,9 @@
-﻿using Blazorise;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazorise;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Volo.Abp.UI.Navigation;
 
 namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure;
@@ -11,9 +11,9 @@ namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure;
 public partial class SideNav
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public Bar Sidebar { get; private  set; }
+    public Bar Sidebar { get; private set; }
 
     [Inject]
     protected IMenuManager MenuManager { get; set; }
@@ -25,8 +25,6 @@ public partial class SideNav
     /// </summary>
     private ApplicationMenuItem RootMenuItem { get; set; }
 
-
-
     protected override async Task OnInitializedAsync()
     {
         //
@@ -35,9 +33,7 @@ public partial class SideNav
         //根据当前页url查询根菜单
         FindRootMenuItemAsync(NavigationManager.Uri);
 
-
         await base.OnInitializedAsync();
-
     }
 
     public void Dispose()
@@ -45,11 +41,8 @@ public partial class SideNav
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
-
-
     private void OnLocationChanged(object sender, LocationChangedEventArgs e)
     {
-
         //根据新页面url查询根菜单
         FindRootMenuItemAsync(e.Location);
 
@@ -75,8 +68,7 @@ public partial class SideNav
         }
         catch
         {
-
-        }           
+        }
     }
 
     private void FindRootMenuItemWithChildren(ApplicationMenuItem topMenuItem, ApplicationMenuItemList menuItems, string location)

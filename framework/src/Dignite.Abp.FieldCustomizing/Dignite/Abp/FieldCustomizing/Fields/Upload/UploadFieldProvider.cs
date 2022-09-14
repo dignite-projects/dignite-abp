@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Upload;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Upload;
 
 public class UploadFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "Upload";
 
     public override string Name => ProviderName;

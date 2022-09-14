@@ -13,7 +13,6 @@ public class FileExplorerDbContext : AbpDbContext<FileExplorerDbContext>, IFileE
     public FileExplorerDbContext(DbContextOptions<FileExplorerDbContext> options)
         : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Dignite.Abp.FieldCustomizing.Fields;
 using Dignite.Abp.FieldCustomizing.Fields.Textbox;
 using Shouldly;
 using Xunit;
@@ -9,12 +8,10 @@ namespace Dignite.Abp.SettingsGrouping;
 public class GroupingSettingDefinitionManager_Tests : SettingsTestBase
 {
     private readonly ISettingDefinitionGroupManager _settingDefinitionManager;
-    private readonly IFieldProviderSelector _formProviderSelector;
 
     public GroupingSettingDefinitionManager_Tests()
     {
         _settingDefinitionManager = GetRequiredService<ISettingDefinitionGroupManager>();
-        _formProviderSelector = GetRequiredService<IFieldProviderSelector>();
     }
 
     [Fact]

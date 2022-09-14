@@ -1,8 +1,8 @@
+using System.IO;
+using System.Threading.Tasks;
 using Dignite.Abp.Files;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using System.IO;
-using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 
@@ -13,14 +13,12 @@ namespace Dignite.Abp.BlobStoring;
 /// </summary>
 public class ImageResizeHandler : IBlobHandler, ITransientDependency
 {
-
     private readonly ICurrentFile _currentFile;
 
     public ImageResizeHandler(ICurrentFile currentFile)
     {
         _currentFile = currentFile;
     }
-
 
     public async Task ExecuteAsync(BlobHandlerContext context)
     {
@@ -58,7 +56,6 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
                             );
                         }
                     }
-
 
                     if (image.Width > configuration.ImageWidth || image.Height > configuration.ImageHeight)
                     {

@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var javascript = Prism.languages.javascript;
 
 	var type = /\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})+\}/.source;
@@ -74,5 +73,4 @@
 	});
 
 	Prism.languages.javadoclike.addSupport('javascript', Prism.languages.jsdoc);
-
 }(Prism));

@@ -1,5 +1,4 @@
-﻿
-window.blazoriseUi =
+﻿window.blazoriseUi =
 {
     /**
      *  Get the visualization height of the first table
@@ -12,7 +11,7 @@ window.blazoriseUi =
             extraHeight = 80;
 
             if (document.body.clientWidth <= 576) {
-                //For small screen 
+                //For small screen
                 let mainNav = document.getElementById('main-navbar-nav');
                 if (mainNav) {
                     extraHeight = extraHeight + mainNav.clientHeight;
@@ -21,7 +20,7 @@ window.blazoriseUi =
         }
 
         let fixedHeaderTable = document.getElementById(id);
-        // The distance from the table content to the top 
+        // The distance from the table content to the top
         let fixedHeaderTableTop = 0
         if (fixedHeaderTable) {
             fixedHeaderTableTop = fixedHeaderTable.getBoundingClientRect().top
@@ -31,7 +30,7 @@ window.blazoriseUi =
             return 500;
         }
 
-        // Form height - The height of the top of the table content - The height of the bottom of the table content 
+        // Form height - The height of the top of the table content - The height of the bottom of the table content
         let height = `calc(100vh - ${fixedHeaderTableTop + extraHeight}px)`;
         return height;
     },

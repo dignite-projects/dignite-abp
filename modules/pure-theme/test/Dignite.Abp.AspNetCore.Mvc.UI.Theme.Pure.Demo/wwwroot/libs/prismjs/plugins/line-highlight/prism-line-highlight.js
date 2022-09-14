@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined' || !document.querySelector) {
 		return;
 	}
@@ -246,7 +245,6 @@
 		}
 	};
 
-
 	function applyHash() {
 		var hash = location.hash.slice(1);
 
@@ -335,5 +333,4 @@
 			});
 		actions.forEach(callFunction);
 	});
-
 }());

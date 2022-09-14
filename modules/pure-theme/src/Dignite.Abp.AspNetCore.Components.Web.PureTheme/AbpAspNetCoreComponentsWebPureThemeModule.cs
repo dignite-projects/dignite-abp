@@ -10,5 +10,4 @@ namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme;
     )]
 public class AbpAspNetCoreComponentsWebPureThemeModule : AbpModule
 {
-    
 }

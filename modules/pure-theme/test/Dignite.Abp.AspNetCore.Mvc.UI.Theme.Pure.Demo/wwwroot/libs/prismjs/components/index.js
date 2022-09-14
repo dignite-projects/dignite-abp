@@ -1,7 +1,6 @@
 const components = require('../components.js');
 const getLoader = require('../dependencies');
 
-
 /**
  * The set of all languages which have been loaded using the below function.
  *

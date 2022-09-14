@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Settings;
-using System.Linq;
 
 namespace Dignite.Abp.SettingsGrouping;
 

@@ -1,5 +1,4 @@
-﻿
-namespace Dignite.Abp.Files;
+﻿namespace Dignite.Abp.Files;
 
 public interface ICurrentFileAccessor
 {

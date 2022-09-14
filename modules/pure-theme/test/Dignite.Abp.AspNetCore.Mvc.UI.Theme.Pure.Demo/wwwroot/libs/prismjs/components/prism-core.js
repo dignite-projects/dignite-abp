@@ -17,14 +17,12 @@ var _self = (typeof window !== 'undefined')
  * @public
  */
 var Prism = (function (_self) {
-
 	// Private helper vars
 	var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
 	var uniqueId = 0;
 
 	// The grammar object for plaintext
 	var plainTextGrammar = {};
-
 
 	var _ = {
 		/**
@@ -426,7 +424,6 @@ var Prism = (function (_self) {
 
 				for (var token in grammar) {
 					if (grammar.hasOwnProperty(token)) {
-
 						if (token == before) {
 							for (var newToken in insert) {
 								if (insert.hasOwnProperty(newToken)) {
@@ -763,7 +760,6 @@ var Prism = (function (_self) {
 	};
 	_self.Prism = _;
 
-
 	// Typescript note:
 	// The following can be used to import the Token type in JSDoc:
 	//
@@ -947,7 +943,6 @@ var Prism = (function (_self) {
 					currentNode !== tokenList.tail;
 					pos += currentNode.value.length, currentNode = currentNode.next
 				) {
-
 					if (rematch && pos >= rematch.reach) {
 						break;
 					}
@@ -1139,7 +1134,6 @@ var Prism = (function (_self) {
 		return array;
 	}
 
-
 	if (!_self.document) {
 		if (!_self.addEventListener) {
 			// in Node.js
@@ -1201,7 +1195,6 @@ var Prism = (function (_self) {
 	}
 
 	return _;
-
 }(_self));
 
 if (typeof module !== 'undefined' && module.exports) {

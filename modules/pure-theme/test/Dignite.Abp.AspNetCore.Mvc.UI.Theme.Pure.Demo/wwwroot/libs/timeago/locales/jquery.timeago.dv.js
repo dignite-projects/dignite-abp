@@ -7,7 +7,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  /** 
+  /**
    * Dhivehi time in Thaana for timeago.js
    **/
   jQuery.timeago.settings.strings = {

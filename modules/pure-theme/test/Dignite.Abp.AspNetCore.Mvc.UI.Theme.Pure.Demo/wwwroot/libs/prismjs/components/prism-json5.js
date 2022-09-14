@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var string = /("|')(?:\\(?:\r\n?|\n|.)|(?!\1)[^\\\r\n])*\1/;
 
 	Prism.languages.json5 = Prism.languages.extend('json', {
@@ -19,5 +18,4 @@
 		},
 		'number': /[+-]?\b(?:NaN|Infinity|0x[a-fA-F\d]+)\b|[+-]?(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:[eE][+-]?\d+\b)?/
 	});
-
 }(Prism));

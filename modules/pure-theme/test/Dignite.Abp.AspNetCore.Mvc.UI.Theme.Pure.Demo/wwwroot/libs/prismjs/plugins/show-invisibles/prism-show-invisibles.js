@@ -1,9 +1,7 @@
 (function () {
-
 	if (typeof Prism === 'undefined') {
 		return;
 	}
-
 
 	var invisibles = {
 		'tab': /\t/,
@@ -12,7 +10,6 @@
 		'cr': /\r/,
 		'space': / /
 	};
-
 
 	/**
 	 * Handles the recursive calling of `addInvisibles` for one token.

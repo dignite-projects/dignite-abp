@@ -45,6 +45,7 @@ public class NotificationData
             }
         }
     }
+
     private readonly Dictionary<string, object> _properties;
 
     /// <summary>

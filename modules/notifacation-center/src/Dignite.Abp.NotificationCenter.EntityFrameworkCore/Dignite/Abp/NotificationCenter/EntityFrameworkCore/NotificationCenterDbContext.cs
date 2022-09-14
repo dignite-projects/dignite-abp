@@ -14,7 +14,6 @@ public class NotificationCenterDbContext : AbpDbContext<NotificationCenterDbCont
     public NotificationCenterDbContext(DbContextOptions<NotificationCenterDbContext> options)
         : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	Prism.languages.smarty = {
 		'comment': {
 			pattern: /^\{\*[\s\S]*?\*\}/,
@@ -127,5 +126,4 @@
 	Prism.hooks.add('after-tokenize', function (env) {
 		Prism.languages['markup-templating'].tokenizePlaceholders(env, 'smarty');
 	});
-
 }(Prism));

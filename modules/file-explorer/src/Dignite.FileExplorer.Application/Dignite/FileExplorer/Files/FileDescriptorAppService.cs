@@ -19,9 +19,9 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     private readonly IBlobContainerFactory _blobContainerFactory;
 
     public FileDescriptorAppService(
-        IFileDescriptorRepository blobRepository, 
-        FileDescriptorManager fileManager, 
-        IBlobContainerConfigurationProvider blobContainerConfigurationProvider, 
+        IFileDescriptorRepository blobRepository,
+        FileDescriptorManager fileManager,
+        IBlobContainerConfigurationProvider blobContainerConfigurationProvider,
         IBlobContainerFactory blobContainerFactory)
     {
         _blobRepository = blobRepository;
@@ -30,14 +30,12 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         _blobContainerFactory = blobContainerFactory;
     }
 
-
-
     public virtual async Task<IRemoteStreamContent> GetFileAsync([NotNull] string containerName, [NotNull] string blobName)
     {
         var file = await _fileManager.GetOrNullAsync(containerName, blobName);
 
         var blobContainer = _blobContainerFactory.Create(containerName);
-        Stream stream= await blobContainer.GetOrNullAsync(blobName);
+        Stream stream = await blobContainer.GetOrNullAsync(blobName);
 
         if (stream != null)
         {
@@ -50,14 +48,14 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     public async Task<PagedResultDto<FileDescriptorDto>> GetListAsync(GetFilesInput input)
     {
         var count = await _blobRepository.GetCountAsync(input.ContainerName, input.Filter, input.EntityTypeFullName, input.EntityId);
-        var result = await _blobRepository.GetListAsync(input.ContainerName,input.Filter,input.EntityTypeFullName,input.EntityId,input.Sorting,input.MaxResultCount,input.SkipCount);
+        var result = await _blobRepository.GetListAsync(input.ContainerName, input.Filter, input.EntityTypeFullName, input.EntityId, input.Sorting, input.MaxResultCount, input.SkipCount);
 
         return new PagedResultDto<FileDescriptorDto>(
             count,
@@ -67,11 +65,9 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 
     public async Task DeleteAsync(Guid id)
     {
-        var result = await _blobRepository.GetAsync(id,false);
+        var result = await _blobRepository.GetAsync(id, false);
         await _fileManager.DeleteAsync(result);
     }
-
-
 
     public virtual Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName)
     {

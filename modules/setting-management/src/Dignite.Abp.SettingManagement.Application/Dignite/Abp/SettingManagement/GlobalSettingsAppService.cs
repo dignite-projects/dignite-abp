@@ -1,8 +1,8 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Dignite.Abp.FieldCustomizing.Fields;
 using Dignite.Abp.SettingsGrouping;
 using Microsoft.AspNetCore.Authorization;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
 

@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	/**
 	 * Returns the placeholder for the given language id and index.
 	 *
@@ -120,5 +119,4 @@
 			}
 		}
 	});
-
 }(Prism));

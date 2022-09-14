@@ -18,6 +18,7 @@ public class MessageNotificationData : NotificationData
             _message = value;
         }
     }
+
     private string _message;
 
     /// <summary>
@@ -25,7 +26,6 @@ public class MessageNotificationData : NotificationData
     /// </summary>
     private MessageNotificationData()
     {
-
     }
 
     public MessageNotificationData(string message)

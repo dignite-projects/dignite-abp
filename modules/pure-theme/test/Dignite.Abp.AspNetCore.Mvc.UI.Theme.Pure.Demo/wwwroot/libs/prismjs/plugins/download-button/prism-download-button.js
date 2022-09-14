@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined' || typeof document === 'undefined' || !document.querySelector) {
 		return;
 	}
@@ -16,5 +15,4 @@
 		a.href = src;
 		return a;
 	});
-
 }());

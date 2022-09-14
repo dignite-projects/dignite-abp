@@ -21,10 +21,9 @@ public class FileDescriptorStore : DomainService, IFileStore<FileDescriptor>
         return await _blobRepository.BlobNameExistsAsync(containerName, blobName, ignoredId, cancellationToken);
     }
 
-
     public async Task CreateAsync(FileDescriptor file, bool autoSave = false, CancellationToken cancellationToken = default)
     {
-        await _blobRepository.InsertAsync(file,autoSave, cancellationToken: cancellationToken);
+        await _blobRepository.InsertAsync(file, autoSave, cancellationToken: cancellationToken);
     }
 
     public async Task DeleteAsync(FileDescriptor blobInfo, bool autoSave = false, CancellationToken cancellationToken = default)
@@ -36,5 +35,4 @@ public class FileDescriptorStore : DomainService, IFileStore<FileDescriptor>
     {
         return await _blobRepository.FindAsync(containerName, blobName, cancellationToken);
     }
-
 }

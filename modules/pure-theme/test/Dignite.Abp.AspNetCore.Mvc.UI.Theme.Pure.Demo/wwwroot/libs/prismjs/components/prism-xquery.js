@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	Prism.languages.xquery = Prism.languages.extend('markup', {
 		'xquery-comment': {
 			pattern: /\(:[\s\S]*?:\)/,
@@ -111,12 +110,9 @@
 				) {
 					// Here we might have entered an XQuery expression inside a tag
 					openedTags[openedTags.length - 1].openedBraces++;
-
 				} else if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces > 0 && token.type === 'punctuation' && token.content === '}') {
-
 					// Here we might have left an XQuery expression inside a tag
 					openedTags[openedTags.length - 1].openedBraces--;
-
 				} else if (token.type !== 'comment') {
 					notTagNorBrace = true;
 				}
@@ -158,5 +154,4 @@
 		}
 		walkTokens(env.tokens);
 	});
-
 }(Prism));

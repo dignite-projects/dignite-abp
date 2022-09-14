@@ -1,5 +1,4 @@
-﻿
-namespace Dignite.Abp.FieldCustomizing.Fields.Select;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Select;
 
 public static class SelectConfigurationNames
 {

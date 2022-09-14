@@ -8,7 +8,6 @@ public class CustomizeFieldDictionary : Dictionary<string, object>
 {
     public CustomizeFieldDictionary()
     {
-
     }
 
     public CustomizeFieldDictionary(IDictionary<string, object> dictionary)

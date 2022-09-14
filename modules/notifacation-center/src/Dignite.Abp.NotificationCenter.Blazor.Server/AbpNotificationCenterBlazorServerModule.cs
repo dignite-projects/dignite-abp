@@ -9,5 +9,4 @@ namespace Dignite.Abp.NotificationCenter.Blazor.Server;
     )]
 public class AbpNotificationCenterBlazorServerModule : AbpModule
 {
-
 }

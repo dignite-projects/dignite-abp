@@ -18,7 +18,6 @@ public class AbpSettingsGroupingModule : AbpModule
         AutoAddDefinitionProviders(context.Services);
     }
 
-
     private static void AutoAddDefinitionProviders(IServiceCollection services)
     {
         var groupingDefinitionProviders = new List<Type>();

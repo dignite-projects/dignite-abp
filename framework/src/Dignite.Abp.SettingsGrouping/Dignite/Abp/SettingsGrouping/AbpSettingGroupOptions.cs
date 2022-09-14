@@ -1,5 +1,4 @@
-﻿using Dignite.Abp.SettingsGrouping;
-using Volo.Abp.Collections;
+﻿using Volo.Abp.Collections;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;

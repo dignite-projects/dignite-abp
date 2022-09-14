@@ -3,7 +3,7 @@
 public static class SettingDefinitionPropertiesNames
 {
     /// <summary>
-    /// Section of setting definition 
+    /// Section of setting definition
     /// </summary>
     public const string SectionName = "SettingDefinitionSectionName";
 

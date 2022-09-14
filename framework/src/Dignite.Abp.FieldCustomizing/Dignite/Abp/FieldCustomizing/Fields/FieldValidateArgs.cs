@@ -1,6 +1,6 @@
-﻿using JetBrains.Annotations;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using JetBrains.Annotations;
 
 namespace Dignite.Abp.FieldCustomizing.Fields;
 

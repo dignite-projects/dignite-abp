@@ -1,6 +1,4 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.RichTextEditor;
 
 public static class RichTextEditorConfigurationNames
 {

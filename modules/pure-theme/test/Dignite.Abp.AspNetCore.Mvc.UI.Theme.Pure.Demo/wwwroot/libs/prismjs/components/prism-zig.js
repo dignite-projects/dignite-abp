@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	function literal(str) {
 		return function () { return str; };
 	}
@@ -97,5 +96,4 @@
 			obj.inside = Prism.languages.zig;
 		}
 	});
-
 }(Prism));

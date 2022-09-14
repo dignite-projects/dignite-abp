@@ -7,10 +7,10 @@ namespace Dignite.FileExplorer;
  * You can switch to MongoDB, however your domain tests should be
  * database independent anyway.
  */
+
 [DependsOn(
     typeof(FileExplorerEntityFrameworkCoreTestModule)
     )]
 public class FileExplorerDomainTestModule : AbpModule
 {
-
 }

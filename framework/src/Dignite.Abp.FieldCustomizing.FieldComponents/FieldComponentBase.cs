@@ -1,6 +1,6 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
+﻿using System;
+using Dignite.Abp.FieldCustomizing.Fields;
 using Microsoft.AspNetCore.Components;
-using System;
 using Volo.Abp.AspNetCore.Components;
 using Volo.Abp.DependencyInjection;
 
@@ -16,7 +16,6 @@ public abstract class FieldComponentBase<TFieldProvider, TConfiguration> : AbpCo
         HideFieldLable = false;
         FieldProviderType = typeof(TFieldProvider);
     }
-
 
     public Type FieldProviderType { get; private set; }
 

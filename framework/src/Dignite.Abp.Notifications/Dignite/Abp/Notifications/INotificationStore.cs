@@ -1,7 +1,7 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace Dignite.Abp.Notifications;
 
@@ -84,7 +84,6 @@ public interface INotificationStore
     /// <param name="startDate">List notifications published after startDateTime</param>
     /// <param name="endDate">List notifications published before startDateTime</param>
     Task<int> GetUserNotificationCountAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null);
-
 
     /// <summary>
     /// Gets roles of a user.

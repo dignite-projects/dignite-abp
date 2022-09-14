@@ -8,7 +8,6 @@ namespace Dignite.Abp.FieldCustomizing;
 
 public static class CustomizableObjectMapper
 {
-
     /// <summary>
     /// Copies customized fields from the <paramref name="sourceDictionary"/> object
     /// to the <paramref name="destinationDictionary"/> object.
@@ -37,7 +36,6 @@ public static class CustomizableObjectMapper
         );
     }
 
-
     /// <summary>
     /// Copies customized fields from the <paramref name="sourceDictionary"/> object
     /// to the <paramref name="destinationDictionary"/> object.
@@ -60,7 +58,6 @@ public static class CustomizableObjectMapper
         Check.AssignableTo<IHasCustomizableFields>(destinationType, nameof(destinationType));
         Check.NotNull(sourceDictionary, nameof(sourceDictionary));
         Check.NotNull(destinationDictionary, nameof(destinationDictionary));
-
 
         foreach (var keyValue in sourceDictionary)
         {

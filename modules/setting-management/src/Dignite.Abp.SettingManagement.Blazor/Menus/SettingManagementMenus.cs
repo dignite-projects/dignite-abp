@@ -1,11 +1,9 @@
-﻿namespace Dignite.Abp.SettingManagement.Blazor.Menus
+﻿namespace Dignite.Abp.SettingManagement.Blazor.Menus;
+
+public class SettingManagementMenus
 {
-    public class SettingManagementMenus
-    {
-        public const string Prefix = "SettingManagement";
+    public const string Prefix = "SettingManagement";
 
-        //Add your menu items here...
-        //public const string Home = Prefix + ".MyNewMenuItem";
-
-    }
+    //Add your menu items here...
+    //public const string Home = Prefix + ".MyNewMenuItem";
 }

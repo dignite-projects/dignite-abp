@@ -1,5 +1,5 @@
-﻿using Dignite.Abp.Notifications;
-using System;
+﻿using System;
+using Dignite.Abp.Notifications;
 
 namespace Dignite.Abp.NotificationCenter
 {
@@ -15,10 +15,9 @@ namespace Dignite.Abp.NotificationCenter
         public string NotificationName { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string NotificationDisplayName { get; set; }
-
 
         /// <summary>
         /// Can be used to add custom properties to this notification.
@@ -30,7 +29,6 @@ namespace Dignite.Abp.NotificationCenter
         /// It's FullName of the entity type.
         /// </summary>
         public string EntityTypeName { get; set; }
-
 
         /// <summary>
         /// Gets/sets primary key of the entity, if this is an entity level notification.
@@ -46,7 +44,6 @@ namespace Dignite.Abp.NotificationCenter
         /// Creation time
         /// </summary>
         public DateTime CreationTime { get; set; }
-
 
         /// <summary>
         /// Current state of the user notification.

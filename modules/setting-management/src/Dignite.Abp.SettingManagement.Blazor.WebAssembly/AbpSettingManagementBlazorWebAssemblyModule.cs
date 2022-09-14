@@ -10,5 +10,4 @@ namespace Dignite.Abp.SettingManagement.Blazor.WebAssembly;
     )]
 public class AbpSettingManagementBlazorWebAssemblyModule : AbpModule
 {
-
 }

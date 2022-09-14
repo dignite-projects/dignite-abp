@@ -1,5 +1,4 @@
 Prism.languages.bro = {
-
 	'comment': {
 		pattern: /(^|[^\\$])#.*/,
 		lookbehind: true,

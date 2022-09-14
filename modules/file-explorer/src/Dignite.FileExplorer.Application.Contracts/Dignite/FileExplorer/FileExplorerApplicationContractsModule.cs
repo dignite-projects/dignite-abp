@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Application;
-using Volo.Abp.Modularity;
 using Volo.Abp.Authorization;
+using Volo.Abp.Modularity;
 
 namespace Dignite.FileExplorer;
 
@@ -11,5 +11,4 @@ namespace Dignite.FileExplorer;
     )]
 public class FileExplorerApplicationContractsModule : AbpModule
 {
-
 }

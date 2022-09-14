@@ -1,9 +1,9 @@
-﻿using Localization.Resources.AbpUi;
-using Dignite.FileExplorer.Localization;
+﻿using Dignite.FileExplorer.Localization;
+using Localization.Resources.AbpUi;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Dignite.FileExplorer;
 

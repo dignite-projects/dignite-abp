@@ -1,5 +1,5 @@
-﻿using Dignite.Abp.Notifications;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Dignite.Abp.Notifications;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Guids;
 using Volo.Abp.MultiTenancy;
@@ -41,7 +41,6 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
 
         //Act
         await _notificationPublisher.PublishAsync("TestNotification", notificationData, severity: NotificationSeverity.Success);
-
     }
 
     private static NotificationData CreateNotificationData()

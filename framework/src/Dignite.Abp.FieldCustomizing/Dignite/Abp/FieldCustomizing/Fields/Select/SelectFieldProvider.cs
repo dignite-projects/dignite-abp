@@ -1,9 +1,7 @@
-﻿
-namespace Dignite.Abp.FieldCustomizing.Fields.Select;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Select;
 
 public class SelectFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "Select";
 
     public override string Name => ProviderName;

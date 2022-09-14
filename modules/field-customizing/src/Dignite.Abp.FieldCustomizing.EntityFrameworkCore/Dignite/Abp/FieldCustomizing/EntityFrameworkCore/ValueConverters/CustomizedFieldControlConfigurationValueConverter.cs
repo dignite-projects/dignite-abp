@@ -1,23 +1,20 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
+using Dignite.Abp.FieldCustomizing.Fields;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.Json.SystemTextJson.JsonConverters;
 
 namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters
 {
-    public  class CustomizedFieldConfigurationValueConverter : ValueConverter<FieldConfigurationDictionary, string>
+    public class CustomizedFieldConfigurationValueConverter : ValueConverter<FieldConfigurationDictionary, string>
     {
         public CustomizedFieldConfigurationValueConverter()
             : base(
                 d => SerializeObject(d),
                 s => DeserializeObject(s))
         {
-
         }
 
         private static string SerializeObject(FieldConfigurationDictionary extraProperties)
@@ -43,9 +40,7 @@ namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters
             var dictionary = JsonSerializer.Deserialize<FieldConfigurationDictionary>(extraPropertiesAsJson, deserializeOptions) ??
                              new FieldConfigurationDictionary();
 
-
             return dictionary;
         }
-
     }
 }

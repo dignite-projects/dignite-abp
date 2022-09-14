@@ -1,5 +1,4 @@
-﻿
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
@@ -12,7 +11,7 @@ public interface ISettingDefinitionGroupContext : ISettingDefinitionContext
     public SettingDefinitionGroup Group { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="group"></param>
     /// <param name="definitions"></param>

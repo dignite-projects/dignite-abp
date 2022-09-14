@@ -5,7 +5,7 @@ namespace Dignite.Abp.SettingManagement.Blazor.Pages.SettingManagement;
 
 internal class UpdateGlobalSettingsInputForClientProxy : UpdateGlobalSettingsInput
 {
-    IReadOnlyList<SettingDto> _settings;
+    private IReadOnlyList<SettingDto> _settings;
 
     public UpdateGlobalSettingsInputForClientProxy(IReadOnlyList<SettingDto> settings)
     {

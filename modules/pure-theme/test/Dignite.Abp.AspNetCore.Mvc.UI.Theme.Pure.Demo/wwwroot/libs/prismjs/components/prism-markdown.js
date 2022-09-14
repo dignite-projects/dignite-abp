@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	// Allow only one line break
 	var inner = /(?:\\.|[^\\\n\r]|(?:\n|\r\n?)(?![\r\n]))/.source;
 
@@ -18,11 +17,9 @@
 		return RegExp(/((?:^|[^\\])(?:\\{2})*)/.source + '(?:' + pattern + ')');
 	}
 
-
 	var tableCell = /(?:\\.|``(?:[^`\r\n]|`(?!`))+``|`[^`\r\n]+`|[^\\|\r\n`])+/.source;
 	var tableRow = /\|?__(?:\|__)+\|?(?:(?:\n|\r\n?)|(?![\s\S]))/.source.replace(/__/g, function () { return tableCell; });
 	var tableLine = /\|?[ \t]*:?-{3,}:?[ \t]*(?:\|[ \t]*:?-{3,}:?[ \t]*)+\|?(?:\n|\r\n?)/.source;
-
 
 	Prism.languages.markdown = Prism.languages.extend('markup', {});
 	Prism.languages.insertBefore('markdown', 'prolog', {
@@ -296,7 +293,6 @@
 				if (codeLang && codeBlock &&
 					codeLang.type === 'code-language' && codeBlock.type === 'code-block' &&
 					typeof codeLang.content === 'string') {
-
 					// this might be a language that Prism does not support
 
 					// do some replacements to support C++, C#, and F#
@@ -411,5 +407,4 @@
 	}
 
 	Prism.languages.md = Prism.languages.markdown;
-
 }(Prism));

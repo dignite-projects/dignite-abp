@@ -1,5 +1,5 @@
-﻿using Volo.Abp.Studio;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
+using Volo.Abp.Studio;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Dignite.Abp.NotificationCenter;

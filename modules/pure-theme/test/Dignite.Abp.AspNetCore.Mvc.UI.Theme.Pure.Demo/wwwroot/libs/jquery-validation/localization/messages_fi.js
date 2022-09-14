@@ -7,7 +7,6 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
-
 /*
  * Translated default messages for the jQuery validation plugin.
  * Locale: FI (Finnish; suomi, suomen kieli)

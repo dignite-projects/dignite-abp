@@ -13,7 +13,7 @@ public enum DateInputMode
     DateTime = 1,
 
     /// <summary>
-    /// Allowed to select only year and month. 
+    /// Allowed to select only year and month.
     /// </summary>
     Month = 2
 }

@@ -9,5 +9,4 @@ public class BlazorPureThemeScriptContributor : BundleContributor
         context.Files.Add("/_content/Dignite.Abp.BlazoriseUI/libs/abp/js/blazorise.js");
         context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.Web.PureTheme/libs/abp/js/theme.js");
     }
-
 }

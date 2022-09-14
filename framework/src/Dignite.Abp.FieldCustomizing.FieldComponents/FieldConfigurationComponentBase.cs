@@ -1,7 +1,7 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
+﻿using System;
+using Dignite.Abp.FieldCustomizing.Fields;
 using Dignite.Abp.FieldCustomizing.Localization;
 using Microsoft.AspNetCore.Components;
-using System;
 using Volo.Abp.AspNetCore.Components;
 using Volo.Abp.DependencyInjection;
 
@@ -16,7 +16,6 @@ public abstract class FieldConfigurationComponentBase<TFieldProvider, TConfigura
         LocalizationResource = typeof(DigniteAbpFieldCustomizingResource);
         FieldProviderType = typeof(TFieldProvider);
     }
-
 
     public Type FieldProviderType { get; private set; }
 

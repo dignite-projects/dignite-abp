@@ -1,6 +1,5 @@
 var abp = abp || {};
 (function () {
-
     /* Application paths *****************************************/
 
     //Current application root path (including virtual directory if exists).
@@ -405,7 +404,6 @@ var abp = abp || {};
     /* SIMPLE EVENT BUS *****************************************/
 
     abp.event = (function () {
-
         var _callbacks = {};
 
         var on = function (eventName, callback) {
@@ -457,7 +455,6 @@ var abp = abp || {};
             trigger: trigger
         };
     })();
-
 
     /* UTILS ***************************************************/
 
@@ -687,7 +684,7 @@ var abp = abp || {};
     }
 
     /**
-     * Escape HTML to help prevent XSS attacks. 
+     * Escape HTML to help prevent XSS attacks.
      */
     abp.utils.htmlEscape = function (html) {
         return typeof html === 'string' ? html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') : html;
@@ -759,7 +756,7 @@ var abp = abp || {};
             return toUtc(date);
         }
     };
-    
+
     /* FEATURES *************************************************/
 
     abp.features = abp.features || {};
@@ -774,7 +771,7 @@ var abp = abp || {};
     abp.features.get = function (name) {
         return abp.features.values[name];
     };
-    
+
     /* GLOBAL FEATURES *************************************************/
 
     abp.globalFeatures = abp.globalFeatures || {};
@@ -784,5 +781,4 @@ var abp = abp || {};
     abp.globalFeatures.isEnabled = function(name){
         return abp.globalFeatures.enabledFeatures.indexOf(name) != -1;
     }
-
 })();

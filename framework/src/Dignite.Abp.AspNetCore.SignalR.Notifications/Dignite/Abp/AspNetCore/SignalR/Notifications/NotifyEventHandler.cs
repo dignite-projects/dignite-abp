@@ -1,8 +1,7 @@
-﻿using Dignite.Abp.Notifications;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.Notifications;
+using Microsoft.AspNetCore.SignalR;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
 
@@ -10,7 +9,6 @@ namespace Dignite.Abp.AspNetCore.SignalR.Notifications;
 
 public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, ITransientDependency
 {
-
     private readonly IHubContext<NotificationHub, INotificationClient> _hubContext;
 
     public NotifyEventHandler(
@@ -18,7 +16,6 @@ public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, I
     {
         _hubContext = hubContext;
     }
-
 
     public async Task HandleEventAsync(RealTimeNotifyEto eto)
     {

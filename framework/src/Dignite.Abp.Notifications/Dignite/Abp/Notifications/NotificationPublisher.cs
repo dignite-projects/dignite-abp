@@ -50,7 +50,6 @@ public class NotificationPublisher : INotificationPublisher, ITransientDependenc
             _currentTenant.Id
         );
 
-
         if (userIds != null && userIds.Length <= MaxUserCountToDirectlyDistributeANotification)
         {
             //We can directly distribute the notification since there are not much receivers

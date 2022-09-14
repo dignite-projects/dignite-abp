@@ -1,9 +1,9 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.Reflection;
 
@@ -96,7 +96,6 @@ public static class HasCustomizableFieldsExtensions
             source.RemoveField(property.Name);
         }
     }
-
 
     /// <summary>
     /// Copies customized fields from the <paramref name="source"/> object

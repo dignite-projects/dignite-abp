@@ -15,6 +15,5 @@ public class FileManager_Tests : FileExplorerDomainTestBase
     [Fact]
     public async Task Method1Async()
     {
-
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Dignite.Abp.Notifications;
+﻿namespace Dignite.Abp.Notifications;
 
 /// <summary>
 /// A class contains a <see cref="UserNotificationInfo"/> and related <see cref="NotificationInfo"/>.

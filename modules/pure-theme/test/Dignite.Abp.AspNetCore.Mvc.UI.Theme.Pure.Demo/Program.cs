@@ -2,7 +2,6 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo;
 
@@ -33,7 +32,6 @@ public class Program
             Log.CloseAndFlush();
         }
     }
-
 
     internal static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)

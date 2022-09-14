@@ -27,7 +27,6 @@ public class NotificationSubscriptionInfo
     /// </summary>
     public string NotificationName { get; set; }
 
-
     /// <summary>
     /// Name of the entity type (including namespaces).
     /// </summary>

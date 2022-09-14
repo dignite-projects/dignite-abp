@@ -9,5 +9,4 @@ public class FieldCustomizingTestBase : AbpIntegratedTest<AbpBlobStoringTestModu
     {
         options.UseAutofac();
     }
-
 }

@@ -1,6 +1,5 @@
-﻿
+﻿using System.Text.Json;
 using Shouldly;
-using System.Text.Json;
 using Xunit;
 
 namespace Dignite.Abp.Notifications;
@@ -19,7 +18,6 @@ public class NotificationData_Serialization_Tests : NotificationsTestBase
         data.Message.ShouldBe("Hello World!");
     }
 
-
     [Fact]
     public void MessageNotificationData_Backward_Compatibility_Test()
     {
@@ -36,4 +34,3 @@ public class NotificationData_Serialization_Tests : NotificationsTestBase
         data.Properties["Message"].ShouldBe("a test message");
     }
 }
-

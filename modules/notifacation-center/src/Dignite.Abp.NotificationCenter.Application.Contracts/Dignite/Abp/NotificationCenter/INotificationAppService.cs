@@ -58,5 +58,4 @@ public interface INotificationAppService : IApplicationService
     /// <param name="startDate">List notifications published after startDateTime</param>
     /// <param name="endDate">List notifications published before startDateTime</param>
     Task<int> GetCountAsync(UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null);
-
 }

@@ -1,6 +1,5 @@
 // http://avisynth.nl/index.php/The_full_AviSynth_grammar
 (function (Prism) {
-
 	function replace(pattern, replacements) {
 		return pattern.replace(/<<(\d+)>>/g, function (m, index) {
 			return replacements[+index];
@@ -184,5 +183,4 @@
 	};
 
 	Prism.languages.avs = Prism.languages.avisynth;
-
 }(Prism));

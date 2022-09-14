@@ -11,7 +11,6 @@ public class DateEditConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.InputMode, value);
     }
 
-
     public DateTimeOffset? Max {
         get => ConfigurationDictionary.GetConfigurationOrDefault<DateTimeOffset?>(DateEditConfigurationNames.Max);
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.Max, value);
@@ -21,7 +20,6 @@ public class DateEditConfiguration : FieldConfigurationBase
         get => ConfigurationDictionary.GetConfigurationOrDefault<DateTimeOffset?>(DateEditConfigurationNames.Min);
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.Min, value);
     }
-
 
     public DateEditConfiguration(FieldConfigurationDictionary fieldConfiguration)
         : base(fieldConfiguration)

@@ -1,5 +1,4 @@
-﻿
-namespace Dignite.Abp.FieldCustomizing;
+﻿namespace Dignite.Abp.FieldCustomizing;
 
 public interface IHasCustomizableFields
 {

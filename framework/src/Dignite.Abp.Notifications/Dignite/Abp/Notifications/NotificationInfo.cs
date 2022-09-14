@@ -26,7 +26,6 @@ public class NotificationInfo
     /// </summary>
     public string NotificationName { get; set; }
 
-
     /// <summary>
     /// Can be used to add custom properties to this notification.
     /// </summary>
@@ -37,7 +36,6 @@ public class NotificationInfo
     /// It's FullName of the entity type.
     /// </summary>
     public string EntityTypeName { get; set; }
-
 
     /// <summary>
     /// Gets/sets primary key of the entity, if this is an entity level notification.

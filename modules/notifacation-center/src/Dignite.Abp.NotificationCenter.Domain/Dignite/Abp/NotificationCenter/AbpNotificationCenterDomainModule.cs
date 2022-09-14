@@ -11,5 +11,4 @@ namespace Dignite.Abp.NotificationCenter;
 )]
 public class AbpNotificationCenterDomainModule : AbpModule
 {
-
 }

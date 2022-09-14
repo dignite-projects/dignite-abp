@@ -43,7 +43,7 @@ public static class SettingDefinitionControlExtensions
             return (FieldConfigurationDictionary)controlConfiguration;
     }
 
-    #endregion
+    #endregion Setting definition field provider
 
     #region set controls configuration
 
@@ -103,5 +103,6 @@ public static class SettingDefinitionControlExtensions
 
         return settingDefinition;
     }
-    #endregion
+
+    #endregion set controls configuration
 }

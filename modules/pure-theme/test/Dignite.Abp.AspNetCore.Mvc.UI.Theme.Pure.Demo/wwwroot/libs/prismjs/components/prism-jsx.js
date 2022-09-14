@@ -1,5 +1,4 @@
 (function (Prism) {
-
 	var javascript = Prism.util.clone(Prism.languages.javascript);
 
 	var space = /(?:\s|\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))\*\/)/.source;
@@ -19,7 +18,6 @@
 	}
 
 	spread = re(spread).source;
-
 
 	Prism.languages.jsx = Prism.languages.extend('markup', javascript);
 	Prism.languages.jsx.tag.pattern = re(
@@ -95,15 +93,11 @@
 						}
 					}
 				} else if (openedTags.length > 0 && token.type === 'punctuation' && token.content === '{') {
-
 					// Here we might have entered a JSX context inside a tag
 					openedTags[openedTags.length - 1].openedBraces++;
-
 				} else if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces > 0 && token.type === 'punctuation' && token.content === '}') {
-
 					// Here we might have left a JSX context inside a tag
 					openedTags[openedTags.length - 1].openedBraces--;
-
 				} else {
 					notTagNorBrace = true;
 				}
@@ -141,5 +135,4 @@
 		}
 		walkTokens(env.tokens);
 	});
-
 }(Prism));

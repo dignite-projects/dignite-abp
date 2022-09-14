@@ -1,6 +1,5 @@
 /* eslint-disable regexp/no-dupe-characters-character-class */
 (function (Prism) {
-
 	/**
 	 * Regular expression for characters that are not allowed in identifiers.
 	 *
@@ -102,5 +101,4 @@
 	};
 
 	Prism.languages.kum = Prism.languages.kumir;
-
 }(Prism));

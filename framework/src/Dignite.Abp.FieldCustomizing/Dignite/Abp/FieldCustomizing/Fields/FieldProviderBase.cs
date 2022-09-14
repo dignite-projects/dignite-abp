@@ -1,6 +1,6 @@
-﻿using Dignite.Abp.FieldCustomizing.Localization;
+﻿using System;
+using Dignite.Abp.FieldCustomizing.Localization;
 using Microsoft.Extensions.Localization;
-using System;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.FieldCustomizing.Fields;
@@ -21,6 +21,7 @@ public abstract class FieldProviderBase : IFieldProvider, ITransientDependency
             return _localizer;
         }
     }
+
     private IStringLocalizer _localizer;
 
     protected Type LocalizationResource {
@@ -30,6 +31,7 @@ public abstract class FieldProviderBase : IFieldProvider, ITransientDependency
             _localizer = null;
         }
     }
+
     private Type _localizationResource = typeof(DigniteAbpFieldCustomizingResource);
 
     public abstract string Name { get; }

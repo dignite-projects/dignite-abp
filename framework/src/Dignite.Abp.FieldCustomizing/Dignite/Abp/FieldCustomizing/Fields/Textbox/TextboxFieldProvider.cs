@@ -1,10 +1,7 @@
-﻿
-
-namespace Dignite.Abp.FieldCustomizing.Fields.Textbox;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Textbox;
 
 public class TextboxFieldProvider : FieldProviderBase
 {
-
     public const string ProviderName = "Textbox";
 
     public override string Name => ProviderName;

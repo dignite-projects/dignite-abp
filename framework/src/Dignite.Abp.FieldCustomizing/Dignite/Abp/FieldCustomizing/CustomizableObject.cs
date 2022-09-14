@@ -1,10 +1,10 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Dignite.Abp.FieldCustomizing.Fields;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Content;
 
 namespace Dignite.Abp.FieldCustomizing;
@@ -20,7 +20,7 @@ public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatab
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [JsonInclude]
     public CustomizeFieldDictionary CustomizedFields { get; set; }
@@ -55,7 +55,7 @@ public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatab
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     public abstract IReadOnlyList<T> GetFieldDefinitions(ValidationContext validationContext);

@@ -43,7 +43,6 @@ Prism.languages.jsstacktrace = {
 					'punctuation': /:/
 				}
 			},
-
 		}
 	}
 };

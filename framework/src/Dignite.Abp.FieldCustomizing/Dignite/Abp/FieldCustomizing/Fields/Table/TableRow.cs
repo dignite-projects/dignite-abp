@@ -1,8 +1,7 @@
-﻿
-namespace Dignite.Abp.FieldCustomizing.Fields.Table;
+﻿namespace Dignite.Abp.FieldCustomizing.Fields.Table;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class TableRow : IHasCustomizableFields
 {

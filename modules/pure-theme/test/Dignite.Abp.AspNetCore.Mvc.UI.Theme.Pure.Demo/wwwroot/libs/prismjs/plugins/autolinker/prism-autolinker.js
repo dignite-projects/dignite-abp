@@ -1,5 +1,4 @@
 (function () {
-
 	if (typeof Prism === 'undefined') {
 		return;
 	}
@@ -72,5 +71,4 @@
 			} catch (e) { /* noop */ }
 		}
 	});
-
 }());

@@ -13,7 +13,7 @@ using Volo.Abp.Domain.Services;
 
 namespace Dignite.FileExplorer.Files;
 
-public class FileDescriptorManager : FileManager<FileDescriptor,FileDescriptorStore>,IDomainService
+public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorStore>, IDomainService
 {
     public virtual async Task<FileDescriptor> CreateAsync<TContainer>(
                                         [NotNull] IRemoteStreamContent remoteStream,
@@ -27,7 +27,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor,FileDescriptorSt
                                         [NotNull] string containerName,
                                         [NotNull] IRemoteStreamContent remoteStream,
                                         [NotNull] IEntity entity)
-    {         
+    {
         var blobName = (await GenerateBlobNameAsync(containerName));
         blobName += Path.GetExtension(remoteStream.FileName).EnsureStartsWith('.'); //Add the extended name
         var fileDescriptor = new FileDescriptor(
@@ -40,17 +40,15 @@ public class FileDescriptorManager : FileManager<FileDescriptor,FileDescriptorSt
                     entity.GetType().FullName,
                     GetEntityId(entity),
                     CurrentTenant.Id);
-        
-        return await CreateAsync(fileDescriptor,remoteStream);
+
+        return await CreateAsync(fileDescriptor, remoteStream);
     }
 
-    public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor fileInfo, 
+    public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor fileInfo,
                                         [NotNull] IRemoteStreamContent fileStream)
     {
-        return await base.CreateAsync(fileInfo, fileStream.GetStream());        
+        return await base.CreateAsync(fileInfo, fileStream.GetStream());
     }
-
-
 
     protected virtual string GetEntityId(IEntity entity)
     {

@@ -11,11 +11,11 @@ public class TableConfiguration : FieldConfigurationBase
         set => ConfigurationDictionary.SetConfiguration(TableConfigurationNames.TableColumns, value);
     }
 
-
     public TableConfiguration(FieldConfigurationDictionary fieldConfiguration)
         : base(fieldConfiguration)
     {
     }
+
     public TableConfiguration() : base()
     {
     }

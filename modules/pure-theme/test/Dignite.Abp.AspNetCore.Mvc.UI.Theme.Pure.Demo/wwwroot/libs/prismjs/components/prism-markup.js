@@ -62,7 +62,6 @@ Prism.languages.markup = {
 					'namespace': /^[^\s>\/:]+:/
 				}
 			}
-
 		}
 	},
 	'entity': [
@@ -80,7 +79,6 @@ Prism.languages.markup['doctype'].inside['internal-subset'].inside = Prism.langu
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
 Prism.hooks.add('wrap', function (env) {
-
 	if (env.type === 'entity') {
 		env.attributes['title'] = env.content.replace(/&amp;/, '&');
 	}

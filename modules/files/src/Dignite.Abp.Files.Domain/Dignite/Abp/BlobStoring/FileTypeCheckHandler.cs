@@ -14,7 +14,6 @@ namespace Dignite.Abp.BlobStoring;
 /// </summary>
 public class FileTypeCheckHandler : IBlobHandler, ITransientDependency
 {
-
     private readonly ICurrentFile _currentFile;
 
     public FileTypeCheckHandler(ICurrentFile currentFile)

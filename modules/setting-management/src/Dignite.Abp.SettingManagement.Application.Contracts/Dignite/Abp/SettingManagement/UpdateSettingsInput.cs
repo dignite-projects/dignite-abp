@@ -9,7 +9,6 @@ public abstract class UpdateSettingsInput : CustomizableObject<SettingDto>
     [Required]
     public string GroupName { get; set; }
 
-
     public override IReadOnlyList<SettingDto> GetFieldDefinitions(ValidationContext validationContext)
     {
         return GetSettings(validationContext);

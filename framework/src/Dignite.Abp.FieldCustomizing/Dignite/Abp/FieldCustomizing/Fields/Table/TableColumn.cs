@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using JetBrains.Annotations;
 
 namespace Dignite.Abp.FieldCustomizing.Fields.Table;
 
@@ -23,11 +23,9 @@ public class TableColumn
     [Required]
     public string Name { get { return FieldDefinition.Name; } }
 
-
     [NotNull]
     [Required]
     public string DisplayName { get { return FieldDefinition.DisplayName; } }
-
 
     [NotNull]
     [Required]

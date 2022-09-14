@@ -42,10 +42,6 @@
     <title>@pageTitle</title>
 
     <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -53,12 +49,12 @@
 
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
 </head>
-<body class="abp-application-layout bg-light @rtl">
+<body class="abp-application-layout @rtl">
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
 
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
-    <div class="@containerClass px-md-3 page-container">
+    <div class="@containerClass">
         @(await Component.InvokeAsync<PageAlertsViewComponent>())
         <div id="AbpContentToolbar">
             <div class="text-end mb-2">
@@ -66,8 +62,7 @@
             </div>
         </div>
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
-        <div style="min-height:1500px;">
-        @RenderBody()</div>
+        @RenderBody()
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
     </div>
 

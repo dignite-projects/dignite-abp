@@ -4,7 +4,7 @@ using Volo.Abp.Modularity;
 namespace Dignite.Abp.FieldCustomizing.FieldComponents;
 
 [DependsOn(
-    typeof(AbpBlazoriseUIModule),
+    typeof(AbpBlazoriseUiModule),
     typeof(AbpFieldCustomizingModule)
     )]
 public class AbpFieldCustomizingFieldComponentsModule : AbpModule

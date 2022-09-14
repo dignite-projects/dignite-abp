@@ -5,7 +5,7 @@ namespace Dignite.Abp.BlazoriseUI;
 [DependsOn(
     typeof(Volo.Abp.BlazoriseUI.AbpBlazoriseUIModule)
     )]
-public class AbpBlazoriseUIModule: AbpModule
+public class AbpBlazoriseUiModule: AbpModule
 {
 }
 

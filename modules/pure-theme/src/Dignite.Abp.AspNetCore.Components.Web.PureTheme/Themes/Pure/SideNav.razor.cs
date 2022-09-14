@@ -73,11 +73,10 @@ namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
-            }
-           
+            }           
         }
 
         private void FindRootMenuItemWithChildren(ApplicationMenuItem topMenuItem, ApplicationMenuItemList menuItems, string location)

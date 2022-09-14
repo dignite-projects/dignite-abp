@@ -6,9 +6,9 @@ namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme
 {
     [DependsOn(
         typeof(AbpAspNetCoreComponentsWebThemingModule),
-        typeof(DigniteAbpBlazoriseUIModule)
+        typeof(AbpBlazoriseUiModule)
         )]
-    public class DigniteAbpAspNetCoreComponentsWebPureThemeModule : AbpModule
+    public class AbpAspNetCoreComponentsWebPureThemeModule : AbpModule
     {
         
     }

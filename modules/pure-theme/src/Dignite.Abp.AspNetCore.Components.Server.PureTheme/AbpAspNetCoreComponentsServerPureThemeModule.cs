@@ -9,10 +9,10 @@ using Volo.Abp.Modularity;
 namespace Dignite.Abp.AspNetCore.Components.Server.PureTheme
 {
     [DependsOn(
-        typeof(DigniteAbpAspNetCoreComponentsWebPureThemeModule),
+        typeof(AbpAspNetCoreComponentsWebPureThemeModule),
         typeof(AbpAspNetCoreComponentsServerThemingModule)
         )]
-    public class DigniteAbpAspNetCoreComponentsServerPureThemeModule : AbpModule
+    public class AbpAspNetCoreComponentsServerPureThemeModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {

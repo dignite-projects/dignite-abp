@@ -8,17 +8,17 @@ using Volo.Abp.Modularity;
 namespace Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme
 {
     [DependsOn(
-        typeof(DigniteAbpAspNetCoreComponentsWebPureThemeModule),
+        typeof(AbpAspNetCoreComponentsWebPureThemeModule),
         typeof(AbpAspNetCoreComponentsWebAssemblyThemingModule),
         typeof(AbpHttpClientIdentityModelWebAssemblyModule)
         )]
-    public class DigniteAbpAspNetCoreComponentsWebAssemblyPureThemeModule : AbpModule
+    public class AbpAspNetCoreComponentsWebAssemblyPureThemeModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpRouterOptions>(options =>
             {
-                options.AdditionalAssemblies.Add(typeof(DigniteAbpAspNetCoreComponentsWebAssemblyPureThemeModule).Assembly);
+                options.AdditionalAssemblies.Add(typeof(AbpAspNetCoreComponentsWebAssemblyPureThemeModule).Assembly);
             });
 
             Configure<AbpToolbarOptions>(options =>

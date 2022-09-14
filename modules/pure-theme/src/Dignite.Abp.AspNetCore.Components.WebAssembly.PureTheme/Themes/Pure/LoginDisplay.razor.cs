@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Routing;
@@ -15,14 +16,18 @@ namespace Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme.Themes.Pure
         [Inject]
         protected IMenuManager MenuManager { get; set; }
 
-        [CanBeNull]
-        protected AuthenticationStateProvider AuthenticationStateProvider;
+        [Inject]
+        public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [CanBeNull]
         protected SignOutSessionStateManager SignOutManager;
 
+        public LoginDisplay()
+        {
+            LocalizationResource = typeof(AbpUiResource);
+        }
+
         protected ApplicationMenu Menu { get; set; }
-        protected bool IsSubMenuOpen { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -30,30 +35,30 @@ namespace Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme.Themes.Pure
 
             Navigation.LocationChanged += OnLocationChanged;
 
-            LazyGetService(ref AuthenticationStateProvider);
             LazyGetService(ref SignOutManager);
 
-            if (AuthenticationStateProvider != null)
-            {
-                AuthenticationStateProvider.AuthenticationStateChanged += async (task) =>
-                {
-                    Menu = await MenuManager.GetAsync(StandardMenus.User);
-                    await InvokeAsync(StateHasChanged);
-                };
-            }
+            AuthenticationStateProvider.AuthenticationStateChanged +=
+                AuthenticationStateProviderOnAuthenticationStateChanged;
         }
 
         protected virtual void OnLocationChanged(object sender, LocationChangedEventArgs e)
         {
-            IsSubMenuOpen = false;
             InvokeAsync(StateHasChanged);
+        }
+
+        private async void AuthenticationStateProviderOnAuthenticationStateChanged(Task<AuthenticationState> task)
+        {
+            Menu = await MenuManager.GetAsync(StandardMenus.User);
+            await InvokeAsync(StateHasChanged);
         }
 
         public void Dispose()
         {
             Navigation.LocationChanged -= OnLocationChanged;
+            AuthenticationStateProvider.AuthenticationStateChanged -=
+                AuthenticationStateProviderOnAuthenticationStateChanged;
         }
-        
+
         private async Task NavigateToAsync(string uri, string target = null)
         {
             if (target == "_blank")
@@ -73,11 +78,6 @@ namespace Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme.Themes.Pure
                 await SignOutManager.SetSignOutState();
                 await NavigateToAsync("authentication/logout");
             }
-        }
-
-        private void ToggleSubMenu()
-        {
-            IsSubMenuOpen = !IsSubMenuOpen;
         }
     }
 }

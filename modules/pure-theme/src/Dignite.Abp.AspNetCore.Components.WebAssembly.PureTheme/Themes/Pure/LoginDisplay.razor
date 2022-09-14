@@ -3,35 +3,35 @@
 @using Volo.Abp.MultiTenancy
 @using global::Localization.Resources.AbpUi
 @inherits AbpComponentBase
-@inject ICurrentUser CurrentUser
-@inject ICurrentTenant CurrentTenant
 @inject IJSRuntime JsRuntime
 @inject NavigationManager Navigation
-@inject IStringLocalizer<AbpUiResource> UiLocalizer
 <AuthorizeView>
-    <Authorized>        
-      <li class="nav-item dropdown">
-        <button class="btn rounded-circle btn-outline-light border-0" type="button" @onclick="ToggleSubMenu" id="CurrentUserMenu" title="@(CurrentTenant.Name != null?CurrentTenant.Name +"/" + CurrentUser.UserName:CurrentUser.UserName)" data-bs-toggle="dropdown" aria-expanded="false">            
-            <img src="https://kaifaqu.qingdao.dignite.com.cn/assets/images/default-profile-picture.png" class="img-fluid" />
-        </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow-sm @(IsSubMenuOpen ? "show" : "")" aria-labelledby="CurrentUserMenu">
+    <Authorized>
+        <Dropdown RightAligned="true">
+            <DropdownToggle Color="Color.Default">
+                @if (CurrentTenant.Name != null)
+                {
+                    <Text><i>@CurrentTenant.Name</i>\@CurrentUser.UserName</Text>
+                }
+                else
+                {
+                    <Text>@CurrentUser.UserName</Text>
+                }
+            </DropdownToggle>
+            <DropdownMenu>
                 @if (Menu != null)
                 {
                     @foreach (var menuItem in Menu.Items)
                     {
-                    <button class="dropdown-item" type="button" @onclick="@(() => NavigateToAsync(menuItem.Url, menuItem.Target))">@menuItem.DisplayName</button>
+                        <DropdownItem Clicked="@(() => NavigateToAsync(menuItem.Url, menuItem.Target))">@menuItem.DisplayName</DropdownItem>
                     }
                 }
-            <li><hr class="dropdown-divider"></li>
-            <li>
-                <button class="dropdown-item" type="button" @onclick="BeginSignOut">@UiLocalizer["Logout"]</button>    
-            </li>
-          </ul>
-      </li>
+                <DropdownDivider />
+                <DropdownItem Clicked="BeginSignOut">@L["Logout"]</DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
     </Authorized>
     <NotAuthorized>
-        <li class="nav-item">
-            <a class="nav-link" href="authentication/login"><i class="fa fa-user" aria-hidden="true"></i> @UiLocalizer["Login"]</a>
-        </li>
+        <a class="nav-link" href="authentication/login">@L["Login"]</a>
     </NotAuthorized>
 </AuthorizeView>

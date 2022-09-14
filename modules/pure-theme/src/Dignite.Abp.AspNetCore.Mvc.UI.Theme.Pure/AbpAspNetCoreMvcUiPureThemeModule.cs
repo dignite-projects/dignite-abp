@@ -20,13 +20,13 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule)
     )]
-public class DigniteAbpAspNetCoreMvcUIPureThemeModule : AbpModule
+public class AbpAspNetCoreMvcUIPureThemeModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(DigniteAbpAspNetCoreMvcUIPureThemeModule).Assembly);
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(AbpAspNetCoreMvcUIPureThemeModule).Assembly);
         });
     }
 
@@ -44,7 +44,7 @@ public class DigniteAbpAspNetCoreMvcUIPureThemeModule : AbpModule
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<DigniteAbpAspNetCoreMvcUIPureThemeModule>("Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure");
+            options.FileSets.AddEmbedded<AbpAspNetCoreMvcUIPureThemeModule>("Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure");
         });
 
         Configure<AbpToolbarOptions>(options =>

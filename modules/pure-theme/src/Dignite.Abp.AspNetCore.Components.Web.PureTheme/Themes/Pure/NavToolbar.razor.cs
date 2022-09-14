@@ -3,31 +3,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
 
-namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure
+namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure;
+
+public partial class NavToolbar
 {
-    public partial class NavToolbar
+    [Inject]
+    private IToolbarManager ToolbarManager { get; set; }
+
+    private List<RenderFragment> ToolbarItemRenders { get; set; } = new List<RenderFragment>();
+
+    protected override async Task OnInitializedAsync()
     {
-        [Inject]
-        private IToolbarManager ToolbarManager { get; set; }
+        var toolbar = await ToolbarManager.GetAsync(StandardToolbars.Main);
 
-        private List<RenderFragment> ToolbarItemRenders { get; set; } = new List<RenderFragment>();
+        ToolbarItemRenders.Clear();
 
-        protected override async Task OnInitializedAsync()
+        var sequence = 0;
+        foreach (var item in toolbar.Items)
         {
-            var toolbar = await ToolbarManager.GetAsync(StandardToolbars.Main);
-
-            ToolbarItemRenders.Clear();
-
-            var sequence = 0;
-            foreach (var item in toolbar.Items)
+            ToolbarItemRenders.Add(builder =>
             {
-                ToolbarItemRenders.Add(builder =>
-                {
-                    builder.OpenComponent(sequence++, item.ComponentType);
-                    builder.CloseComponent();
-                });
-            }
+                builder.OpenComponent(sequence++, item.ComponentType);
+                builder.CloseComponent();
+            });
         }
-
     }
+
 }

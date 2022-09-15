@@ -18,7 +18,7 @@ using Volo.Abp.UI.Navigation;
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo;
 
 [DependsOn(
-    typeof(AbpAspNetCoreMvcUIPureThemeModule),
+    typeof(AbpAspNetCoreMvcUiPureThemeModule),
     typeof(AbpAspNetCoreMvcUiThemeSharedDemoModule),
     typeof(AbpAutofacModule)
     )]
@@ -55,7 +55,6 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
         {
             options.Contributors.Add(new PureThemeDemoToolbarContributor());
         });
-
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

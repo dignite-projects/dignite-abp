@@ -9,7 +9,7 @@ namespace Dignite.Abp.Notifications;
     typeof(AbpTestBaseModule),
     typeof(AbpAutofacModule),
     typeof(AbpBackgroundJobsModule),
-    typeof(DigniteAbpNotificationsModule)
+    typeof(AbpNotificationsModule)
     )]
 public class AbpNotificationsTestModule : AbpModule
 {

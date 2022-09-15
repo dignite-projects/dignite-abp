@@ -16,14 +16,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="wwwroot\**\*.*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\**\*.*" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="5.3.3" />
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="5.3.3" />

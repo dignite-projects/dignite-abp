@@ -1,13 +1,10 @@
 ﻿using System.Text.Unicode;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
@@ -50,27 +47,6 @@ public class AbpAspNetCoreMvcUIPureThemeModule : AbpModule
         Configure<AbpToolbarOptions>(options =>
         {
             options.Contributors.Add(new PureThemeMainTopToolbarContributor());
-        });
-
-        Configure<AbpBundlingOptions>(options =>
-        {
-            options
-                .StyleBundles
-                .Add(PureThemeBundles.Styles.Global, bundle =>
-                {
-                    bundle
-                        .AddBaseBundles(StandardBundles.Styles.Global)
-                        .AddContributors(typeof(PureThemeGlobalStyleContributor));
-                });
-
-            options
-                .ScriptBundles
-                .Add(PureThemeBundles.Scripts.Global, bundle =>
-                {
-                    bundle
-                        .AddBaseBundles(StandardBundles.Scripts.Global)
-                        .AddContributors(typeof(PureThemeGlobalScriptContributor));
-                });
         });
 
         Configure<RazorViewEngineOptions>(options =>

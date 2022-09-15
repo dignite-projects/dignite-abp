@@ -1,11 +1,13 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
+﻿using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Bundling;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Toolbars;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNet;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
@@ -28,9 +30,20 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
 
         Configure<AbpBundlingOptions>(options =>
         {
-            options.StyleBundles
-                .Get(StandardBundles.Styles.Global)
-                .AddFiles("/demo/styles/main.css");
+            var globalStyleBundles = options.StyleBundles.Get(StandardBundles.Styles.Global);
+            var globalScriptBundles = options.ScriptBundles.Get(StandardBundles.Scripts.Global);
+
+            /* remove datatable styles */
+            globalStyleBundles.Contributors.Remove<DatatablesNetBs5StyleContributor>();
+            globalStyleBundles.Contributors.Remove<SharedThemeGlobalStyleContributor>();
+
+            /* remove datatable scripts */
+            globalScriptBundles.Contributors.Remove<DatatablesNetScriptContributor>();
+            globalScriptBundles.Contributors.Remove<DatatablesNetBs5ScriptContributor>();
+
+            /*  */
+            globalStyleBundles.AddContributors(typeof(PureThemeGlobalStyleDemoContributor));
+            globalScriptBundles.AddContributors(typeof(PureThemeGlobalScriptDemoContributor));
         });
 
         Configure<AbpNavigationOptions>(options =>
@@ -42,6 +55,7 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
         {
             options.Contributors.Add(new PureThemeDemoToolbarContributor());
         });
+
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

@@ -26,3 +26,9 @@
         border: 1px solid #999;
         margin: 5px;
     }
+
+/* Adjust the spacing of menu items */
+#main-navbar .nav-link {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}

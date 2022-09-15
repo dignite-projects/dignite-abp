@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />
+	<ProjectReference Include="..\..\src\Dignite.Abp.FieldCustomizing.FieldComponents\Dignite.Abp.FieldCustomizing.FieldComponents.csproj" />
 	<ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
     <PackageReference Include="Volo.Abp.Autofac" Version="5.3.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />

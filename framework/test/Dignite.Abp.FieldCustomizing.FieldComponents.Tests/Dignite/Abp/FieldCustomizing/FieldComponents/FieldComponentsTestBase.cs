@@ -1,9 +1,9 @@
 ﻿using Volo.Abp;
 using Volo.Abp.Testing;
 
-namespace Dignite.Abp.FieldCustomizing;
+namespace Dignite.Abp.FieldCustomizing.FieldComponents;
 
-public class FieldCustomizingTestBase : AbpIntegratedTest<AbpFieldCustomizingTestModule>
+public class FieldComponentsTestBase : AbpIntegratedTest<AbpFieldCustomizingFieldComponentsTestModule>
 {
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
     {

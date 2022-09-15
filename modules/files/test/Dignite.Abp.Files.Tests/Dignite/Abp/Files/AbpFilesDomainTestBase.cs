@@ -1,9 +1,9 @@
 ﻿using Volo.Abp;
 using Volo.Abp.Testing;
 
-namespace Dignite.Abp.BlobStoring.FileSystem;
+namespace Dignite.Abp.Files;
 
-public abstract class AbpBlobStoringFileSystemTestBase : AbpIntegratedTest<AbpBlobStoringFileSystemTestModule>
+public abstract class AbpFilesDomainTestBase : AbpIntegratedTest<AbpFilesDomainTestModule>
 {
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
     {

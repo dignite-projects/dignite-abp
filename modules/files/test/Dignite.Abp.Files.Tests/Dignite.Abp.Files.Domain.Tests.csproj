@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="5.3.4" />
+	<PackageReference Include="Volo.Abp.Autofac" Version="5.3.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Dignite.Abp.Files.Domain\Dignite.Abp.Files.Domain.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.Files.TestBase\Dignite.Abp.Files.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

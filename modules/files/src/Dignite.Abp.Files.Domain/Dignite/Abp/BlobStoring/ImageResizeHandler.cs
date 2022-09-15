@@ -22,13 +22,6 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
 
     public async Task ExecuteAsync(BlobHandlerContext context)
     {
-        /*
-        //Ensure that the starting position of the data flow is 0
-        if (context.BlobStream.Position > 0)
-        {
-            context.BlobStream.Position = 0;
-        }
-        */
         var position = context.BlobStream.Position;
         var configuration = context.ContainerConfiguration.GetImageResizeConfiguration();
 
@@ -40,51 +33,47 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
                 context.BlobStream.Position = position;
             }
 
-            using (MemoryStream ms = new MemoryStream())
+            using (Image image = await Image.LoadAsync(context.BlobStream))
             {
-                await context.BlobStream.CopyToAsync(ms);
-                using (Image image = await Image.LoadAsync(ms))
+
+                if (configuration.ImageSizeMustBeLargerThanPreset)
                 {
-                    if (configuration.ImageSizeMustBeLargerThanPreset)
+                    if (image.Width < configuration.ImageWidth || image.Height < configuration.ImageHeight)
                     {
-                        if (image.Width < configuration.ImageWidth || image.Height < configuration.ImageHeight)
-                        {
-                            throw new BusinessException(
-                                code: "Dignite.Abp.BlobStoring:010004",
-                                message: "Image size must be larger than Preset!",
-                                details: "Uploaded image must be larger than: " + configuration.ImageWidth + "x" + configuration.ImageHeight
-                            );
-                        }
+                        throw new BusinessException(
+                            code: "Dignite.Abp.BlobStoring:010004",
+                            message: "Image size must be larger than Preset!",
+                            details: "Uploaded image must be larger than: " + configuration.ImageWidth + "x" + configuration.ImageHeight
+                        );
                     }
+                }
 
-                    if (image.Width > configuration.ImageWidth || image.Height > configuration.ImageHeight)
+                if (image.Width > configuration.ImageWidth || image.Height > configuration.ImageHeight)
+                {
+                    image.Metadata.ExifProfile = null;
+                    image.Metadata.XmpProfile = null;
+                    image.Mutate(x =>
                     {
-                        image.Metadata.ExifProfile = null;
-                        image.Metadata.XmpProfile = null;
-                        image.Mutate(x =>
+                        x.Resize(new ResizeOptions()
                         {
-                            x.Resize(new ResizeOptions()
-                            {
-                                Mode = ResizeMode.Max,
-                                Size = new Size(configuration.ImageWidth, configuration.ImageHeight)
-                            });
+                            Mode = ResizeMode.Max,
+                            Size = new Size(configuration.ImageWidth, configuration.ImageHeight)
                         });
+                    });
 
-                        var encoder = new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder()
-                        {
-                            Quality = 90
-                        };
+                    var encoder = new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder()
+                    {
+                        Quality = 90
+                    };
 
-                        image.Save(context.BlobStream, encoder);
+                    context.BlobStream.Position = 0;
+                    image.Save(context.BlobStream, encoder);
 
-                        //Reset the data stream position
-                        if (context.BlobStream.CanSeek)
-                        {
-                            context.BlobStream.Position = position;
-                        }
+                    // Length of clipping stream
+                    context.BlobStream.SetLength(context.BlobStream.Position);
+                    context.BlobStream.Position = 0;
 
-                        _currentFile.File.Resize(context.BlobStream.Length);
-                    }
+                    _currentFile.File.Resize(context.BlobStream.Length);
                 }
             }
         }

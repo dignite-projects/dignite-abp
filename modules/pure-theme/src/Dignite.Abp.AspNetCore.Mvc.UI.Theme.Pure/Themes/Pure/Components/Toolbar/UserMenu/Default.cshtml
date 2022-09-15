@@ -9,7 +9,7 @@
 @model ApplicationMenu
 
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="Toolbar_@(Model.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="Toolbar_UserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         @if (CurrentUser.TenantId != null)
         {
             <small><i>@CurrentTenant.Name</i>\</small>
@@ -23,7 +23,7 @@
     </a>
     @if (Model.Items.Any())
     {
-        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm" aria-labelledby="Toolbar_@(Model.Name)">
+        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm" aria-labelledby="Toolbar_UserMenu">
             @foreach (var menuItem in Model.Items)
             {
                 var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";

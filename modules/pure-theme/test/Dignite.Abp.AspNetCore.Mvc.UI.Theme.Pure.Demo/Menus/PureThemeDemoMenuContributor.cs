@@ -19,6 +19,8 @@ public class PureThemeDemoMenuContributor : IMenuContributor
 
     private void AddMainMenuItems(MenuConfigurationContext context)
     {
+        context.Menu.AddItem(new ApplicationMenuItem("home", "Home", "/", "fa fa-home"));
+
         var menuItem = new ApplicationMenuItem(PureThemeDemoMenus.Components.Root, "Components");
 
         var items = new List<ApplicationMenuItem>()
@@ -53,5 +55,10 @@ public class PureThemeDemoMenuContributor : IMenuContributor
              .ForEach(x => menuItem.AddItem(x));
 
         context.Menu.AddItem(menuItem);
+
+
+
+        context.Menu.AddItem(new ApplicationMenuItem("like", "Like", "#"));
+        context.Menu.AddItem(new ApplicationMenuItem("disabled", "Disabled", "#"));
     }
 }

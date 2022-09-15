@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.UI.Navigation;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.UserMenu;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Demo.Components.Toolbar.Search;
 
-[ViewComponent(Name = "Toolbar/UserMenu")]
-public class UserMenuViewComponent : AbpViewComponent
+[ViewComponent(Name = "Toolbar/Search")]
+public class SearchViewComponent : AbpViewComponent
 {
     protected IMenuManager MenuManager { get; }
 
-    public UserMenuViewComponent(IMenuManager menuManager)
+    public SearchViewComponent(IMenuManager menuManager)
     {
         MenuManager = menuManager;
     }

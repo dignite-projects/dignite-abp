@@ -3,7 +3,6 @@ using System.IO;
 using Dignite.Abp.Files.Fakes;
 using Dignite.Abp.Files.TestObjects;
 using Microsoft.Extensions.DependencyInjection;
-using NSubstitute;
 using Volo.Abp;
 using Volo.Abp.Autofac;
 using Volo.Abp.BlobStoring;
@@ -11,13 +10,14 @@ using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.IO;
 using Volo.Abp.Modularity;
 using Dignite.Abp.BlobStoring;
+using Microsoft.Extensions.Options;
 
 namespace Dignite.Abp.Files;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(AbpBlobStoringFileSystemModule),
-    typeof(AbpFilesDomainModule)
+    typeof(AbpFilesDomainModule),
+    typeof(AbpBlobStoringFileSystemModule)
     )]
 public class AbpFilesDomainTestModule : AbpModule
 {
@@ -33,35 +33,36 @@ public class AbpFilesDomainTestModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddSingleton<IFileStore<FakeFile>>(Substitute.For<FakeFileStore>());
-        context.Services.AddSingleton<FileManager<FakeFile,FakeFileStore>>(Substitute.For<FakeFileManager>());
-
-
-
-
         Configure<AbpBlobStoringOptions>(options =>
         {
-            options.Containers.ConfigureAll((containerName, containerConfiguration) =>
+
+            options.Containers
+                .Configure<TestContainer2>(container =>
                 {
-                    containerConfiguration.UseFileSystem(fileSystem =>
+                    container.UseFileSystem(fileSystem =>
                     {
                         fileSystem.BasePath = _testDirectoryPath;
                     });
-                })
-                .Configure<TestContainer2>(container =>
-                {
                     container.AddBlobSizeLimitHandler(config =>
                        config.MaximumBlobSize = 1
                     );
                 })
                 .Configure<TestContainer3>(container =>
                 {
+                    container.UseFileSystem(fileSystem =>
+                    {
+                        fileSystem.BasePath = _testDirectoryPath;
+                    });
                     container.AddFileTypeCheckHandler(config =>
                        config.AllowedFileTypeNames = new string[] { ".jpeg" }
                     );
                 })
                 .Configure<TestContainer4>(container =>
                 {
+                    container.UseFileSystem(fileSystem =>
+                    {
+                        fileSystem.BasePath = _testDirectoryPath;
+                    });
                     container.AddImageResizeHandler(imageResize =>
                     {
                         imageResize.ImageWidth = 200;

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.Files.Fakes;
-public class FakeFileStore : IFileStore<FakeFile>
+public class FakeFileStore : IFileStore<FakeFile>, ITransientDependency
 {
     public Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default)
     {

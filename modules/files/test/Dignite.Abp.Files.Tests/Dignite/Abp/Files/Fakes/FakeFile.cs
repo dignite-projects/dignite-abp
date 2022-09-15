@@ -1,11 +1,9 @@
 ﻿using System;
+using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.Files.Fakes;
-public class FakeFile : IFile
+public class FakeFile : IFile, ITransientDependency
 {
-    public FakeFile()
-    {
-    }
 
     public FakeFile(string containerName, string blobName, long size, string name, string mimeType)
     {

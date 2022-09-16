@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Dignite.FileExplorer.Files;
 using Shouldly;
 using Xunit;
 
-namespace Dignite.FileExplorer.Samples;
+namespace Dignite.FileExplorer.Files;
 
 public class FileDescriptorAppService_Tests : FileExplorerApplicationTestBase
 {
@@ -15,9 +14,9 @@ public class FileDescriptorAppService_Tests : FileExplorerApplicationTestBase
     }
 
     [Fact]
-    public async Task GetAsync()
+    public async Task ShouldGetListAsync()
     {
         var result = await _fileDescriptorAppService.GetListAsync(new GetFilesInput());
-        result.TotalCount.ShouldBe(42);
+        result.Items.ShouldNotBeEmpty();
     }
 }

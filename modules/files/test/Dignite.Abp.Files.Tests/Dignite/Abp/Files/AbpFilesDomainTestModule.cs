@@ -35,6 +35,20 @@ public class AbpFilesDomainTestModule : AbpModule
     {
         Configure<AbpBlobStoringOptions>(options =>
         {
+            /*  
+             *  The default configuration is set here, but it does not work. 
+             *  Therefore, it is configured independently in each container.
+             *  What caused it? No in-depth study. 
+             *  Let's leave it to you. ^_^
+             *  
+            options.Containers.ConfigureDefault(container =>
+            {
+                container.UseFileSystem(fileSystem =>
+                {
+                        fileSystem.BasePath = _testDirectoryPath;
+                });
+            });
+            */
 
             options.Containers
                 .Configure<TestContainer2>(container =>

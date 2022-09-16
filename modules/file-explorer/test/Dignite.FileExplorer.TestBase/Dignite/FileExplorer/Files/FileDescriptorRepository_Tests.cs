@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Shouldly;
 using Volo.Abp.Modularity;
 using Xunit;
 
-namespace Dignite.FileExplorer.Samples;
+namespace Dignite.FileExplorer.Files;
 
 /* Write your custom repository tests like that, in this project, as abstract classes.
  * Then inherit these abstract classes from EF Core & MongoDB test projects.
@@ -12,15 +13,20 @@ namespace Dignite.FileExplorer.Samples;
 public abstract class FileDescriptorRepository_Tests<TStartupModule> : FileExplorerTestBase<TStartupModule>
     where TStartupModule : IAbpModule
 {
-    //private readonly ISampleRepository _sampleRepository;
+    private readonly FileExplorerTestData testData;
+    private readonly IFileDescriptorRepository _fileDescriptorRepository;
 
     protected FileDescriptorRepository_Tests()
     {
-        //_sampleRepository = GetRequiredService<ISampleRepository>();
+        _fileDescriptorRepository = GetRequiredService<IFileDescriptorRepository>();
+        testData = GetRequiredService<FileExplorerTestData>();
     }
 
     [Fact]
-    public async Task Method1Async()
+    public async Task BlobNameExistsAsync_ShouldReturnTrue_WithExistingBlobName()
     {
+        var result = await _fileDescriptorRepository.BlobNameExistsAsync(testData.ContainerName1, testData.BlobName1);
+
+        result.ShouldBeTrue();
     }
 }

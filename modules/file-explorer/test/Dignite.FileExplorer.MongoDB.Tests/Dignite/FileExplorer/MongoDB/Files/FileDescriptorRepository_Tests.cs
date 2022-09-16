@@ -1,7 +1,7 @@
-﻿using Dignite.FileExplorer.Samples;
+﻿using Dignite.FileExplorer.Files;
 using Xunit;
 
-namespace Dignite.FileExplorer.MongoDB.Samples;
+namespace Dignite.FileExplorer.MongoDB.Files;
 
 [Collection(MongoTestCollection.Name)]
 public class FileDescriptorRepository_Tests : FileDescriptorRepository_Tests<FileExplorerMongoDbTestModule>

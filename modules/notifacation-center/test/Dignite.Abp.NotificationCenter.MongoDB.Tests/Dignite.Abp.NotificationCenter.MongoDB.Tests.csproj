@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+	
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Dignite.Abp.NotificationCenter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Mongo2Go" Version="3.1.3" />
+    <ProjectReference Include="..\..\src\Dignite.Abp.NotificationCenter.MongoDB\Dignite.Abp.NotificationCenter.MongoDB.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.NotificationCenter.TestBase\Dignite.Abp.NotificationCenter.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

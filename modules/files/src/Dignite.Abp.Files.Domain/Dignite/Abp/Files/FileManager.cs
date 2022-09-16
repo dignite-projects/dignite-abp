@@ -10,7 +10,6 @@ using Volo.Abp;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Collections;
 using Volo.Abp.Domain.Services;
-using static System.Net.WebRequestMethods;
 
 namespace Dignite.Abp.Files;
 
@@ -71,6 +70,12 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         var blobInfo = await FileStore.FindAsync(containerName, blobName, cancellationToken);
         return blobInfo;
     }
+    public virtual async Task<TFile> GetOrNullAsync<TContainer>([NotNull] string blobName, CancellationToken cancellationToken = default)
+        where TContainer : class
+    {
+        var containerName = BlobContainerNameAttribute.GetContainerName<TContainer>();
+        return await GetOrNullAsync(containerName,blobName,cancellationToken);
+    }
 
 
     public virtual async Task<Stream> GetStreamOrNullAsync([NotNull] string containerName, [NotNull] string blobName, CancellationToken cancellationToken = default)
@@ -79,6 +84,16 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
         return await blobContainer.GetOrNullAsync(blobName, cancellationToken);
     }
+
+
+    public virtual async Task<Stream> GetStreamOrNullAsync<TContainer>([NotNull] string blobName, CancellationToken cancellationToken = default)
+        where TContainer : class
+    {
+        var blobContainer = BlobContainerFactory.Create<TContainer>();
+
+        return await blobContainer.GetOrNullAsync(blobName, cancellationToken);
+    }
+
 
     public virtual async Task<bool> DeleteAsync([NotNull] TFile file, CancellationToken cancellationToken = default)
     {

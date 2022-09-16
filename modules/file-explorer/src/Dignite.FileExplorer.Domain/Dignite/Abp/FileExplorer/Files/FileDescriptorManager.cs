@@ -15,39 +15,45 @@ namespace Dignite.FileExplorer.Files;
 
 public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorStore>, IDomainService
 {
-    public virtual async Task<FileDescriptor> CreateAsync<TContainer>(
-                                        [NotNull] IRemoteStreamContent remoteStream,
-                                        [NotNull] IEntity entity)
+    public virtual async Task<IReadOnlyList<FileDescriptor>> CreateAsync<TContainer>(
+                                        [NotNull] IEntity entity,
+                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams)
+        where TContainer : class
     {
         var containerName = BlobContainerNameAttribute.GetContainerName<TContainer>();
-        return await CreateAsync(containerName, remoteStream, entity);
+        return await CreateAsync(entity,containerName, remoteStreams);
     }
 
-    public virtual async Task<FileDescriptor> CreateAsync(
+    public virtual async Task<IReadOnlyList<FileDescriptor>> CreateAsync(
+                                        [NotNull] IEntity entity,
                                         [NotNull] string containerName,
-                                        [NotNull] IRemoteStreamContent remoteStream,
-                                        [NotNull] IEntity entity)
+                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams)
     {
-        var blobName = (await GenerateBlobNameAsync(containerName));
-        blobName += Path.GetExtension(remoteStream.FileName).EnsureStartsWith('.'); //Add the extended name
-        var fileDescriptor = new FileDescriptor(
-                    GuidGenerator.Create(),
-                    containerName,
-                    blobName,
-                    remoteStream.ContentLength.GetValueOrDefault(),
-                    remoteStream.FileName,
-                    remoteStream.ContentType,
-                    entity.GetType().FullName,
-                    GetEntityId(entity),
-                    CurrentTenant.Id);
+        var files = new List<FileDescriptor>();
+        foreach (var stream in remoteStreams)
+        {
+            var blobName = (await GenerateBlobNameAsync(containerName));
+            blobName += Path.GetExtension(stream.FileName).EnsureStartsWith('.'); //Add the extended name
+            var fileDescriptor = new FileDescriptor(
+                        GuidGenerator.Create(),
+                        containerName,
+                        blobName,
+                        stream.ContentLength.GetValueOrDefault(),
+                        stream.FileName,
+                        stream.ContentType,
+                        entity.GetType().FullName,
+                        GetEntityId(entity),
+                        CurrentTenant.Id);
 
-        return await CreateAsync(fileDescriptor, remoteStream);
+            files.Add( await CreateAsync(fileDescriptor, stream));
+        }
+        return files;
     }
 
     public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor fileInfo,
-                                        [NotNull] IRemoteStreamContent fileStream)
+                                        [NotNull] IRemoteStreamContent remoteStream)
     {
-        return await base.CreateAsync(fileInfo, fileStream.GetStream());
+        return await base.CreateAsync(fileInfo, remoteStream.GetStream());
     }
 
     protected virtual string GetEntityId(IEntity entity)

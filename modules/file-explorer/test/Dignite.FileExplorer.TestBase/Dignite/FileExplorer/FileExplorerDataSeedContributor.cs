@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Dignite.FileExplorer.Files;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
@@ -10,23 +11,68 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
 {
     private readonly IGuidGenerator _guidGenerator;
     private readonly ICurrentTenant _currentTenant;
+    private readonly IFileDescriptorRepository _fileDescriptorRepository;
+    private readonly FileExplorerTestData _fileExplorerTestData;
 
     public FileExplorerDataSeedContributor(
-        IGuidGenerator guidGenerator, ICurrentTenant currentTenant)
+        IGuidGenerator guidGenerator, ICurrentTenant currentTenant, 
+        IFileDescriptorRepository fileDescriptorRepository,
+        FileExplorerTestData fileExplorerTestData)
     {
         _guidGenerator = guidGenerator;
         _currentTenant = currentTenant;
+        _fileDescriptorRepository= fileDescriptorRepository;
+        _fileExplorerTestData = fileExplorerTestData;
     }
 
-    public Task SeedAsync(DataSeedContext context)
+    public async Task SeedAsync(DataSeedContext context)
     {
-        /* Instead of returning the Task.CompletedTask, you can insert your test data
-         * at this point!
-         */
-
         using (_currentTenant.Change(context?.TenantId))
         {
-            return Task.CompletedTask;
+            await SeedFileDescriptorsAsync();
         }
+    }
+
+
+    private async Task SeedFileDescriptorsAsync()
+    {
+        await _fileDescriptorRepository.InsertAsync(
+            new FileDescriptor(
+                _guidGenerator.Create(), 
+                _fileExplorerTestData.ContainerName1, 
+                _fileExplorerTestData.BlobName1, 
+                1024, 
+                "testBlobName1.txt", 
+                "text/plain", 
+                _fileExplorerTestData.EntityTypeFullName, 
+                _fileExplorerTestData.EntityId, 
+                _currentTenant.Id)
+            , autoSave: true);
+
+        await _fileDescriptorRepository.InsertAsync(
+            new FileDescriptor(
+                _guidGenerator.Create(), 
+                _fileExplorerTestData.ContainerName2, 
+                _fileExplorerTestData.BlobName2, 
+                1024, 
+                "testBlobName2.txt", 
+                "text/plain", 
+                _fileExplorerTestData.EntityTypeFullName, 
+                _fileExplorerTestData.EntityId, 
+                _currentTenant.Id)
+            , autoSave: true);
+
+        await _fileDescriptorRepository.InsertAsync(
+            new FileDescriptor(
+                _guidGenerator.Create(), 
+                _fileExplorerTestData.ContainerName3, 
+                _fileExplorerTestData.BlobName3, 
+                1024, 
+                "testBlobName3.txt", 
+                "text/plain", 
+                _fileExplorerTestData.EntityTypeFullName, 
+                _fileExplorerTestData.EntityId, 
+                _currentTenant.Id)
+            , autoSave: true);
     }
 }

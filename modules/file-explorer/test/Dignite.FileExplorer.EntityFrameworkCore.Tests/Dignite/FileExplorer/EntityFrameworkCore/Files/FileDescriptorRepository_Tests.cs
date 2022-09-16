@@ -1,6 +1,6 @@
-﻿using Dignite.FileExplorer.Samples;
+﻿using Dignite.FileExplorer.Files;
 
-namespace Dignite.FileExplorer.EntityFrameworkCore.Samples;
+namespace Dignite.FileExplorer.EntityFrameworkCore.Files;
 
 public class FileDescriptorRepository_Tests : FileDescriptorRepository_Tests<FileExplorerEntityFrameworkCoreTestModule>
 {

@@ -5,6 +5,7 @@ using Volo.Abp.Guids;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Timing;
 using Xunit;
+using Shouldly;
 
 namespace Dignite.Abp.NotificationCenter;
 
@@ -16,6 +17,8 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
     private readonly INotificationDistributer _notificationDistributer;
     private readonly IGuidGenerator _guidGenerator;
     private readonly IClock _clock;
+    private readonly NotificationCenterTestData _notificationCenterTestData;
+    private readonly IUserNotificationManager _userNotificationManager;
 
     public NotificationPublisher_Tests()
     {
@@ -24,6 +27,8 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
         _notificationDistributer = GetRequiredService<INotificationDistributer>();
         _guidGenerator = GetRequiredService<IGuidGenerator>();
         _clock = GetRequiredService<IClock>();
+        _notificationCenterTestData = GetRequiredService<NotificationCenterTestData>();
+        _userNotificationManager = GetRequiredService<IUserNotificationManager>();
         _notificationPublisher = new NotificationPublisher(
             _currentTenant,
             _backgroundJobManager,
@@ -40,7 +45,15 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
         var notificationData = CreateNotificationData();
 
         //Act
-        await _notificationPublisher.PublishAsync("TestNotification", notificationData, severity: NotificationSeverity.Success);
+        await _notificationPublisher.PublishAsync(
+            "FakeDefinitionNotification",
+            notificationData,
+            severity: NotificationSeverity.Success,
+            userIds:new System.Guid[] { _notificationCenterTestData .User1Id}
+            );
+
+        var userNotifications = await _userNotificationManager.GetUserNotificationsAsync(_notificationCenterTestData.User1Id);
+        userNotifications.ShouldNotBeEmpty();
     }
 
     private static NotificationData CreateNotificationData()

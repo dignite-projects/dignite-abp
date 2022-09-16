@@ -2,7 +2,7 @@
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class UserNotificationRepository_Tests : UserNotificationRepository_Tests<AbpNotificationCenterMongoDbTestModule>
+public class NotificationSubscriptionRepository_Tests : NotificationSubscriptionRepository_Tests<AbpNotificationCenterMongoDbTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

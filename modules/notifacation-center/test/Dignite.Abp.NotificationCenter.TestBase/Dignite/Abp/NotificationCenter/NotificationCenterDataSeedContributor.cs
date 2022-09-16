@@ -70,7 +70,7 @@ public class NotificationCenterDataSeedContributor : IDataSeedContributor, ITran
     private async Task SeedNotificationSubscriptionAsync()
     {
         var ns = new NotificationSubscription(
-            _guidGenerator.Create(),
+            _notificationCenterTestData.User1Id,
             _notificationCenterTestData.Notification1Name,
             _notificationCenterTestData.EntityType1Name,
             _notificationCenterTestData.Entity1Id,

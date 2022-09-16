@@ -2,10 +2,10 @@
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class TestNotificationProvider : NotificationDefinitionProvider
+public class FakeNotificationProvider : NotificationDefinitionProvider
 {
     public override void Define(INotificationDefinitionContext context)
     {
-        context.Add(new NotificationDefinition("DefinitionNotification"));
+        context.Add(new NotificationDefinition("FakeDefinitionNotification"));
     }
 }

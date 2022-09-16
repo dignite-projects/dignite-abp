@@ -2,7 +2,7 @@
 using Volo.Abp.Modularity;
 using Xunit;
 
-namespace Dignite.Abp.NotificationCenter.Samples;
+namespace Dignite.Abp.NotificationCenter;
 
 /* Write your custom repository tests like that, in this project, as abstract classes.
  * Then inherit these abstract classes from EF Core & MongoDB test projects.

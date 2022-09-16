@@ -13,9 +13,9 @@ public static class NotificationConsts
     public const int MaxEntityTypeNameLength = 256;
 
     /// <summary>
-    /// value: 64
+    /// value: 128
     /// </summary>
-    public const int MaxEntityIdLength = 64;
+    public const int MaxEntityIdLength = 128;
 
     /// <summary>
     /// value: 256

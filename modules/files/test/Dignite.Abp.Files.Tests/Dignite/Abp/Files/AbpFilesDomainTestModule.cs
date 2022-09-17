@@ -1,16 +1,13 @@
 ﻿using System;
 using System.IO;
-using Dignite.Abp.Files.Fakes;
+using Dignite.Abp.BlobStoring;
 using Dignite.Abp.Files.TestObjects;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.Autofac;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.IO;
 using Volo.Abp.Modularity;
-using Dignite.Abp.BlobStoring;
-using Microsoft.Extensions.Options;
 
 namespace Dignite.Abp.Files;
 

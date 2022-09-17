@@ -122,7 +122,7 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
         }
         return true;
     }
-
+    
     protected async Task<bool> PermissionCheckAsync(NotificationDefinition notificationDefinition, Guid userId)
     {
         if (!notificationDefinition.PermissionName.IsNullOrEmpty())
@@ -155,6 +155,7 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
         }
         return true;
     }
+    
 
     public async Task<IReadOnlyList<NotificationDefinition>> GetAllAvailableAsync(Guid userId)
     {
@@ -163,7 +164,8 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
         foreach (var notificationDefinition in GetAll())
         {
             if (await FeatureCheckAsync(notificationDefinition)
-                && await PermissionCheckAsync(notificationDefinition, userId))
+                && await PermissionCheckAsync(notificationDefinition, userId)
+                )
             {
                 availableDefinitions.Add(notificationDefinition);
             }

@@ -22,7 +22,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     protected INotificationStore NotificationStore { get; }
     protected ILogger Logger { get; }
     protected ICurrentTenant CurrentTenant { get; }
-    protected IUnitOfWorkManager UnitOfWorkManager { get; }
     protected IDistributedEventBus DistributedEventBus { get; }
 
     public DefaultNotificationDistributer(
@@ -39,7 +38,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         NotificationStore = notificationStore;
         Logger = loggerFactory?.CreateLogger(GetType().FullName) ?? NullLogger.Instance;
         CurrentTenant = currentTenant;
-        UnitOfWorkManager = unitOfWorkManager;
         DistributedEventBus = distributedEventBus;
     }
 
@@ -110,7 +108,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     protected virtual async Task<List<UserNotificationInfo>> SaveUserNotificationsAsync(Guid[] users, NotificationInfo notificationInfo)
     {
         await NotificationStore.InsertNotificationAsync(notificationInfo);
-        await UnitOfWorkManager.Current.SaveChangesAsync();
 
         var userNotifications = new List<UserNotificationInfo>();
         foreach (var user in users)

@@ -58,6 +58,7 @@ public class NotificationCenterDataSeedContributor : IDataSeedContributor, ITran
             _clock.Now,
             _currentTenant.Id);
         var userNotification = new UserNotification(
+            _guidGenerator.Create(),
             _notificationCenterTestData.User1Id,
             notification.Id,
             UserNotificationState.Unread,
@@ -70,6 +71,7 @@ public class NotificationCenterDataSeedContributor : IDataSeedContributor, ITran
     private async Task SeedNotificationSubscriptionAsync()
     {
         var ns = new NotificationSubscription(
+            _guidGenerator.Create(),
             _notificationCenterTestData.User1Id,
             _notificationCenterTestData.Notification1Name,
             _notificationCenterTestData.EntityType1Name,

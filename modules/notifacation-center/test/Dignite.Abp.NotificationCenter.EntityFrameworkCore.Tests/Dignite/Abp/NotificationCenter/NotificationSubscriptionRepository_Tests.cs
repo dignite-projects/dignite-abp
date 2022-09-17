@@ -1,0 +1,7 @@
+﻿using Dignite.Abp.NotificationCenter.EntityFrameworkCore;
+
+namespace Dignite.Abp.NotificationCenter;
+
+public class NotificationSubscriptionRepository_Tests : NotificationSubscriptionRepository_Tests<AbpNotificationCenterEntityFrameworkCoreTestModule>
+{
+}

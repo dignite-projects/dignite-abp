@@ -20,7 +20,8 @@ public abstract class NotificationRepository_Tests<TStartupModule> : Notificatio
     }
 
     [Fact]
-    public async Task Method1Async()
+    public Task Method1Async()
     {
+        return Task.CompletedTask;
     }
 }

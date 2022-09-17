@@ -6,10 +6,11 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.Timing;
 using Xunit;
 using Shouldly;
+using Volo.Abp.Uow;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
+public class NotificationStore_Tests : NotificationCenterDomainTestBase
 {
     private readonly NotificationPublisher _notificationPublisher;
     private readonly IBackgroundJobManager _backgroundJobManager;
@@ -19,8 +20,9 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
     private readonly IClock _clock;
     private readonly NotificationCenterTestData _notificationCenterTestData;
     private readonly IUserNotificationManager _userNotificationManager;
+    private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-    public NotificationPublisher_Tests()
+    public NotificationStore_Tests()
     {
         _backgroundJobManager = GetRequiredService<IBackgroundJobManager>();
         _currentTenant = GetRequiredService<ICurrentTenant>();
@@ -29,6 +31,7 @@ public class NotificationPublisher_Tests : NotificationCenterDomainTestBase
         _clock = GetRequiredService<IClock>();
         _notificationCenterTestData = GetRequiredService<NotificationCenterTestData>();
         _userNotificationManager = GetRequiredService<IUserNotificationManager>();
+        _unitOfWorkManager = GetRequiredService<IUnitOfWorkManager>();
         _notificationPublisher = new NotificationPublisher(
             _currentTenant,
             _backgroundJobManager,

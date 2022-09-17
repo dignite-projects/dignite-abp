@@ -13,10 +13,10 @@ using Volo.Abp.MongoDB;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class MongoUserNotificationRepository : MongoDbRepository<NotificationCenterMongoDbContext, UserNotification>, IUserNotificationRepository
+public class MongoUserNotificationRepository : MongoDbRepository<INotificationCenterMongoDbContext, UserNotification>, IUserNotificationRepository
 {
     public MongoUserNotificationRepository(
-        IMongoDbContextProvider<NotificationCenterMongoDbContext> dbContextProvider)
+        IMongoDbContextProvider<INotificationCenterMongoDbContext> dbContextProvider)
         : base(dbContextProvider)
     {
     }
@@ -27,7 +27,7 @@ public class MongoUserNotificationRepository : MongoDbRepository<NotificationCen
         return await (await GetMongoQueryableAsync(cancellationToken))
                    .FirstOrDefaultAsync(un =>
                        un.UserId == userId && un.NotificationId == notificationId,
-                       GetCancellationToken(cancellationToken)
+                       cancellationToken
                    );
     }
 
@@ -36,16 +36,16 @@ public class MongoUserNotificationRepository : MongoDbRepository<NotificationCen
         cancellationToken = GetCancellationToken(cancellationToken);
         return await (await GetMongoQueryableAsync(cancellationToken))
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.Notification.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.Notification.CreationTime <= endDate.Value)
+            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
             .As<IMongoQueryable<UserNotification>>()
             .Where(un =>
                 un.UserId == userId
             )
-            .OrderByDescending(un => un.Notification.CreationTime)
+            .OrderByDescending(un => un.CreationTime)
             .Skip(skipCount)
             .Take(maxResultCount)
-            .ToListAsync(GetCancellationToken(cancellationToken));
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<int> GetCountAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null, CancellationToken cancellationToken = default)
@@ -53,19 +53,19 @@ public class MongoUserNotificationRepository : MongoDbRepository<NotificationCen
         cancellationToken = GetCancellationToken(cancellationToken);
         return await (await GetMongoQueryableAsync(cancellationToken))
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.Notification.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.Notification.CreationTime <= endDate.Value)
+            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
             .As<IMongoQueryable<UserNotification>>()
             .Where(un =>
                 un.UserId == userId
             )
-            .CountAsync(GetCancellationToken(cancellationToken));
+            .CountAsync(cancellationToken);
     }
 
     public async Task<bool> AnyAsync(Guid notificationId, Guid ignoredUserId, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         return await (await GetMongoQueryableAsync(cancellationToken))
-                   .AnyAsync(un => un.NotificationId == notificationId && un.UserId != ignoredUserId, GetCancellationToken(cancellationToken));
+                   .AnyAsync(un => un.NotificationId == notificationId && un.UserId != ignoredUserId, cancellationToken);
     }
 }

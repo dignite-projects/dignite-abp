@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Dignite.Abp.Notifications;
 using Volo.Abp.Auditing;
@@ -77,4 +78,10 @@ public class Notification : BasicAggregateRoot<Guid>, IHasCreationTime, IMultiTe
     public DateTime CreationTime { get; set; }
 
     public Guid? TenantId { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IList<UserNotification> Users { get; set; }
+
 }

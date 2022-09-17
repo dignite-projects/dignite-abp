@@ -47,6 +47,9 @@ public static class NotificationCenterDbContextModelCreatingExtensions
             b.Property(n => n.Data).IsRequired().HasMaxLength(NotificationConsts.MaxDataLength);
             b.Property(n => n.DataTypeName).IsRequired().HasMaxLength(NotificationConsts.MaxDataTypeNameLength);
 
+            //relations
+            b.HasMany(n => n.Users).WithOne().HasForeignKey(un => un.NotificationId).IsRequired();
+
             //Indexes
             b.HasIndex(n => new {
                 n.CreationTime,
@@ -60,9 +63,6 @@ public static class NotificationCenterDbContextModelCreatingExtensions
             b.ToTable(NotificationCenterDbProperties.DbTablePrefix + "UserNotifications", NotificationCenterDbProperties.DbSchema);
 
             b.ConfigureByConvention();
-
-            //Relations
-            b.HasOne(un => un.Notification).WithOne().IsRequired().HasForeignKey<UserNotification>(un => un.NotificationId);
 
             //Keys
             b.HasKey(x => new { x.UserId, x.NotificationId });

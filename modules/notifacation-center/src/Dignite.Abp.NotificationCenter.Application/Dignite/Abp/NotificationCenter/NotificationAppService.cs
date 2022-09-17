@@ -37,8 +37,8 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
         foreach (var subscription in dto)
         {
             var notificationDefinition = _notificationDefinitionManager.Get(subscription.NotificationName);
-            subscription.DisplayName = notificationDefinition.DisplayName.Localize(StringLocalizerFactory);
-            subscription.Description = notificationDefinition.Description.Localize(StringLocalizerFactory);
+            subscription.DisplayName = notificationDefinition.DisplayName?.Localize(StringLocalizerFactory);
+            subscription.Description = notificationDefinition.Description?.Localize(StringLocalizerFactory);
         }
 
         return new ListResultDto<NotificationSubscriptionDto>(dto);

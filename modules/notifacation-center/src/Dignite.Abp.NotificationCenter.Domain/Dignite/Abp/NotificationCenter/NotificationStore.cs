@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Dignite.Abp.Notifications;
 using Newtonsoft.Json;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
+using Volo.Abp.Guids;
 
 namespace Dignite.Abp.NotificationCenter;
 
@@ -14,18 +14,18 @@ public class NotificationStore : INotificationStore, ITransientDependency
     private readonly INotificationSubscriptionRepository _notificationSubscriptionRepository;
     private readonly INotificationRepository _notificationRepository;
     private readonly IUserNotificationRepository _userNotificationRepository;
-    private readonly IIdentityUserAppService _identityUserAppService;
+    private readonly IGuidGenerator _guidGenerator;
 
     public NotificationStore(
+        IGuidGenerator guidGenerator,
         INotificationSubscriptionRepository notificationSubscriptionRepository,
         INotificationRepository notificationRepository,
-        IUserNotificationRepository userNotificationRepository,
-        IIdentityUserAppService identityUserAppService)
+        IUserNotificationRepository userNotificationRepository)
     {
+        _guidGenerator = guidGenerator;
         _notificationSubscriptionRepository = notificationSubscriptionRepository;
         _notificationRepository = notificationRepository;
         _userNotificationRepository = userNotificationRepository;
-        _identityUserAppService = identityUserAppService;
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class NotificationStore : INotificationStore, ITransientDependency
     {
         if (!await IsSubscribedAsync(subscription.UserId, subscription.NotificationName, subscription.EntityTypeName, subscription.EntityId))
         {
-            var notificationSubscription = new NotificationSubscription(subscription);
+            var notificationSubscription = new NotificationSubscription(_guidGenerator.Create(),subscription);
             await _notificationSubscriptionRepository.InsertAsync(notificationSubscription);
         }
     }
@@ -57,7 +57,7 @@ public class NotificationStore : INotificationStore, ITransientDependency
     /// </summary>
     public async Task InsertNotificationAsync(NotificationInfo notificationInfo)
     {
-        await _notificationRepository.InsertAsync(new Notification(notificationInfo), false);
+        await _notificationRepository.InsertAsync(new Notification(notificationInfo));
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class NotificationStore : INotificationStore, ITransientDependency
     /// </summary>
     public async Task InsertUserNotificationAsync(UserNotificationInfo userNotification)
     {
-        await _userNotificationRepository.InsertAsync(new UserNotification(userNotification));
+        await _userNotificationRepository.InsertAsync(new UserNotification(_guidGenerator.Create(), userNotification));
     }
 
     /// <summary>
@@ -161,12 +161,12 @@ public class NotificationStore : INotificationStore, ITransientDependency
     public async Task DeleteAllUserNotificationsAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null)
     {
         var result = await _userNotificationRepository.GetListAsync(userId, state, 0, int.MaxValue, startDate, endDate);
-        foreach (var notification in result)
+        foreach (var un in result)
         {
-            await _userNotificationRepository.DeleteAsync(notification);
-            if (!await _userNotificationRepository.AnyAsync(notification.NotificationId, userId))
+            await _userNotificationRepository.DeleteAsync(un);
+            if (!await _userNotificationRepository.AnyAsync(un.NotificationId, userId))
             {
-                await _notificationRepository.DeleteAsync(notification.NotificationId);
+                await _notificationRepository.DeleteAsync(un.NotificationId);
             }
         }
     }
@@ -182,23 +182,31 @@ public class NotificationStore : INotificationStore, ITransientDependency
     /// <param name="endDate">List notifications published before startDateTime</param>
     public async Task<List<UserNotificationWithNotification>> GetUserNotificationsAsync(Guid userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue, DateTime? startDate = null, DateTime? endDate = null)
     {
-        var result = await _userNotificationRepository.GetListAsync(userId, state, skipCount, maxResultCount, startDate, endDate);
+        var userNotifications = await _userNotificationRepository.GetListAsync(userId, state, skipCount, maxResultCount, startDate, endDate);
+        var notifications = await _notificationRepository.GetListAsync(userNotifications.Select(un => un.NotificationId));
+        var userNotificationWithNotifications=new List<UserNotificationWithNotification>();
+        foreach (var un in userNotifications)
+        {
+            var notification = notifications.Single(n=>n.Id==un.NotificationId);
+            userNotificationWithNotifications.Add(
+                new UserNotificationWithNotification(
+                    new UserNotificationInfo(
+                        un.UserId,
+                        un.NotificationId,
+                        un.TenantId),
+                    new NotificationInfo(
+                        notification.Id,
+                        notification.NotificationName,
+                        notification.Data.IsNullOrEmpty() ? null : JsonConvert.DeserializeObject(notification.Data, Type.GetType(notification.DataTypeName)) as NotificationData,
+                        notification.EntityTypeName,
+                        notification.EntityId,
+                        notification.Severity,
+                        notification.CreationTime,
+                        notification.TenantId))
+                );
+        }
 
-        return result.Select(un => new UserNotificationWithNotification(
-            new UserNotificationInfo(
-                un.UserId,
-                un.NotificationId,
-                un.TenantId),
-            new NotificationInfo(
-                un.Notification.Id,
-                un.Notification.NotificationName,
-                un.Notification.Data.IsNullOrEmpty() ? null : JsonConvert.DeserializeObject(un.Notification.Data, Type.GetType(un.Notification.DataTypeName)) as NotificationData,
-                un.Notification.EntityTypeName,
-                un.Notification.EntityId,
-                un.Notification.Severity,
-                un.Notification.CreationTime,
-                un.Notification.TenantId)
-        )).ToList();
+        return userNotificationWithNotifications;
     }
 
     /// <summary>
@@ -213,16 +221,14 @@ public class NotificationStore : INotificationStore, ITransientDependency
         return await _userNotificationRepository.GetCountAsync(user, state, startDate, endDate);
     }
 
+    
     /// <summary>
     /// Gets roles of a user.
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public async Task<string[]> GetUserRoles(Guid userId)
+    public Task<string[]> GetUserRoles(Guid userId)
     {
-        return (await _identityUserAppService.GetRolesAsync(userId))
-            .Items
-            .Select(r => r.Name)
-            .ToArray();
-    }
+        return Task.FromResult( new string[0]);
+    }    
 }

@@ -33,14 +33,13 @@ public class EfCoreUserNotificationRepository : EfCoreRepository<INotificationCe
     public async Task<List<UserNotification>> GetListAsync(Guid userId, UserNotificationState? state = null, int skipCount = 0, int maxResultCount = int.MaxValue, DateTime? startDate = null, DateTime? endDate = null, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-            .Include(un => un.Notification)
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.Notification.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.Notification.CreationTime <= endDate.Value)
+            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
             .Where(un =>
                 un.UserId == userId
             )
-            .OrderByDescending(un => un.Notification.CreationTime)
+            .OrderByDescending(un => un.CreationTime)
             .Skip(skipCount)
             .Take(maxResultCount)
             .ToListAsync(GetCancellationToken(cancellationToken));
@@ -50,8 +49,8 @@ public class EfCoreUserNotificationRepository : EfCoreRepository<INotificationCe
     {
         return await (await GetDbSetAsync())
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.Notification.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.Notification.CreationTime <= endDate.Value)
+            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
             .Where(un =>
                 un.UserId == userId
             )

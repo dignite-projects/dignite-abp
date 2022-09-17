@@ -8,6 +8,7 @@ public class NotificationCenterApplicationAutoMapperProfile : Profile
     public NotificationCenterApplicationAutoMapperProfile()
     {
         CreateMap<NotificationSubscriptionInfo, NotificationSubscriptionDto>()
+            .ForMember(m => m.Id, y => y.Ignore())
             .ForMember(m => m.DisplayName, y => y.Ignore())
             .ForMember(m => m.Description, y => y.Ignore());
     }

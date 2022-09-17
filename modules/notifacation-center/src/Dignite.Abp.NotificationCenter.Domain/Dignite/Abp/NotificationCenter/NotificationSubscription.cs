@@ -7,13 +7,14 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IMultiTenant
+public class NotificationSubscription : BasicAggregateRoot<Guid>, IHasCreationTime, IMultiTenant
 {
     public NotificationSubscription()
     { }
 
-    public NotificationSubscription(NotificationSubscriptionInfo subscription)
-        : this(subscription.UserId,
+    public NotificationSubscription(Guid id, NotificationSubscriptionInfo subscription)
+        : this(id,
+              subscription.UserId,
             subscription.NotificationName,
             subscription.EntityTypeName,
             subscription.EntityId,
@@ -22,7 +23,7 @@ public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IM
     {
     }
 
-    public NotificationSubscription(Guid userId, string notificationName, string entityTypeName, string entityId, DateTime creationTime, Guid? tenantId)
+    public NotificationSubscription(Guid id, Guid userId, string notificationName, string entityTypeName, string entityId, DateTime creationTime, Guid? tenantId)
     {
         UserId = userId;
         NotificationName = notificationName;
@@ -63,13 +64,4 @@ public class NotificationSubscription : BasicAggregateRoot, IHasCreationTime, IM
 
     public Guid? TenantId { get; set; }
 
-    public override object[] GetKeys()
-    {
-        return new object[] {
-                UserId,
-                NotificationName,
-                EntityTypeName,
-                EntityId
-            };
-    }
 }

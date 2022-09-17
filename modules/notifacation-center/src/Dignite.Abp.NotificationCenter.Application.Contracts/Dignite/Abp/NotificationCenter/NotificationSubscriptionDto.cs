@@ -1,8 +1,10 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Auditing;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class NotificationSubscriptionDto
+public class NotificationSubscriptionDto:EntityDto<Guid>
 {
     /// <summary>
     /// User Id.

@@ -1,18 +1,19 @@
 ﻿using System;
 using Dignite.Abp.Notifications;
-using Volo.Abp.Domain.Entities;
+using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class UserNotification : BasicAggregateRoot, IMultiTenant
+public class UserNotification : CreationAuditedAggregateRoot<Guid>, IMultiTenant
 {
     public UserNotification()
     {
     }
 
-    public UserNotification(UserNotificationInfo userNotification)
+    public UserNotification(Guid id, UserNotificationInfo userNotification)
     : this(
+          id,
          userNotification.UserId,
          userNotification.NotificationId,
          userNotification.State,
@@ -20,7 +21,8 @@ public class UserNotification : BasicAggregateRoot, IMultiTenant
     {
     }
 
-    public UserNotification(Guid userId, Guid notificationId, UserNotificationState state, Guid? tenantId)
+    public UserNotification(Guid id, Guid userId, Guid notificationId, UserNotificationState state, Guid? tenantId)
+        :base(id)
     {
         UserId = userId;
         NotificationId = notificationId;
@@ -43,17 +45,6 @@ public class UserNotification : BasicAggregateRoot, IMultiTenant
     /// </summary>
     public UserNotificationState State { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
-    public Notification Notification { get; set; }
-
     public Guid? TenantId { get; set; }
 
-    public override object[] GetKeys()
-    {
-        return new object[] {
-                UserId,NotificationId
-            };
-    }
 }

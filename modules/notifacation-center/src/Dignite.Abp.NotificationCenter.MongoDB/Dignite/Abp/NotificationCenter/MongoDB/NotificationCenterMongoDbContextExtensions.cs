@@ -22,7 +22,7 @@ public static class NotificationCenterMongoDbContextExtensions
 
         builder.Entity<UserNotification>(x =>
         {
-            x.CollectionName = NotificationCenterDbProperties.DbTablePrefix + "UserNotification";
+            x.CollectionName = NotificationCenterDbProperties.DbTablePrefix + "UserNotifications";
         });
     }
 }

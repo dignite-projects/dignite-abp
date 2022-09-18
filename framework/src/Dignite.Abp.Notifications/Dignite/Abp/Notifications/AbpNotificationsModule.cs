@@ -13,7 +13,6 @@ namespace Dignite.Abp.Notifications;
 
 [DependsOn(
     typeof(AbpNotificationsSharedModule),
-    typeof(AbpAuthorizationModule),
     typeof(AbpFeaturesModule),
     typeof(AbpTimingModule),
     typeof(AbpBackgroundJobsAbstractionsModule),

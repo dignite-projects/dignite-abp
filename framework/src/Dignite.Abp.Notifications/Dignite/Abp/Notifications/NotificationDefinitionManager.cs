@@ -19,63 +19,109 @@ namespace Dignite.Abp.Notifications;
 /// <summary>
 /// Implements <see cref="INotificationDefinitionManager"/>.
 /// </summary>
-internal class NotificationDefinitionManager : INotificationDefinitionManager, ISingletonDependency
+public abstract class NotificationDefinitionManager : INotificationDefinitionManager
 {
     protected Lazy<IDictionary<string, NotificationDefinition>> NotificationDefinitions { get; }
     protected NotificationOptions Options { get; }
     protected IFeatureChecker FeatureChecker { get; }
     protected IServiceProvider ServiceProvider { get; }
-    protected IAuthorizationService AuthorizationService { get; }
-    protected ICurrentPrincipalAccessor CurrentPrincipalAccessor { get; }
-    protected ICurrentTenant CurrentTenant { get; }
-    protected ICurrentUser CurrentUser { get; }
-    protected INotificationStore NotificationStore { get; }
 
     public NotificationDefinitionManager(
         IOptions<NotificationOptions> options,
         IServiceProvider serviceProvider,
-        IFeatureChecker featureChecker,
-        ICurrentPrincipalAccessor currentPrincipalAccessor,
-        IAuthorizationService authorizationService,
-        ICurrentTenant currentTenant,
-        ICurrentUser currentUser,
-        INotificationStore notificationStore
+        IFeatureChecker featureChecker
         )
     {
         ServiceProvider = serviceProvider;
         Options = options.Value;
         FeatureChecker = featureChecker;
-        AuthorizationService = authorizationService;
-        CurrentPrincipalAccessor = currentPrincipalAccessor;
-        CurrentTenant = currentTenant;
-        CurrentUser = currentUser;
-        NotificationStore = notificationStore;
         NotificationDefinitions = new Lazy<IDictionary<string, NotificationDefinition>>(CreateNotificationDefinitions, true);
     }
 
-    public virtual NotificationDefinition Get(string name)
-    {
-        Check.NotNull(name, nameof(name));
-
-        var setting = GetOrNull(name);
-
-        if (setting == null)
-        {
-            throw new AbpException("Undefined notification: " + name);
-        }
-
-        return setting;
-    }
-
+    /// <summary>
+    /// Get defined notifications
+    /// </summary>
+    /// <returns></returns>
     public virtual IReadOnlyList<NotificationDefinition> GetAll()
     {
         return NotificationDefinitions.Value.Values.ToImmutableList();
     }
 
+    /// <summary>
+    /// Get defined notifications
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    /// <exception cref="AbpException"></exception>
+    public virtual NotificationDefinition Get(string name)
+    {
+        var notificationDefinition = GetOrNull(name);
+        if (notificationDefinition == null)
+        {
+            throw new AbpException("Undefined notification: " + name);
+        }
+
+        return notificationDefinition;
+    }
+
+    /// <summary>
+    /// Get defined notifications
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public virtual NotificationDefinition GetOrNull(string name)
     {
+        Check.NotNull(name, nameof(name));
         return NotificationDefinitions.Value.GetOrDefault(name);
     }
+
+    /// <summary>
+    /// Get all available notification definitions for userId
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    public virtual async Task<IReadOnlyList<NotificationDefinition>> GetAllAvailableAsync(Guid userId)
+    {
+        var availableDefinitions = new List<NotificationDefinition>();
+
+        foreach (var notificationDefinition in GetAll())
+        {
+            if (await FeatureCheckAsync(notificationDefinition)
+                && await PermissionCheckAsync(notificationDefinition, userId)
+                )
+            {
+                availableDefinitions.Add(notificationDefinition);
+            }
+        }
+        return availableDefinitions.ToImmutableList();
+    }
+
+    /// <summary>
+    /// Judge whether the specified notification definition is available
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    public virtual async Task<bool> IsAvailableAsync(string name, Guid userId)
+    {
+        var notificationDefinition = GetOrNull(name);
+        if (notificationDefinition == null)
+        {
+            return true;
+        }
+
+        return (await FeatureCheckAsync(notificationDefinition)
+            && await PermissionCheckAsync(notificationDefinition, userId)
+            );
+    }
+
+    /// <summary>
+    /// Check whether the user has the right to subscribe and receive notification of definition
+    /// </summary>
+    /// <param name="notificationDefinition"></param>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    protected abstract Task<bool> PermissionCheckAsync(NotificationDefinition notificationDefinition, Guid userId);
 
     protected virtual IDictionary<string, NotificationDefinition> CreateNotificationDefinitions()
     {
@@ -97,20 +143,7 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
         return settings;
     }
 
-    public async Task<bool> IsAvailableAsync(string name, Guid userId)
-    {
-        var notificationDefinition = GetOrNull(name);
-        if (notificationDefinition == null)
-        {
-            return true;
-        }
-
-        return (await FeatureCheckAsync(notificationDefinition)
-            && await PermissionCheckAsync(notificationDefinition, userId)
-            );
-    }
-
-    protected async Task<bool> FeatureCheckAsync(NotificationDefinition notificationDefinition)
+    protected virtual async Task<bool> FeatureCheckAsync(NotificationDefinition notificationDefinition)
     {
         if (notificationDefinition.FeatureName != null)
         {
@@ -121,55 +154,5 @@ internal class NotificationDefinitionManager : INotificationDefinitionManager, I
             }
         }
         return true;
-    }
-    
-    protected async Task<bool> PermissionCheckAsync(NotificationDefinition notificationDefinition, Guid userId)
-    {
-        if (!notificationDefinition.PermissionName.IsNullOrEmpty())
-        {
-            AuthorizationResult result;
-            if (CurrentUser.Id == userId)
-            {
-                result = await AuthorizationService.AuthorizeAsync(notificationDefinition.PermissionName);
-            }
-            else
-            {
-                var userRoles = await NotificationStore.GetUserRoles(userId);
-                var rolesClaims = userRoles.Select(ur => new Claim(AbpClaimTypes.Role, ur)).ToArray();
-                var claimsIdentity = new ClaimsIdentity(new Claim[] {
-                                new Claim(AbpClaimTypes.UserId,userId.ToString()),
-                                new Claim(AbpClaimTypes.TenantId,CurrentTenant.Id?.ToString())
-                        });
-                claimsIdentity.AddClaims(rolesClaims);
-
-                //Switch current user identity
-                using (CurrentPrincipalAccessor.Change(new ClaimsPrincipal(claimsIdentity)))
-                {
-                    result = await AuthorizationService.AuthorizeAsync(notificationDefinition.PermissionName);
-                }
-            }
-            if (!result.Succeeded)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-
-    public async Task<IReadOnlyList<NotificationDefinition>> GetAllAvailableAsync(Guid userId)
-    {
-        var availableDefinitions = new List<NotificationDefinition>();
-
-        foreach (var notificationDefinition in GetAll())
-        {
-            if (await FeatureCheckAsync(notificationDefinition)
-                && await PermissionCheckAsync(notificationDefinition, userId)
-                )
-            {
-                availableDefinitions.Add(notificationDefinition);
-            }
-        }
-        return availableDefinitions.ToImmutableList();
     }
 }

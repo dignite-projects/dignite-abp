@@ -220,15 +220,4 @@ public class NotificationStore : INotificationStore, ITransientDependency
     {
         return await _userNotificationRepository.GetCountAsync(user, state, startDate, endDate);
     }
-
-    
-    /// <summary>
-    /// Gets roles of a user.
-    /// </summary>
-    /// <param name="userId"></param>
-    /// <returns></returns>
-    public Task<string[]> GetUserRoles(Guid userId)
-    {
-        return Task.FromResult( new string[0]);
-    }    
 }

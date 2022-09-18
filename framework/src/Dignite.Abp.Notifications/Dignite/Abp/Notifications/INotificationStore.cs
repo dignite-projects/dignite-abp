@@ -84,11 +84,4 @@ public interface INotificationStore
     /// <param name="startDate">List notifications published after startDateTime</param>
     /// <param name="endDate">List notifications published before startDateTime</param>
     Task<int> GetUserNotificationCountAsync(Guid userId, UserNotificationState? state = null, DateTime? startDate = null, DateTime? endDate = null);
-
-    /// <summary>
-    /// Gets roles of a user.
-    /// </summary>
-    /// <param name="userId"></param>
-    /// <returns></returns>
-    Task<string[]> GetUserRoles(Guid userId);
 }

@@ -40,6 +40,11 @@ public class NotificationSubscriptionManager : INotificationSubscriptionManager,
             return;
         }
 
+        if(!await _notificationDefinitionManager.IsAvailableAsync(notificationName,userId))
+        {
+            return;
+        }
+
         await _store.InsertSubscriptionAsync(
             new NotificationSubscriptionInfo(
                 userId,

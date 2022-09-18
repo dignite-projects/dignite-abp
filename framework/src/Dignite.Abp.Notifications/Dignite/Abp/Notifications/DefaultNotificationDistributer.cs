@@ -104,7 +104,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         return distributeUserIds.ToArray();
     }
 
-    [UnitOfWork]
     protected virtual async Task<List<UserNotificationInfo>> SaveUserNotificationsAsync(Guid[] users, NotificationInfo notificationInfo)
     {
         await NotificationStore.InsertNotificationAsync(notificationInfo);

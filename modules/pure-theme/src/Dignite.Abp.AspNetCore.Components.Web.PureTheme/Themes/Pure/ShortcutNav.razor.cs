@@ -5,7 +5,7 @@ using Volo.Abp.UI.Navigation;
 
 namespace Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure;
 
-public partial class NavMenu
+public partial class ShortcutNav
 {
     public IMenuManager MenuManager { get; set; }
 
@@ -13,7 +13,7 @@ public partial class NavMenu
 
     protected override async Task OnInitializedAsync()
     {
-        Menu = await MenuManager.GetMainMenuAsync();
+        Menu = await MenuManager.GetAsync(StandardMenus.Shortcut);
     }
 
     private string GetNavUrl(ApplicationMenuItem menuItem)

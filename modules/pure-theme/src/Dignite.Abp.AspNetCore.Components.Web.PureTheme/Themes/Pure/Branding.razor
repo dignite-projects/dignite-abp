@@ -1,17 +1,8 @@
 @using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
 
-<BarBrand>
-    <BarItem>
-        <BarLink To="/">
-            @if (!BrandingProvider.LogoReverseUrl.IsNullOrWhiteSpace())
-            {
-                <img src="@BrandingProvider.LogoReverseUrl" class="navbar-brand-logo" alt="@BrandingProvider.AppName" >
-            }
-            <span class="navbar-brand-title">
-            @BrandingProvider.AppName
-            </span>
-        </BarLink>
-    </BarItem>
+<BarBrand Class="main-navbar-brand">
+    <img src="@BrandingProvider.LogoReverseUrl" class="navbar-brand-logo" title="@BrandingProvider.AppName" />
+    @BrandingProvider.AppName
 </BarBrand>
 

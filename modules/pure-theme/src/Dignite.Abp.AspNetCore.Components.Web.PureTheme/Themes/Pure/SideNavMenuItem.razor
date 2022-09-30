@@ -1,0 +1,38 @@
+﻿
+<BarDropdown>
+    <BarDropdownToggle>
+        @if (MenuItem.Icon != null)
+        {
+            if (MenuItem.Icon.StartsWith("fa"))
+            {
+                <BarIcon IconName="MenuItem.Icon" />
+            }
+        }
+        @MenuItem.DisplayName
+    </BarDropdownToggle>
+    <BarDropdownMenu>
+        @foreach (var menuItem in MenuItem.Items)
+        {
+            if (menuItem.IsLeaf)
+            {
+                var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+                var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+                var url = menuItem.Url == null ? "#" : menuItem.Url.TrimStart('/', '~');
+                <BarDropdownItem To="@url" Class="@cssClass" Target="new Target(menuItem.Target)" ElementId="@menuItem.ElementId">
+                    @if (menuItem.Icon != null)
+                    {
+                        if (menuItem.Icon.StartsWith("fa"))
+                        {
+                            <BarIcon IconName="menuItem.Icon" />
+                        }
+                    }
+                    @menuItem.DisplayName
+                </BarDropdownItem>
+            }
+            else
+            {
+                <SideNavMenuItem MenuItem="menuItem"></SideNavMenuItem>
+            }
+        }
+    </BarDropdownMenu>
+</BarDropdown>

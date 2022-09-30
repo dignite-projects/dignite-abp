@@ -8,7 +8,7 @@
                 <BarLink To="@GetNavUrl(menuItem)" Target="new Target(menuItem.Target)">
                     @if (menuItem.Icon != null)
                     {
-                        <i class="nav-link-icon @menuItem.Icon"></i>
+                        <BarIcon IconName="menuItem.Icon " />
                     }
                     @menuItem.DisplayName    
                 </BarLink>

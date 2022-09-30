@@ -1,37 +1,35 @@
-﻿@using Volo.Abp.UI.Navigation
-@inherits LayoutComponentBase
-
+﻿@inherits LayoutComponentBase
 
 <Layout>
     <LayoutHeader Fixed>
         <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Primary" ThemeContrast="ThemeContrast.Dark" Class="main-navbar" ElementId="main-navbar">
-            @if(SideNav!=null)
+            @if (SideNav != null)
             {
-            <BarToggler Bar="@SideNav.Sidebar" ElementId="navbarToggler" />
+                <BarToggler Bar="@SideNav.Sidebar" ElementId="navbarToggler" />
             }
             <Branding />
-            <NavMenu />  
             <NavToolbar />
         </Bar>
     </LayoutHeader>
     <Layout Sider>
         <LayoutSider>
             <LayoutSiderContent>
-                <SideNav @ref="SideNav"></SideNav>
+                <SideNav @ref="SideNav" />
             </LayoutSiderContent>
         </LayoutSider>
         <Layout>
-            <LayoutContent Padding="Padding.Is3.OnX">
+            <LayoutContent Padding="Padding.Is1.OnX.Is4.OnY.Is4.OnWidescreen">
                 <PageAlert />
                 @Body
                 <UiMessageAlert />
                 <UiNotificationAlert />
                 <UiPageProgress />
             </LayoutContent>
+            <LayoutFooter Fixed>
+                <Bar Breakpoint="Breakpoint.FullHD" Background="Background.White" ThemeContrast="ThemeContrast.Light" Class="main-navbar">
+                    <ShortcutNav />
+                </Bar>
+            </LayoutFooter>
         </Layout>
     </Layout>
 </Layout>
-
-@code {
-    private SideNav SideNav;
-}

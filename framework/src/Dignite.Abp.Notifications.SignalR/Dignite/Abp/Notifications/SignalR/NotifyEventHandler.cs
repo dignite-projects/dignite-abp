@@ -22,6 +22,5 @@ public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, I
         await _hubContext.Clients.Users(
             eto.UserIds.Select(userId => userId.ToString())
             ).ReceiveNotifications();
-        //await _hubContext.Clients.All.ReceiveNotifications();
     }
 }

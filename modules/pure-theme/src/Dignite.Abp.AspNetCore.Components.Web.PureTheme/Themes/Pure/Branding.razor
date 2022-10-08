@@ -2,7 +2,10 @@
 @inject IBrandingProvider BrandingProvider
 
 <BarBrand Class="main-navbar-brand">
-    <img src="@BrandingProvider.LogoReverseUrl" class="navbar-brand-logo" title="@BrandingProvider.AppName" />
+    @if (!BrandingProvider.LogoReverseUrl.IsNullOrEmpty())
+    {
+        <img src="@BrandingProvider.LogoReverseUrl" class="navbar-brand-logo" title="@BrandingProvider.AppName" />
+    }
     @BrandingProvider.AppName
 </BarBrand>
 

@@ -8,19 +8,19 @@ namespace Dignite.Abp.Notifications.SignalR;
 
 public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, ITransientDependency
 {
-    private readonly IHubContext<NotificationHub, INotificationClient> _hubContext;
+    private readonly IHubContext<NotificationsHub, INotificationClient> _hubContext;
 
     public NotifyEventHandler(
-        IHubContext<NotificationHub, INotificationClient> hubContext
+        IHubContext<NotificationsHub, INotificationClient> hubContext
         )
     {
         _hubContext = hubContext;
     }
 
-    public async Task HandleEventAsync(RealTimeNotifyEto eto)
+    public async Task HandleEventAsync(RealTimeNotifyEto notification)
     {
         await _hubContext.Clients.Users(
-            eto.UserIds.Select(userId => userId.ToString())
-            ).ReceiveNotifications();
+            notification.UserIds.Select(userId => userId.ToString())
+            ).ReceiveNotifications(notification);
     }
 }

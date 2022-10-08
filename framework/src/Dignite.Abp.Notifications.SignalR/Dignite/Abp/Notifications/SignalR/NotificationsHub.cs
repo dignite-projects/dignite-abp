@@ -2,6 +2,6 @@
 
 namespace Dignite.Abp.Notifications.SignalR;
 
-public class NotificationHub : AbpHub<INotificationClient>
+public class NotificationsHub : AbpHub<INotificationClient>
 {
 }

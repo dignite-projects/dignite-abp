@@ -2,17 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Volo.Abp;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.Features;
-using Volo.Abp.MultiTenancy;
-using Volo.Abp.Security.Claims;
-using Volo.Abp.Users;
 
 namespace Dignite.Abp.Notifications;
 

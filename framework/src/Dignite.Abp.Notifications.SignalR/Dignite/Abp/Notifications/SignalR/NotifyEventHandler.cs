@@ -20,7 +20,7 @@ public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, I
     public async Task HandleEventAsync(RealTimeNotifyEto eto)
     {
         await _hubContext.Clients.Users(
-            eto.UserNotifications.Select(un => un.UserId.ToString())
+            eto.UserIds.Select(userId => userId.ToString())
             ).ReceiveNotifications();
         //await _hubContext.Clients.All.ReceiveNotifications();
     }

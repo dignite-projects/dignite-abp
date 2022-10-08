@@ -127,6 +127,13 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     /// <returns></returns>
     protected virtual async Task NotifyAsync(UserNotificationInfo[] userNotifications, NotificationInfo notificationInfo)
     {
-        await DistributedEventBus.PublishAsync(new RealTimeNotifyEto(notificationInfo, userNotifications));
+        await DistributedEventBus.PublishAsync(new RealTimeNotifyEto(
+            notificationInfo.Id,
+            notificationInfo.NotificationName,
+            notificationInfo.Data,
+            notificationInfo.Severity,
+            notificationInfo.CreationTime,
+            userNotifications.Select(un => un.UserId).ToArray())
+            );
     }
 }

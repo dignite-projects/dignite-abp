@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.AspNetCore.SignalR;
 
-namespace Dignite.Abp.AspNetCore.SignalR.Notifications;
+namespace Dignite.Abp.Notifications.SignalR;
 
 public class NotificationHub : AbpHub<INotificationClient>
 {

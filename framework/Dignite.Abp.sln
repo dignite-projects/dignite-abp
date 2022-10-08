@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping", "src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj", "{334170E8-9ED4-4721-BEC4-EEDDA7E058C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.SignalR.Notifications", "src\Dignite.Abp.AspNetCore.SignalR.Notifications\Dignite.Abp.AspNetCore.SignalR.Notifications.csproj", "{3AA740A0-6FD9-47B9-B86B-773C35152AE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.SignalR", "src\Dignite.Abp.Notifications.SignalR\Dignite.Abp.Notifications.SignalR.csproj", "{3AA740A0-6FD9-47B9-B86B-773C35152AE8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications", "src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj", "{39D5ED2D-C23D-44DD-8B7C-EF8CA9603DC3}"
 EndProject

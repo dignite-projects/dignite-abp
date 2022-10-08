@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Dignite.Abp.AspNetCore.SignalR.Notifications;
+namespace Dignite.Abp.Notifications.SignalR;
 
 public interface INotificationClient
 {

@@ -15,7 +15,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.3" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.4" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Domain\Dignite.Abp.NotificationCenter.Domain.csproj" />
   </ItemGroup>
 

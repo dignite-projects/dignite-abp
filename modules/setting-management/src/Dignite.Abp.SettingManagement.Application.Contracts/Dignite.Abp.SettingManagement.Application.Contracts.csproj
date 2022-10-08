@@ -15,8 +15,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-	  <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.3.3" />
-	  <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="5.3.3" />
+	  <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.3.4" />
+	  <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="5.3.4" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />

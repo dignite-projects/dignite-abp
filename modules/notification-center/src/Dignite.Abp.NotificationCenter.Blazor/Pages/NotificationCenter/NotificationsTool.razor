@@ -1,11 +1,41 @@
-﻿<Button Color="Color.Primary" Position="Position.Relative">
-    <BarIcon IconName="IconName.Bell">
-    </BarIcon>
+﻿@using Microsoft.AspNetCore.SignalR.Client
+@using Dignite.Abp.Notifications
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
+<Button Color="Color.Primary" Position="Position.Relative">
+    <BarIcon IconName="IconName.Bell"></BarIcon>
+    @if (notificationCount > 0)
+        {
     <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle">
-        0
+        @notificationCount
     </Badge>
+        }
 </Button>
 
 @code {
+    private HubConnection hubConnection;
+    private int notificationCount=0;
 
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/signalr-hubs/notifications"))
+            .Build();
+
+        hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", (notification) =>
+        {
+            notificationCount++;
+            InvokeAsync(StateHasChanged);
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
 }

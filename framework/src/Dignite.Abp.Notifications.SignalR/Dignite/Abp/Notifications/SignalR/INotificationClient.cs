@@ -4,5 +4,5 @@ namespace Dignite.Abp.Notifications.SignalR;
 
 public interface INotificationClient
 {
-    Task ReceiveNotifications();
+    Task ReceiveNotifications(RealTimeNotifyEto notification);
 }

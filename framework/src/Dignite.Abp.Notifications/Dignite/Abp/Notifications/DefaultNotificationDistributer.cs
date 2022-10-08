@@ -30,7 +30,6 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         INotificationStore notificationStore,
         ILoggerFactory loggerFactory,
         ICurrentTenant currentTenant,
-        IUnitOfWorkManager unitOfWorkManager,
         IDistributedEventBus distributedEventBus)
     {
         Options = notificationOptions.Value;

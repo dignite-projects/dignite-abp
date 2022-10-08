@@ -8,7 +8,10 @@
         <BarBrand>
             <BarItem>
                 <BarLink To="/">
+                    @if (!BrandingProvider.LogoUrl.IsNullOrEmpty())
+                    {
                     <img src="@BrandingProvider.LogoUrl" class="navbar-brand-logo" title="@BrandingProvider.AppName" />
+                    }
                     @BrandingProvider.AppName
                 </BarLink>
             </BarItem>

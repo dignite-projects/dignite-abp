@@ -1,11 +1,12 @@
 ﻿using System;
 using Dignite.Abp.Notifications;
-using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Auditing;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class UserNotification : CreationAuditedAggregateRoot<Guid>, IMultiTenant
+public class UserNotification : BasicAggregateRoot<Guid>, IHasCreationTime, IMultiTenant
 {
     public UserNotification()
     {
@@ -44,6 +45,11 @@ public class UserNotification : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     /// Current state of the user notification.
     /// </summary>
     public UserNotificationState State { get; set; }
+
+    /// <summary>
+    /// Creation time
+    /// </summary>
+    public DateTime CreationTime { get; set; }
 
     public Guid? TenantId { get; set; }
 

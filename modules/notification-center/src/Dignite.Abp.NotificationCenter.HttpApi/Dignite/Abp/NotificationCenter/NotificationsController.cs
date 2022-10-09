@@ -28,9 +28,9 @@ public class NotificationsController : NotificationCenterController, INotificati
     [Authorize]
     [HttpGet]
     [Route("subscribed")]
-    public async Task<ListResultDto<NotificationSubscriptionDto>> GetSubscribedAsync()
+    public async Task<ListResultDto<NotificationSubscriptionDto>> GetAllAvailableSubscribeAsync()
     {
-        return await _notificationsAppService.GetSubscribedAsync();
+        return await _notificationsAppService.GetAllAvailableSubscribeAsync();
     }
 
     /// <summary>

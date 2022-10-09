@@ -12,8 +12,11 @@ public interface INotificationAppService : IApplicationService
     /// <summary>
     /// Get the notification subscription of the current user
     /// </summary>
+    /// <remarks>
+    /// Contains notifications available and subscribed to by the current user
+    /// </remarks>
     /// <returns></returns>
-    Task<ListResultDto<NotificationSubscriptionDto>> GetSubscribedAsync();
+    Task<ListResultDto<NotificationSubscriptionDto>> GetAllAvailableSubscribeAsync();
 
     /// <summary>
     /// Unsubscribe from current user's notification
@@ -34,7 +37,7 @@ public interface INotificationAppService : IApplicationService
     /// <summary>
     /// Deletes user notification.
     /// </summary>
-    Task DeleteAsync([NotNull] Guid notificationId);
+    Task DeleteAsync([NotNull] Guid id);
 
     /// <summary>
     /// Deletes all notifications of the current user.

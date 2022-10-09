@@ -3,22 +3,20 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class NotificationSubscriptionDto:EntityDto<Guid>
+public class NotificationSubscriptionDto
 {
-    /// <summary>
-    /// User Id.
-    /// </summary>
-    public Guid UserId { get; set; }
+    public NotificationSubscriptionDto(string notificationName, string displayName, string description, bool isSubscribed)
+    {
+        NotificationName = notificationName;
+        DisplayName = displayName;
+        Description = description;
+        IsSubscribed = isSubscribed;
+    }
 
     /// <summary>
     /// Notification unique name.
     /// </summary>
     public string NotificationName { get; set; }
-
-    /// <summary>
-    /// Creation time
-    /// </summary>
-    public DateTime CreationTime { get; set; }
 
     /// <summary>
     /// Display name of the notification.
@@ -31,4 +29,9 @@ public class NotificationSubscriptionDto:EntityDto<Guid>
     /// Optional.
     /// </summary>
     public string Description { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsSubscribed { get; set; }
 }

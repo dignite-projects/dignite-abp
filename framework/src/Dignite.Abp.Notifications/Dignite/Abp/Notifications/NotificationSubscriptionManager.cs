@@ -59,11 +59,7 @@ public class NotificationSubscriptionManager : INotificationSubscriptionManager,
 
     public async Task SubscribeToAllAvailableNotificationsAsync(Guid userId)
     {
-        var notificationDefinitions = (
-            await _notificationDefinitionManager.GetAllAvailableAsync(userId)
-            )
-            .Where(nd => nd.EntityType == null)
-            .ToList();
+        var notificationDefinitions = await _notificationDefinitionManager.GetAllAvailableAsync(userId);
 
         foreach (var notificationDefinition in notificationDefinitions)
         {

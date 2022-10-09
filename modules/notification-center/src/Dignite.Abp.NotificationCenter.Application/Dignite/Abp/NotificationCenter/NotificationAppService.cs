@@ -28,18 +28,26 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     /// <summary>
     /// Get the notification subscription of the current user
     /// </summary>
+    /// <remarks>
+    /// Contains notifications available and subscribed to by the current user
+    /// </remarks>
     /// <returns></returns>
     [Authorize]
-    public async Task<ListResultDto<NotificationSubscriptionDto>> GetSubscribedAsync()
+    public async Task<ListResultDto<NotificationSubscriptionDto>> GetAllAvailableSubscribeAsync()
     {
-        var result = await _subscriptionManager.GetSubscribedNotificationsAsync(CurrentUser.Id.Value);
-        var dto = ObjectMapper.Map<List<NotificationSubscriptionInfo>, List<NotificationSubscriptionDto>>(result);
-        foreach (var subscription in dto)
-        {
-            var notificationDefinition = _notificationDefinitionManager.Get(subscription.NotificationName);
-            subscription.DisplayName = notificationDefinition.DisplayName?.Localize(StringLocalizerFactory);
-            subscription.Description = notificationDefinition.Description?.Localize(StringLocalizerFactory);
-        }
+        var userId = CurrentUser.Id.Value;
+        var subscribedNotifications = await _subscriptionManager.GetSubscribedNotificationsAsync(userId);
+        var availableNotificationDefinitions = await _notificationDefinitionManager.GetAllAvailableAsync(userId);
+
+        var dto = availableNotificationDefinitions.Select(nd=>
+                new NotificationSubscriptionDto(
+                    nd.Name,
+                    nd.DisplayName?.Localize(StringLocalizerFactory),
+                    nd.Description?.Localize(StringLocalizerFactory),
+                    subscribedNotifications.Any(sn=>sn.NotificationName==nd.Name)
+                )
+            ).ToList();
+
 
         return new ListResultDto<NotificationSubscriptionDto>(dto);
     }
@@ -76,9 +84,9 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     /// Deletes user notification.
     /// </summary>
     [Authorize]
-    public async Task DeleteAsync([NotNull] Guid notificationId)
+    public async Task DeleteAsync([NotNull] Guid id)
     {
-        await _userNotificationManager.DeleteUserNotificationAsync(CurrentUser.Id.Value, notificationId);
+        await _userNotificationManager.DeleteUserNotificationAsync(CurrentUser.Id.Value, id);
     }
 
     /// <summary>

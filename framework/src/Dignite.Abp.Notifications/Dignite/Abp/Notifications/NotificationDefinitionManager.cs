@@ -77,8 +77,9 @@ public abstract class NotificationDefinitionManager : INotificationDefinitionMan
     public virtual async Task<IReadOnlyList<NotificationDefinition>> GetAllAvailableAsync(Guid userId)
     {
         var availableDefinitions = new List<NotificationDefinition>();
+        var notificationDefinitions = GetAll().Where(nd=>nd.EntityType==null);
 
-        foreach (var notificationDefinition in GetAll())
+        foreach (var notificationDefinition in notificationDefinitions)
         {
             if (await FeatureCheckAsync(notificationDefinition)
                 && await PermissionCheckAsync(notificationDefinition, userId)

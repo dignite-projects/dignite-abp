@@ -56,4 +56,9 @@ public partial class NotificationsTool: IAsyncDisposable
             await hubConnection.DisposeAsync();
         }
     }
+
+    private void NavigateToNotificationCenter()
+    {
+        Navigation.NavigateTo("/notification-center");
+    }
 }

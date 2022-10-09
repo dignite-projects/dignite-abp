@@ -17,6 +17,7 @@
     <RootNamespace />
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Dignite.Abp.Notification.SignalRNotifier' " />
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="5.3.4" />
   </ItemGroup>

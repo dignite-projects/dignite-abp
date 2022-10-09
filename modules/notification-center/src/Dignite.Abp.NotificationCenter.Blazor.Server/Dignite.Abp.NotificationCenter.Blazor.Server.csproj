@@ -9,10 +9,12 @@
 
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="5.3.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Blazor\Dignite.Abp.NotificationCenter.Blazor.csproj" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Notifications.SignalRNotifier\Dignite.Abp.Notifications.SignalRNotifier.csproj" />
     </ItemGroup>
 
 </Project>

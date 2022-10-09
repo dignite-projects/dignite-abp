@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications", "..\..\framework\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj", "{44409F64-47A3-4129-A2DF-62AC7BE35E6C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.SignalR", "..\..\framework\src\Dignite.Abp.Notifications.SignalR\Dignite.Abp.Notifications.SignalR.csproj", "{00E03138-4BBF-455B-9D90-B0159E079033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.SignalRNotifier", "..\..\framework\src\Dignite.Abp.Notifications.SignalRNotifier\Dignite.Abp.Notifications.SignalRNotifier.csproj", "{00E03138-4BBF-455B-9D90-B0159E079033}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{A6458654-A086-4E47-9BB3-13FA2F0D7AA7}"
 EndProject

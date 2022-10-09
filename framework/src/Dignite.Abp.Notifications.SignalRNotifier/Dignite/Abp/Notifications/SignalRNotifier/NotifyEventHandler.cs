@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
 
-namespace Dignite.Abp.Notifications.SignalR;
+namespace Dignite.Abp.Notifications.SignalRNotifier;
 
 public class NotifyEventHandler : IDistributedEventHandler<RealTimeNotifyEto>, ITransientDependency
 {

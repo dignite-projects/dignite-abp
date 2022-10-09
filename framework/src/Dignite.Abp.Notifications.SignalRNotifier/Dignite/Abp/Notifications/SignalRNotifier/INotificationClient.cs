@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Dignite.Abp.Notifications.SignalR;
+namespace Dignite.Abp.Notifications.SignalRNotifier;
 
 public interface INotificationClient
 {

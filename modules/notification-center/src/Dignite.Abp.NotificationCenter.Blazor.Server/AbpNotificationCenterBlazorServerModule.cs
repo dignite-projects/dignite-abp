@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.NotificationCenter.Blazor.Server.Bundling;
+using Dignite.Abp.Notifications.SignalRNotifier;
 using Volo.Abp.AspNetCore.Components.Server.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -8,7 +9,8 @@ namespace Dignite.Abp.NotificationCenter.Blazor.Server;
 
 [DependsOn(
     typeof(AbpAspNetCoreComponentsServerThemingModule),
-    typeof(AbpNotificationCenterBlazorModule)
+    typeof(AbpNotificationCenterBlazorModule),
+    typeof(AbpNotificationsSignalRNotifierModule)
     )]
 public class AbpNotificationCenterBlazorServerModule : AbpModule
 {

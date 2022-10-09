@@ -2,7 +2,29 @@
 @using Microsoft.Extensions.Localization
 @using global::Dignite.Abp.NotificationCenter.Localization
 @inject IStringLocalizer<NotificationCenterResource> L
+@inject INotificationAppService NotificationAppService
 @{
 }
 <h1>NotificationCenter</h1>
 <p>@L["SamplePageMessage"]</p>
+
+@if (userNotifications != null && userNotifications.Any())
+{
+    <ListGroup Flush>
+        @foreach (var item in userNotifications)
+            {
+        <ListGroupItem>
+            <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
+                <Heading Size="HeadingSize.Is5" Margin="Margin.Is1.FromBottom">@item.NotificationDisplayName</Heading>
+                <Small>@item.CreationTime</Small>
+            </Div>
+            <Paragraph Margin="Margin.Is1.FromBottom">@item.Data.Type</Paragraph>
+        </ListGroupItem>
+            }
+    </ListGroup>
+}
+
+@if (skipCount < totalCount)
+{
+    <SubmitButton Clicked="@LoadMoreAsync" />
+}

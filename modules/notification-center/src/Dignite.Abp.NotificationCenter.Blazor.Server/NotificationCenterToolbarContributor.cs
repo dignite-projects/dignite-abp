@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Dignite.Abp.NotificationCenter.Blazor.Pages.NotificationCenter;
+using Dignite.Abp.NotificationCenter.Blazor.Server.Pages.NotificationCenter;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
 
 namespace Dignite.Abp.NotificationCenter.Blazor.Server;

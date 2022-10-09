@@ -1,0 +1,10 @@
+﻿
+<Button Color="Color.Primary" Position="Position.Relative">
+    <BarIcon IconName="IconName.Bell"></BarIcon>
+    @if (notificationCount > 0)
+        {
+    <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle">
+        @notificationCount
+    </Badge>
+        }
+</Button>

@@ -67,7 +67,7 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     /// Updates all notification states for current user.
     /// </summary>
     [Authorize]
-    public async Task UpdateStatesAsync([NotNull] UserNotificationState state)
+    public async Task UpdateAllStatesAsync([NotNull] UserNotificationState state)
     {
         await _userNotificationManager.UpdateAllUserNotificationStatesAsync(CurrentUser.Id.Value, state);
     }

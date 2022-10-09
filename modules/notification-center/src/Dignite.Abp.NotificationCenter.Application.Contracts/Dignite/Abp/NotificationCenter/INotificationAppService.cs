@@ -29,7 +29,7 @@ public interface INotificationAppService : IApplicationService
     /// <summary>
     /// Updates all notification states for current user.
     /// </summary>
-    Task UpdateStatesAsync([NotNull] UserNotificationState state);
+    Task UpdateAllStatesAsync([NotNull] UserNotificationState state);
 
     /// <summary>
     /// Deletes user notification.

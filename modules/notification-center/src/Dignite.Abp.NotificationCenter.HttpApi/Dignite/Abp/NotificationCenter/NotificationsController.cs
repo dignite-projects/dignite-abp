@@ -62,9 +62,9 @@ public class NotificationsController : NotificationCenterController, INotificati
     [Authorize]
     [HttpPut]
     [Route("update-all-state")]
-    public async Task UpdateStatesAsync([NotNull] UserNotificationState state)
+    public async Task UpdateAllStatesAsync([NotNull] UserNotificationState state)
     {
-        await _notificationsAppService.UpdateStatesAsync(state);
+        await _notificationsAppService.UpdateAllStatesAsync(state);
     }
 
     /// <summary>

@@ -44,7 +44,7 @@ public class EfCoreNotificationSubscriptionRepository : EfCoreRepository<INotifi
     public async Task<List<NotificationSubscription>> GetListAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-            .Where(un => un.UserId == userId)
+            .Where(un => un.UserId == userId && un.EntityTypeName.IsNullOrEmpty())
             .ToListAsync(
                 GetCancellationToken(cancellationToken)
             );

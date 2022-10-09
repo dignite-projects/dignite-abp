@@ -15,6 +15,8 @@ public partial class NotificationsTool: IAsyncDisposable
     [Inject]
     private NavigationManager Navigation { get; set; }
 
+    [Inject] INotificationAppService NotificationAppService { get; set; }
+
     /// <summary>
     /// Hub Connection
     /// </summary>
@@ -40,6 +42,8 @@ public partial class NotificationsTool: IAsyncDisposable
             })
             .Build();
 
+        notificationCount = await NotificationAppService.GetCountAsync(UserNotificationState.Unread);
+
         hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", (notification) =>
         {
             notificationCount++;
@@ -47,6 +51,8 @@ public partial class NotificationsTool: IAsyncDisposable
         });
 
         await hubConnection.StartAsync();
+
+        await base.OnInitializedAsync();
     }
 
     public async ValueTask DisposeAsync()

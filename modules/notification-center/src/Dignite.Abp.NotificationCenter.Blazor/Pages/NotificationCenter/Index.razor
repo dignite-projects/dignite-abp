@@ -2,6 +2,7 @@
 @using Volo.Abp.AspNetCore.Components
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 @inject INotificationAppService NotificationAppService
+@inject INotificationDataComponentSelector NotificationDataComponentSelector
 @inherits AbpComponentBase
 
 <PageTitle>@L["NotificationCenter"]</PageTitle>
@@ -15,13 +16,17 @@
     {    
         <ListGroup Flush>
             @foreach (var item in userNotifications)
-            {
+                {
+                    var component = NotificationDataComponentSelector.Get(item.Data.Type);
+                    var parameters = new Dictionary<string, object>() {
+                        { "NotificationData",item.Data}
+                    };
                 <ListGroupItem>
                     <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
-                        <Small >@(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
+                        <Small>@(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
                         <Small>@item.CreationTime</Small>
                     </Div>
-                    <Paragraph Margin="Margin.Is1.FromBottom">@item.Data.Type</Paragraph>
+                    <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
                 </ListGroupItem>
             }
         </ListGroup>
@@ -48,14 +53,14 @@
                 <ListGroup Flush>
                     @foreach (var item in availableSubscriptions)
                     {
-                    <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Start">
-                            <Paragraph>
+                    <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Start" Padding="Padding.Is0.FromStart.Is0.FromEnd">
+                        <Paragraph>
                             @item.DisplayName
                             <Small Display="Display.Block" TextColor="TextColor.Secondary">
                                 @item.Description
                             </Small>
                         </Paragraph>
-                            <Switch TValue="bool" Checked="@item.IsSubscribed" CheckedChanged="@(e => OnSubscribeChanged(e, item.DisplayName))"></Switch>
+                        <Switch TValue="bool" Checked="@item.IsSubscribed" CheckedChanged="@(e => OnSubscribeChanged(e, item.NotificationName))"></Switch>
                     </ListGroupItem>
                     }
                 </ListGroup>

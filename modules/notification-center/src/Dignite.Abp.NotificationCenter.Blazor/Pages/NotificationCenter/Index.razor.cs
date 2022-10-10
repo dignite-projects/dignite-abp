@@ -103,6 +103,8 @@ public partial class Index
     {
         try
         {
+            availableSubscriptions.Single(s => s.NotificationName == notificationName).IsSubscribed=isSubscribe;
+
             if (isSubscribe)
                 await NotificationAppService.SubscribeAsync(notificationName);
             else

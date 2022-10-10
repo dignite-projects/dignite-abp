@@ -18,6 +18,13 @@ public interface INotificationAppService : IApplicationService
     /// <returns></returns>
     Task<ListResultDto<NotificationSubscriptionDto>> GetAllAvailableSubscribeAsync();
 
+
+    /// <summary>
+    /// Subscribes to a notification for current user and notification informations.
+    /// </summary>
+    /// <param name="notificationName">Name of the notification.</param>
+    Task SubscribeAsync([NotNull] string notificationName);
+
     /// <summary>
     /// Unsubscribe from current user's notification
     /// </summary>

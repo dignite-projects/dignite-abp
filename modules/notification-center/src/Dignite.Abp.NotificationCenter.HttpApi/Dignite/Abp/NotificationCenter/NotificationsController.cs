@@ -33,6 +33,15 @@ public class NotificationsController : NotificationCenterController, INotificati
         return await _notificationsAppService.GetAllAvailableSubscribeAsync();
     }
 
+
+    [Authorize]
+    [HttpPost]
+    [Route("subscribe")]
+    public async Task SubscribeAsync([NotNull] string notificationName)
+    {
+        await _notificationsAppService.SubscribeAsync(notificationName);
+    }
+
     /// <summary>
     /// Unsubscribe from current user's notification
     /// </summary>

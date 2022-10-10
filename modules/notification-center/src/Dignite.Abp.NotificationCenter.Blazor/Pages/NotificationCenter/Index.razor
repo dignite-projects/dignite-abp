@@ -1,30 +1,65 @@
 @page "/notification-center"
-@using Microsoft.Extensions.Localization
-@using global::Dignite.Abp.NotificationCenter.Localization
-@inject IStringLocalizer<NotificationCenterResource> L
+@using Volo.Abp.AspNetCore.Components
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 @inject INotificationAppService NotificationAppService
-@{
-}
-<h1>NotificationCenter</h1>
-<p>@L["SamplePageMessage"]</p>
+@inherits AbpComponentBase
 
-@if (userNotifications != null && userNotifications.Any())
-{
-    <ListGroup Flush>
-        @foreach (var item in userNotifications)
+<PageTitle>@L["NotificationCenter"]</PageTitle>
+
+<Container Breakpoint="Breakpoint.Mobile">
+    @* ************************* PAGE HEADER ************************* *@
+    <PageHeader Title="@L["NotificationCenter"]"
+                Toolbar="@Toolbar">
+    </PageHeader>
+    @if (userNotifications != null && userNotifications.Any())
+    {    
+        <ListGroup Flush>
+            @foreach (var item in userNotifications)
             {
-        <ListGroupItem>
-            <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
-                <Heading Size="HeadingSize.Is5" Margin="Margin.Is1.FromBottom">@item.NotificationDisplayName</Heading>
-                <Small>@item.CreationTime</Small>
-            </Div>
-            <Paragraph Margin="Margin.Is1.FromBottom">@item.Data.Type</Paragraph>
-        </ListGroupItem>
+                <ListGroupItem>
+                    <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
+                        <Small >@(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
+                        <Small>@item.CreationTime</Small>
+                    </Div>
+                    <Paragraph Margin="Margin.Is1.FromBottom">@item.Data.Type</Paragraph>
+                </ListGroupItem>
             }
-    </ListGroup>
-}
+        </ListGroup>
 
-@if (skipCount < totalCount)
-{
-    <SubmitButton Clicked="@LoadMoreAsync" />
-}
+        @if (skipCount < totalCount)
+        {
+            <SubmitButton Clicked="@LoadMoreAsync" Block Color="Color.Secondary">
+                @L["ButtonLoadMoreText"]
+            </SubmitButton>
+        }
+    }
+</Container>
+
+
+@* ************************* Subscribe Modal ************************* *@
+<Modal @ref="CreateModal" Closing="@ClosingCreateModal">
+    <ModalContent Centered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["Subscribe"]</ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <ListGroup Flush>
+                    @foreach (var item in availableSubscriptions)
+                    {
+                    <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Start">
+                            <Paragraph>
+                            @item.DisplayName
+                            <Small Display="Display.Block" TextColor="TextColor.Secondary">
+                                @item.Description
+                            </Small>
+                        </Paragraph>
+                            <Switch TValue="bool" Checked="@item.IsSubscribed" CheckedChanged="@(e => OnSubscribeChanged(e, item.DisplayName))"></Switch>
+                    </ListGroupItem>
+                    }
+                </ListGroup>
+            </ModalBody>
+        </Form>
+    </ModalContent>
+</Modal>

@@ -23,8 +23,6 @@ public static class NotificationCenterDbContextModelCreatingExtensions
             b.Property(ns => ns.EntityTypeName).HasMaxLength(NotificationConsts.MaxEntityTypeNameLength);
             b.Property(ns => ns.EntityId).HasMaxLength(NotificationConsts.MaxEntityIdLength);
 
-            //Keys
-            b.HasKey(x => new { x.UserId, x.NotificationName, x.EntityTypeName, x.EntityId });
 
             //Indexes
             b.HasIndex(ns => new {

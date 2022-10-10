@@ -1,7 +1,8 @@
 {
   "culture": "en",
   "texts": {
-    "MyAccount": "My account",
-    "SamplePageMessage": "A sample page for the NotificationCenter module"
+    "NotificationCenter": "Notification Center",
+    "Subscribe": "Subscribe",
+    "ButtonLoadMoreText": "Load More"
   }
 }

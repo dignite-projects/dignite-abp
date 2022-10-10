@@ -53,6 +53,16 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     }
 
     /// <summary>
+    /// Subscribes to a notification for current user and notification informations.
+    /// </summary>
+    /// <param name="notificationName">Name of the notification.</param>
+    [Authorize]
+    public async Task SubscribeAsync([NotNull] string notificationName)
+    {
+        await _subscriptionManager.SubscribeAsync(CurrentUser.Id.Value, notificationName);
+    }
+
+    /// <summary>
     /// Unsubscribe from current user's notification
     /// </summary>
     /// <returns></returns>
@@ -116,7 +126,7 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
                 UserId = un.UserNotification.UserId,
                 NotificationId = un.UserNotification.NotificationId,
                 NotificationName = un.Notification.NotificationName,
-                NotificationDisplayName = _notificationDefinitionManager.Get(un.Notification.NotificationName)?.DisplayName?.Localize(StringLocalizerFactory),
+                NotificationDisplayName = _notificationDefinitionManager.GetOrNull(un.Notification.NotificationName)?.DisplayName?.Localize(StringLocalizerFactory),
                 Data = un.Notification.Data,
                 EntityTypeName = un.Notification.EntityTypeName,
                 EntityId = un.Notification.EntityId,

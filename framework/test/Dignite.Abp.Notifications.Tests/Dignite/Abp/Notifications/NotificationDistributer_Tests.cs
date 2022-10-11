@@ -19,7 +19,7 @@ public class NotificationDistributer_Tests : NotificationsTestBase
     public async Task Should_Distribute_Notification_Using_Custom_Distributer()
     {
         //Arrange
-        var notificationData = new NotificationData();
+        var notificationData = new MessageNotificationData("NotificationMessage");
 
         //Act
         await _publisher.PublishAsync("TestNotification", notificationData,

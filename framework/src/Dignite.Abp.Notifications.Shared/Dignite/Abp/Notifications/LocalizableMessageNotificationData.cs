@@ -1,5 +1,6 @@
 ﻿using System;
-using Volo.Abp.Localization;
+using JetBrains.Annotations;
+using Volo.Abp;
 
 namespace Dignite.Abp.Notifications;
 
@@ -10,19 +11,29 @@ namespace Dignite.Abp.Notifications;
 public class LocalizableMessageNotificationData : NotificationData
 {
     /// <summary>
-    /// The message.
+    /// The localizabl string ResourceName.
     /// </summary>
-    public LocalizableString Message {
-        get {
-            return _message ?? (this[nameof(Message)] as LocalizableString);
-        }
+    public string ResourceName {
+        get { return _resourceName ?? (this[nameof(ResourceName)] as string); }
         set {
-            this[nameof(Message)] = value;
-            _message = value;
+            this[nameof(ResourceName)] = value;
+            _resourceName = value;
         }
     }
+    private string _resourceName;
 
-    private LocalizableString _message;
+    /// <summary>
+    /// The localizabl string name.
+    /// </summary>
+    public string Name {
+        get { return _name ?? (this[nameof(Name)] as string); }
+        set {
+            this[nameof(Name)] = value;
+            _name = value;
+        }
+    }
+    private string _name;
+
 
     /// <summary>
     /// Needed for serialization.
@@ -34,9 +45,11 @@ public class LocalizableMessageNotificationData : NotificationData
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalizableMessageNotificationData"/> class.
     /// </summary>
-    /// <param name="message">The message.</param>
-    public LocalizableMessageNotificationData(LocalizableString message)
+    /// <param name="name">The localizabl string name.</param>
+    /// <param name="resourceName">The localizabl string resourceName.</param>
+    public LocalizableMessageNotificationData([NotNull] string name, [CanBeNull] string resourceName = null)
     {
-        Message = message;
+        Name = Check.NotNullOrEmpty(name, nameof(name));
+        ResourceName = resourceName;
     }
 }

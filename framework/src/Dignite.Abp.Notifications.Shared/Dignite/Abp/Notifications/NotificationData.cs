@@ -38,10 +38,7 @@ public class NotificationData
             /* Not assign value, but add dictionary items. This is required for backward compability. */
             foreach (var keyValue in value)
             {
-                if (!_properties.ContainsKey(keyValue.Key))
-                {
-                    _properties[keyValue.Key] = keyValue.Value;
-                }
+                _properties[keyValue.Key]=keyValue.Value;
             }
         }
     }

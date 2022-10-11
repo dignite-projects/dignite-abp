@@ -110,7 +110,7 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         var userNotifications = new List<UserNotificationInfo>();
         foreach (var user in users)
         {
-            var userNotification = new UserNotificationInfo(user, notificationInfo.Id, notificationInfo.TenantId);
+            var userNotification = new UserNotificationInfo(user, notificationInfo.Id, UserNotificationState.Unread, notificationInfo.TenantId);
             await NotificationStore.InsertUserNotificationAsync(userNotification);
             userNotifications.Add(userNotification);
         }

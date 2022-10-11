@@ -45,7 +45,7 @@ public class NotificationStore : INotificationStore, ITransientDependency
     /// </summary>
     public async Task DeleteSubscriptionAsync(Guid userId, string notificationName, string entityTypeName, string entityId)
     {
-        if (!await IsSubscribedAsync(userId, notificationName, entityTypeName, entityId))
+        if (await IsSubscribedAsync(userId, notificationName, entityTypeName, entityId))
         {
             var notificationSubscription = await _notificationSubscriptionRepository.FindAsync(userId, notificationName, entityTypeName, entityId);
             await _notificationSubscriptionRepository.DeleteAsync(notificationSubscription);
@@ -193,6 +193,7 @@ public class NotificationStore : INotificationStore, ITransientDependency
                     new UserNotificationInfo(
                         un.UserId,
                         un.NotificationId,
+                        un.State,
                         un.TenantId),
                     new NotificationInfo(
                         notification.Id,

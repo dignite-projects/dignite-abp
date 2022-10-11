@@ -7,11 +7,11 @@ namespace Dignite.Abp.Notifications;
 /// </summary>
 public class UserNotificationInfo
 {
-    public UserNotificationInfo(Guid userId, Guid notificationId, Guid? tenantId)
+    public UserNotificationInfo(Guid userId, Guid notificationId, UserNotificationState state, Guid? tenantId)
     {
         UserId = userId;
         NotificationId = notificationId;
-        State = UserNotificationState.Unread;
+        State = state;
         TenantId = tenantId;
     }
 

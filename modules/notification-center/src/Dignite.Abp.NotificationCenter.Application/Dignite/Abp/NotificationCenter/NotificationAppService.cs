@@ -123,6 +123,7 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
         return new ListResultDto<UserNotificationDto>(
             result.Select(un => new UserNotificationDto
             {
+                Id=un.Notification.Id,
                 UserId = un.UserNotification.UserId,
                 NotificationId = un.UserNotification.NotificationId,
                 NotificationName = un.Notification.NotificationName,

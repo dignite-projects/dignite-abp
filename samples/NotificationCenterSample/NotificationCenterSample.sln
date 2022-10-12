@@ -1,0 +1,138 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationCenterSample", "src\NotificationCenterSample.csproj", "{2E19BC05-F78C-4907-A059-C29A4859ADB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification-Center", "Notification-Center", "{752E2B95-A458-4465-BC67-912535C065BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abp-Modules", "Abp-Modules", "{9445592D-3810-4F83-B16E-A3F8B1170551}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Shared", "..\..\framework\src\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj", "{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications", "..\..\framework\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj", "{E78C60B1-4359-4DFB-9C28-E53C4970E930}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.SignalRNotifier", "..\..\framework\src\Dignite.Abp.Notifications.SignalRNotifier\Dignite.Abp.Notifications.SignalRNotifier.csproj", "{03158871-32FD-400D-8DE2-FA39194273EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Application", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Application\Dignite.Abp.NotificationCenter.Application.csproj", "{1F3935AD-2ED4-4C56-B2FE-D52F77C03907}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Application.Contracts", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Application.Contracts\Dignite.Abp.NotificationCenter.Application.Contracts.csproj", "{F6D74B88-52A6-4C59-9E95-8988F8EF772C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Blazor\Dignite.Abp.NotificationCenter.Blazor.csproj", "{AC018E3E-7CDA-4146-9828-83FBC5C0C941}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Blazor.Server", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Blazor.Server\Dignite.Abp.NotificationCenter.Blazor.Server.csproj", "{CADC7D7C-EE88-408E-9999-15601B7B22EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Domain", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Domain\Dignite.Abp.NotificationCenter.Domain.csproj", "{F56265A9-68E8-4E97-B564-28145A35ED08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.Domain.Shared", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.Domain.Shared\Dignite.Abp.NotificationCenter.Domain.Shared.csproj", "{3B3AB27B-F9BF-4574-BB78-5D70244A0499}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.EntityFrameworkCore", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.EntityFrameworkCore\Dignite.Abp.NotificationCenter.EntityFrameworkCore.csproj", "{C5499539-D399-4B31-9F80-DB72385E4FFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Identity", "..\..\modules\notification-center\src\Dignite.Abp.Notifications.Identity\Dignite.Abp.Notifications.Identity.csproj", "{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.NotificationCenter.HttpApi", "..\..\modules\notification-center\src\Dignite.Abp.NotificationCenter.HttpApi\Dignite.Abp.NotificationCenter.HttpApi.csproj", "{C0A9ADD5-D3AB-41A5-9317-658C62A84656}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pure-theme", "pure-theme", "{235D31AA-FB7C-4F90-B578-B71DC811805A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.Web.PureTheme", "..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Components.Web.PureTheme\Dignite.Abp.AspNetCore.Components.Web.PureTheme.csproj", "{8E90CFA3-BC6E-4F42-8594-2F289571599D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.Server.PureTheme", "..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Components.Server.PureTheme\Dignite.Abp.AspNetCore.Components.Server.PureTheme.csproj", "{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure", "..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj", "{8810D060-CF14-4BDD-B73F-E0E4307E0F4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78C60B1-4359-4DFB-9C28-E53C4970E930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78C60B1-4359-4DFB-9C28-E53C4970E930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78C60B1-4359-4DFB-9C28-E53C4970E930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78C60B1-4359-4DFB-9C28-E53C4970E930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03158871-32FD-400D-8DE2-FA39194273EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03158871-32FD-400D-8DE2-FA39194273EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03158871-32FD-400D-8DE2-FA39194273EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03158871-32FD-400D-8DE2-FA39194273EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F3935AD-2ED4-4C56-B2FE-D52F77C03907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F3935AD-2ED4-4C56-B2FE-D52F77C03907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F3935AD-2ED4-4C56-B2FE-D52F77C03907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F3935AD-2ED4-4C56-B2FE-D52F77C03907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D74B88-52A6-4C59-9E95-8988F8EF772C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D74B88-52A6-4C59-9E95-8988F8EF772C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D74B88-52A6-4C59-9E95-8988F8EF772C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D74B88-52A6-4C59-9E95-8988F8EF772C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC018E3E-7CDA-4146-9828-83FBC5C0C941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC018E3E-7CDA-4146-9828-83FBC5C0C941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC018E3E-7CDA-4146-9828-83FBC5C0C941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC018E3E-7CDA-4146-9828-83FBC5C0C941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADC7D7C-EE88-408E-9999-15601B7B22EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADC7D7C-EE88-408E-9999-15601B7B22EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADC7D7C-EE88-408E-9999-15601B7B22EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADC7D7C-EE88-408E-9999-15601B7B22EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F56265A9-68E8-4E97-B564-28145A35ED08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F56265A9-68E8-4E97-B564-28145A35ED08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F56265A9-68E8-4E97-B564-28145A35ED08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F56265A9-68E8-4E97-B564-28145A35ED08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B3AB27B-F9BF-4574-BB78-5D70244A0499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B3AB27B-F9BF-4574-BB78-5D70244A0499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B3AB27B-F9BF-4574-BB78-5D70244A0499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B3AB27B-F9BF-4574-BB78-5D70244A0499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5499539-D399-4B31-9F80-DB72385E4FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5499539-D399-4B31-9F80-DB72385E4FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5499539-D399-4B31-9F80-DB72385E4FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5499539-D399-4B31-9F80-DB72385E4FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A9ADD5-D3AB-41A5-9317-658C62A84656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A9ADD5-D3AB-41A5-9317-658C62A84656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A9ADD5-D3AB-41A5-9317-658C62A84656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A9ADD5-D3AB-41A5-9317-658C62A84656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E90CFA3-BC6E-4F42-8594-2F289571599D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E90CFA3-BC6E-4F42-8594-2F289571599D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E90CFA3-BC6E-4F42-8594-2F289571599D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E90CFA3-BC6E-4F42-8594-2F289571599D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8810D060-CF14-4BDD-B73F-E0E4307E0F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8810D060-CF14-4BDD-B73F-E0E4307E0F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8810D060-CF14-4BDD-B73F-E0E4307E0F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8810D060-CF14-4BDD-B73F-E0E4307E0F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D566DB0-EB3C-4B91-B24A-6ECC092831FD} = {9445592D-3810-4F83-B16E-A3F8B1170551}
+		{E78C60B1-4359-4DFB-9C28-E53C4970E930} = {9445592D-3810-4F83-B16E-A3F8B1170551}
+		{03158871-32FD-400D-8DE2-FA39194273EA} = {9445592D-3810-4F83-B16E-A3F8B1170551}
+		{1F3935AD-2ED4-4C56-B2FE-D52F77C03907} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{F6D74B88-52A6-4C59-9E95-8988F8EF772C} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{AC018E3E-7CDA-4146-9828-83FBC5C0C941} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{CADC7D7C-EE88-408E-9999-15601B7B22EF} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{F56265A9-68E8-4E97-B564-28145A35ED08} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{3B3AB27B-F9BF-4574-BB78-5D70244A0499} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{C5499539-D399-4B31-9F80-DB72385E4FFB} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{FC78C60B-D6BC-4BF4-B3FD-24AE5454EF7F} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{C0A9ADD5-D3AB-41A5-9317-658C62A84656} = {752E2B95-A458-4465-BC67-912535C065BB}
+		{8E90CFA3-BC6E-4F42-8594-2F289571599D} = {235D31AA-FB7C-4F90-B578-B71DC811805A}
+		{1DD5E286-A9D5-497D-9708-4DD9DF9AEDF3} = {235D31AA-FB7C-4F90-B578-B71DC811805A}
+		{8810D060-CF14-4BDD-B73F-E0E4307E0F4B} = {235D31AA-FB7C-4F90-B578-B71DC811805A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63E2660C-C1D9-4768-90FD-289F36581842}
+	EndGlobalSection
+EndGlobal

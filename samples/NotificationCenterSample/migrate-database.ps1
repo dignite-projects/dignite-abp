@@ -1,0 +1,1 @@
+dotnet run --project NotificationCenterSample --migrate-database

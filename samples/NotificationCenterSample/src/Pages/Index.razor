@@ -1,0 +1,50 @@
+﻿@page "/"
+@using NotificationCenterSample.Services
+@inherits NotificationCenterSampleComponentBase
+@inject TodoAppService _todoAppService
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                @L["Welcome_Title"]
+            </h5>
+        </div>
+        <div class="card-body">
+            @L["Welcome_Text"]
+        </div>
+    </div>
+    @if (CurrentUser.IsAuthenticated)
+    {
+        <Card Margin="Margin.Is4.OnY">
+            <CardHeader>
+                <CardTitle>Write a notification</CardTitle>
+            </CardHeader>
+            <CardBody>
+                
+                <Field Horizontal>
+                    <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop">Message</FieldLabel>
+                    <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
+                    <MemoEdit Rows="5" @bind-Text="TodoMessage" />
+                    </FieldBody>
+                </Field>
+
+            <Field Horizontal>
+                <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop"></FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
+                    <Button Color="Color.Primary" Clicked="SendAsync">Send</Button>
+                </FieldBody>
+            </Field>
+            </CardBody>
+        </Card>
+        }
+</div>
+
+@code{
+    private string TodoMessage;
+
+    private async Task SendAsync()
+    {
+        await _todoAppService.CreateAsync(TodoMessage);
+        await Notify.Info("Notification sent successfully");
+    }
+}

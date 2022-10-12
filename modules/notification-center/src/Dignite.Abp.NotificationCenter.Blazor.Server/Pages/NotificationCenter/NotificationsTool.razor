@@ -1,4 +1,7 @@
-﻿
+﻿@using Volo.Abp.AspNetCore.Components
+@inherits AbpComponentBase
+@if(CurrentUser.IsAuthenticated)
+{
 <Button Color="Color.Primary" Position="Position.Relative" Clicked="NavigateToNotificationCenter">
     <BarIcon IconName="IconName.Bell"></BarIcon>
     @if (notificationCount > 0)
@@ -8,3 +11,4 @@
     </Badge>
         }
 </Button>
+}

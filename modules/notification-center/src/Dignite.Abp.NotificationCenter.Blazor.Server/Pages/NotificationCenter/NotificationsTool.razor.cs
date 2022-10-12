@@ -30,27 +30,31 @@ public partial class NotificationsTool: IAsyncDisposable
 
     protected override async Task OnInitializedAsync()
     {
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl(Navigation.ToAbsoluteUri("/signalr-hubs/notifications"), options => {
-                if (HttpContextAccessor.HttpContext != null)
-                {
-                    foreach (var cookie in HttpContextAccessor.HttpContext.Request.Cookies)
-                    {
-                        options.Cookies.Add(new Cookie(cookie.Key, cookie.Value, null, HttpContextAccessor.HttpContext.Request.Host.Host));
-                    }
-                }
-            })
-            .Build();
-
-        notificationCount = await NotificationAppService.GetCountAsync(UserNotificationState.Unread);
-
-        hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", (notification) =>
+        if (CurrentUser.IsAuthenticated)
         {
-            notificationCount++;
-            InvokeAsync(StateHasChanged);
-        });
+            hubConnection = new HubConnectionBuilder()
+                .WithUrl(Navigation.ToAbsoluteUri("/signalr-hubs/notifications"), options =>
+                {
+                    if (HttpContextAccessor.HttpContext != null)
+                    {
+                        foreach (var cookie in HttpContextAccessor.HttpContext.Request.Cookies)
+                        {
+                            options.Cookies.Add(new Cookie(cookie.Key, cookie.Value, null, HttpContextAccessor.HttpContext.Request.Host.Host));
+                        }
+                    }
+                })
+                .Build();
 
-        await hubConnection.StartAsync();
+            notificationCount = await NotificationAppService.GetCountAsync(UserNotificationState.Unread);
+
+            hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", (notification) =>
+            {
+                notificationCount++;
+                InvokeAsync(StateHasChanged);
+            });
+
+            await hubConnection.StartAsync();
+        }
 
         await base.OnInitializedAsync();
     }

@@ -1,6 +1,8 @@
 {
   "culture": "zh-Hans",
   "texts": {
+    "NotificationCenter": "通知中心",
+    "Subscribe": "订阅",
     "ButtonLoadMoreText": "加载更多"
   }
 }

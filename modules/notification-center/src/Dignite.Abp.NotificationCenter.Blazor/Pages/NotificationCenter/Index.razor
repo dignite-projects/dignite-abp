@@ -14,7 +14,7 @@
     </PageHeader>
     @if (userNotifications != null && userNotifications.Any())
     {    
-        <ListGroup Flush>
+        <ListGroup Margin="Margin.Is3.FromBottom">
             @foreach (var item in userNotifications)
                 {
                     var component = NotificationDataComponentSelector.Get(item.Data.Type);
@@ -22,8 +22,13 @@
                         { "NotificationData",item.Data}
                     };
                 <ListGroupItem>
-                    <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100">
-                        <Small>@(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
+                    <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100" TextColor="TextColor.Secondary">
+                        <Small>
+                            @if (item.State == Notifications.UserNotificationState.Unread)
+                            {
+                                <Span Background="Background.Primary" Class="unread-badge"></Span>
+                            }
+                            @(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
                         <Small>@item.CreationTime</Small>
                     </Div>
                     <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>

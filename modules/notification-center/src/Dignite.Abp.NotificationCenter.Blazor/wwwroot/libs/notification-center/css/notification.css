@@ -1,0 +1,7 @@
+.unread-badge {
+width:10px;
+height:10px;
+display:inline-block;
+border-radius:50%;
+margin-right:0.25rem;
+}

@@ -29,6 +29,11 @@ public partial class Index
         totalCount = await NotificationAppService.GetCountAsync(null);
         userNotifications = await GetListAsync();
         availableSubscriptions = (await NotificationAppService.GetAllAvailableSubscribeAsync()).Items;
+
+
+        //Set each notification as read
+        await NotificationAppService.UpdateAllStatesAsync(Notifications.UserNotificationState.Read);
+
         await base.OnInitializedAsync();
     }
 
@@ -61,8 +66,8 @@ public partial class Index
         var list= (await NotificationAppService.GetListAsync(null, skipCount, maxResultCount))
             .Items
             .ToList();
-
         skipCount += maxResultCount;
+
         return list;
     }
 

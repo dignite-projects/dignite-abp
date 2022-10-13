@@ -2,7 +2,7 @@
 @inject IBrandingProvider BrandingProvider
 @inherits BaseComponent
 <Bar ElementId="@ElementId" @ref="@Sidebar" Breakpoint="Breakpoint.Desktop" Class="@Class" Style="@Style" NavigationBreakpoint="Breakpoint" ThemeContrast="ThemeContrast.Light"
-     Mode="BarMode.VerticalInline" CollapseMode="collapseMode">
+     Mode="BarMode.VerticalInline" CollapseMode="collapseMode" Shadow="Shadow.Default">
     @if (isBroken)
     {
         <BarBrand>

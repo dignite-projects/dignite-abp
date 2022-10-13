@@ -28,7 +28,6 @@ public class AbpNotificationCenterBlazorServerModule : AbpModule
                 .Add(NotificationCenterBundles.Styles.Global, bundle =>
                 {
                     bundle
-                        .AddBaseBundles(NotificationCenterBundles.Styles.Global)
                         .AddContributors(typeof(NotificationCenterStyleContributor));
                 });
         });

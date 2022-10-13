@@ -19,8 +19,8 @@ public partial class Index
     private List<UserNotificationDto> userNotifications = null;
     private IReadOnlyList<NotificationSubscriptionDto> availableSubscriptions=new List<NotificationSubscriptionDto>();
 
-    protected PageToolbar Toolbar { get; } = new();
-    protected Modal CreateModal;
+    private PageToolbar Toolbar { get; } = new();
+    private Modal CreateModal;
 
 
     protected override async Task OnInitializedAsync()
@@ -37,7 +37,7 @@ public partial class Index
         await base.OnInitializedAsync();
     }
 
-    protected async Task SetToolbarItemsAsync()
+    private async Task SetToolbarItemsAsync()
     {
         Toolbar.AddButton(
             "", 
@@ -71,7 +71,7 @@ public partial class Index
         return list;
     }
 
-    protected virtual async Task OpenCreateModalAsync()
+    private async Task OpenCreateModalAsync()
     {
         try
         {
@@ -91,7 +91,7 @@ public partial class Index
         }
     }
 
-    protected virtual Task ClosingCreateModal(ModalClosingEventArgs eventArgs)
+    private Task ClosingCreateModal(ModalClosingEventArgs eventArgs)
     {
         // cancel close if clicked outside of modal area
         eventArgs.Cancel = eventArgs.CloseReason == CloseReason.FocusLostClosing;
@@ -99,12 +99,12 @@ public partial class Index
         return Task.CompletedTask;
     }
 
-    protected virtual Task CloseCreateModalAsync()
+    private Task CloseCreateModalAsync()
     {
         return InvokeAsync(CreateModal.Hide);
     }
 
-    protected virtual async Task OnSubscribeChanged(bool isSubscribe,string notificationName)
+    private async Task OnSubscribeChanged(bool isSubscribe,string notificationName)
     {
         try
         {

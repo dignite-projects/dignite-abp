@@ -67,8 +67,6 @@ namespace NotificationCenterSample;
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpAspNetCoreMvcUiPureThemeModule),
-    typeof(AbpAspNetCoreComponentsServerPureThemeModule),
 
     // Account module packages
     typeof(AbpAccountApplicationModule),
@@ -115,7 +113,9 @@ namespace NotificationCenterSample;
     typeof(AbpNotificationCenterEntityFrameworkCoreModule),
     typeof(AbpNotificationCenterHttpApiModule),
     typeof(AbpNotificationCenterBlazorServerModule),
-    typeof(AbpNotificationsIdentityModule)
+    typeof(AbpNotificationsIdentityModule),
+    typeof(AbpAspNetCoreMvcUiPureThemeModule),
+    typeof(AbpAspNetCoreComponentsServerPureThemeModule)
 )]
 public class NotificationCenterSampleModule : AbpModule
 {

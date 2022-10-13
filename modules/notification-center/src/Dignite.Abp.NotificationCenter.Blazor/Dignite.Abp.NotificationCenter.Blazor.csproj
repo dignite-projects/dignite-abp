@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Notifications.Components\Dignite.Abp.Notifications.Components.csproj" />
         <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Application.Contracts\Dignite.Abp.NotificationCenter.Application.Contracts.csproj" />
     </ItemGroup>
 </Project>

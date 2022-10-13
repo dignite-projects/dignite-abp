@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dignite.Abp.Notifications.Components;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
@@ -9,7 +10,8 @@ namespace Dignite.Abp.NotificationCenter.Blazor;
 [DependsOn(
     typeof(AbpNotificationCenterApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(AbpNotificationsComponentsModule)
     )]
 public class AbpNotificationCenterBlazorModule : AbpModule
 {

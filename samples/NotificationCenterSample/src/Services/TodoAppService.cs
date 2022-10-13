@@ -3,11 +3,11 @@ using Volo.Abp.Application.Services;
 
 namespace NotificationCenterSample.Services;
 
-public class TodoAppService : ApplicationService
+public class MessageAppService : ApplicationService
 {
     private readonly INotificationPublisher _publisher;
 
-    public TodoAppService(INotificationPublisher notificationPublisher)
+    public MessageAppService(INotificationPublisher notificationPublisher)
     {
         _publisher = notificationPublisher;
     }

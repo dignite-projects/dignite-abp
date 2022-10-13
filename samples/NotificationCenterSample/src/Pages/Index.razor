@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using NotificationCenterSample.Services
 @inherits NotificationCenterSampleComponentBase
-@inject TodoAppService _todoAppService
+@inject MessageAppService _messageAppService
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -24,7 +24,13 @@
                 <Field Horizontal>
                     <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop">Message</FieldLabel>
                     <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
-                    <MemoEdit Rows="5" @bind-Text="TodoMessage" />
+                        <MemoEdit Rows="5" @bind-Text="message" />
+                    </FieldBody>
+                </Field>
+                <Field Horizontal>
+                    <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is2.OnDesktop">receiver</FieldLabel>
+                    <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is10.OnDesktop">
+                        @CurrentUser.UserName
                     </FieldBody>
                 </Field>
 
@@ -40,11 +46,11 @@
 </div>
 
 @code{
-    private string TodoMessage;
+    private string message;
 
     private async Task SendAsync()
     {
-        await _todoAppService.CreateAsync(TodoMessage);
+        await _messageAppService.CreateAsync(message);
         await Notify.Info("Notification sent successfully");
     }
 }

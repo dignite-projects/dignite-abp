@@ -35,6 +35,10 @@ public partial class NotificationsTool: IAsyncDisposable
             hubConnection = new HubConnectionBuilder()
                 .WithUrl(Navigation.ToAbsoluteUri("/signalr-hubs/notifications"), options =>
                 {
+                    /*
+                     * When connecting with the signalr, you need to tell the signalr hub the connection user information, so the current user is configured here
+                     * See:https://github.com/abpframework/abp/issues/8683
+                    */
                     if (HttpContextAccessor.HttpContext != null)
                     {
                         foreach (var cookie in HttpContextAccessor.HttpContext.Request.Cookies)

@@ -3,6 +3,7 @@
 @using System.Globalization
 @using Dignite.Abp.AspNetCore.Components.Server.PureTheme.Bundling
 @using Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure
+@using Dignite.Abp.NotificationCenter.Blazor.Server.Bundling
 @using Microsoft.AspNetCore.Components.Web
 @using Volo.Abp.Localization
 @{
@@ -20,6 +21,7 @@
     <base href="~/" />
 
     <abp-style-bundle name="@BlazorPureThemeBundles.Styles.Global" />
+    <abp-style-bundle name="@NotificationCenterBundles.Styles.Global" />
 </head>
 <body class="abp-application-layout bg-light @rtl">
     <component type="typeof(App)" render-mode="Server" />

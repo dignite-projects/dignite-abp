@@ -1,0 +1,13 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Welcome_Title": "欢迎",
+    "Welcome_Text": "这是ABP框架的极简单层应用程序启动模板.",
+    "Menu:Home": "首页",
+    "SettingsGroup": "分组",
+    "SettingsSection": "第一部分",
+    "SettingsSection2": "第二部分",
+    "SettingName1": "设定项1名称",
+    "SettingDescription1": "设定项1描述"
+  }
+}

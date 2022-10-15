@@ -22,14 +22,14 @@ public class SettingManagementMenuContributor : IMenuContributor
 
         administrationMenu.AddItem(new ApplicationMenuItem(
                 SettingManagementMenus.Prefix,
-                l["SettingManagement"],
+                l["Settings"],
                 url: "~/setting-management/global-settings",
                 icon: "fa fa-cog")
             .RequirePermissions(SettingManagementPermissions.Global));
 
         administrationMenu.AddItem(new ApplicationMenuItem(
                 SettingManagementMenus.Prefix,
-                l["SettingManagement"],
+                l["Settings"],
                 url: "~/setting-management/tenant-settings",
                 icon: "fa fa-cog")
             .RequirePermissions(SettingManagementPermissions.Tenant));

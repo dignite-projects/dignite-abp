@@ -1,7 +1,6 @@
-﻿using Volo.Abp.Localization;
+﻿using Dignite.Abp.SettingManagement.Localization;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.SettingManagement.Localization;
-using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Dignite.Abp.SettingManagement;
@@ -23,7 +22,7 @@ public class AbpSettingManagementDomainSharedModule : AbpModule
             options.Resources
                 .Add<AbpSettingManagementResource>("en")
                 .AddBaseTypes(
-                    typeof(AbpValidationResource)
+                    typeof(Volo.Abp.SettingManagement.Localization.AbpSettingManagementResource)
                 ).AddVirtualJson("/Dignite/Abp/SettingManagement/Localization/Resources");
         });
     }

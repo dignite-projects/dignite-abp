@@ -1,6 +1,6 @@
 @page "/setting-management/global-settings"
 @using Dignite.Abp.FieldCustomizing
-@using Dignite.Abp.FieldCustomizing.FieldComponents
+@using Dignite.Abp.FieldCustomizing.Components
 @using Dignite.Abp.SettingManagement.Localization
 @using Volo.Abp.AspNetCore.Components
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
@@ -10,7 +10,7 @@
 @inherits AbpComponentBase
 @code
 {
-    private IReadOnlyList<SettingGroupDto> SettingNavigations;
+    private IReadOnlyList<SettingGroupDto> SettingGroup;
     protected Validations ValidationsRef;
     string selectedTab;
     private SettingObject settingObject= new SettingObject();
@@ -22,17 +22,17 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SettingNavigations = (await settingsAppService.GetAllAsync()).Items;
-        foreach (var settingNav in SettingNavigations)
+        SettingGroup = (await settingsAppService.GetAllAsync()).Items;
+        foreach (var settingNav in SettingGroup)
         {
             foreach (var setting in settingNav.Settings)
             {
                 settingObject.CustomizedFields.Add(setting.Name,setting.Value);
             }
         }
-        if (SettingNavigations.Any())
+        if (SettingGroup.Any())
         {
-            selectedTab = SettingNavigations[0].Name;
+            selectedTab = SettingGroup[0].Name;
         }
         await base.OnInitializedAsync();
     }
@@ -55,7 +55,7 @@
             }
             if (validate)
             {
-                var settingNav = SettingNavigations.Single(m => m.Name == selectedTab);
+                var settingNav = SettingGroup.Single(m => m.Name == selectedTab);
                 var input = new UpdateGlobalSettingsInputForClientProxy(settingNav.Settings);
                 input.GroupName = settingNav.Name;
                 input.CustomizedFields = settingObject.CustomizedFields;
@@ -82,20 +82,20 @@
     }
 }
 
-<PageHeader Title="@L["SettingManagement"]"></PageHeader>
+<PageHeader Title="@L["Settings"]"></PageHeader>
 <Blazorise.Form>
-    <Blazorise.Validations @ref="@ValidationsRef" Model="@settingObject" ValidateOnLoad="false">  
-@if(SettingNavigations!=null)
+    <Blazorise.Validations @ref="@ValidationsRef" Model="@settingObject" ValidateOnLoad="false">
+        @if (SettingGroup != null)
 {
 <Tabs TabPosition="TabPosition.Start" Pills="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
     <Items>
-        @foreach(var settingNav in SettingNavigations)
+        @foreach (var settingNav in SettingGroup)
         {
             <Tab Name="@settingNav.Name">@settingNav.DisplayName</Tab>
         }
     </Items>
     <Content>
-            @foreach(var settingNav in SettingNavigations)
+            @foreach (var settingNav in SettingGroup)
             {
                 var groups = settingNav.Settings.Where(s => s.Section != null).Select(s=>s.Section).Distinct().ToList();
                 var ungroupedSettings = settingNav.Settings.Where(s => s.Section == null);

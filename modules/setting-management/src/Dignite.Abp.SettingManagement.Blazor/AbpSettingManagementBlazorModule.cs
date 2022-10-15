@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.FieldCustomizing.FieldComponents;
+﻿using Dignite.Abp.FieldCustomizing.Components.BlazoriseUI;
 using Dignite.Abp.SettingManagement.Blazor.Menus;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
@@ -13,7 +13,7 @@ namespace Dignite.Abp.SettingManagement.Blazor;
     typeof(AbpSettingManagementApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule),
-    typeof(AbpFieldCustomizingFieldComponentsModule)
+    typeof(AbpFieldCustomizingComponentsBlazoriseUIModule)
     )]
 public class AbpSettingManagementBlazorModule : AbpModule
 {

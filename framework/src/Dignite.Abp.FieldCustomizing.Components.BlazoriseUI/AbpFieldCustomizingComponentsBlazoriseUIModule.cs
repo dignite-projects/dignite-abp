@@ -1,8 +1,7 @@
 ﻿using Dignite.Abp.BlazoriseUI;
-using Dignite.Abp.FieldCustomizing.Components;
 using Volo.Abp.Modularity;
 
-namespace Dignite.Abp.FieldCustomizing.BlazoriseComponents;
+namespace Dignite.Abp.FieldCustomizing.Components.BlazoriseUI;
 
 [DependsOn(
     typeof(AbpBlazoriseUiModule),

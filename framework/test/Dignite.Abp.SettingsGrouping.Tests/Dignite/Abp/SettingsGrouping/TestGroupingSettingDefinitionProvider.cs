@@ -7,9 +7,9 @@ public class TestGroupingSettingDefinitionProvider : SettingDefinitionGroupProvi
     public override void Define(ISettingDefinitionGroupContext context)
     {
         context.Add(
-            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName, null),
+            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName, null), //add a group
             new SettingDefinitionSection(
-                new FixedLocalizableString("testSection"),
+                new FixedLocalizableString("testSection"), // add a setting items section
                 new Volo.Abp.Settings.SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue),
                 new Volo.Abp.Settings.SettingDefinition(TestSettingNames.TestSettingWithDefaultValue, "default-value")
                     .UseTextboxControl(tb =>

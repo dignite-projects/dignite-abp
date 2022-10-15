@@ -7,16 +7,9 @@ using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
 
-public class TestSettingDefinitionProvider : SettingDefinitionProvider
-{
-    public override void Define(ISettingDefinitionContext context)
-    {
-        context.Add(
-            new SettingDefinition(TestSettingNames.TestSettingPackager, "abc")
-        );
-    }
-}
-
+/// <summary>
+/// Wrap controls defined by existing setting items
+/// </summary>
 public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvider, ISettingDefinitionGroupProvider, ITransientDependency
 {
     public void Define(ISettingDefinitionGroupContext context)
@@ -24,6 +17,7 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
         var settings = new Dictionary<string, SettingDefinition>();
         base.Define(new SettingDefinitionContext(settings));
 
+        //add a setting items group
         context.Add(
             new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName2),
             new SettingDefinitionSection(
@@ -32,6 +26,7 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
             )
         );
 
+        //Configuration setting item control
         settings.GetValueOrDefault(TestSettingNames.TestSettingPackager)
             .UseTextboxControl(tb =>
                 {
@@ -39,5 +34,14 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
                     tb.Placeholder = "placeholder-text";
                 }
             );
+    }
+}
+public class TestSettingDefinitionProvider : SettingDefinitionProvider
+{
+    public override void Define(ISettingDefinitionContext context)
+    {
+        context.Add(
+            new SettingDefinition(TestSettingNames.TestSettingPackager, "abc")
+        );
     }
 }

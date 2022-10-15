@@ -1,0 +1,125 @@
+﻿@using Dignite.Abp.FieldCustomizing.Components
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.Select
+@inherits FieldConfigurationComponentBase<SelectFieldProvider,SelectConfiguration>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit @bind-Text="@Definition.DisplayName" />
+    </Field>
+</Validation>
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+    </Field>
+</Validation>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["Description"]</FieldLabel>
+        <TextEdit @bind-Text="@Configuration.Description" />
+    </Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@Configuration.Required">@L["IsRequired"]</Check>
+</Field>
+
+<Field>
+    <FieldLabel>@L["SelectListItem"]</FieldLabel>
+    <Table>
+        <TableHeader>
+            <TableRow>
+                <TableHeaderCell>@L["SelectListItemText"]</TableHeaderCell>
+                <TableHeaderCell>@L["SelectListItemValue"]</TableHeaderCell>
+                <TableHeaderCell>@L["DefaultSelected"]</TableHeaderCell>
+                <TableHeaderCell>
+                    <Button @onclick="@AddSelectListItem"><Icon Name="IconName.PlusCircle" /></Button>
+                </TableHeaderCell>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach(var item in Options)
+            {
+                <TableRow>
+                    <TableRowCell>                        
+                        <Validation Validator="((e)=>RequiredValidate(e))">
+                        <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" />
+                        </Validation>
+                        </TableRowCell>
+                    <TableRowCell>                        
+                        <Validation Validator="((e)=>RequiredValidate(e))">
+                        <TextEdit Text="@item.Value" TextChanged="@(value=>OnSelectListItemValueChanged(value,item))" />
+                        </Validation>
+                        </TableRowCell>
+                    <TableRowCell><Check TValue="bool" Checked="@item.Selected" CheckedChanged="@(selected=>OnSelectListItemSelectedChanged(selected,item))"></Check></TableRowCell>
+                    <TableRowCell>
+                        <Button @onclick="@(e => RemoveSelectListItem(e, item))"><Icon Name="IconName.Remove" /></Button>
+                    </TableRowCell>
+                </TableRow>
+            }
+        </TableBody>
+    </Table>
+</Field>
+
+<Validation>
+<Field>
+    <FieldLabel>@L["NullText"]</FieldLabel>
+    <TextEdit @bind-Text="@Configuration.NullText" />
+</Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@Configuration.Multiple">@L["Multiple"]</Check>
+</Field>
+
+@code{
+
+    List<SelectListItem> Options;
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Options = Configuration.Options;
+    }
+
+    private void RemoveSelectListItem(MouseEventArgs e,SelectListItem item)
+    {
+        Options.Remove(item);
+        Configuration.Options=Options;
+    }
+    private void AddSelectListItem()
+    {
+        Options.Add(new SelectListItem());
+        Configuration.Options=Options;
+    }
+
+    Task OnSelectListItemTextChanged( string text ,SelectListItem item)
+    {
+        item.Text = text;
+        Configuration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    Task OnSelectListItemValueChanged( string value,SelectListItem item )
+    {
+        item.Value = value;
+        Configuration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    Task OnSelectListItemSelectedChanged( bool selected,SelectListItem item )
+    {
+        item.Selected = selected;
+        Configuration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    
+    void RequiredValidate(ValidatorEventArgs e)
+    {
+        e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+}

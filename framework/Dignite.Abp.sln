@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping.Tests", "test\Dignite.Abp.SettingsGrouping.Tests\Dignite.Abp.SettingsGrouping.Tests.csproj", "{2BF3EC73-331E-499F-83B4-95C8C9F76F42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.FieldComponents", "src\Dignite.Abp.FieldCustomizing.FieldComponents\Dignite.Abp.FieldCustomizing.FieldComponents.csproj", "{9941467B-B90F-4350-974A-560BBED36AAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components", "src\Dignite.Abp.FieldCustomizing.Components\Dignite.Abp.FieldCustomizing.Components.csproj", "{9941467B-B90F-4350-974A-560BBED36AAC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Tests", "test\Dignite.Abp.Notifications.Tests\Dignite.Abp.Notifications.Tests.csproj", "{D4C33144-5332-4DAE-9BD6-995E2A390EA6}"
 EndProject
@@ -29,9 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpTestBase", "test\AbpTestBase\AbpTestBase.csproj", "{3B5F7D3F-5363-48D9-96F6-998157B7C131}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.FieldComponents.Tests", "test\Dignite.Abp.FieldCustomizing.FieldComponents.Tests\Dignite.Abp.FieldCustomizing.FieldComponents.Tests.csproj", "{9339371C-24EC-4DF6-9C22-A635F82081F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components.Tests", "test\Dignite.Abp.FieldCustomizing.Components.Tests\Dignite.Abp.FieldCustomizing.Components.Tests.csproj", "{9339371C-24EC-4DF6-9C22-A635F82081F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Components", "src\Dignite.Abp.Notifications.Components\Dignite.Abp.Notifications.Components.csproj", "{A829CA8B-5C8F-4A14-81F3-7CBBF2199051}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components.BlazoriseUI", "src\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI.csproj", "{0B885452-E9ED-4E74-8D65-FB2990B70458}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{A829CA8B-5C8F-4A14-81F3-7CBBF2199051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A829CA8B-5C8F-4A14-81F3-7CBBF2199051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A829CA8B-5C8F-4A14-81F3-7CBBF2199051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B885452-E9ED-4E74-8D65-FB2990B70458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B885452-E9ED-4E74-8D65-FB2990B70458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B885452-E9ED-4E74-8D65-FB2990B70458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B885452-E9ED-4E74-8D65-FB2990B70458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{3B5F7D3F-5363-48D9-96F6-998157B7C131} = {64061EF0-B5E7-45B6-A0C1-639B7D44E921}
 		{9339371C-24EC-4DF6-9C22-A635F82081F4} = {64061EF0-B5E7-45B6-A0C1-639B7D44E921}
 		{A829CA8B-5C8F-4A14-81F3-7CBBF2199051} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
+		{0B885452-E9ED-4E74-8D65-FB2990B70458} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F622C42C-929D-4CAB-8CC6-23E387FFDD36}

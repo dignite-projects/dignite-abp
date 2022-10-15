@@ -1,0 +1,247 @@
+﻿@using Dignite.Abp.FieldCustomizing.Components
+@using Dignite.Abp.FieldCustomizing.Fields
+@using Dignite.Abp.FieldCustomizing.Fields.Table
+@using Dignite.Abp.FieldCustomizing.Fields.Textbox
+@using System.Collections.Immutable
+@using Dignite.Abp.FieldCustomizing.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@using Volo.Abp.BlazoriseUI.Components
+@inject IEnumerable<IFieldProvider> FieldProviders
+@inject AbpBlazorMessageLocalizerHelper<DigniteAbpFieldCustomizingResource> LH
+@inject IFieldConfigurationComponentSelector fieldConfigurationComponentSelector
+@inherits FieldConfigurationComponentBase<TableFieldProvider,TableConfiguration>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit @bind-Text="@Definition.DisplayName" />
+    </Field>
+</Validation>
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+    </Field>
+</Validation>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["Description"]</FieldLabel>
+        <TextEdit @bind-Text="@Configuration.Description" />
+    </Field>
+</Validation>
+
+<Field>
+    <FieldLabel>@L["CustomTableColumns"]</FieldLabel>
+    <Table>
+        <TableHeader>
+            <Blazorise.TableRow>
+                <TableHeaderCell>@L["TableColumnDisplayName"]</TableHeaderCell>
+                <TableHeaderCell>@L["FieldControl"]</TableHeaderCell>
+                <TableHeaderCell>
+                    <Button @onclick="@AddTableColumn"><Icon Name="IconName.PlusCircle" /></Button>
+                </TableHeaderCell>
+            </Blazorise.TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach(var column in TableColumns)
+            {
+                var index = TableColumns.IndexOf(column);
+                <Blazorise.TableRow>
+                    <TableRowCell>
+                        <Validation Validator="((e)=>ValidateColumnDisplayName(e))">
+                        <TextEdit @bind-Text="@column.FieldDefinition.DisplayName" />
+                        </Validation>
+                    </TableRowCell>
+                    <TableRowCell>
+                        <Validation Validator="((e)=>ValidateColumnFieldControl(e))">
+                        <Select TValue="string" SelectedValue="@column.FieldDefinition.FieldProviderName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
+                            <SelectItem TValue="string" Value="null">@L["SelectFieldControls"]</SelectItem>
+                            @if (AllFieldProviders != null)
+                            {
+                                foreach (var p in AllFieldProviders)
+                                {
+                                    <SelectItem TValue="string" Value="@p.Name">@p.DisplayName</SelectItem>
+                                }
+                            }                            
+                        </Select>
+                        </Validation>
+                    </TableRowCell>
+                    <TableRowCell>
+                        <Button @onclick="@(val => OnSelectedValueChanged(column.FieldDefinition.FieldProviderName, column))"><Icon Name="IconName.Edit" /></Button>
+                        <Button @onclick="@(val => RemoveTableColumn(val, column))"><Icon Name="IconName.Remove" /></Button>
+                        @if (index > 0)
+                        {
+                            <Button @onclick="@(val => MoveTableColumn(val, column,index-1))"><Icon Name="IconName.ArrowUp" /></Button>
+                        }
+                        @if (index < TableColumns.Count-1)
+                        {
+                            <Button @onclick="@(val => MoveTableColumn(val, column,index+1))"><Icon Name="IconName.ArrowDown" /></Button>
+                        }
+                    </TableRowCell>
+                </Blazorise.TableRow>
+            }
+        </TableBody>
+    </Table>
+</Field>
+
+
+    <Blazorise.Modal @ref="FieldConfigModal" Closing="@ClosingEditModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["FieldConfiguration"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseAuditModalAsync" />
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@AuditValidationsRef" Model="@filedConfigurationSelectedParameters" ValidateOnLoad="false">                        
+                        <!------------- selected field control configuration component ------------------------------------->
+                        @if (filedConfigurationSelectedType is not null)
+                        {
+                            <DynamicComponent Type="@filedConfigurationSelectedType" Parameters='@filedConfigurationSelectedParameters' />            
+                        }
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseAuditModalAsync">@L["Cancel"]</Blazorise.Button>                                
+                    <SubmitButton Clicked="@SaveFieldConfigAsync" />
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+@code{
+
+    ImmutableList<IFieldProvider> AllFieldProviders;
+    List<TableColumn> TableColumns;
+
+    //选中字段的控件配置组件
+    private Type filedConfigurationSelectedType;
+
+    //选中字段控件配置项组件的参数
+    Dictionary<string, object> filedConfigurationSelectedParameters = new();
+    private Modal FieldConfigModal;
+    private Validations AuditValidationsRef;
+
+    protected override Task OnInitializedAsync()
+    {
+        AllFieldProviders = FieldProviders.Where(p=>p.ControlType== FieldType.Simple).ToImmutableList();
+        return base.OnInitializedAsync();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        TableColumns = Configuration.TableColumns;
+        if (!TableColumns.Any())
+        {
+            AddTableColumn();
+        }
+    }
+    private void AddTableColumn()
+    {
+        var column = new TableColumn(
+                new TableColumnFieldDefinition(
+                    Nanoid.Nanoid.Generate("abcdefghijklmnopqrstuvwxyz", 10),
+                    "",
+                    null,
+                    "",
+                    new FieldConfigurationDictionary()
+                )
+            );
+        TableColumns.Add(column);            
+        Configuration.TableColumns=TableColumns;
+    }
+
+    private void RemoveTableColumn(MouseEventArgs e,TableColumn item)
+    {
+        TableColumns.Remove(item);
+        Configuration.TableColumns=TableColumns;
+    }
+    private void MoveTableColumn(MouseEventArgs e,TableColumn item,int targetIndex)
+    {
+        TableColumns.MoveItem(tc=>tc==item, targetIndex);
+        Configuration.TableColumns=TableColumns;
+    }
+
+    private async Task OnSelectedValueChanged(string fieldProviderName,TableColumn column)
+    {
+        if (!fieldProviderName.IsNullOrEmpty())
+        {
+            column.FieldDefinition.FieldProviderName = fieldProviderName;
+            if (fieldProviderName != L["SelectFieldControls"].Value)
+            {
+                var component = fieldConfigurationComponentSelector.Get(fieldProviderName);
+
+                filedConfigurationSelectedParameters = new Dictionary<string, object>();
+                filedConfigurationSelectedParameters.Add("Definition", column.FieldDefinition);
+                filedConfigurationSelectedType = component.GetType();
+
+                await OpenFieldConfigModalAsync();
+            }
+        }
+    }
+
+    private async Task OpenFieldConfigModalAsync()
+    { 
+        await InvokeAsync(async () =>
+        {
+            StateHasChanged();
+            await FieldConfigModal.Show();
+        });
+    }
+
+    private async Task SaveFieldConfigAsync()
+    {
+        try
+        {
+            var validate = true;
+            if (AuditValidationsRef != null)
+            {
+                validate = await AuditValidationsRef.ValidateAll();
+
+                if (TableColumns.Select(tc => tc.Name).Distinct().Count() != TableColumns.Count)
+                {
+                    validate = false;
+                    await Notify.Error(L["FiledNameAlreadyExist"]);
+                }
+            }
+            if (validate)
+            {
+                Configuration.TableColumns = TableColumns;
+                await InvokeAsync(FieldConfigModal.Hide);
+            }
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }        
+    }
+
+    protected virtual Task ClosingEditModal(ModalClosingEventArgs eventArgs)
+    {
+        // cancel close if clicked outside of modal area
+        eventArgs.Cancel = eventArgs.CloseReason == CloseReason.FocusLostClosing;
+
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task CloseAuditModalAsync()
+    {
+        InvokeAsync(FieldConfigModal.Hide);
+        return Task.CompletedTask;
+    }
+
+    void ValidateColumnFieldControl(ValidatorEventArgs e)
+    {
+        e.Status = e.Value ==null || Convert.ToString(e.Value).IsNullOrWhiteSpace() || Convert.ToString(e.Value) == L["SelectFieldControls"].Value
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+
+    void ValidateColumnDisplayName(ValidatorEventArgs e)
+    {
+        e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+}

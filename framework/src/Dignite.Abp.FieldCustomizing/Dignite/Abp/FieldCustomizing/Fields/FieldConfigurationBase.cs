@@ -3,13 +3,13 @@
 public abstract class FieldConfigurationBase
 {
     public bool Required {
-        get => ConfigurationDictionary.GetConfigurationOrDefault(FieldConfigurationNames.Required, false);
-        set => ConfigurationDictionary.SetConfiguration(FieldConfigurationNames.Required, value);
+        get => ConfigurationDictionary.GetConfigurationOrDefault(FieldBasicConfigurationNames.Required, false);
+        set => ConfigurationDictionary.SetConfiguration(FieldBasicConfigurationNames.Required, value);
     }
 
     public string Description {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(FieldConfigurationNames.Description, null);
-        set => ConfigurationDictionary.SetConfiguration(FieldConfigurationNames.Description, value);
+        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(FieldBasicConfigurationNames.Description, null);
+        set => ConfigurationDictionary.SetConfiguration(FieldBasicConfigurationNames.Description, value);
     }
 
     public FieldConfigurationDictionary ConfigurationDictionary { get; set; }

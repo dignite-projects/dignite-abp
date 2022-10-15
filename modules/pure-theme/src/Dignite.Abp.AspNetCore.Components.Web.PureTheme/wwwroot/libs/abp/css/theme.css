@@ -1,5 +1,4 @@
 
-
 /* entry row */
 .entry-row {
     position: sticky !important;
@@ -25,6 +24,10 @@
 }
 
 /* main navbar */
+.b-layout-header-fixed {
+    z-index:1032;
+    border-bottom:solid #efefef 1px;
+}
 .main-navbar {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -36,7 +39,7 @@
 .b-bar-vertical-inline .b-bar-item .b-bar-icon, 
 .b-bar-vertical-popout .b-bar-item .b-bar-icon, 
 .b-bar-vertical-small .b-bar-item .b-bar-icon {
-    margin-right:0.75rem;
+    margin-right:0.5rem;
 }
 
 @media (max-width: 768px) {

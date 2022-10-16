@@ -11,10 +11,23 @@ namespace SettingManagementSample;
 
 public class SettingManagementSampleSettingDefinitionProvider: AbpIdentitySettingDefinitionProvider, ISettingDefinitionGroupProvider, ITransientDependency
 {
+
+    public override void Define(ISettingDefinitionContext context)
+    {
+        //Add new setting definition item
+        context.Add(
+                new SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue),
+                new SettingDefinition(TestSettingNames.TestSettingWithDefaultValue, "default-value", L("SettingName1"), L("SettingDescription1")),
+                new SettingDefinition(TestSettingNames.TestSettingEncrypted, isEncrypted: true)
+        );
+
+        base.Define(context);
+    }
+
     public void Define(ISettingDefinitionGroupContext context)
     {
         var settings = new Dictionary<string, SettingDefinition>();
-        base.Define(new SettingDefinitionContext(settings));
+        Define(new SettingDefinitionContext(settings));
 
 
         //Package existing settings
@@ -34,23 +47,14 @@ public class SettingManagementSampleSettingDefinitionProvider: AbpIdentitySettin
             );
 
 
-        //Add new setting definition item
-        context.Add(
-            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName, L("SettingsGroup")),
-            new SettingDefinitionSection(
-                L("SettingsSection2"),
-                new SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue),
-                new SettingDefinition(TestSettingNames.TestSettingWithDefaultValue, "default-value",L("SettingName1"),L("SettingDescription1"))
-                    .UseTextboxControl(tb =>
-                    {
-                        tb.Required = true;
-                        tb.Placeholder = "placeholder-text";
-                        tb.CharLimit = 64;
-                    }
-                    ),
-                new SettingDefinition(TestSettingNames.TestSettingEncrypted, isEncrypted: true)
-            )
-        );
+        settings.GetValueOrDefault(TestSettingNames.TestSettingWithDefaultValue)
+            .UseTextboxControl(tb => 
+            {
+                tb.Required = true;
+                tb.Placeholder = "placeholder-text";
+                tb.CharLimit = 64;
+            }
+            );
     }
 
     private static LocalizableString L(string name)

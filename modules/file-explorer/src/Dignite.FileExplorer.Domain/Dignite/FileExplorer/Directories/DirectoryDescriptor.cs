@@ -2,7 +2,7 @@
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.FileExplorer.Directories;
+namespace Dignite.FileExplorer.Directories;
 
 public class DirectoryDescriptor: AuditedAggregateRoot<Guid>, IMultiTenant
 {

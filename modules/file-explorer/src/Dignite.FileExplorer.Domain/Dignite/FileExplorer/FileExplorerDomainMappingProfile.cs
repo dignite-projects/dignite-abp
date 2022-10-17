@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Dignite.Abp.FileExplorer.Directories;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 
 namespace Dignite.FileExplorer;

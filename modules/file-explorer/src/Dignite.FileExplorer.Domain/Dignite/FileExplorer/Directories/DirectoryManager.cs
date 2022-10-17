@@ -5,7 +5,7 @@ using Dignite.Abp.FileExplorer.Directories;
 using Dignite.Abp.Files;
 using Volo.Abp.Domain.Services;
 
-namespace Dignite.Abp.FileExplorer.Directories
+namespace Dignite.FileExplorer.Directories
 {
     public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
     {

@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 
-namespace Dignite.Abp.FileExplorer.Directories;
+namespace Dignite.FileExplorer.Directories;
 public interface IDirectoryDescriptorRepository : IBasicRepository<DirectoryDescriptor, Guid>
 {
     /// <summary>

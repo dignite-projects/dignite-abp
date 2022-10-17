@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 
-namespace Dignite.Abp.FileExplorer.Directories;
+namespace Dignite.FileExplorer.Directories;
 public interface IDirectoryManager:IDomainService
 {
     /// <summary>

@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Dignite.FileExplorer.Directories;
 
-namespace Dignite.Abp.FileExplorer.Directories;
+namespace Dignite.FileExplorer.Directories;
 public static class DirectoryNameValidator
 {
     public static void CheckDirectoryName(string name)

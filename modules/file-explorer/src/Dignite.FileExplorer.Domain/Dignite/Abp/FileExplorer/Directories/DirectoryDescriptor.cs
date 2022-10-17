@@ -6,6 +6,16 @@ namespace Dignite.Abp.FileExplorer.Directories;
 
 public class DirectoryDescriptor: AuditedAggregateRoot<Guid>, IMultiTenant
 {
+    public DirectoryDescriptor(Guid id, string containerName, string name, Guid? parentId, int order, Guid? tenantId)
+        :base(id)
+    {
+        ContainerName = containerName;
+        Name = name;
+        ParentId = parentId;
+        Order = order;
+        TenantId = tenantId;
+    }
+
     /// <summary>
     /// Container name of blob
     /// </summary>

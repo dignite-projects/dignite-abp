@@ -1,6 +1,10 @@
 ﻿using System;
+using Volo.Abp.EventBus;
+
 namespace Dignite.FileExplorer.Directories
 {
+    [EventName("Dignite.FileExplorer.Directories.DirectoryDescriptor")]
+    [Serializable]
     public class DirectoryDescriptorEto
     {
         public Guid Id { get; set; }

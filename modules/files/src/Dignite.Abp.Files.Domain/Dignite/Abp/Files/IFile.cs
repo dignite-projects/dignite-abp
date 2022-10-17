@@ -8,7 +8,7 @@ namespace Dignite.Abp.Files;
 /// <summary>
 /// Blob info interface
 /// </summary>
-public interface IFile : IAggregateRoot<Guid>, IMultiTenant
+public interface IFile : IAggregateRoot<Guid>
 {
     /// <summary>
     /// Container name of blob

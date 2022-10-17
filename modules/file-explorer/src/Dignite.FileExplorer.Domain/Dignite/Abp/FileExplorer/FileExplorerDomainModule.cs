@@ -1,4 +1,6 @@
-﻿using Dignite.Abp.Files;
+﻿using Dignite.Abp.FileExplorer.Directories;
+using Dignite.Abp.Files;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
@@ -28,6 +30,7 @@ public class FileExplorerDomainModule : AbpModule
         Configure<AbpDistributedEntityEventOptions>(options =>
         {
             options.EtoMappings.Add<FileDescriptor, FileDescriptorEto>(typeof(FileExplorerDomainModule));
+            options.EtoMappings.Add<DirectoryDescriptor, DirectoryDescriptorEto>(typeof(FileExplorerDomainModule));
 
             options.AutoEventSelectors.Add<FileDescriptor>();
         });

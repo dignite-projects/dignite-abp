@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Dignite.FileExplorer.Domain\Dignite.FileExplorer.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dignite\FileExplorer\Directories\" />
+  </ItemGroup>
+
 </Project>

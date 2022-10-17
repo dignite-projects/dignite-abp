@@ -7,8 +7,10 @@ namespace Dignite.FileExplorer.Files;
 
 [EventName("Dignite.FileExplorer.Files.FileDescriptor")]
 [Serializable]
-public class FileDescriptorEto : IMultiTenant, IHasExtraProperties
+public class FileDescriptorEto
 {
+    public Guid Id { get; set; }
+
     public string ContainerName { get; set; }
 
     public string BlobName { get; set; }
@@ -27,9 +29,4 @@ public class FileDescriptorEto : IMultiTenant, IHasExtraProperties
     public string MimeType { get; set; }
 
     public Guid? TenantId { get; set; }
-
-    public virtual ExtraPropertyDictionary ExtraProperties {
-        get;
-        set;
-    }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Dignite.Abp.BlobStoring;
 using JetBrains.Annotations;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -20,7 +19,6 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     public FileDescriptorAppService(
         IFileDescriptorRepository blobRepository,
         FileDescriptorManager fileManager,
-        IBlobContainerConfigurationProvider blobContainerConfigurationProvider,
         IBlobContainerFactory blobContainerFactory)
     {
         _fileRepository = blobRepository;

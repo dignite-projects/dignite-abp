@@ -31,4 +31,13 @@ public interface IFileDescriptorAppService : IApplicationService
     /// <returns></returns>
     Task DeleteAsync(Guid id);
 
+
+    /*
+    TODO: 
+    1:Volume statistics by tenant group
+    2:Volume statistics by container group
+    3:Volume statistics by user group
+    4:Calculate the Volume of the specified tenant
+    4:Calculate the Volume of the specified user
+     */
 }

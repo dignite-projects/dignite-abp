@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.Files.MongoDB;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -16,6 +17,7 @@ public class FileExplorerMongoDbModule : AbpModule
         context.Services.AddMongoDbContext<FileExplorerMongoDbContext>(options =>
         {
             options.AddRepository<FileDescriptor, MongoFileDescriptorRepository>();
+            options.AddRepository<DirectoryDescriptor, MongoDirectoryDescriptorRepository>();
         });
     }
 }

@@ -1,4 +1,5 @@
-﻿using Dignite.FileExplorer.Files;
+﻿using Dignite.FileExplorer.Directories;
+using Dignite.FileExplorer.Files;
 using Volo.Abp;
 using Volo.Abp.MongoDB;
 
@@ -11,9 +12,14 @@ public static class FileExplorerMongoDbContextExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
+        builder.Entity<DirectoryDescriptor>(x =>
+        {
+            x.CollectionName = FileExplorerDbProperties.DbTablePrefix + "DirectoryDescriptors";
+        });
+
         builder.Entity<FileDescriptor>(x =>
         {
-            x.CollectionName = FileExplorerDbProperties.DbTablePrefix + "FileDescriptor";
+            x.CollectionName = FileExplorerDbProperties.DbTablePrefix + "FileDescriptors";
         });
     }
 }

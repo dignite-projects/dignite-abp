@@ -48,7 +48,7 @@ public interface IDirectoryDescriptorRepository : IBasicRepository<DirectoryDesc
     /// <param name="maxResultCount"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<List<DirectoryDescriptor>> GetListAsync(string containerName, Guid? parentId, int skipCount=0, int maxResultCount=int.MaxValue, CancellationToken cancellationToken = default(CancellationToken));
+    Task<List<DirectoryDescriptor>> GetChildrenListAsync(string containerName, Guid? parentId, int skipCount=0, int maxResultCount=int.MaxValue, CancellationToken cancellationToken = default(CancellationToken));
 
     /// <summary>
     /// 
@@ -57,5 +57,14 @@ public interface IDirectoryDescriptorRepository : IBasicRepository<DirectoryDesc
     /// <param name="parentId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<int> GetCountAsync(string containerName, Guid? parentId, CancellationToken cancellationToken = default(CancellationToken));
+    Task<int> GetChildrenCountAsync(string containerName, Guid? parentId, CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="parentId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<bool> AnyChildrenAsync(string containerName, Guid? parentId, CancellationToken cancellationToken = default(CancellationToken));
 }

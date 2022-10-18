@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.Files.EntityFrameworkCore;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -15,6 +16,7 @@ public class FileExplorerEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<FileExplorerDbContext>(options =>
         {
+            options.AddRepository<DirectoryDescriptor, EfCoreDirectoryDescriptorRepository>();
             options.AddRepository<FileDescriptor, EfCoreFileDescriptorRepository>();
         });
     }

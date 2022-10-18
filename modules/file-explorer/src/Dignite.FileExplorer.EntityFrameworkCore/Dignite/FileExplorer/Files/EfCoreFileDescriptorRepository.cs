@@ -38,8 +38,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityType, entityId,
-            cancellationToken
+            containerName, filter, entityType, entityId
         );
 
         return await query.CountAsync(cancellationToken);
@@ -58,8 +57,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityTypeFullName, entityId,
-            cancellationToken
+            containerName, filter, entityTypeFullName, entityId
         );
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -71,8 +69,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         string containerName,
         string filter = null,
         string entityTypeFullName = null,
-        string entityId = null,
-          CancellationToken cancellationToken = default)
+        string entityId = null)
     {
         return (await GetDbSetAsync()).AsNoTracking()
             .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName)

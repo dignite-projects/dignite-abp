@@ -21,6 +21,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     protected IBlobContainerFactory BlobContainerFactory => LazyServiceProvider.LazyGetRequiredService<IBlobContainerFactory>();
     protected ICurrentFile CurrentFile => LazyServiceProvider.LazyGetRequiredService<ICurrentFile>();
     protected IFileStore<TFile> FileStore => LazyServiceProvider.LazyGetService(typeof(TFileStore)).As<IFileStore<TFile>>();
+    protected ContainerNameValidator ContainerNameValidator => LazyServiceProvider.LazyGetRequiredService<ContainerNameValidator>();
 
     /// <summary>
     ///
@@ -36,6 +37,8 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
             bool overrideExisting = false,
             CancellationToken cancellationToken = default)
     {
+
+        ContainerNameValidator.CheckDirectoryName(file.ContainerName);
         await CheckFileAsync(file);
 
         using (CurrentFile.Current(file))

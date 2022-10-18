@@ -47,6 +47,7 @@ public static class FileExplorerDbContextModelCreatingExtensions
             //Indexes
             b.HasIndex(q => new { q.TenantId, q.EntityTypeFullName, q.EntityId });
             b.HasIndex(q => new { q.TenantId, q.ContainerName, q.BlobName });
+            b.HasIndex(q => new { q.TenantId, q.ContainerName, q.DirectoryId });
             b.HasIndex(q => new { q.TenantId, q.CreatorId });
 
             b.ApplyObjectExtensionMappings();

@@ -15,7 +15,6 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 {
     private readonly IFileDescriptorRepository _fileRepository;
     private readonly FileDescriptorManager _fileManager;
-    private readonly IBlobContainerConfigurationProvider _blobContainerConfigurationProvider;
     private readonly IBlobContainerFactory _blobContainerFactory;
 
     public FileDescriptorAppService(
@@ -26,7 +25,6 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     {
         _fileRepository = blobRepository;
         _fileManager = fileManager;
-        _blobContainerConfigurationProvider = blobContainerConfigurationProvider;
         _blobContainerFactory = blobContainerFactory;
     }
 
@@ -69,19 +67,4 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         await _fileManager.DeleteAsync(result);
     }
 
-    public virtual Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName)
-    {
-        var configuration = _blobContainerConfigurationProvider.Get(containerName);
-        var blobSizeLimitHandlerConfiguration = new BlobSizeLimitHandlerConfiguration(configuration);
-        var fileTypeCheckHandlerConfiguration = new FileTypeCheckHandlerConfiguration(configuration);
-        var imageProcessHandlerConfiguration = new ImageResizeHandlerConfiguration(configuration);
-
-        return Task.FromResult(
-            new BlobContainerConfigurationDto(
-                new BlobSizeLimitHandlerConfigurationDto(blobSizeLimitHandlerConfiguration.MaximumBlobSize),
-                new FileTypeCheckHandlerConfigurationDto(fileTypeCheckHandlerConfiguration.AllowedFileTypeNames),
-                new ImageProcessHandlerConfigurationDto(imageProcessHandlerConfiguration.ImageWidth, imageProcessHandlerConfiguration.ImageHeight, imageProcessHandlerConfiguration.ImageSizeMustBeLargerThanPreset)
-                )
-            );
-    }
 }

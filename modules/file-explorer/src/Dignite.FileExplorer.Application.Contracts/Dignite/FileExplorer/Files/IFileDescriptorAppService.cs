@@ -31,10 +31,4 @@ public interface IFileDescriptorAppService : IApplicationService
     /// <returns></returns>
     Task DeleteAsync(Guid id);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="containerName"></param>
-    /// <returns></returns>
-    Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName);
 }

@@ -24,13 +24,6 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     [HttpGet]
-    [Route("{containerName}/configuration")]
-    public virtual Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName)
-    {
-        return _fileAppService.GetBlobContainerConfigurationAsync(containerName);
-    }
-
-    [HttpGet]
     [Route("{containerName}/{*blobName}")]
     public virtual async Task<IRemoteStreamContent> GetFileAsync([NotNull] string containerName, [NotNull] string blobName)
     {

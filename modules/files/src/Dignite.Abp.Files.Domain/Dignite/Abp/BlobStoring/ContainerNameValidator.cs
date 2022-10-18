@@ -1,5 +1,7 @@
-﻿namespace Dignite.Abp.BlobStoring;
-public class ContainerNameValidator
+﻿using Volo.Abp.DependencyInjection;
+
+namespace Dignite.Abp.BlobStoring;
+public class ContainerNameValidator: ITransientDependency
 {
     public void CheckDirectoryName(string name)
     {

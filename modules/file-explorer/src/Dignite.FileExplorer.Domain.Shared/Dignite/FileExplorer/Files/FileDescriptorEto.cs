@@ -1,7 +1,5 @@
 ﻿using System;
-using Volo.Abp.Data;
 using Volo.Abp.EventBus;
-using Volo.Abp.MultiTenancy;
 
 namespace Dignite.FileExplorer.Files;
 
@@ -14,6 +12,11 @@ public class FileDescriptorEto
     public string ContainerName { get; set; }
 
     public string BlobName { get; set; }
+
+    /// <summary>
+    /// Directory in container
+    /// </summary>
+    public Guid? DirectoryId { get; set; }
 
     public long Size { get; set; }
 

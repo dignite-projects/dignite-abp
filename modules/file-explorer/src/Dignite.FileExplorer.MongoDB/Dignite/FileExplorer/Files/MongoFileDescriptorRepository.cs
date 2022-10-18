@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
@@ -27,28 +28,38 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
             .AnyAsync(x => x.ContainerName == containerName && x.BlobName==blobName);
     }
 
-    public async Task<FileDescriptor> FindAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
+    public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await GetAsync(x => x.ContainerName == containerName && x.BlobName == blobName, cancellationToken: cancellationToken);
     }
 
-    public async Task<int> GetCountAsync(string containerName, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
+    public async Task<int> GetCountAsync(string containerName,
+        Guid? directoryId, string filter = null, string entityTypeFullName = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityType, entityId,
+            containerName, 
+            directoryId,
+            filter, 
+            entityTypeFullName, 
+            entityId,
             token);
 
         return await query.As<IMongoQueryable<FileDescriptor>>().CountAsync(token);
     }
 
-    public async Task<List<FileDescriptor>> GetListAsync(string containerName, string filter = null, string entityTypeFullName = null, string entityId = null, string sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
+    public async Task<List<FileDescriptor>> GetListAsync(string containerName,
+        Guid? directoryId, string filter = null, string entityTypeFullName = null, string entityId = null, string sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityTypeFullName, entityId,
+            containerName, 
+            directoryId,
+            filter, 
+            entityTypeFullName,
+            entityId,
             token);
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -61,13 +72,14 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
 
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
+        Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
         string entityId = null,
         CancellationToken cancellationToken = default)
     {
         return (await GetMongoQueryableAsync(cancellationToken))
-            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName)
+            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName && fd.DirectoryId == directoryId)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
             .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);

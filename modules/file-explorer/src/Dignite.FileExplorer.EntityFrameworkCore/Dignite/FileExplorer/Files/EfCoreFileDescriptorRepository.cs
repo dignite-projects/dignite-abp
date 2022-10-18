@@ -27,18 +27,19 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
                    .AnyAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
-    public async Task<FileDescriptor> FindAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
+    public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
                    .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
-    public async Task<int> GetCountAsync(string containerName, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
+    public async Task<int> GetCountAsync(string containerName,
+        Guid? directoryId, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityType, entityId
+            containerName, directoryId, filter, entityType, entityId
         );
 
         return await query.CountAsync(cancellationToken);
@@ -46,6 +47,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
 
     public async Task<List<FileDescriptor>> GetListAsync(
         string containerName,
+        Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
         string entityId = null,
@@ -57,7 +59,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, filter, entityTypeFullName, entityId
+            containerName, directoryId, filter, entityTypeFullName, entityId
         );
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -67,12 +69,13 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
 
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
+        Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
         string entityId = null)
     {
         return (await GetDbSetAsync()).AsNoTracking()
-            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName)
+            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName && fd.DirectoryId==directoryId)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
             .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);

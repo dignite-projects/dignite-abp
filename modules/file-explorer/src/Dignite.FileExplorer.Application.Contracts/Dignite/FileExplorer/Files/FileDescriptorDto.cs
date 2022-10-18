@@ -15,6 +15,11 @@ public class FileDescriptorDto : ExtensibleCreationAuditedEntityDto<Guid>, IMult
 
     public string BlobName { get; set; }
 
+    /// <summary>
+    /// Directory in container
+    /// </summary>
+    public Guid? DirectoryId { get; set; }
+
     public long Size { get; set; }
 
     public string Name { get; set; }

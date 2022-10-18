@@ -14,27 +14,27 @@ namespace Dignite.FileExplorer.Files;
 [Route("api/file-explorer/files")]
 public class FileDescriptorController : AbpController, IFileDescriptorAppService
 {
-    private readonly IFileDescriptorAppService _blobAppService;
+    private readonly IFileDescriptorAppService _fileAppService;
 
     public FileDescriptorController(
-        IFileDescriptorAppService blobAppService
+        IFileDescriptorAppService fileAppService
         )
     {
-        _blobAppService = blobAppService;
+        _fileAppService = fileAppService;
     }
 
     [HttpGet]
     [Route("{containerName}/configuration")]
     public virtual Task<BlobContainerConfigurationDto> GetBlobContainerConfigurationAsync([NotNull] string containerName)
     {
-        return _blobAppService.GetBlobContainerConfigurationAsync(containerName);
+        return _fileAppService.GetBlobContainerConfigurationAsync(containerName);
     }
 
     [HttpGet]
     [Route("{containerName}/{*blobName}")]
     public virtual async Task<IRemoteStreamContent> GetFileAsync([NotNull] string containerName, [NotNull] string blobName)
     {
-        return await _blobAppService.GetFileAsync(containerName, blobName);
+        return await _fileAppService.GetFileAsync(containerName, blobName);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     [HttpGet]
     public virtual async Task<PagedResultDto<FileDescriptorDto>> GetListAsync(GetFilesInput input)
     {
-        var result = await _blobAppService.GetListAsync(input);
+        var result = await _fileAppService.GetListAsync(input);
 
         return result;
     }
@@ -54,14 +54,14 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     [Route("{id}")]
     public virtual async Task DeleteAsync(Guid id)
     {
-        await _blobAppService.DeleteAsync(id);
+        await _fileAppService.DeleteAsync(id);
     }
 
     [HttpGet]
     [Route("download/{containerName}/{*blobName}")]
     public virtual async Task<FileResult> DownloadAsync([NotNull] string containerName, [NotNull] string blobName, [NotNull] string fileName)
     {
-        var file = await _blobAppService.GetFileAsync(containerName, blobName);
+        var file = await _fileAppService.GetFileAsync(containerName, blobName);
         return File(file.GetStream(), file.ContentType, fileName);
     }
 }

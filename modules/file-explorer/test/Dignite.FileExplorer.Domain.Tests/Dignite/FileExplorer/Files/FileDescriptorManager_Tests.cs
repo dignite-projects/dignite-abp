@@ -32,8 +32,9 @@ public class FileDescriptorManager_Tests : FileExplorerDomainTestBase
 
 
         var files = await _fileDescriptorManager.CreateAsync<DefaultContainer>(
-            new FakeEntity(Guid.NewGuid()),
-            streams
+            streams,
+            null,
+            new FakeEntity(Guid.NewGuid())
             );
 
         files.ShouldNotBeEmpty();

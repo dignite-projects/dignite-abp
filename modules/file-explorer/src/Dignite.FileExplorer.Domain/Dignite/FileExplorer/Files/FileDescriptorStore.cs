@@ -33,6 +33,6 @@ public class FileDescriptorStore : DomainService, IFileStore<FileDescriptor>
 
     public async Task<FileDescriptor> FindAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
-        return await _blobRepository.FindAsync(containerName, blobName, cancellationToken);
+        return await _blobRepository.FindByBlobNameAsync(containerName, blobName, cancellationToken);
     }
 }

@@ -15,19 +15,37 @@ namespace Dignite.FileExplorer.Files;
 
 public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorStore>, IDomainService
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TContainer"></typeparam>
+    /// <param name="remoteStreams"></param>
+    /// <param name="directoryId">Directory in container</param>
+    /// <param name="entity">Associated Entity</param>
+    /// <returns></returns>
     public virtual async Task<IReadOnlyList<FileDescriptor>> CreateAsync<TContainer>(
-                                        [NotNull] IEntity entity,
-                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams)
+                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams,
+                                        [CanBeNull] Guid? directoryId,
+                                        [CanBeNull] IEntity entity)
         where TContainer : class
     {
         var containerName = BlobContainerNameAttribute.GetContainerName<TContainer>();
-        return await CreateAsync(entity,containerName, remoteStreams);
+        return await CreateAsync(containerName, remoteStreams,directoryId, entity);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="remoteStreams"></param>
+    /// <param name="directoryId">Directory in container</param>
+    /// <param name="entity">Associated Entity</param>
+    /// <returns></returns>
     public virtual async Task<IReadOnlyList<FileDescriptor>> CreateAsync(
-                                        [NotNull] IEntity entity,
                                         [NotNull] string containerName,
-                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams)
+                                        [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams,
+                                        [CanBeNull] Guid? directoryId,
+                                        [NotNull] IEntity entity)
     {
         var files = new List<FileDescriptor>();
         foreach (var stream in remoteStreams)
@@ -38,14 +56,15 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                         GuidGenerator.Create(),
                         containerName,
                         blobName,
+                        directoryId,
                         stream.ContentLength.GetValueOrDefault(),
                         stream.FileName,
                         stream.ContentType,
                         entity.GetType().FullName,
-                        GetEntityId(entity),
+                        GetEntityKey(entity),
                         CurrentTenant.Id);
 
-            files.Add( await CreateAsync(fileDescriptor, stream));
+            files.Add(await CreateAsync(fileDescriptor, stream));
         }
         return files;
     }
@@ -56,7 +75,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
         return await base.CreateAsync(fileInfo, remoteStream.GetStream());
     }
 
-    protected virtual string GetEntityId(IEntity entity)
+    protected virtual string GetEntityKey(IEntity entity)
     {
         var keys = entity.GetKeys();
         if (keys.All(k => k == null))

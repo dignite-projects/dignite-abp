@@ -13,7 +13,7 @@ namespace Dignite.FileExplorer.Files;
 
 public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppService
 {
-    private readonly IFileDescriptorRepository _blobRepository;
+    private readonly IFileDescriptorRepository _fileRepository;
     private readonly FileDescriptorManager _fileManager;
     private readonly IBlobContainerConfigurationProvider _blobContainerConfigurationProvider;
     private readonly IBlobContainerFactory _blobContainerFactory;
@@ -24,7 +24,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         IBlobContainerConfigurationProvider blobContainerConfigurationProvider,
         IBlobContainerFactory blobContainerFactory)
     {
-        _blobRepository = blobRepository;
+        _fileRepository = blobRepository;
         _fileManager = fileManager;
         _blobContainerConfigurationProvider = blobContainerConfigurationProvider;
         _blobContainerFactory = blobContainerFactory;
@@ -54,8 +54,8 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     /// <returns></returns>
     public async Task<PagedResultDto<FileDescriptorDto>> GetListAsync(GetFilesInput input)
     {
-        var count = await _blobRepository.GetCountAsync(input.ContainerName, input.Filter, input.EntityTypeFullName, input.EntityId);
-        var result = await _blobRepository.GetListAsync(input.ContainerName, input.Filter, input.EntityTypeFullName, input.EntityId, input.Sorting, input.MaxResultCount, input.SkipCount);
+        var count = await _fileRepository.GetCountAsync(input.ContainerName,input.DirectoryId, input.Filter, input.EntityTypeFullName, input.EntityId);
+        var result = await _fileRepository.GetListAsync(input.ContainerName, input.DirectoryId, input.Filter, input.EntityTypeFullName, input.EntityId, input.Sorting, input.MaxResultCount, input.SkipCount);
 
         return new PagedResultDto<FileDescriptorDto>(
             count,
@@ -65,7 +65,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 
     public async Task DeleteAsync(Guid id)
     {
-        var result = await _blobRepository.GetAsync(id, false);
+        var result = await _fileRepository.GetAsync(id, false);
         await _fileManager.DeleteAsync(result);
     }
 

@@ -45,7 +45,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                                         [NotNull] string containerName,
                                         [NotNull] IReadOnlyList<IRemoteStreamContent> remoteStreams,
                                         [CanBeNull] Guid? directoryId,
-                                        [NotNull] IEntity entity)
+                                        [CanBeNull] IEntity entity)
     {
         var files = new List<FileDescriptor>();
         foreach (var stream in remoteStreams)
@@ -60,8 +60,8 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                         stream.ContentLength.GetValueOrDefault(),
                         stream.FileName,
                         stream.ContentType,
-                        entity.GetType().FullName,
-                        GetEntityKey(entity),
+                        entity==null?null:entity.GetType().FullName,
+                        entity == null ? null : GetEntityKey(entity),
                         CurrentTenant.Id);
 
             files.Add(await CreateAsync(fileDescriptor, stream));
@@ -69,10 +69,16 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
         return files;
     }
 
-    public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor fileInfo,
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="remoteStream"></param>
+    /// <returns></returns>
+    public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor file,
                                         [NotNull] IRemoteStreamContent remoteStream)
     {
-        return await base.CreateAsync(fileInfo, remoteStream.GetStream());
+        return await base.CreateAsync(file, remoteStream.GetStream());
     }
 
     protected virtual string GetEntityKey(IEntity entity)

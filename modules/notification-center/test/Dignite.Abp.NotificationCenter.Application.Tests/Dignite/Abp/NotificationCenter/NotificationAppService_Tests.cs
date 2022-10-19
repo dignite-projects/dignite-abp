@@ -16,7 +16,7 @@ public class NotificationAppService_Tests : NotificationCenterApplicationTestBas
     [Fact]
     public async Task Should_Subscribed_NotificationsAsync()
     {
-        var result = await _notificationAppService.GetSubscribedAsync();
+        var result = await _notificationAppService.GetAllAvailableSubscribeAsync();
         result.Items.ShouldNotBeEmpty();
     }
 }

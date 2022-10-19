@@ -348,10 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/modules/BlobStoringManagement/MSBuild_Logs
 
 # vs for Mac
 .DS_Store
 
 # 
-*/wwwroot/libs/*
+**/wwwroot/libs/**

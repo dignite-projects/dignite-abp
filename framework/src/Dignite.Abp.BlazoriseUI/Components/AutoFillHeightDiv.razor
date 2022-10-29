@@ -1,0 +1,37 @@
+﻿@using Blazorise
+@using Blazorise.Utilities
+@using Microsoft.JSInterop
+@inject IJSRuntime JsRuntime
+@inject IIdGenerator IdGenerator
+@inherits ComponentBase
+
+<div id="@ElementId" style="overflow:auto; height:@MaxHeight;">
+    @if (ChildContent != null)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private string ElementId { get; set; }
+
+    private string MaxHeight;
+
+    protected override Task OnInitializedAsync()
+    {
+        ElementId = IdGenerator.Generate;
+        return base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender == true)
+        {
+            MaxHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.calculateHeight", ElementId);
+            StateHasChanged();
+        }
+    }
+}

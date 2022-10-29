@@ -2,7 +2,7 @@ namespace Dignite.Abp.BlobStoring;
 
 public class ImageResizeHandlerConfigurationNames
 {
-    public const string ImageHeight = "Dignite.BlobStoring.ImageResizeHandler.ImageHeight";
-    public const string ImageWidth = "Dignite.BlobStoring.ImageResizeHandler.ImageWidth";
-    public const string ImageSizeMustBeLargerThanPreset = "Dignite.BlobStoring.ImageResizeHandler.ImageSizeCouldBeLessThanPreset";
+    public const string ImageHeight = "ImageResizeHandler.ImageHeight";
+    public const string ImageWidth = "ImageResizeHandler.ImageWidth";
+    public const string ImageSizeMustBeLargerThanPreset = "ImageResizeHandler.ImageSizeCouldBeLessThanPreset";
 }

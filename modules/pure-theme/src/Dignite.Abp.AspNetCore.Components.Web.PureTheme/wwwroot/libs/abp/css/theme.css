@@ -17,6 +17,7 @@
 /* branding */
 .navbar-brand-logo {
     max-height: 40px;
+    margin-right:0.5rem;
 }
 
 .navbar-toggler {
@@ -36,10 +37,12 @@
 .b-layout-footer {
     display: none;
 }
-.b-bar-vertical-inline .b-bar-item .b-bar-icon, 
-.b-bar-vertical-popout .b-bar-item .b-bar-icon, 
+.b-bar-vertical-inline .b-bar-item .b-bar-icon,
+.b-bar-vertical-popout .b-bar-item .b-bar-icon,
 .b-bar-vertical-small .b-bar-item .b-bar-icon {
-    margin-right:0.5rem;
+    width:2.5rem;
+    text-align:center;
+    color: var(--bs-primary)
 }
 
 @media (max-width: 768px) {

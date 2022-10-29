@@ -1,7 +1,6 @@
 using System;
 using Dignite.Abp.BlobStoring;
 using Volo.Abp.Domain.Entities;
-using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.Files;
 

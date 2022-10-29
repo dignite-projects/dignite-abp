@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
@@ -14,7 +15,7 @@ public class SimpleBlobNameGenerator : IBlobNameGenerator, ITransientDependency
     public virtual Task<string> Create()
     {
         return Task.FromResult(
-            Guid.NewGuid().ToString("N")
+            Path.GetRandomFileName().Replace(".","")
             );
     }
 }

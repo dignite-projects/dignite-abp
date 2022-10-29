@@ -136,7 +136,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         var configuration = BlobContainerConfigurationProvider.Get(containerName);
         var namingGeneratorType = configuration.GetConfigurationOrDefault(
             BlobContainerConfigurationNames.BlobNamingGenerator,
-            typeof(SimpleBlobNameGenerator)
+            typeof(RandomBlobNameGenerator)
             );
 
         var generator = LazyServiceProvider.LazyGetRequiredService(namingGeneratorType)

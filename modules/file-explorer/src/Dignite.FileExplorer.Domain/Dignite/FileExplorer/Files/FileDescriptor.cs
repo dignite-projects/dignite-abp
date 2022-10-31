@@ -61,7 +61,7 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     public string EntityTypeFullName { get; protected set; }
 
     /// <summary>
-    /// Associated Entity Key
+    /// Associated Entity Id
     /// </summary>
     public string EntityId { get; protected set; }
 

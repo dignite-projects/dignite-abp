@@ -19,7 +19,7 @@ public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
     {
         //
         DirectoryNameValidator.CheckDirectoryName(name);
-        ContainerNameValidator.CheckDirectoryName(containerName);
+        ContainerNameValidator.Validate(containerName);
 
         //
         if (await DirectoryDescriptorRepository.NameExistsAsync(containerName, name, parentId))

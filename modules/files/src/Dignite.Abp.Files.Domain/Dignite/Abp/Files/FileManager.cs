@@ -38,32 +38,35 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
             CancellationToken cancellationToken = default)
     {
 
-        ContainerNameValidator.CheckDirectoryName(file.ContainerName);
+        ContainerNameValidator.Validate(file.ContainerName);
         await CheckFileAsync(file);
 
         using (CurrentFile.Current(file))
         {
-            await OnCreatingEntityAsync(file, stream);
+            await OnCreatingEntityAsync();
 
+            //Give it to the handlers before saving
+            await FileHandlers(file.ContainerName, stream);
+
+            //Persist file information
             await FileStore.CreateAsync(file, false, cancellationToken);
 
+            //Save file stream to container
             var blobContainer = BlobContainerFactory.Create(file.ContainerName);
             await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
 
-            await OnCreatedEntityAsync(file);
+            await OnCreatedEntityAsync();
         }
 
         return file;
     }
 
-    protected virtual async Task OnCreatingEntityAsync(
-        [NotNull] TFile file,
-        [NotNull] Stream stream)
+    protected virtual Task OnCreatingEntityAsync()
     {
-        await FileHandlers(file.ContainerName, stream);
+        return Task.CompletedTask;
     }
 
-    protected virtual Task OnCreatedEntityAsync([NotNull] TFile file)
+    protected virtual Task OnCreatedEntityAsync()
     {
         return Task.CompletedTask;
     }

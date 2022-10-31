@@ -3,10 +3,10 @@
 namespace Dignite.Abp.BlobStoring;
 public class ContainerNameValidator: ITransientDependency
 {
-    public void CheckDirectoryName(string name)
+    public void Validate(string name)
     {
         /*
-         TODO:Check if container exists
+         TODO:Check if container name exists
 
          */
     }

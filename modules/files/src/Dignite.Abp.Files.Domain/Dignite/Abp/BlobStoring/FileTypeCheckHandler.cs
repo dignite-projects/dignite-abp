@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Dignite.Abp.Files;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 
@@ -14,20 +13,13 @@ namespace Dignite.Abp.BlobStoring;
 /// </summary>
 public class FileTypeCheckHandler : IBlobHandler, ITransientDependency
 {
-    private readonly ICurrentFile _currentFile;
-
-    public FileTypeCheckHandler(ICurrentFile currentFile)
-    {
-        _currentFile = currentFile;
-    }
-
     public Task ExecuteAsync(BlobHandlerContext context)
     {
         var fileTypeCheckHandlerConfiguration = context.ContainerConfiguration.GetFileTypeCheckConfiguration();
 
         if (fileTypeCheckHandlerConfiguration.AllowedFileTypeNames != null && fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.Length > 0)
         {
-            string fileExtensionName = Path.GetExtension(_currentFile.File.Name);
+            string fileExtensionName = Path.GetExtension(context.File.Name);
 
             if (!fileExtensionName.IsNullOrEmpty())
             {

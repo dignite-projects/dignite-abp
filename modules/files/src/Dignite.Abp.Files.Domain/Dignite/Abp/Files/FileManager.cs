@@ -19,7 +19,6 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 {
     protected IBlobContainerConfigurationProvider BlobContainerConfigurationProvider => LazyServiceProvider.LazyGetRequiredService<IBlobContainerConfigurationProvider>();
     protected IBlobContainerFactory BlobContainerFactory => LazyServiceProvider.LazyGetRequiredService<IBlobContainerFactory>();
-    protected ICurrentFile CurrentFile => LazyServiceProvider.LazyGetRequiredService<ICurrentFile>();
     protected IFileStore<TFile> FileStore => LazyServiceProvider.LazyGetService(typeof(TFileStore)).As<IFileStore<TFile>>();
     protected ContainerNameValidator ContainerNameValidator => LazyServiceProvider.LazyGetRequiredService<ContainerNameValidator>();
 
@@ -37,36 +36,33 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
             bool overrideExisting = false,
             CancellationToken cancellationToken = default)
     {
-
         ContainerNameValidator.Validate(file.ContainerName);
         await CheckFileAsync(file);
 
-        using (CurrentFile.Current(file))
-        {
-            await OnCreatingEntityAsync();
+        await OnCreatingEntityAsync(file);
 
-            //Give it to the handlers before saving
-            await FileHandlers(file.ContainerName, stream);
+        //Give it to the handlers before saving
+        await FileHandlers(file, stream);
 
-            //Persist file information
-            await FileStore.CreateAsync(file, false, cancellationToken);
+        //Persist file information
+        await FileStore.CreateAsync(file, false, cancellationToken);
 
-            //Save file stream to container
-            var blobContainer = BlobContainerFactory.Create(file.ContainerName);
-            await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
+        //Save file stream to container
+        var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+        await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
 
-            await OnCreatedEntityAsync();
-        }
+        await OnCreatedEntityAsync(file);
+
 
         return file;
     }
 
-    protected virtual Task OnCreatingEntityAsync()
+    protected virtual Task OnCreatingEntityAsync([NotNull] TFile file)
     {
         return Task.CompletedTask;
     }
 
-    protected virtual Task OnCreatedEntityAsync()
+    protected virtual Task OnCreatedEntityAsync([NotNull] TFile file)
     {
         return Task.CompletedTask;
     }
@@ -129,41 +125,22 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    /// Generate blobname using the configured <see cref="IBlobNameGenerator"/>
-    /// </summary>
-    /// <param name="containerName"></param>
-    /// <returns></returns>
-    public virtual async Task<string> GenerateBlobNameAsync(string containerName)
-    {
-        var configuration = BlobContainerConfigurationProvider.Get(containerName);
-        var namingGeneratorType = configuration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobNamingGenerator,
-            typeof(RandomBlobNameGenerator)
-            );
-
-        var generator = LazyServiceProvider.LazyGetRequiredService(namingGeneratorType)
-            .As<IBlobNameGenerator>();
-
-        var blobName = await generator.Create();
-        return blobName;
-    }
 
     /// <summary>
     /// file handlers
     /// </summary>
-    /// <param name="containerName"></param>
+    /// <param name="file"></param>
     /// <param name="stream"></param>
     /// <returns></returns>
-    private async Task FileHandlers(string containerName, Stream stream)
+    private async Task FileHandlers(TFile file, Stream stream)
     {
-        var configuration = BlobContainerConfigurationProvider.Get(containerName);
+        var configuration = BlobContainerConfigurationProvider.Get(file.ContainerName);
         // blob process handlers
         var processHandlers = configuration.GetConfigurationOrDefault<ITypeList<IBlobHandler>>(BlobContainerConfigurationNames.BlobHandlers, null);
         if (processHandlers != null && processHandlers.Any())
         {
             var serviceProvider = LazyServiceProvider.LazyGetRequiredService<IServiceProvider>();
-            var context = new BlobHandlerContext(stream, configuration);
+            var context = new BlobHandlerContext(file, stream, configuration);
             using (var scope = serviceProvider.CreateScope())
             {
                 foreach (var handlerType in processHandlers)

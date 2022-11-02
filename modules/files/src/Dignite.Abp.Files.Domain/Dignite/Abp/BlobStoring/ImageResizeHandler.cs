@@ -12,13 +12,6 @@ namespace Dignite.Abp.BlobStoring;
 /// </summary>
 public class ImageResizeHandler : IBlobHandler, ITransientDependency
 {
-    private readonly ICurrentFile _currentFile;
-
-    public ImageResizeHandler(ICurrentFile currentFile)
-    {
-        _currentFile = currentFile;
-    }
-
     public async Task ExecuteAsync(BlobHandlerContext context)
     {
         var position = context.BlobStream.Position;
@@ -72,7 +65,7 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
                     context.BlobStream.SetLength(context.BlobStream.Position);
                     context.BlobStream.Position = 0;
 
-                    _currentFile.File.Resize(context.BlobStream.Length);
+                    context.File.Resize(context.BlobStream.Length);
                 }
             }
         }

@@ -4,6 +4,7 @@ using Dignite.Abp.Files;
 using Volo.Abp.Validation;
 
 namespace Dignite.FileExplorer.Directories;
+
 public class CreateDirectoryInput
 {
     /// <summary>
@@ -14,7 +15,7 @@ public class CreateDirectoryInput
     public string ContainerName { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [Required]
     [DynamicMaxLength(typeof(DirectoryDescriptorConsts), nameof(DirectoryDescriptorConsts.MaxNameLength))]
@@ -22,7 +23,7 @@ public class CreateDirectoryInput
     public string Name { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public Guid? ParentId { get; set; }
 }

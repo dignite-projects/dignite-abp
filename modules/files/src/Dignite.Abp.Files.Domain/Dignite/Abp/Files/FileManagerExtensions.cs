@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Volo.Abp.BlobStoring;
 
 namespace Dignite.Abp.Files;
+
 public static class FileManagerExtensions
 {
     public static async Task<TFile> CreateAsync<TFile, TFileStore>(
@@ -27,16 +28,15 @@ public static class FileManagerExtensions
         }
     }
 
-
     public static async Task<byte[]> GetAllBytesOrNullAsync<TFile, TFileStore>(
         this FileManager<TFile, TFileStore> fileManager,
-        [NotNull] string containerName, 
-        [NotNull] string blobName, 
+        [NotNull] string containerName,
+        [NotNull] string blobName,
         CancellationToken cancellationToken = default)
         where TFile : class, IFile
         where TFileStore : IFileStore<TFile>
     {
-        var stream = await fileManager.GetStreamOrNullAsync(containerName,blobName, cancellationToken);
+        var stream = await fileManager.GetStreamOrNullAsync(containerName, blobName, cancellationToken);
         if (stream == null)
         {
             return null;
@@ -48,7 +48,7 @@ public static class FileManagerExtensions
         }
     }
 
-    public static async Task<byte[]> GetAllBytesOrNullAsync<TFile, TFileStore,TContainer>(
+    public static async Task<byte[]> GetAllBytesOrNullAsync<TFile, TFileStore, TContainer>(
         this FileManager<TFile, TFileStore> fileManager,
         [NotNull] string blobName,
         CancellationToken cancellationToken = default)

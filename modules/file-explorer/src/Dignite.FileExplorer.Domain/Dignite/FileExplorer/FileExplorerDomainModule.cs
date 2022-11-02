@@ -1,5 +1,5 @@
-﻿using Dignite.FileExplorer.Directories;
-using Dignite.Abp.Files;
+﻿using Dignite.Abp.Files;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;

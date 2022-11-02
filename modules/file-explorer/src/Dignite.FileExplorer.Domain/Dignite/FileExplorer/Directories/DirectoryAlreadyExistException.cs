@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using Dignite.FileExplorer;
 using Volo.Abp;
 
 namespace Dignite.FileExplorer.Directories;
-public class DirectoryAlreadyExistException:BusinessException
+
+public class DirectoryAlreadyExistException : BusinessException
 {
     public DirectoryAlreadyExistException(SerializationInfo serializationInfo, StreamingContext context)
         : base(serializationInfo, context)

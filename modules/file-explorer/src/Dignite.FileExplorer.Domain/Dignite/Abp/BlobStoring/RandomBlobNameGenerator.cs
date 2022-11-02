@@ -15,7 +15,7 @@ public class RandomBlobNameGenerator : IBlobNameGenerator, ITransientDependency
     public virtual Task<string> Create()
     {
         return Task.FromResult(
-            Path.GetRandomFileName().Replace(".","")
+            Path.GetRandomFileName().Replace(".", "")
             );
     }
 }

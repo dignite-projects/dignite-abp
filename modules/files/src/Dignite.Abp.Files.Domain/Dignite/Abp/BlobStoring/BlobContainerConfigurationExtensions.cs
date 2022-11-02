@@ -6,7 +6,6 @@ namespace Dignite.Abp.BlobStoring;
 
 public static class BlobContainerConfigurationExtensions
 {
-
     #region Blob size limit handler configuration extenisions
 
     public static BlobSizeLimitHandlerConfiguration GetBlobSizeLimitConfiguration(

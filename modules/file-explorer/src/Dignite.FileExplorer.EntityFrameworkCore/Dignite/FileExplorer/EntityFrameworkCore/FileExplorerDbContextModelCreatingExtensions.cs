@@ -14,7 +14,6 @@ public static class FileExplorerDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-
         builder.Entity<DirectoryDescriptor>(b =>
         {
             //Configure table & schema name
@@ -27,7 +26,7 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.Property(q => q.Name).IsRequired().HasMaxLength(DirectoryDescriptorConsts.MaxNameLength);
 
             //Indexes
-            b.HasIndex(q => new { q.TenantId, q.ContainerName, q.ParentId });
+            b.HasIndex(q => new { q.TenantId, q.ContainerName, q.CreatorId, q.ParentId });
 
             b.ApplyObjectExtensionMappings();
         });
@@ -41,13 +40,13 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.ConfigureAbpFiles();
 
             //Properties
-            b.Property(q => q.EntityTypeFullName).HasMaxLength(FileDescriptorConsts.MaxEntityTypeFullNameLength);
+            b.Property(q => q.EntityType).HasMaxLength(FileDescriptorConsts.MaxEntityTypeLength);
             b.Property(q => q.EntityId).HasMaxLength(FileDescriptorConsts.MaxEntityIdLength);
 
             //Indexes
-            b.HasIndex(q => new { q.TenantId, q.EntityTypeFullName, q.EntityId });
+            b.HasIndex(q => new { q.TenantId, q.EntityType, q.EntityId });
             b.HasIndex(q => new { q.TenantId, q.ContainerName, q.BlobName });
-            b.HasIndex(q => new { q.TenantId, q.ContainerName, q.DirectoryId });
+            b.HasIndex(q => new { q.TenantId, q.ContainerName, q.CreatorId, q.DirectoryId });
             b.HasIndex(q => new { q.TenantId, q.CreatorId });
 
             b.ApplyObjectExtensionMappings();

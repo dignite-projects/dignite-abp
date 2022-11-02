@@ -11,16 +11,16 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     protected FileDescriptor()
     { }
 
-    public FileDescriptor(Guid id, string containerName, string blobName, Guid? directoryId, long size, string name, string mineType, string entityTypeFullName, string entityId, Guid? tenantId)
+    public FileDescriptor(Guid id, string containerName, string blobName, Guid? directoryId, long size, string name, string mineType, string entityType, string entityId, Guid? tenantId)
+        : base(id)
     {
-        Id = id;
         ContainerName = containerName;
         BlobName = blobName;
         DirectoryId = directoryId;
         Size = size;
         Name = name;
         MimeType = mineType;
-        EntityTypeFullName = entityTypeFullName;
+        EntityType = entityType;
         EntityId = entityId;
         TenantId = tenantId;
     }
@@ -48,7 +48,7 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     /// <summary>
     /// File name
     /// </summary>
-    public string Name { get; protected set; }
+    public string Name { get; set; }
 
     /// <summary>
     /// File mime type
@@ -58,7 +58,7 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     /// <summary>
     /// Associated Entity Type Name
     /// </summary>
-    public string EntityTypeFullName { get; protected set; }
+    public string EntityType { get; protected set; }
 
     /// <summary>
     /// Associated Entity Id

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Dignite.FileExplorer.Directories;
+
 public class DirectoryDescriptorInfoDto
 {
     public Guid Id { get; set; }
@@ -12,12 +13,12 @@ public class DirectoryDescriptorInfoDto
     public string ContainerName { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public Guid? ParentId { get; set; }
 

@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
-using Dignite.FileExplorer;
 using Volo.Abp;
 
 namespace Dignite.FileExplorer.Directories;
+
 public class InvalidDirectoryNameException : BusinessException
 {
     public InvalidDirectoryNameException(SerializationInfo serializationInfo, StreamingContext context)

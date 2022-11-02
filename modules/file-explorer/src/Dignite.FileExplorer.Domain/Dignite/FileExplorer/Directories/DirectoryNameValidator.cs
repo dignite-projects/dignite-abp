@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace Dignite.FileExplorer.Directories;
+
 public static class DirectoryNameValidator
 {
     public static void CheckDirectoryName(string name)

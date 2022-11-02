@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Dignite.Abp.Files;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using Volo.Abp;
@@ -27,7 +26,6 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
 
             using (Image image = await Image.LoadAsync(context.BlobStream))
             {
-
                 if (configuration.ImageSizeMustBeLargerThanPreset)
                 {
                     if (image.Width < configuration.ImageWidth || image.Height < configuration.ImageHeight)

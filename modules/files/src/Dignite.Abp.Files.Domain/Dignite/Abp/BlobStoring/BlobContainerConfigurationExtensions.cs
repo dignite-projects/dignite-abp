@@ -6,14 +6,6 @@ namespace Dignite.Abp.BlobStoring;
 
 public static class BlobContainerConfigurationExtensions
 {
-    public static void SetBlobNameGenerator<TBlobNameGenerator>(
-        this BlobContainerConfiguration containerConfiguration)
-        where TBlobNameGenerator : IBlobNameGenerator
-    {
-        containerConfiguration.SetConfiguration(
-            BlobContainerConfigurationNames.BlobNamingGenerator,
-            typeof(TBlobNameGenerator));
-    }
 
     #region Blob size limit handler configuration extenisions
 

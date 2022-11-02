@@ -15,13 +15,13 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
     private readonly FileExplorerTestData _fileExplorerTestData;
 
     public FileExplorerDataSeedContributor(
-        IGuidGenerator guidGenerator, ICurrentTenant currentTenant, 
+        IGuidGenerator guidGenerator, ICurrentTenant currentTenant,
         IFileDescriptorRepository fileDescriptorRepository,
         FileExplorerTestData fileExplorerTestData)
     {
         _guidGenerator = guidGenerator;
         _currentTenant = currentTenant;
-        _fileDescriptorRepository= fileDescriptorRepository;
+        _fileDescriptorRepository = fileDescriptorRepository;
         _fileExplorerTestData = fileExplorerTestData;
     }
 
@@ -33,48 +33,47 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
         }
     }
 
-
     private async Task SeedFileDescriptorsAsync()
     {
         await _fileDescriptorRepository.InsertAsync(
             new FileDescriptor(
-                _guidGenerator.Create(), 
-                _fileExplorerTestData.ContainerName1, 
-                _fileExplorerTestData.BlobName1, 
+                _guidGenerator.Create(),
+                _fileExplorerTestData.ContainerName1,
+                _fileExplorerTestData.BlobName1,
                 null,
-                1024, 
-                "testBlobName1.txt", 
-                "text/plain", 
-                _fileExplorerTestData.EntityTypeFullName, 
-                _fileExplorerTestData.EntityId, 
+                1024,
+                "testBlobName1.txt",
+                "text/plain",
+                _fileExplorerTestData.EntityTypeFullName,
+                _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
 
         await _fileDescriptorRepository.InsertAsync(
             new FileDescriptor(
-                _guidGenerator.Create(), 
-                _fileExplorerTestData.ContainerName2, 
-                _fileExplorerTestData.BlobName2, 
+                _guidGenerator.Create(),
+                _fileExplorerTestData.ContainerName2,
+                _fileExplorerTestData.BlobName2,
                 null,
-                1024, 
-                "testBlobName2.txt", 
-                "text/plain", 
-                _fileExplorerTestData.EntityTypeFullName, 
-                _fileExplorerTestData.EntityId, 
+                1024,
+                "testBlobName2.txt",
+                "text/plain",
+                _fileExplorerTestData.EntityTypeFullName,
+                _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
 
         await _fileDescriptorRepository.InsertAsync(
             new FileDescriptor(
-                _guidGenerator.Create(), 
-                _fileExplorerTestData.ContainerName3, 
-                _fileExplorerTestData.BlobName3, 
+                _guidGenerator.Create(),
+                _fileExplorerTestData.ContainerName3,
+                _fileExplorerTestData.BlobName3,
                 null,
-                1024, 
-                "testBlobName3.txt", 
-                "text/plain", 
-                _fileExplorerTestData.EntityTypeFullName, 
-                _fileExplorerTestData.EntityId, 
+                1024,
+                "testBlobName3.txt",
+                "text/plain",
+                _fileExplorerTestData.EntityTypeFullName,
+                _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
     }

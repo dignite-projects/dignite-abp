@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Shouldly;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 using Xunit;
-using Shouldly;
 
 namespace Dignite.FileExplorer.Files;
 
@@ -26,17 +25,14 @@ public class FileDescriptorManager_Tests : FileExplorerDomainTestBase
         await memoryStream.WriteAsync(Encoding.UTF8.GetBytes("text content"));
         memoryStream.Position = 0;
 
-        var streams = new List<IRemoteStreamContent>() {
-            new RemoteStreamContent(memoryStream, "text.txt", "text/plain")
-            };
-
+        var stream = new RemoteStreamContent(memoryStream, "text.txt", "text/plain");
 
         var files = await _fileDescriptorManager.CreateAsync<DefaultContainer>(
-            streams,
+            stream,
             null,
             new FakeEntity(Guid.NewGuid())
             );
 
-        files.ShouldNotBeEmpty();
+        files.ShouldNotBeNull();
     }
 }

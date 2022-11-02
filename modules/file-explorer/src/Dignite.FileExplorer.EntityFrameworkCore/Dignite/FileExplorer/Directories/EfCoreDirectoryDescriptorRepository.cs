@@ -20,57 +20,53 @@ public class EfCoreDirectoryDescriptorRepository : EfCoreRepository<IFileExplore
     {
     }
 
-    public async Task<bool> AnyChildrenAsync(string containerName, Guid? parentId, CancellationToken cancellationToken = default)
+    public async Task<bool> AnyChildrenAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-                   .AnyAsync(b => b.ContainerName == containerName && b.ParentId == parentId, GetCancellationToken(cancellationToken));
+                   .AnyAsync(b => b.ContainerName == containerName && b.CreatorId == creatorId && b.ParentId == parentId, GetCancellationToken(cancellationToken));
     }
 
-    public async Task<DirectoryDescriptor> FindByNameAsync(string containerName, string name, Guid? parentId, CancellationToken cancellationToken = default)
+    public async Task<DirectoryDescriptor> FindByNameAsync(Guid creatorId, string containerName, Guid? parentId, string name, CancellationToken cancellationToken = default)
     {
-        return await base.FindAsync(dd => dd.ContainerName == containerName && dd.ParentId == parentId,true,GetCancellationToken(cancellationToken));
+        return await base.FindAsync(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId && dd.ParentId == parentId && dd.Name == name, true, GetCancellationToken(cancellationToken));
     }
 
-    public async Task<List<DirectoryDescriptor>> GetAllChildrenAsync(string containerName, CancellationToken cancellationToken = default)
-    {
-        return await (await GetDbSetAsync()).Where(dd => dd.ContainerName == containerName).ToListAsync(GetCancellationToken(cancellationToken));
-    }
-
-    public async Task<int> GetChildrenCountAsync(string containerName, Guid? parentId, CancellationToken cancellationToken = default)
+    public async Task<int> GetChildrenCountAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         var query = await GetListQueryAsync(
-            containerName, parentId
+            creatorId, containerName, parentId
         );
 
         return await query.CountAsync(cancellationToken);
     }
 
-    public async Task<List<DirectoryDescriptor>> GetChildrenListAsync(string containerName, Guid? parentId, int skipCount = 0, int maxResultCount = int.MaxValue, CancellationToken cancellationToken = default)
+    public async Task<List<DirectoryDescriptor>> GetChildrenListAsync(Guid creatorId, string containerName, Guid? parentId, int skipCount = 0, int maxResultCount = int.MaxValue, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, parentId
+            creatorId, containerName, parentId
         );
 
-        return await query.OrderBy(dd=>dd.Order)
+        return await query.OrderBy(dd => dd.Order)
             .PageBy(skipCount, maxResultCount)
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<bool> NameExistsAsync(string containerName, string name, Guid? parentId, Guid? ignoredId = null, CancellationToken cancellationToken = default)
+    public async Task<bool> NameExistsAsync(Guid creatorId, string containerName, string name, Guid? parentId, Guid? ignoredId = null, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
             .WhereIf(ignoredId.HasValue, dd => dd.Id != ignoredId)
-            .AnyAsync(b => b.ContainerName == containerName && b.Name == name, GetCancellationToken(cancellationToken));
+            .AnyAsync(b => b.ContainerName == containerName && b.CreatorId == creatorId && b.ParentId == parentId && b.Name == name, GetCancellationToken(cancellationToken));
     }
 
     protected virtual async Task<IQueryable<DirectoryDescriptor>> GetListQueryAsync(
+        Guid creatorId,
         string containerName,
         Guid? parentId)
     {
         return (await GetDbSetAsync()).AsNoTracking()
-            .Where(dd => dd.ContainerName == containerName && dd.ParentId == parentId);
+            .Where(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId && dd.ParentId == parentId);
     }
 }

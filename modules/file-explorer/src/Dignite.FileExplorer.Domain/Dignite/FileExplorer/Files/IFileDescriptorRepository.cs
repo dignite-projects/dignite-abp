@@ -14,6 +14,7 @@ public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Gu
 
     Task<List<FileDescriptor>> GetListAsync(
         string containerName,
+        Guid? creatorId,
         Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
@@ -25,9 +26,10 @@ public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Gu
 
     Task<int> GetCountAsync(
         string containerName,
+        Guid? creatorId,
         Guid? directoryId,
-        string filter = null, 
-        string entityTypeFullName = null, 
-        string entityId = null, 
+        string filter = null,
+        string entityTypeFullName = null,
+        string entityId = null,
         CancellationToken cancellationToken = default);
 }

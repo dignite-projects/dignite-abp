@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
@@ -12,6 +11,7 @@ using Volo.Abp.Domain.Repositories.MongoDB;
 using Volo.Abp.MongoDB;
 
 namespace Dignite.FileExplorer.Files;
+
 public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMongoDbContext, FileDescriptor, Guid>, IFileDescriptorRepository
 {
     public MongoFileDescriptorRepository(IMongoDbContextProvider<IFileExplorerMongoDbContext> dbContextProvider) : base(
@@ -25,7 +25,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
         return await (await GetMongoQueryableAsync(token))
             .WhereIf(ignoredId != null, ct => ct.Id != ignoredId)
             .As<IMongoQueryable<FileDescriptor>>()
-            .AnyAsync(x => x.ContainerName == containerName && x.BlobName==blobName);
+            .AnyAsync(x => x.ContainerName == containerName && x.BlobName == blobName);
     }
 
     public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
@@ -34,15 +34,17 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
     }
 
     public async Task<int> GetCountAsync(string containerName,
+        Guid? creatorId,
         Guid? directoryId, string filter = null, string entityTypeFullName = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, 
+            containerName,
+            creatorId,
             directoryId,
-            filter, 
-            entityTypeFullName, 
+            filter,
+            entityTypeFullName,
             entityId,
             token);
 
@@ -50,14 +52,16 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
     }
 
     public async Task<List<FileDescriptor>> GetListAsync(string containerName,
+        Guid? creatorId,
         Guid? directoryId, string filter = null, string entityTypeFullName = null, string entityId = null, string sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, 
+            containerName,
+            creatorId,
             directoryId,
-            filter, 
+            filter,
             entityTypeFullName,
             entityId,
             token);
@@ -68,10 +72,9 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
                   .ToListAsync(token);
     }
 
-
-
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
+        Guid? creatorId,
         Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
@@ -79,9 +82,11 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
         CancellationToken cancellationToken = default)
     {
         return (await GetMongoQueryableAsync(cancellationToken))
-            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName && fd.DirectoryId == directoryId)
+            .Where(fd => fd.ContainerName == containerName)
+            .WhereIf(directoryId.HasValue, fd => fd.DirectoryId == directoryId.Value)
+            .WhereIf(creatorId.HasValue, fd => fd.CreatorId == creatorId.Value)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
-            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
+            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityType == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

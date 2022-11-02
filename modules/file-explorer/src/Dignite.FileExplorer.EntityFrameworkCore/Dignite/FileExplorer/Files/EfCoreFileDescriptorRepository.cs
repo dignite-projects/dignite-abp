@@ -34,12 +34,12 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     }
 
     public async Task<int> GetCountAsync(string containerName,
-        Guid? directoryId, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
+        Guid? creatorId, Guid? directoryId, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, directoryId, filter, entityType, entityId
+            containerName, creatorId, directoryId, filter, entityType, entityId
         );
 
         return await query.CountAsync(cancellationToken);
@@ -47,6 +47,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
 
     public async Task<List<FileDescriptor>> GetListAsync(
         string containerName,
+        Guid? creatorId,
         Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
@@ -59,7 +60,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, directoryId, filter, entityTypeFullName, entityId
+            containerName, creatorId, directoryId, filter, entityTypeFullName, entityId
         );
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -69,15 +70,18 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
 
     protected virtual async Task<IQueryable<FileDescriptor>> GetListQueryAsync(
         string containerName,
+        Guid? creatorId,
         Guid? directoryId,
         string filter = null,
         string entityTypeFullName = null,
         string entityId = null)
     {
         return (await GetDbSetAsync()).AsNoTracking()
-            .WhereIf(!containerName.IsNullOrWhiteSpace(), fd => fd.ContainerName == containerName && fd.DirectoryId==directoryId)
+            .Where(fd => fd.ContainerName == containerName)
+            .WhereIf(directoryId.HasValue, fd => fd.DirectoryId == directoryId.Value)
+            .WhereIf(creatorId.HasValue, fd => fd.CreatorId == creatorId.Value)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
-            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityTypeFullName == entityTypeFullName)
+            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityType == entityTypeFullName)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

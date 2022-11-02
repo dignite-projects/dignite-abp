@@ -23,11 +23,31 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         _fileAppService = fileAppService;
     }
 
-    [HttpGet]
-    [Route("{containerName}/{*blobName}")]
-    public virtual async Task<IRemoteStreamContent> GetFileAsync([NotNull] string containerName, [NotNull] string blobName)
+    [HttpPost]
+    public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
-        return await _fileAppService.GetFileAsync(containerName, blobName);
+        return await _fileAppService.CreateAsync(input);
+    }
+
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<FileDescriptorDto> UpdateAsync(Guid id, UpdateFileInput input)
+    {
+        return await _fileAppService.UpdateAsync(id, input);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public virtual async Task DeleteAsync(Guid id)
+    {
+        await _fileAppService.DeleteAsync(id);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<FileDescriptorDto> GetAsync(Guid id)
+    {
+        return await _fileAppService.GetAsync(id);
     }
 
     /// <summary>
@@ -43,18 +63,18 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         return result;
     }
 
-    [HttpDelete]
-    [Route("{id}")]
-    public virtual async Task DeleteAsync(Guid id)
+    [HttpGet]
+    [Route("{containerName}/{*blobName}")]
+    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
     {
-        await _fileAppService.DeleteAsync(id);
+        return await _fileAppService.GetStreamAsync(containerName, blobName);
     }
 
     [HttpGet]
     [Route("download/{containerName}/{*blobName}")]
     public virtual async Task<FileResult> DownloadAsync([NotNull] string containerName, [NotNull] string blobName, [NotNull] string fileName)
     {
-        var file = await _fileAppService.GetFileAsync(containerName, blobName);
-        return File(file.GetStream(), file.ContentType, fileName);
+        var file = await _fileAppService.GetStreamAsync(containerName, blobName);
+        return File(file.GetStream(), file.ContentType, fileName.IsNullOrEmpty() ? file.FileName : fileName);
     }
 }

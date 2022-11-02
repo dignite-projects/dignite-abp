@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dignite.FileExplorer.Files;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
@@ -20,5 +22,15 @@ public class FileExplorerApplicationModule : AbpModule
         {
             options.AddMaps<FileExplorerApplicationModule>(validate: true);
         });
+
+        Configure<AuthorizationOptions>(options =>
+        {
+            options.AddPolicy("DigniteFileExplorerManagePolicy", policy => policy.Requirements.Add(CommonOperations.Create));
+            options.AddPolicy("DigniteFileExplorerUpdatePolicy", policy => policy.Requirements.Add(CommonOperations.Update));
+            options.AddPolicy("DigniteFileExplorerDeletePolicy", policy => policy.Requirements.Add(CommonOperations.Delete));
+            options.AddPolicy("DigniteFileExplorerGetPolicy", policy => policy.Requirements.Add(CommonOperations.Get));
+        });
+
+        context.Services.AddSingleton<IAuthorizationHandler, FileDescriptorAuthorizationHandler>();
     }
 }

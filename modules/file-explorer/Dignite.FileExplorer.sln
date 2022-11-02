@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Applic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Installer", "src\Dignite.FileExplorer.Installer\Dignite.FileExplorer.Installer.csproj", "{BE39FD00-745B-4049-8161-FC129817CBE4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-files", "dignite-files", "{17C67D25-7401-41DD-909B-860C2DE9FACD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp-files", "dignite-abp-files", "{17C67D25-7401-41DD-909B-860C2DE9FACD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.Domain", "..\files\src\Dignite.Abp.Files.Domain\Dignite.Abp.Files.Domain.csproj", "{608EAEBB-AD15-4F19-BB13-63D1040A90F0}"
 EndProject

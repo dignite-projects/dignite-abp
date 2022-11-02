@@ -5,5 +5,5 @@ public class BlobContainerConfigurationNames
     /// <summary>
     ///
     /// </summary>
-    public const string BlobHandlers = "BlobHandlers";
+    public const string BlobNamingGenerator = "BlobNameGenerator";
 }

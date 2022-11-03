@@ -20,7 +20,7 @@ public class FileDescriptorEto
 
     public long Size { get; set; }
 
-    public string EntityTypeFullName { get; set; }
+    public string EntityType { get; set; }
 
     public string EntityId { get; set; }
 

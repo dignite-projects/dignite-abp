@@ -8,16 +8,22 @@ namespace Dignite.FileExplorer.Files;
 
 public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Guid>
 {
-    Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default);
+    Task<bool> BlobNameExistsAsync(string containerName, string blobName, CancellationToken cancellationToken = default);
+
+    Task<bool> Md5ExistsAsync(string containerName, string md5, CancellationToken cancellationToken = default);
+
+    Task<bool> ReferencingAnyAsync(string containerName, string blobName, CancellationToken cancellationToken = default);
 
     Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default);
+
+    Task<FileDescriptor> FindByMd5Async(string containerName, string md5, CancellationToken cancellationToken = default);
 
     Task<List<FileDescriptor>> GetListAsync(
         string containerName,
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityTypeFullName = null,
+        string entityType = null,
         string entityId = null,
         string sorting = null,
         int maxResultCount = int.MaxValue,
@@ -29,7 +35,7 @@ public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Gu
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityTypeFullName = null,
+        string entityType = null,
         string entityId = null,
         CancellationToken cancellationToken = default);
 }

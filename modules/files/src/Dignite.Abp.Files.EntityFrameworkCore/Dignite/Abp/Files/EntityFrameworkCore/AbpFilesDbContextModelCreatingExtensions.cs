@@ -12,5 +12,7 @@ public static class AbpFilesDbContextModelCreatingExtensions
         b.Property(u => u.BlobName).IsRequired().HasMaxLength(AbpFileConsts.MaxBlobNameLength).HasColumnName(nameof(IFile.BlobName));
         b.Property(u => u.Name).HasMaxLength(AbpFileConsts.MaxNameLength).HasColumnName(nameof(IFile.Name));
         b.Property(u => u.MimeType).HasMaxLength(AbpFileConsts.MaxMimeTypeLength).HasColumnName(nameof(IFile.MimeType));
+        b.Property(u => u.Md5).HasMaxLength(AbpFileConsts.MaxMd5Length).HasColumnName(nameof(IFile.Md5));
+        b.Property(u => u.ReferBlobName).HasMaxLength(AbpFileConsts.MaxBlobNameLength).HasColumnName(nameof(IFile.ReferBlobName));
     }
 }

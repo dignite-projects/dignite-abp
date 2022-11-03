@@ -1,5 +1,4 @@
 using System;
-using Dignite.Abp.BlobStoring;
 using Volo.Abp.Domain.Entities;
 
 namespace Dignite.Abp.Files;
@@ -35,8 +34,30 @@ public interface IFile : IAggregateRoot<Guid>
     string MimeType { get; }
 
     /// <summary>
-    /// Reset the file size <see cref="IBlobHandler.ExecuteAsync(BlobHandlerContext)"/>
+    /// File md5
+    /// </summary>
+    string Md5 { get; }
+
+    /// <summary>
+    /// Referencing other blob
+    /// </summary>
+    string ReferBlobName { get; }
+
+    /// <summary>
+    /// Set the file size
     /// </summary>
     /// <param name="size"></param>
-    void Resize(long size);
+    void SetSize(long size);
+
+    /// <summary>
+    /// Set the file md5
+    /// </summary>
+    /// <param name="md5"></param>
+    void SetMd5(string md5);
+
+    /// <summary>
+    /// Set the file ReferBlobName
+    /// </summary>
+    /// <param name="blobName"></param>
+    void SetReferBlobName(string blobName);
 }

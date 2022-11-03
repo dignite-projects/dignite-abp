@@ -70,10 +70,9 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                     GuidGenerator.Create(),
                     containerName,
                     blobName,
-                    directoryId,
-                    stream.ContentLength.GetValueOrDefault(),
                     stream.FileName,
                     stream.ContentType,
+                    directoryId,
                     entityType,
                     entityId,
                     CurrentTenant.Id);

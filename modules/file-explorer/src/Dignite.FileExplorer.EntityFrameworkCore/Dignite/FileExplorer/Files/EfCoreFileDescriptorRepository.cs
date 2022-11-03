@@ -20,17 +20,34 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     {
     }
 
-    public async Task<bool> BlobNameExistsAsync(string containerName, string blobName, Guid? ignoredId = null, CancellationToken cancellationToken = default)
+    public async Task<bool> BlobNameExistsAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-                   .WhereIf(ignoredId != null, ct => ct.Id != ignoredId)
                    .AnyAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<bool> Md5ExistsAsync(string containerName, string md5, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+                   .AnyAsync(b => b.ContainerName == containerName && b.Md5 != null && b.Md5 == md5, GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<bool> ReferencingAnyAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+                   .AnyAsync(b => b.ContainerName == containerName && b.ReferBlobName != null && b.ReferBlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
     public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
                    .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<FileDescriptor> FindByMd5Async(string containerName, string md5, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+                   .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.Md5 != null && b.Md5 == md5, GetCancellationToken(cancellationToken));
     }
 
     public async Task<int> GetCountAsync(string containerName,
@@ -50,7 +67,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityTypeFullName = null,
+        string entityType = null,
         string entityId = null,
         string sorting = null,
         int maxResultCount = int.MaxValue,
@@ -60,7 +77,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, creatorId, directoryId, filter, entityTypeFullName, entityId
+            containerName, creatorId, directoryId, filter, entityType, entityId
         );
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -73,7 +90,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityTypeFullName = null,
+        string entityType = null,
         string entityId = null)
     {
         return (await GetDbSetAsync()).AsNoTracking()
@@ -81,7 +98,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
             .WhereIf(directoryId.HasValue, fd => fd.DirectoryId == directoryId.Value)
             .WhereIf(creatorId.HasValue, fd => fd.CreatorId == creatorId.Value)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
-            .WhereIf(!entityTypeFullName.IsNullOrWhiteSpace(), fd => fd.EntityType == entityTypeFullName)
+            .WhereIf(!entityType.IsNullOrWhiteSpace(), fd => fd.EntityType == entityType)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

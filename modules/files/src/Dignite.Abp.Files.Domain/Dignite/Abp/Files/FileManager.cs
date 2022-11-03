@@ -27,7 +27,10 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     /// </summary>
     /// <param name="file"></param>
     /// <param name="stream"></param>
-    /// <param name="overrideExisting"></param>
+    /// <param name="overrideExisting">
+    /// When the value is true, the exist BLOB will be overwritten,
+    /// And you need to ensure that the blob ownership is the current user
+    /// </param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public virtual async Task<TFile> CreateAsync(
@@ -41,11 +44,23 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
         await OnCreatingEntityAsync(file);
 
+        if (overrideExisting)
+        {
+            if (await FileStore.BlobNameExistsAsync(file.ContainerName, file.BlobName, cancellationToken))
+                await DeleteAsync(file);
+        }
+        else
+        {
+            if (await FileStore.BlobNameExistsAsync(file.ContainerName, file.BlobName, cancellationToken))
+                throw new BlobAlreadyExistsException(
+                $"Saving BLOB '{file.BlobName}' does already exists in the container '{file.ContainerName}'! Set {nameof(overrideExisting)} if it should be overwritten.");
+        }
+
         //Give it to the handlers before saving
         await FileHandlers(file, stream);
 
-        //Persist file information
-        await FileStore.CreateAsync(file, false, cancellationToken);
+        //Save file information to database
+        await SaveFileInformationAsync(file, stream, cancellationToken);
 
         //Save file stream to container
         var blobContainer = BlobContainerFactory.Create(file.ContainerName);
@@ -68,8 +83,8 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
     public virtual async Task<TFile> GetOrNullAsync([NotNull] string containerName, [NotNull] string blobName, CancellationToken cancellationToken = default)
     {
-        var blobInfo = await FileStore.FindAsync(containerName, blobName, cancellationToken);
-        return blobInfo;
+        var file = await FileStore.FindByBlobNameAsync(containerName, blobName, cancellationToken);
+        return file;
     }
 
     public virtual async Task<TFile> GetOrNullAsync<TContainer>([NotNull] string blobName, CancellationToken cancellationToken = default)
@@ -98,13 +113,25 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     {
         await OnDeletingEntityAsync(file);
 
+        // delete file information
         await FileStore.DeleteAsync(file, false, cancellationToken);
 
-        //delete blob
-        if (!await FileStore.BlobNameExistsAsync(file.ContainerName, file.BlobName, file.Id, cancellationToken))
+        // delete file blob
+        if (file.ReferBlobName.IsNullOrEmpty())
         {
-            var blobContainer = BlobContainerFactory.Create(file.ContainerName);
-            return await blobContainer.DeleteAsync(file.BlobName, cancellationToken);
+            if (!await FileStore.ReferencingAnyAsync(file.ContainerName, file.BlobName, cancellationToken))
+            {
+                var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+                return await blobContainer.DeleteAsync(file.BlobName, cancellationToken);
+            }
+        }
+        else
+        {
+            if (!await FileStore.ReferencingAnyAsync(file.ContainerName, file.ReferBlobName, cancellationToken))
+            {
+                var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+                return await blobContainer.DeleteAsync(file.BlobName, cancellationToken);
+            }
         }
 
         await OnDeletedEntityAsync(file);
@@ -159,5 +186,34 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         Check.Length(file.Name, nameof(IFile.MimeType), AbpFileConsts.MaxMimeTypeLength);
 
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Save file information to database
+    /// </summary>
+    /// <param name="file"></param>
+    /// <param name="stream"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private async Task SaveFileInformationAsync(
+        [NotNull] TFile file,
+        Stream stream,
+        CancellationToken cancellationToken = default)
+    {
+        var md5 = stream.Md5();
+        var md5ExistingFile = await FileStore.FindByMd5Async(file.ContainerName, md5, cancellationToken);
+        if (md5ExistingFile == null)
+        {
+            file.SetSize(stream.Length);
+            file.SetMd5(md5);
+        }
+        else
+        {
+            file.SetSize(md5ExistingFile.Size);
+            file.SetReferBlobName(md5ExistingFile.BlobName);
+        }
+
+        //Save file information to database
+        await FileStore.CreateAsync(file, false, cancellationToken);
     }
 }

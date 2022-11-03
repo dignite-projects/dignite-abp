@@ -1,59 +1,28 @@
 ﻿using System;
 using Dignite.Abp.Files;
 using Volo.Abp.Auditing;
-using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.FileExplorer.Files;
 
-public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject, IDeletionAuditedObject, IMultiTenant
+public class FileDescriptor : FileBase, ICreationAuditedObject, IDeletionAuditedObject, IMultiTenant
 {
     protected FileDescriptor()
     { }
 
-    public FileDescriptor(Guid id, string containerName, string blobName, Guid? directoryId, long size, string name, string mineType, string entityType, string entityId, Guid? tenantId)
-        : base(id)
+    public FileDescriptor(Guid id, string containerName, string blobName, string name, string mineType, Guid? directoryId, string entityType, string entityId, Guid? tenantId)
+        : base(id, containerName, blobName, name, mineType)
     {
-        ContainerName = containerName;
-        BlobName = blobName;
         DirectoryId = directoryId;
-        Size = size;
-        Name = name;
-        MimeType = mineType;
         EntityType = entityType;
         EntityId = entityId;
         TenantId = tenantId;
     }
 
     /// <summary>
-    /// Container name of blob
-    /// </summary>
-    public string ContainerName { get; protected set; }
-
-    /// <summary>
-    /// Blob name
-    /// </summary>
-    public string BlobName { get; protected set; }
-
-    /// <summary>
     /// Directory in container
     /// </summary>
     public Guid? DirectoryId { get; set; }
-
-    /// <summary>
-    /// Blob binary size
-    /// </summary>
-    public long Size { get; protected set; }
-
-    /// <summary>
-    /// File name
-    /// </summary>
-    public string Name { get; set; }
-
-    /// <summary>
-    /// File mime type
-    /// </summary>
-    public string MimeType { get; protected set; }
 
     /// <summary>
     /// Associated Entity Type Name
@@ -74,9 +43,4 @@ public class FileDescriptor : AggregateRoot<Guid>, IFile, ICreationAuditedObject
     public bool IsDeleted { get; set; }
 
     public Guid? TenantId { get; protected set; }
-
-    public void Resize(long size)
-    {
-        this.Size = size;
-    }
 }

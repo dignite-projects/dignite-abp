@@ -62,8 +62,6 @@ public class ImageResizeHandler : IBlobHandler, ITransientDependency
                     // Length of clipping stream
                     context.BlobStream.SetLength(context.BlobStream.Position);
                     context.BlobStream.Position = 0;
-
-                    context.File.Resize(context.BlobStream.Length);
                 }
             }
         }

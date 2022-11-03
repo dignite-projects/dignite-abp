@@ -40,11 +40,10 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 _guidGenerator.Create(),
                 _fileExplorerTestData.ContainerName1,
                 _fileExplorerTestData.BlobName1,
-                null,
-                1024,
                 "testBlobName1.txt",
                 "text/plain",
-                _fileExplorerTestData.EntityTypeFullName,
+                null,
+                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
@@ -54,11 +53,10 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 _guidGenerator.Create(),
                 _fileExplorerTestData.ContainerName2,
                 _fileExplorerTestData.BlobName2,
-                null,
-                1024,
                 "testBlobName2.txt",
                 "text/plain",
-                _fileExplorerTestData.EntityTypeFullName,
+                null,
+                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
@@ -68,11 +66,10 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 _guidGenerator.Create(),
                 _fileExplorerTestData.ContainerName3,
                 _fileExplorerTestData.BlobName3,
-                null,
-                1024,
                 "testBlobName3.txt",
                 "text/plain",
-                _fileExplorerTestData.EntityTypeFullName,
+                null,
+                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);

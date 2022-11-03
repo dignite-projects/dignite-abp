@@ -2,7 +2,7 @@
 
 namespace Dignite.FileExplorer.TestObjects;
 
-[BlobContainerName("TestContainer1")]
+[BlobContainerName("testContainer1")]
 public class TestContainer1
 {
 }

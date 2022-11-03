@@ -4,7 +4,7 @@ namespace Dignite.FileExplorer;
 
 public class FileExplorerTestData : ISingletonDependency
 {
-    public string EntityTypeFullName { get; } = "EntityTypeFullName";
+    public string EntityType { get; } = "EntityTypeFullName";
     public string EntityId { get; } = "123456";
     public string ContainerName1 { get; } = "testContainer1";
     public string BlobName1 { get; } = "testBlobName1";

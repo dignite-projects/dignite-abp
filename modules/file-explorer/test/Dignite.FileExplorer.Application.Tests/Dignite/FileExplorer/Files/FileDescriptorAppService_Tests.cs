@@ -16,7 +16,10 @@ public class FileDescriptorAppService_Tests : FileExplorerApplicationTestBase
     [Fact]
     public async Task ShouldGetListAsync()
     {
-        var result = await _fileDescriptorAppService.GetListAsync(new GetFilesInput());
+        var result = await _fileDescriptorAppService.GetListAsync(new GetFilesInput()
+        {
+            ContainerName = "testContainer1"
+        });
         result.Items.ShouldNotBeEmpty();
     }
 }

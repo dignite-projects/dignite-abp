@@ -1,6 +1,8 @@
 ﻿@using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
 @inherits BaseComponent
+@if(Menu!=null && Menu.Items.Any())
+{
 <Bar ElementId="@ElementId" @ref="@Sidebar" Breakpoint="Breakpoint.Desktop" Class="@Class" Style="@Style" NavigationBreakpoint="Breakpoint" ThemeContrast="ThemeContrast.Light"
      Mode="BarMode.VerticalInline" CollapseMode="collapseMode" Shadow="Shadow.Default">
     @if (isBroken)
@@ -19,28 +21,26 @@
     }
     <BarMenu>
         <BarStart>
-            @if (Menu != null)
+            @foreach (var menuItem in Menu.Items)
             {
-                foreach (var menuItem in Menu.Items)
-                {
-                    @if (menuItem.IsLeaf){
-                        <BarItem Disabled="@menuItem.IsDisabled">
-                            <BarLink To="@menuItem.Url" Class="@menuItem.CssClass" Target="new Target(menuItem.Target)">
-                                @if (menuItem.Icon != null)
-                                {
-                                    <BarIcon IconName="menuItem.Icon" />
-                                }
-                                @menuItem.DisplayName
-                            </BarLink>         
-                        </BarItem>
-                    }
-                    else{
-                        <BarItem Disabled="@menuItem.IsDisabled">
-                            <SideNavMenuItem MenuItem="menuItem"></SideNavMenuItem>                    
-                        </BarItem>
-                    }
+                @if (menuItem.IsLeaf){
+                    <BarItem Disabled="@menuItem.IsDisabled">
+                        <BarLink To="@menuItem.Url" Class="@menuItem.CssClass" Target="new Target(menuItem.Target)">
+                            @if (menuItem.Icon != null)
+                            {
+                                <BarIcon IconName="menuItem.Icon" />
+                            }
+                            @menuItem.DisplayName
+                        </BarLink>         
+                    </BarItem>
+                }
+                else{
+                    <BarItem Disabled="@menuItem.IsDisabled">
+                        <SideNavMenuItem MenuItem="menuItem"></SideNavMenuItem>                    
+                    </BarItem>
                 }
             }
         </BarStart>
     </BarMenu>
 </Bar>
+}

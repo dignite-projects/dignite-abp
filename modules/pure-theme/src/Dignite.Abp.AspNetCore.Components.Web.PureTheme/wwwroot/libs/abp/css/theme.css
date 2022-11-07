@@ -1,4 +1,3 @@
-
 /* entry row */
 .entry-row {
     position: sticky !important;
@@ -9,39 +8,43 @@
     z-index: 1020;
 }
 
-.entry-row h1.content-header-title {
-    font-size: 1.5rem;
-    line-height: normal;
-}
+    .entry-row h1.content-header-title {
+        font-size: 1.5rem;
+        line-height: normal;
+    }
 
 /* branding */
 .navbar-brand-logo {
     max-height: 40px;
-    margin-right:0.5rem;
+    margin-right: 0.5rem;
 }
 
 .navbar-toggler {
-    margin-right:0.5rem;
+    margin-right: 0.5rem;
 }
 
 /* main navbar */
 .b-layout-header-fixed {
-    z-index:1032;
-    border-bottom:solid #efefef 1px;
+    z-index: 1032;
+    border-bottom: solid #efefef 1px;
 }
+
 .main-navbar {
     padding-left: 1rem;
     padding-right: 1rem;
     height: var(--b-bar-horizontal-height, auto);
 }
+
 .b-layout-footer {
     display: none;
 }
+
 .b-bar-vertical-inline .b-bar-item .b-bar-icon,
 .b-bar-vertical-popout .b-bar-item .b-bar-icon,
 .b-bar-vertical-small .b-bar-item .b-bar-icon {
-    width:2.5rem;
-    text-align:center;
+    font-size: 1.0rem;
+    width: 2.5rem;
+    text-align: center;
     color: var(--bs-primary)
 }
 
@@ -62,23 +65,23 @@
         height: var(--b-bar-horizontal-height, auto);
     }
 
-    .main-navbar-nav .b-bar-icon {
-        display: block;
-        font-size: 1.25rem;
-        text-align: center;
-    }
+        .main-navbar-nav .b-bar-icon {
+            display: block;
+            font-size: 1.25rem;
+            text-align: center;
+        }
 
     .main-navbar .navbar-toolbar {
         flex-direction: row;
     }
 
-    /* for bootstrap */
-    .main-navbar .navbar-toolbar .nav-item > .nav-link {
-        padding-left: var(--bs-navbar-nav-link-padding-x);
-        padding-right: var(--bs-navbar-nav-link-padding-x);
-    }
+        /* for bootstrap */
+        .main-navbar .navbar-toolbar .nav-item > .nav-link {
+            padding-left: var(--bs-navbar-nav-link-padding-x);
+            padding-right: var(--bs-navbar-nav-link-padding-x);
+        }
 
-    .main-navbar .navbar-toolbar .dropdown-menu {
-        position: absolute;
-    }
+        .main-navbar .navbar-toolbar .dropdown-menu {
+            position: absolute;
+        }
 }

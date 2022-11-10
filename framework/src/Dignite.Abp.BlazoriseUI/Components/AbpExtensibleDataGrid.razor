@@ -1,9 +1,12 @@
 ﻿@typeparam TItem
 @using Blazorise;
 @using Blazorise.DataGrid;
+@using Microsoft.JSInterop
 @using Volo.Abp.Data
 @using Volo.Abp.BlazoriseUI.Components.ObjectExtending
 @using Volo.Abp.BlazoriseUI.Components
+@inject IJSRuntime JsRuntime
+@inject IIdGenerator IdGenerator
 
 <DataGrid ElementId="@ElementId" TItem="TItem"
           Data="@Data"

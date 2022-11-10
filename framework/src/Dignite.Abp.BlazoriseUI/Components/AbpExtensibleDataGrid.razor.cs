@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Blazorise;
 using Blazorise.DataGrid;
 using Blazorise.Extensions;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
 using Volo.Abp.BlazoriseUI.Components;
@@ -38,18 +36,13 @@ public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
 
     [Parameter] public int PageSize { get; set; }
 
-    [Parameter] public IEnumerable<TableColumn> Columns { get; set; }
-    [Parameter] public DataGridSelectionMode SelectionMode { get; set; }
-
     [Parameter] public int CurrentPage { get; set; } = 1;
 
-    [Inject]
-    public IStringLocalizerFactory StringLocalizerFactory { get; set; }
+    [Parameter] public IEnumerable<TableColumn> Columns { get; set; }
 
-    [Inject]
-    public IJSRuntime JsRuntime { get; set; }
+    [Parameter] public DataGridSelectionMode SelectionMode { get; set; }
 
-    [Inject] public IIdGenerator IdGenerator { get; set; }
+    [Parameter] public int? ExtraHeight { get; set; }
 
     protected virtual RenderFragment RenderCustomTableColumnComponent(Type type, object data)
     {
@@ -83,7 +76,11 @@ public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
     {
         if (firstRender == true)
         {
-            DataGridHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.getDataGridHeight", ElementId);
+            DataGridHeight = await JsRuntime.InvokeAsync<string>(
+                "blazoriseUi.getDataGridHeight",
+                ElementId,
+                ExtraHeight.HasValue ? ExtraHeight.Value : "undefined"
+                );
             StateHasChanged();
         }
     }

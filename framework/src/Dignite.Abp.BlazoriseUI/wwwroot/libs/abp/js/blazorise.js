@@ -6,7 +6,7 @@
      * @param {*} extraHeight  Extra height ( The content height at the bottom of the table  Number type , The default is 65)
      */
     getDataGridHeight: function (id, extraHeight) {
-        if (typeof extraHeight == "undefined") {
+        if (typeof extraHeight == undefined || extraHeight=="undefined") {
             //Default bottom pagination 50 +  Margin 10
             extraHeight = 105;
 

@@ -30,7 +30,7 @@
     {
         if (firstRender == true)
         {
-            MaxHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.calculateHeight", ElementId);
+            MaxHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.calculateFullScreenElementHeight", ElementId, 70);
             StateHasChanged();
         }
     }

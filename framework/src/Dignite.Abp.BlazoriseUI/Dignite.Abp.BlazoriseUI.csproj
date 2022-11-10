@@ -9,6 +9,7 @@
 
   <ItemGroup>
 	  <PackageReference Include="Volo.Abp.BlazoriseUI" Version="5.3.4" />
+	  <PackageReference Include="Blazorise.TreeView" Version="1.0.4" />
   </ItemGroup>
 
 

@@ -1,0 +1,44 @@
+﻿@typeparam TNode
+@using Blazorise;
+@using Blazorise.TreeView;
+@using Microsoft.AspNetCore.Components.Web
+
+<div ondragover="event.preventDefault();">
+    <TreeView TNode="TNode" Nodes="@Nodes"
+              GetChildNodes="@GetChildNodes"
+              HasChildNodes="@HasChildNodes"
+              ExpandedNodes="@ExpandedNodes"
+              ExpandedNodesChanged="@ExpandedNodesChanged"
+              SelectedNode="@SelectedNode"
+              SelectedNodeChanged="@SelectedNodeChanged">              
+        <NodeContent>         
+            @if (Draggable)
+            {
+                var key = context.GetHashCode();
+                <div draggable="true" @key="@(key)"
+                     @ondragstart="() => DraggingNode = context"
+                     @ondragend="()=> DraggingNode = default(TNode)"
+                     @ondrag="@(()=> DraggingNode=context)" style="position:relative; margin-bottom:9px;">
+                    @NodeContent(context)
+                    @if (DraggingNode is not null)
+                    {
+                        var isAvailableDragging = DragEnterNode != null && DragEnterNode.GetHashCode() != DraggingNode.GetHashCode() && context.GetHashCode() == DragEnterNode.GetHashCode();
+                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodeArea.Inside)?Border.Primary:Border.Is0" Width="Width.Is100" Height="Height.Is100" Position="Position.Absolute.Top.Is0.Start.Is0"
+                                @ondragenter="@(()=>DragEnter(context, DragEnterNodeArea.Inside))"
+                                @ondrop="@(()=> Dropped())">
+                        </Div>
+
+                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodeArea.Bottom)?Border.Is3.Primary.OnTop:Border.Is0" style="bottom:-9px; height:6px;" Width="Width.Is100" Position="Position.Absolute.Start.Is0"
+                                @ondragenter="@(()=>DragEnter(context, DragEnterNodeArea.Bottom))"
+                                @ondrop="@(()=> Dropped())">
+                        </Div>
+                    }
+                </div>
+            }
+            else
+            {
+                @NodeContent(context)
+            }
+        </NodeContent>
+</TreeView>
+</div>

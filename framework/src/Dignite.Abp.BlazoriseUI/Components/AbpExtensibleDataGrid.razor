@@ -20,10 +20,18 @@
           FixedHeaderDataGridHeight="@DataGridHeight"
           FixedHeaderDataGridMaxHeight="@DataGridHeight"
           >
-    <FirstPageButtonTemplate>首页</FirstPageButtonTemplate>
-    <LastPageButtonTemplate>尾页</LastPageButtonTemplate>
-    <PreviousPageButtonTemplate>上一页</PreviousPageButtonTemplate>
-    <NextPageButtonTemplate>下一页</NextPageButtonTemplate>
+    <FirstPageButtonTemplate>
+        <Icon Name="IconName.StepBackward"></Icon>
+    </FirstPageButtonTemplate>
+    <LastPageButtonTemplate>        
+        <Icon Name="IconName.StepForward"></Icon>
+    </LastPageButtonTemplate>
+    <PreviousPageButtonTemplate>
+        <Icon Name="IconName.ChevronLeft"></Icon>
+        </PreviousPageButtonTemplate>
+    <NextPageButtonTemplate>
+        <Icon Name="IconName.ChevronRight"></Icon>
+        </NextPageButtonTemplate>
     <LoadingTemplate>
         <Row Class="w-100 align-items-center" Style="height: 150px;">
             <Column>
@@ -31,16 +39,6 @@
             </Column>
         </Row>
     </LoadingTemplate>
-    <EmptyTemplate>
-        <Row Class="w-100 align-items-center" Style="height: 150px;">
-            <Column>
-                <Heading Size="HeadingSize.Is4" Alignment="TextAlignment.Center">没有查询到有效数据！</Heading>
-            </Column>
-        </Row>
-    </EmptyTemplate>
-    <TotalItemsTemplate>
-        共有 @context.TotalItems 条数据
-    </TotalItemsTemplate>
     <DataGridColumns>
         @if (SelectionMode == DataGridSelectionMode.Multiple)
         {

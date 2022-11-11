@@ -16,6 +16,8 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    [Parameter] public int ExtraHeight { get; set; }
+
     private string ElementId { get; set; }
 
     private string MaxHeight;
@@ -30,7 +32,7 @@
     {
         if (firstRender == true)
         {
-            MaxHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.calculateFullScreenElementHeight", ElementId, 70);
+            MaxHeight = await JsRuntime.InvokeAsync<string>("blazoriseUi.calculateFullScreenElementHeight", ElementId, ExtraHeight);
             StateHasChanged();
         }
     }

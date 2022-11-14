@@ -13,7 +13,7 @@ namespace Dignite.Abp.SettingManagement.Blazor;
     typeof(AbpSettingManagementApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
     typeof(AbpAutoMapperModule),
-    typeof(AbpFieldCustomizingComponentsBlazoriseUIModule)
+    typeof(AbpFieldCustomizingComponentsBlazoriseUiModule)
     )]
 public class AbpSettingManagementBlazorModule : AbpModule
 {

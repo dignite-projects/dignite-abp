@@ -1,5 +1,5 @@
 ﻿using Dignite.Abp.FieldCustomizing;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.FieldCustomizing.Forms;
 
 namespace Dignite.Abp.SettingManagement;
 
@@ -12,7 +12,7 @@ public class SettingDto : ICustomizeFieldDefinition
         string description,
         string value,
         string fieldProviderName,
-        FieldConfigurationDictionary configuration)
+        FormConfigurationDictionary configuration)
     {
         Section = section;
         Name = name;
@@ -35,5 +35,5 @@ public class SettingDto : ICustomizeFieldDefinition
 
     public string FieldProviderName { get; set; }
 
-    public FieldConfigurationDictionary Configuration { get; set; }
+    public FormConfigurationDictionary Configuration { get; set; }
 }

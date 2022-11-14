@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.FieldCustomizing.Forms;
 using Dignite.Abp.SettingsGrouping;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.SettingManagement;
@@ -15,16 +15,16 @@ public abstract class SettingsAppServiceBase : SettingManagementAppServiceBase
 {
     protected ISettingDefinitionGroupManager SettingDefinitionManager { get; }
     protected ISettingManager SettingManager { get; }
-    protected IEnumerable<IFieldProvider> ControlProviders { get; }
+    protected IEnumerable<IFormProvider> FormProviders { get; }
 
     protected SettingsAppServiceBase(
         ISettingDefinitionGroupManager settingDefinitionManager,
         ISettingManager settingManager,
-        IEnumerable<IFieldProvider> controlProviders)
+        IEnumerable<IFormProvider> formProviders)
     {
         SettingDefinitionManager = settingDefinitionManager;
         SettingManager = settingManager;
-        ControlProviders = controlProviders;
+        FormProviders = formProviders;
     }
 
     public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
@@ -70,7 +70,7 @@ public abstract class SettingsAppServiceBase : SettingManagementAppServiceBase
     protected async Task UpdateAsync(UpdateSettingsInput input)
     {
         var settingDefinitions = SettingDefinitionManager.GetList(input.GroupName);
-        var settings = input.CustomizedFields.Where(s =>
+        var settings = input.CustomFields.Where(s =>
             settingDefinitions.Select(sd => sd.Name).Contains(s.Key)
         );
 

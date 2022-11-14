@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Dignite.Abp.FieldCustomizing.Fields.Textbox;
+using Dignite.Abp.FieldCustomizing.Forms.Textbox;
 using Shouldly;
 using Xunit;
 

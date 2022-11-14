@@ -1,18 +1,16 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Select
-@inherits FieldConfigurationComponentBase<SelectFieldProvider,SelectConfiguration>
+﻿@using Dignite.Abp.FieldCustomizing.Forms.Select
+@inherits FieldConfigurationComponentBase<SelectFormProvider,SelectConfiguration>
 
 <Validation>
     <Field>
         <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Definition.DisplayName" />
+        <TextEdit @bind-Text="@FieldDefinition.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
         <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+        <TextEdit MaxLength="64" @bind-Text="@FieldDefinition.Name" />
     </Field>
 </Validation>
 

@@ -1,23 +1,23 @@
 ﻿using System;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.FieldCustomizing.Forms;
 using Microsoft.AspNetCore.Components;
 using Volo.Abp.AspNetCore.Components;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.FieldCustomizing.Components;
 
-public abstract class FieldComponentBase<TFieldProvider, TConfiguration> : AbpComponentBase, IFieldComponent, ITransientDependency
-    where TFieldProvider : IFieldProvider
-    where TConfiguration : FieldConfigurationBase, new()
+public abstract class FieldComponentBase<TFormProvider, TConfiguration> : AbpComponentBase, IFieldComponent, ITransientDependency
+    where TFormProvider : IFormProvider
+    where TConfiguration : FormConfigurationBase, new()
 {
     protected FieldComponentBase()
     {
         LocalizationResource = typeof(AbpFieldCustomizingModule);
         HideFieldLable = false;
-        FieldProviderType = typeof(TFieldProvider);
+        FormProviderType = typeof(TFormProvider);
     }
 
-    public Type FieldProviderType { get; private set; }
+    public Type FormProviderType { get; private set; }
 
     public TConfiguration Configuration { get; private set; }
 

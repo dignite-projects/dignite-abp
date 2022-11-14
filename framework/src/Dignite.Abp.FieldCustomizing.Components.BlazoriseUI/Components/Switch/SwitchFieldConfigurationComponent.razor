@@ -1,18 +1,16 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Switch
-@inherits FieldConfigurationComponentBase<SwitchFieldProvider,SwitchConfiguration>
+﻿@using Dignite.Abp.FieldCustomizing.Forms.Switch
+@inherits FieldConfigurationComponentBase<SwitchFormProvider,SwitchConfiguration>
 
 <Validation>
     <Field>
         <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Definition.DisplayName" />
+        <TextEdit @bind-Text="@FieldDefinition.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
         <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+        <TextEdit MaxLength="64" @bind-Text="@FieldDefinition.Name" />
     </Field>
 </Validation>
 
@@ -23,7 +21,7 @@
     </Field>
 </Validation>
 <Field>
-    <Check TValue="bool" Checked="@(Checked(Definition.DefaultValue))" CheckedChanged="OnChecked">@L["DefaultValue"]</Check>
+    <Check TValue="bool" Checked="@(Checked(FieldDefinition.DefaultValue))" CheckedChanged="OnChecked">@L["DefaultValue"]</Check>
 </Field>
 
 @code{
@@ -38,6 +36,6 @@
 
     private void OnChecked(bool value)
     {
-        Definition.DefaultValue = value.ToString();
+        FieldDefinition.DefaultValue = value.ToString();
     }
 }

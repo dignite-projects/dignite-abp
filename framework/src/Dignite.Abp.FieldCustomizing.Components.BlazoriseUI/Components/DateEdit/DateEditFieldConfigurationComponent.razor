@@ -1,18 +1,16 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.DateEdit
-@inherits FieldConfigurationComponentBase<DateEditFieldProvider,DateEditConfiguration>
+﻿@using Dignite.Abp.FieldCustomizing.Forms.DateEdit
+@inherits FieldConfigurationComponentBase<DateEditFormProvider,DateEditConfiguration>
 
 <Validation>
     <Field>
         <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Definition.DisplayName" />
+        <TextEdit @bind-Text="@FieldDefinition.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
         <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+        <TextEdit MaxLength="64" @bind-Text="@FieldDefinition.Name" />
     </Field>
 </Validation>
 
@@ -28,10 +26,10 @@
 <Validation>
 <Field>
     <FieldLabel>@L["DateEditMode"]</FieldLabel>
-    <RadioGroup TValue="Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode" Name="DateInputMode" @bind-CheckedValue="@Configuration.InputMode">
-        <Radio TValue="Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode.Date">@L["Date"]</Radio>
-        <Radio TValue="Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode.DateTime">@L["DateTime"]</Radio>
-        <Radio TValue="Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Fields.DateEdit.DateInputMode.Month">@L["Month"]</Radio>
+    <RadioGroup TValue="Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode" Name="DateInputMode" @bind-CheckedValue="@Configuration.InputMode">
+        <Radio TValue="Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode.Date">@L["Date"]</Radio>
+        <Radio TValue="Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode.DateTime">@L["DateTime"]</Radio>
+        <Radio TValue="Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode" Value="@Dignite.Abp.FieldCustomizing.Forms.DateEdit.DateInputMode.Month">@L["Month"]</Radio>
     </RadioGroup>
 </Field>
 </Validation>

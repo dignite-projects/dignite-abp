@@ -7,6 +7,6 @@ namespace Dignite.Abp.FieldCustomizing.Components.BlazoriseUI;
     typeof(AbpBlazoriseUiModule),
     typeof(AbpFieldCustomizingComponentsModule)
     )]
-public class AbpFieldCustomizingComponentsBlazoriseUIModule : AbpModule
+public class AbpFieldCustomizingComponentsBlazoriseUiModule : AbpModule
 {
 }

@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.FieldCustomizing.Fields;
+﻿using Dignite.Abp.FieldCustomizing.Forms;
 using JetBrains.Annotations;
 
 namespace Dignite.Abp.FieldCustomizing;
@@ -24,5 +24,5 @@ public interface ICustomizeFieldDefinition
     string FieldProviderName { get; set; }
 
     [NotNull]
-    FieldConfigurationDictionary Configuration { get; set; }
+    FormConfigurationDictionary Configuration { get; set; }
 }

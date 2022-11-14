@@ -1,9 +1,5 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Textbox
-@using Dignite.Abp.FieldCustomizing;
-
-@inherits FieldComponentBase<TextboxFieldProvider,TextboxConfiguration>
+﻿@using Dignite.Abp.FieldCustomizing.Forms.Textbox
+@inherits FieldComponentBase<TextboxFormProvider,TextboxConfiguration>
 
     <Field Horizontal="@(!HideFieldLable)">
         <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>

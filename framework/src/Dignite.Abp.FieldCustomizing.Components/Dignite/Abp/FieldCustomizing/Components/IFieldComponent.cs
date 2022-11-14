@@ -4,5 +4,5 @@ namespace Dignite.Abp.FieldCustomizing.Components;
 
 public interface IFieldComponent
 {
-    Type FieldProviderType { get; }
+    Type FormProviderType { get; }
 }

@@ -4,7 +4,7 @@ namespace Dignite.Abp.FieldCustomizing.Components;
 
 public interface IFieldConfigurationComponent
 {
-    Type FieldProviderType { get; }
+    Type FormProviderType { get; }
 
-    ICustomizeFieldDefinition Definition { get; }
+    ICustomizeFieldDefinition FieldDefinition { get; }
 }

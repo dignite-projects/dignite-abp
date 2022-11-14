@@ -1,10 +1,6 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Table
-@using Dignite.Abp.FieldCustomizing
-@using Microsoft.AspNetCore.Components.Forms
+﻿@using Dignite.Abp.FieldCustomizing.Forms.Table
 @inject IFieldComponentSelector fieldComponentSelector
-@inherits FieldComponentBase<TableFieldProvider,TableConfiguration>
+@inherits FieldComponentBase<TableFormProvider,TableConfiguration>
 
 <Field Horizontal="@(!HideFieldLable)">
     <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>
@@ -32,7 +28,7 @@
                                 {
                                     var component = fieldComponentSelector.Get(column.FieldDefinition.FieldProviderName);
                                     var parameters = new Dictionary<string, object>();
-                                    parameters.Add("CustomizeField", new Dignite.Abp.FieldCustomizing.CustomizeField(row, column.FieldDefinition));
+                                        parameters.Add("CustomizeField", new Dignite.Abp.FieldCustomizing.CustomizeField(row, column.FieldDefinition));
                                     parameters.Add("HideFieldLable", true);
                                     <TableRowCell>
                                         <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
@@ -56,7 +52,7 @@
     </FieldBody>
 </Field>
 @code{
-    public List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow> TableRows = new List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow>();
+    public List<Dignite.Abp.FieldCustomizing.Forms.Table.TableRow> TableRows = new List<Dignite.Abp.FieldCustomizing.Forms.Table.TableRow>();
 
     protected override void OnInitialized()
     {
@@ -64,7 +60,7 @@
         var value = CustomizeField.Entity.GetField(CustomizeField.Definition.Name, null);
         if (value != null)
         {
-            TableRows = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dignite.Abp.FieldCustomizing.Fields.Table.TableRow>>(value.ToString());
+            TableRows = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Dignite.Abp.FieldCustomizing.Forms.Table.TableRow>>(value.ToString());
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿using Dignite.Abp.FieldCustomizing.Components.BlazoriseUI.Components.Textbox;
-using Dignite.Abp.FieldCustomizing.Fields.Textbox;
+using Dignite.Abp.FieldCustomizing.Forms.Textbox;
 using Shouldly;
 using Xunit;
 
@@ -17,6 +17,6 @@ public class FieldComponentSelector_Tests : FieldComponentsTestBase
     [Fact]
     public void Should_Select_Textbox_Component_Provider()
     {
-        _selector.Get(TextboxFieldProvider.ProviderName).ShouldBeAssignableTo<TextboxFieldComponent>();
+        _selector.Get(TextboxFormProvider.ProviderName).ShouldBeAssignableTo<TextboxFieldComponent>();
     }
 }

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.FieldCustomizing.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Content;
 
 namespace Dignite.Abp.FieldCustomizing;
 
 [Serializable]
-public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatableObject
+public abstract class CustomizableObject<T> : IHasCustomFields, IValidatableObject
     where T : class, ICustomizeFieldDefinition
 {
     protected CustomizableObject()
     {
-        CustomizedFields = new();
+        CustomFields = new();
         CustomizedFieldFiles = new();
     }
 
@@ -23,7 +23,7 @@ public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatab
     ///
     /// </summary>
     [JsonInclude]
-    public CustomizeFieldDictionary CustomizedFields { get; set; }
+    public CustomFieldDictionary CustomFields { get; set; }
 
     /// <summary>
     /// Select the uploaded file stream content
@@ -34,16 +34,16 @@ public abstract class CustomizableObject<T> : IHasCustomizableFields, IValidatab
     {
         var validationErrors = new List<ValidationResult>();
         var fieldDefinitions = GetFieldDefinitions(validationContext);
-        var fieldProviderSelector = validationContext.GetRequiredService<IFieldProviderSelector>();
+        var fieldProviderSelector = validationContext.GetRequiredService<IFormProviderSelector>();
 
-        foreach (var customField in CustomizedFields)
+        foreach (var customField in CustomFields)
         {
             var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name == customField.Key);
             if (fieldDefinition == null)
                 continue;
             var fieldProvider = fieldProviderSelector.Get(fieldDefinition.FieldProviderName);
             fieldProvider.Validate(
-                new FieldValidateArgs(
+                new FormValidateArgs(
                     fieldDefinition,
                     customField.Value,
                     validationErrors

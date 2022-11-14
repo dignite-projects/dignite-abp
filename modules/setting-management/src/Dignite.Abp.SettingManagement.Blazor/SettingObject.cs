@@ -2,12 +2,12 @@
 
 namespace Dignite.Abp.SettingManagement.Blazor;
 
-public class SettingObject : IHasCustomizableFields
+public class SettingObject : IHasCustomFields
 {
     public SettingObject()
     {
-        this.CustomizedFields = new CustomizeFieldDictionary();
+        this.CustomFields = new CustomFieldDictionary();
     }
 
-    public CustomizeFieldDictionary CustomizedFields { get; }
+    public CustomFieldDictionary CustomFields { get; }
 }

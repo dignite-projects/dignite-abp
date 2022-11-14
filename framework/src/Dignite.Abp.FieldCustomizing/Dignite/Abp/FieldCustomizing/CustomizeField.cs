@@ -2,13 +2,13 @@
 
 public class CustomizeField
 {
-    public CustomizeField(IHasCustomizableFields entity, ICustomizeFieldDefinition definition)
+    public CustomizeField(IHasCustomFields entity, ICustomizeFieldDefinition definition)
     {
         Entity = entity;
         Definition = definition;
     }
 
-    public IHasCustomizableFields Entity { get; set; }
+    public IHasCustomFields Entity { get; set; }
 
     public ICustomizeFieldDefinition Definition { get; set; }
 }

@@ -6,7 +6,7 @@
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 
 @inject IGlobalSettingsAppService settingsAppService
-@inject IFieldControlComponentSelector fieldControlComponentSelector
+@inject IFieldFormComponentSelector fieldFormComponentSelector
 @inherits AbpComponentBase
 @code
 {
@@ -27,7 +27,7 @@
         {
             foreach (var setting in settingNav.Settings)
             {
-                settingObject.CustomizedFields.Add(setting.Name,setting.Value);
+                settingObject.CustomFields.Add(setting.Name,setting.Value);
             }
         }
         if (SettingGroup.Any())
@@ -58,7 +58,7 @@
                 var settingNav = SettingGroup.Single(m => m.Name == selectedTab);
                 var input = new UpdateGlobalSettingsInputForClientProxy(settingNav.Settings);
                 input.GroupName = settingNav.Name;
-                input.CustomizedFields = settingObject.CustomizedFields;
+                input.CustomFields = settingObject.CustomFields;
 
                 await settingsAppService.UpdateAsync(input);
             }
@@ -111,7 +111,7 @@
                                 <CardBody>
                                 @foreach(var setting in settingNav.Settings.Where(s=>s.Section==group).ToList())
                                 {
-                                    var component = fieldControlComponentSelector.Get(setting.FieldProviderName);
+                                                var component = fieldFormComponentSelector.Get(setting.FieldProviderName);
                                     var parameters = GetSettingFormControlComponentParameters(setting);
                                     <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
                                 }
@@ -125,7 +125,7 @@
                         <CardBody>
                         @foreach (var setting in ungroupedSettings)
                         {
-                            var component = fieldControlComponentSelector.Get(setting.FieldProviderName);
+                                            var component = fieldFormComponentSelector.Get(setting.FieldProviderName);
                             var parameters = GetSettingFormControlComponentParameters(setting);
                             <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
                         }     

@@ -1,9 +1,6 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.NumericEdit
-@using Dignite.Abp.FieldCustomizing;
+﻿@using Dignite.Abp.FieldCustomizing.Forms.NumericEdit
 
-@inherits FieldComponentBase<NumericEditFieldProvider,NumericEditConfiguration>
+@inherits FieldComponentBase<NumericEditFormProvider,NumericEditConfiguration>
 
     <Field Horizontal="@(!HideFieldLable)">
         <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>

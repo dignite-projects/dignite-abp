@@ -1,9 +1,5 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Switch
-@using Dignite.Abp.FieldCustomizing
-@using Microsoft.AspNetCore.Components.Forms
-@inherits FieldComponentBase<SwitchFieldProvider,SwitchConfiguration>
+﻿@using Dignite.Abp.FieldCustomizing.Forms.Switch
+@inherits FieldComponentBase<SwitchFormProvider,SwitchConfiguration>
 
     <Field Horizontal="@(!HideFieldLable)">
         <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@HideFieldLable">@CustomizeField.Definition.DisplayName</FieldLabel>

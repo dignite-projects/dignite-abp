@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dignite.Abp.FieldCustomizing.Fields;
-using Dignite.Abp.FieldCustomizing.Fields.Select;
-using Dignite.Abp.FieldCustomizing.Fields.Switch;
-using Dignite.Abp.FieldCustomizing.Fields.Textbox;
+using Dignite.Abp.FieldCustomizing.Forms;
+using Dignite.Abp.FieldCustomizing.Forms.Select;
+using Dignite.Abp.FieldCustomizing.Forms.Switch;
+using Dignite.Abp.FieldCustomizing.Forms.Textbox;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
@@ -33,14 +33,14 @@ public static class SettingDefinitionControlExtensions
     /// </summary>
     /// <param name="setting"></param>
     /// <returns></returns>
-    public static FieldConfigurationDictionary GetControlConfigurationOrNull(
+    public static FormConfigurationDictionary GetControlConfigurationOrNull(
         this SettingDefinition setting)
     {
         var controlConfiguration = setting.Properties.GetOrDefault(SettingDefinitionPropertiesNames.FieldControlConfigurationName);
         if (controlConfiguration == null)
             return null;
         else
-            return (FieldConfigurationDictionary)controlConfiguration;
+            return (FormConfigurationDictionary)controlConfiguration;
     }
 
     #endregion Setting definition field provider
@@ -57,11 +57,11 @@ public static class SettingDefinitionControlExtensions
         this SettingDefinition settingDefinition,
         Action<TextboxConfiguration> configureAction)
     {
-        var textboxConfiguration = new TextboxConfiguration(new FieldConfigurationDictionary());
+        var textboxConfiguration = new TextboxConfiguration(new FormConfigurationDictionary());
         configureAction(textboxConfiguration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlConfigurationName, textboxConfiguration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, TextboxFieldProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, TextboxFormProvider.ProviderName);
 
         return settingDefinition;
     }
@@ -76,11 +76,11 @@ public static class SettingDefinitionControlExtensions
         this SettingDefinition settingDefinition,
         Action<SwitchConfiguration> configureAction)
     {
-        var configuration = new SwitchConfiguration(new FieldConfigurationDictionary());
+        var configuration = new SwitchConfiguration(new FormConfigurationDictionary());
         configureAction(configuration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlConfigurationName, configuration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, SwitchFieldProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, SwitchFormProvider.ProviderName);
 
         return settingDefinition;
     }
@@ -95,11 +95,11 @@ public static class SettingDefinitionControlExtensions
         this SettingDefinition settingDefinition,
         Action<SelectConfiguration> configureAction)
     {
-        var config = new SelectConfiguration(new FieldConfigurationDictionary());
+        var config = new SelectConfiguration(new FormConfigurationDictionary());
         configureAction(config);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlConfigurationName, config.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, SelectFieldProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FieldControlProviderName, SelectFormProvider.ProviderName);
 
         return settingDefinition;
     }

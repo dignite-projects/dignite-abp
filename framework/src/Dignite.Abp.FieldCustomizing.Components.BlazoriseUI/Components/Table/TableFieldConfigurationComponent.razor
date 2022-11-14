@@ -1,26 +1,24 @@
-﻿@using Dignite.Abp.FieldCustomizing.Components
-@using Dignite.Abp.FieldCustomizing.Fields
-@using Dignite.Abp.FieldCustomizing.Fields.Table
-@using Dignite.Abp.FieldCustomizing.Fields.Textbox
+﻿@using Dignite.Abp.FieldCustomizing.Forms
+@using Dignite.Abp.FieldCustomizing.Forms.Table
+@using Dignite.Abp.FieldCustomizing.Forms.Textbox
 @using System.Collections.Immutable
 @using Dignite.Abp.FieldCustomizing.Localization
 @using Volo.Abp.AspNetCore.Components.Web
-@using Volo.Abp.BlazoriseUI.Components
-@inject IEnumerable<IFieldProvider> FieldProviders
-@inject AbpBlazorMessageLocalizerHelper<DigniteAbpFieldCustomizingResource> LH
+@inject IEnumerable<IFormProvider> FieldProviders
+@inject AbpBlazorMessageLocalizerHelper<AbpFieldCustomizingResource> LH
 @inject IFieldConfigurationComponentSelector fieldConfigurationComponentSelector
-@inherits FieldConfigurationComponentBase<TableFieldProvider,TableConfiguration>
+@inherits FieldConfigurationComponentBase<TableFormProvider,TableConfiguration>
 
 <Validation>
     <Field>
         <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Definition.DisplayName" />
+        <TextEdit @bind-Text="@FieldDefinition.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
         <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Definition.Name" />
+        <TextEdit MaxLength="64" @bind-Text="@FieldDefinition.Name" />
     </Field>
 </Validation>
 
@@ -111,20 +109,17 @@
     </Blazorise.Modal>
 @code{
 
-    ImmutableList<IFieldProvider> AllFieldProviders;
+    ImmutableList<IFormProvider> AllFieldProviders;
     List<TableColumn> TableColumns;
 
-    //选中字段的控件配置组件
     private Type filedConfigurationSelectedType;
-
-    //选中字段控件配置项组件的参数
     Dictionary<string, object> filedConfigurationSelectedParameters = new();
     private Modal FieldConfigModal;
     private Validations AuditValidationsRef;
 
     protected override Task OnInitializedAsync()
     {
-        AllFieldProviders = FieldProviders.Where(p=>p.ControlType== FieldType.Simple).ToImmutableList();
+        AllFieldProviders = FieldProviders.Where(p=>p.FormType== FormType.Simple).ToImmutableList();
         return base.OnInitializedAsync();
     }
 
@@ -145,7 +140,7 @@
                     "",
                     null,
                     "",
-                    new FieldConfigurationDictionary()
+                    new FormConfigurationDictionary()
                 )
             );
         TableColumns.Add(column);            

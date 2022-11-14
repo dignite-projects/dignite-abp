@@ -10,12 +10,12 @@ public static class AbpAutoMapperCustomizableDtoExtensions
         string[] fields = null,
         string[] ignoredFields = null,
         bool mapToRegularProperties = false)
-        where TDestination : IHasCustomizableFields
-        where TSource : IHasCustomizableFields
+        where TDestination : IHasCustomFields
+        where TSource : IHasCustomFields
     {
         return mappingExpression
             .ForMember(
-                x => x.CustomizedFields,
+                x => x.CustomFields,
                 y => y.MapFrom(
                     (source, destination, extraProps) =>
                     {
@@ -25,7 +25,7 @@ public static class AbpAutoMapperCustomizableDtoExtensions
 
                         CustomizableObjectMapper
                             .MapCustomizeFieldsTo<TSource, TDestination>(
-                                source.CustomizedFields,
+                                source.CustomFields,
                                 result,
                                 fields,
                                 ignoredFields

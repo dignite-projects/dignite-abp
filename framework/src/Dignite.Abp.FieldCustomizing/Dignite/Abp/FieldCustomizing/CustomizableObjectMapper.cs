@@ -23,8 +23,8 @@ public static class CustomizableObjectMapper
         [NotNull] Dictionary<string, object> destinationDictionary,
         string[] fields = null,
         string[] ignoredFields = null)
-        where TSource : IHasCustomizableFields
-        where TDestination : IHasCustomizableFields
+        where TSource : IHasCustomFields
+        where TDestination : IHasCustomFields
     {
         MapCustomizeFieldsTo(
             typeof(TSource),
@@ -54,8 +54,8 @@ public static class CustomizableObjectMapper
         string[] fields = null,
         string[] ignoredFields = null)
     {
-        Check.AssignableTo<IHasCustomizableFields>(sourceType, nameof(sourceType));
-        Check.AssignableTo<IHasCustomizableFields>(destinationType, nameof(destinationType));
+        Check.AssignableTo<IHasCustomFields>(sourceType, nameof(sourceType));
+        Check.AssignableTo<IHasCustomFields>(destinationType, nameof(destinationType));
         Check.NotNull(sourceDictionary, nameof(sourceDictionary));
         Check.NotNull(destinationDictionary, nameof(destinationDictionary));
 

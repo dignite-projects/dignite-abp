@@ -24,7 +24,7 @@ public class AbpFieldCustomizingModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<DigniteAbpFieldCustomizingResource>("en")
+                .Add<AbpFieldCustomizingResource>("en")
                 .AddVirtualJson("/Dignite/Abp/FieldCustomizing/Localization/Resources");
         });
     }

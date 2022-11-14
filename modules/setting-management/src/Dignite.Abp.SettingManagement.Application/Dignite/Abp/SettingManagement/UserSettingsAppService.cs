@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dignite.Abp.FieldCustomizing.Forms;
 using Dignite.Abp.SettingsGrouping;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.SettingManagement;
@@ -13,9 +12,8 @@ public class UserSettingsAppService : SettingsAppServiceBase, IUserSettingsAppSe
 {
     public UserSettingsAppService(
         ISettingDefinitionGroupManager settingDefinitionManager,
-        ISettingManager settingManager,
-        IEnumerable<IFormProvider> formProviders)
-        : base(settingDefinitionManager, settingManager, formProviders)
+        ISettingManager settingManager)
+        : base(settingDefinitionManager, settingManager)
     {
     }
 

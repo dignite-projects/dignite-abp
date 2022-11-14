@@ -15,16 +15,13 @@ public abstract class SettingsAppServiceBase : SettingManagementAppServiceBase
 {
     protected ISettingDefinitionGroupManager SettingDefinitionManager { get; }
     protected ISettingManager SettingManager { get; }
-    protected IEnumerable<IFormProvider> FormProviders { get; }
 
     protected SettingsAppServiceBase(
         ISettingDefinitionGroupManager settingDefinitionManager,
-        ISettingManager settingManager,
-        IEnumerable<IFormProvider> formProviders)
+        ISettingManager settingManager)
     {
         SettingDefinitionManager = settingDefinitionManager;
         SettingManager = settingManager;
-        FormProviders = formProviders;
     }
 
     public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()

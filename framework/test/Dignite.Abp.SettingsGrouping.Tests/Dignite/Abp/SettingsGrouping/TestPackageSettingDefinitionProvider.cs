@@ -12,18 +12,16 @@ namespace Dignite.Abp.SettingsGrouping;
 /// </summary>
 public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvider, ISettingDefinitionGroupProvider, ITransientDependency
 {
-    public void Define(ISettingDefinitionGroupContext context)
+    public string Section => TestSettingNames.TestSettingGroupName2;
+
+    public override void Define(ISettingDefinitionContext context)
     {
         var settings = new Dictionary<string, SettingDefinition>();
         base.Define(new SettingDefinitionContext(settings));
 
         //add a setting items group
-        context.Add(
-            new SettingDefinitionGroup(TestSettingNames.TestSettingGroupName2),
-            new SettingDefinitionSection(
-                new FixedLocalizableString("testSection"),
+        context.Add(new FixedLocalizableString(TestSettingNames.TestSettingSectionName2),
                 settings.Values.ToImmutableArray().ToArray()
-            )
         );
 
         //Configuration setting item control

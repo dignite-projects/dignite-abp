@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
@@ -24,26 +25,16 @@ public class SettingDefinitionGroupManager : SettingDefinitionManager, ISettingD
         Groups = new Lazy<IReadOnlyList<SettingDefinitionGroup>>(CreateSettingDefinitionGroups, true);
     }
 
-    public virtual IReadOnlyList<SettingDefinitionGroup> GetGroups()
+    public virtual IReadOnlyList<string> GetGroups()
     {
-        return Groups.Value;
+        return Groups.Value.Select(g=>g.Name).ToList();
     }
 
-    public virtual IReadOnlyList<SettingDefinitionSection> GetSections(string groupName)
+    public virtual IReadOnlyList<ILocalizableString> GetSections(string groupName)
     {
         var settings = GetList(groupName);
         var sectionNames = settings.GroupBy(s => s.GetSectionOrNull()).Select(s => s.Key).ToList();
-        var sections = new List<SettingDefinitionSection>();
-        foreach (var section in sectionNames)
-        {
-            sections.Add(
-                new SettingDefinitionSection(
-                    section,
-                    GetList(groupName).Where(s => s.GetSectionOrNull() == section).ToArray()
-                ));
-        }
-
-        return sections;
+        return sectionNames;
     }
 
     public virtual IReadOnlyList<SettingDefinition> GetList(string groupName)
@@ -57,12 +48,13 @@ public class SettingDefinitionGroupManager : SettingDefinitionManager, ISettingD
             throw new AbpException("Undefined group: " + groupName);
         }
 
-        return group.SettingDefinitions;
+        return group.Definitions.Values.ToList();
     }
 
     protected virtual IReadOnlyList<SettingDefinitionGroup> CreateSettingDefinitionGroups()
     {
-        var groups = new List<SettingDefinitionGroup>();
+        List<SettingDefinitionGroup> groups = new List<SettingDefinitionGroup>();
+
         using (var scope = ServiceProvider.CreateScope())
         {
             var providers = GroupingSettingOptions
@@ -73,13 +65,14 @@ public class SettingDefinitionGroupManager : SettingDefinitionManager, ISettingD
             foreach (var provider in providers)
             {
                 var settings = new Dictionary<string, SettingDefinition>();
-                var context = new SettingDefinitionGroupContext(settings);
-                provider.Define(context);
-                context.Group.IncludeSettingDefinitions(settings);
-                groups.Add(context.Group);
+                provider.Define(new SettingDefinitionContext(settings));
+                groups.Add(new SettingDefinitionGroup(
+                    provider.Section,settings
+                    ));
             }
         }
 
         return groups;
+
     }
 }

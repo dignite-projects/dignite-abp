@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
@@ -9,7 +10,7 @@ public interface ISettingDefinitionGroupManager : ISettingDefinitionManager
     /// Get setting definition groups
     /// </summary>
     /// <returns></returns>
-    IReadOnlyList<SettingDefinitionGroup> GetGroups();
+    IReadOnlyList<string> GetGroups();
 
     /// <summary>
     /// Get setting definition list
@@ -23,5 +24,5 @@ public interface ISettingDefinitionGroupManager : ISettingDefinitionManager
     /// </summary>
     /// <param name="groupName"></param>
     /// <returns></returns>
-    IReadOnlyList<SettingDefinitionSection> GetSections(string groupName);
+    IReadOnlyList<ILocalizableString> GetSections(string groupName);
 }

@@ -1,6 +1,9 @@
-﻿namespace Dignite.Abp.SettingsGrouping;
+﻿using Volo.Abp.Localization;
+using Volo.Abp.Settings;
 
-public interface ISettingDefinitionGroupProvider
+namespace Dignite.Abp.SettingsGrouping;
+
+public interface ISettingDefinitionGroupProvider: ISettingDefinitionProvider
 {
-    void Define(ISettingDefinitionGroupContext context);
+    string Section { get; }
 }

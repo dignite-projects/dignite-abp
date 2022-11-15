@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using Volo.Abp;
-using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
 namespace Dignite.Abp.SettingsGrouping;
@@ -11,10 +8,10 @@ namespace Dignite.Abp.SettingsGrouping;
 /// </summary>
 public class SettingDefinitionGroup
 {
-    public SettingDefinitionGroup(string name, ILocalizableString displayName = null)
+    public SettingDefinitionGroup(string name, Dictionary<string, SettingDefinition> definitions)
     {
         Name = name;
-        DisplayName = displayName ?? new FixedLocalizableString(name);
+        Definitions=definitions;
     }
 
     /// <summary>
@@ -25,20 +22,7 @@ public class SettingDefinitionGroup
     /// <summary>
     ///
     /// </summary>
-    private ILocalizableString _displayName;
+    public Dictionary<string, SettingDefinition> Definitions { get; }
 
-    /// <summary>
-    ///
-    /// </summary>
-    public ILocalizableString DisplayName {
-        get => _displayName;
-        set => _displayName = Check.NotNull(value, nameof(value));
-    }
 
-    public IReadOnlyList<SettingDefinition> SettingDefinitions { get; private set; }
-
-    internal void IncludeSettingDefinitions(Dictionary<string, SettingDefinition> settings)
-    {
-        SettingDefinitions = settings.Values.ToImmutableList();
-    }
 }

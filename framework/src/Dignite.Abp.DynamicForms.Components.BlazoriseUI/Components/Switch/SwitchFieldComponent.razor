@@ -1,0 +1,34 @@
+﻿@using Dignite.Abp.DynamicForms.Switch
+@inherits FieldComponentBase<SwitchFormProvider,SwitchConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop" Margin="Margin.IsAuto">                 
+        @if (value.HasValue)
+        {
+            <Icon class="text-success" Name="IconName.Check" />
+        }
+        else
+        {
+            <Icon class="text-success" Name="IconName.Times" />
+        }
+    </FieldBody>
+</Field>
+
+
+@code{
+    private bool? value = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (CustomizableObject.GetField(Field.Name, null) != null)
+        {
+            bool convertValue;
+            if (bool.TryParse(CustomizableObject.GetField(Field.Name).ToString(), out convertValue))
+            {
+                value = convertValue;
+            }
+        }
+    }
+}

@@ -12,7 +12,7 @@ public class TestGroupingSettingDefinitionProvider : SettingDefinitionGroupProvi
         context.Add(new FixedLocalizableString(TestSettingNames.TestSettingSectionName1), //add a group
                 new Volo.Abp.Settings.SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue),
                 new Volo.Abp.Settings.SettingDefinition(TestSettingNames.TestSettingWithDefaultValue, "default-value")
-                    .UseTextboxControl(tb =>
+                    .UseTextboxForm(tb =>
                         {
                             tb.Required = true;
                             tb.Placeholder = "placeholder-text";

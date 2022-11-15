@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Dignite.Abp.FieldCustomizing.Forms.Textbox;
+using Dignite.Abp.DynamicForms.Textbox;
 using Shouldly;
 using Xunit;
 
@@ -33,7 +33,7 @@ public class GroupingSettingDefinitionManager_Tests : SettingsTestBase
     {
         var definitions = _settingDefinitionManager.GetList(TestSettingNames.TestSettingGroupName);
         var setting1 = definitions.Single(sf => sf.Name == TestSettingNames.TestSettingWithDefaultValue);
-        var fieldConfig = setting1.GetControlConfigurationOrNull();
+        var fieldConfig = setting1.GetFormConfigurationOrNull();
         var textboxFormConfig = new TextboxConfiguration(fieldConfig);
         textboxFormConfig.Placeholder.ShouldNotBeNullOrEmpty();
     }
@@ -43,7 +43,7 @@ public class GroupingSettingDefinitionManager_Tests : SettingsTestBase
     {
         var definitions = _settingDefinitionManager.GetList(TestSettingNames.TestSettingGroupName2);
         var setting1 = definitions.Single(sf => sf.Name == TestSettingNames.TestSettingPackager);
-        var fieldConfig = setting1.GetControlConfigurationOrNull();
+        var fieldConfig = setting1.GetFormConfigurationOrNull();
         var textboxFormConfig = new TextboxConfiguration(fieldConfig);
         textboxFormConfig.Placeholder.ShouldNotBeNullOrEmpty();
     }

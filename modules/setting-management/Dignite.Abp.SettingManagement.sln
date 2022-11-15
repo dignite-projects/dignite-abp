@@ -23,15 +23,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping", "..\..\framework\src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj", "{1F912ABE-3821-4B05-876B-7B651FC1E475}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing", "..\..\framework\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj", "{9862684C-2A74-45FE-AB24-9B9C0177733A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms", "..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj", "{9862684C-2A74-45FE-AB24-9B9C0177733A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManagement.Domain.Shared", "src\Dignite.Abp.SettingManagement.Domain.Shared\Dignite.Abp.SettingManagement.Domain.Shared.csproj", "{B6A60CB0-08B4-4093-98F5-1CF4CAD2C602}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.BlazoriseUI", "..\..\framework\src\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj", "{820EF09A-2D55-4A7C-80E5-2EF3EBC2F1BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components", "..\..\framework\src\Dignite.Abp.FieldCustomizing.Components\Dignite.Abp.FieldCustomizing.Components.csproj", "{651D8B5F-4438-4FF2-9F5C-F2AB541B1436}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components", "..\..\framework\src\Dignite.Abp.DynamicForms.Components\Dignite.Abp.DynamicForms.Components.csproj", "{651D8B5F-4438-4FF2-9F5C-F2AB541B1436}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components.BlazoriseUI", "..\..\framework\src\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI.csproj", "{1C3D7C13-5BAD-4A35-8F85-1800A09E5655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components.BlazoriseUI", "..\..\framework\src\Dignite.Abp.DynamicForms.Components.BlazoriseUI\Dignite.Abp.DynamicForms.Components.BlazoriseUI.csproj", "{1C3D7C13-5BAD-4A35-8F85-1800A09E5655}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

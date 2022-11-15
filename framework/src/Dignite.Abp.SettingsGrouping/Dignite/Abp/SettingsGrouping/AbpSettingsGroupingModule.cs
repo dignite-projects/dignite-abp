@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dignite.Abp.FieldCustomizing;
+using Dignite.Abp.DynamicForms;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 using Volo.Abp.Settings;
@@ -9,7 +9,7 @@ namespace Dignite.Abp.SettingsGrouping;
 
 [DependsOn(
     typeof(AbpSettingsModule),
-    typeof(AbpFieldCustomizingModule)
+    typeof(AbpDynamicFormsModule)
     )]
 public class AbpSettingsGroupingModule : AbpModule
 {

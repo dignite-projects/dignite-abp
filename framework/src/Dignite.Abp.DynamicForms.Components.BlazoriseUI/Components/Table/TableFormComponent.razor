@@ -1,0 +1,92 @@
+﻿@using Dignite.Abp.DynamicForms.Table
+@using System.Text.Json;
+@inject IFormComponentSelector fieldControlComponentSelector
+@inherits FormComponentBase<TableFormProvider,TableConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        @if (FormConfiguration.TableColumns.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        @foreach (var column in FormConfiguration.TableColumns)
+                        {
+                            <TableHeaderCell>@column.DisplayName</TableHeaderCell>
+                        }
+                        <TableHeaderCell Style="width:100px;">
+                            <Button @onclick="@AddTableRow"><Icon Name="IconName.PlusCircle" /></Button>
+                        </TableHeaderCell>
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <TableBody>
+                    @foreach (var row in TableRows)
+                    {
+                        <Blazorise.TableRow>
+                            @foreach (var column in FormConfiguration.TableColumns)
+                            {
+                                if (!column.CustomField.FormProviderName.IsNullOrEmpty())
+                                {
+                                    var component = fieldControlComponentSelector.Get(column.CustomField.FormProviderName);
+                                    var parameters = new Dictionary<string, object>();
+                                    parameters.Add("CustomizableObject", row);
+                                    parameters.Add("Field", column.CustomField);
+                                    parameters.Add("IsChild", true);
+                                    <TableRowCell>
+                                        <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                    </TableRowCell>
+                                }
+                            }
+                            <TableRowCell>
+                                <Button @onclick="@(val => RemoveTableRow(row))"><Icon Name="IconName.Remove" /></Button>
+                            </TableRowCell>
+                        </Blazorise.TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
+        <FieldHelp>@FormConfiguration.Description</FieldHelp>
+    </FieldBody>
+</Field>
+@code {
+    public List<Dignite.Abp.DynamicForms.Table.TableRow> TableRows = new List<Dignite.Abp.DynamicForms.Table.TableRow>();
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var value = CustomizableObject.GetField(Field.Name, null);
+        if (value != null)
+        {
+            try
+            {
+                TableRows = JsonSerializer.Deserialize<List<Dignite.Abp.DynamicForms.Table.TableRow>>(value.ToString());
+            }
+            catch
+            {
+            }
+            CustomizableObject.SetField(Field.Name, TableRows);
+        }
+        else
+        {
+            CustomizableObject.SetField(Field.Name, TableRows);
+        }
+    }
+    private void AddTableRow()
+    {
+        var row = new Dignite.Abp.DynamicForms.Table.TableRow();
+        foreach (var column in FormConfiguration.TableColumns)
+        {
+            row.CustomFields.Add(column.Name, column.CustomField.DefaultValue);
+        }
+        TableRows.Add(row);
+        CustomizableObject.SetField(Field.Name, TableRows);
+    }
+    private void RemoveTableRow(Dignite.Abp.DynamicForms.Table.TableRow row)
+    {
+        TableRows.Remove(row);
+        CustomizableObject.SetField(Field.Name, TableRows);
+    }
+}

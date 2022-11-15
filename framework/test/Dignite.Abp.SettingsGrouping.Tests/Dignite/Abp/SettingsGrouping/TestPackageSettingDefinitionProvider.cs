@@ -26,7 +26,7 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
 
         //Configuration setting item control
         settings.GetValueOrDefault(TestSettingNames.TestSettingPackager)
-            .UseTextboxControl(tb =>
+            .UseTextboxForm(tb =>
                 {
                     tb.Required = true;
                     tb.Placeholder = "placeholder-text";

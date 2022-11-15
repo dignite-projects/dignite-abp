@@ -1,7 +1,7 @@
 ﻿using System;
+using Dignite.Abp.DynamicForms;
 using Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueComparers;
 using Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters;
-using Dignite.Abp.FieldCustomizing.Fields;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,22 +15,22 @@ public static class AbpFieldCustomizingDbContextModelCreatingExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="b"></param>
     public static void ConfigureCustomizableFieldDefinitions<T>(this EntityTypeBuilder<T> b)
-        where T : class, ICustomizeFieldDefinition
+        where T : class, ICustomizeField
     {
         b.As<EntityTypeBuilder>().TryConfigureCustomizableFieldDefinitions();
     }
 
     public static void TryConfigureCustomizableFieldDefinitions(this EntityTypeBuilder b)
     {
-        if (!b.Metadata.ClrType.IsAssignableTo<ICustomizeFieldDefinition>())
+        if (!b.Metadata.ClrType.IsAssignableTo<ICustomizeField>())
         {
             return;
         }
 
-        b.Property<string>(nameof(ICustomizeFieldDefinition.DisplayName)).IsRequired().HasMaxLength(64);
-        b.Property<string>(nameof(ICustomizeFieldDefinition.Name)).IsRequired().HasMaxLength(64);
-        b.Property<FieldConfigurationDictionary>(nameof(ICustomizeFieldDefinition.Configuration))
-            .HasColumnName(nameof(ICustomizeFieldDefinition.Configuration))
+        b.Property<string>(nameof(ICustomizeField.DisplayName)).IsRequired().HasMaxLength(64);
+        b.Property<string>(nameof(ICustomizeField.Name)).IsRequired().HasMaxLength(64);
+        b.Property<FormConfigurationDictionary>(nameof(ICustomizeField.FormConfiguration))
+            .HasColumnName(nameof(ICustomizeField.FormConfiguration))
             .HasConversion(
                 new CustomizedFieldConfigurationValueConverter()
                 )
@@ -43,20 +43,20 @@ public static class AbpFieldCustomizingDbContextModelCreatingExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="b"></param>
     public static void ConfigureObjectCustomizedFields<T>(this EntityTypeBuilder<T> b)
-        where T : class, IHasCustomizableFields
+        where T : class, IHasCustomFields
     {
         b.As<EntityTypeBuilder>().TryConfigureObjectCustomizedFields();
     }
 
     public static void TryConfigureObjectCustomizedFields(this EntityTypeBuilder b)
     {
-        if (!b.Metadata.ClrType.IsAssignableTo<IHasCustomizableFields>())
+        if (!b.Metadata.ClrType.IsAssignableTo<IHasCustomFields>())
         {
             return;
         }
 
-        b.Property<CustomizeFieldDictionary>(nameof(IHasCustomizableFields.CustomizedFields))
-            .HasColumnName(nameof(IHasCustomizableFields.CustomizedFields))
+        b.Property<CustomFieldDictionary>(nameof(IHasCustomFields.CustomFields))
+            .HasColumnName(nameof(IHasCustomFields.CustomFields))
             .HasConversion(new CustomizedFieldsValueConverter())
             .Metadata.SetValueComparer(new CustomizedFieldDictionaryValueComparer());
     }

@@ -8,12 +8,12 @@ public static class SettingDefinitionPropertiesNames
     public const string SectionName = "SettingDefinitionSectionName";
 
     /// <summary>
-    /// Provider of setting definition field control
+    /// Provider of setting form
     /// </summary>
-    public const string FieldControlProviderName = "SettingDefinitionControlProviderName";
+    public const string FormProviderName = "SettingFormProviderName";
 
     /// <summary>
-    /// Configuration of setting definition field control
+    /// Configuration of setting form
     /// </summary>
-    public const string FieldControlConfigurationName = "SettingDefinitionControlConfigurationName";
+    public const string FormConfiguration = "SettingFormConfiguration";
 }

@@ -1,11 +1,11 @@
 ﻿using System;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.DynamicForms;
 using Volo.Abp.EventBus;
 
 namespace Dignite.Abp.FieldCustomizing;
 
 [EventName("Dignite.Abp.FieldCustomizing.FieldDefinition")]
-public class CustomizeFieldDefinitionEto : ICustomizeFieldDefinition
+public class CustomizeFieldDefinitionEto : ICustomizeField
 {
     public Guid Id { get; set; }
 
@@ -17,7 +17,7 @@ public class CustomizeFieldDefinitionEto : ICustomizeFieldDefinition
 
     public string DefaultValue { get; set; }
 
-    public string FieldProviderName { get; set; }
+    public string FormProviderName { get; set; }
 
-    public FieldConfigurationDictionary Configuration { get; set; }
+    public FormConfigurationDictionary FormConfiguration { get; set; }
 }

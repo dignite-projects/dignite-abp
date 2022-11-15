@@ -1,0 +1,34 @@
+﻿@using Dignite.Abp.DynamicForms.Switch
+@inherits FormComponentBase<SwitchFormProvider,SwitchConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop" Margin="Margin.IsAuto">      
+        <Switch TValue="bool" Checked="@Checked(CustomizableObject.GetField(Field.Name))" CheckedChanged="@OnCheckedChanged"></Switch>
+        <FieldHelp>@FormConfiguration.Description</FieldHelp>
+    </FieldBody>
+</Field>
+
+
+@code{
+
+
+    private bool Checked(object value)
+    {
+        if (value == null)
+            return false;
+        else
+        {
+            bool defaultChecked = false;
+            bool.TryParse(value.ToString(), out defaultChecked);
+            return defaultChecked;
+        }
+    }
+
+    Task OnCheckedChanged(bool value )
+    {
+        CustomizableObject.SetField(Field.Name, value);
+
+        return Task.CompletedTask;
+    }
+}

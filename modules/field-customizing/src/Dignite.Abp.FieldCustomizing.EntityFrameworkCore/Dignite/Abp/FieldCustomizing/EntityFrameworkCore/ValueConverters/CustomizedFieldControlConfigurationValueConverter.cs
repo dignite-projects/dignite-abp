@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.DynamicForms;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.Json.SystemTextJson.JsonConverters;
 
-namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters
+namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters;
+
+public class CustomizedFieldConfigurationValueConverter : ValueConverter<FormConfigurationDictionary, string>
 {
-    public class CustomizedFieldConfigurationValueConverter : ValueConverter<FieldConfigurationDictionary, string>
+    public CustomizedFieldConfigurationValueConverter()
+        : base(
+            d => SerializeObject(d),
+            s => DeserializeObject(s))
     {
-        public CustomizedFieldConfigurationValueConverter()
-            : base(
-                d => SerializeObject(d),
-                s => DeserializeObject(s))
+    }
+
+    private static string SerializeObject(FormConfigurationDictionary extraProperties)
+    {
+        var serializeOptions = new JsonSerializerOptions
         {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+        return JsonSerializer.Serialize(extraProperties, serializeOptions);
+    }
+
+    private static FormConfigurationDictionary DeserializeObject(string extraPropertiesAsJson)
+    {
+        if (extraPropertiesAsJson.IsNullOrEmpty() || extraPropertiesAsJson == "{}")
+        {
+            return new FormConfigurationDictionary();
         }
 
-        private static string SerializeObject(FieldConfigurationDictionary extraProperties)
-        {
-            var serializeOptions = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                WriteIndented = true
-            };
-            return JsonSerializer.Serialize(extraProperties, serializeOptions);
-        }
+        var deserializeOptions = new JsonSerializerOptions();
+        deserializeOptions.Converters.Add(new ObjectToInferredTypesConverter());
 
-        private static FieldConfigurationDictionary DeserializeObject(string extraPropertiesAsJson)
-        {
-            if (extraPropertiesAsJson.IsNullOrEmpty() || extraPropertiesAsJson == "{}")
-            {
-                return new FieldConfigurationDictionary();
-            }
+        var dictionary = JsonSerializer.Deserialize<FormConfigurationDictionary>(extraPropertiesAsJson, deserializeOptions) ??
+                         new FormConfigurationDictionary();
 
-            var deserializeOptions = new JsonSerializerOptions();
-            deserializeOptions.Converters.Add(new ObjectToInferredTypesConverter());
-
-            var dictionary = JsonSerializer.Deserialize<FieldConfigurationDictionary>(extraPropertiesAsJson, deserializeOptions) ??
-                             new FieldConfigurationDictionary();
-
-            return dictionary;
-        }
+        return dictionary;
     }
 }

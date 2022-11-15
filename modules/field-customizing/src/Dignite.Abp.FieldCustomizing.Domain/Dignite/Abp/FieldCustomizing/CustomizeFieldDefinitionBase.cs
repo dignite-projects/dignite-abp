@@ -1,11 +1,11 @@
 ﻿using System;
-using Dignite.Abp.FieldCustomizing.Fields;
+using Dignite.Abp.DynamicForms;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.FieldCustomizing;
 
-public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFieldDefinition, IMultiTenant
+public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeField, IMultiTenant
 {
     public Guid? TenantId { get; set; }
 
@@ -19,12 +19,9 @@ public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFie
     public string DefaultValue { get; set; }
 
     /// <summary>
-    /// Field Provider <see cref="IFieldProvider.Name"/>
+    /// Field Provider <see cref="IFormProvider.Name"/>
     /// </summary>
-    public string FieldProviderName { get; set; }
+    public string FormProviderName { get; set; }
 
-    /// <summary>
-    /// Field Configuration
-    /// </summary>
-    public FieldConfigurationDictionary Configuration { get; set; }
+    public FormConfigurationDictionary FormConfiguration { get; set; }
 }

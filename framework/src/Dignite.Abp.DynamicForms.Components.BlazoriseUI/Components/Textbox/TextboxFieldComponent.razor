@@ -1,0 +1,13 @@
+﻿@using Dignite.Abp.DynamicForms.Textbox
+@inherits FieldComponentBase<TextboxFormProvider,TextboxConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        @CustomizableObject.GetField(Field.Name)?.ToString()
+    </FieldBody>
+</Field>
+
+
+@code{
+}

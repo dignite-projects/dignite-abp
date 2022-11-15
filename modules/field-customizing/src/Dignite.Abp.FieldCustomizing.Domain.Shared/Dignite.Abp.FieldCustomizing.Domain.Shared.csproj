@@ -16,9 +16,10 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EventBus" Version="5.3.4" />
+	  <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
   </ItemGroup>
 </Project>

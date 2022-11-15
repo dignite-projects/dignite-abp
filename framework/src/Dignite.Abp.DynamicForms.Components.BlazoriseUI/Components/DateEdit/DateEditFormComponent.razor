@@ -1,0 +1,54 @@
+﻿@using Dignite.Abp.DynamicForms.DateEdit
+@inherits FormComponentBase<DateEditFormProvider,DateEditConfiguration>
+
+<Validation Validator="@ValidateIsRequired">
+    <Field Horizontal="@(!IsChild)">
+        <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+            <DateEdit TValue="DateTime?" 
+            InputMode="(Blazorise.DateInputMode)Enum.Parse(typeof(Blazorise.DateInputMode),FormConfiguration.InputMode.ToString())"
+            Max="@FormConfiguration.Max"
+            Min="@FormConfiguration.Min"
+            Date="@value" 
+            DateChanged="@OnValueChanged"
+            />
+            <FieldHelp>@FormConfiguration.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+
+@code{
+    private DateTime? value = null;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (CustomizableObject.GetField(Field.Name, null) != null)
+        {
+            DateTime convertValue;
+            if (DateTime.TryParse(CustomizableObject.GetField(Field.Name, null).ToString(), out convertValue))
+            {
+                value = convertValue;
+            }
+        }
+    }
+
+
+    void ValidateIsRequired( ValidatorEventArgs e )
+    {
+        var value = Convert.ToString( e.Value );
+        if(FormConfiguration.Required)
+        {
+            e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
+    }
+
+    Task OnValueChanged(DateTime? value )
+    {
+        this.value = value;
+        CustomizableObject.SetField(Field.Name, value);
+
+        return Task.CompletedTask;
+    }
+
+}

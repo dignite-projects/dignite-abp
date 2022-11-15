@@ -1,0 +1,37 @@
+﻿@using Dignite.Abp.DynamicForms.Select
+@using System.Text.Json;
+@inherits FieldComponentBase<SelectFormProvider,SelectConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        @if (Values != null)
+        {
+            @FormConfiguration.Options.Where(o=>Values.Contains( o.Value)).Select(o=>o.Text).JoinAsString(",")
+        }
+    </FieldBody>
+</Field>
+
+
+@code{
+    private IReadOnlyList<string> Values = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (CustomizableObject.GetField(Field.Name, null) != null)
+        {
+            var values = CustomizableObject.GetField(Field.Name, null);
+            if (values != null)
+            {
+                try
+                {
+                    Values = JsonSerializer.Deserialize<List<string>>(values.ToString());
+                }
+                catch
+                { }
+            }
+        }
+    }
+
+}

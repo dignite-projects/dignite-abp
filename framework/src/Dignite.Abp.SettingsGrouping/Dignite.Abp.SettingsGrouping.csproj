@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
   </ItemGroup>
 
 

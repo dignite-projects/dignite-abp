@@ -1,16 +1,16 @@
 @page "/setting-management/global-settings"
-@using Dignite.Abp.FieldCustomizing
-@using Dignite.Abp.FieldCustomizing.Components
+@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components
 @using Dignite.Abp.SettingManagement.Localization
 @using Volo.Abp.AspNetCore.Components
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 
 @inject IGlobalSettingsAppService settingsAppService
-@inject IFieldFormComponentSelector fieldFormComponentSelector
+@inject IFormComponentSelector fieldFormComponentSelector
 @inherits AbpComponentBase
 @code
 {
-    private IReadOnlyList<SettingGroupDto> SettingGroup;
+    private IReadOnlyList<SettingProviderDto> SettingGroup;
     protected Validations ValidationsRef;
     string selectedTab;
     private SettingObject settingObject= new SettingObject();
@@ -57,7 +57,7 @@
             {
                 var settingNav = SettingGroup.Single(m => m.Name == selectedTab);
                 var input = new UpdateGlobalSettingsInputForClientProxy(settingNav.Settings);
-                input.GroupName = settingNav.Name;
+                input.ProviderName = settingNav.Name;
                 input.CustomFields = settingObject.CustomFields;
 
                 await settingsAppService.UpdateAsync(input);
@@ -72,11 +72,8 @@
     Dictionary<string, object> GetSettingFormControlComponentParameters(SettingDto setting)
     { 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("CustomizeField", 
-            new Abp.FieldCustomizing.CustomizeField(
-                settingObject, 
-                setting
-            ));
+        parameters.Add("CustomizableObject", settingObject);
+        parameters.Add("Field", setting);
 
         return parameters;
     }
@@ -86,58 +83,58 @@
 <Blazorise.Form>
     <Blazorise.Validations @ref="@ValidationsRef" Model="@settingObject" ValidateOnLoad="false">
         @if (SettingGroup != null)
-{
-<Tabs TabPosition="TabPosition.Start" Pills="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
-    <Items>
-        @foreach (var settingNav in SettingGroup)
         {
-            <Tab Name="@settingNav.Name">@settingNav.DisplayName</Tab>
-        }
-    </Items>
-    <Content>
-            @foreach (var settingNav in SettingGroup)
-            {
-                var groups = settingNav.Settings.Where(s => s.Section != null).Select(s=>s.Section).Distinct().ToList();
-                var ungroupedSettings = settingNav.Settings.Where(s => s.Section == null);
-                <TabPanel Name="@settingNav.Name">   
-                    @if (groups.Any())
+        <Tabs TabPosition="TabPosition.Start" Pills="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
+            <Items>
+                @foreach (var settingNav in SettingGroup)
+                {
+                    <Tab Name="@settingNav.Name">@settingNav.DisplayName</Tab>
+                }
+            </Items>
+            <Content>
+                    @foreach (var settingNav in SettingGroup)
                     {
-                        foreach (var group in groups)
-                        {
-                            <h5>
-                                @group
-                            </h5>                 
+                        var groups = settingNav.Settings.Where(s => s.Group != null).Select(s=>s.Group).Distinct().ToList();
+                        var ungroupedSettings = settingNav.Settings.Where(s => s.Group == null);
+                        <TabPanel Name="@settingNav.Name">   
+                            @if (groups.Any())
+                            {
+                                foreach (var group in groups)
+                                {
+                                    <h5>
+                                        @group
+                                    </h5>                 
+                                    <Card Class="mb-3">
+                                        <CardBody>
+                                        @foreach(var setting in settingNav.Settings.Where(s=>s.Group==group).ToList())
+                                        {
+                                            var component = fieldFormComponentSelector.Get(setting.FormName);
+                                            var parameters = GetSettingFormControlComponentParameters(setting);
+                                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                        }
+                                        </CardBody>
+                                    </Card>
+                                }
+                            }
+                            @if (ungroupedSettings.Any())
+                            {
                             <Card Class="mb-3">
                                 <CardBody>
-                                @foreach(var setting in settingNav.Settings.Where(s=>s.Section==group).ToList())
+                                @foreach (var setting in ungroupedSettings)
                                 {
-                                                var component = fieldFormComponentSelector.Get(setting.FieldProviderName);
+                                    var component = fieldFormComponentSelector.Get(setting.FormName);
                                     var parameters = GetSettingFormControlComponentParameters(setting);
                                     <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
-                                }
+                                }     
                                 </CardBody>
-                            </Card>
-                        }
-                    }
-                    @if (ungroupedSettings.Any())
-                    {
-                    <Card Class="mb-3">
-                        <CardBody>
-                        @foreach (var setting in ungroupedSettings)
-                        {
-                                            var component = fieldFormComponentSelector.Get(setting.FieldProviderName);
-                            var parameters = GetSettingFormControlComponentParameters(setting);
-                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
-                        }     
-                        </CardBody>
-                    </Card>  
-                    }
+                            </Card>  
+                            }
                                             
-                </TabPanel>
-            }
-        <Button Color="Color.Primary" Clicked="@SaveAsync">@L["Save"]</Button>
-    </Content>
-</Tabs>
-}
+                        </TabPanel>
+                    }
+                <Button Color="Color.Primary" Clicked="@SaveAsync">@L["Save"]</Button>
+            </Content>
+        </Tabs>
+        }
     </Blazorise.Validations>
 </Blazorise.Form>

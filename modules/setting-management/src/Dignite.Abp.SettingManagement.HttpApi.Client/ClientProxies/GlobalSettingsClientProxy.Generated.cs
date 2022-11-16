@@ -11,9 +11,9 @@ namespace Dignite.Abp.SettingManagement.ClientProxies
     [ExposeServices(typeof(IGlobalSettingsAppService), typeof(GlobalSettingsClientProxy))]
     public partial class GlobalSettingsClientProxy : ClientProxyBase<IGlobalSettingsAppService>, IGlobalSettingsAppService
     {
-        public virtual async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
+        public virtual async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
         {
-            return await RequestAsync<ListResultDto<SettingGroupDto>>(nameof(GetAllAsync));
+            return await RequestAsync<ListResultDto<SettingProviderDto>>(nameof(GetAllAsync));
         }
 
         public virtual async Task UpdateAsync(UpdateGlobalSettingsInput input)

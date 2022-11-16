@@ -7,19 +7,19 @@ using Dignite.Abp.DynamicForms.Textbox;
 using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
-namespace Dignite.Abp.SettingsGrouping;
+namespace Dignite.Abp.Settings.DynamicForms;
 
 public static class SettingDefinitionExtensions
 {
     /// <summary>
-    /// Gets the section name of the setting
+    /// Gets the group name of the setting
     /// </summary>
     /// <param name="setting"></param>
     /// <returns></returns>
-    public static ILocalizableString GetSectionOrNull(
+    public static ILocalizableString GetGroupOrNull(
         this SettingDefinition setting)
     {
-        var group = setting.Properties.GetOrDefault(SettingDefinitionPropertiesNames.SectionName);
+        var group = setting.Properties.GetOrDefault(SettingDefinitionPropertiesNames.Group);
         if (group != null)
         {
             return (ILocalizableString)group;
@@ -31,12 +31,12 @@ public static class SettingDefinitionExtensions
     ///
     /// </summary>
     /// <param name="setting"></param>
-    /// <param name="sectionName"></param>
-    public static SettingDefinition SetSection(
+    /// <param name="groupName"></param>
+    public static SettingDefinition SetGroup(
         this SettingDefinition setting,
-        ILocalizableString sectionName)
+        ILocalizableString groupName)
     {
-        setting.WithProperty(SettingDefinitionPropertiesNames.SectionName, sectionName);
+        setting.WithProperty(SettingDefinitionPropertiesNames.Group, groupName);
         return setting;
     }
 
@@ -51,7 +51,7 @@ public static class SettingDefinitionExtensions
     public static string GetFormProviderNameOrNull(
         this SettingDefinition setting)
     {
-        var providerName = setting.Properties.GetOrDefault(SettingDefinitionPropertiesNames.FormProviderName);
+        var providerName = setting.Properties.GetOrDefault(SettingDefinitionPropertiesNames.FormProvider);
         if (providerName != null)
         {
             return (string)providerName;
@@ -76,7 +76,7 @@ public static class SettingDefinitionExtensions
 
     #endregion Setting definition field provider
 
-    #region set controls configuration
+    #region set dynamic form
 
     /// <summary>
     /// Use Textbox Control
@@ -92,7 +92,7 @@ public static class SettingDefinitionExtensions
         configureAction(textboxConfiguration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, textboxConfiguration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, TextboxForm.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProvider, TextboxForm.TextboxFormName);
 
         return settingDefinition;
     }
@@ -111,7 +111,7 @@ public static class SettingDefinitionExtensions
         configureAction(configuration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, configuration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SwitchForm.SwitchFormName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProvider, SwitchForm.SwitchFormName);
 
         return settingDefinition;
     }
@@ -130,7 +130,7 @@ public static class SettingDefinitionExtensions
         configureAction(config);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, config.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SelectForm.SwitchFormName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProvider, SelectForm.SwitchFormName);
 
         return settingDefinition;
     }

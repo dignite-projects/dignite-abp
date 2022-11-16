@@ -17,6 +17,6 @@ public class FormConfigurationComponentSelector_Tests : FieldComponentsTestBase
     [Fact]
     public void Should_Select_Textbox_Component_Provider()
     {
-        _selector.Get(TextboxForm.ProviderName).ShouldBeAssignableTo<TextboxConfigurationComponent>();
+        _selector.Get(TextboxForm.TextboxFormName).ShouldBeAssignableTo<TextboxConfigurationComponent>();
     }
 }

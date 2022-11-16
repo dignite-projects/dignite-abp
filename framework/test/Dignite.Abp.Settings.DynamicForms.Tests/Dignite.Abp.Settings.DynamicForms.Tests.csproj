@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj" />
+    <ProjectReference Include="..\..\src\Dignite.Abp.Settings.DynamicForms\Dignite.Abp.Settings.DynamicForms.csproj" />
     <ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
     <PackageReference Include="Volo.Abp.Autofac" Version="5.3.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />

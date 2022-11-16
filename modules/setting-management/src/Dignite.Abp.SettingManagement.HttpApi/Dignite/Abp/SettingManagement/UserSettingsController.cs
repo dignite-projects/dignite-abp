@@ -19,7 +19,7 @@ public class UserSettingsController : AbpControllerBase, IUserSettingsAppService
     }
 
     [HttpGet]
-    public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
+    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
     {
         return await _userSettingsAppService.GetAllAsync();
     }

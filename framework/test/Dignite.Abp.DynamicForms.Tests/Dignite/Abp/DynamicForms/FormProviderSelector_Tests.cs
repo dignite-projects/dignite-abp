@@ -16,6 +16,6 @@ public class FormProviderSelector_Tests : DynamicFormsTestBase
     [Fact]
     public void Should_Select_Textbox_Field_Provider()
     {
-        _selector.Get(TextboxForm.ProviderName).ShouldBeAssignableTo<TextboxForm>();
+        _selector.Get(TextboxForm.TextboxFormName).ShouldBeAssignableTo<TextboxForm>();
     }
 }

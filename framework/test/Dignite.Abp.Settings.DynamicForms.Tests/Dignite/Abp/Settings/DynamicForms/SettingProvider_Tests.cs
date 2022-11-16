@@ -3,7 +3,7 @@ using Shouldly;
 using Volo.Abp.Settings;
 using Xunit;
 
-namespace Dignite.Abp.SettingsGrouping;
+namespace Dignite.Abp.Settings.DynamicForms;
 
 public class SettingProvider_Tests : SettingsTestBase
 {
@@ -18,7 +18,7 @@ public class SettingProvider_Tests : SettingsTestBase
     public async Task Should_Get_Test_Setting()
     {
         var allSettings = await _settingProvider.GetAllAsync();
-        string setting1 = await _settingProvider.GetOrNullAsync(TestSettingNames.TestSettingWithDefaultValue);
+        var setting1 = await _settingProvider.GetOrNullAsync(TestSettingNames.TestSettingWithDefaultValue);
         setting1.ShouldNotBeNull();
     }
 }

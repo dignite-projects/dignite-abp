@@ -11,9 +11,9 @@ namespace Dignite.Abp.SettingManagement.ClientProxies
     [ExposeServices(typeof(IUserSettingsAppService), typeof(UserSettingsClientProxy))]
     public partial class UserSettingsClientProxy : ClientProxyBase<IUserSettingsAppService>, IUserSettingsAppService
     {
-        public virtual async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
+        public virtual async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
         {
-            return await RequestAsync<ListResultDto<SettingGroupDto>>(nameof(GetAllAsync));
+            return await RequestAsync<ListResultDto<SettingProviderDto>>(nameof(GetAllAsync));
         }
 
         public virtual async Task UpdateAsync(UpdateUserSettingsInput input)

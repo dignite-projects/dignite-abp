@@ -2,9 +2,9 @@
 
 namespace Dignite.Abp.SettingManagement;
 
-public class SettingGroupDto
+public class SettingProviderDto
 {
-    public SettingGroupDto(string name, string displayName, IReadOnlyList<SettingDto> settings)
+    public SettingProviderDto(string name, string displayName, IReadOnlyList<SettingDto> settings)
     {
         Name = name;
         DisplayName = displayName;

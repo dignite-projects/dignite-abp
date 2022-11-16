@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dignite.Abp.SettingsGrouping;
+using Dignite.Abp.Settings.DynamicForms;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
@@ -11,7 +11,7 @@ namespace Dignite.Abp.SettingManagement;
 public class TenantSettingsAppService : SettingsAppServiceBase, ITenantSettingsAppService
 {
     public TenantSettingsAppService(
-        ISettingDefinitionGroupManager settingDefinitionManager,
+        ISettingDefinitionFormManager settingDefinitionManager,
         ISettingManager settingManager)
         : base(settingDefinitionManager, settingManager)
     {

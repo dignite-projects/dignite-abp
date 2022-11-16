@@ -21,13 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManageme
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManagement.Blazor", "..\..\modules\setting-management\src\Dignite.Abp.SettingManagement.Blazor\Dignite.Abp.SettingManagement.Blazor.csproj", "{852EE6D9-B3D9-4A22-8056-E2378710B1CF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "abp-modules", "abp-modules", "{54B0D7E4-37F7-416E-853C-86E40D379125}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.FieldCustomizing.Components.BlazoriseUI", "..\..\framework\src\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI\Dignite.Abp.FieldCustomizing.Components.BlazoriseUI.csproj", "{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManagement.Domain.Shared", "..\..\modules\setting-management\src\Dignite.Abp.SettingManagement.Domain.Shared\Dignite.Abp.SettingManagement.Domain.Shared.csproj", "{9174B982-56F6-4F94-8078-F2C1BCD6BCC2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManagement.Application.Contracts", "..\..\modules\setting-management\src\Dignite.Abp.SettingManagement.Application.Contracts\Dignite.Abp.SettingManagement.Application.Contracts.csproj", "{F3565FFD-9B09-49CE-B3AB-FED2C71A2BAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{16F662BB-EC16-45AF-9CAE-F31AF92C7040}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Settings.DynamicForms", "..\..\framework\src\Dignite.Abp.Settings.DynamicForms\Dignite.Abp.Settings.DynamicForms.csproj", "{F530D579-F9DD-4525-8E41-017618A916E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,6 @@ Global
 		{852EE6D9-B3D9-4A22-8056-E2378710B1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{852EE6D9-B3D9-4A22-8056-E2378710B1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{852EE6D9-B3D9-4A22-8056-E2378710B1CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9174B982-56F6-4F94-8078-F2C1BCD6BCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9174B982-56F6-4F94-8078-F2C1BCD6BCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9174B982-56F6-4F94-8078-F2C1BCD6BCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,10 @@ Global
 		{F3565FFD-9B09-49CE-B3AB-FED2C71A2BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3565FFD-9B09-49CE-B3AB-FED2C71A2BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3565FFD-9B09-49CE-B3AB-FED2C71A2BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F530D579-F9DD-4525-8E41-017618A916E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F530D579-F9DD-4525-8E41-017618A916E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F530D579-F9DD-4525-8E41-017618A916E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F530D579-F9DD-4525-8E41-017618A916E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,9 +86,9 @@ Global
 		{09274E9B-A833-4081-87BD-5F06F120C09A} = {3F8761DE-D1A1-4C76-84F3-0E7A9CFDC846}
 		{CA0397FE-1384-4E3B-BC7F-D73C75123D0E} = {3F8761DE-D1A1-4C76-84F3-0E7A9CFDC846}
 		{852EE6D9-B3D9-4A22-8056-E2378710B1CF} = {3F8761DE-D1A1-4C76-84F3-0E7A9CFDC846}
-		{758BF6FA-DD1B-4827-A8F1-CCCD4B29366D} = {54B0D7E4-37F7-416E-853C-86E40D379125}
 		{9174B982-56F6-4F94-8078-F2C1BCD6BCC2} = {3F8761DE-D1A1-4C76-84F3-0E7A9CFDC846}
 		{F3565FFD-9B09-49CE-B3AB-FED2C71A2BAA} = {3F8761DE-D1A1-4C76-84F3-0E7A9CFDC846}
+		{F530D579-F9DD-4525-8E41-017618A916E7} = {16F662BB-EC16-45AF-9CAE-F31AF92C7040}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63E2660C-C1D9-4768-90FD-289F36581842}

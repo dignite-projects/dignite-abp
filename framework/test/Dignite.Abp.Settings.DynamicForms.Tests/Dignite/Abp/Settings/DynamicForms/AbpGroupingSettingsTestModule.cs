@@ -2,11 +2,11 @@
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
-namespace Dignite.Abp.SettingsGrouping;
+namespace Dignite.Abp.Settings.DynamicForms;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(AbpSettingsGroupingModule),
+    typeof(AbpSettingsDynamicFormsModule),
     typeof(AbpTestBaseModule)
     )]
 public class AbpSettingsGroupingTestModule : AbpModule

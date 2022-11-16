@@ -1,7 +1,7 @@
 ﻿using Volo.Abp;
 using Volo.Abp.Testing;
 
-namespace Dignite.Abp.SettingsGrouping;
+namespace Dignite.Abp.Settings.DynamicForms;
 
 public class SettingsTestBase : AbpIntegratedTest<AbpSettingsGroupingTestModule>
 {

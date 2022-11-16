@@ -19,8 +19,7 @@
 	  <PackageReference Include="Volo.Abp.Authorization.Abstractions" Version="5.3.4" />
   </ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.FieldCustomizing\Dignite.Abp.FieldCustomizing.csproj" />
-		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Settings.DynamicForms\Dignite.Abp.Settings.DynamicForms.csproj" />
 		<ProjectReference Include="..\Dignite.Abp.SettingManagement.Domain.Shared\Dignite.Abp.SettingManagement.Domain.Shared.csproj" />
 	</ItemGroup>
 

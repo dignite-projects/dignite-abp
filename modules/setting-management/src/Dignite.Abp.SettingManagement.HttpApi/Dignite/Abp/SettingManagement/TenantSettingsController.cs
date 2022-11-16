@@ -19,7 +19,7 @@ public class TenantSettingsController : AbpControllerBase, ITenantSettingsAppSer
     }
 
     [HttpGet]
-    public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
+    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
     {
         return await _tenantSettingsAppService.GetAllAsync();
     }

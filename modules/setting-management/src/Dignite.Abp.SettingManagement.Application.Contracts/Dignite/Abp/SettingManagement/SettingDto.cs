@@ -1,39 +1,37 @@
-﻿using Dignite.Abp.FieldCustomizing;
-using Dignite.Abp.FieldCustomizing.Forms;
+﻿using Dignite.Abp.DynamicForms;
 
 namespace Dignite.Abp.SettingManagement;
 
-public class SettingDto : ICustomizeFieldDefinition
+public class SettingDto : ICustomizeFieldInfo
 {
     public SettingDto(
-        string section,
         string name,
         string displayName,
+        string formName,
+        FormConfigurationDictionary formConfiguration,
+        string group,
         string description,
-        string value,
-        string fieldProviderName,
-        FormConfigurationDictionary configuration)
+        string value)
     {
-        Section = section;
         Name = name;
         DisplayName = displayName;
+        FormName = formName;
+        FormConfiguration = formConfiguration;
+        Group = group;
         Description = description;
         Value = value;
-        FieldProviderName = fieldProviderName;
-        Configuration = configuration;
     }
-
-    public string Section { get; set; }
 
     public string Name { get; set; }
     public string DisplayName { get; set; }
-    public string Description { get; set; }
-
-    public string Value { get; set; }
 
     public string DefaultValue { get; set; }
 
-    public string FieldProviderName { get; set; }
+    public string FormName { get; set; }
 
-    public FormConfigurationDictionary Configuration { get; set; }
+    public FormConfigurationDictionary FormConfiguration { get; set; }
+
+    public string Group { get; set; }
+    public string Description { get; set; }
+    public string Value { get; set; }
 }

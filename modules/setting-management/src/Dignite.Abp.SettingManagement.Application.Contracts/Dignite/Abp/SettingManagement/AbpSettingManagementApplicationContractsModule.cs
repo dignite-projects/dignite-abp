@@ -1,5 +1,4 @@
-﻿using Dignite.Abp.FieldCustomizing;
-using Dignite.Abp.SettingsGrouping;
+﻿using Dignite.Abp.Settings.DynamicForms;
 using Volo.Abp.Application;
 using Volo.Abp.Authorization;
 using Volo.Abp.Modularity;
@@ -10,8 +9,7 @@ namespace Dignite.Abp.SettingManagement;
     typeof(AbpSettingManagementDomainSharedModule),
     typeof(AbpDddApplicationContractsModule),
     typeof(AbpAuthorizationAbstractionsModule),
-    typeof(AbpFieldCustomizingModule),
-    typeof(AbpSettingsGroupingModule)
+    typeof(AbpSettingsDynamicFormsModule)
 )]
 public class AbpSettingManagementApplicationContractsModule : AbpModule
 {

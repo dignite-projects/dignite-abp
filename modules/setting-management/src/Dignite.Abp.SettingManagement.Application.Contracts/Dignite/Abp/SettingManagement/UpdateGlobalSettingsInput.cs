@@ -16,6 +16,6 @@ public class UpdateGlobalSettingsInput : UpdateSettingsInput
     {
         var settingsAppService = validationContext.GetRequiredService<IGlobalSettingsAppService>();
         var settingNavigations = settingsAppService.GetAllAsync().Result;
-        return settingNavigations.Items.Single(i => i.Name == GroupName).Settings;
+        return settingNavigations.Items.Single(i => i.Name == ProviderName).Settings;
     }
 }

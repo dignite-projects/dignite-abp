@@ -5,14 +5,15 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
-namespace Dignite.Abp.SettingsGrouping;
+namespace Dignite.Abp.Settings.DynamicForms;
 
 /// <summary>
 /// Wrap controls defined by existing setting items
 /// </summary>
-public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvider, ISettingDefinitionGroupProvider, ITransientDependency
+[SettingDefinitionProviderName(TestSettingNames.TestSettingProviderName2)]
+public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvider, ISettingDefinitionFormProvider, ITransientDependency
 {
-    public string Section => TestSettingNames.TestSettingGroupName2;
+    public ILocalizableString DisplayName => new FixedLocalizableString(TestSettingNames.TestSettingProviderName2);
 
     public override void Define(ISettingDefinitionContext context)
     {
@@ -20,7 +21,7 @@ public class TestPackageSettingDefinitionProvider : TestSettingDefinitionProvide
         base.Define(new SettingDefinitionContext(settings));
 
         //add a setting items group
-        context.Add(new FixedLocalizableString(TestSettingNames.TestSettingSectionName2),
+        context.Add(new FixedLocalizableString(TestSettingNames.TestSettingGroupName2),
                 settings.Values.ToImmutableArray().ToArray()
         );
 

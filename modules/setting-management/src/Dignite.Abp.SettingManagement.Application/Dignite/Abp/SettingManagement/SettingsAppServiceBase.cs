@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using Dignite.Abp.FieldCustomizing.Forms;
-using Dignite.Abp.SettingsGrouping;
+using Dignite.Abp.Settings.DynamicForms;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
@@ -13,60 +12,61 @@ namespace Dignite.Abp.SettingManagement;
 
 public abstract class SettingsAppServiceBase : SettingManagementAppServiceBase
 {
-    protected ISettingDefinitionGroupManager SettingDefinitionManager { get; }
+    protected ISettingDefinitionFormManager SettingDefinitionManager { get; }
     protected ISettingManager SettingManager { get; }
 
     protected SettingsAppServiceBase(
-        ISettingDefinitionGroupManager settingDefinitionManager,
+        ISettingDefinitionFormManager settingDefinitionManager,
         ISettingManager settingManager)
     {
         SettingDefinitionManager = settingDefinitionManager;
         SettingManager = settingManager;
     }
 
-    public async Task<ListResultDto<SettingGroupDto>> GetAllAsync()
+    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
     {
-        var navigations = SettingDefinitionManager.GetGroups();
+        var settingDefinitionProviders = SettingDefinitionManager.GetProviders();
         var settingValues = await GetSettingValues();
-        var navigationList = new List<SettingGroupDto>();
-        foreach (var nav in navigations)
+        var dto = new List<SettingProviderDto>();
+        foreach (var provider in settingDefinitionProviders)
         {
-            var settingDefinitions = nav.SettingDefinitions.Where(sd =>
-                sd.GetControlConfigurationOrNull() != null
-                ).ToList();
+            var settingDefinitions = SettingDefinitionManager.GetList(provider)
+                                                            .Where(sd =>sd.GetFormConfigurationOrNull() != null)
+                                                            .ToList();
             if (settingDefinitions.Any())
             {
                 var settings = new List<SettingDto>();
-                foreach (var sd in settingDefinitions)
+                foreach (var definition in settingDefinitions)
                 {
-                    var value = settingValues.Any(sv => sv.Name == sd.Name) ? settingValues.Single(sv => sv.Name == sd.Name).Value : null;
-                    var group = sd.GetSectionOrNull();
-                    settings.Add(new SettingDto(
-                        group == null ? null : group.Localize(StringLocalizerFactory),
-                        sd.Name,
-                        sd.DisplayName.Localize(StringLocalizerFactory),
-                        sd.Description == null ? null : sd.Description.Localize(StringLocalizerFactory),
-                        value,
-                        sd.GetControlProviderNameOrNull(),
-                        sd.GetControlConfigurationOrNull()
+                    var value = settingValues.FirstOrDefault(sv => sv.Name == definition.Name)?.Value;
+                    var group = definition.GetGroupOrNull();
+                    settings.Add(
+                        new SettingDto(
+                            definition.Name,
+                            definition.DisplayName == null ? null : definition.DisplayName.Localize(StringLocalizerFactory),
+                            definition.GetFormProviderNameOrNull(),
+                            definition.GetFormConfigurationOrNull(),
+                            group == null ? null : group.Localize(StringLocalizerFactory),
+                            definition.Description == null ? null : definition.Description.Localize(StringLocalizerFactory),
+                            value
                         ));
                 }
 
-                navigationList.Add(new SettingGroupDto(
-                    nav.Name,
-                    nav.DisplayName.Localize(StringLocalizerFactory),
+                dto.Add(new SettingProviderDto(
+                    SettingDefinitionProviderNameAttribute.GetProviderName(provider.GetType()),
+                    provider.DisplayName.Localize(StringLocalizerFactory),
                     settings
                     ));
             }
         }
 
         return
-            new ListResultDto<SettingGroupDto>(navigationList);
+            new ListResultDto<SettingProviderDto>(dto);
     }
 
     protected async Task UpdateAsync(UpdateSettingsInput input)
     {
-        var settingDefinitions = SettingDefinitionManager.GetList(input.GroupName);
+        var settingDefinitions = SettingDefinitionManager.GetList(input.ProviderName);
         var settings = input.CustomFields.Where(s =>
             settingDefinitions.Select(sd => sd.Name).Contains(s.Key)
         );

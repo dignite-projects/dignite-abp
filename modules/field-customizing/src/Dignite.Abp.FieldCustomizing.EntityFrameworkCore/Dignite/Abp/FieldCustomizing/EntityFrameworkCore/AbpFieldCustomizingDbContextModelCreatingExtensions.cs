@@ -15,26 +15,26 @@ public static class AbpFieldCustomizingDbContextModelCreatingExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="b"></param>
     public static void ConfigureCustomizableFieldDefinitions<T>(this EntityTypeBuilder<T> b)
-        where T : class, ICustomizeField
+        where T : class, ICustomizeFieldInfo
     {
         b.As<EntityTypeBuilder>().TryConfigureCustomizableFieldDefinitions();
     }
 
     public static void TryConfigureCustomizableFieldDefinitions(this EntityTypeBuilder b)
     {
-        if (!b.Metadata.ClrType.IsAssignableTo<ICustomizeField>())
+        if (!b.Metadata.ClrType.IsAssignableTo<ICustomizeFieldInfo>())
         {
             return;
         }
 
-        b.Property<string>(nameof(ICustomizeField.DisplayName)).IsRequired().HasMaxLength(64);
-        b.Property<string>(nameof(ICustomizeField.Name)).IsRequired().HasMaxLength(64);
-        b.Property<FormConfigurationDictionary>(nameof(ICustomizeField.FormConfiguration))
-            .HasColumnName(nameof(ICustomizeField.FormConfiguration))
+        b.Property<string>(nameof(ICustomizeFieldInfo.DisplayName)).IsRequired().HasMaxLength(64);
+        b.Property<string>(nameof(ICustomizeFieldInfo.Name)).IsRequired().HasMaxLength(64);
+        b.Property<FormConfigurationDictionary>(nameof(ICustomizeFieldInfo.FormConfiguration))
+            .HasColumnName(nameof(ICustomizeFieldInfo.FormConfiguration))
             .HasConversion(
-                new CustomizedFieldConfigurationValueConverter()
+                new FormConfigurationValueConverter()
                 )
-            .Metadata.SetValueComparer(new CustomizedFieldConfigurationDictionaryValueComparer());
+            .Metadata.SetValueComparer(new FormConfigurationDictionaryValueComparer());
     }
 
     /// <summary>

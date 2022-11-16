@@ -1,12 +1,10 @@
-﻿using Dignite.Abp.DynamicForms;
+﻿namespace Dignite.Abp.DynamicForms.Table;
 
-namespace Dignite.Abp.DynamicForms.Table;
-
-public class TableFormProvider : FormProviderBase
+public class TableForm : FormBase
 {
-    public const string ProviderName = "Table";
+    public const string TableFormName = "Table";
 
-    public override string Name => ProviderName;
+    public override string Name => TableFormName;
 
     public override string DisplayName => L["TableControl"];
 

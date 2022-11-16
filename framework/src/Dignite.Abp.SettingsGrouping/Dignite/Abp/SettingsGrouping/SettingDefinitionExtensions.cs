@@ -92,7 +92,7 @@ public static class SettingDefinitionExtensions
         configureAction(textboxConfiguration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, textboxConfiguration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, TextboxFormProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, TextboxForm.ProviderName);
 
         return settingDefinition;
     }
@@ -111,7 +111,7 @@ public static class SettingDefinitionExtensions
         configureAction(configuration);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, configuration.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SwitchFormProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SwitchForm.SwitchFormName);
 
         return settingDefinition;
     }
@@ -130,7 +130,7 @@ public static class SettingDefinitionExtensions
         configureAction(config);
 
         settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormConfiguration, config.ConfigurationDictionary);
-        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SelectFormProvider.ProviderName);
+        settingDefinition.WithProperty(SettingDefinitionPropertiesNames.FormProviderName, SelectForm.SwitchFormName);
 
         return settingDefinition;
     }

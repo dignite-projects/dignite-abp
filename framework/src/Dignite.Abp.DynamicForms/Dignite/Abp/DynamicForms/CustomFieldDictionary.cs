@@ -7,7 +7,7 @@ namespace Dignite.Abp.DynamicForms;
 /// Dictionary for persisting dynamic form data
 /// </summary>
 /// <remarks>
-/// Key:<see cref="ICustomizeField.Name"/> name
+/// Key:<see cref="ICustomizeFieldInfo.Name"/> name
 /// Value: Dynamic form value
 /// </remarks>
 [Serializable]

@@ -1,7 +1,7 @@
 ﻿namespace Dignite.Abp.DynamicForms;
 
 /// <summary>
-/// used to persist dynamic form data
+/// Object with custom fields
 /// </summary>
 public interface IHasCustomFields
 {

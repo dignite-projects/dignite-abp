@@ -1,10 +1,10 @@
 ﻿namespace Dignite.Abp.DynamicForms.Textbox;
 
-public class TextboxFormProvider : FormProviderBase
+public class TextboxForm : FormBase
 {
-    public const string ProviderName = "Textbox";
+    public const string TextboxFormName = "Textbox";
 
-    public override string Name => ProviderName;
+    public override string Name => TextboxFormName;
 
     public override string DisplayName => L["TextboxControl"];
 

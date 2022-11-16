@@ -6,9 +6,9 @@ using Volo.Abp.DependencyInjection;
 namespace Dignite.Abp.DynamicForms;
 
 /// <summary>
-/// Basic class of dynamic form provider
+/// Basic class of dynamic form
 /// </summary>
-public abstract class FormProviderBase : IFormProvider, ITransientDependency
+public abstract class FormBase : IForm, ITransientDependency
 {
     public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
 

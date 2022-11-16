@@ -5,12 +5,12 @@ namespace Dignite.Abp.DynamicForms.Components;
 public interface IFieldComponentSelector
 {
     /// <summary>
-    /// Get field component using field form provider name
+    /// Get field component using field form name
     /// </summary>
-    /// <param name="formProviderName">
-    /// <see cref="IFormProvider.Name"/>
+    /// <param name="formName">
+    /// <see cref="IForm.Name"/>
     /// </param>
     /// <returns></returns>
     [NotNull]
-    IFieldComponent Get(string formProviderName);
+    IFieldComponent Get(string formName);
 }

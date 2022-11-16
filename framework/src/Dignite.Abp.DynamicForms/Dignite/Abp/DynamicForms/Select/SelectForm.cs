@@ -1,12 +1,10 @@
-﻿using Dignite.Abp.DynamicForms;
+﻿namespace Dignite.Abp.DynamicForms.Select;
 
-namespace Dignite.Abp.DynamicForms.Select;
-
-public class SelectFormProvider : FormProviderBase
+public class SelectForm : FormBase
 {
-    public const string ProviderName = "Select";
+    public const string SwitchFormName = "Select";
 
-    public override string Name => ProviderName;
+    public override string Name => SwitchFormName;
 
     public override string DisplayName => L["SelectControl"];
 

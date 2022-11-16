@@ -1,12 +1,10 @@
-﻿using Dignite.Abp.DynamicForms;
+﻿namespace Dignite.Abp.DynamicForms.Switch;
 
-namespace Dignite.Abp.DynamicForms.Switch;
-
-public class SwitchFormProvider : FormProviderBase
+public class SwitchForm : FormBase
 {
-    public const string ProviderName = "Switch";
+    public const string SwitchFormName = "Switch";
 
-    public override string Name => ProviderName;
+    public override string Name => SwitchFormName;
 
     public override string DisplayName => L["SwitchControl"];
 

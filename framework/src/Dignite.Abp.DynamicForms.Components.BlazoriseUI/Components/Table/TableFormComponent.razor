@@ -1,7 +1,7 @@
 ﻿@using Dignite.Abp.DynamicForms.Table
 @using System.Text.Json;
 @inject IFormComponentSelector fieldControlComponentSelector
-@inherits FormComponentBase<TableFormProvider,TableConfiguration>
+@inherits FormComponentBase<TableForm,TableConfiguration>
 
 <Field Horizontal="@(!IsChild)">
     <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
@@ -26,9 +26,9 @@
                         <Blazorise.TableRow>
                             @foreach (var column in FormConfiguration.TableColumns)
                             {
-                                if (!column.CustomField.FormProviderName.IsNullOrEmpty())
+                                if (!column.CustomField.FormName.IsNullOrEmpty())
                                 {
-                                    var component = fieldControlComponentSelector.Get(column.CustomField.FormProviderName);
+                                    var component = fieldControlComponentSelector.Get(column.CustomField.FormName);
                                     var parameters = new Dictionary<string, object>();
                                     parameters.Add("CustomizableObject", row);
                                     parameters.Add("Field", column.CustomField);

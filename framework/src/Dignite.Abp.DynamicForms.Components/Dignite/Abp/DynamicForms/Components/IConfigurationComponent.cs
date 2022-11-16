@@ -4,5 +4,5 @@ namespace Dignite.Abp.DynamicForms.Components;
 
 public interface IConfigurationComponent
 {
-    Type FormProviderType { get; }
+    Type FormType { get; }
 }

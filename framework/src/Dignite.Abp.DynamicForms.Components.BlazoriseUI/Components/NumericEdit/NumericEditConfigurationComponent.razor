@@ -1,15 +1,15 @@
 ﻿@using Dignite.Abp.DynamicForms.NumericEdit
-@inherits ConfigurationComponentBase<NumericEditFormProvider,NumericEditConfiguration>
+@inherits ConfigurationComponentBase<NumericEditForm,NumericEditConfiguration>
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <FieldLabel>@L["FormDisplayName"]</FieldLabel>
         <TextEdit @bind-Text="@Field.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
-        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <FieldLabel>@L["FormName"]</FieldLabel>
         <TextEdit MaxLength="64" @bind-Text="@Field.Name" />
     </Field>
 </Validation>

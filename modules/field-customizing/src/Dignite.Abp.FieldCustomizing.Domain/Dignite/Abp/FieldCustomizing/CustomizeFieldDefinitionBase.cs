@@ -5,7 +5,7 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.FieldCustomizing;
 
-public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeField, IMultiTenant
+public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFieldInfo, IMultiTenant
 {
     public Guid? TenantId { get; set; }
 
@@ -19,9 +19,9 @@ public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFie
     public string DefaultValue { get; set; }
 
     /// <summary>
-    /// Field Provider <see cref="IFormProvider.Name"/>
+    /// Field <see cref="IForm.Name"/>
     /// </summary>
-    public string FormProviderName { get; set; }
+    public string FormName { get; set; }
 
     public FormConfigurationDictionary FormConfiguration { get; set; }
 }

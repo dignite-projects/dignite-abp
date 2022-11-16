@@ -2,6 +2,6 @@
 
 public static class FormBasicConfigurationNames
 {
-    public const string Required = "DynamicFormProviderConfiguration.Required";
-    public const string Description = "DynamicFormProviderConfiguration.Description";
+    public const string Required = "DynamicFormConfiguration.Required";
+    public const string Description = "DynamicFormConfiguration.Description";
 }

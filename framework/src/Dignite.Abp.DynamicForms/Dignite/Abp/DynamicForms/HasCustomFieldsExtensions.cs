@@ -9,7 +9,7 @@ using Volo.Abp.Reflection;
 
 namespace Dignite.Abp.DynamicForms;
 
-public static class CustomizableObjectExtensions
+public static class HasCustomFieldsExtensions
 {
     /// <summary>
     /// 
@@ -73,7 +73,7 @@ public static class CustomizableObjectExtensions
         return source;
     }
 
-    public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<ICustomizeField> customizeFields)
+    public static TSource SetDefaultsForCustomizeFields<TSource>(this TSource source, IReadOnlyList<ICustomizeFieldInfo> customizeFields)
         where TSource : IHasCustomFields
     {
         foreach (var field in customizeFields)

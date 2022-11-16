@@ -1,24 +1,24 @@
-﻿using Dignite.Abp.DynamicForms;
+﻿using System;
 
-namespace Dignite.Abp.DynamicForms.NumericEdit;
+namespace Dignite.Abp.DynamicForms.DateEdit;
 
 /// <summary>
 ///
 /// </summary>
-public class NumericEditFormProvider : FormProviderBase
+public class DateEditForm : FormBase
 {
-    public const string ProviderName = "NumericEdit";
+    public const string DateEditFormName = "DateEdit";
 
-    public override string Name => ProviderName;
+    public override string Name => DateEditFormName;
 
-    public override string DisplayName => L["NumericEditControl"];
+    public override string DisplayName => L["DateEditControl"];
 
     public override FormType FormType => FormType.Simple;
 
     public override void Validate(FormValidateArgs args)
     {
-        var configuration = new NumericEditConfiguration(args.Field.FormConfiguration);
-        decimal value = decimal.MinValue;
+        var configuration = new DateEditConfiguration(args.Field.FormConfiguration);
+        DateTime value = DateTime.MinValue;
 
         if (configuration.Required && (args.Value == null || args.Value.ToString().Length == 0))
         {
@@ -30,17 +30,17 @@ public class NumericEditFormProvider : FormProviderBase
         }
         else
         {
-            if (decimal.TryParse(args.Value.ToString(), out value))
+            if (DateTime.TryParse(args.Value.ToString(), out value))
             {
                 args.ValidationErrors.Add(
                     new System.ComponentModel.DataAnnotations.ValidationResult(
-                        L["ValidateValue:NotNumericType"],
+                        L["ValidateValue:NotDateType"],
                         new[] { args.Field.Name }
                         ));
             }
         }
 
-        if (value != decimal.MinValue && configuration.Max.HasValue && configuration.Max.Value < value)
+        if (value != DateTime.MinValue && configuration.Max.HasValue && configuration.Max.Value < value)
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
@@ -49,7 +49,7 @@ public class NumericEditFormProvider : FormProviderBase
                     ));
         }
 
-        if (value != decimal.MinValue && configuration.Min.HasValue && configuration.Min.Value > value)
+        if (value != DateTime.MinValue && configuration.Min.HasValue && configuration.Min.Value > value)
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
@@ -61,6 +61,6 @@ public class NumericEditFormProvider : FormProviderBase
 
     public override FormConfigurationBase GetConfiguration(FormConfigurationDictionary fieldConfiguration)
     {
-        return new NumericEditConfiguration(fieldConfiguration);
+        return new DateEditConfiguration(fieldConfiguration);
     }
 }

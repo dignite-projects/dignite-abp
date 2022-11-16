@@ -8,9 +8,9 @@ using Volo.Abp.Json.SystemTextJson.JsonConverters;
 
 namespace Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters;
 
-public class CustomizedFieldConfigurationValueConverter : ValueConverter<FormConfigurationDictionary, string>
+public class FormConfigurationValueConverter : ValueConverter<FormConfigurationDictionary, string>
 {
-    public CustomizedFieldConfigurationValueConverter()
+    public FormConfigurationValueConverter()
         : base(
             d => SerializeObject(d),
             s => DeserializeObject(s))

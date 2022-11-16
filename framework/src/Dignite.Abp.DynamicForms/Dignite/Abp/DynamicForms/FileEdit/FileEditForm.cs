@@ -1,14 +1,12 @@
-﻿using Dignite.Abp.DynamicForms;
+﻿namespace Dignite.Abp.DynamicForms.FileEdit;
 
-namespace Dignite.Abp.DynamicForms.FileEdit;
-
-public class FileEditFormProvider : FormProviderBase
+public class FileEditForm : FormBase
 {
-    public const string ProviderName = "Upload";
+    public const string SwitchFormName = "FileEdit";
 
-    public override string Name => ProviderName;
+    public override string Name => SwitchFormName;
 
-    public override string DisplayName => L["UploadControl"];
+    public override string DisplayName => L["FileEditControl"];
 
     public override FormType FormType => FormType.Simple;
 

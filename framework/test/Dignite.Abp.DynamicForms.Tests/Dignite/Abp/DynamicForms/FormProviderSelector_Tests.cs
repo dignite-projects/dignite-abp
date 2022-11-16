@@ -6,16 +6,16 @@ namespace Dignite.Abp.DynamicForms;
 
 public class FormProviderSelector_Tests : DynamicFormsTestBase
 {
-    private readonly IFormProviderSelector _selector;
+    private readonly IFormSelector _selector;
 
     public FormProviderSelector_Tests()
     {
-        _selector = GetRequiredService<IFormProviderSelector>();
+        _selector = GetRequiredService<IFormSelector>();
     }
 
     [Fact]
     public void Should_Select_Textbox_Field_Provider()
     {
-        _selector.Get(TextboxFormProvider.ProviderName).ShouldBeAssignableTo<TextboxFormProvider>();
+        _selector.Get(TextboxForm.ProviderName).ShouldBeAssignableTo<TextboxForm>();
     }
 }

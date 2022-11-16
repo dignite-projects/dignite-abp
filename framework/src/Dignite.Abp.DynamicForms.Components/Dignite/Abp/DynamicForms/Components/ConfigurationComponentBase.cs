@@ -6,21 +6,21 @@ using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.DynamicForms.Components;
 
-public abstract class ConfigurationComponentBase<TFormProvider, TFormConfiguration> : AbpComponentBase, IConfigurationComponent, ITransientDependency
-    where TFormProvider : IFormProvider
+public abstract class ConfigurationComponentBase<TForm, TFormConfiguration> : AbpComponentBase, IConfigurationComponent, ITransientDependency
+    where TForm : IForm
     where TFormConfiguration : FormConfigurationBase, new()
 {
-    public Type FormProviderType { get; private set; }
+    public Type FormType { get; private set; }
 
     public TFormConfiguration FormConfiguration { get; private set; }
 
     [Parameter]
-    public ICustomizeField Field { get; set; }
+    public ICustomizeFieldInfo Field { get; set; }
 
     protected ConfigurationComponentBase()
     {
         LocalizationResource = typeof(AbpDynamicFormsResource);
-        FormProviderType = typeof(TFormProvider);
+        FormType = typeof(TForm);
         FormConfiguration = new TFormConfiguration();
     }
 

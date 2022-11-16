@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Dignite.Abp.DynamicForms.Table;
 
 [Serializable]
-public class TableColumnCustomField : ICustomizeField
+public class TableColumnCustomField : ICustomizeFieldInfo
 {
     public TableColumnCustomField()
     {
@@ -14,14 +14,14 @@ public class TableColumnCustomField : ICustomizeField
     public TableColumnCustomField(
         [NotNull] string name,
         [NotNull] string displayName,
-        [NotNull] string fieldProviderName,
+        [NotNull] string fieldName,
         [NotNull] string defaultValue,
         [NotNull] FormConfigurationDictionary configuration
         )
     {
         Name = name;
         DisplayName = displayName;
-        FormProviderName = fieldProviderName;
+        FormName = fieldName;
         DefaultValue = defaultValue;
         FormConfiguration = configuration;
     }
@@ -33,10 +33,10 @@ public class TableColumnCustomField : ICustomizeField
     public string DisplayName { get; set; }
 
     /// <summary>
-    /// The provider to be used to <see cref="IFormProvider.Name"/>
+    /// The form to be used to <see cref="IForm.Name"/>
     /// </summary>
     [NotNull]
-    public string FormProviderName { get; set; }
+    public string FormName { get; set; }
 
     /// <summary>
     /// Default value of the field.

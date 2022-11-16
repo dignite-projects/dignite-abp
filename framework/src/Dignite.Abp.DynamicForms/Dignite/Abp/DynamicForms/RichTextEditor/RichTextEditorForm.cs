@@ -2,11 +2,11 @@
 
 namespace Dignite.Abp.DynamicForms.RichTextEditor;
 
-public class RichTextEditorFormProvider : FormProviderBase
+public class RichTextEditorForm : FormBase
 {
-    public const string ProviderName = "RichTextEditor";
+    public const string SwitchFormName = "RichTextEditor";
 
-    public override string Name => ProviderName;
+    public override string Name => SwitchFormName;
 
     public override string DisplayName => L["RichTextEditorControl"];
 

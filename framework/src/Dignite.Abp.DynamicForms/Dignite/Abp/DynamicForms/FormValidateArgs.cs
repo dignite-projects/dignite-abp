@@ -6,14 +6,14 @@ namespace Dignite.Abp.DynamicForms;
 
 public class FormValidateArgs
 {
-    public ICustomizeField Field { get; }
+    public ICustomizeFieldInfo Field { get; }
 
     public object Value { get; }
 
     public List<ValidationResult> ValidationErrors { get; }
 
     public FormValidateArgs(
-        [NotNull] ICustomizeField field,
+        [NotNull] ICustomizeFieldInfo field,
         object value,
         List<ValidationResult> validationErrors)
     {

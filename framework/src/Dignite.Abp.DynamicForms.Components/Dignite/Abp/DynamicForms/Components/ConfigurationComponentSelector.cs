@@ -9,35 +9,35 @@ namespace Dignite.Abp.DynamicForms.Components;
 public class ConfigurationComponentSelector : IConfigurationComponentSelector, ITransientDependency
 {
     private readonly IEnumerable<IConfigurationComponent> _formConfigurationComponents;
-    private readonly IFormProviderSelector _formProviderSelector;
+    private readonly IFormSelector _formSelector;
 
-    public ConfigurationComponentSelector(IEnumerable<IConfigurationComponent> formConfigurationComponents, IFormProviderSelector formProviderSelector)
+    public ConfigurationComponentSelector(IEnumerable<IConfigurationComponent> formConfigurationComponents, IFormSelector formSelector)
     {
         _formConfigurationComponents = formConfigurationComponents;
-        _formProviderSelector = formProviderSelector;
+        _formSelector = formSelector;
     }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="formProviderName">
-    /// <see cref="IFormProvider.Name"/>
+    /// <param name="formName">
+    /// <see cref="IForm.Name"/>
     /// </param>
     /// <returns></returns>
     [NotNull]
-    public IConfigurationComponent Get(string formProviderName)
+    public IConfigurationComponent Get(string formName)
     {
         if (!_formConfigurationComponents.Any())
         {
             throw new AbpException("No form configuration component was registered! At least one component must be registered to be able to use the dynamic form components system.");
         }
 
-        var formProvider = _formProviderSelector.Get(formProviderName);
-        var formConfigurationComponent = _formConfigurationComponents.FirstOrDefault(fp => fp.FormProviderType == formProvider.GetType());
+        var form = _formSelector.Get(formName);
+        var formConfigurationComponent = _formConfigurationComponents.FirstOrDefault(fp => fp.FormType == form.GetType());
 
         if (formConfigurationComponent == null)
             throw new AbpException(
-                $"Could not find the form configuration component with the form configuration provider type full name ({formProvider.GetType().FullName}) ."
+                $"Could not find the form configuration component with the form type full name ({form.GetType().FullName}) ."
             );
         else
             return formConfigurationComponent;

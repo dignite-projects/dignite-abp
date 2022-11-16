@@ -18,6 +18,6 @@ public class FieldComponentSelector_Tests : FieldComponentsTestBase
     [Fact]
     public void Should_Select_Textbox_Component_Provider()
     {
-        _selector.Get(TextboxFormProvider.ProviderName).ShouldBeAssignableTo<TextboxFieldComponent>();
+        _selector.Get(TextboxForm.ProviderName).ShouldBeAssignableTo<TextboxFieldComponent>();
     }
 }

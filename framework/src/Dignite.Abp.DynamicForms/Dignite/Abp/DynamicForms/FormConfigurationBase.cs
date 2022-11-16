@@ -22,5 +22,6 @@ public abstract class FormConfigurationBase
 
     public FormConfigurationBase()
     {
+        ConfigurationDictionary = new FormConfigurationDictionary();
     }
 }

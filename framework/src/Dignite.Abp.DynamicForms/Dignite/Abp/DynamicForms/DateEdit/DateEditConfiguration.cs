@@ -26,7 +26,7 @@ public class DateEditConfiguration : FormConfigurationBase
     {
     }
 
-    public DateEditConfiguration()
+    public DateEditConfiguration() : base()
     {
     }
 }

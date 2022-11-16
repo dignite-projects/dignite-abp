@@ -1,16 +1,16 @@
 ﻿using JetBrains.Annotations;
 
-namespace Dignite.Abp.DynamicForms.Components;
+namespace Dignite.Abp.DynamicForms;
 
-public interface IFormComponentSelector
+public interface IFormSelector
 {
     /// <summary>
-    /// Get form component using form name
+    /// Get form using name
     /// </summary>
     /// <param name="formName">
     /// <see cref="IForm.Name"/>
     /// </param>
     /// <returns></returns>
     [NotNull]
-    IFormComponent Get(string formName);
+    IForm Get(string formName);
 }

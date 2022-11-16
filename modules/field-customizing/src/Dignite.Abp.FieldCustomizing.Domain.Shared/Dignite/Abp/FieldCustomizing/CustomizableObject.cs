@@ -10,8 +10,8 @@ using Volo.Abp.Content;
 namespace Dignite.Abp.FieldCustomizing;
 
 [Serializable]
-public abstract class CustomizableObject<T> : IHasCustomFields, IValidatableObject
-    where T : class, ICustomizeField
+public abstract class CustomizableObject<TCustomizeFieldInfo> : IHasCustomFields, IValidatableObject
+    where TCustomizeFieldInfo : class, ICustomizeFieldInfo
 {
     protected CustomizableObject()
     {
@@ -26,7 +26,7 @@ public abstract class CustomizableObject<T> : IHasCustomFields, IValidatableObje
     public CustomFieldDictionary CustomFields { get; set; }
 
     /// <summary>
-    /// Select the uploaded file stream content
+    /// All the uploaded file streams selected in the custom fields of file edit type
     /// </summary>
     public Dictionary<string, List<IRemoteStreamContent>> CustomizedFieldFiles { get; set; }
 
@@ -34,18 +34,19 @@ public abstract class CustomizableObject<T> : IHasCustomFields, IValidatableObje
     {
         var validationErrors = new List<ValidationResult>();
         var fieldDefinitions = GetFieldDefinitions(validationContext);
-        var fieldProviderSelector = validationContext.GetRequiredService<IFormProviderSelector>();
+        var formSelector = validationContext.GetRequiredService<IFormSelector>();
 
-        foreach (var customField in CustomFields)
+        foreach (var field in CustomFields)
         {
-            var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name == customField.Key);
+            var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name == field.Key);
             if (fieldDefinition == null)
                 continue;
-            var fieldProvider = fieldProviderSelector.Get(fieldDefinition.FormProviderName);
-            fieldProvider.Validate(
+
+            var form = formSelector.Get(fieldDefinition.FormName);
+            form.Validate(
                 new FormValidateArgs(
                     fieldDefinition,
-                    customField.Value,
+                    field.Value,
                     validationErrors
                 )
             );
@@ -58,5 +59,5 @@ public abstract class CustomizableObject<T> : IHasCustomFields, IValidatableObje
     ///
     /// </summary>
     /// <returns></returns>
-    public abstract IReadOnlyList<T> GetFieldDefinitions(ValidationContext validationContext);
+    public abstract IReadOnlyList<TCustomizeFieldInfo> GetFieldDefinitions(ValidationContext validationContext);
 }

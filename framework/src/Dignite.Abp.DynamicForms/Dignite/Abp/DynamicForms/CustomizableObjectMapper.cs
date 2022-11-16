@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dignite.Abp.DynamicForms;
 using JetBrains.Annotations;
 using Volo.Abp;
 
-namespace Dignite.Abp.FieldCustomizing;
+namespace Dignite.Abp.DynamicForms;
 
 public static class CustomizableObjectMapper
 {

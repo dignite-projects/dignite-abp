@@ -1,7 +1,6 @@
-﻿using Dignite.Abp.DynamicForms;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
-namespace Dignite.Abp.FieldCustomizing;
+namespace Dignite.Abp.DynamicForms;
 
 public static class HasCustomFieldsObjectCustomizingExtensions
 {

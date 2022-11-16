@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
-using Dignite.Abp.DynamicForms;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Content;
 
-namespace Dignite.Abp.FieldCustomizing;
+namespace Dignite.Abp.DynamicForms;
 
 [Serializable]
 public abstract class CustomizableObject<TCustomizeFieldInfo> : IHasCustomFields, IValidatableObject

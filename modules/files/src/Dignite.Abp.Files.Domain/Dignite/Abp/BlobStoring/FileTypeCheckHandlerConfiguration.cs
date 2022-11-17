@@ -5,7 +5,7 @@ namespace Dignite.Abp.BlobStoring;
 public class FileTypeCheckHandlerConfiguration
 {
     /// <summary>
-    /// 允许上传的文件类型
+    /// Limit the type of upload files
     /// </summary>
     public string[] AllowedFileTypeNames {
         get => _containerConfiguration.GetConfigurationOrDefault<string[]>(FileTypeCheckHandlerConfigurationNames.AllowedFileTypeNames, null);

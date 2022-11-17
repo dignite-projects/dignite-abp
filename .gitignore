@@ -353,4 +353,4 @@ MigrationBackup/
 .DS_Store
 
 # 
-**/wwwroot/libs/**
+**/samples/**/wwwroot/libs/**

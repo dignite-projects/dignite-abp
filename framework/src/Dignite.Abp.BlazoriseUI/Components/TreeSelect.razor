@@ -1,0 +1,34 @@
+﻿@typeparam TNode
+@typeparam TValue
+@using Blazorise
+@using Volo.Abp.AspNetCore.Components
+@using Blazorise.TreeView
+@using Microsoft.AspNetCore.Components.Web
+
+<Addons>
+    <Addon AddonType="AddonType.Body">
+        <TextEdit Role="TextRole.Search" @onclick="@(()=> ShowTreeSelectToggle())" @bind-Text="@TextEditText" ReadOnly="true" autocomplete="off" />
+    </Addon>
+    @if (!TextEditText.IsNullOrEmpty())
+    {
+        <Addon AddonType="AddonType.End">
+            <Button Color="Color.Secondary" Clicked="ClearNodeAsync">
+                <Icon Name="IconName.Times"></Icon>
+            </Button>
+        </Addon>
+    }
+</Addons>
+<Div Position="Position.Relative">
+    <Div Visibility="ShowTree?Visibility.Visible:Visibility.Invisible" Class="tree-select-container" Position="Position.Absolute.Top.Is0.Start.Is0" Width="Width.Is100" Padding="Padding.Is2" Border="Border.OnBottom.Is1.Rounded.Light" Shadow="Shadow.Default" Background="Background.White">
+        <AbpExtensibleTreeView TNode="TNode" Nodes="@Nodes" Draggable="false"
+                               GetChildNodes="@GetChildNodes"
+                               HasChildNodes="@HasChildNodes"
+                               ExpandedNodes="@ExpandedNodes"
+                               ExpandedNodesChanged="@ExpandedNodesChanged"
+                               SelectedNodeChanged="@OnSelectChangedAsync">
+            <NodeContent>
+                @NodeText(context)
+            </NodeContent>
+        </AbpExtensibleTreeView>
+    </Div>
+</Div>

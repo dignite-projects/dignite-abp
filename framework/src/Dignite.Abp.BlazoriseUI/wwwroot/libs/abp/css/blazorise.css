@@ -3,3 +3,9 @@
     margin: 0;
     padding: 0 !important;
 }
+
+/* tree select component*/
+.tree-select-container {
+    max-height:50vh;
+    overflow-y:auto;
+}

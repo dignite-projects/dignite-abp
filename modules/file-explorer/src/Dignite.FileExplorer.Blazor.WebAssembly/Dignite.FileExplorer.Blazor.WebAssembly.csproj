@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="5.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Dignite.FileExplorer.Blazor\Dignite.FileExplorer.Blazor.csproj" />
+        <ProjectReference Include="..\Dignite.FileExplorer.HttpApi.Client\Dignite.FileExplorer.HttpApi.Client.csproj" />
+    </ItemGroup>
+
+</Project>

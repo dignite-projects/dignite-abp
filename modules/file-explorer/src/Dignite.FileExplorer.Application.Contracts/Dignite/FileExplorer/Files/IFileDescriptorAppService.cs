@@ -16,6 +16,13 @@ public interface IFileDescriptorAppService : ICrudAppService<FileDescriptorDto, 
     /// <returns></returns>
     Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <returns></returns>
+    Task<BlobHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName);
+
     /*
     TODO:
     1:Volume statistics by tenant group

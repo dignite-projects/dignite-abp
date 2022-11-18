@@ -1,0 +1,36 @@
+﻿@using Dignite.FileExplorer.Files
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Dignite.Abp.BlazoriseUI.Components
+@inherits AbpCrudPageBase<IFileDescriptorAppService,FileDescriptorDto, Guid, GetFilesInput, CreateFileInput, UpdateFileInput>
+<Modal @ref="_modal" Closing="@ClosingModal">
+    <ModalContent Size="ModalSize.Default" Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["FileExplorer"]</ModalTitle>
+            <CloseButton Clicked="CloseModal" />
+        </ModalHeader>
+        <ModalBody>
+            <Row NoGutters>
+                <Column ColumnSize="ColumnSize.Is3">        
+                    <AutoFillHeightDiv ExtraHeight="40">
+
+                    </AutoFillHeightDiv>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is9">
+                    @* ************************* DATA GRID ************************* *@
+                    <Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid TItem="FileDescriptorDto" @ref="FileDataGridRef"
+                                                                              Data="Entities"
+                                                                              TotalItems="TotalCount"
+                                                                              ShowPager="true"
+                                                                              PageSize="PageSize"
+                                                                              CurrentPage="@CurrentPage"
+                                                                              Columns="@FileTableColumns">
+                    </Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid>
+                </Column>
+            </Row>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="CloseModal">@L["Cancel"]</Button>
+            <Button Color="Color.Primary" Clicked="SelectFilesAsync">@L["Select"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>

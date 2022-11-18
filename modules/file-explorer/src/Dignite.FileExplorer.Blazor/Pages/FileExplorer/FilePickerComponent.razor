@@ -1,0 +1,4 @@
+﻿@using Volo.Abp.AspNetCore.Components
+@inherits AbpComponentBase
+<Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
+<FileExplorerModal @ref="_fileExplorerModal" SelectFiles="SelectFilesAsync"></FileExplorerModal>

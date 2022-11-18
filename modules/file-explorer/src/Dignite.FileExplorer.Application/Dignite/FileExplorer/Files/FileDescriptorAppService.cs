@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.BlobStoring;
 using Dignite.FileExplorer.Permissions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.Collections;
 using Volo.Abp.Content;
 
 namespace Dignite.FileExplorer.Files;
@@ -17,15 +21,18 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     private readonly IFileDescriptorRepository _fileRepository;
     private readonly FileDescriptorManager _fileManager;
     private readonly IBlobContainerFactory _blobContainerFactory;
+    private readonly IBlobContainerConfigurationProvider _blobContainerConfigurationProvider;
 
     public FileDescriptorAppService(
         IFileDescriptorRepository blobRepository,
         FileDescriptorManager fileManager,
-        IBlobContainerFactory blobContainerFactory)
+        IBlobContainerFactory blobContainerFactory,
+        IBlobContainerConfigurationProvider blobContainerConfigurationProvider)
     {
         _fileRepository = blobRepository;
         _fileManager = fileManager;
         _blobContainerFactory = blobContainerFactory;
+        _blobContainerConfigurationProvider = blobContainerConfigurationProvider;
     }
 
     [Authorize]
@@ -102,5 +109,22 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <returns></returns>
+    public virtual Task<BlobHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
+    {
+        var dto = new BlobHandlerConfigurationDto();
+        var configuration = _blobContainerConfigurationProvider.Get(containerName);
+        var blobSizeLimitConfiguration = configuration.GetBlobSizeLimitConfiguration();
+        var fileTypeCheckConfiguration = configuration.GetFileTypeCheckConfiguration();
+        dto.MaximumBlobSize= blobSizeLimitConfiguration.MaximumBlobSize;
+        dto.AllowedFileTypeNames = fileTypeCheckConfiguration.AllowedFileTypeNames;
+
+        return Task.FromResult(dto);
     }
 }

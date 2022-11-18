@@ -45,6 +45,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.EntityFra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.MongoDB", "..\files\src\Dignite.Abp.Files.MongoDB\Dignite.Abp.Files.MongoDB.csproj", "{382F03A9-A43E-4B41-8F33-F4FF2E4D4CC5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor", "src\Dignite.FileExplorer.Blazor\Dignite.FileExplorer.Blazor.csproj", "{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor.Server", "src\Dignite.FileExplorer.Blazor.Server\Dignite.FileExplorer.Blazor.Server.csproj", "{ECF59A7D-C38E-46E9-9752-0C104D4F839C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor.WebAssembly", "src\Dignite.FileExplorer.Blazor.WebAssembly\Dignite.FileExplorer.Blazor.WebAssembly.csproj", "{CFDEBBE7-534C-43E3-BE6C-24B41B669714}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp-modules", "dignite-abp-modules", "{495301F5-E4CC-4543-A002-6E76CD75E802}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.BlazoriseUI", "..\..\framework\src\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj", "{E33795C4-C541-4777-A001-247454F4FD2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +133,22 @@ Global
 		{382F03A9-A43E-4B41-8F33-F4FF2E4D4CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{382F03A9-A43E-4B41-8F33-F4FF2E4D4CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382F03A9-A43E-4B41-8F33-F4FF2E4D4CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF59A7D-C38E-46E9-9752-0C104D4F839C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF59A7D-C38E-46E9-9752-0C104D4F839C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF59A7D-C38E-46E9-9752-0C104D4F839C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF59A7D-C38E-46E9-9752-0C104D4F839C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDEBBE7-534C-43E3-BE6C-24B41B669714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDEBBE7-534C-43E3-BE6C-24B41B669714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDEBBE7-534C-43E3-BE6C-24B41B669714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDEBBE7-534C-43E3-BE6C-24B41B669714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33795C4-C541-4777-A001-247454F4FD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33795C4-C541-4777-A001-247454F4FD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33795C4-C541-4777-A001-247454F4FD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33795C4-C541-4777-A001-247454F4FD2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +172,10 @@ Global
 		{FB2B1B7C-76DB-4236-88BA-AC44BF5F02A2} = {17C67D25-7401-41DD-909B-860C2DE9FACD}
 		{F53D5A7B-833B-4BB5-A532-55C56A0C746B} = {17C67D25-7401-41DD-909B-860C2DE9FACD}
 		{382F03A9-A43E-4B41-8F33-F4FF2E4D4CC5} = {17C67D25-7401-41DD-909B-860C2DE9FACD}
+		{7DCEC062-55A6-4E92-B699-9DDAB0DCF5B9} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{ECF59A7D-C38E-46E9-9752-0C104D4F839C} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{CFDEBBE7-534C-43E3-BE6C-24B41B669714} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{E33795C4-C541-4777-A001-247454F4FD2E} = {495301F5-E4CC-4543-A002-6E76CD75E802}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileExplorerSample", "FileExplorerSample\FileExplorerSample.csproj", "{2E19BC05-F78C-4907-A059-C29A4859ADB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pure-theme", "pure-theme", "{8309C213-219B-4795-ACA6-11B8D1E82585}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure", "..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj", "{77B6B73F-E533-430D-B7CF-953632D5EC0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.Server.PureTheme", "..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Components.Server.PureTheme\Dignite.Abp.AspNetCore.Components.Server.PureTheme.csproj", "{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "file-explorer-module", "file-explorer-module", "{90EE7603-1EEA-4278-8BD6-07DF119E777A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Application", "..\..\modules\file-explorer\src\Dignite.FileExplorer.Application\Dignite.FileExplorer.Application.csproj", "{3A9B8112-79AE-493A-B89A-A2EA47763A15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor.Server", "..\..\modules\file-explorer\src\Dignite.FileExplorer.Blazor.Server\Dignite.FileExplorer.Blazor.Server.csproj", "{AB68F51D-0F71-4511-9D60-352E96AF4215}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.HttpApi", "..\..\modules\file-explorer\src\Dignite.FileExplorer.HttpApi\Dignite.FileExplorer.HttpApi.csproj", "{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.EntityFrameworkCore", "..\..\modules\file-explorer\src\Dignite.FileExplorer.EntityFrameworkCore\Dignite.FileExplorer.EntityFrameworkCore.csproj", "{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor", "..\..\modules\file-explorer\src\Dignite.FileExplorer.Blazor\Dignite.FileExplorer.Blazor.csproj", "{62130F73-4F34-434C-94D8-697D6A903DC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Domain", "..\..\modules\file-explorer\src\Dignite.FileExplorer.Domain\Dignite.FileExplorer.Domain.csproj", "{B82DB57C-CC89-471A-80EF-46FD7F2F31B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Files.Domain", "..\..\modules\files\src\Dignite.Abp.Files.Domain\Dignite.Abp.Files.Domain.csproj", "{97DB1EA0-4531-40E7-8912-B474E56D53D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E19BC05-F78C-4907-A059-C29A4859ADB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B6B73F-E533-430D-B7CF-953632D5EC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B6B73F-E533-430D-B7CF-953632D5EC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B6B73F-E533-430D-B7CF-953632D5EC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B6B73F-E533-430D-B7CF-953632D5EC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9B8112-79AE-493A-B89A-A2EA47763A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9B8112-79AE-493A-B89A-A2EA47763A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9B8112-79AE-493A-B89A-A2EA47763A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9B8112-79AE-493A-B89A-A2EA47763A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB68F51D-0F71-4511-9D60-352E96AF4215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB68F51D-0F71-4511-9D60-352E96AF4215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB68F51D-0F71-4511-9D60-352E96AF4215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB68F51D-0F71-4511-9D60-352E96AF4215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62130F73-4F34-434C-94D8-697D6A903DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62130F73-4F34-434C-94D8-697D6A903DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62130F73-4F34-434C-94D8-697D6A903DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62130F73-4F34-434C-94D8-697D6A903DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B82DB57C-CC89-471A-80EF-46FD7F2F31B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B82DB57C-CC89-471A-80EF-46FD7F2F31B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B82DB57C-CC89-471A-80EF-46FD7F2F31B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B82DB57C-CC89-471A-80EF-46FD7F2F31B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DB1EA0-4531-40E7-8912-B474E56D53D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DB1EA0-4531-40E7-8912-B474E56D53D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DB1EA0-4531-40E7-8912-B474E56D53D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DB1EA0-4531-40E7-8912-B474E56D53D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77B6B73F-E533-430D-B7CF-953632D5EC0D} = {8309C213-219B-4795-ACA6-11B8D1E82585}
+		{2E5CA9F8-4FD3-4A15-A901-7D7DFAD8333B} = {8309C213-219B-4795-ACA6-11B8D1E82585}
+		{3A9B8112-79AE-493A-B89A-A2EA47763A15} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{AB68F51D-0F71-4511-9D60-352E96AF4215} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{1C3C8866-9F6D-431C-B8B2-A823E95B5B1A} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{63E8EFA6-FD26-4FEC-ACD6-253CB09FD442} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{62130F73-4F34-434C-94D8-697D6A903DC2} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{B82DB57C-CC89-471A-80EF-46FD7F2F31B8} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+		{97DB1EA0-4531-40E7-8912-B474E56D53D5} = {90EE7603-1EEA-4278-8BD6-07DF119E777A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63E2660C-C1D9-4768-90FD-289F36581842}
+	EndGlobalSection
+EndGlobal

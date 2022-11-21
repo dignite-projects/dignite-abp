@@ -1,0 +1,21 @@
+﻿@page "/"
+@using Dignite.FileExplorer.Blazor.Pages.FileExplorer
+@inherits FileExplorerSampleComponentBase
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">
+                @L["Welcome_Title"]
+            </h5>
+        </div>
+        <div class="card-body">
+            @L["Welcome_Text"]
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-body">
+            <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="testeee"></FilePickerComponent>
+        </div>
+    </div>
+</div>

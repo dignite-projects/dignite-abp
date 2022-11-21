@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Blazorise;
 using Dignite.FileExplorer.Files;
 using Microsoft.AspNetCore.Components;
+using Volo.Abp.AspNetCore.Components;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class FileEditComponent
@@ -16,7 +17,11 @@ public partial class FileEditComponent
     /// </summary>
     protected virtual BlobHandlerConfigurationDto Configuration { get; private set; }
 
+    protected long MaxFileSize = long.MaxValue;
+
     public virtual List<FileDescriptorDto> FileDescriptors { get; protected set; }
+
+    public virtual List<IFileEntry> Files { get; protected set; }
 
     public FileEditComponent(IFileDescriptorAppService fileDescriptorAppService)
     {
@@ -46,9 +51,9 @@ public partial class FileEditComponent
     protected override async Task OnInitializedAsync()
     {
         Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
-        Configuration.MaximumBlobSize = Configuration.MaximumBlobSize == 0 ? int.MaxValue : Configuration.MaximumBlobSize;
+        MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize*1024);
 
-        if (!EntityId.IsNullOrEmpty() && Multiple)
+        if (!EntityId.IsNullOrEmpty())
         {
             FileDescriptors = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
             {
@@ -64,6 +69,11 @@ public partial class FileEditComponent
 
     private async Task OnFileChangedAsync(FileChangedEventArgs e)
     {
+        Files = e.Files.ToList();
+        if (!Multiple)
+        {
+            FileDescriptors.Clear();
+        }
         await Changed.InvokeAsync(e);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Blazorise;
 using Dignite.Abp.BlazoriseUI.Components;
@@ -9,6 +11,7 @@ using Dignite.FileExplorer.Permissions;
 using Microsoft.AspNetCore.Components;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.EntityActions;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
+using Volo.Abp.Content;
 using Volo.Abp.Users;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
@@ -16,7 +19,6 @@ public partial class FileExplorerModal
 {
     protected readonly IFileDescriptorAppService FileDescriptorAppService;
     protected Modal _modal;
-    private string _fileEditFilter = null;
 
     protected AbpExtensibleDataGrid<FileDescriptorDto> FileDataGridRef;
     private List<TableColumn> FileTableColumns => TableColumns.Get<FileExplorerModal>();
@@ -24,10 +26,15 @@ public partial class FileExplorerModal
     protected string ContainerName { get; set; }
 
     protected string EntityId { get; set; }
-    protected BlobHandlerConfigurationDto BlobHandlerConfiguration { get; set; }=new BlobHandlerConfigurationDto();
+    protected BlobHandlerConfigurationDto Configuration { get; set; }
+
+    protected long MaxFileSize = long.MaxValue;
 
     [Parameter] 
-    public EventCallback<IReadOnlyList<FileDescriptorDto>> SelectFiles { get; set; }
+    public EventCallback<List<FileDescriptorDto>> SelectFiles { get; set; }
+
+    [Parameter]
+    public bool Multiple { get; set; }
 
     public FileExplorerModal(IFileDescriptorAppService fileDescriptorAppService)
     {
@@ -39,13 +46,16 @@ public partial class FileExplorerModal
         DeletePolicyName = FileExplorerPermissions.Files.Delete;
 
         FileDescriptorAppService = fileDescriptorAppService;
+        Configuration = new BlobHandlerConfigurationDto();
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        BlobHandlerConfiguration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
-        _fileEditFilter = BlobHandlerConfiguration.AllowedFileTypeNames?.JoinAsString(", ");
+        Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
+        MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize * 1024);
+
+
         await base.OnInitializedAsync();
     }
 
@@ -122,6 +132,7 @@ public partial class FileExplorerModal
     protected override Task UpdateGetListInputAsync()
     {
         GetListInput.ContainerName = ContainerName;
+        GetListInput.CreatorId = CurrentUser.Id;
         //GetListInput.EntityId = EntityId;
 
         return base.UpdateGetListInputAsync();
@@ -142,6 +153,19 @@ public partial class FileExplorerModal
         {
             await HandleErrorAsync(ex);
         }
+    }
+
+
+    private async Task OnFileChangedAsync(FileChangedEventArgs e)
+    {
+        var input = new CreateFileInput();
+        input.ContainerName = ContainerName;
+        input.EntityId = EntityId;
+        input.File = new RemoteStreamContent(
+                                            file.OpenReadStream(long.MaxValue),
+                                            file.Name,
+                                            file.Type
+                                            );
     }
 
     protected virtual async Task SelectFilesAsync()

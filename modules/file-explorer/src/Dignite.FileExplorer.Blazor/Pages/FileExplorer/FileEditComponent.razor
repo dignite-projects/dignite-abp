@@ -1,2 +1,40 @@
-﻿
-<FileEdit Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@Configuration?.MaximumBlobSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+﻿@using Volo.Abp.AspNetCore.Components
+@inherits AbpComponentBase
+<FileEdit Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+
+@if((FileDescriptors!=null && FileDescriptors.Any())
+    || (Files != null && Files.Any())
+    )
+{
+<Table>
+    <TableHeader>
+        <TableRow>
+            <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+            <TableHeaderCell>@L["Size"]</TableHeaderCell>
+            <TableHeaderCell></TableHeaderCell>
+        </TableRow>
+    </TableHeader>
+    <TableBody>
+        @foreach(var item in FileDescriptors)
+            {
+        <TableRow>
+            <TableRowCell>@item.Name</TableRowCell>
+            <TableRowCell>@item.Size</TableRowCell>
+            <TableRowCell>
+                <Button Color="Color.Primary" Clicked="@(()=>{FileDescriptors.RemoveAll(fd=>fd.Id==item.Id);})"><Icon Name="@IconName.Delete"></Icon></Button>
+            </TableRowCell>
+        </TableRow>
+            }
+        @foreach(var item in Files)
+            {
+        <TableRow>
+            <TableRowCell>@item.Name</TableRowCell>
+            <TableRowCell>@item.Size</TableRowCell>
+            <TableRowCell>
+                <Button Color="Color.Primary" Clicked="@(()=>{Files.RemoveAll(f=>f.Id==item.Id);})"><Icon Name="@IconName.Delete"></Icon></Button>
+            </TableRowCell>
+        </TableRow>
+            }
+    </TableBody>
+</Table>
+}

@@ -9,8 +9,9 @@
             <CloseButton Clicked="CloseModal" />
         </ModalHeader>
         <ModalBody>
+            <FileEdit Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
             <Row NoGutters>
-                <Column ColumnSize="ColumnSize.Is3">        
+                <Column ColumnSize="ColumnSize.Is3">
                     <AutoFillHeightDiv ExtraHeight="40">
 
                     </AutoFillHeightDiv>

@@ -3,7 +3,7 @@
 @using Dignite.Abp.BlazoriseUI.Components
 @inherits AbpCrudPageBase<IFileDescriptorAppService,FileDescriptorDto, Guid, GetFilesInput, CreateFileInput, UpdateFileInput>
 <Modal @ref="_modal" Closing="@ClosingModal">
-    <ModalContent Size="ModalSize.Default" Centered="true">
+    <ModalContent Size="ModalSize.ExtraLarge" Centered="true">
         <ModalHeader>
             <ModalTitle>@L["FileExplorer"]</ModalTitle>
             <CloseButton Clicked="CloseModal" />
@@ -24,7 +24,8 @@
                                                                               ShowPager="true"
                                                                               PageSize="PageSize"
                                                                               CurrentPage="@CurrentPage"
-                                                                              Columns="@FileTableColumns">
+                                                                              Columns="@FileTableColumns"
+                                                                              ExtraHeight="200">
                     </Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid>
                 </Column>
             </Row>

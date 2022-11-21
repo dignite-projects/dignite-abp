@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Configuration;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class FilePickerComponent
 {
     protected FileExplorerModal _fileExplorerModal;
+    public List<FileDescriptorDto> FileDescriptors { get; set; }
     protected readonly IFileDescriptorAppService FileDescriptorAppService;
 
     public FilePickerComponent(IFileDescriptorAppService fileDescriptorAppService)
@@ -35,10 +35,13 @@ public partial class FilePickerComponent
     [Parameter]
     public bool Multiple { get; set; }
 
-    [Parameter]
-    public List<FileDescriptorDto> FileDescriptors { get; set; }
-
-
+    /// <summary>
+    /// Event triggered when a modal window for selecting files is opened
+    /// </summary>
+    /// <example>
+    /// When opening the Select File Mode window, judge whether the blog post already exists. 
+    /// If not, create a draft
+    /// </example>
     [Parameter]
     public EventCallback OpeningFileExplorerModal { get; set; }
 
@@ -52,7 +55,7 @@ public partial class FilePickerComponent
                 SkipCount = 0,
                 ContainerName = ContainerName,
                 EntityId = EntityId,
-                MaxResultCount = int.MaxValue
+                MaxResultCount = 1000
             })).Items.ToList();
         }
         else

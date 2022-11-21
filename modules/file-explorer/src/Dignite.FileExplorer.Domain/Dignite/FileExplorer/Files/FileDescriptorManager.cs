@@ -52,7 +52,6 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
             containerName,
             stream,
             directoryId,
-            entity == null ? null : entity.GetType().FullName,
             entity == null ? null : GetEntityKey(entity)
             );
     }
@@ -61,7 +60,6 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                                         [NotNull] string containerName,
                                         [NotNull] IRemoteStreamContent stream,
                                         [CanBeNull] Guid? directoryId,
-                                        [CanBeNull] string entityType,
                                         [CanBeNull] string entityId)
     {
         var blobName = (await GenerateBlobNameAsync(containerName));
@@ -73,7 +71,6 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                     stream.FileName,
                     stream.ContentType,
                     directoryId,
-                    entityType,
                     entityId,
                     CurrentTenant.Id);
 
@@ -89,7 +86,12 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
     public virtual async Task<FileDescriptor> CreateAsync([NotNull] FileDescriptor file,
                                         [NotNull] IRemoteStreamContent remoteStream)
     {
-        return await base.CreateAsync(file, remoteStream.GetStream());
+        using (MemoryStream ms = new MemoryStream())
+        {
+            await remoteStream.GetStream().CopyToAsync(ms);
+            ms.Position = 0;
+            return await base.CreateAsync(file, ms);
+        }
     }
 
     protected virtual string GetEntityKey(IEntity entity)
@@ -105,7 +107,6 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
 
     protected override Task CheckFileAsync([NotNull] FileDescriptor file)
     {
-        Check.NotNullOrWhiteSpace(file.EntityType, nameof(FileDescriptor.EntityType), FileDescriptorConsts.MaxEntityTypeLength);
         Check.NotNullOrWhiteSpace(file.EntityId, nameof(FileDescriptor.EntityId), FileDescriptorConsts.MaxEntityIdLength);
         return base.CheckFileAsync(file);
     }

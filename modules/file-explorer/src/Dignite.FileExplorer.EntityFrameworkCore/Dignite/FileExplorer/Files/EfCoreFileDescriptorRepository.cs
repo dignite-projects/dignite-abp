@@ -51,12 +51,12 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     }
 
     public async Task<int> GetCountAsync(string containerName,
-        Guid? creatorId, Guid? directoryId, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
+        Guid? creatorId, Guid? directoryId, string filter = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, creatorId, directoryId, filter, entityType, entityId
+            containerName, creatorId, directoryId, filter, entityId
         );
 
         return await query.CountAsync(cancellationToken);
@@ -67,7 +67,6 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityType = null,
         string entityId = null,
         string sorting = null,
         int maxResultCount = int.MaxValue,
@@ -77,7 +76,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         cancellationToken = GetCancellationToken(cancellationToken);
 
         var query = await GetListQueryAsync(
-            containerName, creatorId, directoryId, filter, entityType, entityId
+            containerName, creatorId, directoryId, filter, entityId
         );
 
         return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
@@ -90,7 +89,6 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityType = null,
         string entityId = null)
     {
         return (await GetDbSetAsync()).AsNoTracking()
@@ -98,7 +96,6 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
             .WhereIf(directoryId.HasValue, fd => fd.DirectoryId == directoryId.Value)
             .WhereIf(creatorId.HasValue, fd => fd.CreatorId == creatorId.Value)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
-            .WhereIf(!entityType.IsNullOrWhiteSpace(), fd => fd.EntityType == entityType)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

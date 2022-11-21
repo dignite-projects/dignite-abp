@@ -77,4 +77,11 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         var file = await _fileAppService.GetStreamAsync(containerName, blobName);
         return File(file.GetStream(), file.ContentType, fileName.IsNullOrEmpty() ? file.FileName : fileName);
     }
+
+    [HttpGet]
+    [Route("configuration")]
+    public virtual async Task<BlobHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
+    {
+        return await _fileAppService.GetBlobHandlerConfiguration(containerName);
+    }
 }

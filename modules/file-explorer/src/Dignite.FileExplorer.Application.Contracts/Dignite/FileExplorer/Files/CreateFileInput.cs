@@ -21,13 +21,6 @@ public class CreateFileInput
     public Guid? DirectoryId { get; set; }
 
     /// <summary>
-    /// Associated Entity Type Name
-    /// </summary>
-    [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxEntityTypeLength))]
-    [RegularExpression(FileDescriptorConsts.EntityTypeRegularExpression)]
-    public string EntityType { get; set; }
-
-    /// <summary>
     /// Associated Entity Id
     /// </summary>
     [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxEntityIdLength))]

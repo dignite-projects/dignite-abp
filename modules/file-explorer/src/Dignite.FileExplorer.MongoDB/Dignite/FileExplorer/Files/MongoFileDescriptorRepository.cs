@@ -54,7 +54,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
 
     public async Task<int> GetCountAsync(string containerName,
         Guid? creatorId,
-        Guid? directoryId, string filter = null, string entityType = null, string entityId = null, CancellationToken cancellationToken = default)
+        Guid? directoryId, string filter = null, string entityId = null, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
@@ -63,7 +63,6 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
             creatorId,
             directoryId,
             filter,
-            entityType,
             entityId,
             token);
 
@@ -72,7 +71,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
 
     public async Task<List<FileDescriptor>> GetListAsync(string containerName,
         Guid? creatorId,
-        Guid? directoryId, string filter = null, string entityType = null, string entityId = null, string sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
+        Guid? directoryId, string filter = null, string entityId = null, string sorting = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
@@ -81,7 +80,6 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
             creatorId,
             directoryId,
             filter,
-            entityType,
             entityId,
             token);
 
@@ -96,7 +94,6 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityType = null,
         string entityId = null,
         CancellationToken cancellationToken = default)
     {
@@ -105,7 +102,6 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
             .WhereIf(directoryId.HasValue, fd => fd.DirectoryId == directoryId.Value)
             .WhereIf(creatorId.HasValue, fd => fd.CreatorId == creatorId.Value)
             .WhereIf(!filter.IsNullOrWhiteSpace(), fd => fd.Name.Contains(filter))
-            .WhereIf(!entityType.IsNullOrWhiteSpace(), fd => fd.EntityType == entityType)
             .WhereIf(!entityId.IsNullOrWhiteSpace(), fd => fd.EntityId == entityId);
     }
 }

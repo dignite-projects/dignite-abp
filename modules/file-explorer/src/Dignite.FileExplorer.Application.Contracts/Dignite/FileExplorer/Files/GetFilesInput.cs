@@ -14,7 +14,5 @@ public class GetFilesInput : PagedAndSortedResultRequestDto
     public Guid? CreatorId { get; set; }
 
     public string Filter { get; set; }
-
-    public string EntityType { get; set; }
     public string EntityId { get; set; }
 }

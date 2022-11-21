@@ -9,11 +9,4 @@ public static class FileExplorerErrorCodes
         public const string InvalidDirectoryName = "FileExplorer:Directory:0003";
         public const string CantMovableToUnderChild = "FileExplorer:Directory:0004";
     }
-
-    public static class Files
-    {
-        public const string EntityTypeDoesntExist = "FileExplorer:File:0001";
-        public const string IncompatibleFileType = "FileExplorer.File:010002";
-        public const string CanNotGetFileType = "FileExplorer.File:010003";
-    }
 }

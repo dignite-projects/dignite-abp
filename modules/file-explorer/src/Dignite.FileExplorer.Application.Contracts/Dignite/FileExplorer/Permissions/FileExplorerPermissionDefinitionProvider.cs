@@ -9,6 +9,7 @@ public class FileExplorerPermissionDefinitionProvider : PermissionDefinitionProv
     public override void Define(IPermissionDefinitionContext context)
     {
         var myGroup = context.AddGroup(FileExplorerPermissions.GroupName, L("Permission:FileExplorer"));
+        myGroup.AddPermission(FileExplorerPermissions.Files.Management, L("Permission:Management"));
     }
 
     private static LocalizableString L(string name)

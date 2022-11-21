@@ -43,7 +43,6 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 "testBlobName1.txt",
                 "text/plain",
                 null,
-                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
@@ -56,7 +55,6 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 "testBlobName2.txt",
                 "text/plain",
                 null,
-                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);
@@ -69,7 +67,6 @@ public class FileExplorerDataSeedContributor : IDataSeedContributor, ITransientD
                 "testBlobName3.txt",
                 "text/plain",
                 null,
-                _fileExplorerTestData.EntityType,
                 _fileExplorerTestData.EntityId,
                 _currentTenant.Id)
             , autoSave: true);

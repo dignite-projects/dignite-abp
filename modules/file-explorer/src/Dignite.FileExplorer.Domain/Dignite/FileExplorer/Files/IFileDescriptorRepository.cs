@@ -23,7 +23,6 @@ public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Gu
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityType = null,
         string entityId = null,
         string sorting = null,
         int maxResultCount = int.MaxValue,
@@ -35,7 +34,6 @@ public interface IFileDescriptorRepository : IBasicRepository<FileDescriptor, Gu
         Guid? creatorId,
         Guid? directoryId,
         string filter = null,
-        string entityType = null,
         string entityId = null,
         CancellationToken cancellationToken = default);
 }

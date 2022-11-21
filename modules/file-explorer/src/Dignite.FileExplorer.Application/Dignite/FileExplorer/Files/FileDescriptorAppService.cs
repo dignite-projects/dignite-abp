@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Abp.BlobStoring;
 using Dignite.FileExplorer.Permissions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.Collections;
 using Volo.Abp.Content;
 
 namespace Dignite.FileExplorer.Files;
@@ -38,9 +36,16 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     [Authorize]
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
-        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.DirectoryId, input.EntityType, input.EntityId);
+        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.DirectoryId, input.EntityId);
 
-        await AuthorizationService.CheckAsync(fileDescriptor, CommonOperations.Create);
+        try
+        {
+            await AuthorizationService.CheckAsync(fileDescriptor, CommonOperations.Create);
+        }
+        catch (AbpAuthorizationException ex)
+        {
+            await _fileManager.DeleteAsync(fileDescriptor);
+        }
         return ObjectMapper.Map<FileDescriptor, FileDescriptorDto>(fileDescriptor);
     }
 
@@ -84,8 +89,8 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         {
             input.CreatorId = CurrentUser.Id;
         }
-        var count = await _fileRepository.GetCountAsync(input.ContainerName, input.CreatorId, input.DirectoryId, input.Filter, input.EntityType, input.EntityId);
-        var result = await _fileRepository.GetListAsync(input.ContainerName, input.CreatorId, input.DirectoryId, input.Filter, input.EntityType, input.EntityId, input.Sorting, input.MaxResultCount, input.SkipCount);
+        var count = await _fileRepository.GetCountAsync(input.ContainerName, input.CreatorId, input.DirectoryId, input.Filter, input.EntityId);
+        var result = await _fileRepository.GetListAsync(input.ContainerName, input.CreatorId, input.DirectoryId, input.Filter, input.EntityId, input.Sorting, input.MaxResultCount, input.SkipCount);
 
         return new PagedResultDto<FileDescriptorDto>(
             count,

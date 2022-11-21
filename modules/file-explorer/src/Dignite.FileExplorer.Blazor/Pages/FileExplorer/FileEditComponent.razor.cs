@@ -21,7 +21,7 @@ public partial class FileEditComponent
 
     public virtual List<FileDescriptorDto> FileDescriptors { get; protected set; }
 
-    public virtual List<IFileEntry> Files { get; protected set; }
+    public virtual IFileEntry[] Files { get; protected set; }
 
     public FileEditComponent(IFileDescriptorAppService fileDescriptorAppService)
     {
@@ -69,7 +69,7 @@ public partial class FileEditComponent
 
     private async Task OnFileChangedAsync(FileChangedEventArgs e)
     {
-        Files = e.Files.ToList();
+        Files = e.Files;
         if (!Multiple)
         {
             FileDescriptors.Clear();

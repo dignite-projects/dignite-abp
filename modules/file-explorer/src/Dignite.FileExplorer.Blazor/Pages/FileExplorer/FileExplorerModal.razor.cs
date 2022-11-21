@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Channels;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Blazorise;
+using Blazorise.DataGrid;
 using Dignite.Abp.BlazoriseUI.Components;
 using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
-using Dignite.FileExplorer.Permissions;
 using Microsoft.AspNetCore.Components;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.EntityActions;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
@@ -29,6 +28,7 @@ public partial class FileExplorerModal
     protected BlobHandlerConfigurationDto Configuration { get; set; }
 
     protected long MaxFileSize = long.MaxValue;
+    public virtual IFileEntry[] Files { get; protected set; }
 
     [Parameter] 
     public EventCallback<List<FileDescriptorDto>> SelectFiles { get; set; }
@@ -41,24 +41,8 @@ public partial class FileExplorerModal
         ObjectMapperContext = typeof(FileExplorerBlazorModule);
         LocalizationResource = typeof(FileExplorerResource);
 
-        CreatePolicyName = FileExplorerPermissions.Files.Create;
-        UpdatePolicyName = FileExplorerPermissions.Files.Update;
-        DeletePolicyName = FileExplorerPermissions.Files.Delete;
-
         FileDescriptorAppService = fileDescriptorAppService;
-        Configuration = new BlobHandlerConfigurationDto();
     }
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
-        MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize * 1024);
-
-
-        await base.OnInitializedAsync();
-    }
-
 
     protected override ValueTask SetEntityActionsAsync()
     {
@@ -69,13 +53,13 @@ public partial class FileExplorerModal
                 new EntityAction
                 {
                     Text = L["Rename"],
-                    Visible = (data) => HasUpdatePermission,
+                    Visible = (data) => CurrentUser.GetId() == data.As<FileDescriptorDto>().CreatorId,
                     Clicked = async (data) => await OpenEditModalAsync(data.As<FileDescriptorDto>())
                 },
                 new EntityAction
                 {
                     Text = L["Delete"],
-                    Visible = (data) => CurrentUser.GetId() != data.As<FileDescriptorDto>().CreatorId,
+                    Visible = (data) => CurrentUser.GetId() == data.As<FileDescriptorDto>().CreatorId,
                     Clicked = async (data) => await DeleteEntityAsync(data.As<FileDescriptorDto>()),
                     ConfirmationMessage = (data) => GetDeleteConfirmationMessage(data.As<FileDescriptorDto>())
                 }
@@ -99,12 +83,6 @@ public partial class FileExplorerModal
                 {
                     Title = L["Size"],
                     Data = nameof(FileDescriptorDto.Size),
-                    Sortable = true,
-                },
-                new TableColumn
-                {
-                    Title = L["EntityType"],
-                    Data = nameof(FileDescriptorDto.EntityType),
                     Sortable = true,
                 },
                 new TableColumn
@@ -142,9 +120,13 @@ public partial class FileExplorerModal
     {
         try
         {
-            CurrentPage = 0;
+            CurrentPage = 1;
             ContainerName = containerName;
             EntityId = entityId;
+
+
+            Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
+            MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize * 1024);
 
             await GetEntitiesAsync();
             await InvokeAsync(_modal.Show);
@@ -158,14 +140,20 @@ public partial class FileExplorerModal
 
     private async Task OnFileChangedAsync(FileChangedEventArgs e)
     {
-        var input = new CreateFileInput();
-        input.ContainerName = ContainerName;
-        input.EntityId = EntityId;
-        input.File = new RemoteStreamContent(
-                                            file.OpenReadStream(long.MaxValue),
-                                            file.Name,
-                                            file.Type
-                                            );
+        this.Files = e.Files;
+        foreach (var file in e.Files)
+        {
+            var input = new CreateFileInput();
+            input.ContainerName = ContainerName;
+            input.EntityId = EntityId;
+            input.File = new RemoteStreamContent(
+                                                file.OpenReadStream(long.MaxValue),
+                                                file.Name,
+                                                file.Type
+                                                );
+
+            await FileDescriptorAppService.CreateAsync(input);
+        }
     }
 
     protected virtual async Task SelectFilesAsync()

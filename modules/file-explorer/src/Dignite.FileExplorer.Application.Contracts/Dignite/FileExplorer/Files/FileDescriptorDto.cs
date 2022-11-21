@@ -7,7 +7,6 @@ namespace Dignite.FileExplorer.Files;
 public class FileDescriptorDto : ExtensibleCreationAuditedEntityDto<Guid>, IMultiTenant
 {
     public Guid? TenantId { get; set; }
-    public string EntityType { get; set; }
 
     public string EntityId { get; set; }
 

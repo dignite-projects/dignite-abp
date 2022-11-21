@@ -9,9 +9,6 @@ public class FileExplorerPermissions
     public static class Files
     {
         public const string Default = GroupName + ".File";
-        public const string Create = Default + ".Create";
-        public const string Update = Default + ".Update";
-        public const string Delete = Default + ".Delete";
         public const string Management = Default + ".Management";
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace System.IO;
 
@@ -12,12 +13,16 @@ public static class StreamExtensions
             stream.Position = 0;
         }
 
-        using (var md5 = MD5.Create())
+
+        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+        md5.ComputeHash(stream);
+        byte[] b = md5.Hash;
+        md5.Clear();
+        StringBuilder sb = new StringBuilder(32);
+        for (int i = 0; i < b.Length; i++)
         {
-            var hash = md5.ComputeHash(stream);
-            stream.Position = 0;
-            var base64String = Convert.ToBase64String(hash);
-            return base64String;
+            sb.Append(b[i].ToString("X2"));
         }
+        return sb.ToString();
     }
 }

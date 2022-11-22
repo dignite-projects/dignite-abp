@@ -67,19 +67,6 @@ public class AbpFilesDomainTestModule : AbpModule
                     container.AddFileTypeCheckHandler(config =>
                        config.AllowedFileTypeNames = new string[] { ".jpeg" }
                     );
-                })
-                .Configure<TestContainer4>(container =>
-                {
-                    container.UseFileSystem(fileSystem =>
-                    {
-                        fileSystem.BasePath = _testDirectoryPath;
-                    });
-                    container.AddImageResizeHandler(imageResize =>
-                    {
-                        imageResize.ImageWidth = 200;
-                        imageResize.ImageHeight = 200;
-                        imageResize.ImageSizeMustBeLargerThanPreset = false;
-                    });
                 });
         });
     }

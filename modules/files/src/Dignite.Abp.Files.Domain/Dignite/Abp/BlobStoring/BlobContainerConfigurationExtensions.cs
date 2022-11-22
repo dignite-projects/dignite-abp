@@ -62,31 +62,4 @@ public static class BlobContainerConfigurationExtensions
 
     #endregion File type check handler configuration extenisions
 
-    #region Image resize handler configuration extenisions
-
-    public static ImageResizeHandlerConfiguration GetImageResizeConfiguration(
-        this BlobContainerConfiguration containerConfiguration)
-    {
-        return new ImageResizeHandlerConfiguration(containerConfiguration);
-    }
-
-    public static void AddImageResizeHandler(
-        this BlobContainerConfiguration containerConfiguration,
-        Action<ImageResizeHandlerConfiguration> configureAction)
-    {
-        var blobProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobHandlers,
-            new TypeList<IBlobHandler>());
-
-        if (blobProcessHandlers.TryAdd<ImageResizeHandler>())
-        {
-            configureAction(new ImageResizeHandlerConfiguration(containerConfiguration));
-
-            containerConfiguration.SetConfiguration(
-                BlobContainerConfigurationNames.BlobHandlers,
-                blobProcessHandlers);
-        }
-    }
-
-    #endregion Image resize handler configuration extenisions
 }

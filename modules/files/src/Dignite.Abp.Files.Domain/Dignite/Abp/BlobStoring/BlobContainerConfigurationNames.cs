@@ -1,6 +1,6 @@
 namespace Dignite.Abp.BlobStoring;
 
-public class BlobContainerConfigurationNames
+public static class BlobContainerConfigurationNames
 {
     /// <summary>
     ///

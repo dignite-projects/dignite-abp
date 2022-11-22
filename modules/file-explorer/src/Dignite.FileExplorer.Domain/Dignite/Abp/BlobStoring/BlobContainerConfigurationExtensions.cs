@@ -1,4 +1,6 @@
+using System;
 using Volo.Abp.BlobStoring;
+using Volo.Abp.Collections;
 
 namespace Dignite.Abp.BlobStoring;
 
@@ -9,7 +11,36 @@ public static class BlobContainerConfigurationExtensions
         where TBlobNameGenerator : IBlobNameGenerator
     {
         containerConfiguration.SetConfiguration(
-            BlobContainerConfigurationNames.BlobNamingGenerator,
+            FileExplorerBlobContainerConfigurationNames.BlobNamingGenerator,
             typeof(TBlobNameGenerator));
     }
+
+
+    #region Image resize handler configuration extenisions
+
+    public static ImageResizeHandlerConfiguration GetImageResizeConfiguration(
+        this BlobContainerConfiguration containerConfiguration)
+    {
+        return new ImageResizeHandlerConfiguration(containerConfiguration);
+    }
+
+    public static void AddImageResizeHandler(
+        this BlobContainerConfiguration containerConfiguration,
+        Action<ImageResizeHandlerConfiguration> configureAction)
+    {
+        var blobProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
+            BlobContainerConfigurationNames.BlobHandlers,
+            new TypeList<IBlobHandler>());
+
+        if (blobProcessHandlers.TryAdd<ImageResizeHandler>())
+        {
+            configureAction(new ImageResizeHandlerConfiguration(containerConfiguration));
+
+            containerConfiguration.SetConfiguration(
+                BlobContainerConfigurationNames.BlobHandlers,
+                blobProcessHandlers);
+        }
+    }
+
+    #endregion Image resize handler configuration extenisions
 }

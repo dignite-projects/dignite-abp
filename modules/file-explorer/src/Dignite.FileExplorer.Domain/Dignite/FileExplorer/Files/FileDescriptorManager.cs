@@ -120,7 +120,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
     {
         var configuration = BlobContainerConfigurationProvider.Get(containerName);
         var namingGeneratorType = configuration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobNamingGenerator,
+            FileExplorerBlobContainerConfigurationNames.BlobNamingGenerator,
             typeof(RandomBlobNameGenerator)
             );
 

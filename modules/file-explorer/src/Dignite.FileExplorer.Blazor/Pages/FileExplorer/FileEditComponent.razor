@@ -1,40 +1,82 @@
 ﻿@using Volo.Abp.AspNetCore.Components
 @inherits AbpComponentBase
-<FileEdit Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
-
-@if((FileDescriptors!=null && FileDescriptors.Any())
-    || (Files != null && Files.Any())
-    )
+<FileEdit @ref="FileEditRef" Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+@if (FileDescriptorsContent != null)
 {
-<Table>
-    <TableHeader>
-        <TableRow>
-            <TableHeaderCell>@L["FileName"]</TableHeaderCell>
-            <TableHeaderCell>@L["Size"]</TableHeaderCell>
-            <TableHeaderCell></TableHeaderCell>
-        </TableRow>
-    </TableHeader>
-    <TableBody>
-        @foreach(var item in FileDescriptors)
-            {
-        <TableRow>
-            <TableRowCell>@item.Name</TableRowCell>
-            <TableRowCell>@item.Size</TableRowCell>
-            <TableRowCell>
-                <Button Color="Color.Primary" Clicked="@(()=>{FileDescriptors.RemoveAll(fd=>fd.Id==item.Id);})"><Icon Name="@IconName.Delete"></Icon></Button>
-            </TableRowCell>
-        </TableRow>
-            }
-        @foreach(var item in Files)
-            {
-        <TableRow>
-            <TableRowCell>@item.Name</TableRowCell>
-            <TableRowCell>@item.Size</TableRowCell>
-            <TableRowCell>
-                <Button Color="Color.Primary" Clicked="@(()=>{Files.RemoveAll(f=>f.Id==item.Id);})"><Icon Name="@IconName.Delete"></Icon></Button>
-            </TableRowCell>
-        </TableRow>
-            }
-    </TableBody>
-</Table>
+    @FileDescriptorsContent(SelectedFiles)
+}
+else
+{
+    if (SelectedFiles != null && SelectedFiles.Any())
+    {
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                    <TableHeaderCell>@L["Size"]</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                @foreach (var item in SelectedFiles)
+                {
+                    <TableRow>
+                        <TableRowCell>@item.Name</TableRowCell>
+                        <TableRowCell>@item.Size</TableRowCell>
+                        <TableRowCell>
+                            <Button Color="Color.Primary" Clicked="@(()=>RemoveFileAsync(item))"><Icon Name="@IconName.Delete"></Icon></Button>
+                        </TableRowCell>
+                    </TableRow>
+                }          
+            </TableBody>
+        </Table>
+    }
+}
+@if (FilesContent != null)
+{
+    @FilesContent(Files)
+}
+else
+{
+    @if (Files != null && Files.Any())
+    {
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                    <TableHeaderCell>@L["Size"]</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                @foreach (var item in Files)
+                {
+                    <TableRow>
+                        <TableRowCell>
+                            @item.File.Name
+                            @if (item.Status == FileUploadStatus.Fail)
+                            {
+                                <Paragraph TextColor="TextColor.Danger">
+                                    @item.ErrorMessage
+                                </Paragraph>
+                            }
+                        </TableRowCell>
+                        <TableRowCell>@item.File.Size</TableRowCell>
+                        <TableRowCell>
+                            @if (item.Status == FileUploadStatus.Fail)
+                            {
+                                <Icon Name="IconName.TimesCircle" TextColor="TextColor.Danger"></Icon>
+                            }
+                            else
+                            {
+                                <Button Color="Color.Primary" Clicked="@(()=>RemoveFileAsync(item))">
+                                    <Icon Name="@IconName.Delete"></Icon>
+                                </Button>
+                            }
+                        </TableRowCell>
+                    </TableRow>
+                }
+            </TableBody>
+        </Table>
+    }
 }

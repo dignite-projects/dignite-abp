@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using System.Linq;
 using System.Threading.Tasks;
 using Blazorise;
 using Blazorise.DataGrid;
@@ -28,7 +28,7 @@ public partial class FileExplorerModal
     protected BlobHandlerConfigurationDto Configuration { get; set; }
 
     protected long MaxFileSize = long.MaxValue;
-    public virtual IFileEntry[] Files { get; protected set; }
+    protected virtual List<FileUpload> Files { get; set; }
 
     [Parameter] 
     public EventCallback<List<FileDescriptorDto>> SelectFiles { get; set; }
@@ -44,18 +44,24 @@ public partial class FileExplorerModal
         FileDescriptorAppService = fileDescriptorAppService;
     }
 
+    protected override Task OnDataGridReadAsync(DataGridReadDataEventArgs<FileDescriptorDto> e)
+    {
+        if (ContainerName.IsNullOrEmpty())
+        {
+            return Task.CompletedTask;
+        }
+        else
+        {
+            return base.OnDataGridReadAsync(e);
+        }
+    }
+
     protected override ValueTask SetEntityActionsAsync()
     {
         EntityActions
             .Get<FileExplorerModal>()
             .AddRange(new EntityAction[]
             {
-                new EntityAction
-                {
-                    Text = L["Rename"],
-                    Visible = (data) => CurrentUser.GetId() == data.As<FileDescriptorDto>().CreatorId,
-                    Clicked = async (data) => await OpenEditModalAsync(data.As<FileDescriptorDto>())
-                },
                 new EntityAction
                 {
                     Text = L["Delete"],
@@ -116,6 +122,12 @@ public partial class FileExplorerModal
         return base.UpdateGetListInputAsync();
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        Files=null;
+        base.Dispose(disposing);
+    }
+
     public virtual async Task OpenAsync(string containerName, string entityId)
     {
         try
@@ -125,11 +137,11 @@ public partial class FileExplorerModal
             EntityId = entityId;
 
 
+            await InvokeAsync(_modal.Show);
+            await GetEntitiesAsync();
             Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
             MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize * 1024);
 
-            await GetEntitiesAsync();
-            await InvokeAsync(_modal.Show);
         }
         catch (Exception ex)
         {
@@ -140,19 +152,72 @@ public partial class FileExplorerModal
 
     private async Task OnFileChangedAsync(FileChangedEventArgs e)
     {
-        this.Files = e.Files;
-        foreach (var file in e.Files)
+        if (e.Files.Any())
         {
+            Files = new List<FileUpload>();
+            foreach (var file in e.Files)
+            {
+                var fu = new FileUpload(file);
+                if (file.Size > MaxFileSize)
+                {
+                    fu.Status = FileUploadStatus.Fail;
+                    fu.ErrorMessage = L["ExceedsMaximumSize"];
+                }
+
+                Files.Add(fu);
+            }
+
+            // start upload
+            await UploadAsync();
+        }
+    }
+
+    protected virtual async Task UploadAsync()
+    {
+        foreach (var file in Files)
+        {
+            if (file.Status != FileUploadStatus.Ready)
+                continue;
+
+            file.Status = FileUploadStatus.Progressing;
             var input = new CreateFileInput();
             input.ContainerName = ContainerName;
             input.EntityId = EntityId;
             input.File = new RemoteStreamContent(
-                                                file.OpenReadStream(long.MaxValue),
-                                                file.Name,
-                                                file.Type
+                                                file.File.OpenReadStream(long.MaxValue),
+                                                file.File.Name,
+                                                file.File.Type
                                                 );
+            try
+            {
+                var fd = await FileDescriptorAppService.CreateAsync(input);
+                file.Status = FileUploadStatus.Success;
+                var newEntities = Entities.ToList();
+                newEntities.Insert(0, fd);
+                Entities = newEntities;
+                if (Multiple)
+                {
+                    if (FileDataGridRef.SelectedItems == null)
+                    {
+                        FileDataGridRef.SelectedItems = new List<FileDescriptorDto>();
+                    }
+                    FileDataGridRef.SelectedItems.Add(fd);
+                }
+                else
+                {
+                    FileDataGridRef.SelectedItem = fd;
+                }
+            }
+            catch (Exception ex)
+            {
+                file.Status = FileUploadStatus.Fail;
+                file.ErrorMessage = ex.Message;
+            }
+        }
 
-            await FileDescriptorAppService.CreateAsync(input);
+        if (!Files.Any(f => f.Status == FileUploadStatus.Fail))
+        {
+            Files = null;
         }
     }
 
@@ -160,10 +225,26 @@ public partial class FileExplorerModal
     {
         try
         {
-            await InvokeAsync(() => {
-                SelectFiles.InvokeAsync(FileDataGridRef.SelectedItems);
-                _modal.Hide();
-            });
+            if (Multiple)
+            {
+                await InvokeAsync(() =>
+                {
+                    SelectFiles.InvokeAsync(FileDataGridRef.SelectedItems);
+                    _modal.Hide();
+                });
+            }
+            else
+            {
+                await InvokeAsync(() =>
+                {
+                    SelectFiles.InvokeAsync(
+                        new List<FileDescriptorDto>
+                        {
+                            FileDataGridRef.SelectedItem
+                        });
+                    _modal.Hide();
+                });
+            }
         }
         catch (Exception ex)
         {
@@ -173,6 +254,7 @@ public partial class FileExplorerModal
 
     protected Task CloseModal()
     {
+        Files = null;
         return InvokeAsync(_modal.Hide);
     }
 

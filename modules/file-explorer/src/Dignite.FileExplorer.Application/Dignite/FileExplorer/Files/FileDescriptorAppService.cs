@@ -62,9 +62,12 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     [Authorize]
     public async Task DeleteAsync(Guid id)
     {
-        var result = await _fileRepository.GetAsync(id, false);
-        await AuthorizationService.CheckAsync(result, CommonOperations.Delete);
-        await _fileManager.DeleteAsync(result);
+        var result = await _fileRepository.FindAsync(id, false);
+        if (result != null)
+        {
+            await AuthorizationService.CheckAsync(result, CommonOperations.Delete);
+            await _fileManager.DeleteAsync(result);
+        }
     }
 
     public async Task<FileDescriptorDto> GetAsync(Guid id)

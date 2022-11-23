@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Blazorise;
 using Dignite.FileExplorer.Files;
 using Microsoft.AspNetCore.Components;
-using Volo.Abp.AspNetCore.Components;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class FileEditComponent
@@ -19,9 +18,9 @@ public partial class FileEditComponent
 
     protected long MaxFileSize = long.MaxValue;
 
-    public virtual List<FileDescriptorDto> FileDescriptors { get; protected set; }
+    protected FileEdit FileEditRef;
 
-    public virtual IFileEntry[] Files { get; protected set; }
+    protected virtual List<FileUpload> Files { get; set; }
 
     public FileEditComponent(IFileDescriptorAppService fileDescriptorAppService)
     {
@@ -45,23 +44,44 @@ public partial class FileEditComponent
     [Parameter]
     public bool Multiple { get; set; }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Parameter]
+    public List<FileDescriptorDto> SelectedFiles { get; set; }
+
+    [Parameter]
+    public EventCallback<List<FileDescriptorDto>> SelectedFilesChanged { get; set; }
+
     [Parameter]
     public EventCallback<FileChangedEventArgs> Changed { get; set; }
+
+
+    [Parameter]
+    public RenderFragment<List<FileDescriptorDto>> FileDescriptorsContent { get; set; }
+
+    [Parameter]
+    public RenderFragment<List<FileUpload>> FilesContent { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
         MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize*1024);
 
-        if (!EntityId.IsNullOrEmpty())
+        if (!EntityId.IsNullOrEmpty() && SelectedFiles == null)
         {
-            FileDescriptors = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
+            SelectedFiles = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
             {
                 SkipCount = 0,
                 ContainerName = ContainerName,
                 EntityId = EntityId,
-                MaxResultCount = int.MaxValue
+                MaxResultCount = 1000
             })).Items.ToList();
+            await InvokeAsync(() =>
+            {
+                SelectedFilesChanged.InvokeAsync(SelectedFiles);
+            });
         }
 
         await base.OnInitializedAsync();
@@ -69,11 +89,70 @@ public partial class FileEditComponent
 
     private async Task OnFileChangedAsync(FileChangedEventArgs e)
     {
-        Files = e.Files;
-        if (!Multiple)
+        if (e.Files.Any())
         {
-            FileDescriptors.Clear();
+            Files = Files == null ? new List<FileUpload>() : Files.Where(f => f.Status == FileUploadStatus.Ready).ToList();
+            foreach (var file in e.Files)
+            {
+                var fu = new FileUpload(file);
+                if (file.Size > MaxFileSize)
+                {
+                    fu.Status = FileUploadStatus.Fail;
+                    fu.ErrorMessage = L["ExceedsMaximumSize"];
+                }
+
+                Files.Add(fu);
+            }
+
+            await Changed.InvokeAsync(
+                new FileChangedEventArgs(
+                    Files
+                    .Where(f => f.Status== FileUploadStatus.Ready)
+                    .Select(f=>f.File)
+                    .ToArray())
+                );
         }
-        await Changed.InvokeAsync(e);
+    }
+
+    protected internal virtual async Task RemoveFileAsync(FileUpload file)
+    {
+        Files.Remove(file);
+
+        /* The API to remove a single file is not supported in the current version. It is supported in the advanced version, and this method will be used after the newer version is updated */
+        //await FileEditRef.RemoveFile(file.File.Id);
+
+        await Changed.InvokeAsync(
+            new FileChangedEventArgs(
+                Files
+                .Where(f => f.Status == FileUploadStatus.Ready)
+                .Select(f => f.File)
+                .ToArray())
+            );
+    }
+
+    protected internal virtual async Task RemoveFileAsync(FileDescriptorDto fileDescriptor)
+    {
+        if (fileDescriptor.EntityId == EntityId)
+        {
+            /*
+             * Prompt the user whether to delete the original file when removing the file
+             * True: delete the original file
+               False: Remove file information only
+             * */
+            if (await Message.Confirm(L["FileWillBeDeletedMessage"]))
+            {
+                await FileDescriptorAppService.DeleteAsync(fileDescriptor.Id);
+            }
+        }
+        await RemoveItem(fileDescriptor);
+    }
+
+    protected virtual async Task RemoveItem(FileDescriptorDto fileDescriptor)
+    {
+        SelectedFiles.RemoveAll(fd => fd.Id == fileDescriptor.Id);
+        await InvokeAsync(() =>
+        {
+            SelectedFilesChanged.InvokeAsync(SelectedFiles);
+        });
     }
 }

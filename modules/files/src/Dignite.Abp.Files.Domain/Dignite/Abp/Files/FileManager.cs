@@ -62,9 +62,12 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         //Save file information to database
         await SaveFileInformationAsync(file, stream, cancellationToken);
 
-        //Save file stream to container
-        var blobContainer = BlobContainerFactory.Create(file.ContainerName);
-        await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
+        if (file.ReferBlobName.IsNullOrEmpty())
+        {
+            //Save file stream to container
+            var blobContainer = BlobContainerFactory.Create(file.ContainerName);
+            await blobContainer.SaveAsync(file.BlobName, stream, overrideExisting, cancellationToken);
+        }
 
         await OnCreatedEntityAsync(file);
 
@@ -127,10 +130,12 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         }
         else
         {
-            if (!await FileStore.ReferencingAnyAsync(file.ContainerName, file.ReferBlobName, cancellationToken))
+            if (!await FileStore.ReferencingAnyAsync(file.ContainerName, file.ReferBlobName, cancellationToken)
+                && !await FileStore.BlobNameExistsAsync(file.ContainerName,file.ReferBlobName)
+                )
             {
                 var blobContainer = BlobContainerFactory.Create(file.ContainerName);
-                return await blobContainer.DeleteAsync(file.BlobName, cancellationToken);
+                return await blobContainer.DeleteAsync(file.ReferBlobName, cancellationToken);
             }
         }
 

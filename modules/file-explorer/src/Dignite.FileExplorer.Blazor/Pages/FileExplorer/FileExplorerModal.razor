@@ -1,4 +1,5 @@
-﻿@using Dignite.FileExplorer.Files
+﻿@using Blazorise.SpinKit
+@using Dignite.FileExplorer.Files
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 @using Dignite.Abp.BlazoriseUI.Components
 @inherits AbpCrudPageBase<IFileDescriptorAppService,FileDescriptorDto, Guid, GetFilesInput, CreateFileInput, UpdateFileInput>
@@ -9,26 +10,83 @@
             <CloseButton Clicked="CloseModal" />
         </ModalHeader>
         <ModalBody>
-            <FileEdit Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+            <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
             <Row NoGutters>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <AutoFillHeightDiv ExtraHeight="40">
+                    <AutoFillHeightDiv ExtraHeight="340">
 
                     </AutoFillHeightDiv>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is9">
                     @* ************************* DATA GRID ************************* *@
                     <Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid TItem="FileDescriptorDto" @ref="FileDataGridRef"
+                                                                              SelectionMode="Multiple?DataGridSelectionMode.Multiple: DataGridSelectionMode.Single"
                                                                               Data="Entities"
+                                                                              ReadData="OnDataGridReadAsync"
                                                                               TotalItems="TotalCount"
                                                                               ShowPager="true"
                                                                               PageSize="PageSize"
                                                                               CurrentPage="@CurrentPage"
                                                                               Columns="@FileTableColumns"
-                                                                              ExtraHeight="200">
+                                                                              ExtraHeight="340">
                     </Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid>
                 </Column>
             </Row>
+            @if (Files != null && Files.Any())
+            {
+                <Div Position="Position.Fixed.Bottom.Is0.End.Is0" Shadow="Shadow.Large" Margin="Margin.Is5">
+                    <Card>
+                        <CardHeader>
+                            @L["UploadFiles"]
+                        </CardHeader>
+                        <CardBody>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                                        <TableHeaderCell>@L["FileSize"]</TableHeaderCell>
+                                        <TableHeaderCell></TableHeaderCell>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    @foreach (var file in Files)
+                                    {
+                                        <TableRow>
+                                            <TableRowCell>
+                                                @file.File.Name
+                                                @if (file.Status == FileUploadStatus.Fail)
+                                                {
+                                                    <Paragraph TextColor="TextColor.Danger">
+                                                        @file.ErrorMessage
+                                                    </Paragraph>
+                                                }
+                                            </TableRowCell>
+                                            <TableRowCell>@file.File.Size</TableRowCell>
+                                            <TableRowCell>                                                
+                                                @switch (file.Status)
+                                                {
+                                                    case FileUploadStatus.Ready:
+                                                        <Icon Name="IconName.MoreHorizontal" TextColor="TextColor.Secondary"></Icon>
+                                                        break;
+                                                    case FileUploadStatus.Progressing:
+                                                        <SpinKit Type="SpinKitType.Chase" Size="16px" />
+                                                        break;
+                                                    case FileUploadStatus.Success:
+                                                        <Icon Name="IconName.Check" TextColor="TextColor.Primary"></Icon>
+                                                        break;
+                                                    default:
+                                                        <Icon Name="IconName.TimesCircle" TextColor="TextColor.Danger"></Icon>
+                                                        break;
+                                                }
+                                            </TableRowCell>
+                                        </TableRow>
+                                    }
+                                </TableBody>
+                            </Table>
+                        </CardBody>
+                    </Card>
+                </Div>
+            }
         </ModalBody>
         <ModalFooter>
             <Button Color="Color.Secondary" Clicked="CloseModal">@L["Cancel"]</Button>

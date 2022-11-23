@@ -1,30 +1,35 @@
 ﻿@using Volo.Abp.AspNetCore.Components
 @inherits AbpComponentBase
 <Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
-
-@if (FileDescriptors != null && FileDescriptors.Any())
+@if (FileDescriptorsContent != null)
 {
-    <Table>
-        <TableHeader>
-            <TableRow>
-                <TableHeaderCell>@L["FileName"]</TableHeaderCell>
-                <TableHeaderCell>@L["Size"]</TableHeaderCell>
-                <TableHeaderCell></TableHeaderCell>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            @foreach (var item in FileDescriptors)
-            {
-                <TableRow>
-                    <TableRowCell>@item.Name</TableRowCell>
-                    <TableRowCell>@item.Size</TableRowCell>
-                    <TableRowCell>
-                        <Button Color="Color.Primary" Clicked="@(() => { FileDescriptors.RemoveAll(fd => fd.Id == item.Id); })"><Icon Name="@IconName.Delete"></Icon></Button>
-                    </TableRowCell>
-                </TableRow>
-            }
-        </TableBody>
-    </Table>
+    @FileDescriptorsContent(SelectedFiles)
 }
-
+else
+{
+    if (SelectedFiles != null && SelectedFiles.Any())
+    {
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                    <TableHeaderCell>@L["Size"]</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                @foreach (var item in SelectedFiles)
+                {
+                    <TableRow>
+                        <TableRowCell>@item.Name</TableRowCell>
+                        <TableRowCell>@item.Size</TableRowCell>
+                        <TableRowCell>
+                            <Button Color="Color.Primary" Clicked="@(() => RemoveFileAsync(item))"><Icon Name="@IconName.Delete"></Icon></Button>
+                        </TableRowCell>
+                    </TableRow>
+                }
+            </TableBody>
+        </Table>
+    }
+}
 <FileExplorerModal @ref="_fileExplorerModal" Multiple="@Multiple" SelectFiles="SelectFilesAsync"></FileExplorerModal>

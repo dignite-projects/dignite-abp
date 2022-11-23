@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
 namespace Dignite.Abp.BlazoriseUI.Components;
-public partial class AbpExtensibleTreeView<TNode>: ComponentBase
+public partial class ExtensibleTreeView<TNode>: ComponentBase
 {
     #region Members
 

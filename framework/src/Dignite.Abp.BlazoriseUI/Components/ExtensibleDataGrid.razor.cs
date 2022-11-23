@@ -11,7 +11,7 @@ using Volo.Abp.BlazoriseUI.Components;
 
 namespace Dignite.Abp.BlazoriseUI.Components;
 
-public partial class AbpExtensibleDataGrid<TItem> : ComponentBase
+public partial class ExtensibleDataGrid<TItem> : ComponentBase
 {
     protected const string DataFieldAttributeName = "Data";
 

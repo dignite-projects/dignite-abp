@@ -20,7 +20,7 @@
 </Addons>
 <Div Position="Position.Relative">
     <Div Visibility="ShowTree?Visibility.Visible:Visibility.Invisible" Class="tree-select-container" Position="Position.Absolute.Top.Is0.Start.Is0" Width="Width.Is100" Padding="Padding.Is2" Border="Border.OnBottom.Is1.Rounded.Light" Shadow="Shadow.Default" Background="Background.White">
-        <AbpExtensibleTreeView TNode="TNode" Nodes="@Nodes" Draggable="false"
+        <ExtensibleTreeView TNode="TNode" Nodes="@Nodes" Draggable="false"
                                GetChildNodes="@GetChildNodes"
                                HasChildNodes="@HasChildNodes"
                                ExpandedNodes="@ExpandedNodes"
@@ -29,6 +29,6 @@
             <NodeContent>
                 @NodeText(context)
             </NodeContent>
-        </AbpExtensibleTreeView>
+        </ExtensibleTreeView>
     </Div>
 </Div>

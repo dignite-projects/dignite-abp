@@ -19,7 +19,7 @@ public partial class FileExplorerModal
     protected readonly IFileDescriptorAppService FileDescriptorAppService;
     protected Modal _modal;
 
-    protected AbpExtensibleDataGrid<FileDescriptorDto> FileDataGridRef;
+    protected ExtensibleDataGrid<FileDescriptorDto> FileDataGridRef;
     private List<TableColumn> FileTableColumns => TableColumns.Get<FileExplorerModal>();
 
     protected string ContainerName { get; set; }

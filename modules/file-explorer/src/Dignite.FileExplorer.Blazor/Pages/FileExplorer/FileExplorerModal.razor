@@ -13,13 +13,13 @@
             <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
             <Row NoGutters>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <AutoFillHeightDiv ExtraHeight="340">
+                    <AutoHeight ExtraHeight="340">
 
-                    </AutoFillHeightDiv>
+                    </AutoHeight>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is9">
                     @* ************************* DATA GRID ************************* *@
-                    <Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid TItem="FileDescriptorDto" @ref="FileDataGridRef"
+                    <ExtensibleDataGrid TItem="FileDescriptorDto" @ref="FileDataGridRef"
                                                                               SelectionMode="Multiple?DataGridSelectionMode.Multiple: DataGridSelectionMode.Single"
                                                                               Data="Entities"
                                                                               ReadData="OnDataGridReadAsync"
@@ -29,7 +29,7 @@
                                                                               CurrentPage="@CurrentPage"
                                                                               Columns="@FileTableColumns"
                                                                               ExtraHeight="340">
-                    </Dignite.Abp.BlazoriseUI.Components.AbpExtensibleDataGrid>
+                    </ExtensibleDataGrid>
                 </Column>
             </Row>
             @if (Files != null && Files.Any())

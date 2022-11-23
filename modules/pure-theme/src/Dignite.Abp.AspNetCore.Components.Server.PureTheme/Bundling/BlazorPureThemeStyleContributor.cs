@@ -8,6 +8,7 @@ public class BlazorPureThemeStyleContributor : BundleContributor
     public override void ConfigureBundle(BundleConfigurationContext context)
     {
         context.Files.AddIfNotContains("/_content/Blazorise.TreeView/blazorise.treeview.css");
+        context.Files.AddIfNotContains("/_content/Blazorise.SpinKit/blazorise.spinkit.css");
         context.Files.AddIfNotContains("/_content/Dignite.Abp.BlazoriseUI/libs/abp/css/blazorise.css");
         context.Files.AddIfNotContains("/_content/Dignite.Abp.AspNetCore.Components.Web.PureTheme/libs/abp/css/theme.css");
     }

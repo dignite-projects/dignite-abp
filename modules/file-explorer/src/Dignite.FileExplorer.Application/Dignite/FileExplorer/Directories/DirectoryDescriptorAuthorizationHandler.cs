@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Dignite.Abp.BlobStoring;
 using Microsoft.AspNetCore.Authorization;
@@ -84,6 +85,10 @@ public class DirectoryDescriptorAuthorizationHandler : AuthorizationHandler<Oper
     {
         var containerConfiguration = BlobContainerConfigurationProvider.Get(resource.ContainerName);
         var authorizationConfiguration = containerConfiguration.GetAuthorizationConfiguration();
+        if (authorizationConfiguration.CreateDirectoryPermissionName.IsNullOrEmpty())
+        {
+            return false;
+        }
         if (await PermissionChecker.IsGrantedAsync(context.User, authorizationConfiguration.CreateDirectoryPermissionName))
         {
             return true;

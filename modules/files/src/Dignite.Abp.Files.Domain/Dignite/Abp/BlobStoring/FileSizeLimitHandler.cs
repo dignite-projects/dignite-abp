@@ -7,17 +7,17 @@ namespace Dignite.Abp.BlobStoring;
 /// <summary>
 /// Handler for limiting the size of blob
 /// </summary>
-public class BlobSizeLimitHandler : IBlobHandler, ITransientDependency
+public class FileSizeLimitHandler : IFileHandler, ITransientDependency
 {
-    public Task ExecuteAsync(BlobHandlerContext context)
+    public Task ExecuteAsync(FileHandlerContext context)
     {
-        var configuration = context.ContainerConfiguration.GetBlobSizeLimitConfiguration();
-        if (configuration.MaximumBlobSize * 1024 < context.BlobStream.Length)
+        var configuration = context.ContainerConfiguration.GetFileSizeLimitConfiguration();
+        if (configuration.MaxFileSize * 1024 < context.BlobStream.Length)
         {
             throw new BusinessException(
                 code: "Dignite.Abp.BlobStoring:010008",
                 message: "Blob object is too large",
-                details: $"The blob object size cannot exceed {configuration.MaximumBlobSize}M!"
+                details: $"The blob object size cannot exceed {configuration.MaxFileSize}M!"
             );
         }
 

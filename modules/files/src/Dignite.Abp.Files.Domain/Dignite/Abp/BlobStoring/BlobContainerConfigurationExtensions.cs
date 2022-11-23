@@ -6,29 +6,29 @@ namespace Dignite.Abp.BlobStoring;
 
 public static class BlobContainerConfigurationExtensions
 {
-    #region Blob size limit handler configuration extenisions
+    #region file size limit handler configuration extenisions
 
-    public static BlobSizeLimitHandlerConfiguration GetBlobSizeLimitConfiguration(
+    public static FileSizeLimitHandlerConfiguration GetFileSizeLimitConfiguration(
         this BlobContainerConfiguration containerConfiguration)
     {
-        return new BlobSizeLimitHandlerConfiguration(containerConfiguration);
+        return new FileSizeLimitHandlerConfiguration(containerConfiguration);
     }
 
-    public static void AddBlobSizeLimitHandler(
+    public static void AddFileSizeLimitHandler(
         this BlobContainerConfiguration containerConfiguration,
-        Action<BlobSizeLimitHandlerConfiguration> configureAction)
+        Action<FileSizeLimitHandlerConfiguration> configureAction)
     {
-        var blobProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobHandlers,
-            new TypeList<IBlobHandler>());
+        var fileProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
+            BlobContainerConfigurationNames.FileHandlers,
+            new TypeList<IFileHandler>());
 
-        if (blobProcessHandlers.TryAdd<BlobSizeLimitHandler>())
+        if (fileProcessHandlers.TryAdd<FileSizeLimitHandler>())
         {
-            configureAction(new BlobSizeLimitHandlerConfiguration(containerConfiguration));
+            configureAction(new FileSizeLimitHandlerConfiguration(containerConfiguration));
 
             containerConfiguration.SetConfiguration(
-                BlobContainerConfigurationNames.BlobHandlers,
-                blobProcessHandlers);
+                BlobContainerConfigurationNames.FileHandlers,
+                fileProcessHandlers);
         }
     }
 
@@ -47,15 +47,15 @@ public static class BlobContainerConfigurationExtensions
         Action<FileTypeCheckHandlerConfiguration> configureAction)
     {
         var blobProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobHandlers,
-            new TypeList<IBlobHandler>());
+            BlobContainerConfigurationNames.FileHandlers,
+            new TypeList<IFileHandler>());
 
         if (blobProcessHandlers.TryAdd<FileTypeCheckHandler>())
         {
             configureAction(new FileTypeCheckHandlerConfiguration(containerConfiguration));
 
             containerConfiguration.SetConfiguration(
-                BlobContainerConfigurationNames.BlobHandlers,
+                BlobContainerConfigurationNames.FileHandlers,
                 blobProcessHandlers);
         }
     }

@@ -80,7 +80,7 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
 
     [HttpGet]
     [Route("configuration")]
-    public virtual async Task<BlobHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
+    public virtual async Task<FileHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
     {
         return await _fileAppService.GetBlobHandlerConfiguration(containerName);
     }

@@ -9,9 +9,9 @@ namespace Dignite.Abp.BlobStoring;
 /// <summary>
 /// Resize uploaded images to fit predefined values
 /// </summary>
-public class ImageResizeHandler : IBlobHandler, ITransientDependency
+public class ImageResizeHandler : IFileHandler, ITransientDependency
 {
-    public async Task ExecuteAsync(BlobHandlerContext context)
+    public async Task ExecuteAsync(FileHandlerContext context)
     {
         var position = context.BlobStream.Position;
         var configuration = context.ContainerConfiguration.GetImageResizeConfiguration();

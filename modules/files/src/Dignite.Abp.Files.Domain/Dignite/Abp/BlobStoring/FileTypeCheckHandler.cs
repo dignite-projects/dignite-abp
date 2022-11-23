@@ -11,9 +11,9 @@ namespace Dignite.Abp.BlobStoring;
 /// <summary>
 /// 上传 BLOB 文件时进行文件类型检查
 /// </summary>
-public class FileTypeCheckHandler : IBlobHandler, ITransientDependency
+public class FileTypeCheckHandler : IFileHandler, ITransientDependency
 {
-    public Task ExecuteAsync(BlobHandlerContext context)
+    public Task ExecuteAsync(FileHandlerContext context)
     {
         var fileTypeCheckHandlerConfiguration = context.ContainerConfiguration.GetFileTypeCheckConfiguration();
 

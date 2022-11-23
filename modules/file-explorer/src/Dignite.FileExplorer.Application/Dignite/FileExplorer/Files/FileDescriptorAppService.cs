@@ -124,13 +124,13 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     /// </summary>
     /// <param name="containerName"></param>
     /// <returns></returns>
-    public virtual Task<BlobHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
+    public virtual Task<FileHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName)
     {
-        var dto = new BlobHandlerConfigurationDto();
+        var dto = new FileHandlerConfigurationDto();
         var configuration = _blobContainerConfigurationProvider.Get(containerName);
-        var blobSizeLimitConfiguration = configuration.GetBlobSizeLimitConfiguration();
+        var blobSizeLimitConfiguration = configuration.GetFileSizeLimitConfiguration();
         var fileTypeCheckConfiguration = configuration.GetFileTypeCheckConfiguration();
-        dto.MaximumBlobSize= blobSizeLimitConfiguration.MaximumBlobSize;
+        dto.MaxBlobSize= blobSizeLimitConfiguration.MaxFileSize;
         dto.AllowedFileTypeNames = fileTypeCheckConfiguration.AllowedFileTypeNames;
 
         return Task.FromResult(dto);

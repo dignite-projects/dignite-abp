@@ -5,5 +5,5 @@ public static class BlobContainerConfigurationNames
     /// <summary>
     ///
     /// </summary>
-    public const string BlobHandlers = "BlobHandlers";
+    public const string FileHandlers = "FileHandlers";
 }

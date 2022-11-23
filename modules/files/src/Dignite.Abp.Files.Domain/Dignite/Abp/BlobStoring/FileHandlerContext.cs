@@ -4,9 +4,9 @@ using Volo.Abp.BlobStoring;
 
 namespace Dignite.Abp.BlobStoring;
 
-public class BlobHandlerContext
+public class FileHandlerContext
 {
-    public BlobHandlerContext(
+    public FileHandlerContext(
         IFile file,
         Stream blobStream,
         BlobContainerConfiguration containerConfiguration

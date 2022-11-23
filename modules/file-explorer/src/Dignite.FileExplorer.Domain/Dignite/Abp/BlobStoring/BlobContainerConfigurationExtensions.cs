@@ -29,15 +29,15 @@ public static class BlobContainerConfigurationExtensions
         Action<ImageResizeHandlerConfiguration> configureAction)
     {
         var blobProcessHandlers = containerConfiguration.GetConfigurationOrDefault(
-            BlobContainerConfigurationNames.BlobHandlers,
-            new TypeList<IBlobHandler>());
+            BlobContainerConfigurationNames.FileHandlers,
+            new TypeList<IFileHandler>());
 
         if (blobProcessHandlers.TryAdd<ImageResizeHandler>())
         {
             configureAction(new ImageResizeHandlerConfiguration(containerConfiguration));
 
             containerConfiguration.SetConfiguration(
-                BlobContainerConfigurationNames.BlobHandlers,
+                BlobContainerConfigurationNames.FileHandlers,
                 blobProcessHandlers);
         }
     }

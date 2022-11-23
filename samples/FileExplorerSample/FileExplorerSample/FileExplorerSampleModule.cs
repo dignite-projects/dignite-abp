@@ -167,9 +167,9 @@ public class FileExplorerSampleModule : AbpModule
             options.Containers
                 .Configure<SampleContainer>(container =>
                 {
-                    container.AddBlobSizeLimitHandler(handler =>
+                    container.AddFileSizeLimitHandler(handler =>
                     {
-                        handler.MaximumBlobSize = 1024;
+                        handler.MaxFileSize = 1024;
                     });
                     container.AddFileTypeCheckHandler(handler =>
                     {

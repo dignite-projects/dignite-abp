@@ -164,18 +164,18 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     {
         var configuration = BlobContainerConfigurationProvider.Get(file.ContainerName);
         // blob process handlers
-        var processHandlers = configuration.GetConfigurationOrDefault<ITypeList<IBlobHandler>>(BlobContainerConfigurationNames.BlobHandlers, null);
+        var processHandlers = configuration.GetConfigurationOrDefault<ITypeList<IFileHandler>>(BlobContainerConfigurationNames.FileHandlers, null);
         if (processHandlers != null && processHandlers.Any())
         {
             var serviceProvider = LazyServiceProvider.LazyGetRequiredService<IServiceProvider>();
-            var context = new BlobHandlerContext(file, stream, configuration);
+            var context = new FileHandlerContext(file, stream, configuration);
             using (var scope = serviceProvider.CreateScope())
             {
                 foreach (var handlerType in processHandlers)
                 {
                     var handler = scope.ServiceProvider
                         .GetRequiredService(handlerType)
-                        .As<IBlobHandler>();
+                        .As<IFileHandler>();
 
                     await handler.ExecuteAsync(context);
                 }

@@ -25,7 +25,7 @@ public partial class FileExplorerModal
     protected string ContainerName { get; set; }
 
     protected string EntityId { get; set; }
-    protected BlobHandlerConfigurationDto Configuration { get; set; }
+    protected FileHandlerConfigurationDto Configuration { get; set; }
 
     protected long MaxFileSize = long.MaxValue;
     protected virtual List<FileUpload> Files { get; set; }
@@ -140,7 +140,7 @@ public partial class FileExplorerModal
             await InvokeAsync(_modal.Show);
             await GetEntitiesAsync();
             Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
-            MaxFileSize = Configuration.MaximumBlobSize == 0 ? long.MaxValue : (Configuration.MaximumBlobSize * 1024);
+            MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize * 1024);
 
         }
         catch (Exception ex)

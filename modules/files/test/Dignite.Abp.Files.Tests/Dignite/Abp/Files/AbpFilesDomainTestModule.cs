@@ -54,8 +54,8 @@ public class AbpFilesDomainTestModule : AbpModule
                     {
                         fileSystem.BasePath = _testDirectoryPath;
                     });
-                    container.AddBlobSizeLimitHandler(config =>
-                       config.MaximumBlobSize = 1
+                    container.AddFileSizeLimitHandler(config =>
+                       config.MaxFileSize = 1
                     );
                 })
                 .Configure<TestContainer3>(container =>

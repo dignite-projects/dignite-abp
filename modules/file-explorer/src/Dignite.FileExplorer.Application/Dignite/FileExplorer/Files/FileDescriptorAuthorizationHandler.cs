@@ -64,21 +64,21 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
     {
         if (requirement.Name == CommonOperations.Create.Name)
         {
-            return authorizationConfiguration.CreateFilePermissionName;
+            return authorizationConfiguration?.CreateFilePermissionName;
         }
 
         if (requirement.Name == CommonOperations.Delete.Name)
         {
-            return authorizationConfiguration.DeleteFilePermissionName;
+            return authorizationConfiguration?.DeleteFilePermissionName;
         }
 
         if (requirement.Name == CommonOperations.Update.Name)
         {
-            return authorizationConfiguration.UpdateFilePermissionName;
+            return authorizationConfiguration?.UpdateFilePermissionName;
         }
         if (requirement.Name == CommonOperations.Get.Name)
         {
-            return authorizationConfiguration.GetFilePermissionName;
+            return authorizationConfiguration?.GetFilePermissionName;
         }
 
         return null;

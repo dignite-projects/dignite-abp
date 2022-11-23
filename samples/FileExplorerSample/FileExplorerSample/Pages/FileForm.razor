@@ -1,0 +1,65 @@
+﻿@page "/file-form"
+@using Dignite.FileExplorer.Blazor.Pages.FileExplorer
+@using Dignite.FileExplorer.Files;
+@inject IFileDescriptorAppService FileDescriptorAppService
+@inherits FileExplorerSampleComponentBase
+<div class="container">
+    <Row>
+        <Column>
+            <Card>
+                <CardHeader>
+                    Send file stream with form
+                </CardHeader>
+                <CardBody>
+                    <FileEditComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="7c804a75-665c-c575-13e5-3a07b0bbb0fe"></FileEditComponent>
+                </CardBody>
+            </Card>
+        </Column>
+        <Column>
+            <Card>
+                <CardHeader>
+                    Select uploaded files
+                </CardHeader>
+                <CardBody>
+                    <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="@EntityId" @bind-SelectedFiles="@Files">
+                        <FileDescriptorsContent>
+                            @if (context != null && context.Any())
+                            {
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                                            <TableHeaderCell>@L["Size"]</TableHeaderCell>
+                                            <TableHeaderCell></TableHeaderCell>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                    @foreach (var item in context)
+                                        {
+                                            <TableRow>
+                                                <TableRowCell>@item.Name</TableRowCell>
+                                                <TableRowCell>@item.Size</TableRowCell>
+                                                <TableRowCell>
+                                                </TableRowCell>
+                                            </TableRow>
+                                        }
+                                    </TableBody>
+                                </Table>
+                            }
+                        </FileDescriptorsContent>
+                    </FilePickerComponent>
+                    <hr />
+                    @if (Files != null)
+                    {
+                        @foreach (var file in Files)
+                        {
+                            <p>
+                                @file.Name
+                            </p>
+                        }
+                    }
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
+</div>

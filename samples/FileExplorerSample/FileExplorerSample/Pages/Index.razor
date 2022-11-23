@@ -12,10 +12,16 @@
             @L["Welcome_Text"]
         </div>
     </div>
-
-    <div class="card mt-5">
-        <div class="card-body">
-            <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="testeee"></FilePickerComponent>
-        </div>
-    </div>
+    @if (CurrentUser.IsAuthenticated)
+    {
+        <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is5">
+            <a href="/file-form">File Upload Demo</a>
+        </Paragraph>           
+    }
+    else
+    {
+        <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is5">
+            <a href="/account/login">Login</a>
+        </Paragraph>
+    }
 </div>

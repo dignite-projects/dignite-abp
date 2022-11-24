@@ -2,10 +2,12 @@
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Dignite.Abp.BlobStoring;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BlobStoring;
 
@@ -16,6 +18,8 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
     protected IServiceProvider ServiceProvider { get; }
     protected IBlobContainerConfigurationProvider BlobContainerConfigurationProvider { get; }
     protected IPermissionChecker PermissionChecker { get; }
+
+    protected IDirectoryDescriptorRepository DirectoryDescriptorRepository { get; }
 
     public FileDescriptorAuthorizationHandler(
         IServiceProvider serviceProvider,
@@ -43,6 +47,20 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
             || await PermissionChecker.IsGrantedAsync(context.User, FileExplorerPermissions.Files.Management)
             )
         {
+            // Directory authorization verification
+            if (resource.DirectoryId.HasValue)
+            {
+                var directory = await DirectoryDescriptorRepository.FindAsync(resource.DirectoryId.Value, false);
+                if (directory == null)
+                {
+                    throw new BusinessException(FileExplorerErrorCodes.Directories.DirectoryNotExist);
+                }
+                if (directory.CreatorId != resource.CreatorId)
+                {
+                    return;
+                }
+            }
+
             // File descriptor associated entity authorization check handler
             if (!resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null)
             {

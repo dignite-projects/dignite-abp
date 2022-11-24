@@ -36,16 +36,13 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     [Authorize]
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
-        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.DirectoryId, input.EntityId);
+        // Build a temporary file for authorization verification
+        var tempFileDescriptor = new FileDescriptor(Guid.NewGuid(), input.ContainerName, string.Empty, string.Empty, string.Empty, input.DirectoryId, input.EntityId, CurrentTenant.Id);
+        tempFileDescriptor.CreatorId = CurrentUser.Id;
+        await AuthorizationService.CheckAsync(tempFileDescriptor, CommonOperations.Create);
 
-        try
-        {
-            await AuthorizationService.CheckAsync(fileDescriptor, CommonOperations.Create);
-        }
-        catch (AbpAuthorizationException ex)
-        {
-            await _fileManager.DeleteAsync(fileDescriptor);
-        }
+        // formal start of file creation
+        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.DirectoryId, input.EntityId);
         return ObjectMapper.Map<FileDescriptor, FileDescriptorDto>(fileDescriptor);
     }
 

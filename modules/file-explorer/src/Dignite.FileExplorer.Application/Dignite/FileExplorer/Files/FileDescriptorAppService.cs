@@ -50,6 +50,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     public async Task<FileDescriptorDto> UpdateAsync(Guid id, UpdateFileInput input)
     {
         var entity = await _fileRepository.GetAsync(id);
+        entity.DirectoryId= input.DirectoryId;
         entity.Name = input.Name;
         await AuthorizationService.CheckAsync(entity, CommonOperations.Update);
         await _fileRepository.UpdateAsync(entity);

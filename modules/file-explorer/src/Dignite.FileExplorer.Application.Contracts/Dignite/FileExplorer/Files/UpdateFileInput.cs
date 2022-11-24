@@ -1,9 +1,16 @@
-﻿namespace Dignite.FileExplorer.Files;
+﻿using System;
+
+namespace Dignite.FileExplorer.Files;
 
 public class UpdateFileInput
 {
     /// <summary>
-    /// File name
+    /// Modify the directory of the file
+    /// </summary>
+    public Guid? DirectoryId { get; set; }
+
+    /// <summary>
+    /// Modify the name of the file
     /// </summary>
     public string Name { get; set; }
 }

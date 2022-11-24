@@ -9,7 +9,8 @@ public interface IDirectoryDescriptorAppService : ICrudAppService<DirectoryDescr
     /// <summary>
     ///
     /// </summary>
+    /// <param name="id"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<DirectoryDescriptorDto> MoveAsync(MoveDirectoryInput input);
+    Task<DirectoryDescriptorDto> MoveAsync(Guid id, MoveDirectoryInput input);
 }

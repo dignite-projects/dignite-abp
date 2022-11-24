@@ -21,7 +21,7 @@ public interface IFileDescriptorAppService : ICrudAppService<FileDescriptorDto, 
     /// </summary>
     /// <param name="containerName"></param>
     /// <returns></returns>
-    Task<FileHandlerConfigurationDto> GetBlobHandlerConfiguration([NotNull] string containerName);
+    Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName);
 
     /*
     TODO:

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Dignite.FileExplorer.MongoDB;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -31,7 +32,7 @@ public class MongoDirectoryDescriptorRepository : MongoDbRepository<IFileExplore
         return await GetAsync(x => x.ContainerName == containerName && x.CreatorId == creatorId && x.ParentId == parentId && x.Name == name, cancellationToken: cancellationToken);
     }
 
-    public async Task<int> GetChildrenCountAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
+    public async Task<int> GetCountAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
@@ -41,7 +42,7 @@ public class MongoDirectoryDescriptorRepository : MongoDbRepository<IFileExplore
         return await query.As<IMongoQueryable<DirectoryDescriptor>>().CountAsync(token);
     }
 
-    public async Task<List<DirectoryDescriptor>> GetChildrenListAsync(Guid creatorId, string containerName, Guid? parentId, int skipCount = 0, int maxResultCount = int.MaxValue, CancellationToken cancellationToken = default)
+    public async Task<List<DirectoryDescriptor>> GetListAsync(Guid creatorId, string containerName, Guid? parentId, int skipCount = 0, int maxResultCount = int.MaxValue, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
@@ -61,6 +62,20 @@ public class MongoDirectoryDescriptorRepository : MongoDbRepository<IFileExplore
             .WhereIf(ignoredId.HasValue, dd => dd.Id != ignoredId)
             .As<IMongoQueryable<DirectoryDescriptor>>()
             .AnyAsync(x => x.ContainerName == containerName && x.CreatorId == creatorId && x.ParentId == parentId && x.Name == name);
+    }
+
+    public async Task<int> GetMaxOrderAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
+    {
+        var token = GetCancellationToken(cancellationToken);
+
+        var query = await GetListQueryAsync(
+            creatorId, containerName, parentId, token);
+
+        return await query.OrderBy(dd => dd.Order)
+                  .As<IMongoQueryable<DirectoryDescriptor>>()
+                  .DefaultIfEmpty()
+                  .As<IMongoQueryable<DirectoryDescriptor>>()
+                  .MaxAsync(d=> (int?)d.Order) ?? 0;
     }
 
     protected virtual async Task<IQueryable<DirectoryDescriptor>> GetListQueryAsync(

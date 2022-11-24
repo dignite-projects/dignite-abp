@@ -20,10 +20,9 @@ public interface IDirectoryManager : IDomainService
     ///
     /// </summary>
     /// <param name="directory"></param>
-    /// <param name="newParentId"></param>
-    /// <param name="order"></param>
+    /// <param name="parentId"></param>
     /// <returns></returns>
-    Task MoveAsync(DirectoryDescriptor directory, Guid? newParentId, int order);
+    Task MoveAsync(DirectoryDescriptor directory, Guid? parentId);
 
     /// <summary>
     ///

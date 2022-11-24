@@ -1,4 +1,5 @@
-﻿using Dignite.FileExplorer.Files;
+﻿using Dignite.FileExplorer.Directories;
+using Dignite.FileExplorer.Files;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application;
@@ -32,5 +33,6 @@ public class FileExplorerApplicationModule : AbpModule
         });
 
         context.Services.AddSingleton<IAuthorizationHandler, FileDescriptorAuthorizationHandler>();
+        context.Services.AddSingleton<IAuthorizationHandler, DirectoryDescriptorAuthorizationHandler>();
     }
 }

@@ -14,7 +14,11 @@
             <Row NoGutters>
                 <Column ColumnSize="ColumnSize.Is3">
                     <AutoHeight ExtraHeight="340">
-
+                        @if (DirectoryTreeComponentParameters!=null)
+                        {
+                            <DynamicComponent Type="@typeof(DirectoryTreeComponent)"
+                                          Parameters="@DirectoryTreeComponentParameters" />
+                        }
                     </AutoHeight>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is9">
@@ -32,6 +36,8 @@
                     </ExtensibleDataGrid>
                 </Column>
             </Row>
+
+            @***********************  Upload File Panel  **************************@
             @if (Files != null && Files.Any())
             {
                 <Div Position="Position.Fixed.Bottom.Is0.End.Is0" Shadow="Shadow.Large" Margin="Margin.Is5">

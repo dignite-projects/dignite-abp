@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json.Serialization;
+using Volo.Abp.Application.Dtos;
 
 namespace Dignite.FileExplorer.Directories;
 
-public class DirectoryDescriptorInfoDto
+public class DirectoryDescriptorInfoDto: ExtensibleEntityDto<Guid>, IEquatable<DirectoryDescriptorInfoDto>
 {
-    public Guid Id { get; set; }
+    public DirectoryDescriptorInfoDto() : base()
+    {
+        Children = new List<DirectoryDescriptorInfoDto>();
+    }
 
     /// <summary>
     /// Container name of blob
@@ -22,7 +28,32 @@ public class DirectoryDescriptorInfoDto
     /// </summary>
     public Guid? ParentId { get; set; }
 
-    public bool HasChildren { get; set; }
+    public bool HasChildren { get; private set; }
 
     public IList<DirectoryDescriptorInfoDto> Children { get; set; }
+
+
+    public bool Equals(DirectoryDescriptorInfoDto other)
+    {
+        return this.Id == other.Id;
+    }
+
+    public void AddChild(DirectoryDescriptorInfoDto ou)
+    {
+        this.HaveChildren(true);
+        ou.ParentId = this.Id;
+        this.Children.Add(ou);
+    }
+
+    public void RemoveChild(DirectoryDescriptorInfoDto ou)
+    {
+        this.Children.RemoveAll(c => ou.Id == c.Id);
+        if (!Children.Any())
+            this.HaveChildren(false);
+    }
+
+    public void HaveChildren(bool hasChild)
+    {
+        this.HasChildren = hasChild;
+    }
 }

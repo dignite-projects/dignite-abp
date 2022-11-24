@@ -19,7 +19,6 @@ public class CreateDirectoryInput
     /// </summary>
     [Required]
     [DynamicMaxLength(typeof(DirectoryDescriptorConsts), nameof(DirectoryDescriptorConsts.MaxNameLength))]
-    [RegularExpression(DirectoryDescriptorConsts.NameRegularExpression)]
     public string Name { get; set; }
 
     /// <summary>

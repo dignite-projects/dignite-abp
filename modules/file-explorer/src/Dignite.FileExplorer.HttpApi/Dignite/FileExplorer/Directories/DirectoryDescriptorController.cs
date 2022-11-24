@@ -47,11 +47,11 @@ public class FileDescriptorController : AbpController, IDirectoryDescriptorAppSe
         return await _directoryAppService.GetListAsync(input);
     }
 
-    [HttpPost]
-    [Route("move")]
-    public async Task<DirectoryDescriptorDto> MoveAsync(MoveDirectoryInput input)
+    [HttpPut]
+    [Route("{id}/move")]
+    public async Task<DirectoryDescriptorDto> MoveAsync(Guid id,MoveDirectoryInput input)
     {
-        return await _directoryAppService.MoveAsync(input);
+        return await _directoryAppService.MoveAsync(id, input);
     }
 
     [HttpPut]

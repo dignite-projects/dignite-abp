@@ -14,7 +14,7 @@ public partial class FileEditComponent
     /// <summary>
     /// 
     /// </summary>
-    protected virtual FileHandlerConfigurationDto Configuration { get; private set; }
+    protected virtual FileContainerConfigurationDto Configuration { get; private set; }
 
     protected long MaxFileSize = long.MaxValue;
 
@@ -25,7 +25,7 @@ public partial class FileEditComponent
     public FileEditComponent(IFileDescriptorAppService fileDescriptorAppService)
     {
         FileDescriptorAppService = fileDescriptorAppService;
-        Configuration = new FileHandlerConfigurationDto();
+        Configuration = new FileContainerConfigurationDto();
     }
 
 
@@ -66,7 +66,7 @@ public partial class FileEditComponent
 
     protected override async Task OnInitializedAsync()
     {
-        Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
+        Configuration = await FileDescriptorAppService.GetFileContainerConfiguration(ContainerName);
         MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize*1024);
 
         if (!EntityId.IsNullOrEmpty() && SelectedFiles == null)

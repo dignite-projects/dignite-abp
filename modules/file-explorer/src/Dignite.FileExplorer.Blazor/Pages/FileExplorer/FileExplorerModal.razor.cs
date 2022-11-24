@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Blazorise;
 using Blazorise.DataGrid;
 using Dignite.Abp.BlazoriseUI.Components;
+using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.EntityActions;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
 using Volo.Abp.Content;
@@ -25,10 +27,12 @@ public partial class FileExplorerModal
     protected string ContainerName { get; set; }
 
     protected string EntityId { get; set; }
-    protected FileHandlerConfigurationDto Configuration { get; set; }
+    protected FileContainerConfigurationDto Configuration { get; set; }
 
     protected long MaxFileSize = long.MaxValue;
     protected virtual List<FileUpload> Files { get; set; }
+
+    protected IDictionary<string, object> DirectoryTreeComponentParameters;
 
     [Parameter] 
     public EventCallback<List<FileDescriptorDto>> SelectFiles { get; set; }
@@ -124,7 +128,8 @@ public partial class FileExplorerModal
 
     protected override void Dispose(bool disposing)
     {
-        Files=null;
+        DirectoryTreeComponentParameters = null;
+        Files =null;
         base.Dispose(disposing);
     }
 
@@ -135,13 +140,24 @@ public partial class FileExplorerModal
             CurrentPage = 1;
             ContainerName = containerName;
             EntityId = entityId;
+            GetListInput.DirectoryId = null;
 
 
             await InvokeAsync(_modal.Show);
             await GetEntitiesAsync();
-            Configuration = await FileDescriptorAppService.GetBlobHandlerConfiguration(ContainerName);
+            Configuration = await FileDescriptorAppService.GetFileContainerConfiguration(ContainerName);
             MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize * 1024);
 
+            //
+            DirectoryTreeComponentParameters = new Dictionary<string, object>
+            {
+                { "ContainerName", containerName },
+                { "Configuration", Configuration },
+                { "SelectedDirectoryChanged", EventCallback.Factory.Create<DirectoryDescriptorInfoDto>(
+                                            this, 
+                                            SelectedDirectoryChanged
+                                            )}
+            };
         }
         catch (Exception ex)
         {
@@ -252,8 +268,15 @@ public partial class FileExplorerModal
         }
     }
 
+    protected virtual async Task SelectedDirectoryChanged(DirectoryDescriptorInfoDto e)
+    {
+        GetListInput.DirectoryId = e.Id;
+        await GetEntitiesAsync();
+    }
+
     protected Task CloseModal()
     {
+        DirectoryTreeComponentParameters = null;
         Files = null;
         return InvokeAsync(_modal.Hide);
     }

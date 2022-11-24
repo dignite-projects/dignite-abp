@@ -1,0 +1,101 @@
+﻿@using Dignite.Abp.BlazoriseUI.Components
+@using Dignite.FileExplorer.Directories;
+@using Dignite.FileExplorer.Localization;
+@using Volo.Abp.BlazoriseUI.Components
+@inject AbpBlazorMessageLocalizerHelper<FileExplorerResource> LH
+@inherits AbpCrudPageBase<IDirectoryDescriptorAppService,DirectoryDescriptorDto, DirectoryDescriptorInfoDto, Guid, GetDirectoriesInput, CreateDirectoryInput, UpdateDirectoryInput>
+
+@if (HasCreatePermission)
+{
+    <Blazorise.Button Color="Blazorise.Color.Primary" Clicked="@OnAddRootDirectoryClicked">@L["NewRootDirectory"]</Blazorise.Button>
+}
+
+<ExtensibleTreeView TNode="DirectoryDescriptorInfoDto" Draggable
+                       Nodes="@AllDirectories"
+                       SelectedNode="@SelectedDirectory"
+                       SelectedNodeChanged="@OnSelectDescriptorChanged"
+                       ExpandedNodes="@ExpandedNodes"
+                       ExpandedNodesChanged="@OnExpandChanged"
+                       GetChildNodes="x => x.Children"
+                       HasChildNodes="x => x.HasChildren"
+                       NodeDropped="@OnDroped">
+    <NodeContent>
+        <Dropdown>
+            <Button Color="(SelectedDirectory!=null && SelectedDirectory.Id==context.Id)? Color.Secondary: Color.Light" Padding="Padding.Is0.FromTop.Is0.FromBottom.Is1.FromStart.Is1.FromEnd">@context.Name</Button>
+            <DropdownToggle Color="(SelectedDirectory!=null && SelectedDirectory.Id==context.Id)? Color.Secondary: Color.Light" Padding="Padding.Is0.FromTop.Is0.FromBottom" Split />
+            <DropdownMenu>
+                <DropdownItem Disabled="@(!HasCreatePermission)" Clicked="@(e=>OnAddSubDirectoryClicked(context))">@L["NewSubUnit"]</DropdownItem>
+                <DropdownItem Disabled="@(!HasUpdatePermission)" Clicked="@(e=>OnEditDirectoryClicked(context))">@L["Edit"]</DropdownItem>
+                <DropdownDivider />
+                <DropdownItem Disabled="@(!HasDeletePermission)" Clicked="@(e=>DeleteEntityAsync(context))">@L["Delete"]</DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+    </NodeContent>
+</ExtensibleTreeView>
+
+
+@* ************************* CREATE MODAL ************************* *@
+@if (HasCreatePermission)
+{
+    <Blazorise.Modal @ref="CreateModal" Closing="@ClosingCreateModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["NewDirectory"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseCreateModalAsync" />
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                        <Blazorise.Validation MessageLocalizer="@LH.Localize">
+                            <Blazorise.Field>
+                                <Blazorise.FieldLabel>@L["Name"]</Blazorise.FieldLabel>
+                                <Blazorise.TextEdit @bind-Text="@NewEntity.Name" Autofocus="true">
+                                    <Feedback>
+                                        <Blazorise.ValidationError />
+                                    </Feedback>
+                                </Blazorise.TextEdit>
+                            </Blazorise.Field>
+                        </Blazorise.Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="@Blazorise.Color.Secondary" Clicked="CloseCreateModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@CreateEntityAsync" />
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+}
+
+@* ************************* EDIT MODAL ************************* *@
+@if (HasUpdatePermission)
+{
+    <Blazorise.Modal @ref="EditModal" Closing="@ClosingEditModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["Edit"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseEditModalAsync" />
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                        <Blazorise.Validation MessageLocalizer="@LH.Localize">
+                            <Blazorise.Field>
+                                <Blazorise.FieldLabel>@L["Name"]</Blazorise.FieldLabel>
+                                <Blazorise.TextEdit @bind-Text="@EditingEntity.Name" Autofocus="true">
+                                    <Feedback>
+                                        <Blazorise.ValidationError />
+                                    </Feedback>
+                                </Blazorise.TextEdit>
+                            </Blazorise.Field>
+                        </Blazorise.Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseEditModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@UpdateEntityAsync" />
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+}

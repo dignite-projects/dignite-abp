@@ -22,8 +22,7 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
     {
         var entity = await _directoryManager.CreateAsync(CurrentUser.Id.Value, input.ContainerName, input.Name, input.ParentId);
         await AuthorizationService.CheckAsync(entity, CommonOperations.Create);
-        return
-            ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
+        return ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
     }
 
     [Authorize]
@@ -47,32 +46,52 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
     public async Task<PagedResultDto<DirectoryDescriptorInfoDto>> GetListAsync(GetDirectoriesInput input)
     {
         var userId = CurrentUser.Id.Value;
-        var count = await _directoryRepository.GetChildrenCountAsync(userId, input.ContainerName, input.ParentId);
-        var result = await _directoryRepository.GetChildrenListAsync(userId, input.ContainerName, input.ParentId, input.MaxResultCount, input.SkipCount);
+        var count = await _directoryRepository.GetCountAsync(userId, input.ContainerName, input.ParentId);
+        var result = await _directoryRepository.GetListAsync(userId, input.ContainerName, input.ParentId, input.SkipCount, input.MaxResultCount);
         var dtoList = ObjectMapper.Map<List<DirectoryDescriptor>, List<DirectoryDescriptorInfoDto>>(result);
         foreach (var dto in dtoList)
         {
-            dto.HasChildren = await _directoryRepository.AnyChildrenAsync(userId, input.ContainerName, input.ParentId);
+            dto.HaveChildren(await _directoryRepository.AnyChildrenAsync(userId, input.ContainerName, dto.Id));
         }
 
         return new PagedResultDto<DirectoryDescriptorInfoDto>(count, dtoList);
     }
 
     [Authorize]
-    public async Task<DirectoryDescriptorDto> MoveAsync(MoveDirectoryInput input)
+    public async Task<DirectoryDescriptorDto> MoveAsync(Guid id, MoveDirectoryInput input)
     {
-        var entity = await _directoryRepository.GetAsync(input.Id, false);
+        var entity = await _directoryRepository.GetAsync(id, false);
+        var target = await _directoryRepository.GetAsync(input.TargetId,false);
         await AuthorizationService.CheckAsync(entity, CommonOperations.Update);
+        await AuthorizationService.CheckAsync(target, CommonOperations.Update);
 
-        if (input.NewParentId.HasValue)
+        if (!entity.ContainerName.Equals(target.ContainerName, StringComparison.OrdinalIgnoreCase))
         {
-            var newParent = await _directoryRepository.GetAsync(input.NewParentId.Value, false);
-            await AuthorizationService.CheckAsync(newParent, CommonOperations.Update);
+            throw new DirectoryInvalidMoveException();
         }
 
-        await _directoryManager.MoveAsync(entity, input.NewParentId, input.Order);
-        return
-            ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
+        if (input.Position == DirectoryMovePosition.Inside)
+        {
+            var order = await _directoryRepository.GetMaxOrderAsync(entity.CreatorId.Value, entity.ContainerName, target.Id);
+            entity.Order = order;
+            await _directoryManager.MoveAsync(entity, target.Id);
+        }
+        else if (input.Position == DirectoryMovePosition.Bottom)
+        { 
+            var children = await _directoryRepository.GetListAsync(entity.CreatorId.Value,entity.ContainerName,target.ParentId,0,1000);
+            entity.Order = target.Order+1;
+            await _directoryManager.MoveAsync(entity, target.ParentId);
+            foreach (var directory in children)
+            {
+                if (directory.Order >= entity.Order)
+                {
+                    directory.Order= directory.Order+1;
+                    await _directoryRepository.UpdateAsync(directory);
+                }
+            }
+        }
+
+        return ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
     }
 
     [Authorize]

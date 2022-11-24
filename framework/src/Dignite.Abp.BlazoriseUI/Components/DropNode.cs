@@ -2,7 +2,7 @@
 
 public class DropNode<TNode>
 {
-    public DropNode(TNode node, TNode target, DragEnterNodeArea area)
+    public DropNode(TNode node, TNode target, DragEnterNodePosition area)
     {
         Node = node;
         Target = target;
@@ -11,5 +11,5 @@ public class DropNode<TNode>
 
     public TNode Node { get; set; }
     public TNode Target { get; set; }
-    public DragEnterNodeArea Area { get; set; }
+    public DragEnterNodePosition Area { get; set; }
 }

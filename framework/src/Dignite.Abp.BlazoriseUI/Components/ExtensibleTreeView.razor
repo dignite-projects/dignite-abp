@@ -23,13 +23,13 @@
                     @if (DraggingNode is not null)
                     {
                         var isAvailableDragging = DragEnterNode != null && DragEnterNode.GetHashCode() != DraggingNode.GetHashCode() && context.GetHashCode() == DragEnterNode.GetHashCode();
-                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodeArea.Inside)?Border.Primary:Border.Is0" Width="Width.Is100" Height="Height.Is100" Position="Position.Absolute.Top.Is0.Start.Is0"
-                                @ondragenter="@(()=>DragEnter(context, DragEnterNodeArea.Inside))"
+                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodePosition.Inside)?Border.Primary:Border.Is0" Width="Width.Is100" Height="Height.Is100" Position="Position.Absolute.Top.Is0.Start.Is0"
+                                @ondragenter="@(()=>DragEnter(context, DragEnterNodePosition.Inside))"
                                 @ondrop="@(()=> Dropped())">
                         </Div>
 
-                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodeArea.Bottom)?Border.Is3.Primary.OnTop:Border.Is0" style="bottom:-9px; height:6px;" Width="Width.Is100" Position="Position.Absolute.Start.Is0"
-                                @ondragenter="@(()=>DragEnter(context, DragEnterNodeArea.Bottom))"
+                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodePosition.Bottom)?Border.Is3.Primary.OnTop:Border.Is0" style="bottom:-9px; height:6px;" Width="Width.Is100" Position="Position.Absolute.Start.Is0"
+                                @ondragenter="@(()=>DragEnter(context, DragEnterNodePosition.Bottom))"
                                 @ondrop="@(()=> Dropped())">
                         </Div>
                     }

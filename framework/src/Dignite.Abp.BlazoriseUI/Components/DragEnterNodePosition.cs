@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public enum DragEnterNodeArea
+public enum DragEnterNodePosition
 {
     /// <summary>
     /// 

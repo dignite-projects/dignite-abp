@@ -20,7 +20,7 @@ public partial class ExtensibleTreeView<TNode>: ComponentBase
     /// <summary>
     /// 
     /// </summary>
-    private DragEnterNodeArea? DragEnterArea;
+    private DragEnterNodePosition? DragEnterArea;
     #endregion
 
     #region Properties
@@ -72,7 +72,7 @@ public partial class ExtensibleTreeView<TNode>: ComponentBase
     #endregion
 
     #region Methods
-    void DragEnter(TNode node, DragEnterNodeArea area)
+    void DragEnter(TNode node, DragEnterNodePosition area)
     {
         DragEnterNode = node;
         DragEnterArea = area;

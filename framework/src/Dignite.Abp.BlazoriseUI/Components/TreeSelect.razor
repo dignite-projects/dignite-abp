@@ -7,7 +7,9 @@
 
 <Addons>
     <Addon AddonType="AddonType.Body">
-        <TextEdit Role="TextRole.Search" @onclick="@(()=> ShowTreeSelectToggle())" @bind-Text="@TextEditText" ReadOnly="true" autocomplete="off" />
+        <Validation Validator="@(Validator ?? ValidationRule.None)" AsyncValidator="@AsyncValidator">
+            <TextEdit Role="TextRole.Search" @onclick="@(()=> ShowTreeSelectToggle())" @bind-Text="@TextEditText" ReadOnly="true" autocomplete="off" />
+        </Validation>
     </Addon>
     @if (!TextEditText.IsNullOrEmpty())
     {

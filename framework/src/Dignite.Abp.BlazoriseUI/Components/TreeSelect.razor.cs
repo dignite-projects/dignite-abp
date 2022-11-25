@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Blazorise;
 using Microsoft.AspNetCore.Components;
 
 namespace Dignite.Abp.BlazoriseUI.Components;
@@ -59,6 +61,16 @@ public partial class TreeSelect<TNode, TValue> : ComponentBase
     /// 
     /// </summary>
     [Parameter] public Func<TNode, TValue> NodeValue { get; set; }
+
+    /// <summary>
+    /// Validation handler used to validate selected value.
+    /// </summary>
+    [Parameter] public Action<ValidatorEventArgs> Validator { get; set; }
+
+    /// <summary>
+    /// Asynchronously validates the selected value.
+    /// </summary>
+    [Parameter] public Func<ValidatorEventArgs, CancellationToken, Task> AsyncValidator { get; set; }
 
     protected override void OnParametersSet()
     {

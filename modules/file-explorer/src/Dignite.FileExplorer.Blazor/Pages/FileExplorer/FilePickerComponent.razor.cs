@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Blazorise;
 using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Components;
@@ -55,6 +57,17 @@ public partial class FilePickerComponent
 
     [Parameter]
     public RenderFragment<List<FileDescriptorDto>> FileDescriptorsContent { get; set; }
+
+
+    /// <summary>
+    /// Validation handler used to validate selected value.
+    /// </summary>
+    [Parameter] public Action<ValidatorEventArgs> Validator { get; set; }
+
+    /// <summary>
+    /// Asynchronously validates the selected value.
+    /// </summary>
+    [Parameter] public Func<ValidatorEventArgs, CancellationToken, Task> AsyncValidator { get; set; }
 
 
     protected override async Task OnInitializedAsync()

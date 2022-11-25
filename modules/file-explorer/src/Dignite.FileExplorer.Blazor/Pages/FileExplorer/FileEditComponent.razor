@@ -1,7 +1,9 @@
 ﻿@using Dignite.FileExplorer.Files;
 @using Volo.Abp.AspNetCore.Components
 @inherits AbpComponentBase
-<FileEdit @ref="FileEditRef" Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+<Validation Validator="@(Validator ?? ValidationRule.None)" AsyncValidator="@AsyncValidator">
+    <FileEdit @ref="FileEditRef" Changed="@OnFileChangedAsync" Multiple="@Multiple" MaxFileSize="@MaxFileSize" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+</Validation>
 @if (FileDescriptorsContent != null)
 {
     @FileDescriptorsContent(SelectedFiles)

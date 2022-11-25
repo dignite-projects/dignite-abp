@@ -1,7 +1,10 @@
 ﻿@using Dignite.FileExplorer.Files;
 @using Volo.Abp.AspNetCore.Components
 @inherits AbpComponentBase
-<Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
+
+<Validation Validator="@(Validator ?? ValidationRule.None)" AsyncValidator="@AsyncValidator">
+    <Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
+</Validation>
 @if (FileDescriptorsContent != null)
 {
     @FileDescriptorsContent(SelectedFiles)

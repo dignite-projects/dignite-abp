@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Blazorise;
 using Dignite.FileExplorer.Files;
@@ -63,6 +64,17 @@ public partial class FileEditComponent
 
     [Parameter]
     public RenderFragment<List<FileUpload>> FilesContent { get; set; }
+
+
+    /// <summary>
+    /// Validation handler used to validate selected value.
+    /// </summary>
+    [Parameter] public Action<ValidatorEventArgs> Validator { get; set; }
+
+    /// <summary>
+    /// Asynchronously validates the selected value.
+    /// </summary>
+    [Parameter] public Func<ValidatorEventArgs, CancellationToken, Task> AsyncValidator { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

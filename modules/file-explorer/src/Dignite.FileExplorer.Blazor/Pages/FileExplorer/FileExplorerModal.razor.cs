@@ -266,11 +266,14 @@ public partial class FileExplorerModal
             {
                 await InvokeAsync(() =>
                 {
-                    SelectFiles.InvokeAsync(
-                        new List<FileDescriptorDto>
-                        {
+                    if (FileDataGridRef.SelectedItem != null)
+                    {
+                        SelectFiles.InvokeAsync(
+                            new List<FileDescriptorDto>
+                            {
                             FileDataGridRef.SelectedItem
-                        });
+                            });
+                    }
                     CloseModal();
                 });
             }
@@ -283,6 +286,8 @@ public partial class FileExplorerModal
 
     protected virtual async Task SelectedDirectoryChanged(DirectoryDescriptorInfoDto e)
     {
+        FileDataGridRef.SelectedItem = null;
+        FileDataGridRef.SelectedItems = null;
         DirectoryTreeComponentParameters.Remove("SelectedDirectory");
         DirectoryTreeComponentParameters.Add("SelectedDirectory", e);
         CurrentDirectory = e;

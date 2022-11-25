@@ -72,4 +72,13 @@ public interface IDirectoryDescriptorRepository : IBasicRepository<DirectoryDesc
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<int> GetMaxOrderAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="creatorId"></param>
+    /// <param name="containerName"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<List<DirectoryDescriptor>> GetAllListByUserAsync(Guid creatorId, string containerName, CancellationToken cancellationToken = default(CancellationToken));
 }

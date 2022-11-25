@@ -30,21 +30,21 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     [HttpPut]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public async Task<FileDescriptorDto> UpdateAsync(Guid id, UpdateFileInput input)
     {
         return await _fileAppService.UpdateAsync(id, input);
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public virtual async Task DeleteAsync(Guid id)
     {
         await _fileAppService.DeleteAsync(id);
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public async Task<FileDescriptorDto> GetAsync(Guid id)
     {
         return await _fileAppService.GetAsync(id);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dignite.FileExplorer.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 
@@ -45,13 +46,23 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
     [Authorize]
     public async Task<PagedResultDto<DirectoryDescriptorInfoDto>> GetListAsync(GetDirectoriesInput input)
     {
-        var userId = CurrentUser.Id.Value;
-        var count = await _directoryRepository.GetCountAsync(userId, input.ContainerName, input.ParentId);
-        var result = await _directoryRepository.GetListAsync(userId, input.ContainerName, input.ParentId, input.SkipCount, input.MaxResultCount);
+        if (input.CreatorId.HasValue)
+        {
+            if (!await AuthorizationService.IsGrantedAsync(FileExplorerPermissions.Files.Management))
+            {
+                input.CreatorId = CurrentUser.Id.Value;
+            }
+        }
+        else
+        {
+            input.CreatorId = CurrentUser.Id;
+        }
+        var count = await _directoryRepository.GetCountAsync(input.CreatorId.Value, input.ContainerName, input.ParentId);
+        var result = await _directoryRepository.GetListAsync(input.CreatorId.Value, input.ContainerName, input.ParentId, input.SkipCount, input.MaxResultCount);
         var dtoList = ObjectMapper.Map<List<DirectoryDescriptor>, List<DirectoryDescriptorInfoDto>>(result);
         foreach (var dto in dtoList)
         {
-            dto.HaveChildren(await _directoryRepository.AnyChildrenAsync(userId, input.ContainerName, dto.Id));
+            dto.HaveChildren(await _directoryRepository.AnyChildrenAsync(input.CreatorId.Value, input.ContainerName, dto.Id));
         }
 
         return new PagedResultDto<DirectoryDescriptorInfoDto>(count, dtoList);
@@ -85,7 +96,7 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
             {
                 if (directory.Order >= entity.Order)
                 {
-                    directory.Order= directory.Order+1;
+                    directory.Order = directory.Order + 1;
                     await _directoryRepository.UpdateAsync(directory);
                 }
             }
@@ -102,5 +113,13 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
         await _directoryManager.RenameAsync(entity, input.Name);
         return
             ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
+    }
+
+    [Authorize]
+    public async Task<ListResultDto<DirectoryDescriptorInfoDto>> GetMyAsync(string containerName)
+    {
+        var result = await _directoryRepository.GetAllListByUserAsync(CurrentUser.Id.Value, containerName);
+        var dtoList = ObjectMapper.Map<List<DirectoryDescriptor>, List<DirectoryDescriptorInfoDto>>(result);
+        return new ListResultDto<DirectoryDescriptorInfoDto>(dtoList.BuildTree());
     }
 }

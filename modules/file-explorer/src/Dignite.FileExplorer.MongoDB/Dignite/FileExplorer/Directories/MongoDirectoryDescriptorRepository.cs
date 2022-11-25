@@ -78,6 +78,16 @@ public class MongoDirectoryDescriptorRepository : MongoDbRepository<IFileExplore
                   .MaxAsync(d=> (int?)d.Order) ?? 0;
     }
 
+    public async Task<List<DirectoryDescriptor>> GetAllListByUserAsync(Guid creatorId, string containerName, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        var token = GetCancellationToken(cancellationToken);
+        return await (await GetMongoQueryableAsync(token))
+            .Where(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId)
+            .OrderBy(dd=>dd.ParentId)
+            .ThenBy(dd => dd.Order)
+            .ToListAsync();
+    }
+
     protected virtual async Task<IQueryable<DirectoryDescriptor>> GetListQueryAsync(
         Guid creatorId,
         string containerName,

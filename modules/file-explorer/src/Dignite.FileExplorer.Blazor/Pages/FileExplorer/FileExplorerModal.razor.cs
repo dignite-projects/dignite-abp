@@ -9,7 +9,6 @@ using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.EntityActions;
 using Volo.Abp.AspNetCore.Components.Web.Extensibility.TableColumns;
 using Volo.Abp.Content;
@@ -19,6 +18,7 @@ namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class FileExplorerModal
 {
     protected readonly IFileDescriptorAppService FileDescriptorAppService;
+    protected readonly IDirectoryDescriptorAppService DirectoryDescriptorAppService;
     protected Modal _modal;
 
     protected ExtensibleDataGrid<FileDescriptorDto> FileDataGridRef;
@@ -30,9 +30,13 @@ public partial class FileExplorerModal
     protected FileContainerConfigurationDto Configuration { get; set; }
 
     protected long MaxFileSize = long.MaxValue;
-    protected virtual List<FileUpload> Files { get; set; }
+    protected List<FileUpload> Files { get; set; }
 
     protected IDictionary<string, object> DirectoryTreeComponentParameters;
+
+    protected DirectoryDescriptorInfoDto CurrentDirectory;
+
+    protected IReadOnlyList<DirectoryDescriptorInfoDto> AllDirectories;
 
     [Parameter] 
     public EventCallback<List<FileDescriptorDto>> SelectFiles { get; set; }
@@ -40,12 +44,13 @@ public partial class FileExplorerModal
     [Parameter]
     public bool Multiple { get; set; }
 
-    public FileExplorerModal(IFileDescriptorAppService fileDescriptorAppService)
+    public FileExplorerModal(IFileDescriptorAppService fileDescriptorAppService, IDirectoryDescriptorAppService directoryDescriptorAppService)
     {
         ObjectMapperContext = typeof(FileExplorerBlazorModule);
         LocalizationResource = typeof(FileExplorerResource);
 
         FileDescriptorAppService = fileDescriptorAppService;
+        DirectoryDescriptorAppService = directoryDescriptorAppService;
     }
 
     protected override Task OnDataGridReadAsync(DataGridReadDataEventArgs<FileDescriptorDto> e)
@@ -68,7 +73,7 @@ public partial class FileExplorerModal
             {
                 new EntityAction
                 {
-                    Text = L["Delete"],
+                    Icon= "fa fa-trash-o",
                     Visible = (data) => CurrentUser.GetId() == data.As<FileDescriptorDto>().CreatorId,
                     Clicked = async (data) => await DeleteEntityAsync(data.As<FileDescriptorDto>()),
                     ConfirmationMessage = (data) => GetDeleteConfirmationMessage(data.As<FileDescriptorDto>())
@@ -94,12 +99,16 @@ public partial class FileExplorerModal
                     Title = L["Size"],
                     Data = nameof(FileDescriptorDto.Size),
                     Sortable = true,
+                    ValueConverter=(data)=> FileSizeFormatter.FormatSize(data.As<FileDescriptorDto>().Size)
                 },
                 new TableColumn
                 {
-                    Title = L["EntityId"],
-                    Data = nameof(FileDescriptorDto.EntityId),
+                    Title = L["DirectoryId"],
+                    Data = nameof(FileDescriptorDto.DirectoryId),
                     Sortable = true,
+                    ValueConverter = (data)=> data.As<FileDescriptorDto>().DirectoryId.HasValue? 
+                                                                            AllDirectories.FindById(data.As<FileDescriptorDto>().DirectoryId.Value)?.Name
+                                                                            :null
                 },
                 new TableColumn
                 {
@@ -126,13 +135,6 @@ public partial class FileExplorerModal
         return base.UpdateGetListInputAsync();
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        DirectoryTreeComponentParameters = null;
-        Files =null;
-        base.Dispose(disposing);
-    }
-
     public virtual async Task OpenAsync(string containerName, string entityId)
     {
         try
@@ -142,8 +144,9 @@ public partial class FileExplorerModal
             EntityId = entityId;
             GetListInput.DirectoryId = null;
 
-
             await InvokeAsync(_modal.Show);
+
+            AllDirectories = (await DirectoryDescriptorAppService.GetMyAsync(ContainerName)).Items;
             await GetEntitiesAsync();
             Configuration = await FileDescriptorAppService.GetFileContainerConfiguration(ContainerName);
             MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize * 1024);
@@ -153,6 +156,7 @@ public partial class FileExplorerModal
             {
                 { "ContainerName", containerName },
                 { "Configuration", Configuration },
+                { "SelectedDirectory", null},
                 { "SelectedDirectoryChanged", EventCallback.Factory.Create<DirectoryDescriptorInfoDto>(
                                             this, 
                                             SelectedDirectoryChanged
@@ -183,6 +187,14 @@ public partial class FileExplorerModal
                 Files.Add(fu);
             }
 
+            //When a new directory is created and the directory structure of this component is not updated synchronously, the directory structure is updated here
+            if (GetListInput.DirectoryId.HasValue
+                && AllDirectories.FindById(GetListInput.DirectoryId.Value) == null
+                )
+            {
+                AllDirectories = (await DirectoryDescriptorAppService.GetMyAsync(ContainerName)).Items;
+            }
+
             // start upload
             await UploadAsync();
         }
@@ -198,6 +210,7 @@ public partial class FileExplorerModal
             file.Status = FileUploadStatus.Progressing;
             var input = new CreateFileInput();
             input.ContainerName = ContainerName;
+            input.DirectoryId = GetListInput.DirectoryId;
             input.EntityId = EntityId;
             input.File = new RemoteStreamContent(
                                                 file.File.OpenReadStream(long.MaxValue),
@@ -246,7 +259,7 @@ public partial class FileExplorerModal
                 await InvokeAsync(() =>
                 {
                     SelectFiles.InvokeAsync(FileDataGridRef.SelectedItems);
-                    _modal.Hide();
+                    CloseModal();
                 });
             }
             else
@@ -258,7 +271,7 @@ public partial class FileExplorerModal
                         {
                             FileDataGridRef.SelectedItem
                         });
-                    _modal.Hide();
+                    CloseModal();
                 });
             }
         }
@@ -270,14 +283,30 @@ public partial class FileExplorerModal
 
     protected virtual async Task SelectedDirectoryChanged(DirectoryDescriptorInfoDto e)
     {
-        GetListInput.DirectoryId = e.Id;
+        DirectoryTreeComponentParameters.Remove("SelectedDirectory");
+        DirectoryTreeComponentParameters.Add("SelectedDirectory", e);
+        CurrentDirectory = e;
+        GetListInput.DirectoryId = e == null ? null : e.Id;
+        BreadcrumbItems = e == null ? null : e.GetParentList(AllDirectories)
+                                            .Select(dd => new Volo.Abp.BlazoriseUI.BreadcrumbItem(dd.Name,dd.Id.ToString()))
+                                            .ToList();
         await GetEntitiesAsync();
+    }
+
+
+    protected override void Dispose(bool disposing)
+    {
+        DirectoryTreeComponentParameters = null;
+        Files = null;
+        CurrentDirectory = null;
+        base.Dispose(disposing);
     }
 
     protected Task CloseModal()
     {
         DirectoryTreeComponentParameters = null;
         Files = null;
+        CurrentDirectory=null;
         return InvokeAsync(_modal.Hide);
     }
 

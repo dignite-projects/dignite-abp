@@ -13,9 +13,9 @@ namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class DirectoryTreeComponent
 {
     protected IList<DirectoryDescriptorInfoDto> AllDirectories = new List<DirectoryDescriptorInfoDto>();
-    protected DirectoryDescriptorInfoDto SelectedDirectory;
     protected IList<DirectoryDescriptorInfoDto> ExpandedNodes = new List<DirectoryDescriptorInfoDto>();
 
+    [Parameter] public DirectoryDescriptorInfoDto SelectedDirectory { get; set; }
     [Parameter] public EventCallback<DirectoryDescriptorInfoDto> SelectedDirectoryChanged { get; set; }
     [Parameter] public string ContainerName { get; set; }
     [Parameter] public FileContainerConfigurationDto Configuration { get; set; }
@@ -36,13 +36,9 @@ public partial class DirectoryTreeComponent
     {
         try
         {
-            var result = await AppService.GetListAsync(new GetDirectoriesInput
-            {
-                ContainerName = ContainerName
-            });
+            var result = await AppService.GetMyAsync(ContainerName);
 
             Entities = result.Items;
-            TotalCount = result.Items.Count;
 
             AllDirectories = Entities.ToList();
         }
@@ -58,27 +54,6 @@ public partial class DirectoryTreeComponent
         await SelectedDirectoryChanged.InvokeAsync(args);
     }
 
-    protected virtual async Task OnExpandChanged(IList<DirectoryDescriptorInfoDto> args)
-    {
-        var expandedNode = args.LastOrDefault();
-        if (expandedNode != null && expandedNode.HasChildren && !expandedNode.Children.Any())
-        {
-            var children = (await AppService.GetListAsync(new GetDirectoriesInput
-            {
-                ContainerName = ContainerName,
-                ParentId = expandedNode.Id
-            })).Items;
-
-            //
-            expandedNode.Children.Clear();
-
-            //
-            foreach (var ou in children)
-            {
-                expandedNode.AddChild(ou);
-            }
-        }
-    }
 
     protected virtual async void OnDroped(DropNode<DirectoryDescriptorInfoDto> dropNode)
     {
@@ -129,6 +104,7 @@ public partial class DirectoryTreeComponent
 
             var children = (await AppService.GetListAsync(new GetDirectoriesInput
             {
+                CreatorId=CurrentUser.Id,
                 ContainerName = ContainerName,
                 ParentId = currentNode.Id
             })).Items;
@@ -214,6 +190,7 @@ public partial class DirectoryTreeComponent
                 {
                     var children = (await AppService.GetListAsync(new GetDirectoriesInput
                     {
+                        CreatorId=CurrentUser.Id,
                         ContainerName= source.ContainerName,
                         ParentId = target.Id
                     })).Items;

@@ -7,7 +7,16 @@
 
 @if (HasCreatePermission)
 {
-    <Blazorise.Button Color="Blazorise.Color.Primary" Clicked="@OnAddRootDirectoryClicked">@L["NewRootDirectory"]</Blazorise.Button>
+    <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Margin="Margin.Is2.FromBottom">
+        <Div Padding="Padding.Is2.FromStart">
+            @L["MyDirectories"]
+        </Div>
+        <Div>
+            <Blazorise.Button Color="Blazorise.Color.Light" Size="Size.Small" Clicked="@OnAddRootDirectoryClicked">
+                <Icon Name="IconName.Add"></Icon>
+            </Blazorise.Button>
+        </Div>
+    </Div>
 }
 
 <ExtensibleTreeView TNode="DirectoryDescriptorInfoDto" Draggable
@@ -15,7 +24,6 @@
                        SelectedNode="@SelectedDirectory"
                        SelectedNodeChanged="@OnSelectDescriptorChanged"
                        ExpandedNodes="@ExpandedNodes"
-                       ExpandedNodesChanged="@OnExpandChanged"
                        GetChildNodes="x => x.Children"
                        HasChildNodes="x => x.HasChildren"
                        NodeDropped="@OnDroped">
@@ -24,7 +32,7 @@
             <Button Color="(SelectedDirectory!=null && SelectedDirectory.Id==context.Id)? Color.Secondary: Color.Light" Padding="Padding.Is0.FromTop.Is0.FromBottom.Is1.FromStart.Is1.FromEnd">@context.Name</Button>
             <DropdownToggle Color="(SelectedDirectory!=null && SelectedDirectory.Id==context.Id)? Color.Secondary: Color.Light" Padding="Padding.Is0.FromTop.Is0.FromBottom" Split />
             <DropdownMenu>
-                <DropdownItem Disabled="@(!HasCreatePermission)" Clicked="@(e=>OnAddSubDirectoryClicked(context))">@L["NewSubUnit"]</DropdownItem>
+                <DropdownItem Disabled="@(!HasCreatePermission)" Clicked="@(e=>OnAddSubDirectoryClicked(context))">@L["NewDirectory"]</DropdownItem>
                 <DropdownItem Disabled="@(!HasUpdatePermission)" Clicked="@(e=>OnEditDirectoryClicked(context))">@L["Edit"]</DropdownItem>
                 <DropdownDivider />
                 <DropdownItem Disabled="@(!HasDeletePermission)" Clicked="@(e=>DeleteEntityAsync(context))">@L["Delete"]</DropdownItem>

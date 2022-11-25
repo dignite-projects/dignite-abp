@@ -11,7 +11,8 @@
                     Send file stream with form
                 </CardHeader>
                 <CardBody>
-                    <FileEditComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="7c804a75-665c-c575-13e5-3a07b0bbb0fe"></FileEditComponent>
+                    <FileEditComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="7c804a75-665c-c575-13e5-3a07b0bbb0fe">
+                    </FileEditComponent>
                 </CardBody>
             </Card>
         </Column>
@@ -21,32 +22,7 @@
                     Select uploaded files
                 </CardHeader>
                 <CardBody>
-                    <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="@EntityId" @bind-SelectedFiles="@Files">
-                        <FileDescriptorsContent>
-                            @if (context != null && context.Any())
-                            {
-                                <Table>
-                                    <TableHeader>
-                                        <TableRow>
-                                            <TableHeaderCell>@L["FileName"]</TableHeaderCell>
-                                            <TableHeaderCell>@L["Size"]</TableHeaderCell>
-                                            <TableHeaderCell></TableHeaderCell>
-                                        </TableRow>
-                                    </TableHeader>
-                                    <TableBody>
-                                    @foreach (var item in context)
-                                        {
-                                            <TableRow>
-                                                <TableRowCell>@item.Name</TableRowCell>
-                                                <TableRowCell>@item.Size</TableRowCell>
-                                                <TableRowCell>
-                                                </TableRowCell>
-                                            </TableRow>
-                                        }
-                                    </TableBody>
-                                </Table>
-                            }
-                        </FileDescriptorsContent>
+                    <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="false" EntityId="@EntityId" @bind-SelectedFiles="@Files">                        
                     </FilePickerComponent>
                     <hr />
                     <h5>

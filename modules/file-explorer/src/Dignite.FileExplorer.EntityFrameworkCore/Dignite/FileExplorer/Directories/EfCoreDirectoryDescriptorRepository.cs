@@ -72,6 +72,15 @@ public class EfCoreDirectoryDescriptorRepository : EfCoreRepository<IFileExplore
             .AnyAsync(b => b.ContainerName == containerName && b.CreatorId == creatorId && b.ParentId == parentId && b.Name == name, GetCancellationToken(cancellationToken));
     }
 
+    public async Task<List<DirectoryDescriptor>> GetAllListByUserAsync(Guid creatorId, string containerName, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        return await (await GetDbSetAsync())
+            .Where(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId)
+            .OrderBy(dd=>dd.ParentId)
+            .ThenBy(m=>m.Order)
+            .ToListAsync(cancellationToken);
+    }
+
     protected virtual async Task<IQueryable<DirectoryDescriptor>> GetListQueryAsync(
         Guid creatorId,
         string containerName,

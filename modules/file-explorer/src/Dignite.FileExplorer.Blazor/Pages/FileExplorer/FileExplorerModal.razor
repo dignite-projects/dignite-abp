@@ -9,11 +9,10 @@
             <ModalTitle>@L["FileExplorer"]</ModalTitle>
             <CloseButton Clicked="CloseModal" />
         </ModalHeader>
-        <ModalBody>
-            <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
-            <Row NoGutters>
+        <ModalBody>            
+            <Row>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <AutoHeight ExtraHeight="340">
+                    <AutoHeight ExtraHeight="240">
                         @if (DirectoryTreeComponentParameters!=null)
                         {
                             <DynamicComponent Type="@typeof(DirectoryTreeComponent)"
@@ -22,6 +21,37 @@
                     </AutoHeight>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is9">
+                    <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Margin="Margin.Is2.FromBottom">
+                        <Div Padding="Padding.Is2.FromStart">
+                            <Breadcrumb Margin="Margin.Is0.FromBottom">
+                                @if (CurrentDirectory == null)
+                                {
+                                    <BreadcrumbItem>
+                                        <BreadcrumbLink><Text>@L["AllFiles"]</Text></BreadcrumbLink>
+                                    </BreadcrumbItem>
+                                }
+                                else
+                                {
+                                    <BreadcrumbItem>
+                                        <BreadcrumbLink To="#" Clicked="@(()=>SelectedDirectoryChanged(null))">@L["AllFiles"]</BreadcrumbLink>
+                                    </BreadcrumbItem>
+                                    @foreach (var item in BreadcrumbItems)
+                                    {
+                                        <BreadcrumbItem>
+                                            <Text>@item.Text</Text>
+                                        </BreadcrumbItem>                                        
+                                    }
+                                    <BreadcrumbItem>
+                                        <Text>@CurrentDirectory.Name</Text>
+                                    </BreadcrumbItem>                                    
+                                }
+                            </Breadcrumb>                            
+                        </Div>
+                        <Div>
+                            <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+                        </Div>
+                    </Div>
+                    
                     @* ************************* DATA GRID ************************* *@
                     <ExtensibleDataGrid TItem="FileDescriptorDto" @ref="FileDataGridRef"
                                                                               SelectionMode="Multiple?DataGridSelectionMode.Multiple: DataGridSelectionMode.Single"
@@ -67,7 +97,7 @@
                                                     </Paragraph>
                                                 }
                                             </TableRowCell>
-                                            <TableRowCell>@file.File.Size</TableRowCell>
+                                            <TableRowCell>@FileSizeFormatter.FormatSize(file.File.Size)</TableRowCell>
                                             <TableRowCell>                                                
                                                 @switch (file.Status)
                                                 {

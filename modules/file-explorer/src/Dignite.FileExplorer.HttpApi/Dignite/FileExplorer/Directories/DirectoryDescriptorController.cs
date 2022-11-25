@@ -28,14 +28,14 @@ public class FileDescriptorController : AbpController, IDirectoryDescriptorAppSe
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public async Task DeleteAsync(Guid id)
     {
         await _directoryAppService.DeleteAsync(id);
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public async Task<DirectoryDescriptorDto> GetAsync(Guid id)
     {
         return await _directoryAppService.GetAsync(id);
@@ -47,15 +47,22 @@ public class FileDescriptorController : AbpController, IDirectoryDescriptorAppSe
         return await _directoryAppService.GetListAsync(input);
     }
 
+    [HttpGet]
+    [Route("my/{containerName}")]
+    public async Task<ListResultDto<DirectoryDescriptorInfoDto>> GetMyAsync(string containerName)
+    {
+        return await _directoryAppService.GetMyAsync(containerName);
+    }
+
     [HttpPut]
-    [Route("{id}/move")]
+    [Route("{id:guid}/move")]
     public async Task<DirectoryDescriptorDto> MoveAsync(Guid id,MoveDirectoryInput input)
     {
         return await _directoryAppService.MoveAsync(id, input);
     }
 
     [HttpPut]
-    [Route("{id}")]
+    [Route("{id:guid}")]
     public async Task<DirectoryDescriptorDto> UpdateAsync(Guid id, UpdateDirectoryInput input)
     {
         return await _directoryAppService.UpdateAsync(id, input);

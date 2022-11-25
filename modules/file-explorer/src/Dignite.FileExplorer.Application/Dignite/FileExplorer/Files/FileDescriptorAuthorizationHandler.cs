@@ -24,11 +24,13 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
     public FileDescriptorAuthorizationHandler(
         IServiceProvider serviceProvider,
         IPermissionChecker permissionChecker,
-        IBlobContainerConfigurationProvider blobContainerConfigurationProvider)
+        IBlobContainerConfigurationProvider blobContainerConfigurationProvider,
+        IDirectoryDescriptorRepository directoryDescriptorRepository)
     {
         ServiceProvider = serviceProvider;
         PermissionChecker = permissionChecker;
         BlobContainerConfigurationProvider = blobContainerConfigurationProvider;
+        DirectoryDescriptorRepository = directoryDescriptorRepository;
     }
 
     protected override async Task HandleRequirementAsync(

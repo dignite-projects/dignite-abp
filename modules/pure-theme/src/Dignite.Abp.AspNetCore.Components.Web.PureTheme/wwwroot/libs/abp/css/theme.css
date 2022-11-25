@@ -6,12 +6,20 @@
     padding-bottom: 0.75rem;
     background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
     z-index: 1020;
+    align-items: center !important;
 }
 
-    .entry-row h1.content-header-title {
-        font-size: 1.5rem;
-        line-height: normal;
-    }
+.entry-row h1.content-header-title {
+    font-size: 1.5rem;
+    line-height: normal;
+    margin-bottom:0px;
+}
+.entry-row ol.breadcrumb {
+    margin-bottom:0px;
+}
+.entry-row button {
+    margin-right:0.5rem;
+}
 
 /* branding */
 .navbar-brand-logo {

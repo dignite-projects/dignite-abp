@@ -19,9 +19,16 @@ public class TenantSettingsController : AbpControllerBase, ITenantSettingsAppSer
     }
 
     [HttpGet]
-    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
+    [Route("groups")]
+    public async Task<ListResultDto<SettingGroupDto>> GetAllGroupsAsync()
     {
-        return await _tenantSettingsAppService.GetAllAsync();
+        return await _tenantSettingsAppService.GetAllGroupsAsync();
+    }
+
+    [HttpGet]
+    public async Task<ListResultDto<SettingDto>> GetListAsync(GetSettingsInput input)
+    {
+        return await _tenantSettingsAppService.GetListAsync(input);
     }
 
     [HttpPut]

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dignite.Abp.Settings.DynamicForms;
+using Dignite.Abp.SettingsGrouping;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
@@ -11,7 +11,7 @@ namespace Dignite.Abp.SettingManagement;
 public class GlobalSettingsAppService : SettingsAppServiceBase, IGlobalSettingsAppService
 {
     public GlobalSettingsAppService(
-        ISettingDefinitionFormManager settingDefinitionManager,
+        ISettingDefinitionGroupManager settingDefinitionManager,
         ISettingManager settingManager)
         : base(settingDefinitionManager, settingManager)
     {
@@ -22,7 +22,7 @@ public class GlobalSettingsAppService : SettingsAppServiceBase, IGlobalSettingsA
         await SettingManager.SetGlobalAsync(name, value);
     }
 
-    protected override async Task<List<SettingValue>> GetSettingValues()
+    protected override async Task<List<SettingValue>> GetAllAsync()
     {
         return await SettingManager.GetAllGlobalAsync();
     }

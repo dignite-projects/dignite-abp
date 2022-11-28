@@ -1,40 +1,25 @@
-﻿using System.Collections.Immutable;
-using Dignite.Abp.Settings.DynamicForms;
+﻿using Dignite.Abp.SettingsGrouping;
 using SettingManagementSample.Localization;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.Settings;
 using Volo.Abp.Localization;
 using Volo.Abp.Settings;
 
 namespace SettingManagementSample;
 
-[SettingDefinitionProviderName(TestSettingNames.TestSettingProviderName)]
-public class SettingManagementSampleSettingDefinitionProvider: AbpIdentitySettingDefinitionProvider, ISettingDefinitionFormProvider, ITransientDependency
+public class SettingManagementSampleSettingDefinitionProvider: SettingDefinitionProvider, ISettingDefinitionGroupProvider, ITransientDependency
 {
-    public ILocalizableString DisplayName => L("SettingsGroup");
+    public SettingDefinitionGroup Group => new SettingDefinitionGroup(
+        TestSettingNames.TestSettingGroupName, 
+        L(TestSettingNames.TestSettingGroupName), 
+        L("Setting_Group_Description"),
+        "fas fa fa-certificate"
+        );
 
     public override void Define(ISettingDefinitionContext context)
     {
-        var settings = new Dictionary<string, SettingDefinition>();
-        base.Define(new SettingDefinitionContext(settings));
-
-        settings.GetValueOrDefault(IdentitySettingNames.Password.RequiredLength)
-            .UseTextboxForm(tb =>
-            {
-                tb.Required = true;
-                tb.Placeholder = "placeholder-text";
-            }
-            );
-
-        //Add inherited settings
-        context.Add(
-            L(TestSettingNames.TestSettingGroupName),
-            settings.Values.ToImmutableArray().ToArray()
-        );
-
         //Add new setting definition item
-        context.Add(L(TestSettingNames.TestSettingGroupName2),
+        context.Add(
+            new SettingDefinitionGroup(TestSettingNames.TestSettingSubGroupName2, L(TestSettingNames.TestSettingSubGroupName2), L("Setting_SubGroup_Description2")),
             new SettingDefinition(TestSettingNames.TestSettingWithoutDefaultValue)
                 .UseTextboxForm(tb =>
                 {
@@ -58,6 +43,7 @@ public class SettingManagementSampleSettingDefinitionProvider: AbpIdentitySettin
                 {
                     tb.Required = true;
                     tb.Placeholder = "placeholder-text";
+                    tb.Description = "这里是文本框的输入提示！";
                     tb.CharLimit = 64;
                 })
         );

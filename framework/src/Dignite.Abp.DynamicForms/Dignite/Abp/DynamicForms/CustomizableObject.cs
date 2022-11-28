@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp;
 using Volo.Abp.Content;
 
 namespace Dignite.Abp.DynamicForms;
@@ -39,9 +40,9 @@ public abstract class CustomizableObject<TCustomizeFieldInfo> : IHasCustomFields
         {
             var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name == field.Key);
             if (fieldDefinition == null)
-                continue;
+                throw new AbpException($"No custom field named {field.Key} exists");
 
-            var form = formSelector.Get(fieldDefinition.FormName);
+            var form = formSelector.Get(fieldDefinition.FormProviderName);
             form.Validate(
                 new FormValidateArgs(
                     fieldDefinition,

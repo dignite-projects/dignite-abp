@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Dignite.Abp.Settings.DynamicForms;
+using Dignite.Abp.SettingsGrouping;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
@@ -11,13 +11,13 @@ namespace Dignite.Abp.SettingManagement;
 public class UserSettingsAppService : SettingsAppServiceBase, IUserSettingsAppService
 {
     public UserSettingsAppService(
-        ISettingDefinitionFormManager settingDefinitionManager,
+        ISettingDefinitionGroupManager settingDefinitionManager,
         ISettingManager settingManager)
         : base(settingDefinitionManager, settingManager)
     {
     }
 
-    public async Task UpdateAsync(UpdateUserSettingsInput input)
+    public async Task UpdateAllAsync(UpdateUserSettingsInput input)
     {
         await base.UpdateAsync(input);
     }
@@ -27,7 +27,7 @@ public class UserSettingsAppService : SettingsAppServiceBase, IUserSettingsAppSe
         await SettingManager.SetForCurrentUserAsync(name, value);
     }
 
-    protected override async Task<List<SettingValue>> GetSettingValues()
+    protected override async Task<List<SettingValue>> GetAllAsync()
     {
         return await SettingManager.GetAllForCurrentUserAsync();
     }

@@ -6,7 +6,9 @@ namespace Dignite.Abp.SettingManagement;
 
 public interface IGlobalSettingsAppService : IApplicationService
 {
-    Task<ListResultDto<SettingProviderDto>> GetAllAsync();
+    Task<ListResultDto<SettingGroupDto>> GetAllGroupsAsync();
+
+    Task<ListResultDto<SettingDto>> GetListAsync(GetSettingsInput input);
 
     Task UpdateAsync(UpdateGlobalSettingsInput input);
 }

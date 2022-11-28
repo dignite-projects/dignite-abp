@@ -1,0 +1,56 @@
+﻿@using Dignite.Abp.DynamicForms.Components;
+@using Dignite.Abp.SettingManagement.Localization;
+@using Volo.Abp.AspNetCore.Components;
+@using Volo.Abp.BlazoriseUI.Components
+@inject IFormComponentSelector fieldFormComponentSelector
+@inherits AbpComponentBase
+
+<Blazorise.Form>
+    <Blazorise.Validations @ref="@ValidationsRef" Model="@SettingsCustomizableObject" ValidateOnLoad="false">
+        @foreach (var setting in Settings)
+        {
+            var component = fieldFormComponentSelector.Get(setting.FormProviderName);
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("CustomizableObject", SettingsCustomizableObject);
+            parameters.Add("Field", setting);
+            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+        }
+    </Blazorise.Validations>
+    <Div TextAlignment="TextAlignment.End">
+        <SubmitButton Clicked="@SaveAsync" />
+    </Div>
+</Blazorise.Form>
+
+@code {
+    protected Validations ValidationsRef;
+
+    [Parameter] public IReadOnlyList<SettingDto> Settings { get; set; }
+    [Parameter] public SettingsCustomizableObject SettingsCustomizableObject { get; set; }
+    [Parameter] public EventCallback OnSaveCallback { get; set; }
+
+    public SettingsFormComponent()
+    {
+        LocalizationResource = typeof(AbpSettingManagementResource);
+    }
+
+    private async Task SaveAsync()
+    {
+        try
+        {
+            var validate = true;
+            if (ValidationsRef != null)
+            {
+                validate = await ValidationsRef.ValidateAll();
+            }
+            if (validate)
+            {
+                await OnSaveCallback.InvokeAsync();
+                await Notify.Success(L["SettingSaveSuccessMessage"]);
+            }
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }
+    }
+}

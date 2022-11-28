@@ -2,6 +2,7 @@
   "culture": "zh-Hans",
   "texts": {
     "Permission:GlobalSettings": "全局设置",
-    "Permission:TenantSettings": "租户设置"
+    "Permission:TenantSettings": "租户设置",
+    "SettingSaveSuccessMessage": "设置项保存成功。"
   }
 }

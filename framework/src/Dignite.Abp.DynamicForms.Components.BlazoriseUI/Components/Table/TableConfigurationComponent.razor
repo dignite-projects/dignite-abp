@@ -53,7 +53,7 @@
                     </TableRowCell>
                     <TableRowCell>
                         <Validation Validator="((e)=>ValidateColumnFieldControl(e))">
-                        <Select TValue="string" SelectedValue="@column.CustomField.FormName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
+                        <Select TValue="string" SelectedValue="@column.CustomField.FormProviderName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
                                 <SelectItem TValue="string" Value="null">@L["SelectForm"]</SelectItem>
                             @if (AvailableForms != null)
                             {
@@ -66,7 +66,7 @@
                         </Validation>
                     </TableRowCell>
                     <TableRowCell>
-                        <Button @onclick="@(val => OnSelectedValueChanged(column.CustomField.FormName, column))"><Icon Name="IconName.Edit" /></Button>
+                        <Button @onclick="@(val => OnSelectedValueChanged(column.CustomField.FormProviderName, column))"><Icon Name="IconName.Edit" /></Button>
                         <Button @onclick="@(val => RemoveTableColumn(val, column))"><Icon Name="IconName.Remove" /></Button>
                         @if (index > 0)
                         {
@@ -162,7 +162,7 @@
     {
         if (!formName.IsNullOrEmpty())
         {
-            column.CustomField.FormName = formName;
+            column.CustomField.FormProviderName = formName;
             if (formName != L["SelectForm"].Value)
             {
                 var component = configurationComponentSelector.Get(formName);

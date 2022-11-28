@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingManageme
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{16F662BB-EC16-45AF-9CAE-F31AF92C7040}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Settings.DynamicForms", "..\..\framework\src\Dignite.Abp.Settings.DynamicForms\Dignite.Abp.Settings.DynamicForms.csproj", "{F530D579-F9DD-4525-8E41-017618A916E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping", "..\..\framework\src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj", "{F530D579-F9DD-4525-8E41-017618A916E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

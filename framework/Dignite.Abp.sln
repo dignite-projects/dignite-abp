@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7869E1B7-6CC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{64061EF0-B5E7-45B6-A0C1-639B7D44E921}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Settings.DynamicForms", "src\Dignite.Abp.Settings.DynamicForms\Dignite.Abp.Settings.DynamicForms.csproj", "{334170E8-9ED4-4721-BEC4-EEDDA7E058C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping", "src\Dignite.Abp.SettingsGrouping\Dignite.Abp.SettingsGrouping.csproj", "{334170E8-9ED4-4721-BEC4-EEDDA7E058C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.SignalRNotifier", "src\Dignite.Abp.Notifications.SignalRNotifier\Dignite.Abp.Notifications.SignalRNotifier.csproj", "{3AA740A0-6FD9-47B9-B86B-773C35152AE8}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Tests", "test\Dignite.Abp.DynamicForms.Tests\Dignite.Abp.DynamicForms.Tests.csproj", "{02A0C261-0677-4A47-B3DF-4E09C243284C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Settings.DynamicForms.Tests", "test\Dignite.Abp.Settings.DynamicForms.Tests\Dignite.Abp.Settings.DynamicForms.Tests.csproj", "{2BF3EC73-331E-499F-83B4-95C8C9F76F42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.SettingsGrouping.Tests", "test\Dignite.Abp.SettingsGrouping.Tests\Dignite.Abp.SettingsGrouping.Tests.csproj", "{2BF3EC73-331E-499F-83B4-95C8C9F76F42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components", "src\Dignite.Abp.DynamicForms.Components\Dignite.Abp.DynamicForms.Components.csproj", "{9941467B-B90F-4350-974A-560BBED36AAC}"
 EndProject

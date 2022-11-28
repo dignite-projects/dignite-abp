@@ -2,18 +2,22 @@
 @using Dignite.Abp.DynamicForms
 @using Dignite.Abp.DynamicForms.Components
 @using Dignite.Abp.SettingManagement.Localization
+@using Microsoft.AspNetCore.Authorization;
 @using Volo.Abp.AspNetCore.Components
 @using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
 
+@attribute [Authorize(SettingManagementPermissions.Global)]
 @inject IGlobalSettingsAppService settingsAppService
 @inject IFormComponentSelector fieldFormComponentSelector
 @inherits AbpComponentBase
 @code
 {
-    private IReadOnlyList<SettingProviderDto> SettingGroup;
-    protected Validations ValidationsRef;
-    string selectedTab;
-    private SettingObject settingObject= new SettingObject();
+    private IReadOnlyList<SettingGroupDto> AllSettingGroups;
+    private IList<SettingGroupDto> SubGroups;
+    private string GroupName;
+    private string SubGroupName;
+    private SettingsCustomizableObject SettingsCustomizableObject;
+    private IReadOnlyList<SettingDto> Settings;
 
     public GlobalSettings()
     {
@@ -22,119 +26,137 @@
 
     protected override async Task OnInitializedAsync()
     {
-        SettingGroup = (await settingsAppService.GetAllAsync()).Items;
-        foreach (var settingNav in SettingGroup)
+        AllSettingGroups = (await settingsAppService.GetAllGroupsAsync()).Items;
+        if (AllSettingGroups.Any())
         {
-            foreach (var setting in settingNav.Settings)
-            {
-                settingObject.CustomFields.Add(setting.Name,setting.Value);
-            }
-        }
-        if (SettingGroup.Any())
-        {
-            selectedTab = SettingGroup[0].Name;
+            GroupName = AllSettingGroups[0].Name;
+            SubGroups = AllSettingGroups[0].SubGroups;
+
+            await OnGroupChanged(GroupName);
         }
         await base.OnInitializedAsync();
     }
 
-    private Task OnSelectedTabChanged( string name )
+    private async Task OnGroupChanged(string name)
     {
-        selectedTab = name;
+        GroupName = name;
+        SubGroupName = null;
+        SubGroups = AllSettingGroups.First(g=>g.Name==name).SubGroups;
 
-        return Task.CompletedTask;
+        if (AllSettingGroups.First(g => g.Name == GroupName).Settings.Any())
+        {
+            await BuildSettingsCustomizableObject();
+        }
+        else
+        {
+            Settings = null;
+            SettingsCustomizableObject = null;
+        }
     }
+
+    private async Task OnSubGroupChanged(string subGroupName)
+    {
+        SubGroupName = subGroupName;
+        await BuildSettingsCustomizableObject();
+    }
+
+    private async Task BuildSettingsCustomizableObject()
+    {
+        Settings = (await settingsAppService.GetListAsync(new GetSettingsInput
+            {
+                GroupName = GroupName,
+                SubGroupName = SubGroupName
+            })).Items;
+        SettingsCustomizableObject = new SettingsCustomizableObject();
+        foreach (var setting in Settings)
+        {
+            SettingsCustomizableObject.CustomFields.Add(setting.Name, setting.Value);
+        }
+    }
+
 
     private async Task SaveAsync()
-    {        
-        try
-        {
-            var validate = true;
-            if (ValidationsRef != null)
-            {
-                validate = await ValidationsRef.ValidateAll();
-            }
-            if (validate)
-            {
-                var settingNav = SettingGroup.Single(m => m.Name == selectedTab);
-                var input = new UpdateGlobalSettingsInputForClientProxy(settingNav.Settings);
-                input.ProviderName = settingNav.Name;
-                input.CustomFields = settingObject.CustomFields;
+    {
+        var input = new UpdateGlobalSettingsInputForClientProxy(Settings);
+        input.GroupName = GroupName;
+        input.SubGroupName = SubGroupName;
+        input.CustomFields = SettingsCustomizableObject.CustomFields;
 
-                await settingsAppService.UpdateAsync(input);
-            }
-        }
-        catch (Exception ex)
-        {
-            await HandleErrorAsync(ex);
-        }
-    }
-
-    Dictionary<string, object> GetSettingFormControlComponentParameters(SettingDto setting)
-    { 
-        var parameters = new Dictionary<string, object>();
-        parameters.Add("CustomizableObject", settingObject);
-        parameters.Add("Field", setting);
-
-        return parameters;
+        await settingsAppService.UpdateAsync(input);
     }
 }
 
-<PageHeader Title="@L["Settings"]"></PageHeader>
-<Blazorise.Form>
-    <Blazorise.Validations @ref="@ValidationsRef" Model="@settingObject" ValidateOnLoad="false">
-        @if (SettingGroup != null)
-        {
-        <Tabs TabPosition="TabPosition.Start" Pills="true" SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged">
-            <Items>
-                @foreach (var settingNav in SettingGroup)
-                {
-                    <Tab Name="@settingNav.Name">@settingNav.DisplayName</Tab>
-                }
-            </Items>
-            <Content>
-                    @foreach (var settingNav in SettingGroup)
+<Container Background="Background.White" Border="Border.Is1.Rounded" Padding="Padding.Is0">
+    @if (AllSettingGroups != null)
+    {
+        <Row NoGutters>
+            <Column ColumnSize="ColumnSize.Is4" Border="Border.Is1.OnEnd">
+                <Heading Size="HeadingSize.Is4" Padding="Padding.Is4.Is0.FromBottom">@L["Settings"]</Heading>
+                <Divider></Divider>
+                <ListGroup Flush Mode="ListGroupMode.Selectable" SelectedItem="@GroupName" SelectedItemChanged="OnGroupChanged">
+                    @foreach (var group in AllSettingGroups)
                     {
-                        var groups = settingNav.Settings.Where(s => s.Group != null).Select(s=>s.Group).Distinct().ToList();
-                        var ungroupedSettings = settingNav.Settings.Where(s => s.Group == null);
-                        <TabPanel Name="@settingNav.Name">   
-                            @if (groups.Any())
-                            {
-                                foreach (var group in groups)
-                                {
-                                    <h5>
-                                        @group
-                                    </h5>                 
-                                    <Card Class="mb-3">
-                                        <CardBody>
-                                        @foreach(var setting in settingNav.Settings.Where(s=>s.Group==group).ToList())
-                                        {
-                                            var component = fieldFormComponentSelector.Get(setting.FormName);
-                                            var parameters = GetSettingFormControlComponentParameters(setting);
-                                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
-                                        }
-                                        </CardBody>
-                                    </Card>
-                                }
-                            }
-                            @if (ungroupedSettings.Any())
-                            {
-                            <Card Class="mb-3">
-                                <CardBody>
-                                @foreach (var setting in ungroupedSettings)
-                                {
-                                    var component = fieldFormComponentSelector.Get(setting.FormName);
-                                    var parameters = GetSettingFormControlComponentParameters(setting);
-                                    <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
-                                }     
-                                </CardBody>
-                            </Card>  
-                            }
-                                            
-                        </TabPanel>
+                        <ListGroupItem Name="@group.Name">
+                            <Div Flex="Flex.AlignItems.Center" Width="Width.Is100">
+                                <Div Margin="Margin.Is3.FromEnd">
+                                    <i class="@group.Icon"></i>
+                                </Div>
+                                <Div Flex="Flex.Column" Width="Width.Is100">
+                                    @group.DisplayName
+                                    <Small>@group.Description</Small>
+                                </Div>
+                                <Icon Name="IconName.AngleRight"></Icon>
+                            </Div>
+                        </ListGroupItem>                    
                     }
-                <Button Color="Color.Primary" Clicked="@SaveAsync">@L["Save"]</Button>
-            </Content>
-        </Tabs>
-        }
-    </Blazorise.Validations>
-</Blazorise.Form>
+                </ListGroup>  
+            </Column>
+            <Column ColumnSize="ColumnSize.Is8" Padding="Padding.Is4.Is5.FromBottom">
+                <Heading Size="HeadingSize.Is4">
+                    @if (SubGroupName.IsNullOrEmpty())
+                    {
+                        var group = AllSettingGroups.First(g => g.Name == GroupName);
+                        @group.DisplayName
+                    }
+                    else
+                    {
+                        var subGroup = AllSettingGroups.First(g => g.Name == GroupName).SubGroups.First(sg=>sg.Name==SubGroupName);
+                        <Button Color="Color.Light" Clicked="@(()=> OnGroupChanged(GroupName))" Size="Size.Small" Margin="Margin.Is2.FromEnd" Padding="Padding.Is2.FromStart.Is2.FromEnd.Is1.FromTop.Is1.FromBottom" Border="Border.Is0.RoundedCircle">
+                            <Icon Name="IconName.ArrowLeft"></Icon>
+                        </Button>
+                        @subGroup.DisplayName                   
+                    }
+                </Heading>
+                <Divider></Divider>
+                @if (GroupName != null && SubGroupName == null && SubGroups != null && SubGroups.Any())
+                {
+                    <ListGroup Flush Mode="ListGroupMode.Selectable" SelectedItem="@SubGroupName" SelectedItemChanged="OnSubGroupChanged">
+                        @foreach (var subGroup in SubGroups)
+                        {
+                            <ListGroupItem Name="@subGroup.Name">
+                                <Div Flex="Flex.AlignItems.Center" Width="Width.Is100">
+                                    <Div Margin="Margin.Is3.FromEnd">
+                                        <i class="@subGroup.Icon"></i>
+                                    </Div>
+                                    <Div Flex="Flex.Column" Width="Width.Is100">
+                                        @subGroup.DisplayName
+                                        <Small TextColor="TextColor.Secondary">@subGroup.Description</Small>
+                                    </Div>
+                                    <Icon Name="IconName.AngleRight"></Icon>
+                                </Div>
+                            </ListGroupItem>
+                        }
+                    </ListGroup>
+                }
+                @if (Settings != null)
+                {
+                    if (SubGroupName == null)
+                    {
+                        <Divider></Divider>
+                    }
+                    <SettingsFormComponent Settings="@Settings" SettingsCustomizableObject="SettingsCustomizableObject" OnSaveCallback="SaveAsync"></SettingsFormComponent>
+                }
+            </Column>
+        </Row>
+    }
+</Container>

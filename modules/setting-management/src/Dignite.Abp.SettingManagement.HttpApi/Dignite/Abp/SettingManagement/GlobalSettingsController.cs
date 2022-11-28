@@ -19,9 +19,16 @@ public class GlobalSettingsController : AbpControllerBase, IGlobalSettingsAppSer
     }
 
     [HttpGet]
-    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
+    [Route("groups")]
+    public async Task<ListResultDto<SettingGroupDto>> GetAllGroupsAsync()
     {
-        return await _globalSettingsAppService.GetAllAsync();
+        return await _globalSettingsAppService.GetAllGroupsAsync();
+    }
+
+    [HttpGet]
+    public async Task<ListResultDto<SettingDto>> GetListAsync(GetSettingsInput input)
+    {
+        return await _globalSettingsAppService.GetListAsync(input);
     }
 
     [HttpPut]

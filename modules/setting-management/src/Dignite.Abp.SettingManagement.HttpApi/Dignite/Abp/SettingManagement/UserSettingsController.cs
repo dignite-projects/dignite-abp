@@ -19,14 +19,21 @@ public class UserSettingsController : AbpControllerBase, IUserSettingsAppService
     }
 
     [HttpGet]
-    public async Task<ListResultDto<SettingProviderDto>> GetAllAsync()
+    [Route("groups")]
+    public async Task<ListResultDto<SettingGroupDto>> GetAllGroupsAsync()
     {
-        return await _userSettingsAppService.GetAllAsync();
+        return await _userSettingsAppService.GetAllGroupsAsync();
+    }
+
+    [HttpGet]
+    public async Task<ListResultDto<SettingDto>> GetListAsync(GetSettingsInput input)
+    {
+        return await _userSettingsAppService.GetListAsync(input);
     }
 
     [HttpPut]
-    public async Task UpdateAsync(UpdateUserSettingsInput input)
+    public async Task UpdateAllAsync(UpdateUserSettingsInput input)
     {
-        await _userSettingsAppService.UpdateAsync(input);
+        await _userSettingsAppService.UpdateAllAsync(input);
     }
 }

@@ -124,7 +124,7 @@ namespace FileExplorerSample;
 public class FileExplorerSampleModule : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
-    public const bool IsMultiTenant = false;
+    public const bool IsMultiTenant = true;
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {

@@ -16,6 +16,11 @@
 		<RootNamespace />
 	</PropertyGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="Dignite\FileExplorer\Localization\Resources\*.json" />
+		<Content Remove="Dignite\FileExplorer\Localization\Resources\*.json" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Validation" Version="5.3.4" />
   </ItemGroup>

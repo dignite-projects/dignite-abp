@@ -1,6 +1,26 @@
 {
   "culture": "zh-Hant",
   "texts": {
-    "ManageYourProfile": "管理個人資料"
+    "FileExplorer:Directory:0001": "目錄已存在！",
+    "FileExplorer:Directory:0002": "目錄不存在！",
+    "FileExplorer:Directory:0003": "目錄名無效！",
+    "FileExplorer:Directory:0004": "無效的移動！",
+    "FileExplorer:Directory:0005": "禁止移動到子目錄！",
+    "FileExplorer": "文件管理器",
+    "Permission:FileExplorer": "文件管理器",
+    "Permission:Management": "管理文件",
+    "MyDirectories": "我的文件目錄",
+    "NewDirectory": "新建目錄",
+    "DirectoryName": "目錄名",
+    "DeletionConfirmationMessage": "確認刪除 {0} 嗎？",
+    "SuccessfullyDeleted": "刪除成功！",
+    "FileName": "文件名",
+    "FileSize": "文件大小",
+    "ExceedsMaximumSize": "上傳的文件大小不能超過 {0}。",
+    "AllFiles": "所有文件",
+    "UploadFiles": "上傳文件",
+    "Confirm": "確定",
+    "Directory": "目錄",
+    "SelectFile": "選擇文件"
   }
 }

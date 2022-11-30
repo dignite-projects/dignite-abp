@@ -1,7 +1,26 @@
 {
   "culture": "en",
   "texts": {
-    "ManageYourProfile": "Manage your profile",
-    "SamplePageMessage": "A sample page for the FileExplorer module"
+    "FileExplorer:Directory:0001": "The directory already exists!",
+    "FileExplorer:Directory:0002": "The directory does not exist!",
+    "FileExplorer:Directory:0003": "The directory name is invalid!",
+    "FileExplorer:Directory:0004": "Invalid move!",
+    "FileExplorer:Directory:0005": "Moving to subdirectories is prohibited!",
+    "FileExplorer": "File Explorer",
+    "Permission:FileExplorer": "File Explorer",
+    "Permission:Management": "Manage Files",
+    "MyDirectories": "My Directory",
+    "NewDirectory": "New Directory",
+    "DirectoryName": "Directory Name",
+    "DeletionConfirmationMessage": "Are you sure you want to delete {0}?",
+    "SuccessfullyDeleted": "Deleted successfully!",
+    "FileName": "File Name",
+    "FileSize": "File Size",
+    "ExceedsMaximumSize": "The uploaded file size cannot exceed {0}.",
+    "AllFiles": "All Files",
+    "UploadFiles": "Upload Files",
+    "Confirm": "OK",
+    "Directory": "Directory",
+    "SelectFile": "Select File"
   }
 }

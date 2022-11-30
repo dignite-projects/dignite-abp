@@ -1,9 +1,9 @@
 {
-  "culture": "zh-Hans",
+  "culture": "zh-Hant",
   "texts": {
     "Permission:Notification": "通知",
     "NotificationCenter": "通知中心",
-    "Subscribe": "订阅",
-    "ButtonLoadMoreText": "加载更多"
+    "Subscribe": "訂閱",
+    "ButtonLoadMoreText": "加載更多"
   }
 }

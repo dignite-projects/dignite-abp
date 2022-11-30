@@ -1,6 +1,7 @@
 {
   "culture": "en",
   "texts": {
+    "Permission:Notification": "Notification",
     "NotificationCenter": "Notification Center",
     "Subscribe": "Subscribe",
     "ButtonLoadMoreText": "Load More"

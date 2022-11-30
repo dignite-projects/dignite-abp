@@ -1,8 +1,0 @@
-{
-  "culture": "en",
-  "texts": {
-    "Permission:GlobalSettings": "Global Settings",
-    "Permission:TenantSettings": "Global Settings",
-    "SettingSaveSuccessMessage": "设置项保存成功。"
-  }
-}

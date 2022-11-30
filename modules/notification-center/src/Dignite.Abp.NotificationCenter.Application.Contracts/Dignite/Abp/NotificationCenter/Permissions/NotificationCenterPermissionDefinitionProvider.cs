@@ -8,7 +8,7 @@ public class NotificationCenterPermissionDefinitionProvider : PermissionDefiniti
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(NotificationCenterPermissions.GroupName, L("Permission:NotificationCenter"));
+        var myGroup = context.AddGroup(NotificationCenterPermissions.GroupName, L("Permission:Notification"));
     }
 
     private static LocalizableString L(string name)

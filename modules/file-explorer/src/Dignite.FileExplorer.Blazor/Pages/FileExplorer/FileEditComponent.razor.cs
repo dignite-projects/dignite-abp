@@ -110,7 +110,7 @@ public partial class FileEditComponent
                 if (file.Size > MaxFileSize)
                 {
                     fu.Status = FileUploadStatus.Fail;
-                    fu.ErrorMessage = L["ExceedsMaximumSize"];
+                    fu.ErrorMessage = L["ExceedsMaximumSize", FileSizeFormatter.FormatSize(MaxFileSize)];
                 }
 
                 Files.Add(fu);
@@ -151,7 +151,7 @@ public partial class FileEditComponent
              * True: delete the original file
                False: Remove file information only
              * */
-            if (await Message.Confirm(L["FileWillBeDeletedMessage"]))
+            if (await Message.Confirm(L["DeletionConfirmationMessage", fileDescriptor.Name]))
             {
                 await FileDescriptorAppService.DeleteAsync(fileDescriptor.Id);
             }

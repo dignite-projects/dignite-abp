@@ -90,20 +90,20 @@ public partial class FileExplorerModal
             {
                 new TableColumn
                 {
-                    Title = L["Name"],
+                    Title = L["FileName"],
                     Data = nameof(FileDescriptorDto.Name),
                     Sortable = true,
                 },
                 new TableColumn
                 {
-                    Title = L["Size"],
+                    Title = L["FileSize"],
                     Data = nameof(FileDescriptorDto.Size),
                     Sortable = true,
                     ValueConverter=(data)=> FileSizeFormatter.FormatSize(data.As<FileDescriptorDto>().Size)
                 },
                 new TableColumn
                 {
-                    Title = L["DirectoryId"],
+                    Title = L["Directory"],
                     Data = nameof(FileDescriptorDto.DirectoryId),
                     Sortable = true,
                     ValueConverter = (data)=> data.As<FileDescriptorDto>().DirectoryId.HasValue? 
@@ -181,7 +181,7 @@ public partial class FileExplorerModal
                 if (file.Size > MaxFileSize)
                 {
                     fu.Status = FileUploadStatus.Fail;
-                    fu.ErrorMessage = L["ExceedsMaximumSize"];
+                    fu.ErrorMessage = L["ExceedsMaximumSize", FileSizeFormatter.FormatSize(file.Size)];
                 }
 
                 Files.Add(fu);

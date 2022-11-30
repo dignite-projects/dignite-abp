@@ -131,7 +131,7 @@ public partial class FilePickerComponent
              * True: delete the original file
                False: Remove file information only
              * */
-            if (await Message.Confirm(L["FileWillBeDeletedMessage"]))
+            if (await Message.Confirm(L["DeletionConfirmationMessage", fileDescriptor.Name]))
             {
                 await FileDescriptorAppService.DeleteAsync(fileDescriptor.Id);
             }

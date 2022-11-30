@@ -58,7 +58,7 @@
                     <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
                         <Blazorise.Validation MessageLocalizer="@LH.Localize">
                             <Blazorise.Field>
-                                <Blazorise.FieldLabel>@L["Name"]</Blazorise.FieldLabel>
+                                <Blazorise.FieldLabel>@L["DirectoryName"]</Blazorise.FieldLabel>
                                 <Blazorise.TextEdit @bind-Text="@NewEntity.Name" Autofocus="true">
                                     <Feedback>
                                         <Blazorise.ValidationError />
@@ -91,7 +91,7 @@
                     <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
                         <Blazorise.Validation MessageLocalizer="@LH.Localize">
                             <Blazorise.Field>
-                                <Blazorise.FieldLabel>@L["Name"]</Blazorise.FieldLabel>
+                                <Blazorise.FieldLabel>@L["DirectoryName"]</Blazorise.FieldLabel>
                                 <Blazorise.TextEdit @bind-Text="@EditingEntity.Name" Autofocus="true">
                                     <Feedback>
                                         <Blazorise.ValidationError />

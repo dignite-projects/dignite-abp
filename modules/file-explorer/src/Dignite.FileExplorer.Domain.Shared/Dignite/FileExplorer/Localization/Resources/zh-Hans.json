@@ -1,7 +1,27 @@
 {
   "culture": "zh-Hans",
   "texts": {
-    "ManageYourProfile": "管理个人资料",
-    "SamplePageMessage": "FileExplorer模块的示例页面"
+    "FileExplorer:Directory:0001": "目录已存在！",
+    "FileExplorer:Directory:0002": "目录不存在！",
+    "FileExplorer:Directory:0003": "目录名无效！",
+    "FileExplorer:Directory:0004": "无效的移动！",
+    "FileExplorer:Directory:0005": "禁止移动到子目录！",
+    "FileExplorer": "文件管理器",
+    "Permission:FileExplorer": "文件管理器",
+    "Permission:Management": "管理文件",
+    "MyDirectories": "我的文件目录",
+    "NewDirectory": "新建目录",
+    "DirectoryName": "目录名",
+    "DeletionConfirmationMessage": "确认删除 {0} 吗？",
+    "SuccessfullyDeleted": "删除成功！",
+    "FileName": "文件名",
+    "FileSize": "文件大小",
+    "ExceedsMaximumSize": "上传的文件大小不能超过 {0}。",
+    "AllFiles": "所有文件",
+    "UploadFiles": "上传文件",
+    "Confirm": "确定",
+    "Directory": "目录",
+    "SelectFile": "选择文件",
+    "Confirm": "确定"
   }
 }

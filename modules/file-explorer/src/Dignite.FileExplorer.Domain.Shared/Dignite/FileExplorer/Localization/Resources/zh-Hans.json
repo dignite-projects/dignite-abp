@@ -16,6 +16,7 @@
     "SuccessfullyDeleted": "删除成功！",
     "FileName": "文件名",
     "FileSize": "文件大小",
+    "CreationTime": "创建时间",
     "ExceedsMaximumSize": "上传的文件大小不能超过 {0}。",
     "AllFiles": "所有文件",
     "UploadFiles": "上传文件",

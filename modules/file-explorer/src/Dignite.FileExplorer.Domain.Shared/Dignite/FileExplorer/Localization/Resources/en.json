@@ -16,6 +16,7 @@
     "SuccessfullyDeleted": "Deleted successfully!",
     "FileName": "File Name",
     "FileSize": "File Size",
+    "CreationTime": "Creation Time",
     "ExceedsMaximumSize": "The uploaded file size cannot exceed {0}.",
     "AllFiles": "All Files",
     "UploadFiles": "Upload Files",

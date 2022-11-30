@@ -11,14 +11,8 @@
 	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-	  <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 	  <RootNamespace />
   </PropertyGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Dignite\Abp\Files\Localization\*.json" />
-		<Content Remove="Dignite\Abp\Files\Localization\*.json" />
-	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Validation" Version="5.3.4" />

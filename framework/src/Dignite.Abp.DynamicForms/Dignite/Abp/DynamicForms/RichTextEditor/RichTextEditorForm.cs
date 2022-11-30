@@ -1,12 +1,10 @@
-﻿using Dignite.Abp.DynamicForms;
-
-namespace Dignite.Abp.DynamicForms.RichTextEditor;
+﻿namespace Dignite.Abp.DynamicForms.RichTextEditor;
 
 public class RichTextEditorForm : FormBase
 {
-    public const string SwitchFormName = "RichTextEditor";
+    public const string RichTextEditorFormName = "RichTextEditor";
 
-    public override string Name => SwitchFormName;
+    public override string Name => RichTextEditorFormName;
 
     public override string DisplayName => L["RichTextEditorControl"];
 
@@ -20,7 +18,7 @@ public class RichTextEditorForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValidateValue:Required"],
+                    L["ValidateValue:Required", args.Field.DisplayName],
                     new[] { args.Field.Name }
                     ));
         }

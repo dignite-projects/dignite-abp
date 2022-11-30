@@ -3,14 +3,16 @@
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FormDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Field.DisplayName" />
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
-        <FieldLabel>@L["FormName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Field.Name" />
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
+            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
+        </TextEdit>
     </Field>
 </Validation>
 

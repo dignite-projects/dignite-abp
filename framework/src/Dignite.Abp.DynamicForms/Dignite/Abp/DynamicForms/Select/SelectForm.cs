@@ -2,9 +2,9 @@
 
 public class SelectForm : FormBase
 {
-    public const string SwitchFormName = "Select";
+    public const string SelectFormName = "Select";
 
-    public override string Name => SwitchFormName;
+    public override string Name => SelectFormName;
 
     public override string DisplayName => L["SelectControl"];
 
@@ -18,7 +18,7 @@ public class SelectForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValidateValue:Required"],
+                    L["ValidateValue:Required", args.Field.DisplayName],
                     new[] { args.Field.Name }
                     ));
         }

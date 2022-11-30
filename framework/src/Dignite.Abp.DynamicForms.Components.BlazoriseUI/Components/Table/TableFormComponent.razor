@@ -26,9 +26,9 @@
                         <Blazorise.TableRow>
                             @foreach (var column in FormConfiguration.TableColumns)
                             {
-                                if (!column.CustomField.FormProviderName.IsNullOrEmpty())
+                                if (!column.CustomField.FormName.IsNullOrEmpty())
                                 {
-                                    var component = fieldControlComponentSelector.Get(column.CustomField.FormProviderName);
+                                    var component = fieldControlComponentSelector.Get(column.CustomField.FormName);
                                     var parameters = new Dictionary<string, object>();
                                     parameters.Add("CustomizableObject", row);
                                     parameters.Add("Field", column.CustomField);

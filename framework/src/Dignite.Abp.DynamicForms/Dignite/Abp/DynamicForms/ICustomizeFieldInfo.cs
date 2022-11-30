@@ -33,7 +33,7 @@ public interface ICustomizeFieldInfo
     /// Form used by field
     /// </summary>
     [NotNull]
-    string FormProviderName { get; }
+    string FormName { get; }
 
     /// <summary>
     /// Form configuration of field

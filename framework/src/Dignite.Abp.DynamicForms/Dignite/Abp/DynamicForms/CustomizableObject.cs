@@ -42,7 +42,7 @@ public abstract class CustomizableObject<TCustomizeFieldInfo> : IHasCustomFields
             if (fieldDefinition == null)
                 throw new AbpException($"No custom field named {field.Key} exists");
 
-            var form = formSelector.Get(fieldDefinition.FormProviderName);
+            var form = formSelector.Get(fieldDefinition.FormName);
             form.Validate(
                 new FormValidateArgs(
                     fieldDefinition,

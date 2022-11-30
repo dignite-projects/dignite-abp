@@ -11,14 +11,16 @@
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FormDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Field.DisplayName" />
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
-        <FieldLabel>@L["FormName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Field.Name" />
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
+            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
+        </TextEdit>
     </Field>
 </Validation>
 
@@ -35,7 +37,7 @@
         <TableHeader>
             <Blazorise.TableRow>
                 <TableHeaderCell>@L["TableColumnName"]</TableHeaderCell>
-                <TableHeaderCell>@L["Form"]</TableHeaderCell>
+                <TableHeaderCell>@L["TableColumnForm"]</TableHeaderCell>
                 <TableHeaderCell>
                     <Button @onclick="@AddTableColumn"><Icon Name="IconName.PlusCircle" /></Button>
                 </TableHeaderCell>
@@ -53,8 +55,8 @@
                     </TableRowCell>
                     <TableRowCell>
                         <Validation Validator="((e)=>ValidateColumnFieldControl(e))">
-                        <Select TValue="string" SelectedValue="@column.CustomField.FormProviderName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
-                                <SelectItem TValue="string" Value="null">@L["SelectForm"]</SelectItem>
+                        <Select TValue="string" SelectedValue="@column.CustomField.FormName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
+                            <SelectItem TValue="string" Value="null">@L["SelectForm"]</SelectItem>
                             @if (AvailableForms != null)
                             {
                                     foreach (var p in AvailableForms)
@@ -66,7 +68,7 @@
                         </Validation>
                     </TableRowCell>
                     <TableRowCell>
-                        <Button @onclick="@(val => OnSelectedValueChanged(column.CustomField.FormProviderName, column))"><Icon Name="IconName.Edit" /></Button>
+                        <Button @onclick="@(val => OnSelectedValueChanged(column.CustomField.FormName, column))"><Icon Name="IconName.Edit" /></Button>
                         <Button @onclick="@(val => RemoveTableColumn(val, column))"><Icon Name="IconName.Remove" /></Button>
                         @if (index > 0)
                         {
@@ -162,7 +164,7 @@
     {
         if (!formName.IsNullOrEmpty())
         {
-            column.CustomField.FormProviderName = formName;
+            column.CustomField.FormName = formName;
             if (formName != L["SelectForm"].Value)
             {
                 var component = configurationComponentSelector.Get(formName);
@@ -197,7 +199,7 @@
                 if (TableColumns.Select(tc => tc.Name).Distinct().Count() != TableColumns.Count)
                 {
                     validate = false;
-                    await Notify.Error(L["NameAlreadyExist"]);
+                    await Notify.Error(L["ColumnNameAlreadyExist"]);
                 }
             }
             if (validate)

@@ -2,9 +2,9 @@
 
 public class FileEditForm : FormBase
 {
-    public const string SwitchFormName = "FileEdit";
+    public const string FileEditFormName = "FileEdit";
 
-    public override string Name => SwitchFormName;
+    public override string Name => FileEditFormName;
 
     public override string DisplayName => L["FileEditControl"];
 

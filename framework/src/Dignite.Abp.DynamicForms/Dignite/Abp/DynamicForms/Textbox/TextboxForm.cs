@@ -18,7 +18,7 @@ public class TextboxForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValidateValue:Required"],
+                    L["ValidateValue:Required", args.Field.DisplayName],
                     new[] { args.Field.Name }
                     ));
         }
@@ -27,7 +27,7 @@ public class TextboxForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["CharacterCountExceedsLimit", args.Field.DisplayName, configuration.CharLimit],
+                    L["ValidateValue:CharacterCountExceedsLimit", args.Field.DisplayName, configuration.CharLimit],
                     new[] { args.Field.Name }
                     ));
         }

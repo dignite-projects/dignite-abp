@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Dignite.Abp.DynamicForms;
 
 namespace Dignite.Abp.DynamicForms.RichTextEditor;
 

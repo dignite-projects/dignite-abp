@@ -27,8 +27,9 @@ public static class AbpFieldCustomizingDbContextModelCreatingExtensions
             return;
         }
 
-        b.Property<string>(nameof(ICustomizeFieldInfo.DisplayName)).IsRequired().HasMaxLength(64);
-        b.Property<string>(nameof(ICustomizeFieldInfo.Name)).IsRequired().HasMaxLength(64);
+        b.Property<string>(nameof(ICustomizeFieldInfo.DisplayName)).IsRequired().HasMaxLength(CustomizeFieldInfoConsts.MaxDisplayNameLength);
+        b.Property<string>(nameof(ICustomizeFieldInfo.Name)).IsRequired().HasMaxLength(CustomizeFieldInfoConsts.MaxNameLength);
+        b.Property<string>(nameof(ICustomizeFieldInfo.FormName)).IsRequired().HasMaxLength(CustomizeFieldInfoConsts.MaxFormNameLength);
         b.Property<FormConfigurationDictionary>(nameof(ICustomizeFieldInfo.FormConfiguration))
             .HasColumnName(nameof(ICustomizeFieldInfo.FormConfiguration))
             .HasConversion(

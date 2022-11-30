@@ -24,7 +24,7 @@ public class DateEditForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValidateValue:Required"],
+                    L["ValidateValue:Required", args.Field.DisplayName],
                     new[] { args.Field.Name }
                     ));
         }
@@ -34,7 +34,7 @@ public class DateEditForm : FormBase
             {
                 args.ValidationErrors.Add(
                     new System.ComponentModel.DataAnnotations.ValidationResult(
-                        L["ValidateValue:NotDateType"],
+                        L["ValidateValue:NotDateType", args.Field.DisplayName],
                         new[] { args.Field.Name }
                         ));
             }
@@ -44,7 +44,7 @@ public class DateEditForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValueCannotBeGreaterThan", args.Field.DisplayName, configuration.Max.Value],
+                    L["ValidateValue:CannotBeGreaterThan", args.Field.DisplayName, configuration.Max.Value],
                     new[] { args.Field.Name }
                     ));
         }
@@ -53,7 +53,7 @@ public class DateEditForm : FormBase
         {
             args.ValidationErrors.Add(
                 new System.ComponentModel.DataAnnotations.ValidationResult(
-                    L["ValueCannotBeLessThan", args.Field.DisplayName, configuration.Min.Value],
+                    L["ValidateValue:CannotBeLessThan", args.Field.DisplayName, configuration.Min.Value],
                     new[] { args.Field.Name }
                     ));
         }

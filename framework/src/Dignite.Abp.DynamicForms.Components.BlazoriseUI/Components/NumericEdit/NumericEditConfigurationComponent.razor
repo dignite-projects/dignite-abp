@@ -3,14 +3,16 @@
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FormDisplayName"]</FieldLabel>
-        <TextEdit @bind-Text="@Field.DisplayName" />
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
     </Field>
 </Validation>
 <Validation>
     <Field>
-        <FieldLabel>@L["FormName"]</FieldLabel>
-        <TextEdit MaxLength="64" @bind-Text="@Field.Name" />
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
+            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
+        </TextEdit>
     </Field>
 </Validation>
 
@@ -39,7 +41,7 @@
     <FieldLabel>@L["NumericStep"]</FieldLabel>
     <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Step" />    
     <FieldHelp>
-        微调器按钮递增或递减值
+        @L["NumericStepHelp"]
     </FieldHelp>
 </Field>
 
@@ -47,7 +49,7 @@
     <FieldLabel>@L["FormatSpecifier"]</FieldLabel>
     <TextEdit MaxLength="8" @bind-Text="@FormConfiguration.FormatSpecifier">
         <FieldHelp>
-            参见:<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings#standard-format-specifiers" target="_blank">https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings</a>
+            See:<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings#standard-format-specifiers" target="_blank">https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings</a>
         </FieldHelp>
     </TextEdit>
 </Field>

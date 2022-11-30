@@ -1,7 +1,6 @@
-using Dignite.Abp.DynamicForms;
-namespace Dignite.Abp.FieldCustomizing;
+namespace Dignite.Abp.DynamicForms;
 
-public class CustomizeFieldDefinitionConsts
+public class CustomizeFieldInfoConsts
 {
     /// <summary>
     /// Maximum length of the <see cref="ICustomizeFieldInfo.Name"/> property.
@@ -12,7 +11,7 @@ public class CustomizeFieldDefinitionConsts
     /// <summary>
     /// Regular Expression of the <see cref="ICustomizeFieldInfo.Name"/> property.
     /// </summary>
-    public static string NameRegularExpression = "^[a-zA-Z][A-Za-z0-9_-]+$";
+    public static string NameRegularExpression = "^[a-zA-Z][A-Za-z0-9_]+$";
 
     /// <summary>
     /// Maximum length of the <see cref="ICustomizeFieldInfo.DisplayName"/> property.
@@ -24,5 +23,5 @@ public class CustomizeFieldDefinitionConsts
     /// Maximum length of the <see cref="ICustomizeFieldInfo.FormName"/> property.
     /// Default value: 128
     /// </summary>
-    public static int MaxFormNameLength = 256;
+    public static int MaxFormNameLength = 64;
 }

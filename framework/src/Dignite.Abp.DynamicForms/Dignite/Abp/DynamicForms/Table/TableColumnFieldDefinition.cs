@@ -21,7 +21,7 @@ public class TableColumnCustomField : ICustomizeFieldInfo
     {
         Name = name;
         DisplayName = displayName;
-        FormProviderName = fieldName;
+        FormName = fieldName;
         DefaultValue = defaultValue;
         FormConfiguration = configuration;
     }
@@ -36,7 +36,7 @@ public class TableColumnCustomField : ICustomizeFieldInfo
     /// The form to be used to <see cref="IForm.Name"/>
     /// </summary>
     [NotNull]
-    public string FormProviderName { get; set; }
+    public string FormName { get; set; }
 
     /// <summary>
     /// Default value of the field.

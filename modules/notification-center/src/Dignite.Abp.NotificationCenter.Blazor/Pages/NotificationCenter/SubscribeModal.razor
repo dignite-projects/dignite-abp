@@ -1,0 +1,94 @@
+﻿@using Dignite.Abp.NotificationCenter.Localization;
+@using Volo.Abp.AspNetCore.Components
+@inject INotificationAppService NotificationAppService
+@inherits AbpComponentBase
+
+<Modal @ref="CreateModal" Closing="@ClosingCreateModal">
+    <ModalContent Centered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@L["Subscribe"]</ModalTitle>
+                <CloseButton Clicked="CloseCreateModalAsync"/>
+            </ModalHeader>
+            <ModalBody>
+                <ListGroup Flush>
+                    @foreach (var item in availableSubscriptions)
+                    {
+                        <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Start" Padding="Padding.Is0.FromStart.Is0.FromEnd">
+                            <Paragraph>
+                                @item.DisplayName
+                                <Small Display="Display.Block" TextColor="TextColor.Secondary">
+                                    @item.Description
+                                </Small>
+                            </Paragraph>
+                            <Switch TValue="bool" Checked="@item.IsSubscribed" CheckedChanged="@(e => OnSubscribeChanged(e, item.NotificationName))"></Switch>
+                        </ListGroupItem>
+                    }
+                </ListGroup>
+            </ModalBody>
+        </Form>
+    </ModalContent>
+</Modal>
+@code {
+
+    private Modal CreateModal;
+    private IReadOnlyList<NotificationSubscriptionDto> availableSubscriptions = new List<NotificationSubscriptionDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        LocalizationResource = typeof(NotificationCenterResource);
+        availableSubscriptions = (await NotificationAppService.GetAllAvailableSubscribeAsync()).Items;
+        await base.OnInitializedAsync();
+    }
+
+    public async Task OpenCreateModalAsync()
+    {
+        try
+        {
+            await InvokeAsync(async () =>
+            {
+                StateHasChanged();
+                if (CreateModal != null)
+                {
+                    await CreateModal.Show();
+                }
+
+            });
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }
+    }
+
+    private Task ClosingCreateModal(ModalClosingEventArgs eventArgs)
+    {
+        // cancel close if clicked outside of modal area
+        eventArgs.Cancel = eventArgs.CloseReason == CloseReason.FocusLostClosing;
+
+        return Task.CompletedTask;
+    }
+
+    private Task CloseCreateModalAsync()
+    {
+        return InvokeAsync(CreateModal.Hide);
+    }
+
+    private async Task OnSubscribeChanged(bool isSubscribe, string notificationName)
+    {
+        try
+        {
+            availableSubscriptions.Single(s => s.NotificationName == notificationName).IsSubscribed = isSubscribe;
+
+            if (isSubscribe)
+                await NotificationAppService.SubscribeAsync(notificationName);
+            else
+                await NotificationAppService.UnsubscribeAsync(notificationName);
+
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }
+    }
+}

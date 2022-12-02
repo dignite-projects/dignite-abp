@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.BlazoriseUI", "..\..\framework\src\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj", "{A6701DDC-6DFA-4647-B23A-F6C5D6CB4675}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Notifications.Components", "..\..\framework\src\Dignite.Abp.Notifications.Components\Dignite.Abp.Notifications.Components.csproj", "{35C722F3-49C3-4E2E-A401-9E465228AB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Components", "..\..\framework\src\Dignite.Abp.Notifications.Components\Dignite.Abp.Notifications.Components.csproj", "{35C722F3-49C3-4E2E-A401-9E465228AB5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

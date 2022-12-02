@@ -1,0 +1,35 @@
+@using Volo.Abp.AspNetCore.Components
+@inject INotificationAppService NotificationAppService
+@inject INotificationDataComponentSelector NotificationDataComponentSelector
+@inherits AbpComponentBase
+
+
+@if (userNotifications != null && userNotifications.Any())
+{    
+    @foreach (var item in userNotifications)
+    {
+        var component = NotificationDataComponentSelector.Get(item.Data.Type);
+        var parameters = new Dictionary<string, object>() {
+            { "NotificationData",item.Data}
+        };
+        <Div Padding="Padding.Is3.OnX.Is2.FromTop">
+            <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100" TextColor="TextColor.Secondary">
+                <Small>
+                    @if (item.State == Notifications.UserNotificationState.Unread)
+                    {
+                        <Span Background="Background.Primary" Class="unread-badge"></Span>
+                    }
+                    @(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
+                <Small>@item.CreationTime</Small>
+            </Div>
+            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+        </Div>
+    }
+
+    @if (skipCount < totalCount)
+    {
+        <SubmitButton Clicked="@LoadMoreAsync" Block Color="Color.Secondary">
+            @L["ButtonLoadMoreText"]
+        </SubmitButton>
+    }
+}

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Dignite.Abp.NotificationCenter.Blazor.Pages.NotificationCenter;
+using Dignite.Abp.NotificationCenter.Localization;
 using Dignite.Abp.Notifications;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
@@ -22,14 +24,16 @@ public partial class NotificationsTool: IAsyncDisposable
     /// </summary>
     private HubConnection hubConnection;
 
-
     /// <summary>
     /// notification count
     /// </summary>
     private int notificationCount = 0;
 
+    private SubscribeModal SubscribeModalRef;
+
     protected override async Task OnInitializedAsync()
     {
+        LocalizationResource = typeof(NotificationCenterResource);
         if (CurrentUser.IsAuthenticated)
         {
             hubConnection = new HubConnectionBuilder()
@@ -63,16 +67,16 @@ public partial class NotificationsTool: IAsyncDisposable
         await base.OnInitializedAsync();
     }
 
+    private async Task OpenSubscribeModalAsync()
+    {
+        await SubscribeModalRef.OpenCreateModalAsync();
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (hubConnection is not null)
         {
             await hubConnection.DisposeAsync();
         }
-    }
-
-    private void NavigateToNotificationCenter()
-    {
-        Navigation.NavigateTo("/notification-center");
     }
 }

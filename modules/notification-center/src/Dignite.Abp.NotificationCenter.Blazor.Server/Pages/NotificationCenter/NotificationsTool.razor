@@ -1,14 +1,27 @@
-﻿@using Volo.Abp.AspNetCore.Components
+﻿@using Dignite.Abp.NotificationCenter.Blazor.Pages.NotificationCenter
+@using Volo.Abp.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
 @inherits AbpComponentBase
 @if(CurrentUser.IsAuthenticated)
 {
-<Button Color="Color.Light" Position="Position.Relative" Clicked="NavigateToNotificationCenter">
-    <BarIcon IconName="IconName.Bell"></BarIcon>
-    @if (notificationCount > 0)
-        {
-    <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle">
-        @notificationCount
-    </Badge>
-        }
-</Button>
+    <Dropdown Display="Display.InlineBlock" RightAligned Margin="Margin.Is2.FromStart.Is2.FromEnd">
+        <DropdownToggle Color="Color.Light">
+            <BarIcon IconName="IconName.Bell"></BarIcon>
+            @if (notificationCount > 0)
+            {
+                <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle">
+                    @notificationCount
+                </Badge>
+            }
+        </DropdownToggle>
+        <DropdownMenu MaxMenuHeight="70vh;" Shadow="Shadow.Large">
+            <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Padding="Padding.Is3.OnX.Is2.OnY">
+                @L["NotificationCenter"]
+                <Icon Name="IconName.Bell" IconStyle="IconStyle.Regular" Clicked="OpenSubscribeModalAsync" title="@L["Subscribe"]"></Icon>
+            </Div>
+            <DropdownDivider></DropdownDivider>
+            <NotificationsComponent></NotificationsComponent>
+        </DropdownMenu>
+    </Dropdown>
+    <SubscribeModal @ref="SubscribeModalRef"></SubscribeModal>
 }

@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.Notifications;
+using NotificationCenterSample.Notifications;
 using Volo.Abp.Application.Services;
 
 namespace NotificationCenterSample.Services;
@@ -19,7 +20,9 @@ public class MessageAppService : ApplicationService
         var notificationData = new MessageNotificationData(text);
 
         //Act
-        await _publisher.PublishAsync("TestNotification", notificationData,
+        await _publisher.PublishAsync(
+            NotificationCenterSampleNotifications.TestNotification, 
+            notificationData,
             severity: NotificationSeverity.Success,
             userIds: new Guid[] {
                 CurrentUser.Id.Value

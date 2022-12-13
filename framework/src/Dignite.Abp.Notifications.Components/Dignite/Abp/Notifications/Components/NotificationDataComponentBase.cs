@@ -1,5 +1,4 @@
 ﻿using System;
-using Dignite.Abp.Notifications;
 using Microsoft.AspNetCore.Components;
 using Volo.Abp.AspNetCore.Components;
 using Volo.Abp.DependencyInjection;

@@ -1,6 +1,7 @@
 @using Volo.Abp.AspNetCore.Components
 @inject INotificationAppService NotificationAppService
 @inject INotificationDataComponentSelector NotificationDataComponentSelector
+@inject INotificationNavigateHandlerSelector NotificationNavigateHandlerSelector
 @inherits AbpComponentBase
 
 
@@ -12,7 +13,7 @@
         var parameters = new Dictionary<string, object>() {
             { "NotificationData",item.Data}
         };
-        <Div Padding="Padding.Is3.OnX.Is2.FromTop">
+        <Div Padding="Padding.Is3.OnX.Is2.FromTop" >
             <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100" TextColor="TextColor.Secondary">
                 <Small>
                     @if (item.State == Notifications.UserNotificationState.Unread)
@@ -22,7 +23,9 @@
                     @(item.NotificationDisplayName.IsNullOrEmpty()?item.NotificationName:item.NotificationDisplayName)</Small>
                 <Small>@item.CreationTime</Small>
             </Div>
-            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+            <Div @onclick="@(()=>Navigate(item))">
+                <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+            </Div>
         </Div>
     }
 

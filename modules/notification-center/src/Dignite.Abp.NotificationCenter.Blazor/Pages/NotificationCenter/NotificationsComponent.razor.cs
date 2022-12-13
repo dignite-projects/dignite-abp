@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Abp.NotificationCenter.Localization;
+using Dignite.Abp.Notifications.Components;
 
 namespace Dignite.Abp.NotificationCenter.Blazor.Pages.NotificationCenter;
 public partial class NotificationsComponent
@@ -24,6 +25,16 @@ public partial class NotificationsComponent
         userNotifications = await GetListAsync();
 
         await base.OnInitializedAsync();
+    }
+
+    private void Navigate(UserNotificationDto notification)
+    {
+        var handler = NotificationNavigateHandlerSelector.Get(notification.NotificationName);
+        if (handler != null)
+        {
+            var navigationContext = ObjectMapper.Map<UserNotificationDto, NotificationNavigationContext>(notification);
+            handler.Excute(navigationContext);
+        }
     }
 
 

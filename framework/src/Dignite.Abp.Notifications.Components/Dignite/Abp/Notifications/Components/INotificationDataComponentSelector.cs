@@ -1,15 +1,14 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace Dignite.Abp.Notifications.Components;
 
 public interface INotificationDataComponentSelector
 {
     /// <summary>
-    /// Get blazor component using field control provider name
+    /// Get blazor component using NotificationDataTypeFullName
     /// </summary>
     /// <param name="notificationDataTypeFullName">
-    /// <see cref="UserNotificationDto.Data"/>
+    /// <see cref="NotificationData.Type"/>
     /// </param>
     /// <returns></returns>
     [NotNull]

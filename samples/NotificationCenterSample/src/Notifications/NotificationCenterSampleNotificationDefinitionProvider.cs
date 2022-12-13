@@ -8,7 +8,7 @@ public class NotificationCenterSampleNotificationDefinitionProvider : Notificati
 {
     public override void Define(INotificationDefinitionContext context)
     {
-        context.Add(new NotificationDefinition("TestNotification",null,L("TestNotification"), L("TestNotificationDescription")));
+        context.Add(new NotificationDefinition(NotificationCenterSampleNotifications.TestNotification, null,L("TestNotification"), L("TestNotificationDescription")));
     }
 
     private static LocalizableString L(string name)

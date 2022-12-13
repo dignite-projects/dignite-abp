@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Volo.Abp;
@@ -16,10 +15,10 @@ public class NotificationDataComponentSelector:INotificationDataComponentSelecto
     }
 
     /// <summary>
-    /// Get blazor component using field control provider name
+    /// Get blazor component using NotificationDataTypeFullName
     /// </summary>
     /// <param name="notificationDataTypeFullName">
-    /// <see cref="UserNotificationDto.Data"/>
+    /// <see cref="NotificationData.Type"/>
     /// </param>
     /// <returns></returns>
     [NotNull]

@@ -2,6 +2,9 @@
 
 namespace Dignite.Abp.Notifications.Components;
 
+/// <summary>
+/// Notification Data Component Selector
+/// </summary>
 public interface INotificationDataComponentSelector
 {
     /// <summary>

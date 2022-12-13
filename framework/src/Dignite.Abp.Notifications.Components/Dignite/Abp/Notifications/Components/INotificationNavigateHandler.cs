@@ -1,4 +1,8 @@
 ﻿namespace Dignite.Abp.Notifications.Components;
+
+/// <summary>
+/// Jumps for processing notifications
+/// </summary>
 public interface INotificationNavigateHandler
 {
     /// <summary>

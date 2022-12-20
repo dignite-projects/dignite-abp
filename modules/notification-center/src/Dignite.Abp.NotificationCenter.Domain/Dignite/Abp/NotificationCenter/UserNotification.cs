@@ -42,6 +42,11 @@ public class UserNotification : BasicAggregateRoot<Guid>, IHasCreationTime, IMul
     public Guid NotificationId { get; set; }
 
     /// <summary>
+    /// Notification
+    /// </summary>
+    public Notification Notification { get; set; }
+
+    /// <summary>
     /// Current state of the user notification.
     /// </summary>
     public UserNotificationState State { get; set; }

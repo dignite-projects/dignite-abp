@@ -14,13 +14,15 @@
                 </Badge>
             }
         </DropdownToggle>
-        <DropdownMenu MaxMenuHeight="70vh;" Shadow="Shadow.Large">
+        <DropdownMenu Shadow="Shadow.Large">
             <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Padding="Padding.Is3.OnX.Is2.OnY" Style="min-width:300px;">
                 @L["NotificationCenter"]
-                <Icon Name="IconName.Bell" IconStyle="IconStyle.Regular" Clicked="OpenSubscribeModalAsync" title="@L["Subscribe"]"></Icon>
+                <Icon Name="IconName.Wrench" IconStyle="IconStyle.Regular" Clicked="OpenSubscribeModalAsync" title="@L["Subscribe"]"></Icon>
             </Div>
             <DropdownDivider></DropdownDivider>
-            <NotificationsComponent></NotificationsComponent>
+            <Div Overflow="Overflow.Auto" Style="max-height:70vh;">
+                <NotificationsComponent></NotificationsComponent>
+            </Div>
         </DropdownMenu>
     </Dropdown>
     <SubscribeModal @ref="SubscribeModalRef"></SubscribeModal>

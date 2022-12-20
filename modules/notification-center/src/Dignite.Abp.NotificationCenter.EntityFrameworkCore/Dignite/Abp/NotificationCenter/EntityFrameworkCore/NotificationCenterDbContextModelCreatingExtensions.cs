@@ -46,7 +46,7 @@ public static class NotificationCenterDbContextModelCreatingExtensions
             b.Property(n => n.DataTypeName).IsRequired().HasMaxLength(NotificationConsts.MaxDataTypeNameLength);
 
             //relations
-            b.HasMany(n => n.Users).WithOne().HasForeignKey(un => un.NotificationId).IsRequired();
+            b.HasMany(n => n.Users).WithOne(un=>un.Notification).HasForeignKey(un => un.NotificationId).IsRequired();
 
             //Indexes
             b.HasIndex(n => new {

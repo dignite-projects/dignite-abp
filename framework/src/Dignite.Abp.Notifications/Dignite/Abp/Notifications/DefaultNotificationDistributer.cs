@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -23,6 +24,7 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     protected ILogger Logger { get; }
     protected ICurrentTenant CurrentTenant { get; }
     protected IDistributedEventBus DistributedEventBus { get; }
+    protected IStringLocalizerFactory StringLocalizerFactory { get; }
 
     public DefaultNotificationDistributer(
         IOptions<NotificationOptions> notificationOptions,
@@ -30,7 +32,8 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         INotificationStore notificationStore,
         ILoggerFactory loggerFactory,
         ICurrentTenant currentTenant,
-        IDistributedEventBus distributedEventBus)
+        IDistributedEventBus distributedEventBus,
+        IStringLocalizerFactory stringLocalizerFactory)
     {
         Options = notificationOptions.Value;
         NotificationDefinitionManager = notificationDefinitionManager;
@@ -38,6 +41,7 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
         Logger = loggerFactory?.CreateLogger(GetType().FullName) ?? NullLogger.Instance;
         CurrentTenant = currentTenant;
         DistributedEventBus = distributedEventBus;
+        StringLocalizerFactory = stringLocalizerFactory;
     }
 
     public async Task DistributeAsync(
@@ -126,9 +130,11 @@ public class DefaultNotificationDistributer : INotificationDistributer, ITransie
     /// <returns></returns>
     protected virtual async Task NotifyAsync(UserNotificationInfo[] userNotifications, NotificationInfo notificationInfo)
     {
+        var notificationDisplayName = NotificationDefinitionManager.GetOrNull(notificationInfo.NotificationName)?.DisplayName?.Localize(StringLocalizerFactory);
         await DistributedEventBus.PublishAsync(new RealTimeNotifyEto(
             notificationInfo.Id,
             notificationInfo.NotificationName,
+            notificationDisplayName,
             notificationInfo.Data,
             notificationInfo.Severity,
             notificationInfo.CreationTime,

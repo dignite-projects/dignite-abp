@@ -6,10 +6,11 @@ namespace Dignite.Abp.Notifications;
 [EventName("Dignite.Abp.Notifications.RealTimeNotify")]
 public class RealTimeNotifyEto
 {
-    public RealTimeNotifyEto(Guid notificationId, string notificationName, NotificationData data, NotificationSeverity severity, DateTime creationTime, Guid[] userIds)
+    public RealTimeNotifyEto(Guid notificationId, string notificationName, string notificationDisplayName, NotificationData data, NotificationSeverity severity, DateTime creationTime, Guid[] userIds)
     {
         NotificationId = notificationId;
         NotificationName = notificationName;
+        NotificationDisplayName = notificationDisplayName;
         Data = data;
         Severity = severity;
         CreationTime = creationTime;
@@ -26,6 +27,11 @@ public class RealTimeNotifyEto
     /// Unique notification name.
     /// </summary>
     public string NotificationName { get; set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    public string NotificationDisplayName { get; set; }
 
     /// <summary>
     /// Can be used to add custom properties to this notification.

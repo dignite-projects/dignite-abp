@@ -21,9 +21,8 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.SignalR" Version="5.3.4" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj" />
   </ItemGroup>
 
 </Project>

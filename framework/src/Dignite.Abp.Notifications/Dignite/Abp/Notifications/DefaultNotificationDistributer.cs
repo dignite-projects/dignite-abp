@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.Uow;
 
 namespace Dignite.Abp.Notifications;
 

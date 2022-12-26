@@ -28,8 +28,11 @@ public partial class NotificationsTool: IAsyncDisposable
     /// notification count
     /// </summary>
     private int notificationCount = 0;
+    private bool hasNewNotifications = true; 
 
     private SubscribeModal SubscribeModalRef;
+    private NotificationsComponent NotificationsComponentRef;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,10 +58,11 @@ public partial class NotificationsTool: IAsyncDisposable
 
             notificationCount = await NotificationAppService.GetCountAsync(UserNotificationState.Unread);
 
-            hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", (notification) =>
+            hubConnection.On<RealTimeNotifyEto>("ReceiveNotifications", async (eto) =>
             {
                 notificationCount++;
-                InvokeAsync(StateHasChanged);
+                hasNewNotifications = true;
+                await InvokeAsync(StateHasChanged);
             });
 
             await hubConnection.StartAsync();
@@ -77,6 +81,16 @@ public partial class NotificationsTool: IAsyncDisposable
         if (hubConnection is not null)
         {
             await hubConnection.DisposeAsync();
+        }
+    }
+
+    private async Task OnVisibleChanged(bool isVisible)
+    {
+        if (isVisible && hasNewNotifications)
+        {
+            await NotificationsComponentRef.LoadNewNotificationsAsync();
+            hasNewNotifications = false;
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

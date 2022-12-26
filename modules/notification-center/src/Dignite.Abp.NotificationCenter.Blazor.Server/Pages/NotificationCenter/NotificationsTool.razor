@@ -4,7 +4,7 @@
 @inherits AbpComponentBase
 @if(CurrentUser.IsAuthenticated)
 {
-    <Dropdown Display="Display.InlineBlock" RightAligned Margin="Margin.Is2.FromStart.Is2.FromEnd">
+    <Dropdown Display="Display.InlineBlock" RightAligned Margin="Margin.Is2.FromStart.Is2.FromEnd" VisibleChanged="OnVisibleChanged">
         <DropdownToggle Color="Color.Light">
             <BarIcon IconName="IconName.Bell"></BarIcon>
             @if (notificationCount > 0)
@@ -17,11 +17,11 @@
         <DropdownMenu Shadow="Shadow.Large">
             <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Padding="Padding.Is3.OnX.Is2.OnY" Style="min-width:300px;">
                 @L["NotificationCenter"]
-                <Icon Name="IconName.Wrench" IconStyle="IconStyle.Regular" Clicked="OpenSubscribeModalAsync" title="@L["Subscribe"]"></Icon>
+                <Icon Name="IconName.Bell" IconStyle="IconStyle.Regular" Clicked="OpenSubscribeModalAsync" title="@L["Subscribe"]"></Icon>
             </Div>
             <DropdownDivider></DropdownDivider>
             <Div Overflow="Overflow.Auto" Style="max-height:70vh;">
-                <NotificationsComponent></NotificationsComponent>
+                <NotificationsComponent @ref="NotificationsComponentRef"></NotificationsComponent>
             </Div>
         </DropdownMenu>
     </Dropdown>

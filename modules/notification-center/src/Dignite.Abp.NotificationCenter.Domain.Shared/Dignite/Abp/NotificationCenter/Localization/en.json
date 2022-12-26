@@ -5,6 +5,10 @@
     "NotificationCenter": "Notification Center",
     "Subscribe": "Subscribe",
     "NoNotifications": "No Notifications!",
-    "ButtonLoadMoreText": "Load More"
+    "ButtonLoadMoreText": "Load More",
+    "{0}SecondsAgo": "{0} Seconds Ago",
+    "{0}MinutesAgo": "{0} Minutes Ago",
+    "{0}HoursAgo": "{0} Hours Ago",
+    "Yesterday": "Yesterday"
   }
 }

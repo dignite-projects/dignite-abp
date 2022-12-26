@@ -1,51 +1,65 @@
 @using Volo.Abp.AspNetCore.Components
 @inject INotificationAppService NotificationAppService
-@inject INotificationDataComponentSelector NotificationDataComponentSelector
 @inject INotificationComponentProviderSelector NotificationComponentProviderSelector
+@inject INotificationDataComponentSelector NotificationDataComponentSelector
 @inherits AbpComponentBase
 
 
+@if (Loading)
+{
+    <Div Padding="Padding.Is3.OnX.Is2.FromTop" TextColor="TextColor.Black50">
+        正在加载数据...
+    </Div>
+}
 @if (userNotifications != null && userNotifications.Any())
 {    
     @foreach (var item in userNotifications)
     {
         var componentProvider = NotificationComponentProviderSelector.Get(item.NotificationName);
-        var component = NotificationDataComponentSelector.Get(item.Data.Type);
-        var parameters = new Dictionary<string, object>() {
+        var notificationIcon = componentProvider.GetIcon(item.EntityId);
+        var notificationDataComponent = NotificationDataComponentSelector.Get(item.Data.Type);
+        var notificationDataParameters = new Dictionary<string, object>() {
             { "NotificationData",item.Data}
         };
         <Div Padding="Padding.Is3.OnX.Is2.FromTop" Flex="Flex.JustifyContent.Start">
-            <Div Class="notification-icon" Border="Border.Rounded" Position="Position.Relative" Margin="Margin.Is2.FromEnd">
-                <Icon Name="componentProvider.GetIcon(string.Empty)" IconSize="IconSize.Large"></Icon>
+            <Div Class="notification-icon" Border="Border.Rounded" Flex="Flex.AlignItems.Center.JustifyContent.Center" Margin="Margin.Is2.FromEnd" Position="Position.Relative">
+                <Icon Name="@notificationIcon" IconSize="IconSize.Large" TextColor="TextColor.Primary"></Icon>
                 @if (item.State == Notifications.UserNotificationState.Unread)
                 {
-                    <Badge Color="Color.Primary" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle" Border="Border.Light.OnAll.RoundedCircle" Padding="Padding.Is1">
+                    <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle" Border="Border.Light.OnAll.RoundedCircle" Padding="Padding.Is1">
                         <Span Visibility="Visibility.Invisible" Position="Position.Absolute">unread messages</Span>
                     </Badge>
                 }
             </Div>
-            <Div>
-                <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100" TextColor="TextColor.Secondary">
+            <Div Flex="Flex.Grow.Is1">
+                <Div Flex="Flex.JustifyContent.Start" Width="Width.Is100" TextColor="TextColor.Secondary">
                     <Small>
                         @(item.NotificationDisplayName.IsNullOrEmpty() ? item.NotificationName : item.NotificationDisplayName)
                     </Small>
-                    <Small>@item.CreationTime</Small>
+                    <Span Padding="Padding.Is1.OnX">·</Span>
+                    <Small Flex="Flex.Grow.Is1">@(FormatNotificationTime(item.CreationTime))</Small>
+                    <Icon Name="IconName.MoreVertical" IconSize="IconSize.Small" Margin="Margin.Is2.FromStart.Is1.FromTop"></Icon>
                 </Div>
-                <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                <DynamicComponent Type="@notificationDataComponent.GetType()" Parameters="@notificationDataParameters"></DynamicComponent>
             </Div>
         </Div>
     }
 
     @if (skipCount < totalCount)
     {
-        <SubmitButton Clicked="@LoadMoreAsync" Block Color="Color.Secondary">
-            @L["ButtonLoadMoreText"]
-        </SubmitButton>
+        <Div Padding="Padding.Is3">
+            <SubmitButton Clicked="@LoadMoreAsync" Block Color="Color.Secondary">
+                @L["ButtonLoadMoreText"]
+            </SubmitButton>
+        </Div>
     }
 }
 else
 {
-    <Div Padding="Padding.Is3.OnX.Is2.FromTop" TextColor="TextColor.Black50">
-        @L["NoNotifications"]
-    </Div>    
+    @if (!Loading)
+    {
+        <Div Padding="Padding.Is3.OnX.Is2.FromTop" TextColor="TextColor.Black50">
+            @L["NoNotifications"]
+        </Div>
+    }
 }

@@ -4,8 +4,22 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class UserNotificationDto : EntityDto<Guid>
+public class UserNotificationDto : EntityDto
 {
+    public UserNotificationDto(Guid userId, Guid notificationId, string notificationName, string notificationDisplayName, NotificationData data, string entityTypeName, string entityId, NotificationSeverity severity, DateTime creationTime, UserNotificationState state)
+    {
+        UserId = userId;
+        NotificationId = notificationId;
+        NotificationName = notificationName;
+        NotificationDisplayName = notificationDisplayName;
+        Data = data;
+        EntityTypeName = entityTypeName;
+        EntityId = entityId;
+        Severity = severity;
+        CreationTime = creationTime;
+        State = state;
+    }
+
     public Guid UserId { get; set; }
 
     public Guid NotificationId { get; set; }

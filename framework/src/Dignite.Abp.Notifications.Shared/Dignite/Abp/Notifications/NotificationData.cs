@@ -14,7 +14,7 @@ public class NotificationData
     /// Gets notification data type name.
     /// It returns the full class name by default.
     /// </summary>
-    public virtual string Type => GetType().FullName;
+    public virtual string Type { get; set; }
 
     /// <summary>
     /// Shortcut to set/get <see cref="Properties"/>.
@@ -50,6 +50,7 @@ public class NotificationData
     /// </summary>
     public NotificationData()
     {
+        Type = GetType().FullName;
         _properties = new Dictionary<string, object>();
     }
 }

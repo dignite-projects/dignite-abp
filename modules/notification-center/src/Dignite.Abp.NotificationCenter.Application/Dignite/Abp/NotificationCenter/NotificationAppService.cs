@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dignite.Abp.Notifications;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.NotificationCenter;
@@ -18,7 +19,8 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     public NotificationAppService(
         INotificationDefinitionManager notificationDefinitionManager,
         INotificationSubscriptionManager subscriptionManager,
-        IUserNotificationManager userNotificationManager)
+        IUserNotificationManager userNotificationManager
+        )
     {
         _notificationDefinitionManager = notificationDefinitionManager;
         _subscriptionManager = subscriptionManager;
@@ -121,20 +123,18 @@ public class NotificationAppService : NotificationCenterAppService, INotificatio
     {
         var result = await _userNotificationManager.GetUserNotificationsAsync(CurrentUser.Id.Value, state, skipCount, maxResultCount, startDate, endDate);
         return new ListResultDto<UserNotificationDto>(
-            result.Select(un => new UserNotificationDto
-            {
-                Id=un.Notification.Id,
-                UserId = un.UserNotification.UserId,
-                NotificationId = un.UserNotification.NotificationId,
-                NotificationName = un.Notification.NotificationName,
-                NotificationDisplayName = _notificationDefinitionManager.GetOrNull(un.Notification.NotificationName)?.DisplayName?.Localize(StringLocalizerFactory),
-                Data = un.Notification.Data,
-                EntityTypeName = un.Notification.EntityTypeName,
-                EntityId = un.Notification.EntityId,
-                Severity = un.Notification.Severity,
-                State = un.UserNotification.State,
-                CreationTime = un.Notification.CreationTime
-            }).ToList()
+            result.Select(un => new UserNotificationDto(
+                un.UserNotification.UserId,
+                un.UserNotification.NotificationId,
+                un.Notification.NotificationName,
+                _notificationDefinitionManager.GetOrNull(un.Notification.NotificationName)?.DisplayName?.Localize(StringLocalizerFactory),
+                un.Notification.Data,
+                un.Notification.EntityTypeName,
+                un.Notification.EntityId,
+                un.Notification.Severity,
+                un.Notification.CreationTime,
+                un.UserNotification.State
+            )).ToList()
         );
     }
 

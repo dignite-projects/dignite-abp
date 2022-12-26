@@ -5,6 +5,10 @@
     "NotificationCenter": "通知中心",
     "Subscribe": "訂閱",
     "NoNotifications": "沒有通知！",
-    "ButtonLoadMoreText": "加載更多"
+    "ButtonLoadMoreText": "加載更多",
+    "{0}SecondsAgo": "{0}秒前",
+    "{0}MinutesAgo": "{0}分鐘前",
+    "{0}HoursAgo": "{0}小時前",
+    "Yesterday": "昨天"
   }
 }

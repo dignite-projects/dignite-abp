@@ -34,11 +34,9 @@ public class EfCoreUserNotificationRepository : EfCoreRepository<INotificationCe
     {
         return await (await GetDbSetAsync())
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
-            .Where(un =>
-                un.UserId == userId
-            )
+            .WhereIf(startDate != null, un => un.CreationTime > startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime < endDate.Value)
+            .Where(un => un.UserId == userId)
             .OrderByDescending(un => un.CreationTime)
             .Skip(skipCount)
             .Take(maxResultCount)
@@ -49,8 +47,8 @@ public class EfCoreUserNotificationRepository : EfCoreRepository<INotificationCe
     {
         return await (await GetDbSetAsync())
             .WhereIf(state != null, un => un.State == state)
-            .WhereIf(startDate != null, un => un.CreationTime >= startDate.Value)
-            .WhereIf(endDate != null, un => un.CreationTime <= endDate.Value)
+            .WhereIf(startDate != null, un => un.CreationTime > startDate.Value)
+            .WhereIf(endDate != null, un => un.CreationTime < endDate.Value)
             .Where(un =>
                 un.UserId == userId
             )

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.Notifications.Components;
@@ -17,5 +18,12 @@ public interface INotificationComponentProvider: ITransientDependency
     /// 
     /// </summary>
     /// <returns></returns>
-    string GetIcon(string entityId = null);
+    Type IconComponentType { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    Task NotificationClickAsync(NotificationClickArgs args);
 }

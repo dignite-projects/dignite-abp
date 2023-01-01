@@ -9,6 +9,7 @@
     "{0}SecondsAgo": "{0}秒前",
     "{0}MinutesAgo": "{0}分鐘前",
     "{0}HoursAgo": "{0}小時前",
-    "Yesterday": "昨天"
+    "Yesterday": "昨天",
+    "NotificationsLoadingText": "正在加載新通知..."
   }
 }

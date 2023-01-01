@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Abp.NotificationCenter.Localization;
+using Microsoft.AspNetCore.Components;
 
 namespace Dignite.Abp.NotificationCenter.Blazor.Pages.NotificationCenter;
 public partial class NotificationsComponent
@@ -16,6 +17,9 @@ public partial class NotificationsComponent
 
     private List<UserNotificationDto> userNotifications = null;
     private bool Loading=false;
+
+    [Parameter]
+    public EventCallback OnSetNotificationRead { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -49,9 +53,12 @@ public partial class NotificationsComponent
                     100,
                     userNotifications.First().CreationTime,
                     null
-                )).Items.ToList();
+                )).Items
+                .Where(n=>!userNotifications.Any((un=>un.NotificationId==n.NotificationId)))
+                .OrderBy(n=>n.CreationTime).ToList();
 
             userNotifications.InsertRange(0,newNotifications);
+
             Loading = false;
             await InvokeAsync(StateHasChanged);
         }
@@ -78,6 +85,29 @@ public partial class NotificationsComponent
             skipCount += maxResultCount;
         }
         return list;
+    }
+
+    async Task NotificationClick(UserNotificationDto notification)
+    {
+        if (notification.State == Notifications.UserNotificationState.Unread)
+        {
+            notification.State= Notifications.UserNotificationState.Read;
+            await NotificationAppService.UpdateStateAsync(notification.NotificationId, Notifications.UserNotificationState.Read);
+            
+
+            await InvokeAsync(() => {
+                OnSetNotificationRead.InvokeAsync();
+            });
+        }
+
+        //
+        var componentProvider = NotificationComponentProviderSelector.Get(notification.NotificationName);
+        await componentProvider.NotificationClickAsync(
+            new Notifications.Components.NotificationClickArgs(
+                notification.Data, 
+                notification.EntityTypeName, 
+                notification.EntityId)
+            );           
     }
 
     string FormatNotificationTime(DateTime notificationTime)

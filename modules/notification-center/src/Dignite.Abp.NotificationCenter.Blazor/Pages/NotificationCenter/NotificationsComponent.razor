@@ -5,25 +5,18 @@
 @inherits AbpComponentBase
 
 
-@if (Loading)
-{
-    <Div Padding="Padding.Is3.OnX.Is2.FromTop" TextColor="TextColor.Black50">
-        正在加载数据...
-    </Div>
-}
 @if (userNotifications != null && userNotifications.Any())
 {    
     @foreach (var item in userNotifications)
     {
         var componentProvider = NotificationComponentProviderSelector.Get(item.NotificationName);
-        var notificationIcon = componentProvider.GetIcon(item.EntityId);
         var notificationDataComponent = NotificationDataComponentSelector.Get(item.Data.Type);
         var notificationDataParameters = new Dictionary<string, object>() {
             { "NotificationData",item.Data}
         };
-        <Div Padding="Padding.Is3.OnX.Is2.FromTop" Flex="Flex.JustifyContent.Start">
-            <Div Class="notification-icon" Border="Border.Rounded" Flex="Flex.AlignItems.Center.JustifyContent.Center" Margin="Margin.Is2.FromEnd" Position="Position.Relative">
-                <Icon Name="@notificationIcon" IconSize="IconSize.Large" TextColor="TextColor.Primary"></Icon>
+        <Div Class="notification-item" Padding="Padding.Is3.OnX.Is2.FromTop" Flex="Flex.JustifyContent.Start">
+            <Div Class="notification-icon" Border="Border.Rounded.Is1" Flex="Flex.AlignItems.Center.JustifyContent.Center" Margin="Margin.Is2.FromEnd" Position="Position.Relative">
+                <DynamicComponent Type="componentProvider.IconComponentType"></DynamicComponent>
                 @if (item.State == Notifications.UserNotificationState.Unread)
                 {
                     <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle" Border="Border.Light.OnAll.RoundedCircle" Padding="Padding.Is1">
@@ -32,15 +25,15 @@
                 }
             </Div>
             <Div Flex="Flex.Grow.Is1">
-                <Div Flex="Flex.JustifyContent.Start" Width="Width.Is100" TextColor="TextColor.Secondary">
+                <Div Flex="Flex.JustifyContent.Between" Width="Width.Is100" TextColor="TextColor.Secondary">
                     <Small>
                         @(item.NotificationDisplayName.IsNullOrEmpty() ? item.NotificationName : item.NotificationDisplayName)
                     </Small>
-                    <Span Padding="Padding.Is1.OnX">·</Span>
-                    <Small Flex="Flex.Grow.Is1">@(FormatNotificationTime(item.CreationTime))</Small>
-                    <Icon Name="IconName.MoreVertical" IconSize="IconSize.Small" Margin="Margin.Is2.FromStart.Is1.FromTop"></Icon>
+                    <Small>@(FormatNotificationTime(item.CreationTime))</Small>
                 </Div>
-                <DynamicComponent Type="@notificationDataComponent.GetType()" Parameters="@notificationDataParameters"></DynamicComponent>
+                <Div @onclick="()=>NotificationClick(item)" Class="notification-data">
+                    <DynamicComponent Type="@notificationDataComponent.GetType()" Parameters="@notificationDataParameters"></DynamicComponent>                    
+                </Div>
             </Div>
         </Div>
     }
@@ -63,3 +56,11 @@ else
         </Div>
     }
 }
+
+<Div Position="Position.Absolute.Start.Is0.Top.Is0" Width="Width.Is100">
+    <Alert Color="Color.Warning" Visible="@Loading">
+        <AlertDescription>
+            @L["NotificationsLoadingText"]
+        </AlertDescription>
+    </Alert>
+</Div>

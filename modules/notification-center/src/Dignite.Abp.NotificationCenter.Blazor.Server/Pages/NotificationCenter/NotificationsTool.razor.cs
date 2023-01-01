@@ -93,4 +93,10 @@ public partial class NotificationsTool: IAsyncDisposable
             await InvokeAsync(StateHasChanged);
         }
     }
+
+    private async Task SetNotificationRead()
+    {
+        notificationCount--;
+        await InvokeAsync(StateHasChanged);
+    }
 }

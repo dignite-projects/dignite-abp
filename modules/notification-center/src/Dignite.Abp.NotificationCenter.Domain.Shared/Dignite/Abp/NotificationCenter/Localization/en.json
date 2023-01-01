@@ -9,6 +9,7 @@
     "{0}SecondsAgo": "{0} Seconds Ago",
     "{0}MinutesAgo": "{0} Minutes Ago",
     "{0}HoursAgo": "{0} Hours Ago",
-    "Yesterday": "Yesterday"
+    "Yesterday": "Yesterday",
+    "NotificationsLoadingText": "Loading notifications..."
   }
 }

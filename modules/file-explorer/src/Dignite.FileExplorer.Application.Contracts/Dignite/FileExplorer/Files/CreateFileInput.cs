@@ -12,7 +12,7 @@ public class CreateFileInput
     /// Container name of blob
     /// </summary>
     [Required]
-    [DynamicStringLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxMimeTypeLength))]
+    [DynamicStringLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxContainerNameLength))]
     public string ContainerName { get; set; }
 
     /// <summary>

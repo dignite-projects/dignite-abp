@@ -3,5 +3,5 @@
 public static class FileDescriptorConsts
 {
 
-    public static int MaxEntityIdLength = 128;
+    public static int MaxEntityIdLength { get; set; } = 128;
 }

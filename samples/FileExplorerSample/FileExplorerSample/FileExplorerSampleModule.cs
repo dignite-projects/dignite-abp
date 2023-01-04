@@ -59,6 +59,7 @@ using FileExplorerSample.Services;
 using Dignite.Abp.BlobStoring;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.BlobStoring.FileSystem;
+using Microsoft.AspNetCore.Cors;
 
 namespace FileExplorerSample;
 
@@ -198,6 +199,25 @@ public class FileExplorerSampleModule : AbpModule
                 {
                     fileSystem.BasePath = Directory.GetCurrentDirectory() + "/wwwroot";
                 });
+            });
+        });
+
+        context.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .WithOrigins(
+                        configuration["App:CorsOrigins"]
+                            .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                            .Select(o => o.RemovePostFix("/"))
+                            .ToArray()
+                    )
+                    .WithAbpExposedHeaders()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
             });
         });
 

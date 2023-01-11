@@ -345,10 +345,6 @@ public class MyProfile : Profile
 
 ## See Also
 
--  [Dynamic Form Blazor Component](Dynamic-Form-Components.md)
-
-教你如何开发 Dynamic Form Blazor Component。
-
 - [FieldCustomizing Module](Field-Customizing.md)
 
 提供一系列方法，帮助您快速的构建自定义字段。
@@ -356,4 +352,8 @@ public class MyProfile : Profile
 - [Dignite.Cms Module](Cms.md)
 
 基于[FieldCustomizing Module](Field-Customizing.md)开发的一套无头CMS。
+
+-  [Dynamic Form Blazor Component](Dynamic-Form-Components.md)
+
+教你如何开发 Dynamic Form Blazor Component。
 

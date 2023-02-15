@@ -43,10 +43,6 @@ public class FileExplorerDomainTestModule : AbpModule
                     {
                         fileSystem.BasePath = _testDirectoryPath;
                     });
-                    container.UseFileSystem(fileSystem =>
-                    {
-                        fileSystem.BasePath = _testDirectoryPath;
-                    });
                     container.AddImageResizeHandler(imageResize =>
                     {
                         imageResize.ImageWidth = 200;

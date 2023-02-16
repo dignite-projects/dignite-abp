@@ -1,4 +1,5 @@
-﻿using Dignite.FileExplorer.Localization;
+﻿using Dignite.FileExplorer.Files;
+using Dignite.FileExplorer.Localization;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
@@ -27,6 +28,11 @@ public class FileExplorerHttpApiModule : AbpModule
             options.Resources
                 .Get<FileExplorerResource>()
                 .AddBaseTypes(typeof(AbpUiResource));
+        });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.FormBodyBindingIgnoredTypes.Add(typeof(CreateFileInput));
         });
     }
 }

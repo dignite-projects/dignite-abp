@@ -83,7 +83,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
             entityId,
             token);
 
-        return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
+        return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} asc" : sorting)
                   .As<IMongoQueryable<FileDescriptor>>()
                   .PageBy<FileDescriptor, IMongoQueryable<FileDescriptor>>(skipCount, maxResultCount)
                   .ToListAsync(token);

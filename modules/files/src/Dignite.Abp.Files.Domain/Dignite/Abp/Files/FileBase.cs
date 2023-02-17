@@ -59,7 +59,7 @@ public abstract class FileBase : AggregateRoot<Guid>, IFile
 
     public void SetReferBlobName(string blobName)
     {
-        ReferBlobName = BlobName;
+        ReferBlobName = blobName;
     }
 
     public void SetSize(long size)

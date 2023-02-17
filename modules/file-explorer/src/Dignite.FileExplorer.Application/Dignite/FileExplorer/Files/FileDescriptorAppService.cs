@@ -106,6 +106,11 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         if (entity != null)
         {
             await AuthorizationService.CheckAsync(entity, CommonOperations.Get);
+            if (!entity.ReferBlobName.IsNullOrEmpty())
+            { 
+                blobName= entity.ReferBlobName;
+            }
+
             var blobContainer = _blobContainerFactory.Create(containerName);
             Stream stream = await blobContainer.GetOrNullAsync(blobName);
 

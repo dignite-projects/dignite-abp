@@ -50,7 +50,7 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
             )
         {
             // Directory authorization verification
-            if (resource.DirectoryId.HasValue)
+            if (resource.DirectoryId.HasValue && resource.DirectoryId.Value!= Guid.Empty)
             {
                 var directory = await DirectoryDescriptorRepository.FindAsync(resource.DirectoryId.Value, false);
                 if (directory == null)

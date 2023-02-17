@@ -64,10 +64,10 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     [HttpGet]
-    [Route("{containerName}/{*blobName}")]
-    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
+    [Route("configuration")]
+    public virtual async Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName)
     {
-        return await _fileAppService.GetStreamAsync(containerName, blobName);
+        return await _fileAppService.GetFileContainerConfiguration(containerName);
     }
 
     [HttpGet]
@@ -79,9 +79,9 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     [HttpGet]
-    [Route("configuration")]
-    public virtual async Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName)
+    [Route("{containerName}/{*blobName}")]
+    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
     {
-        return await _fileAppService.GetFileContainerConfiguration(containerName);
+        return await _fileAppService.GetStreamAsync(containerName, blobName);
     }
 }

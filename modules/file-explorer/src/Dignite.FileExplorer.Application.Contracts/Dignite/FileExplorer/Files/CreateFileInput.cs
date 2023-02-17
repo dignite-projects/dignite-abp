@@ -8,6 +8,11 @@ namespace Dignite.FileExplorer.Files;
 
 public class CreateFileInput
 {
+    public CreateFileInput()
+    {
+        DirectoryId = null;
+    }
+
     /// <summary>
     /// Container name of blob
     /// </summary>

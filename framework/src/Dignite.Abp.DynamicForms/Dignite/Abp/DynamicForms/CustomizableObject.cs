@@ -38,7 +38,7 @@ public abstract class CustomizableObject<TCustomizeFieldInfo> : IHasCustomFields
 
         foreach (var field in CustomFields)
         {
-            var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name == field.Key);
+            var fieldDefinition = fieldDefinitions.FirstOrDefault(fi => fi.Name.Equals(field.Key, StringComparison.OrdinalIgnoreCase));
             if (fieldDefinition == null)
                 throw new AbpException($"No custom field named {field.Key} exists");
 

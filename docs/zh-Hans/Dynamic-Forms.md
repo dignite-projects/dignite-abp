@@ -278,7 +278,7 @@ public class EntryEditDto: CustomizableObject<CustomizeFieldDefinitionDemoDto>
         ///<summary>
         /// Get the definition information of the field for data validation
         ///</summary>
-        public override IReadOnlyList<BasicCustomizeFieldDefinition> GetFieldDefinitions(ValidationContext validationContext)
+        public override IReadOnlyList<CustomizeFieldDefinitionDemoDto> GetFieldDefinitions(ValidationContext validationContext)
         {
             ......
         }

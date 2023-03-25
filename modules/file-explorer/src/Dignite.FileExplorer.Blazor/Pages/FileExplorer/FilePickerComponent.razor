@@ -4,36 +4,36 @@
 
 <Validation Validator="@(Validator ?? ValidationRule.None)" AsyncValidator="@AsyncValidator">
     <Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
-</Validation>
-@if (FileDescriptorsContent != null)
-{
-    @FileDescriptorsContent(SelectedFiles)
-}
-else
-{
-    if (SelectedFiles != null && SelectedFiles.Any())
+    @if (FileDescriptorsContent != null)
     {
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHeaderCell>@L["FileName"]</TableHeaderCell>
-                    <TableHeaderCell>@L["FileSize"]</TableHeaderCell>
-                    <TableHeaderCell></TableHeaderCell>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                @foreach (var item in SelectedFiles)
-                {
-                    <TableRow>
-                        <TableRowCell>@item.Name</TableRowCell>
-                        <TableRowCell>@FileSizeFormatter.FormatSize(item.Size)</TableRowCell>
-                        <TableRowCell>
-                            <Button Color="Color.Primary" Clicked="@(() => RemoveFileAsync(item))"><Icon Name="@IconName.Delete"></Icon></Button>
-                        </TableRowCell>
-                    </TableRow>
-                }
-            </TableBody>
-        </Table>
+        @FileDescriptorsContent(SelectedFiles)
     }
-}
-<FileExplorerModal @ref="_fileExplorerModal" Multiple="@Multiple" SelectFiles="SelectFilesAsync"></FileExplorerModal>
+    else
+    {
+        if (SelectedFiles != null && SelectedFiles.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                        <TableHeaderCell>@L["FileSize"]</TableHeaderCell>
+                        <TableHeaderCell></TableHeaderCell>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    @foreach (var item in SelectedFiles)
+                    {
+                        <TableRow>
+                            <TableRowCell>@item.Name</TableRowCell>
+                            <TableRowCell>@FileSizeFormatter.FormatSize(item.Size)</TableRowCell>
+                            <TableRowCell>
+                                <Button Color="Color.Primary" Clicked="@(() => RemoveFileAsync(item))"><Icon Name="@IconName.Delete"></Icon></Button>
+                            </TableRowCell>
+                        </TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
+    }
+    <FileExplorerModal @ref="_fileExplorerModal" Multiple="@Multiple" SelectFiles="SelectFilesAsync"></FileExplorerModal>
+</Validation>

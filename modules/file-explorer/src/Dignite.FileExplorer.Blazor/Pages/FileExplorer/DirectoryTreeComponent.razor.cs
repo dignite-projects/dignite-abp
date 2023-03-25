@@ -26,7 +26,7 @@ public partial class DirectoryTreeComponent
     }
     protected override async Task OnInitializedAsync()
     {
-        HasCreatePermission = await AuthorizationService.IsGrantedAsync(Configuration.CreateDirectoryPermissionName);
+        HasCreatePermission = Configuration.CreateDirectoryPermissionName.IsNullOrEmpty() ? false : await AuthorizationService.IsGrantedAsync(Configuration.CreateDirectoryPermissionName);
         HasUpdatePermission = HasCreatePermission;
         HasDeletePermission = HasCreatePermission;
         await GetEntitiesAsync();

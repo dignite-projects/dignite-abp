@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Dignite.Abp.DynamicForms;
@@ -17,29 +18,42 @@ public class CustomizedFieldsValueConverter : ValueConverter<CustomFieldDictiona
     {
     }
 
-    private static string SerializeObject(CustomFieldDictionary extraFields)
+    private static string SerializeObject(CustomFieldDictionary customFields)
     {
         JsonSerializerOptions options = new JsonSerializerOptions
         {
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             WriteIndented = true
         };
-        var copyDictionary = new Dictionary<string, object>(extraFields);
 
-        var serializeValue = JsonSerializer.Serialize(copyDictionary, options);
+        /*
+        var serializeValue = JsonSerializer.Serialize(
+            customFields.Select(f => new KeyValuePair<string, object>(f.Key, f.Value)),
+            options);
+        */
+
+        var serializeValue = JsonSerializer.Serialize(customFields, options);
         return serializeValue;
     }
 
-    private static CustomFieldDictionary DeserializeObject(string extraFieldsAsJson)
+    private static CustomFieldDictionary DeserializeObject(string customFieldsAsJson)
     {
-        if (extraFieldsAsJson.IsNullOrEmpty() || extraFieldsAsJson == "{}")
+        if (customFieldsAsJson.IsNullOrEmpty() || customFieldsAsJson == "{}" || customFieldsAsJson == "[]")
         {
             return new CustomFieldDictionary();
         }
 
         var deserializeOptions = new JsonSerializerOptions();
         deserializeOptions.Converters.Add(new ObjectToInferredTypesConverter());
-        var dictionary = JsonSerializer.Deserialize<CustomFieldDictionary>(extraFieldsAsJson, deserializeOptions) ??
+
+        /*
+        var dictionary = JsonSerializer.Deserialize<List<KeyValuePair<string, object>>>(
+            customFieldsAsJson,
+            deserializeOptions)
+            .ToDictionary(kv => kv.Key, kv => kv.Value);
+        */
+
+        var dictionary = JsonSerializer.Deserialize<CustomFieldDictionary>(customFieldsAsJson, deserializeOptions) ??
                          new CustomFieldDictionary();
 
         return dictionary;

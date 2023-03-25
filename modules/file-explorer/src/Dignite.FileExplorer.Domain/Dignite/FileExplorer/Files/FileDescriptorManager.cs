@@ -107,7 +107,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
 
     protected override Task CheckFileAsync([NotNull] FileDescriptor file)
     {
-        Check.NotNullOrWhiteSpace(file.EntityId, nameof(FileDescriptor.EntityId), FileDescriptorConsts.MaxEntityIdLength);
+        //Check.NotNullOrWhiteSpace(file.EntityId, nameof(FileDescriptor.EntityId), FileDescriptorConsts.MaxEntityIdLength);
         return base.CheckFileAsync(file);
     }
 

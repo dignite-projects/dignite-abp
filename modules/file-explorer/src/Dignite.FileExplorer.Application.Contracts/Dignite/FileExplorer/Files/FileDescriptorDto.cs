@@ -4,6 +4,7 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.FileExplorer.Files;
 
+[Serializable]
 public class FileDescriptorDto : ExtensibleCreationAuditedEntityDto<Guid>, IMultiTenant
 {
     public Guid? TenantId { get; set; }

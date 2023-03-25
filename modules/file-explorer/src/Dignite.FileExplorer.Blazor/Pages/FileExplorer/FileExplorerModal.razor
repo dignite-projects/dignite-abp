@@ -48,7 +48,11 @@
                             </Breadcrumb>                            
                         </Div>
                         <Div>
-                            <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")" />
+                            <FileEdit Changed="@OnFileChangedAsync" Disabled="@(Files!=null && Files.Any(f=>f.Status != FileUploadStatus.Fail))" Multiple="@Multiple" Filter="@Configuration?.AllowedFileTypeNames?.JoinAsString(",")">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </FileEdit>
                         </Div>
                     </Div>
                     

@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Dignite.Abp.FieldCustomizing;
 
-public abstract class CustomizeFieldDefinitionBase : Entity<Guid>, ICustomizeFieldInfo
+public abstract class CustomizeFieldDefinitionBase : AggregateRoot<Guid>, ICustomizeFieldInfo
 {
     protected CustomizeFieldDefinitionBase(Guid id,string displayName, string name, string defaultValue, string formName, FormConfigurationDictionary formConfiguration)
         :base(id)

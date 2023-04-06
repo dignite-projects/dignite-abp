@@ -1,0 +1,63 @@
+﻿@using Dignite.Abp.DynamicForms.FileExplorer
+@using Dignite.FileExplorer.Blazor.Pages.FileExplorer
+@using Dignite.FileExplorer.Files;
+@using System.Text.Json;
+@inherits FormComponentBase<FileExplorerForm,FileExplorerConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        <FilePickerComponent ContainerName="@(FormConfiguration.FileContainerName)" 
+            Multiple="@FormConfiguration.UploadFileMultiple"
+            SelectedFiles="@Files"
+            SelectedFilesChanged="OnFilesChanged"
+                                Validator="@ValidateIsRequired">
+        </FilePickerComponent>
+        <FieldHelp>@FormConfiguration.Description</FieldHelp>
+    </FieldBody>
+</Field>
+
+@code{
+    private List<FileDescriptorDto> Files = new();
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        var value = CustomizableObject.GetField(Field.Name, null);
+        if (value != null)
+        {
+            try
+            {
+                Files = JsonSerializer.Deserialize<List<FileDescriptorDto>>(value.ToString());
+            }
+            catch
+            {
+            }
+            CustomizableObject.SetField(Field.Name, Files);
+        }
+        else
+        {
+            CustomizableObject.SetField(Field.Name, Files);
+        }
+    }
+
+
+    void ValidateIsRequired( ValidatorEventArgs e )
+    {
+        if(FormConfiguration.Required)
+        {
+            e.Status = Files.Any() ? ValidationStatus.Success : ValidationStatus.Error;
+            e.ErrorText = L["PleaseSelectFiles"];
+        }
+    }
+
+    Task OnFilesChanged(List<FileDescriptorDto> files)
+    {
+        this.Files = files;
+        CustomizableObject.SetField(Field.Name, Files);
+
+        return Task.CompletedTask;
+    }
+
+}

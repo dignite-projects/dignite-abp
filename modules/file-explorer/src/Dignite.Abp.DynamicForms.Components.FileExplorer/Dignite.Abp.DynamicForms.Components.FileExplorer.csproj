@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms.Components\Dignite.Abp.DynamicForms.Components.csproj" />
+	  <ProjectReference Include="..\Dignite.Abp.DynamicForms.FileExplorer\Dignite.Abp.DynamicForms.FileExplorer.csproj" />
+	  <ProjectReference Include="..\Dignite.FileExplorer.Blazor\Dignite.FileExplorer.Blazor.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -23,6 +23,7 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         _fileAppService = fileAppService;
     }
 
+    [IgnoreAntiforgeryToken]
     [HttpPost]
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {

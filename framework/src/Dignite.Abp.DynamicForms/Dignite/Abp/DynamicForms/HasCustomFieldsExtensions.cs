@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using JetBrains.Annotations;
-using Volo.Abp;
 using Volo.Abp.Reflection;
 
 namespace Dignite.Abp.DynamicForms;
@@ -36,6 +36,7 @@ public static class HasCustomFieldsExtensions
             return defaultValue;
         }
 
+
         if (TypeHelper.IsPrimitiveExtended(typeof(TField), includeEnums: true))
         {
             var conversionType = typeof(TField);
@@ -51,8 +52,10 @@ public static class HasCustomFieldsExtensions
 
             return (TField)Convert.ChangeType(value, conversionType, CultureInfo.InvariantCulture);
         }
-
-        throw new AbpException("GetField<TField> does not support non-primitive types. Use non-generic GetField method and handle type casting manually.");
+        else
+        {
+            return JsonSerializer.Deserialize<TField>(value.ToString());
+        }        
     }
 
     public static TSource SetField<TSource>(

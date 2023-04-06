@@ -1,5 +1,6 @@
 ﻿using System;
 using Dignite.Abp.DynamicForms;
+using Dignite.Abp.FieldCustomizing.EntityFrameworkCore.QueryingByFields;
 using Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueComparers;
 using Dignite.Abp.FieldCustomizing.EntityFrameworkCore.ValueConverters;
 using Microsoft.EntityFrameworkCore;

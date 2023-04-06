@@ -26,12 +26,12 @@
     <Check TValue="bool" @bind-Checked="@FormConfiguration.Required">@L["IsRequired"]</Check>
 </Field>
 <Field>
-    <FieldLabel>@L["Max"]</FieldLabel>
-    <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Max" />
+    <FieldLabel>@L["Min"]</FieldLabel>
+    <NumericEdit TValue="decimal?" @bind-Value="@FormConfiguration.Min" />
 </Field>
 <Field>
-    <FieldLabel>@L["Min"]</FieldLabel>
-    <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Min" />
+    <FieldLabel>@L["Max"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Max" />
 </Field>
 <Field>
     <FieldLabel>@L["NumericDecimals"]</FieldLabel>

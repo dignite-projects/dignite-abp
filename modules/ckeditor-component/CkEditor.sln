@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.CkEditor", "Dignite.Abp.DynamicForms.CkEditor\Dignite.Abp.DynamicForms.CkEditor.csproj", "{07F271D1-2B52-415D-A295-3814B0333BE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor", "Dignite.Abp.AspNetCore.Components.CkEditor\Dignite.Abp.AspNetCore.Components.CkEditor.csproj", "{166BAE34-E08D-4E38-8E34-C200829C97E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor.Server", "Dignite.Abp.AspNetCore.Components.CkEditor.Server\Dignite.Abp.AspNetCore.Components.CkEditor.Server.csproj", "{1EE14F57-FD87-4A20-805D-04EEEE8162F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components.CkEditor", "Dignite.Abp.DynamicForms.Components.CkEditor\Dignite.Abp.DynamicForms.Components.CkEditor.csproj", "{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07F271D1-2B52-415D-A295-3814B0333BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F271D1-2B52-415D-A295-3814B0333BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F271D1-2B52-415D-A295-3814B0333BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F271D1-2B52-415D-A295-3814B0333BE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166BAE34-E08D-4E38-8E34-C200829C97E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166BAE34-E08D-4E38-8E34-C200829C97E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166BAE34-E08D-4E38-8E34-C200829C97E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166BAE34-E08D-4E38-8E34-C200829C97E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE14F57-FD87-4A20-805D-04EEEE8162F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE14F57-FD87-4A20-805D-04EEEE8162F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE14F57-FD87-4A20-805D-04EEEE8162F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE14F57-FD87-4A20-805D-04EEEE8162F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67620638-CB18-4896-8060-2202AFC1982D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,77 @@
+﻿@using Microsoft.JSInterop
+@namespace Dignite.Abp.AspNetCore.Components.CkEditor
+@inject IJSRuntime Js
+@implements IAsyncDisposable
+<div>
+    <textarea @ref="EditorElement">
+        @Content
+    </textarea>
+</div>
+
+
+@code {
+
+    private ElementReference EditorElement { get; set; }
+    private IJSObjectReference JsEditorInstance { get; set; }
+
+    public bool IsInitialized { get; set; }
+
+    private string _content;
+
+    [Parameter]
+    public string Content
+    {
+        get=> _content ?? "";
+        set
+        {
+            if (Content == value)
+                return;
+            _content = value;
+            if (IsInitialized)
+                SetData(Content);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> ContentChanged { get; set; }
+
+    [Parameter]
+    public CkEditorOptions Options { get; set; } = CkEditorOptions.Default;
+
+
+    [Parameter]
+    public string UrlForUploadingImage { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            JsEditorInstance = await Js.InvokeAsync<IJSObjectReference>("ClassicEditor.create", EditorElement, UrlForUploadingImage, Options, DotNetObjectReference.Create(this));
+            IsInitialized = true;
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+    [JSInvokable]
+    public async Task EditorContentChanged(string data)
+    {
+        _content = data;
+        if (ContentChanged.HasDelegate)
+            await ContentChanged.InvokeAsync(data);
+        StateHasChanged();
+    }
+
+    public async Task SetData(string content)
+    {
+        await JsEditorInstance.InvokeVoidAsync("data.set", content);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (JsEditorInstance != null)
+        {
+            await JsEditorInstance.InvokeVoidAsync("destroy");
+        }
+        GC.SuppressFinalize(this);
+    }
+}

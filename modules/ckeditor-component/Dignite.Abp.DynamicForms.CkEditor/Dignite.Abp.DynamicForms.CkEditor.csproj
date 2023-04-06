@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\..\configureawait.props" />
+	<Import Project="..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>Dignite.Abp.DynamicForms.CkEditor</AssemblyName>
+		<PackageId>Dignite.Abp.DynamicForms.CkEditor</PackageId>
+		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\en.json" />
+	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hans.json" />
+	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hant.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\en.json" />
+	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hans.json" />
+	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hant.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
+	</ItemGroup>
+
+</Project>

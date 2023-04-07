@@ -36,7 +36,6 @@ public static class HasCustomFieldsExtensions
             return defaultValue;
         }
 
-
         if (TypeHelper.IsPrimitiveExtended(typeof(TField), includeEnums: true))
         {
             var conversionType = typeof(TField);
@@ -45,7 +44,7 @@ public static class HasCustomFieldsExtensions
                 conversionType = conversionType.GetFirstGenericArgumentIfNullable();
             }
 
-            if (conversionType == typeof(Guid))
+            if (conversionType == typeof(Guid)|| conversionType == typeof(String))
             {
                 return (TField)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString());
             }
@@ -55,7 +54,7 @@ public static class HasCustomFieldsExtensions
         else
         {
             return JsonSerializer.Deserialize<TField>(value.ToString());
-        }        
+        }
     }
 
     public static TSource SetField<TSource>(

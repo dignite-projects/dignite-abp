@@ -29,4 +29,10 @@ public abstract class ConfigurationComponentBase<TForm, TFormConfiguration> : Ab
         base.OnInitialized();
         FormConfiguration.ConfigurationDictionary = Field.FormConfiguration;
     }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        FormConfiguration.ConfigurationDictionary = Field.FormConfiguration;
+    }
 }

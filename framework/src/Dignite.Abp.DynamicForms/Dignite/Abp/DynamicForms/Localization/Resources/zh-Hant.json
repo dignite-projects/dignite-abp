@@ -50,6 +50,10 @@
     "ValidateValue:CannotBeGreaterThan": "{0} 值不能大於 {1}！",
     "ValidateValue:CannotBeLessThan": "{0} 值不能小於 {1}！",
     "ValidateValue:NotNumericType": "{0} 值非數字類型！",
-    "ValidateValue:CharacterCountExceedsLimit": "{0} 字數不能超過 {1} 個！"
+    "ValidateValue:CharacterCountExceedsLimit": "{0} 字數不能超過 {1} 個！",
+    "MatrixControl": "矩陣",
+    "MatrixBlockTypes": "矩陣塊類型",
+    "NewBlockType": "新建矩陣塊類型",
+    "MatrixBlockType": "矩陣塊類型"
   }
 }

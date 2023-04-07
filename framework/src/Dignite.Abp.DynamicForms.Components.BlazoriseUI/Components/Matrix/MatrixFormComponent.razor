@@ -1,0 +1,72 @@
+﻿@using Dignite.Abp.DynamicForms.Matrix
+@using System.Text.Json;
+@inject IFormComponentSelector FormComponentSelector
+@inherits FormComponentBase<MatrixForm,MatrixConfiguration>
+
+<Field Horizontal="@(!IsChild)">
+    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
+        @foreach(var block in MatrixBlocks)
+        {
+            var blockType = FormConfiguration.MatrixBlockTypes.FirstOrDefault(t => t.Name == block.MatrixBlockTypeName);
+            if (blockType!=null)
+            {
+                <Card>
+                    <CardHeader>                        
+                        <Div Flex="Flex.JustifyContent.Between">
+                            <Div Padding="Padding.Is2">
+                                @blockType.DisplayName
+                            </Div>
+                            <Div Padding="Padding.Is2">
+                                <Button Color="Color.Default" Size="Size.Small" Clicked="()=>RemoveMatrixBlock(block)">@L["Remove"]</Button>
+                            </Div>
+                        </Div>
+                    </CardHeader>
+                    <CardBody>
+                        @foreach (var field in blockType.FieldDefinitions)
+                        {
+                            var component = FormComponentSelector.Get(field.FormName);
+                            var parameters = new Dictionary<string, object>();
+                            parameters.Add("CustomizableObject", block);
+                            parameters.Add("Field", field);
+                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>           
+                        }
+                    </CardBody>
+                </Card>
+            }
+        }
+        <ListGroup Flex="Flex.AlignItems.Start">
+            @foreach(var blockType in FormConfiguration.MatrixBlockTypes)
+            {
+                <ListGroupItem Clicked="()=>AddMatrixBlock(blockType)">@blockType.DisplayName</ListGroupItem>
+            }
+        </ListGroup>
+        <FieldHelp>@FormConfiguration.Description</FieldHelp>
+    </FieldBody>
+</Field>
+@code {
+    protected List<MatrixBlock> MatrixBlocks = new List<MatrixBlock>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        var value = CustomizableObject.GetField<List<MatrixBlock>>(Field.Name, null);
+        if (value == null)
+        {
+            value = new List<MatrixBlock>();
+            CustomizableObject.SetField(Field.Name, value);
+        }
+        MatrixBlocks = value;
+    }
+    private void AddMatrixBlock(MatrixBlockType blockType)
+    {
+        MatrixBlocks.Add(new MatrixBlock(blockType.Name));
+        CustomizableObject.SetField(Field.Name, MatrixBlocks);
+    }
+    private void RemoveMatrixBlock(MatrixBlock block)
+    {
+        MatrixBlocks.Remove(block);
+        CustomizableObject.SetField(Field.Name, MatrixBlocks);
+    }
+}

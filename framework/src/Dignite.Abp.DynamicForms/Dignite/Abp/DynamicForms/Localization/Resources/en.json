@@ -50,6 +50,10 @@
     "ValidateValue:CannotBeGreaterThan": "{0} Value cannot be greater than {1}.",
     "ValidateValue:CannotBeLessThan": "{0} Value cannot be less than 1 {1}.",
     "ValidateValue:NotNumericType": "{0} Value non numeric type.",
-    "ValidateValue:CharacterCountExceedsLimit": "{0} The number of characters cannot exceed {1}."
+    "ValidateValue:CharacterCountExceedsLimit": "{0} The number of characters cannot exceed {1}.",
+    "MatrixControl": "Matrix",
+    "MatrixBlockTypes": "Matrix Block Types",
+    "NewBlockType": "New Block Type",
+    "MatrixBlockType": "Matrix Block Type"
   }
 }

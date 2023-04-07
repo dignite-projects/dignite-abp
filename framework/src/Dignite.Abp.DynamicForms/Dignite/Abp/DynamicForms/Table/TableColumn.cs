@@ -13,10 +13,10 @@ public class TableColumn
     }
 
     public TableColumn(
-        TableColumnCustomField fieldDefinition
+        TableColumnCustomField customField
         )
     {
-        CustomField = fieldDefinition;
+        CustomField = customField;
     }
 
     [NotNull]

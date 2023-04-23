@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms", "src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj", "{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.TenantLocalization", "src\Dignite.Abp.TenantLocalization\Dignite.Abp.TenantLocalization.csproj", "{87EB042B-ACF7-4FA5-8553-15EBED66139E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{A829CA8B-5C8F-4A14-81F3-7CBBF2199051} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 		{0B885452-E9ED-4E74-8D65-FB2990B70458} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 		{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
+		{87EB042B-ACF7-4FA5-8553-15EBED66139E} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F622C42C-929D-4CAB-8CC6-23E387FFDD36}

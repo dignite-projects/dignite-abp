@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Dignite.Abp.FieldCustomizing.EntityFrameworkCore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:58126;http://localhost:58127"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Dignite.FileExplorer.Domain.Shared": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:58149;http://localhost:58150"
+    }
+  }
+}

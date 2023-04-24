@@ -3,14 +3,14 @@ using Microsoft.Extensions.Localization;
 using Volo.Abp.Localization;
 
 
-namespace Dignite.Abp.TenantLocalization;
+namespace Dignite.Abp.Localization.MultiTenancy;
 
-public class TenantStringLocalizerFactory : IStringLocalizerFactory
+public class MultiTenancyStringLocalizerFactory : IStringLocalizerFactory
 {
-    private readonly TenantJsonStringLocalizerFactory _jsonStringLocalizerFactory;
+    private readonly MultiTenancyJsonStringLocalizerFactory _jsonStringLocalizerFactory;
     private readonly AbpStringLocalizerFactory _abpStringLocalizerFactory;
 
-    public TenantStringLocalizerFactory(TenantJsonStringLocalizerFactory jsonStringLocalizerFactory, AbpStringLocalizerFactory abpStringLocalizerFactory)
+    public MultiTenancyStringLocalizerFactory(MultiTenancyJsonStringLocalizerFactory jsonStringLocalizerFactory, AbpStringLocalizerFactory abpStringLocalizerFactory)
     {
         _jsonStringLocalizerFactory = jsonStringLocalizerFactory;
         _abpStringLocalizerFactory = abpStringLocalizerFactory;
@@ -18,7 +18,7 @@ public class TenantStringLocalizerFactory : IStringLocalizerFactory
 
     public IStringLocalizer Create(Type resourceSource)
     {
-        if (TenantLocalizationResourceNameAttribute.GetOrNull(resourceSource) != null)
+        if (MultiTenancyLocalizationResourceNameAttribute.GetOrNull(resourceSource) != null)
             return _jsonStringLocalizerFactory.Create(resourceSource);
         else
             return _abpStringLocalizerFactory.Create(resourceSource);

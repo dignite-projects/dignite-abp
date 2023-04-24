@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
 
-namespace Dignite.Abp.TenantLocalization;
+namespace Dignite.Abp.Localization.MultiTenancy;
 
-public class TenantLocalizationResourceNameAttribute : Attribute
+public class MultiTenancyLocalizationResourceNameAttribute : Attribute
 {
     public string Name { get; }
 
-    public TenantLocalizationResourceNameAttribute(string name)
+    public MultiTenancyLocalizationResourceNameAttribute(string name)
     {
         Name = name;
     }
 
-    public static TenantLocalizationResourceNameAttribute GetOrNull(Type resourceType)
+    public static MultiTenancyLocalizationResourceNameAttribute GetOrNull(Type resourceType)
     {
         return resourceType
             .GetCustomAttributes(true)
-            .OfType<TenantLocalizationResourceNameAttribute>()
+            .OfType<MultiTenancyLocalizationResourceNameAttribute>()
             .FirstOrDefault();
     }
 

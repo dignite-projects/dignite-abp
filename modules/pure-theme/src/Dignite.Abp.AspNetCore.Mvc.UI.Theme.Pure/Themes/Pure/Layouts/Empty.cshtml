@@ -43,7 +43,7 @@
     {
         <meta name="description" content="@ViewBag.Description" />
     }
-    <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
+    <abp-style-bundle name="@PureThemeBundles.Styles.Public" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -61,7 +61,7 @@
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Empty)
     </div>
 
-    <abp-script-bundle name="@PureThemeBundles.Scripts.Global" />
+    <abp-script-bundle name="@PureThemeBundles.Scripts.Pubilc" />
 
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>

@@ -1,9 +1,9 @@
-﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.MainNavbar
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.PageAlerts
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.PageFooter
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
@@ -44,7 +44,7 @@
     <link rel="shortcut icon" href="/@CurrentTenant?.Name/favicon.ico" type="image/x-icon" />
     <title>@pageTitle</title>
 
-    <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
+    <abp-style-bundle name="@PureThemeBundles.Styles.Public" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -71,7 +71,7 @@
 
     @(await Component.InvokeAsync<PageFooterViewComponent>())
 
-    <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
+    <abp-script-bundle name="@PureThemeBundles.Scripts.Pubilc" />
 
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>

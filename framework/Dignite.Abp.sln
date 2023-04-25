@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Localization.MultiTenancy", "src\Dignite.Abp.Localization.MultiTenancy\Dignite.Abp.Localization.MultiTenancy.csproj", "{87EB042B-ACF7-4FA5-8553-15EBED66139E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy", "src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy.csproj", "{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87EB042B-ACF7-4FA5-8553-15EBED66139E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{0B885452-E9ED-4E74-8D65-FB2990B70458} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 		{AD8B2A4E-B10C-4B86-A932-BDB4E2FB7269} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 		{87EB042B-ACF7-4FA5-8553-15EBED66139E} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
+		{E3847E4D-F283-4BA6-BA15-F1C9E723DD74} = {7869E1B7-6CC9-4C08-9B94-85D21A5F5968}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F622C42C-929D-4CAB-8CC6-23E387FFDD36}

@@ -1,24 +1,21 @@
 ﻿using System.Text.Unicode;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNet;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
-using Volo.Abp.MultiTenancy;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
-
 [DependsOn(
-    typeof(AbpAspNetCoreMvcUiThemeSharedModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyModule)
+    typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+    typeof(AbpAspNetCoreMvcUiThemeMultiTenancyModule)
     )]
 public class AbpAspNetCoreMvcUiPureThemeModule : AbpModule
 {
@@ -47,37 +44,25 @@ public class AbpAspNetCoreMvcUiPureThemeModule : AbpModule
             options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiPureThemeModule>("Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure");
         });
 
-        Configure<AbpToolbarOptions>(options =>
-        {
-            options.Contributors.Add(new PureThemeMainTopToolbarContributor());
-        });
-
         Configure<AbpBundlingOptions>(options =>
         {
             options
                 .StyleBundles
-                .Add(PureThemeBundles.Styles.Global, bundle =>
+                .Add(PureThemeBundles.Styles.Public, bundle =>
                 {
                     bundle
-                        .AddBaseBundles(StandardBundles.Styles.Global)
-                        .AddContributors(typeof(PureThemeGlobalStyleContributor));
+                        .AddContributors(typeof(PureThemePublicStyleContributor));
                 });
 
             options
                 .ScriptBundles
-                .Add(PureThemeBundles.Scripts.Global, bundle =>
+                .Add(PureThemeBundles.Scripts.Pubilc, bundle =>
                 {
                     bundle
-                        .AddBaseBundles(StandardBundles.Scripts.Global)
-                        .AddContributors(typeof(PureThemeGlobalScriptContributor));
+                        .AddContributors(typeof(PureThemePublicScriptContributor));
                 });
         });
 
-        Configure<RazorViewEngineOptions>(options =>
-        {
-            var currentTenantLazy = context.Services.GetServiceLazy<ICurrentTenant>();
-            options.ViewLocationExpanders.Add(new PureViewLocationExpander(currentTenantLazy));
-        });
 
         Configure<WebEncoderOptions>(options =>
         {

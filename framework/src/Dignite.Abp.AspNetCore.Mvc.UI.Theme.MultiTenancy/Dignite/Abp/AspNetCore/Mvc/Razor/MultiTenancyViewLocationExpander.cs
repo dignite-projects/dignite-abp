@@ -5,21 +5,25 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
-
-public class PureViewLocationExpander : IViewLocationExpander
+namespace Dignite.Abp.AspNetCore.Mvc.Razor;
+public class MultiTenancyViewLocationExpander : IViewLocationExpander
 {
     private const string _languageKey = "___language";
     private const string _tenancyNameKEY = "___tenantName";
     private const string _webComponentPathKey = "___webComponentPath";
 
     private readonly Lazy<ICurrentTenant> _currentTenantLazy;
+    private readonly Lazy<IThemeSelector> _themeSelectorLazy;
 
-    public PureViewLocationExpander(Lazy<ICurrentTenant> currentTenantLazy)
+    public MultiTenancyViewLocationExpander(
+        Lazy<ICurrentTenant> currentTenantLazy,
+        Lazy<IThemeSelector> themeSelectorLazy)
     {
         _currentTenantLazy = currentTenantLazy;
+        _themeSelectorLazy = themeSelectorLazy;
     }
 
     public void PopulateValues([NotNull] ViewLocationExpanderContext context)
@@ -84,6 +88,7 @@ public class PureViewLocationExpander : IViewLocationExpander
 
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
+        var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
         string language = "." + context.Values.GetOrDefault(_languageKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;
@@ -92,8 +97,8 @@ public class PureViewLocationExpander : IViewLocationExpander
         if (!string.IsNullOrEmpty(webComponentPath))
         {
             _viewLocations = new string[] {
-                "/Themes/Pure/" + webComponentPath + language + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/" + webComponentPath + RazorViewEngine.ViewExtension
+                $"/Themes/{currentThemeName}/" + webComponentPath + language + RazorViewEngine.ViewExtension,
+                $"/Themes/{currentThemeName}/" + webComponentPath + RazorViewEngine.ViewExtension
             };
         }
         else if (!string.IsNullOrEmpty(context.AreaName))
@@ -104,10 +109,10 @@ public class PureViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/Pure/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
         else
@@ -117,10 +122,10 @@ public class PureViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/Pure/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Shared/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Themes/Pure/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
 

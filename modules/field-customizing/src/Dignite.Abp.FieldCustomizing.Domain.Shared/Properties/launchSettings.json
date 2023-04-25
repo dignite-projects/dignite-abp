@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Dignite.Abp.FieldCustomizing.Domain.Shared": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57699;http://localhost:57700"
+    }
+  }
+}

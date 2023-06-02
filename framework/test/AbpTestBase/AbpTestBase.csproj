@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.TestBase" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>

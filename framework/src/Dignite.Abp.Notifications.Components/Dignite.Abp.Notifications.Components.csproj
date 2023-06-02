@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<Import Project="..\..\..\configureawait.props" />
 	<Import Project="..\..\..\common.props" />
 
@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Components" Version="5.3.4" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components" Version="6.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

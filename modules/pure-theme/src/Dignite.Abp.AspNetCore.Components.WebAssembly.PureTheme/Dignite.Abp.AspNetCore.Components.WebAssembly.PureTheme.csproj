@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="5.3.4" />
-	  <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.WebAssembly" Version="5.3.4" />
+	  <PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="6.0.3" />
+	  <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.WebAssembly" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>

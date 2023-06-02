@@ -3,6 +3,7 @@
 // https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0
 
 (function (Prism) {
+
 	var commentLike = /\/(?![/*])|\/\/.*[\r\n]|\/\*[^*]*(?:\*(?!\/)[^*]*)*\*\//.source;
 	var stringLike =
 		/@(?!")|"(?:[^\r\n\\"]|\\.)*"|@"(?:[^\\"]|""|\\[\s\S])*"(?!")/.source +
@@ -178,4 +179,5 @@
 	});
 
 	Prism.languages.razor = Prism.languages.cshtml;
+
 }(Prism));

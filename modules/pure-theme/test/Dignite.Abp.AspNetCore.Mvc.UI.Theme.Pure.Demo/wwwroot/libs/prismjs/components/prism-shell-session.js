@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	// CAREFUL!
 	// The following patterns are concatenated, so the group referenced by a back reference is non-obvious!
 
@@ -65,4 +66,5 @@
 	};
 
 	Prism.languages['sh-session'] = Prism.languages['shellsession'] = Prism.languages['shell-session'];
+
 }(Prism));

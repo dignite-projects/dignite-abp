@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>Dignite.Abp.NotificationCenter.Domain.Tests</AssemblyName>
 		<PackageId>Dignite.Abp.NotificationCenter.Domain.Tests</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -15,8 +15,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
-	  <PackageReference Include="Volo.Abp.BackgroundJobs" Version="6.0.3" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+	  <PackageReference Include="Volo.Abp.BackgroundJobs" Version="7.2.2" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.EntityFrameworkCore.Tests\Dignite.Abp.NotificationCenter.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

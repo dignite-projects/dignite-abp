@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var operators = [
 		// query and projection
 		'$eq', '$gt', '$gte', '$in', '$lt', '$lte', '$ne', '$nin', '$and', '$not', '$nor', '$or',
@@ -92,4 +93,5 @@
 			alias: 'keyword'
 		}
 	});
+
 }(Prism));

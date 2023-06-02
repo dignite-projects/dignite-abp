@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	Prism.languages.erb = {
 		'delimiter': {
 			pattern: /^(\s*)<%=?|%>(?=\s*$)/,
@@ -20,4 +21,5 @@
 	Prism.hooks.add('after-tokenize', function (env) {
 		Prism.languages['markup-templating'].tokenizePlaceholders(env, 'erb');
 	});
+
 }(Prism));

@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	/**
 	 * If the given language is present, it will insert the given doc comment grammar token into it.
 	 *
@@ -35,4 +36,5 @@
 	insertDocComment('csharp', slashDocComment);
 	insertDocComment('fsharp', slashDocComment);
 	insertDocComment('vbnet', tickDocComment);
+
 }(Prism));

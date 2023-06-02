@@ -21,12 +21,12 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Validation" Version="6.0.3" />
+    <PackageReference Include="Volo.Abp.Validation" Version="7.2.2" />
 	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

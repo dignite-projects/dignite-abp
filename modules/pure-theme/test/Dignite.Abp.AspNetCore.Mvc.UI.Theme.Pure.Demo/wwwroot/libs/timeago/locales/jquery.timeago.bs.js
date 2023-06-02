@@ -7,7 +7,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  // Bosnian
+  // Bosnian  
   var numpf = function(n, f, s, t) {
     var n10;
     n10 = n % 10;
@@ -51,4 +51,5 @@
     },
     wordSeparator: " "
   };
+  
 }));

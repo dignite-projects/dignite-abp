@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var attributes = {
 		pattern: /(^[ \t]*)\[(?!\[)(?:(["'$`])(?:(?!\2)[^\\]|\\.)*\2|\[(?:[^\[\]\\]|\\.)*\]|[^\[\]\\"'$`]|\\.)*\]/m,
 		lookbehind: true,
@@ -196,6 +197,7 @@
 		}
 	};
 
+
 	// Allow some nesting. There is no recursion though, so cloning should not be needed.
 
 	function copyFromAsciiDoc(keys) {
@@ -219,6 +221,7 @@
 	asciidoc['other-block'].inside.rest = copyFromAsciiDoc('table list-punctuation indented-block comment attribute-entry attributes hr page-break admonition list-label macro inline replacement entity line-continuation');
 
 	asciidoc['title'].inside.rest = copyFromAsciiDoc('macro inline replacement entity');
+
 
 	// Plugin to make entity title show the real entity, idea by Roman Komarov
 	Prism.hooks.add('wrap', function (env) {

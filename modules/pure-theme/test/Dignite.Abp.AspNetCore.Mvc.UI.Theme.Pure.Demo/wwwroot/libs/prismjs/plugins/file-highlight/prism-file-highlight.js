@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -190,4 +191,5 @@
 		}
 		Prism.plugins.fileHighlight.highlight.apply(this, arguments);
 	};
+
 }());

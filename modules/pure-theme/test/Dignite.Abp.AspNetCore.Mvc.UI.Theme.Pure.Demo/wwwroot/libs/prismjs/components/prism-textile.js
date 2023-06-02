@@ -38,11 +38,13 @@
 		'punctuation': /[\\\/]\d+|\S/
 	};
 
+
 	var textile = Prism.languages.textile = Prism.languages.extend('markup', {
 		'phrase': {
 			pattern: /(^|\r|\n)\S[\s\S]*?(?=$|\r?\n\r?\n|\r\r)/,
 			lookbehind: true,
 			inside: {
+
 				// h1. Header 1
 				'block-tag': {
 					pattern: withModifier(/^[a-z]\w*(?:<MOD>|<PAR>|[<>=])*\./.source),
@@ -280,4 +282,5 @@
 	phraseTableInside['footnote'] = nestedPatterns['footnote'];
 	phraseTableInside['acronym'] = nestedPatterns['acronym'];
 	phraseTableInside['mark'] = nestedPatterns['mark'];
+
 }(Prism));

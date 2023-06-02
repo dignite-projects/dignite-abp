@@ -18,6 +18,7 @@
  */
 
 var getLoader = (function () {
+
 	/**
 	 * A function which does absolutely nothing.
 	 *
@@ -443,6 +444,7 @@ var getLoader = (function () {
 	}
 
 	return getLoader;
+
 }());
 
 if (typeof module !== 'undefined') {

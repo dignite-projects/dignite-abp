@@ -2,6 +2,7 @@
 // https://unicode-org.github.io/icu-docs/apidoc/released/icu4j/com/ibm/icu/text/MessageFormat.html
 
 (function (Prism) {
+
 	/**
 	 * @param {string} source
 	 * @param {number} level
@@ -143,4 +144,5 @@
 
 	nestedMessage.inside.message.inside = Prism.languages['icu-message-format'];
 	Prism.languages['icu-message-format'].argument.inside.content.inside['choice-style'].inside.rest = Prism.languages['icu-message-format'];
+
 }(Prism));

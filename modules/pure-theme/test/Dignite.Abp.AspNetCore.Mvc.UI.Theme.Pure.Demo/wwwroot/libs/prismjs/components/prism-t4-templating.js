@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	function createBlock(prefix, inside, contentAlias) {
 		return {
 			pattern: RegExp('<#' + prefix + '[\\s\\S]*?#>'),
@@ -44,4 +45,5 @@
 	}
 
 	Prism.languages['t4-templating'] = Object.defineProperty({}, 'createT4', { value: createT4 });
+
 }(Prism));

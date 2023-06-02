@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 
 	Prism.languages.css = {
@@ -59,4 +60,5 @@
 		markup.tag.addInlined('style', 'css');
 		markup.tag.addAttribute('style', 'css');
 	}
+
 }(Prism));

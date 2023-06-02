@@ -2,6 +2,7 @@
 // Mostly it works OK but can paint code incorrectly on complex html/template tag combinations.
 
 (function (Prism) {
+
 	Prism.languages.django = {
 		'comment': /^\{#[\s\S]*?#\}$/,
 		'tag': {
@@ -36,6 +37,7 @@
 		'punctuation': /[{}[\](),.:;]/
 	};
 
+
 	var pattern = /\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\}|\{#[\s\S]*?#\}/g;
 	var markupTemplating = Prism.languages['markup-templating'];
 
@@ -54,4 +56,5 @@
 	Prism.hooks.add('after-tokenize', function (env) {
 		markupTemplating.tokenizePlaceholders(env, 'jinja2');
 	});
+
 }(Prism));

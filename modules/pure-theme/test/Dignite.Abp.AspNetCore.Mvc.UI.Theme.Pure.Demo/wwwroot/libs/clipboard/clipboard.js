@@ -16,8 +16,10 @@
 })(this, function() {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
+
 /***/ 686:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
 "use strict";
 
 // EXPORTS
@@ -48,6 +50,7 @@ function command(type) {
   }
 }
 ;// CONCATENATED MODULE: ./src/actions/cut.js
+
 
 /**
  * Cut action wrapper.
@@ -89,6 +92,8 @@ function createFakeElement(value) {
 }
 ;// CONCATENATED MODULE: ./src/actions/copy.js
 
+
+
 /**
  * Copy action wrapper.
  * @param {String|HTMLElement} target
@@ -120,6 +125,8 @@ var ClipboardActionCopy = function ClipboardActionCopy(target) {
 ;// CONCATENATED MODULE: ./src/actions/default.js
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+
+
 /**
  * Inner function which performs selection from either `text` or `target`
  * properties and then executes copy or cut operations.
@@ -139,6 +146,7 @@ var ClipboardActionDefault = function ClipboardActionDefault() {
     throw new Error('Invalid "action" value, use either "copy" or "cut"');
   } // Sets the `target` property using an element that will be have its content copied.
 
+
   if (target !== undefined) {
     if (target && _typeof(target) === 'object' && target.nodeType === 1) {
       if (action === 'copy' && target.hasAttribute('disabled')) {
@@ -153,11 +161,13 @@ var ClipboardActionDefault = function ClipboardActionDefault() {
     }
   } // Define selection strategy based on `text` property.
 
+
   if (text) {
     return actions_copy(text, {
       container: container
     });
   } // Defines which selection strategy based on `target` property.
+
 
   if (target) {
     return action === 'cut' ? actions_cut(target) : actions_copy(target, {
@@ -190,6 +200,11 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+
+
+
+
+
 /**
  * Helper function to retrieve attribute value.
  * @param {String} suffix
@@ -209,6 +224,7 @@ function getAttributeValue(suffix, element) {
  * Base class which takes one or more elements, adds event listeners to them,
  * and instantiates a new `ClipboardAction` on each click.
  */
+
 
 var Clipboard = /*#__PURE__*/function (_Emitter) {
   _inherits(Clipboard, _Emitter);
@@ -238,6 +254,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
    * @param {Object} options
    */
 
+
   _createClass(Clipboard, [{
     key: "resolveOptions",
     value: function resolveOptions() {
@@ -251,6 +268,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * Adds a click event listener to the passed trigger.
      * @param {String|HTMLElement|HTMLCollection|NodeList} trigger
      */
+
   }, {
     key: "listenClick",
     value: function listenClick(trigger) {
@@ -264,6 +282,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * Defines a new `ClipboardAction` on each click event.
      * @param {Event} e
      */
+
   }, {
     key: "onClick",
     value: function onClick(e) {
@@ -294,6 +313,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * Default `action` lookup function.
      * @param {Element} trigger
      */
+
   }, {
     key: "defaultAction",
     value: function defaultAction(trigger) {
@@ -303,6 +323,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * Default `target` lookup function.
      * @param {Element} trigger
      */
+
   }, {
     key: "defaultTarget",
     value: function defaultTarget(trigger) {
@@ -318,6 +339,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * @param {Object} options
      * @returns Text copied.
      */
+
   }, {
     key: "defaultText",
 
@@ -331,6 +353,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
     /**
      * Destroy lifecycle.
      */
+
   }, {
     key: "destroy",
     value: function destroy() {
@@ -349,6 +372,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * @param {String|HTMLElement} target
      * @returns Text cutted.
      */
+
   }, {
     key: "cut",
     value: function cut(target) {
@@ -359,6 +383,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
      * given.
      * @param {String} [action]
      */
+
   }, {
     key: "isSupported",
     value: function isSupported() {
@@ -381,6 +406,7 @@ var Clipboard = /*#__PURE__*/function (_Emitter) {
 
 /***/ 828:
 /***/ (function(module) {
+
 var DOCUMENT_NODE_TYPE = 9;
 
 /**
@@ -415,10 +441,12 @@ function closest (element, selector) {
 
 module.exports = closest;
 
+
 /***/ }),
 
 /***/ 438:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
 var closest = __webpack_require__(828);
 
 /**
@@ -498,10 +526,12 @@ function listener(element, selector, type, callback) {
 
 module.exports = delegate;
 
+
 /***/ }),
 
 /***/ 879:
 /***/ (function(__unused_webpack_module, exports) {
+
 /**
  * Check if argument is a HTML element.
  *
@@ -552,10 +582,12 @@ exports.fn = function(value) {
     return type === '[object Function]';
 };
 
+
 /***/ }),
 
 /***/ 370:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
 var is = __webpack_require__(879);
 var delegate = __webpack_require__(438);
 
@@ -652,10 +684,12 @@ function listenSelector(selector, type, callback) {
 
 module.exports = listen;
 
+
 /***/ }),
 
 /***/ 817:
 /***/ (function(module) {
+
 function select(element) {
     var selectedText;
 
@@ -700,10 +734,12 @@ function select(element) {
 
 module.exports = select;
 
+
 /***/ }),
 
 /***/ 279:
 /***/ (function(module) {
+
 function E () {
   // Keep this empty so it's easier to inherit from
   // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
@@ -772,13 +808,14 @@ E.prototype = {
 module.exports = E;
 module.exports.TinyEmitter = E;
 
+
 /***/ })
 
 /******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -791,14 +828,14 @@ module.exports.TinyEmitter = E;
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	!function() {
@@ -811,7 +848,7 @@ module.exports.TinyEmitter = E;
 /******/ 			return getter;
 /******/ 		};
 /******/ 	}();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -823,12 +860,12 @@ module.exports.TinyEmitter = E;
 /******/ 			}
 /******/ 		};
 /******/ 	}();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
 /******/ 	}();
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup

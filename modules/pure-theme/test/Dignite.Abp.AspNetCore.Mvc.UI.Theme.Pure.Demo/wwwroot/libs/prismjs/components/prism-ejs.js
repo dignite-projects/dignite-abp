@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	Prism.languages.ejs = {
 		'delimiter': {
 			pattern: /^<%[-_=]?|[-_]?%>$/,
@@ -21,4 +22,5 @@
 	});
 
 	Prism.languages.eta = Prism.languages.ejs;
+
 }(Prism));

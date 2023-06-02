@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var expressionDef = /\{[^\r\n\[\]{}]*\}/;
 
 	var params = {
@@ -165,4 +166,5 @@
 			return getTextContent(token.content);
 		}
 	}
+
 }(Prism));

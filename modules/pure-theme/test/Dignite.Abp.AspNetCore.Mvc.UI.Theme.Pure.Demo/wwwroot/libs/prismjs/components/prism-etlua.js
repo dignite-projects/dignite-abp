@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	Prism.languages.etlua = {
 		'delimiter': {
 			pattern: /^<%[-=]?|-?%>$/,
@@ -18,4 +19,5 @@
 	Prism.hooks.add('after-tokenize', function (env) {
 		Prism.languages['markup-templating'].tokenizePlaceholders(env, 'etlua');
 	});
+
 }(Prism));

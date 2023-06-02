@@ -1,10 +1,12 @@
 (function (Prism) {
+
 	var multilineComment = /\/\*(?:[^*/]|\*(?!\/)|\/(?!\*)|<self>)*\*\//.source;
 	for (var i = 0; i < 2; i++) {
 		// support 4 levels of nested comments
 		multilineComment = multilineComment.replace(/<self>/g, function () { return multilineComment; });
 	}
 	multilineComment = multilineComment.replace(/<self>/g, function () { return /[^\s\S]/.source; });
+
 
 	Prism.languages.rust = {
 		'comment': [
@@ -122,4 +124,5 @@
 
 	Prism.languages.rust['closure-params'].inside.rest = Prism.languages.rust;
 	Prism.languages.rust['attribute'].inside['string'] = Prism.languages.rust['string'];
+
 }(Prism));

@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	/**
 	 * @param {string} name
 	 * @returns {RegExp}
@@ -146,4 +147,5 @@
 	if (options) {
 		Prism.languages.insertBefore('http', 'header', options);
 	}
+
 }(Prism));

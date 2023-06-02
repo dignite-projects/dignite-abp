@@ -1,4 +1,5 @@
 Prism.languages.hlsl = Prism.languages.extend('c', {
+
 	// Regarding keywords and class names:
 	// The list of all keywords was split into 'keyword' and 'class-name' tokens based on whether they are capitalized.
 	// https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-appendix-keywords

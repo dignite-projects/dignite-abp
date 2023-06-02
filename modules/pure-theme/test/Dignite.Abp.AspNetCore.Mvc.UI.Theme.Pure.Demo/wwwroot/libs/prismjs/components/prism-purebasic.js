@@ -5,6 +5,7 @@ Original Code by Bas Groothedde
 slightly changed to pass all tests
 */
 
+
 // PureBasic support, steal stuff from ansi-c
 Prism.languages.purebasic = Prism.languages.extend('clike', {
 	'comment': /;.*/,

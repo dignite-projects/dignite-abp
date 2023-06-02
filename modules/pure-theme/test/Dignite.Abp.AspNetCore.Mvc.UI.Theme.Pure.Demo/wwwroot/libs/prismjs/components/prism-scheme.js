@@ -116,4 +116,5 @@
 		// return the last item
 		return grammar[key];
 	}
+
 }(Prism));

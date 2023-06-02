@@ -3,15 +3,15 @@
 	<Import Project="..\..\..\common.test.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<RootNamespace />
 	</PropertyGroup>
 
   <ItemGroup>
 	  <ProjectReference Include="..\..\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj" />
 	  <ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
-	  <PackageReference Include="Volo.Abp.Autofac" Version="6.0.3" />
-	  <PackageReference Include="Volo.Abp.BackgroundJobs" Version="6.0.3" />
+	  <PackageReference Include="Volo.Abp.Autofac" Version="7.2.2" />
+	  <PackageReference Include="Volo.Abp.BackgroundJobs" Version="7.2.2" />
 	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
   </ItemGroup>
 

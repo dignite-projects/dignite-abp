@@ -21,6 +21,7 @@
 	});
 	delete Prism.languages.sass.atrule;
 
+
 	var variable = /\$[-\w]+|#\{\$[-\w]+\}/;
 	var operator = [
 		/[+*\/%]|[=!]=|<=?|>=?|\b(?:and|not|or)\b/,
@@ -72,4 +73,5 @@
 			greedy: true
 		}
 	});
+
 }(Prism));

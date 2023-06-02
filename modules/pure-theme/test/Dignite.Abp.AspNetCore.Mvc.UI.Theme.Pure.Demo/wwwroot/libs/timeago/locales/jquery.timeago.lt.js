@@ -7,7 +7,7 @@
     factory(jQuery);
   }
 }(function (jQuery) {
-  //Lithuanian
+  //Lithuanian      
   jQuery.timeago.settings.strings = {
     prefixAgo: "prieš",
     prefixFromNow: null,

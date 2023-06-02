@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined' || !Function.prototype.bind) {
 		return;
 	}
@@ -7,6 +8,7 @@
 		// gradient must be defined before color and angle
 		'gradient': {
 			create: (function () {
+
 				// Stores already processed gradients so that we don't
 				// make the conversion every time the previewer is shown
 				var cache = {};
@@ -317,6 +319,7 @@
 		'easing': {
 			create: function () {
 				new Prism.plugins.Previewer('easing', function (value) {
+
 					value = {
 						'linear': '0,0,1,1',
 						'ease': '.25,.1,.25,1',
@@ -705,4 +708,5 @@
 	for (var previewer in previewers) {
 		previewers[previewer].create();
 	}
+
 }());

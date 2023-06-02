@@ -1,11 +1,9 @@
 ﻿using Volo.Abp.Modularity;
-using Volo.Abp.Studio;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Dignite.Abp.NotificationCenter;
 
 [DependsOn(
-    typeof(AbpStudioModuleInstallerModule),
     typeof(AbpVirtualFileSystemModule)
     )]
 public class AbpNotificationCenterInstallerModule : AbpModule

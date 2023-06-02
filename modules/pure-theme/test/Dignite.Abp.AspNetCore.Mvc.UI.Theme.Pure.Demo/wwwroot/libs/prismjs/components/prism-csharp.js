@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	/**
 	 * Replaces all placeholders "<<n>>" of given pattern with the n-th replacement (zero based).
 	 *
@@ -83,6 +84,7 @@
 	var character = /'(?:[^\r\n'\\]|\\.|\\[Uux][\da-fA-F]{1,8})'/.source; // simplified pattern
 	var regularString = /"(?:\\.|[^\\"\r\n])*"/.source;
 	var verbatimString = /@"(?:""|\\[\s\S]|[^\\"])*"(?!")/.source;
+
 
 	Prism.languages.csharp = Prism.languages.extend('clike', {
 		'string': [
@@ -303,6 +305,7 @@
 		}
 	});
 
+
 	// string interpolation
 	var formatString = /:[^}\r\n]+/.source;
 	// multi line
@@ -359,4 +362,5 @@
 	});
 
 	Prism.languages.dotnet = Prism.languages.cs = Prism.languages.csharp;
+
 }(Prism));

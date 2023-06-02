@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var templateString = Prism.languages.javascript['template-string'];
 
 	// see the pattern in prism-javascript.js
@@ -6,6 +7,7 @@
 	var interpolationObject = templateString.inside['interpolation'];
 	var interpolationPunctuationObject = interpolationObject.inside['interpolation-punctuation'];
 	var interpolationPattern = interpolationObject.pattern.source;
+
 
 	/**
 	 * Creates a new pattern to match a template string with a special tag.
@@ -40,6 +42,7 @@
 		};
 	}
 
+
 	Prism.languages.javascript['template-string'] = [
 		// styled-jsx:
 		//   css`a { color: #25F; }`
@@ -66,6 +69,7 @@
 		// vanilla template string
 		templateString
 	].filter(Boolean);
+
 
 	/**
 	 * Returns a specific placeholder literal for the given language.
@@ -175,9 +179,11 @@
 			}
 		}).join('');
 
+
 		// 2. Tokenize the embedded code
 
 		var embeddedTokens = tokenizeWithHooks(embeddedCode, grammar, language);
+
 
 		// 3. Re-insert the interpolation
 
@@ -323,6 +329,7 @@
 		findTemplateStrings(env.tokens);
 	});
 
+
 	/**
 	 * Returns the string content of a token or token stream.
 	 *
@@ -338,4 +345,5 @@
 			return stringContent(value.content);
 		}
 	}
+
 }(Prism));

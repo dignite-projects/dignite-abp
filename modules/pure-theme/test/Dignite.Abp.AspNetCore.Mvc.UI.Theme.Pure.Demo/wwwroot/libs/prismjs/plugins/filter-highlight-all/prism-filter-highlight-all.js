@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -10,12 +11,14 @@
 
 	var script = Prism.util.currentScript();
 
+
 	/**
 	 * @type {Array<(element: HTMLElement) => boolean>}
 	 */
 	var filters = [];
 
 	var config = Prism.plugins.filterHighlightAll = {
+
 		/**
 		 * Adds a new filter for the elements of `highlightAll` and `highlightAllUnder` such that only elements for
 		 * which the given function returns `true` will be highlighted.
@@ -44,6 +47,7 @@
 		},
 
 		reject: {
+
 			/**
 			 * Adds a new filter for the elements of `highlightAll` and `highlightAllUnder` such that only elements for
 			 * which the given function returns `false` will be highlighted.
@@ -70,6 +74,7 @@
 					return !element.matches(selector);
 				});
 			},
+
 		},
 
 		/**
@@ -118,4 +123,5 @@
 	Prism.hooks.add('before-all-elements-highlight', function (env) {
 		env.elements = env.elements.filter(combinedFilter);
 	});
+
 }());

@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var builtinTypes = /\b(?:bool|bytes|double|s?fixed(?:32|64)|float|[su]?int(?:32|64)|string)\b/;
 
 	Prism.languages.protobuf = Prism.languages.extend('clike', {
@@ -38,4 +39,5 @@
 			lookbehind: true
 		}
 	});
+
 }(Prism));

@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	Prism.languages.typescript = Prism.languages.extend('javascript', {
 		'class-name': {
 			pattern: /(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
@@ -55,4 +56,5 @@
 	});
 
 	Prism.languages.ts = Prism.languages.typescript;
+
 }(Prism));

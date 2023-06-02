@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined') {
 		return;
 	}
@@ -9,4 +10,5 @@
 		}
 		env.classes.push('keyword-' + env.content);
 	});
+
 }());

@@ -8,6 +8,7 @@
 	// - Add support for markup embedded in plain text
 
 	Prism.languages.pug = {
+
 		// Multiline stuff should appear before the rest
 
 		// This handles both single-line and multi-line comments
@@ -183,4 +184,5 @@
 	}
 
 	Prism.languages.insertBefore('pug', 'filter', all_filters);
+
 }(Prism));

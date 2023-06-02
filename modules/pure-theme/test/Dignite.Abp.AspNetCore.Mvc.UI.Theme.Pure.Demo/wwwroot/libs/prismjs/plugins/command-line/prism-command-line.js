@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -47,6 +48,7 @@
 		var vars = env.vars = env.vars || {};
 		return vars['command-line'] = vars['command-line'] || {};
 	}
+
 
 	Prism.hooks.add('before-highlight', function (env) {
 		var commandLine = getCommandLineInfo(env);
@@ -222,4 +224,5 @@
 		env.element.insertBefore(prompt, env.element.firstChild);
 		commandLine.complete = true;
 	});
+
 }());

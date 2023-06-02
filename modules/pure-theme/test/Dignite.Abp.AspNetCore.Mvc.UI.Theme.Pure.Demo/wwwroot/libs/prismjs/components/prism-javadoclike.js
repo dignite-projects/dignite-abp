@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var javaDocLike = Prism.languages.javadoclike = {
 		'parameter': {
 			pattern: /(^[\t ]*(?:\/{3}|\*|\/\*\*)\s*@(?:arg|arguments|param)\s+)\w+/m,
@@ -12,6 +13,7 @@
 		},
 		'punctuation': /[{}]/
 	};
+
 
 	/**
 	 * Adds doc comment support to the given language and calls a given callback on each doc comment pattern.
@@ -81,4 +83,5 @@
 	Object.defineProperty(javaDocLike, 'addSupport', { value: addSupport });
 
 	javaDocLike.addSupport(['java', 'javascript', 'php'], javaDocLike);
+
 }(Prism));

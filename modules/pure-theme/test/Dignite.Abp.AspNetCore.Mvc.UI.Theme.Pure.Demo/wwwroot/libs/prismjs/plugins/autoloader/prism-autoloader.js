@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -299,6 +300,7 @@
 		loadLanguages: loadLanguages
 	};
 
+
 	/**
 	 * Lazily loads an external script.
 	 *
@@ -455,6 +457,7 @@
 				addScript(getLanguagePath(lang), function () {
 					data.loading = false;
 					languageCallback(lang, 'success');
+
 				}, function () {
 					data.loading = false;
 					data.error = true;
@@ -513,4 +516,5 @@
 			});
 		}
 	});
+
 }());

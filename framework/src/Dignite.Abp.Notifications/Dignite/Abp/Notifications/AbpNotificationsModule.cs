@@ -30,7 +30,7 @@ public class AbpNotificationsModule : AbpModule
     {
         var definitionProviders = new List<Type>();
 
-        services.OnRegistred(context =>
+        services.OnRegistered(context =>
         {
             if (typeof(INotificationDefinitionProvider).IsAssignableFrom(context.ImplementationType))
             {

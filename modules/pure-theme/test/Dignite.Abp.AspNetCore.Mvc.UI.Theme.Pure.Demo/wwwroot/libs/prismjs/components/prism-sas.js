@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var stringPattern = /(?:"(?:""|[^"])*"(?!")|'(?:''|[^'])*'(?!'))/.source;
 
 	var number = /\b(?:\d[\da-f]*x|\d+(?:\.\d+)?(?:e[+-]?\d+)?)\b/i;
@@ -210,6 +211,7 @@
 					pattern: /((?:^|\s)=?)saveresult\s[^;]+/im,
 					lookbehind: true,
 					inside: {
+
 						'statement': {
 							pattern: /^saveresult\s+\S+/i,
 							inside: {
@@ -320,4 +322,5 @@
 		'operator': /\*\*?|\|\|?|!!?|¦¦?|<[>=]?|>[<=]?|[-+\/=&]|[~¬^]=?/,
 		'punctuation': punctuation
 	};
+
 }(Prism));

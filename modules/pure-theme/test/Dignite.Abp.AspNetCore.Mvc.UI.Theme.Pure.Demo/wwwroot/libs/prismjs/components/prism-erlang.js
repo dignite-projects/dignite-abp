@@ -40,4 +40,5 @@ Prism.languages.erlang = {
 	],
 	'atom': /\b[a-z][\w@]*/,
 	'punctuation': /[()[\]{}:;,.#|]|<<|>>/
+
 };

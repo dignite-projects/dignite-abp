@@ -2,6 +2,7 @@
 // https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Throwable.html#printStackTrace()
 
 Prism.languages.javastacktrace = {
+
 	// java.sql.SQLException: Violation of unique constraint MY_ENTITY_UK_1: duplicate value(s) for column(s) MY_COLUMN in statement [...]
 	// Caused by: java.sql.SQLException: Violation of unique constraint MY_ENTITY_UK_1: duplicate value(s) for column(s) MY_COLUMN in statement [...]
 	// Caused by: com.example.myproject.MyProjectServletException
@@ -137,4 +138,5 @@ Prism.languages.javastacktrace = {
 			'keyword': /\b[a-z]+(?: [a-z]+)*\b/
 		}
 	}
+
 };

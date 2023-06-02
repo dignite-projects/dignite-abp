@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined') {
 		return;
 	}
@@ -123,6 +124,7 @@
 		return null;
 	}, 'bitbucket');
 
+
 	var jsonpCallbackCounter = 0;
 	/**
 	 * Makes a JSONP request.
@@ -184,6 +186,7 @@
 
 	var SELECTOR = 'pre[data-jsonp]:not([' + STATUS_ATTR + '="' + STATUS_LOADED + '"])'
 		+ ':not([' + STATUS_ATTR + '="' + STATUS_LOADING + '"])';
+
 
 	Prism.hooks.add('before-highlightall', function (env) {
 		env.selector += ', ' + SELECTOR;
@@ -267,6 +270,7 @@
 		}
 	});
 
+
 	Prism.plugins.jsonphighlight = {
 		/**
 		 * The timeout after which an error message will be displayed.
@@ -295,4 +299,5 @@
 			}
 		}
 	};
+
 }());

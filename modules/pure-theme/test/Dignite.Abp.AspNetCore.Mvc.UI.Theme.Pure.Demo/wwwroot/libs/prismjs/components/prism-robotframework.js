@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	var comment = {
 		pattern: /(^[ \t]*| {2}|\t)#.*/m,
 		lookbehind: true,
@@ -42,6 +43,7 @@
 			inside: extendecInside
 		};
 	}
+
 
 	var docTag = {
 		pattern: /(\[Documentation\](?: {2}|\t)[ \t]*)(?![ \t]|#)(?:.|(?:\r\n?|\n)[ \t]*\.{3})+/,
@@ -98,4 +100,5 @@
 	};
 
 	Prism.languages.robot = Prism.languages['robotframework'];
+
 }(Prism));

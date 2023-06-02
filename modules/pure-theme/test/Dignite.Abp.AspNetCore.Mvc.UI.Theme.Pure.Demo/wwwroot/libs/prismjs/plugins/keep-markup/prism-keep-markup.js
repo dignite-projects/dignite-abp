@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined' || typeof document === 'undefined' || !document.createRange) {
 		return;
 	}
@@ -68,14 +69,17 @@
 
 	Prism.hooks.add('after-highlight', function (env) {
 		if (env.keepMarkup && env.keepMarkup.length) {
+
 			var walk = function (elt, nodeState) {
 				for (var i = 0, l = elt.childNodes.length; i < l; i++) {
+
 					var child = elt.childNodes[i];
 
 					if (child.nodeType === 1) { // element
 						if (!walk(child, nodeState)) {
 							return false;
 						}
+
 					} else if (child.nodeType === 3) { // text
 						if (!nodeState.nodeStart && nodeState.pos + child.data.length > nodeState.node.posOpen) {
 							// We found the start position

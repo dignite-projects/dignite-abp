@@ -6,6 +6,7 @@
 */
 
 (function (Prism) {
+
 	Prism.languages.haml = {
 		// Multiline stuff should appear before the rest
 
@@ -144,4 +145,5 @@
 	}
 
 	Prism.languages.insertBefore('haml', 'filter', all_filters);
+
 }(Prism));

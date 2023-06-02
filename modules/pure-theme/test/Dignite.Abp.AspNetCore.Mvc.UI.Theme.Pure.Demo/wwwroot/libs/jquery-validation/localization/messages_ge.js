@@ -7,6 +7,7 @@
 		factory( jQuery );
 	}
 }(function( $ ) {
+
 /**
  * @author  @tatocaster <kutaliatato@gmail.com>
  * Translated default messages for the jQuery validation plugin.

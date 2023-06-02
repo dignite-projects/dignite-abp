@@ -25,7 +25,7 @@
     year: "vuosi",
     years: "%d vuotta"
   };
-
+  
   // The above is not a great localization because one would usually
   // write "2 days ago" in Finnish as "2 päivää sitten", however
   // one would write "2 days into the future" as "2:n päivän päästä"

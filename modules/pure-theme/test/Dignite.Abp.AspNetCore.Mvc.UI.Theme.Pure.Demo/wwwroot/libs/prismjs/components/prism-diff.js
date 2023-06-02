@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	Prism.languages.diff = {
 		'coord': [
 			// Match all kinds of coord lines (prefixed by "+++", "---" or "***").
@@ -52,10 +53,12 @@
 				}
 			}
 		};
+
 	});
 
 	// make prefixes available to Diff plugin
 	Object.defineProperty(Prism.languages.diff, 'PREFIXES', {
 		value: PREFIXES
 	});
+
 }(Prism));

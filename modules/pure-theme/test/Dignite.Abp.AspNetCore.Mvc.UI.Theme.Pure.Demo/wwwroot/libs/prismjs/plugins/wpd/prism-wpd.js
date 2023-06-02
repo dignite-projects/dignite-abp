@@ -1,4 +1,5 @@
 (function () {
+
 	if (typeof Prism === 'undefined') {
 		return;
 	}
@@ -149,4 +150,5 @@
 
 		return null;
 	}
+
 }());

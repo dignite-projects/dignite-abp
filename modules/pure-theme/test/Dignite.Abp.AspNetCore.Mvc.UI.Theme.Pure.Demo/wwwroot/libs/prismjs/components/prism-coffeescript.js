@@ -1,4 +1,5 @@
 (function (Prism) {
+
 	// Ignore comments starting with { to privilege string interpolation highlighting
 	var comment = /#(?!\{).+/;
 	var interpolation = {
@@ -81,6 +82,7 @@
 				}
 			}
 		]
+
 	});
 
 	Prism.languages.insertBefore('coffeescript', 'keyword', {

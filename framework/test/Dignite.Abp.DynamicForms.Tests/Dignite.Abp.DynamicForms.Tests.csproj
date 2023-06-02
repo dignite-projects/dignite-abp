@@ -10,7 +10,7 @@
   <ItemGroup>
 	<ProjectReference Include="..\..\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
 	<ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="6.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
   </ItemGroup>
 

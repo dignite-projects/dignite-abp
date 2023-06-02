@@ -16,7 +16,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Localization" Version="5.3.4" />
+    <PackageReference Include="Volo.Abp.Localization" Version="6.0.3" />
 	<PackageReference Include="My.Extensions.Localization.Json" Version="3.0.0" />
   </ItemGroup>
 

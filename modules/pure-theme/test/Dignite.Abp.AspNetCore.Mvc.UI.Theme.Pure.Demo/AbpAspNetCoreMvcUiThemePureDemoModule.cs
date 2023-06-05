@@ -11,6 +11,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
@@ -54,6 +55,11 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
         Configure<AbpToolbarOptions>(options =>
         {
             options.Contributors.Add(new PureThemeDemoToolbarContributor());
+        });
+
+        Configure<AbpThemingOptions>(options =>
+        {
+            options.DefaultThemeName = PureTheme.Name;
         });
     }
 

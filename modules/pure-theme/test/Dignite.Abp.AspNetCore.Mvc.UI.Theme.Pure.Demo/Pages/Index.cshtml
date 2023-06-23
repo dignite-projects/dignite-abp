@@ -1,5 +1,12 @@
 ﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@inject IThemeManager ThemeManager
 @model Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Pages.IndexModel
+@{
+    Layout = ThemeManager.CurrentTheme.GetPublicLayout();
+}
 <h1>Pure Theme Demo</h1>
 
 <p>Check the <a href="/Components">Components</a>.</p>
+
+<div style="height:1500px;"></div>

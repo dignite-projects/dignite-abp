@@ -15,5 +15,6 @@ public class PureThemePublicStyleContributor : BundleContributor
 {    
     public override void ConfigureBundle(BundleConfigurationContext context)
     {
+        context.Files.Add("/themes/pure/public.css");
     }
 }

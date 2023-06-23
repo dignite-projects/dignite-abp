@@ -1,0 +1,175 @@
+﻿:root {
+    --bs-link-color: rgba(0,50,200,1);
+    --bs-primary: 0,50,200;
+    --bs-primary-rgb: 0,50,200;
+    --bs-light-rgb: 237,247,230;
+}
+a:focus {
+    outline: 1px dashed var(--bs-link-color);
+}
+.navbar {
+    --bs-navbar-nav-link-padding-x: 0rem;
+    --bs-navbar-active-color: rgba(0,50,200,1);
+}
+.navbar-nav {
+    --bs-nav-link-color: rgba(0,50,200,1);
+    --bs-nav-link-hover-color: rgba(0,50,200,1);
+    --bs-nav-link-font-size:1.25rem;
+}
+.accordion {
+    --bs-accordion-active-bg: transparent;
+}
+.card {
+    --bs-card-inner-border-radius:0.5rem;
+}
+
+.navbar-horizontal {
+    align-items: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    transition: all .5s ease 0s;
+    z-index: 1020;
+    /*
+    position:sticky;
+    top:1rem;
+    */
+}
+.navbar-horizontal:hover {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgb(255, 255, 255,0.8);
+    box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
+    border-radius: 30px;
+}
+.navbar-horizontal .navbar-brand img {
+    max-height:30px;
+}
+@media (min-width: 992px) {
+    .navbar-horizontal {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+    .navbar-horizontal .navbar-brand,
+    .navbar-horizontal .navbar-toolbars {
+        min-width: 15%;
+        max-width: 20%;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+}
+@media (max-width: 991px){
+    .navbar-horizontal {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: #fff;
+        box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
+        border-radius: 30px;
+    }
+    .navbar-horizontal .navbar-brand {
+        order: 1;
+    }
+    .navbar-horizontal .navbar-collapse {
+        order: 3;
+    }
+    .navbar-horizontal .navbar-toolbars {
+        order: 2;
+    }
+    .navbar-toolbars > .navbar-nav {
+        flex-direction: row;
+    }
+    .navbar-toolbars > .navbar-nav .navbar-toggler {
+        border: none;
+    }
+}
+.navbar-horizontal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #001962;
+    z-index: 1050;
+    cursor: pointer;
+    pointer-events: all;
+    transition: opacity .15s linear;
+}
+.navbar-horizontal-overlay:not(.show) {
+    opacity: 0;
+    display:none;
+}
+.navbar-horizontal-overlay.show {
+    opacity: 0.8;
+}
+
+.navbar-toolbars > .navbar-nav {
+    justify-content: flex-end;
+}
+.navbar-toolbars > .navbar-nav .nav-link {
+    margin-right: 0rem;
+    margin-left: 0rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+/** Animation of underline **/
+.underline-animate {
+    background: linear-gradient(90deg, var(--bs-link-color), var(--bs-link-color));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: 0.5s all;
+    text-decoration:none;
+}
+
+.active.underline-animate,
+.underline-animate:hover {
+    background-size: 100% 1px;
+}
+.underline-animate-white {
+    background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,1));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+}
+
+/** Link with arrow animation **/
+.chevron-right-animate {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    padding-right: 0.75rem;
+}
+
+.chevron-right-animate:after {
+    position: absolute;
+    top: -50%;
+    margin-top: -.25rem;
+    font-size: 2rem;
+    font-weight: 300;
+    transition: all .5s;
+    content: '›';
+    right: 0rem
+}
+
+.chevron-right-animate:hover:after {
+    right: -0.25rem
+}
+
+.btn.chevron-right-animate {
+    padding-right: 1.5rem !important;
+}
+
+.btn.chevron-right-animate:after {
+    margin-top: 0.575rem;
+    right: 0.75rem
+}
+
+.btn.chevron-right-animate:hover:after {
+    right: 0.5rem
+}
+
+/* external link */

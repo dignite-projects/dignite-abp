@@ -17,6 +17,14 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="wwwroot\**\*.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="wwwroot\**\*.*" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.2.2" />
 	</ItemGroup>
 

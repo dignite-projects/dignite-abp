@@ -5,11 +5,11 @@
 @if (Model.OtherLanguages.Any())
 {
     <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="Toolbar_LanguageSwitch">
+        <button type="button" class="btn btn-outline-light dropdown-toggle rounded-pill" data-bs-toggle="dropdown" aria-expanded="false" id="LanguageSwitch">
             <i class="fa fa-language" aria-hidden="true"></i>
             @Model.CurrentLanguage.DisplayName
         </button>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Toolbar_LanguageSwitch">
+        <ul class="dropdown-menu" aria-labelledby="LanguageSwitch">
             @foreach (var language in Model.OtherLanguages)
             {
                 <li>

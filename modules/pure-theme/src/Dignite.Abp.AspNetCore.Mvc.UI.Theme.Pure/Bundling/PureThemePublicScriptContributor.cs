@@ -13,5 +13,6 @@ public class PureThemePublicScriptContributor : BundleContributor
 {
     public override void ConfigureBundle(BundleConfigurationContext context)
     {
+        context.Files.Add("/themes/pure/public.js");
     }
 }

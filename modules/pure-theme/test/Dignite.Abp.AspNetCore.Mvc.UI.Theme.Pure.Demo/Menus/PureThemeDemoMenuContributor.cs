@@ -9,15 +9,15 @@ public class PureThemeDemoMenuContributor : IMenuContributor
 {
     public Task ConfigureMenuAsync(MenuConfigurationContext context)
     {
-        if (context.Menu.Name == StandardMenus.Main)
+        if (context.Menu.Name == PureNavbarConsts.MenusName)
         {
-            AddMainMenuItems(context);
+            AddPublicMenuItems(context);
         }
 
         return Task.CompletedTask;
     }
 
-    private void AddMainMenuItems(MenuConfigurationContext context)
+    private void AddPublicMenuItems(MenuConfigurationContext context)
     {
         context.Menu.AddItem(new ApplicationMenuItem("home", "Home", "/", "fa fa-home"));
 

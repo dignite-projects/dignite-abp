@@ -30,7 +30,7 @@
             topMarginHeight = element.getBoundingClientRect().top
         }
         else {
-            console.warn("table-fixed-header is not found.Set the initial value of scrolly in the ant table component.");
+            console.warn("'element' is not found.");
             return 500;
         }
 

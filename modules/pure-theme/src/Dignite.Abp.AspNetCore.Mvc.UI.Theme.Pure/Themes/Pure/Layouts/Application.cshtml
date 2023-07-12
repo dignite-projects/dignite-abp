@@ -1,7 +1,6 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.ContentTitle
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
@@ -58,13 +57,8 @@
     <div class="@containerClass">
         @(await Component.InvokeAsync<PageAlertsViewComponent>())
         <div id="AbpContentToolbar">
-            <div class="row mb-2">
-                @(await Component.InvokeAsync<ContentTitleViewComponent>())
-                <div class="col">
-                    <div class="text-end">
-                        @await RenderSectionAsync("content_toolbar", false)
-                    </div>
-                </div>
+            <div class="text-end mb-2">
+                @RenderSection("content_toolbar", false)
             </div>
         </div>
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)

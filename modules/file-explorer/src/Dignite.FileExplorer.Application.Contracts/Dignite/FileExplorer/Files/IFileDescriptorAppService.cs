@@ -21,7 +21,7 @@ public interface IFileDescriptorAppService : ICrudAppService<FileDescriptorDto, 
     /// </summary>
     /// <param name="containerName"></param>
     /// <returns></returns>
-    Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName);
+    Task<FileContainerConfigurationDto> GetFileContainerConfigurationAsync([NotNull] string containerName);
 
     /*
     TODO:

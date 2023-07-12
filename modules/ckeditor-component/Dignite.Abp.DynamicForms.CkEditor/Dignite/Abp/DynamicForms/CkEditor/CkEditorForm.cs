@@ -1,4 +1,6 @@
-﻿namespace Dignite.Abp.DynamicForms.CkEditor;
+﻿using Dignite.Abp.DynamicForms.CkEditor.Localization;
+
+namespace Dignite.Abp.DynamicForms.CkEditor;
 
 public class CkEditorForm : FormBase
 {
@@ -9,6 +11,11 @@ public class CkEditorForm : FormBase
     public override string DisplayName => L["CkEditorFormDisplayName"];
 
     public override FormType FormType => FormType.Simple;
+
+    public CkEditorForm()
+    {
+        LocalizationResource = typeof(AbpDynamicFormsCkEditorResource);
+    }
 
     public override void Validate(FormValidateArgs args)
     {

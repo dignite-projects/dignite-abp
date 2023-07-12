@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.DynamicForms.FileExplorer.Localization;
+using Dignite.Abp.DynamicForms.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -21,7 +22,8 @@ public class AbpDynamicFormsFileExplorerModule : AbpModule
         {
             options.Resources
                 .Add<AbpDynamicFormsFileExplorerResource>("en")
-                .AddVirtualJson("/Dignite/Abp/DynamicForms/FileExplorer/Localization/Resources");
+                .AddVirtualJson("/Dignite/Abp/DynamicForms/FileExplorer/Localization/Resources")
+                .AddBaseTypes(typeof(AbpDynamicFormsResource)); //Inherit from an existing resource
         });
     }
 }

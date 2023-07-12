@@ -1,6 +1,8 @@
 {
   "culture": "zh-Hans",
   "texts": {
-    "FileExplorerFormDisplayName": "文件管理"
+    "CkEditorFormDisplayName": "CkEditor",
+    "ImagesContainerName": "图片容器名称",
+    "InitialContent": "初始化内容"
   }
 }

@@ -5,7 +5,7 @@ public class QueryingByFieldParameter
     {
     }
 
-    public QueryingByFieldParameter( string fieldName, string value)
+    public QueryingByFieldParameter(string fieldName, string value)
     {
         FieldName = fieldName;
         Value = value;
@@ -14,5 +14,5 @@ public class QueryingByFieldParameter
 
     public string FieldName { get; set; }
 
-    public string Value { get; set; }
+    public virtual string Value { get; set; }
 }

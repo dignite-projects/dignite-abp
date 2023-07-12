@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.DynamicForms.CkEditor.Localization;
+using Dignite.Abp.DynamicForms.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -21,7 +22,8 @@ public class AbpDynamicFormsCkEditorModule : AbpModule
         {
             options.Resources
                 .Add<AbpDynamicFormsCkEditorResource>("en")
-                .AddVirtualJson("/Dignite/Abp/DynamicForms/CkEditor/Localization/Resources");
+                .AddVirtualJson("/Dignite/Abp/DynamicForms/CkEditor/Localization/Resources")
+                .AddBaseTypes(typeof(AbpDynamicFormsResource)); //Inherit from an existing resource
         });
     }
 }

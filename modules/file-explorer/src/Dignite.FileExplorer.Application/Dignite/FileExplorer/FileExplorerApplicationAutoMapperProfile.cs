@@ -9,7 +9,8 @@ public class FileExplorerApplicationAutoMapperProfile : Profile
 {
     public FileExplorerApplicationAutoMapperProfile()
     {
-        CreateMap<FileDescriptor, FileDescriptorDto>();
+        CreateMap<FileDescriptor, FileDescriptorDto>()
+            .Ignore(fd=>fd.Url);
         CreateMap<DirectoryDescriptor, DirectoryDescriptorDto>();
         CreateMap<DirectoryDescriptor, DirectoryDescriptorInfoDto>()
             .Ignore(x => x.HasChildren)

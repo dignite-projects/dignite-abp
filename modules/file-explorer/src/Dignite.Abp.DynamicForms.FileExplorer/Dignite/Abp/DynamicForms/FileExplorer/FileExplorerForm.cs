@@ -1,8 +1,15 @@
-﻿namespace Dignite.Abp.DynamicForms.FileExplorer;
+﻿using Dignite.Abp.DynamicForms.FileExplorer.Localization;
+
+namespace Dignite.Abp.DynamicForms.FileExplorer;
 
 public class FileExplorerForm : FormBase
 {
     public const string FileExplorerFormName = "FileExplorer";
+
+    public FileExplorerForm()
+    {
+        LocalizationResource = typeof(AbpDynamicFormsFileExplorerResource);
+    }
 
     public override string Name => FileExplorerFormName;
 

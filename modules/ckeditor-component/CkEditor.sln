@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Comp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components.CkEditor", "Dignite.Abp.DynamicForms.Components.CkEditor\Dignite.Abp.DynamicForms.Components.CkEditor.csproj", "{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly", "Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly\Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly.csproj", "{23FD4010-9F21-4049-9836-47034665339C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23FD4010-9F21-4049-9836-47034665339C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FD4010-9F21-4049-9836-47034665339C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FD4010-9F21-4049-9836-47034665339C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FD4010-9F21-4049-9836-47034665339C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

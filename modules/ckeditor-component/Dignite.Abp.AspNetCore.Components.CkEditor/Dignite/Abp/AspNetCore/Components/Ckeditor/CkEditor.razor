@@ -40,13 +40,13 @@
 
 
     [Parameter]
-    public string UrlForUploadingImage { get; set; }
+    public string ImagesContainerName { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            JsEditorInstance = await Js.InvokeAsync<IJSObjectReference>("ClassicEditor.create", EditorElement, UrlForUploadingImage, Options, DotNetObjectReference.Create(this));
+            JsEditorInstance = await Js.InvokeAsync<IJSObjectReference>("ClassicEditor.create", EditorElement, ImagesContainerName, Options, DotNetObjectReference.Create(this));
             IsInitialized = true;
         }
         base.OnAfterRender(firstRender);

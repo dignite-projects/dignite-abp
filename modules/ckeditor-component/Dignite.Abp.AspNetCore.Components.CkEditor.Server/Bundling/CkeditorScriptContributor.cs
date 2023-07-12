@@ -9,7 +9,7 @@ public class CkeditorScriptContributor : BundleContributor
         context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.CkEditor/libs/ckeditor5/ckeditor.js");
         context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.CkEditor/libs/ckeditor5/translations/zh-cn.js");
         context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.CkEditor/libs/ckeditor5/ckeditor-blazor.js");
-        context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.CkEditor.Server/libs/ckeditor5/requestInterceptor.js");
+        //context.Files.Add("/_content/Dignite.Abp.AspNetCore.Components.CkEditor.Server/libs/ckeditor5/requestInterceptor.js");
     }
 
 }

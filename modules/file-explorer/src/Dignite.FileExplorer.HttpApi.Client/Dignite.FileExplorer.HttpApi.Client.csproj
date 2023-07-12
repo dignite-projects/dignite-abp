@@ -5,23 +5,13 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyName>Dignite.FileExplorer.HttpApi.Client</AssemblyName>
-		<PackageId>Dignite.FileExplorer.HttpApi.Client</PackageId>
-		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-		<RootNamespace />
+		<Nullable>enable</Nullable>
+		<RootNamespace>Dignite.FileExplorer</RootNamespace>
 	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" Version="7.2.2" />
     <ProjectReference Include="..\Dignite.FileExplorer.Application.Contracts\Dignite.FileExplorer.Application.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="**\*generate-proxy.json" />
-    <Content Remove="**\*generate-proxy.json" />
   </ItemGroup>
 
 </Project>

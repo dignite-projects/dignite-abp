@@ -9,11 +9,12 @@ using Volo.Abp.Content;
 
 namespace Dignite.FileExplorer.Files;
 
-[Area("FileExplorer")]
+[Area(FileExplorerRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = FileExplorerRemoteServiceConsts.RemoteServiceName)]
-[Route("api/file-explorer/files")]
+[Route(RoutePrefix)]
 public class FileDescriptorController : AbpController, IFileDescriptorAppService
 {
+    private const string RoutePrefix = "api/file-explorer/files";
     private readonly IFileDescriptorAppService _fileAppService;
 
     public FileDescriptorController(
@@ -27,7 +28,9 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     [HttpPost]
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
-        return await _fileAppService.CreateAsync(input);
+        var file = await _fileAppService.CreateAsync(input);
+        file.Url = GetFileUrl(file);
+        return file;
     }
 
     [HttpPut]
@@ -48,7 +51,9 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     [Route("{id:guid}")]
     public async Task<FileDescriptorDto> GetAsync(Guid id)
     {
-        return await _fileAppService.GetAsync(id);
+        var file = await _fileAppService.GetAsync(id);
+        file.Url = GetFileUrl(file);
+        return file;
     }
 
     /// <summary>
@@ -60,15 +65,18 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     public virtual async Task<PagedResultDto<FileDescriptorDto>> GetListAsync(GetFilesInput input)
     {
         var result = await _fileAppService.GetListAsync(input);
-
+        foreach (var item in result.Items)
+        {
+            item.Url = GetFileUrl(item);
+        }
         return result;
     }
 
     [HttpGet]
     [Route("configuration")]
-    public virtual async Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName)
+    public virtual async Task<FileContainerConfigurationDto> GetFileContainerConfigurationAsync([NotNull] string containerName)
     {
-        return await _fileAppService.GetFileContainerConfiguration(containerName);
+        return await _fileAppService.GetFileContainerConfigurationAsync(containerName);
     }
 
     [HttpGet]
@@ -84,5 +92,10 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
     {
         return await _fileAppService.GetStreamAsync(containerName, blobName);
+    }
+
+    private string GetFileUrl(FileDescriptorDto file)
+    {
+        return $"{Request.Scheme}://{Request.Host.Value}/{RoutePrefix}/{file.ContainerName}/{file.BlobName}";
     }
 }

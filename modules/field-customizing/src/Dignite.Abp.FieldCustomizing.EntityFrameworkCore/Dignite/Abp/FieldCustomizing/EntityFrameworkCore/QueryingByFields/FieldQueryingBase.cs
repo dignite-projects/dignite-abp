@@ -17,6 +17,6 @@ public abstract class FieldQueryingBase<TForm> : IFieldQuerying, ITransientDepen
     public Type FormType { get; private set; }
 
 
-    public abstract IEnumerable<TSource> Query<TSource>([NotNull] IEnumerable<TSource> source, [NotNull]QueryingByFieldParameter parameter)
+    public abstract IEnumerable<TSource> Query<TSource>([NotNull] IEnumerable<TSource> source, [NotNull] QueryingByFieldParameter parameter)
         where TSource : IHasCustomFields;
 }

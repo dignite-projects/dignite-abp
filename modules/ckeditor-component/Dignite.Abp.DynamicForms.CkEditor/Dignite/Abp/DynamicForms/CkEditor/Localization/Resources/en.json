@@ -1,6 +1,8 @@
 {
   "culture": "en",
   "texts": {
-    "FileExplorerFormDisplayName": "File Explorer"
+    "CkEditorFormDisplayName": "CkEditor",
+    "ImagesContainerName": "Images Container Name",
+    "InitialContent": "Initial Content"
   }
 }

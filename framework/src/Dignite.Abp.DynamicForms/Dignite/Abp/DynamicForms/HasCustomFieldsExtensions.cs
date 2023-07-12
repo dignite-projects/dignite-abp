@@ -53,7 +53,7 @@ public static class HasCustomFieldsExtensions
         }
         else
         {
-            return JsonSerializer.Deserialize<TField>(value.ToString());
+            return JsonSerializer.Deserialize<TField>(value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
         }
     }
 

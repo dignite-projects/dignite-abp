@@ -127,7 +127,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     /// </summary>
     /// <param name="containerName"></param>
     /// <returns></returns>
-    public virtual Task<FileContainerConfigurationDto> GetFileContainerConfiguration([NotNull] string containerName)
+    public virtual Task<FileContainerConfigurationDto> GetFileContainerConfigurationAsync([NotNull] string containerName)
     {
         var dto = new FileContainerConfigurationDto();
         var configuration = _blobContainerConfigurationProvider.Get(containerName);

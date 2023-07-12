@@ -5,7 +5,7 @@
 <Field Horizontal="@(!IsChild)">
     <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
     <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <CkEditor @bind-Content="Content" Options="Options" UrlForUploadingImage="@UrlForUploadingImage">
+        <CkEditor @bind-Content="Content" Options="Options" ImagesContainerName="@ImagesContainerName">
             </CkEditor>
         <FieldHelp>@FormConfiguration.Description</FieldHelp>
     </FieldBody>
@@ -26,11 +26,11 @@
         }
     }
 
-    protected string UrlForUploadingImage
+    protected string ImagesContainerName
     {
         get
         {
-            return $"/api/file-explorer/files?ContainerName={FormConfiguration.ImagesContainerName}";
+            return FormConfiguration.ImagesContainerName;
         }
 
     } 

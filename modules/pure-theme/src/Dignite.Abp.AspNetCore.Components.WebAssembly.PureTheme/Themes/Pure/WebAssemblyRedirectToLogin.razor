@@ -1,0 +1,17 @@
+@inject NavigationManager Navigation
+
+@using Volo.Abp.DependencyInjection
+@using Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits RedirectToLogin
+@attribute [ExposeServices(typeof(RedirectToLogin))]
+@attribute [Dependency(ReplaceServices = true)]
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateToLogin("authentication/login");
+    }
+
+}

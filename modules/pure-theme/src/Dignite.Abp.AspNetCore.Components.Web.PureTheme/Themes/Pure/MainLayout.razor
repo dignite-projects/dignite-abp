@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using Volo.Abp.Ui.LayoutHooks
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Components.LayoutHooks
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inherits LayoutComponentBase
 
 <Layout>
     <LayoutHeader Fixed>
@@ -20,7 +23,10 @@
         <Layout>
             <LayoutContent Padding="Padding.Is1.OnX.Is4.OnY.Is4.OnWidescreen">
                 <PageAlert />
+                <LayoutHook Name="@LayoutHooks.Body.First" Layout="@StandardLayouts.Application" />
                 @Body
+                <LayoutHook Name="@LayoutHooks.Body.Last" Layout="@StandardLayouts.Application" />
+                <DynamicLayoutComponent />
                 <UiMessageAlert />
                 <UiNotificationAlert />
                 <UiPageProgress />

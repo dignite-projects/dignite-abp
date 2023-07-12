@@ -4,5 +4,5 @@ public class FileExplorerRemoteServiceConsts
 {
     public const string RemoteServiceName = "FileExplorer";
 
-    public const string ModuleName = "fileExplorer";
+    public const string ModuleName = "file-explorer";
 }

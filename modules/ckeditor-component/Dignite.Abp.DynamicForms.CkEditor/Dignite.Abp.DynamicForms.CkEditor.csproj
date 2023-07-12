@@ -15,15 +15,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\en.json" />
-	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hans.json" />
-	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hant.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\en.json" />
-	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hans.json" />
-	  <EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\zh-Hant.json" />
+		<EmbeddedResource Include="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\*.json" />
+		<Content Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\*.json" />
 	</ItemGroup>
 
 	<ItemGroup>

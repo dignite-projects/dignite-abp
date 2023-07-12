@@ -3,8 +3,11 @@
 @using Volo.Abp.MultiTenancy
 @using global::Localization.Resources.AbpUi
 @inherits AbpComponentBase
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
 @inject IJSRuntime JsRuntime
 @inject NavigationManager Navigation
+@inject IStringLocalizer<AbpUiResource> UiLocalizer
 <AuthorizeView>
     <Authorized>
         <Dropdown RightAligned="true">
@@ -27,13 +30,12 @@
                     }
                 }
                 <DropdownDivider />
-                <DropdownItem Clicked="BeginSignOut">@L["Logout"]</DropdownItem>
+                <DropdownItem Clicked="BeginSignOut">@UiLocalizer["Logout"]</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </Authorized>
     <NotAuthorized>
-        <Link To="authentication/Login">
-            @L["Login"]
-        </Link>
+        <BarLink To="authentication/Login">@L["Login"]</BarLink>
     </NotAuthorized>
 </AuthorizeView>
+

@@ -78,7 +78,7 @@ public partial class FileEditComponent
 
     protected override async Task OnInitializedAsync()
     {
-        Configuration = await FileDescriptorAppService.GetFileContainerConfiguration(ContainerName);
+        Configuration = await FileDescriptorAppService.GetFileContainerConfigurationAsync(ContainerName);
         MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize*1024);
 
         if (!EntityId.IsNullOrEmpty() && SelectedFiles == null)

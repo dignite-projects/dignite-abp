@@ -1,6 +1,11 @@
 {
   "culture": "en",
   "texts": {
-    "FileExplorerFormDisplayName": "File Explorer"
+    "FileExplorerFormDisplayName": "File Explorer",
+    "PleaseSelectFiles": "Please Select Files",
+    "FileContainerName": "File Container Name",
+    "UploadFileMultiple": "Upload File Multiple",
+    "FileName": "File Name",
+    "FileSize": "File Size"
   }
 }

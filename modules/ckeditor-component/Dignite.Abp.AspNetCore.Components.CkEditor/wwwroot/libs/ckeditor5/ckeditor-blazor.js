@@ -1,6 +1,6 @@
 ﻿
 (() => {
-    let urlForUploadingImage = '';
+    let ImagesContainerName = '';
 
     class editorUploadAdapter {
         constructor(loader) {
@@ -29,17 +29,27 @@
         // Initializes the XMLHttpRequest object using the URL passed to the constructor.
         _initRequest() {
             const xhr = this.xhr = new XMLHttpRequest();
+            var urlToPostImage = this._getUploadImageUrl();
 
             // Note that your request may look different. It is up to you and your editor
             // integration to choose the right communication channel. This example uses
             // a POST request with JSON as a data structure but your configuration
             // could be different.
-            xhr.open('POST', urlForUploadingImage, true);
+            xhr.open('POST', urlToPostImage, true);
+            xhr.responseType = 'json';
             xhr.setRequestHeader('accept', 'application/json');
             xhr.setRequestHeader('accept', 'text/plain');
             xhr.setRequestHeader('accept', '*/*');
 
-            xhr.responseType = 'json';
+            /*
+            Originally, the authorization logic was placed in the 'Dignite.Abp.AspNetCore.Components.CkEditor. Server/libs/ckeditor5/requestInterceptor.js'
+            and 'Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/requestInterceptor.js' codes,
+            Using global interception to insert authorization into the XML HttpRequest, after several hours of testing and learning, 
+            it was not possible to only intercept this request in the interceptor, which means that the code in the interceptor will contaminate all requests. 
+            Therefore, we abandoned that method and instead wrote the authorization code on this file.
+            */
+            this._setWebAssemblyAuthorization();
+            this._setServerAuthorization();
         }
 
         // Initializes XMLHttpRequest listeners.
@@ -67,8 +77,7 @@
                 // This URL will be used to display the image in the content. Learn more in the
                 // UploadAdapter#upload documentation.
                 resolve({
-                    //default: window.location.protocol + "//" + window.location.host + "/api/file-explorer/files/" + response.containerName + "/" + response.blobName
-                    default: "/api/file-explorer/files/" + response.containerName + "/" + response.blobName
+                    default: response.url
                 });
             });
 
@@ -91,9 +100,39 @@
             const data = new FormData();
             data.append('File', file, file.name);
 
-
             // Send the request.
             this.xhr.send(data);
+        }
+
+
+        // Set authorization in WebAssembly mode
+        _setWebAssemblyAuthorization() {
+            // dignite.appSettings from Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/readAppSettingsJson.js
+            if (dignite.appSettings !== undefined) {
+                // Authorization is stored in SessionStorage in WebAssembly mode, and the key value structure example 'oidc.user:https://localhost:44357:RibenZhiye_Blazor'
+                // Splice the tokenKey using the following code and get authorization string
+                var tokenKey = "oidc.user:" + dignite.appSettings.AuthServer.Authority + ":" + dignite.appSettings.AuthServer.ClientId;
+                var token = sessionStorage.getItem(tokenKey);
+                if (token != null) {
+                    var accessToken = "Bearer " + JSON.parse(token).access_token;
+                    this.xhr.setRequestHeader("Authorization", accessToken)
+                }
+            }
+        }
+
+        // Set authorization in BlazorServer mode
+        _setServerAuthorization() {
+            var token = abp.utils.getCookieValue('XSRF-TOKEN');
+            if (token != null) {
+                this.xhr.setRequestHeader('RequestVerificationToken', token)
+            }
+        }
+
+        // get the API interface address for uploading images
+        _getUploadImageUrl() {
+            // dignite.appSettings from Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/readAppSettingsJson.js
+            var remoteServiceUrl = dignite.appSettings == undefined ? "" : dignite.appSettings.RemoteServices.Default.BaseUrl;
+            return remoteServiceUrl+'/api/file-explorer/files?ContainerName=' + ImagesContainerName;
         }
     }
 
@@ -105,10 +144,10 @@
         };
     }
 
-    class BlazorEditor extends ClassicEditor {
-        static async create(target, urlToPostImage, options, reference) {
 
-            urlForUploadingImage = urlToPostImage;
+    class BlazorEditor extends ClassicEditor {
+        static async create(target, imagesContainerName, options, reference) {
+            ImagesContainerName = imagesContainerName;
             options["extraPlugins"] = [uploadAdapterPlugin];
             options["mediaEmbed"] = {
                 extraProviders: [
@@ -161,6 +200,19 @@
                         html: match => {
                             return `<div class="ck_media__wrapper" data-oembed-url="">
                                         <iframe style="min-height:498px;width:100%" src='https://player.youku.com/embed/${match[1]}==' frameborder="0" allowFullScreen="true"></iframe>
+                                    </div>`;
+                        }
+                    },
+                    {
+                        /**
+                         * Adapt to ixigua Video
+                         * https://www.ixigua.com/7115639644800320031
+                         */
+                        name: 'ixigua-video',
+                        url: /^https:\/\/www\.ixigua\.com\/(\d+)(\?logTag=[\w\d]+)?/,
+                        html: match => {
+                            return `<div class="ck_media__wrapper" data-oembed-url="">
+                                        <iframe style="min-height:498px;width:100%" src='https://www.ixigua.com/iframe/${match[1]}?autoplay=0' frameborder="0" allowFullScreen="true"></iframe>
                                     </div>`;
                         }
                     }

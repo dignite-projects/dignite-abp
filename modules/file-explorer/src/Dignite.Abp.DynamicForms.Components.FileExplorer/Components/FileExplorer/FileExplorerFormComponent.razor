@@ -29,16 +29,14 @@
         {
             try
             {
-                Files = JsonSerializer.Deserialize<List<FileDescriptorDto>>(value.ToString());
+                Files = JsonSerializer.Deserialize<List<FileDescriptorDto>>(
+                    value.ToString(),
+                    new JsonSerializerOptions(JsonSerializerDefaults.Web) // For a description of the parameters for deserialization, please refer to https://khalidabuhakmeh.com/solving-dotnet-json-deserialization-issues
+                );
             }
             catch
             {
             }
-            CustomizableObject.SetField(Field.Name, Files);
-        }
-        else
-        {
-            CustomizableObject.SetField(Field.Name, Files);
         }
     }
 

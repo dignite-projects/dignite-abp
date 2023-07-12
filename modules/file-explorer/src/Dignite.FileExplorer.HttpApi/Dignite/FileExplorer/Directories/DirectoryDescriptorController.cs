@@ -7,7 +7,7 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace Dignite.FileExplorer.Directories;
 
-[Area("FileExplorer")]
+[Area(FileExplorerRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = FileExplorerRemoteServiceConsts.RemoteServiceName)]
 [Route("api/file-explorer/directories")]
 public class FileDescriptorController : AbpController, IDirectoryDescriptorAppService

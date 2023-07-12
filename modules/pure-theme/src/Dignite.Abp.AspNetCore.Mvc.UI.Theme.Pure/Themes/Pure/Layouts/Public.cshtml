@@ -13,7 +13,6 @@
 @using Volo.Abp.Ui.LayoutHooks;
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
-@inject ICurrentTenant CurrentTenant
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
@@ -42,7 +41,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/tenants/@CurrentTenant?.Name/favicon.ico" type="image/x-icon" />
     <title>@pageTitle</title>
 
     <abp-style-bundle name="@PureThemeBundles.Styles.Public" />

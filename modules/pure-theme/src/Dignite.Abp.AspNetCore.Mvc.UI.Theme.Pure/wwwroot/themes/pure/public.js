@@ -21,6 +21,10 @@ window.dignite =
  */
 $(document).ready(function () {
     var navbarContainer = document.getElementById('main-navbar-container');//Get the navigation bar container
+    if (navbarContainer === null)
+        return false;
+
+
     var navbar = navbarContainer.getElementsByClassName('navbar');//Get the navigation bar
     var overlay = document.getElementById('navbar-overlay'); // Get the navigation bar overlay
     var dropdowns = document.querySelectorAll('#main-navbar-collapse > .navbar-nav > .nav-item > .dropdown'); //Get every menu in the navigation bar, excluding submenus

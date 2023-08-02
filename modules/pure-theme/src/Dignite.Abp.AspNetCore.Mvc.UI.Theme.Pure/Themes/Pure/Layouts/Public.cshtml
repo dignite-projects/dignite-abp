@@ -53,9 +53,9 @@
 </head>
 <body class="abp-application-layout @rtl">
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
-
+    
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
-
+    
     <div class="@containerClass">
         @(await Component.InvokeAsync<PageAlertsViewComponent>())
         <div id="AbpContentToolbar">

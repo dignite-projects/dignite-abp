@@ -22,13 +22,10 @@
 
 	<ItemGroup>
 		<Content Remove="wwwroot\**\*.*" />
-	</ItemGroup>
+	</ItemGroup>		
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.3.0" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy.csproj" />
 	</ItemGroup>
 

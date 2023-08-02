@@ -1,20 +1,20 @@
-﻿:root {
-    --bs-link-color: rgba(0,50,200,1);
-    --bs-primary: 0,50,200;
-    --bs-primary-rgb: 0,50,200;
-    --bs-light-rgb: 237,247,230;
+﻿@font-face {
+    font-family: 'Arciform';
+    src: url('fonts/Arciform.woff2') format('woff2'), url('fonts/Arciform.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+body {
+    --body-padding-top: 80px;
+    padding-top: var(--body-padding-top);
+}
+.navbar {
+    --bs-navbar-padding-y: 0.75rem;
+    --bs-navbar-brand-padding-y: 0rem;
 }
 a:focus {
     outline: 1px dashed var(--bs-link-color);
-}
-.navbar {
-    --bs-navbar-nav-link-padding-x: 0rem;
-    --bs-navbar-active-color: rgba(0,50,200,1);
-}
-.navbar-nav {
-    --bs-nav-link-color: rgba(0,50,200,1);
-    --bs-nav-link-hover-color: rgba(0,50,200,1);
-    --bs-nav-link-font-size:1.25rem;
 }
 .accordion {
     --bs-accordion-active-bg: transparent;
@@ -23,88 +23,29 @@ a:focus {
     --bs-card-inner-border-radius:0.5rem;
 }
 
-.navbar-horizontal {
-    align-items: flex-start;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    transition: all .5s ease 0s;
-    z-index: 1020;
-    /*
-    position:sticky;
-    top:1rem;
-    */
-}
-.navbar-horizontal:hover {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background-color: rgb(255, 255, 255,0.8);
-    box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
-    border-radius: 30px;
-}
-.navbar-horizontal .navbar-brand img {
-    max-height:30px;
-}
-@media (min-width: 992px) {
-    .navbar-horizontal {
-        margin-left: 1.5rem;
-        margin-right: 1.5rem;
-    }
-    .navbar-horizontal .navbar-brand,
-    .navbar-horizontal .navbar-toolbars {
-        min-width: 15%;
-        max-width: 20%;
-    }
-    .navbar-expand-lg .navbar-nav .nav-link {
-        margin-right: 1rem;
-        margin-left: 1rem;
-    }
-}
-@media (max-width: 991px){
-    .navbar-horizontal {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        background-color: #fff;
-        box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
-        border-radius: 30px;
-    }
-    .navbar-horizontal .navbar-brand {
-        order: 1;
-    }
-    .navbar-horizontal .navbar-collapse {
-        order: 3;
-    }
-    .navbar-horizontal .navbar-toolbars {
-        order: 2;
-    }
-    .navbar-toolbars > .navbar-nav {
-        flex-direction: row;
-    }
-    .navbar-toolbars > .navbar-nav .navbar-toggler {
-        border: none;
-    }
-}
-.navbar-horizontal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
+#main-navbar-container {
+    --navbar-horizontal-height: 40px;
+    position: absolute;
     width: 100%;
-    background-color: #001962;
-    z-index: 1050;
-    cursor: pointer;
-    pointer-events: all;
-    transition: opacity .15s linear;
+    top: 0px;
+    transition: all .3s ease 0s;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    min-height: var(--navbar-horizontal-height);
+    z-index: 1020;
 }
-.navbar-horizontal-overlay:not(.show) {
-    opacity: 0;
-    display:none;
+#main-navbar-container .navbar-brand {
+    display: flex;
+    align-items: center;
 }
-.navbar-horizontal-overlay.show {
-    opacity: 0.8;
+#main-navbar-container .navbar-brand img {
+    max-height: 35px;
+    margin-right: 0.5rem;
 }
-
+#main-navbar-container .navbar-brand-name {
+    font-size: 1.75rem;
+    line-height: 100%;
+}
 .navbar-toolbars > .navbar-nav {
     justify-content: flex-end;
 }
@@ -114,6 +55,158 @@ a:focus {
     padding-right: 1rem;
     padding-left: 1rem;
 }
+@media (min-width: 992px) {
+    #main-navbar-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    #main-navbar-container .navbar-brand,
+    #main-navbar-container .navbar-toolbars {
+        min-width: 15%;
+        max-width: 20%;
+    }
+
+    /**** nav-like style ****/
+    #main-navbar-container .navbar-nav .nav-link {
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+        position: relative;
+        display: inline-flex;
+        -moz-column-gap: 10px;
+        column-gap: 10px;
+        align-items: center;
+        font-size: 1.1875rem;
+        font-weight: 500;
+        line-height: normal;
+        padding: 0.3em clamp(0.2em, 1vw, 0.9em);
+        border-radius: 1.6rem;
+    }
+
+    #main-navbar-container .navbar-nav .nav-link::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--bs-nav-link-color);
+        border-radius: 1.6rem;
+        pointer-events: none;
+        transform-origin: 50% 50%;
+        transform: scale(1.1);
+        opacity: 0;
+        transition: opacity .3s cubic-bezier(0.23, 1, 0.32, 1),transform .3s cubic-bezier(0.23, 1, 0.32, 1)
+    }
+    #main-navbar-container .navbar-nav .nav-link:hover::before,
+    #main-navbar-container .navbar-nav .nav-link:focus::before,
+    #main-navbar-container .navbar-nav .nav-link.active::before,
+    #main-navbar-container .navbar-nav .nav-link.show::before {
+        transform: scale(1);
+        opacity: 1
+    }
+    /**** --end-- ****/
+
+    /**** Styling for expanded navigation submenus ****/
+    #main-navbar-container.has-subnav-open {
+        width: calc(100% - 3rem);
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        background-color: rgb(255, 255, 255,1);
+        box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
+    }
+    #main-navbar-container .dropdown-menu {
+        background-color: transparent;
+        opacity: 0;
+        transition: all .5s ease 0s;
+        top: 150px;
+    }
+    #main-navbar-container.has-subnav-open .dropdown-menu {
+        top: 100%;
+        opacity: 1;
+    }
+    #main-navbar-container .dropdown-menu .dropdown-item {
+        font-size: 1.25rem;
+        position: relative;
+        color: var(--bs-nav-link-color);
+    }
+    #main-navbar-container .dropdown-menu .dropdown-item::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -0.25em;
+        width: 0.3em;
+        height: 0.3em;
+        max-width: 7px;
+        max-height: 7px;
+        border-radius: 0.2em;
+        background-color: var(--bs-nav-link-color);
+        transform: translate3d(-0.5em, -50%, 0);
+        opacity: 0;
+        transition: opacity .3s cubic-bezier(0.23, 1, 0.32, 1),transform .3s cubic-bezier(0.23, 1, 0.32, 1)
+    }
+    #main-navbar-container .dropdown-menu .dropdown-item:hover::before {
+        transform: translate3d(0, -50%, 0);
+        opacity: 1
+    }
+    /**** --end-- ****/
+}
+
+/* style of submenu */
+#main-navbar-container .dropdown-submenu .dropdown-menu {
+    position:relative;
+    padding-left: 1rem;
+}
+/**** --end-- ****/
+
+
+
+
+
+@media (max-width: 991px){
+    #main-navbar-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background-color: #fff;
+        box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
+        border-radius: 30px;
+    }
+    #main-navbar-container .navbar-brand {
+        order: 1;
+    }
+    #main-navbar-container .navbar-collapse {
+        order: 3;
+    }
+    #main-navbar-container .navbar-toolbars {
+        order: 2;
+    }
+    .navbar-toolbars > .navbar-nav {
+        flex-direction: row;
+    }
+    .navbar-toolbars > .navbar-nav .navbar-toggler {
+        border: none;
+    }
+}
+
+
+/**** The style of the overlay when expanding the navigation submenu ****/
+.navbar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #001962;
+    z-index: 1010;
+    pointer-events: all;
+    transition: opacity .15s linear;
+}
+.navbar-overlay:not(.show) {
+    opacity: 0;
+    display:none;
+}
+.navbar-overlay.show {
+    opacity: 0.8;
+}
+
 
 /** Animation of underline **/
 .underline-animate {
@@ -125,12 +218,18 @@ a:focus {
     text-decoration:none;
 }
 
-.active.underline-animate,
+.underline-animate.active,
 .underline-animate:hover {
     background-size: 100% 1px;
 }
 .underline-animate-white {
     background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,1));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+}
+.underline-animate-dark {
+    background: linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,1));
     background-size: 0 1px;
     background-repeat: no-repeat;
     background-position: 0 100%;
@@ -171,5 +270,3 @@ a:focus {
 .btn.chevron-right-animate:hover:after {
     right: 0.5rem
 }
-
-/* external link */

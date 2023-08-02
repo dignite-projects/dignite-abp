@@ -1,10 +1,4 @@
-﻿@font-face {
-    font-family: 'Arciform';
-    src: url('fonts/Arciform.woff2') format('woff2'), url('fonts/Arciform.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+﻿
 body {
     --body-padding-top: 80px;
     padding-top: var(--body-padding-top);

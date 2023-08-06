@@ -1,4 +1,15 @@
-﻿
+﻿::selection {
+    background-color: var(--bs-link-color);
+    color:#fff;
+}
+::-moz-selection {
+    background-color: var(--bs-link-color);
+    color: #fff;
+}
+::-webkit-selection {
+    background-color: var(--bs-link-color);
+    color: #fff;
+}
 body {
     --body-padding-top: 80px;
     padding-top: var(--body-padding-top);
@@ -16,6 +27,10 @@ a:focus {
 .card {
     --bs-card-inner-border-radius:0.5rem;
 }
+.btn {
+    --bs-btn-padding-x: 1rem;
+    --bs-btn-border-radius: 50rem;
+}
 
 #main-navbar-container {
     --navbar-horizontal-height: 40px;
@@ -29,8 +44,13 @@ a:focus {
     z-index: 1020;
 }
 #main-navbar-container .navbar-brand {
+    transition: all .3s ease 0s;
     display: flex;
     align-items: center;
+}
+#main-navbar-container .navbar-brand:hover {
+    transform: scale(.975);
+    opacity: .8;
 }
 #main-navbar-container .navbar-brand img {
     max-height: 35px;
@@ -114,11 +134,11 @@ a:focus {
         top: 150px;
     }
     #main-navbar-container.has-subnav-open .dropdown-menu {
-        top: 100%;
+        top: 50px;
         opacity: 1;
     }
     #main-navbar-container .dropdown-menu .dropdown-item {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         position: relative;
         color: var(--bs-nav-link-color);
     }
@@ -146,8 +166,9 @@ a:focus {
 
 /* style of submenu */
 #main-navbar-container .dropdown-submenu .dropdown-menu {
-    position:relative;
-    padding-left: 1rem;
+    top: 100%;
+    position: relative;
+    padding-left: 1.5rem;
 }
 /**** --end-- ****/
 
@@ -188,7 +209,7 @@ a:focus {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: #001962;
+    background-color: rgba(var(--bs-primary-rgb));
     z-index: 1010;
     pointer-events: all;
     transition: opacity .15s linear;

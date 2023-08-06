@@ -18,14 +18,9 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
 
         if (ImageFormatHelper.IsValidImage(context.BlobStream, ImageFormatHelper.AllowedImageUploadFormats))
         {
-            // IsValidImage may change the position of the stream
-            if (context.BlobStream.CanSeek)
-            {
-                context.BlobStream.Position = position;
-            }
-
             using (Image image = await Image.LoadAsync(context.BlobStream))
             {
+                context.BlobStream.Position = 0;
                 if (configuration.ImageSizeMustBeLargerThanPreset)
                 {
                     if (image.Width < configuration.ImageWidth || image.Height < configuration.ImageHeight)
@@ -56,7 +51,6 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
                         Quality = 90
                     };
 
-                    context.BlobStream.Position = 0;
                     image.Save(context.BlobStream, encoder);
 
                     // Length of clipping stream

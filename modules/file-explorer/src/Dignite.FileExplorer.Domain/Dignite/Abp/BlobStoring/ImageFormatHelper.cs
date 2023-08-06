@@ -27,6 +27,7 @@ public class ImageFormatHelper
     {
         using (var image = Image.Load(stream, out var imageFormat))
         {
+            stream.Position = 0;
             return imageFormat;
         }
     }

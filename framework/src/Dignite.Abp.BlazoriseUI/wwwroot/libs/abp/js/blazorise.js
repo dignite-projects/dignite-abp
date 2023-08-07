@@ -8,7 +8,7 @@
     getDataGridHeight: function (id, extraHeight) {
         if (typeof extraHeight == undefined || extraHeight=="undefined") {
             //Default bottom pagination 50 +  Margin 10
-            extraHeight = 105;
+            extraHeight = 115;
 
             if (document.body.clientWidth <= 576) {
                 //For small screen

@@ -16,11 +16,14 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     private const string _webComponentPathKey = "___webComponentPath";
 
     private readonly Lazy<ICurrentTenant> _currentTenantLazy;
+    private readonly Lazy<IThemeSelector> _themeSelectorLazy;
 
     public MultiTenancyViewLocationExpander(
-        Lazy<ICurrentTenant> currentTenantLazy)
+        Lazy<ICurrentTenant> currentTenantLazy,
+        Lazy<IThemeSelector> themeSelectorLazy)
     {
         _currentTenantLazy = currentTenantLazy;
+        _themeSelectorLazy = themeSelectorLazy;
     }
 
     public void PopulateValues([NotNull] ViewLocationExpanderContext context)
@@ -85,6 +88,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
 
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
+        var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
         string language = "." + context.Values.GetOrDefault(_languageKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;
@@ -93,8 +97,8 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         if (!string.IsNullOrEmpty(webComponentPath))
         {
             _viewLocations = new string[] {
-                "/" + webComponentPath + language + RazorViewEngine.ViewExtension,
-                "/" + webComponentPath + RazorViewEngine.ViewExtension
+                $"/Themes/{currentThemeName}/" + webComponentPath + language + RazorViewEngine.ViewExtension,
+                $"/Themes/{currentThemeName}/" + webComponentPath + RazorViewEngine.ViewExtension
             };
         }
         else if (!string.IsNullOrEmpty(context.AreaName))
@@ -105,10 +109,10 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
         else
@@ -118,10 +122,10 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Shared/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
 

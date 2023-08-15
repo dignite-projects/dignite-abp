@@ -14,12 +14,15 @@ body {
     --body-padding-top: 80px;
     padding-top: var(--body-padding-top);
 }
+a:focus {
+    outline: 1px dashed var(--bs-link-color);
+}
 .navbar {
     --bs-navbar-padding-y: 0.75rem;
     --bs-navbar-brand-padding-y: 0rem;
 }
-a:focus {
-    outline: 1px dashed var(--bs-link-color);
+.dropdown-menu {
+    --bs-dropdown-link-active-bg: transparent;
 }
 .accordion {
     --bs-accordion-active-bg: transparent;
@@ -232,10 +235,26 @@ a:focus {
     transition: 0.5s all;
     text-decoration:none;
 }
-
 .underline-animate.active,
 .underline-animate:hover {
     background-size: 100% 1px;
+}
+.underline-animate.fw-medium,
+.underline-animate.fw-semibold{
+    background-size: 0 2px;
+}
+.underline-animate.active.fw-medium,
+.underline-animate.fw-medium:hover,
+.underline-animate.active.fw-semibold,
+.underline-animate.fw-semibold:hover{
+    background-size: 100% 2px;
+}
+.underline-animate.fw-bolder {
+    background-size: 0 4px;
+}
+.underline-animate.active.fw-bolder,
+.underline-animate.fw-bolder:hover {
+    background-size: 100% 4px;
 }
 .underline-animate-white {
     background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,1));
@@ -268,7 +287,6 @@ a:focus {
     content: '›';
     right: 0rem
 }
-
 .chevron-right-animate:hover:after {
     right: -0.25rem
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.UI.Navigation;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.UserMenu;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Toolbar.UserMenu;
 
 [ViewComponent(Name = "Toolbar/UserMenu")]
 public class UserMenuViewComponent : AbpViewComponent

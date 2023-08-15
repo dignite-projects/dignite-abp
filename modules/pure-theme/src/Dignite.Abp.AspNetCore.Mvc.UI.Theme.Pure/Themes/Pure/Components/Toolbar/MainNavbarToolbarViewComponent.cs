@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Toolbar;
 
 [ViewComponent(Name = "Toolbar")]
 public class MainNavbarToolbarViewComponent : AbpViewComponent

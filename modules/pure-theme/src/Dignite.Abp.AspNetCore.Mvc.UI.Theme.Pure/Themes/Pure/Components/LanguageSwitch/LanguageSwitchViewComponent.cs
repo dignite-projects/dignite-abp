@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.LanguageSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.LanguageSwitch;
 
 public class LanguageSwitchViewComponent : AbpViewComponent
 {

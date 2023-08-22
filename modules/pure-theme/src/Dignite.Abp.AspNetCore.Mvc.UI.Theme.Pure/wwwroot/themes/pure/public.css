@@ -10,8 +10,10 @@
     background-color: var(--bs-link-color);
     color: #fff;
 }
-body {
+:root {
     --body-padding-top: 80px;
+}
+body {
     padding-top: var(--body-padding-top);
 }
 a:focus {

@@ -28,9 +28,16 @@ a:focus {
 }
 .accordion {
     --bs-accordion-active-bg: transparent;
+    --bs-accordion-btn-padding-x: 2rem;
+    --bs-accordion-btn-padding-y: 1.5rem;
+    --bs-accordion-body-padding-x: 2rem;
+    --bs-accordion-body-padding-y: 1.5rem;
+}
+.accordion-button {
+    font-size:1.25rem;
 }
 .card {
-    --bs-card-inner-border-radius:0.5rem;
+    --bs-card-inner-border-radius: 0.5rem;
 }
 .btn {
     --bs-btn-padding-x: 1rem;
@@ -43,10 +50,16 @@ a:focus {
     width: 100%;
     top: 0px;
     transition: all .3s ease 0s;
-    margin-top: 1rem;
+    margin-top: .9rem;
     border-radius: 2rem;
     min-height: var(--navbar-horizontal-height);
-    z-index: 1020;
+    z-index: 1022;
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    background-color: rgb(255,255,255,.75);
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 #main-navbar-container .navbar-brand {
     transition: all .3s ease 0s;
@@ -75,10 +88,6 @@ a:focus {
     padding-left: 1rem;
 }
 @media (min-width: 992px) {
-    #main-navbar-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
     #main-navbar-container .navbar-brand,
     #main-navbar-container .navbar-toolbars {
         min-width: 15%;
@@ -183,9 +192,9 @@ a:focus {
 
 @media (max-width: 991px){
     #main-navbar-container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        background-color: #fff;
+        width: calc(100% - 1rem);
+        margin-left: .5rem;
+        margin-right: .5rem;
         box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
         border-radius: 30px;
     }
@@ -215,7 +224,7 @@ a:focus {
     height: 100%;
     width: 100%;
     background-color: rgba(var(--bs-primary-rgb));
-    z-index: 1010;
+    z-index: 1021;
     pointer-events: all;
     transition: opacity .15s linear;
 }

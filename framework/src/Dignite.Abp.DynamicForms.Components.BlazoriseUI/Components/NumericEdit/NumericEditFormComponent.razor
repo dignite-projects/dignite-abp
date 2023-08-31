@@ -27,7 +27,7 @@
         if (CustomizableObject.GetField(Field.Name, null) != null)
         {
             decimal convertValue;
-            if (decimal.TryParse(CustomizableObject.GetField(Field.Name, 0).ToString(), out convertValue))
+            if (decimal.TryParse(CustomizableObject.GetField(Field.Name).ToString(), out convertValue))
             {
                 value = convertValue;
             }

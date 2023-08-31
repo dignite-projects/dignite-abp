@@ -44,12 +44,15 @@ public static class HasCustomFieldsExtensions
                 conversionType = conversionType.GetFirstGenericArgumentIfNullable();
             }
 
+            /*
             if (conversionType == typeof(Guid)|| conversionType == typeof(String))
             {
                 return (TField)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString());
             }
-
             return (TField)Convert.ChangeType(value, conversionType, CultureInfo.InvariantCulture);
+            */
+
+            return (TField)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString());
         }
         else
         {

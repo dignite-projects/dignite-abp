@@ -24,7 +24,7 @@ $(document).ready(function () {
     if (navbarContainer === null)
         return false;
 
-
+    var bodyElement = document.getElementsByTagName('body')[0];
     var navbar = navbarContainer.getElementsByClassName('navbar');//Get the navigation bar
     var overlay = document.getElementById('navbar-overlay'); // Get the navigation bar overlay
     var dropdowns = document.querySelectorAll('#main-navbar-collapse > .navbar-nav > .nav-item > .dropdown'); //Get every menu in the navigation bar, excluding submenus
@@ -51,6 +51,7 @@ $(document).ready(function () {
             if (!navbarContainer.classList.contains('has-subnav-open')) {
                 navbarContainer.classList.add('has-subnav-open');
                 overlay.classList.add('show');
+                bodyElement.style.setProperty('overflow','hidden');
             }
 
             /**
@@ -76,6 +77,7 @@ $(document).ready(function () {
                 navbarContainer.style.removeProperty('--navbar-horizontal-height');
                 navbarContainer.classList.remove('has-subnav-open');
                 overlay.classList.remove('show');
+                bodyElement.style.removeProperty('overflow');
             }
 
             navbarExpanded = false;

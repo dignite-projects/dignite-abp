@@ -21,8 +21,7 @@ public class LanguageSwitchViewComponent : AbpViewComponent
     public virtual async Task<IViewComponentResult> InvokeAsync()
     {
         var languages = await LanguageProvider.GetLanguagesAsync();
-        var currentLanguage = languages.FindByCulture(
-            CultureInfo.CurrentCulture.Name,
+        LanguageInfo currentLanguage = languages.FindByCulture(
             CultureInfo.CurrentUICulture.Name
         );
 

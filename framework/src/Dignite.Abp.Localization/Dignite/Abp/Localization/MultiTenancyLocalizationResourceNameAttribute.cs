@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Dignite.Abp.Localization.MultiTenancy;
+namespace Dignite.Abp.Localization;
 
 public class MultiTenancyLocalizationResourceNameAttribute : Attribute
 {

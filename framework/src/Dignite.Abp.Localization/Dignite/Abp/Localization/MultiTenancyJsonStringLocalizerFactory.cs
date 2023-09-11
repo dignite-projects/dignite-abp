@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using My.Extensions.Localization.Json;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.Localization.MultiTenancy;
+namespace Dignite.Abp.Localization;
 
 public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
 {

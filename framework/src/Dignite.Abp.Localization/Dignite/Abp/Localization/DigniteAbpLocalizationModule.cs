@@ -1,14 +1,12 @@
-﻿using Volo.Abp.Localization;
-using Volo.Abp.Modularity;
+﻿using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.Localization.MultiTenancy;
+namespace Dignite.Abp.Localization;
 
 [DependsOn(
-    typeof(AbpLocalizationModule),
     typeof(AbpMultiTenancyModule)
     )]
-public class AbpLocalizationMultiTenancyModule : AbpModule
+public class DigniteAbpLocalizationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Localization;
 using Volo.Abp.Localization;
 
 
-namespace Dignite.Abp.Localization.MultiTenancy;
+namespace Dignite.Abp.Localization;
 
 public class MultiTenancyStringLocalizerFactory : IStringLocalizerFactory
 {

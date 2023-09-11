@@ -7,8 +7,8 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-		<AssemblyName>Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy</AssemblyName>
-		<PackageId>Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy</PackageId>
+		<AssemblyName>Dignite.Abp.AspNetCore.Mvc.UI</AssemblyName>
+		<PackageId>Dignite.Abp.AspNetCore.Mvc.UI</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
 		<IsPackable>true</IsPackable>
 		<OutputType>Library</OutputType>

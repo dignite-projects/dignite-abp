@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="7.3.0" />
-	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy.csproj" />
+	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI\Dignite.Abp.AspNetCore.Mvc.UI.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.Razor;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Razor;
 public class MultiTenancyViewLocationExpander : IViewLocationExpander
 {
     private const string _languageKey = "___language";
@@ -47,7 +47,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
          * Group 2 = Component Name (ex "MyComponent")
          * Group 3 = View Name (ex "Default")
          * */
-        Regex defaultComponentDetector = new Regex(@"^((?:[Cc]omponents))+\/+([\w\.\/]+)\/+(.*)");
+        var defaultComponentDetector = new Regex(@"^((?:[Cc]omponents))+\/+([\w\.\/]+)\/+(.*)");
         var defaultComponentMatch = defaultComponentDetector.Match(context.ViewName);
 
         if (defaultComponentMatch.Success)
@@ -73,7 +73,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
             var tenantViewLocations = new List<string>();
             foreach (var viewLocation in _viewLocations)
             {
-                tenantViewLocations.Add(("/Tenants/" + tenantName + viewLocation));
+                tenantViewLocations.Add("/Tenants/" + tenantName + viewLocation);
             }
 
             tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();
@@ -89,7 +89,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
         var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
-        string language = "." + context.Values.GetOrDefault(_languageKey);
+        var language = "." + context.Values.GetOrDefault(_languageKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;
 

@@ -4,7 +4,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theming;
 
 /// <summary>
 /// 

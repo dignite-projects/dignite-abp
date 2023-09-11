@@ -1,13 +1,9 @@
 ﻿using System.Text.Unicode;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNet;
-using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -15,7 +11,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 [DependsOn(
     typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-    typeof(AbpAspNetCoreMvcUiThemeMultiTenancyModule)
+    typeof(DigniteAbpAspNetCoreMvcUiModule)
     )]
 public class AbpAspNetCoreMvcUiPureThemeModule : AbpModule
 {

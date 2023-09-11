@@ -1,15 +1,14 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.Razor;
+﻿using Dignite.Abp.AspNetCore.Mvc.UI.Razor;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AspNetCore.Mvc.UI;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy;
+namespace Dignite.Abp.AspNetCore.Mvc.UI;
 
-[DependsOn(typeof(AbpAspNetCoreMvcUiModule))]
-public class AbpAspNetCoreMvcUiThemeMultiTenancyModule: AbpModule
+[DependsOn(typeof(Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule))]
+public class DigniteAbpAspNetCoreMvcUiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

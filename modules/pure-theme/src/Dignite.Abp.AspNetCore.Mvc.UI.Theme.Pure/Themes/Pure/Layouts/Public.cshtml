@@ -34,9 +34,9 @@
 
 <!DOCTYPE html>
 
-<html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
+<html lang="@CultureInfo.CurrentUICulture.Name" dir="@rtl">
 <head>
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Public)
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -49,10 +49,10 @@
 
     @await RenderSectionAsync("styles", false)
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Public)
 </head>
-<body class="abp-application-layout @rtl">
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
+<body class="abp-public-layout @rtl">
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Public)
     
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
     
@@ -60,9 +60,9 @@
 
     <div class="@containerClass">
         @(await Component.InvokeAsync<PageAlertsViewComponent>())
-        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Public)
         @RenderBody()
-        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Public)
     </div>
 
     @(await Component.InvokeAsync<PageFooterViewComponent>())
@@ -77,6 +77,6 @@
 
     @await RenderSectionAsync("scripts", false)
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Application)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Public)
 </body>
 </html>

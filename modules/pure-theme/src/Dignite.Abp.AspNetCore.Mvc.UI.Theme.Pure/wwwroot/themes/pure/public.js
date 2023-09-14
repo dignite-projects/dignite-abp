@@ -27,7 +27,7 @@ $(document).ready(function () {
     var bodyElement = document.getElementsByTagName('body')[0];
     var navbar = navbarContainer.getElementsByClassName('navbar');//Get the navigation bar
     var overlay = document.getElementById('navbar-overlay'); // Get the navigation bar overlay
-    var dropdowns = document.querySelectorAll('#main-navbar-collapse > .navbar-nav > .nav-item > .dropdown'); //Get every menu in the navigation bar, excluding submenus
+    var dropdowns = navbarContainer.querySelectorAll('.navbar-nav > .nav-item > .dropdown'); //Get every menu in the navigation bar, excluding submenus
 
     /**
      * Whether the menu under the navigation bar is expanded. Expand without submenus¡£

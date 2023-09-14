@@ -11,7 +11,7 @@
     color: #fff;
 }
 :root {
-    --body-padding-top: 80px;
+    --body-padding-top: 76px;
 }
 body {
     padding-top: var(--body-padding-top);
@@ -24,7 +24,19 @@ a:focus {
     --bs-navbar-brand-padding-y: 0rem;
 }
 .dropdown-menu {
+    --bs-dropdown-link-active-color:#000;
     --bs-dropdown-link-active-bg: transparent;
+}
+.dropdown-toggle::after {
+    margin-left: 0rem;
+    line-height: 1.3rem;
+    content: '›';
+    font-size: 1.9rem;
+    font-weight: 500;
+    border: none;
+    vertical-align: 0rem;
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
 }
 .accordion {
     --bs-accordion-active-bg: transparent;
@@ -43,6 +55,7 @@ a:focus {
     --bs-btn-padding-x: 1rem;
     --bs-btn-border-radius: 50rem;
 }
+
 
 #main-navbar-container {
     --navbar-horizontal-height: 40px;
@@ -103,7 +116,7 @@ a:focus {
         -moz-column-gap: 10px;
         column-gap: 10px;
         align-items: center;
-        font-size: 1.1875rem;
+        font-size: 1.125rem;
         font-weight: 500;
         line-height: normal;
         padding: 0.3em clamp(0.2em, 1vw, 0.9em);
@@ -154,6 +167,8 @@ a:focus {
     #main-navbar-container .dropdown-menu .dropdown-item {
         font-size: 1.5rem;
         position: relative;
+    }
+    #main-navbar-container .dropdown-menu a.dropdown-item {
         color: var(--bs-nav-link-color);
     }
     #main-navbar-container .dropdown-menu .dropdown-item::before {
@@ -187,16 +202,11 @@ a:focus {
 /**** --end-- ****/
 
 
-
-
-
 @media (max-width: 991px){
     #main-navbar-container {
-        width: calc(100% - 1rem);
-        margin-left: .5rem;
-        margin-right: .5rem;
-        box-shadow: 1px 2px 2px rgba(0,0,0,0.1);
-        border-radius: 30px;
+        width: 100%;
+        margin-left: 0rem;
+        margin-right: 0rem;
     }
     #main-navbar-container .navbar-brand {
         order: 1;

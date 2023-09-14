@@ -1,5 +1,4 @@
-﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.LanguageSwitch;
-@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 @using Volo.Abp.UI.Navigation;
 @using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
@@ -34,9 +33,6 @@
             }
         </div>
 
-        <div class="d-flex justify-content-center">
-            @(await Component.InvokeAsync<LanguageSwitchViewComponent>())
-        </div>        
         <hr />
         <div class="d-flex flex-column flex-md-row">
             <ul class="list-inline">

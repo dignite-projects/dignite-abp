@@ -7,8 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.LanguageSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Toolbar.LanguageSwitch;
 
+[ViewComponent(Name = "Toolbar/LanguageSwitch")]
 public class LanguageSwitchViewComponent : AbpViewComponent
 {
     protected ILanguageProvider LanguageProvider { get; }
@@ -21,7 +22,8 @@ public class LanguageSwitchViewComponent : AbpViewComponent
     public virtual async Task<IViewComponentResult> InvokeAsync()
     {
         var languages = await LanguageProvider.GetLanguagesAsync();
-        LanguageInfo currentLanguage = languages.FindByCulture(
+        var currentLanguage = languages.FindByCulture(
+            CultureInfo.CurrentCulture.Name,
             CultureInfo.CurrentUICulture.Name
         );
 

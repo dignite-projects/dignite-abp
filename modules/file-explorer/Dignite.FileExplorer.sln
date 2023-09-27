@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.FileExplorer.Blazor.WebAssembly", "src\Dignite.FileExplorer.Blazor.WebAssembly\Dignite.FileExplorer.Blazor.WebAssembly.csproj", "{CFDEBBE7-534C-43E3-BE6C-24B41B669714}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{495301F5-E4CC-4543-A002-6E76CD75E802}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp-modules", "dignite-abp-modules", "{495301F5-E4CC-4543-A002-6E76CD75E802}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.BlazoriseUI", "..\..\framework\src\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj", "{E33795C4-C541-4777-A001-247454F4FD2E}"
 EndProject

@@ -24,7 +24,7 @@ public abstract class FormComponentBase<TForm, TFormConfiguration> : AbpComponen
 
     protected FormComponentBase()
     {
-        LocalizationResource = typeof(DigniteAbpDynamicFormsModule);
+        LocalizationResource = typeof(AbpDynamicFormsModule);
         IsChild = false;
         FormType = typeof(TForm);
         FormConfiguration = new TFormConfiguration();

@@ -8,7 +8,7 @@ namespace Dignite.FileExplorer.EntityFrameworkCore;
 
 [DependsOn(
     typeof(FileExplorerDomainModule),
-    typeof(DigniteAbpFilesEntityFrameworkCoreModule)
+    typeof(AbpFilesEntityFrameworkCoreModule)
 )]
 public class FileExplorerEntityFrameworkCoreModule : AbpModule
 {

@@ -72,8 +72,8 @@ namespace FileExplorerSample;
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(DigniteAbpAspNetCoreMvcUiPureThemeModule),
-    typeof(DigniteAbpAspNetCoreComponentsServerPureThemeModule),
+    typeof(AbpAspNetCoreMvcUiPureThemeModule),
+    typeof(AbpAspNetCoreComponentsServerPureThemeModule),
 
     // Account module packages
     typeof(AbpAccountApplicationModule),

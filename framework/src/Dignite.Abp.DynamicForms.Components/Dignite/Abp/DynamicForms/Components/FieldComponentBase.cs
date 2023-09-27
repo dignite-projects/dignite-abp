@@ -33,7 +33,7 @@ public abstract class FieldComponentBase<TForm, TFormConfiguration> : AbpCompone
 
     protected FieldComponentBase()
     {
-        LocalizationResource = typeof(DigniteAbpDynamicFormsModule);
+        LocalizationResource = typeof(AbpDynamicFormsModule);
         IsChild = false;
         FormType = typeof(TForm);
         FormConfiguration = new TFormConfiguration();

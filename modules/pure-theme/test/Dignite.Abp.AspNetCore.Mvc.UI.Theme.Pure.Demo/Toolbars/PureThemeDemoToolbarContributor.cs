@@ -10,7 +10,7 @@ public class PureThemeDemoToolbarContributor : IToolbarContributor
 {
     public Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
     {
-        if (context.Toolbar.Name != StandardToolbars.Main)
+        if (context.Toolbar.Name != PureNavbarConsts.ToolbarsName)
         {
             return Task.CompletedTask;
         }

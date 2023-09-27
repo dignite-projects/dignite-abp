@@ -4,6 +4,6 @@
  * See SampleManager_Tests for example.
  */
 
-public abstract class NotificationCenterDomainTestBase : NotificationCenterTestBase<AbpNotificationCenterDomainTestModule>
+public abstract class NotificationCenterDomainTestBase : NotificationCenterTestBase<DigniteAbpNotificationCenterDomainTestModule>
 {
 }

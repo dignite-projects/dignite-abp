@@ -8,7 +8,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddApplication<AbpAspNetCoreMvcUiThemePureDemoModule>();
+        services.AddApplication<DigniteAbpAspNetCoreMvcUiThemePureDemoModule>();
     }
 
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

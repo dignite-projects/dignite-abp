@@ -3,7 +3,7 @@ using Volo.Abp.Testing;
 
 namespace Dignite.Abp.Files;
 
-public abstract class AbpFilesDomainTestBase : AbpIntegratedTest<AbpFilesDomainTestModule>
+public abstract class AbpFilesDomainTestBase : AbpIntegratedTest<DigniteAbpFilesDomainTestModule>
 {
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
     {

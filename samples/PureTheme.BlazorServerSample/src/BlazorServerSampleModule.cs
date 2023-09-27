@@ -106,8 +106,8 @@ namespace PureTheme.BlazorServerSample;
     typeof(AbpSettingManagementBlazorServerModule),
 
     // Pure theme module packages
-    typeof(AbpAspNetCoreComponentsServerPureThemeModule),
-    typeof(AbpAspNetCoreMvcUiPureThemeModule)
+    typeof(DigniteAbpAspNetCoreComponentsServerPureThemeModule),
+    typeof(DigniteAbpAspNetCoreMvcUiPureThemeModule)
 )]
 public class BlazorServerSampleModule : AbpModule
 {

@@ -3,7 +3,7 @@ using Volo.Abp.Testing;
 
 namespace Dignite.Abp.DynamicForms.Components;
 
-public class FieldComponentsTestBase : AbpIntegratedTest<AbpDynamicFormsComponentsTestModule>
+public class FieldComponentsTestBase : AbpIntegratedTest<DigniteAbpDynamicFormsComponentsTestModule>
 {
     protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
     {

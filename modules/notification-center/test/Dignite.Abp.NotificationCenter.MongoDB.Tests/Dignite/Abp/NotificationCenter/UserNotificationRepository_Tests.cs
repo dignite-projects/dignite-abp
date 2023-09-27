@@ -4,6 +4,6 @@ using Xunit;
 namespace Dignite.Abp.NotificationCenter;
 
 [Collection(MongoTestCollection.Name)]
-public class UserNotificationRepository_Tests : UserNotificationRepository_Tests<AbpNotificationCenterMongoDbTestModule>
+public class UserNotificationRepository_Tests : UserNotificationRepository_Tests<DigniteAbpNotificationCenterMongoDbTestModule>
 {
 }

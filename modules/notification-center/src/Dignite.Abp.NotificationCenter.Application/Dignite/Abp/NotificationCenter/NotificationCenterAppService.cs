@@ -8,6 +8,6 @@ public abstract class NotificationCenterAppService : ApplicationService
     protected NotificationCenterAppService()
     {
         LocalizationResource = typeof(NotificationCenterResource);
-        ObjectMapperContext = typeof(AbpNotificationCenterApplicationModule);
+        ObjectMapperContext = typeof(DigniteAbpNotificationCenterApplicationModule);
     }
 }

@@ -8,7 +8,7 @@ namespace Dignite.FileExplorer.MongoDB;
 
 [DependsOn(
     typeof(FileExplorerDomainModule),
-    typeof(AbpFilesMongoDbModule)
+    typeof(DigniteAbpFilesMongoDbModule)
     )]
 public class FileExplorerMongoDbModule : AbpModule
 {

@@ -7,7 +7,7 @@ namespace Dignite.Abp.NotificationCenter;
  * See SampleAppService_Tests for example.
  */
 
-public abstract class NotificationCenterApplicationTestBase : NotificationCenterTestBase<AbpNotificationCenterApplicationTestModule>
+public abstract class NotificationCenterApplicationTestBase : NotificationCenterTestBase<DigniteAbpNotificationCenterApplicationTestModule>
 {
     protected virtual void UsingDbContext(Action<INotificationCenterDbContext> action)
     {

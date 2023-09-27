@@ -109,13 +109,13 @@ namespace NotificationCenterSample;
     typeof(AbpSettingManagementBlazorServerModule),
 
     // Notification Center module packages
-    typeof(AbpNotificationCenterApplicationModule),
-    typeof(AbpNotificationCenterEntityFrameworkCoreModule),
-    typeof(AbpNotificationCenterHttpApiModule),
-    typeof(AbpNotificationCenterBlazorServerModule),
-    typeof(AbpNotificationsIdentityModule),
-    typeof(AbpAspNetCoreMvcUiPureThemeModule),
-    typeof(AbpAspNetCoreComponentsServerPureThemeModule)
+    typeof(DigniteAbpNotificationCenterApplicationModule),
+    typeof(DigniteAbpNotificationCenterEntityFrameworkCoreModule),
+    typeof(DigniteAbpNotificationCenterHttpApiModule),
+    typeof(DigniteAbpNotificationCenterBlazorServerModule),
+    typeof(DigniteAbpNotificationsIdentityModule),
+    typeof(DigniteAbpAspNetCoreMvcUiPureThemeModule),
+    typeof(DigniteAbpAspNetCoreComponentsServerPureThemeModule)
 )]
 public class NotificationCenterSampleModule : AbpModule
 {

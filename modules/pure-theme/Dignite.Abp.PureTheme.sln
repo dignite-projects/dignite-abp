@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo", "test\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.csproj", "{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy\Dignite.Abp.AspNetCore.Mvc.UI.Theme.MultiTenancy.csproj", "{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI\Dignite.Abp.AspNetCore.Mvc.UI.csproj", "{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

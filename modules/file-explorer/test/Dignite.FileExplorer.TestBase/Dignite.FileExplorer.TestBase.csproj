@@ -2,7 +2,7 @@
 
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.TestBase</AssemblyName>
 		<PackageId>Dignite.FileExplorer.TestBase</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>

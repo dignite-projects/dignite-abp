@@ -4,6 +4,6 @@
  * while SampleRepository_Tests uses a different approach.
  */
 
-public abstract class NotificationCenterEntityFrameworkCoreTestBase : NotificationCenterTestBase<AbpNotificationCenterEntityFrameworkCoreTestModule>
+public abstract class NotificationCenterEntityFrameworkCoreTestBase : NotificationCenterTestBase<DigniteAbpNotificationCenterEntityFrameworkCoreTestModule>
 {
 }

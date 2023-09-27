@@ -9,7 +9,7 @@ public class PureThemeDemoMenuContributor : IMenuContributor
 {
     public Task ConfigureMenuAsync(MenuConfigurationContext context)
     {
-        if (context.Menu.Name == PureNavbarConsts.MenusName)
+        if (context.Menu.Name == StandardMenus.Main)
         {
             AddPublicMenuItems(context);
         }

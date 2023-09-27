@@ -8,7 +8,7 @@ namespace Dignite.Abp.DynamicForms;
 [DependsOn(
     typeof(AbpTestBaseModule),
     typeof(AbpAutofacModule),
-    typeof(AbpDynamicFormsModule)
+    typeof(DigniteAbpDynamicFormsModule)
     )]
 public class DigniteAbpDynamicFormsTestModule : AbpModule
 {

@@ -8,7 +8,7 @@ namespace Dignite.Abp.DynamicForms.Components;
 [DependsOn(
     typeof(AbpTestBaseModule),
     typeof(AbpAutofacModule),
-    typeof(AbpDynamicFormsComponentsBlazoriseUiModule)
+    typeof(DigniteAbpDynamicFormsComponentsBlazoriseUiModule)
     )]
 public class DigniteAbpDynamicFormsComponentsTestModule : AbpModule
 {

@@ -40,10 +40,10 @@ public partial class FilePickerComponent
     /// 
     /// </summary>
     [Parameter]
-    public List<FileDescriptorDto> SelectedFiles { get; set; }
+    public List<FileDescriptorDto> FileDescriptors { get; set; }
 
     [Parameter] 
-    public EventCallback<List<FileDescriptorDto>> SelectedFilesChanged { get; set; }
+    public EventCallback<List<FileDescriptorDto>> FileDescriptorsChanged { get; set; }
 
     /// <summary>
     /// Event triggered when a modal window for selecting files is opened
@@ -72,9 +72,9 @@ public partial class FilePickerComponent
 
     protected override async Task OnInitializedAsync()
     {
-        if (!EntityId.IsNullOrEmpty() && SelectedFiles==null)
+        if (!EntityId.IsNullOrEmpty() && FileDescriptors==null)
         {
-            SelectedFiles = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
+            FileDescriptors = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
             {
                 SkipCount = 0,
                 ContainerName = ContainerName,
@@ -83,7 +83,7 @@ public partial class FilePickerComponent
             })).Items.ToList();
             await InvokeAsync(() =>
             {
-                SelectedFilesChanged.InvokeAsync(SelectedFiles);
+                FileDescriptorsChanged.InvokeAsync(FileDescriptors);
             });
         }
         await base.OnInitializedAsync();
@@ -95,22 +95,22 @@ public partial class FilePickerComponent
         {
             if (!Multiple)
             {
-                SelectedFiles = files;
+                FileDescriptors = files;
             }
             else
             {
-                SelectedFiles = SelectedFiles == null ? new List<FileDescriptorDto>() : SelectedFiles;
+                FileDescriptors = FileDescriptors == null ? new List<FileDescriptorDto>() : FileDescriptors;
                 foreach (var file in files)
                 {
-                    if (!SelectedFiles.Any(fd => fd.Id == file.Id))
+                    if (!FileDescriptors.Any(fd => fd.Id == file.Id))
                     {
-                        SelectedFiles.Add(file);
+                        FileDescriptors.Add(file);
                     }
                 }
             }
             await InvokeAsync(() =>
             {
-                SelectedFilesChanged.InvokeAsync(SelectedFiles);
+                FileDescriptorsChanged.InvokeAsync(FileDescriptors);
             });
         }
     }
@@ -141,10 +141,10 @@ public partial class FilePickerComponent
 
     protected virtual async Task RemoveFileItem(FileDescriptorDto fileDescriptor)
     {
-        SelectedFiles.RemoveAll(fd => fd.Id == fileDescriptor.Id);
+        FileDescriptors.RemoveAll(fd => fd.Id == fileDescriptor.Id);
         await InvokeAsync(() =>
         {
-            SelectedFilesChanged.InvokeAsync(SelectedFiles);
+            FileDescriptorsChanged.InvokeAsync(FileDescriptors);
         });
     }
 }

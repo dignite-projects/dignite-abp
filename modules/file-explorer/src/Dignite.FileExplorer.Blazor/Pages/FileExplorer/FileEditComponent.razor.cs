@@ -50,13 +50,13 @@ public partial class FileEditComponent
     /// 
     /// </summary>
     [Parameter]
-    public List<FileDescriptorDto> SelectedFiles { get; set; }
+    public List<FileDescriptorDto> FileDescriptors { get; set; }
 
     [Parameter]
-    public EventCallback<List<FileDescriptorDto>> SelectedFilesChanged { get; set; }
+    public EventCallback<List<FileDescriptorDto>> FileDescriptorsChanged { get; set; }
 
     [Parameter]
-    public EventCallback<FileChangedEventArgs> Changed { get; set; }
+    public EventCallback<FileChangedEventArgs> FileChanged { get; set; }
 
 
     [Parameter]
@@ -81,9 +81,9 @@ public partial class FileEditComponent
         Configuration = await FileDescriptorAppService.GetFileContainerConfigurationAsync(ContainerName);
         MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize*1024);
 
-        if (!EntityId.IsNullOrEmpty() && SelectedFiles == null)
+        if (!EntityId.IsNullOrEmpty() && FileDescriptors == null)
         {
-            SelectedFiles = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
+            FileDescriptors = (await FileDescriptorAppService.GetListAsync(new GetFilesInput
             {
                 SkipCount = 0,
                 ContainerName = ContainerName,
@@ -92,7 +92,7 @@ public partial class FileEditComponent
             })).Items.ToList();
             await InvokeAsync(() =>
             {
-                SelectedFilesChanged.InvokeAsync(SelectedFiles);
+                FileDescriptorsChanged.InvokeAsync(FileDescriptors);
             });
         }
 
@@ -116,7 +116,7 @@ public partial class FileEditComponent
                 Files.Add(fu);
             }
 
-            await Changed.InvokeAsync(
+            await FileChanged.InvokeAsync(
                 new FileChangedEventArgs(
                     Files
                     .Where(f => f.Status== FileUploadStatus.Ready)
@@ -133,7 +133,7 @@ public partial class FileEditComponent
         /* The API to remove a single file is not supported in the current version. It is supported in the advanced version, and this method will be used after the newer version is updated */
         //await FileEditRef.RemoveFile(file.File.Id);
 
-        await Changed.InvokeAsync(
+        await FileChanged.InvokeAsync(
             new FileChangedEventArgs(
                 Files
                 .Where(f => f.Status == FileUploadStatus.Ready)
@@ -161,10 +161,10 @@ public partial class FileEditComponent
 
     protected virtual async Task RemoveItem(FileDescriptorDto fileDescriptor)
     {
-        SelectedFiles.RemoveAll(fd => fd.Id == fileDescriptor.Id);
+        FileDescriptors.RemoveAll(fd => fd.Id == fileDescriptor.Id);
         await InvokeAsync(() =>
         {
-            SelectedFilesChanged.InvokeAsync(SelectedFiles);
+            FileDescriptorsChanged.InvokeAsync(FileDescriptors);
         });
     }
 }

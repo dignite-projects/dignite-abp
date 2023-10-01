@@ -6,11 +6,11 @@
     <Button Color="Color.Primary" Clicked="OpenFileExplorerModalAsync">@L["SelectFile"]</Button>
     @if (FileDescriptorsContent != null)
     {
-        @FileDescriptorsContent(SelectedFiles)
+        @FileDescriptorsContent(FileDescriptors)
     }
     else
     {
-        if (SelectedFiles != null && SelectedFiles.Any())
+        if (FileDescriptors != null && FileDescriptors.Any())
         {
             <Table>
                 <TableHeader>
@@ -21,7 +21,7 @@
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    @foreach (var item in SelectedFiles)
+                    @foreach (var item in FileDescriptors)
                     {
                         <TableRow>
                             <TableRowCell>@item.Name</TableRowCell>

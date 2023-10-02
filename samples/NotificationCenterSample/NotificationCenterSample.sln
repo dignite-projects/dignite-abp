@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationCenterSample", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification-Center", "Notification-Center", "{752E2B95-A458-4465-BC67-912535C065BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abp-Modules", "Abp-Modules", "{9445592D-3810-4F83-B16E-A3F8B1170551}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dignite-Abp", "Dignite-Abp", "{9445592D-3810-4F83-B16E-A3F8B1170551}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Notifications.Shared", "..\..\framework\src\Dignite.Abp.Notifications.Shared\Dignite.Abp.Notifications.Shared.csproj", "{5D566DB0-EB3C-4B91-B24A-6ECC092831FD}"
 EndProject

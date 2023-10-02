@@ -16,10 +16,9 @@ public class MessageAppService : ApplicationService
 
     public async Task<NotificationData> CreateAsync(string text)
     {
-        //Arrange
         var notificationData = new MessageNotificationData(text);
 
-        //Act
+        //Publish
         await _publisher.PublishAsync(
             NotificationCenterSampleNotifications.TestNotification, 
             notificationData,

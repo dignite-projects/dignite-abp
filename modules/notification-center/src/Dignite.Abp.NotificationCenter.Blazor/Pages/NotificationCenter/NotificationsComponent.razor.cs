@@ -87,29 +87,6 @@ public partial class NotificationsComponent
         return list;
     }
 
-    async Task NotificationClick(UserNotificationDto notification)
-    {
-        if (notification.State == Notifications.UserNotificationState.Unread)
-        {
-            notification.State= Notifications.UserNotificationState.Read;
-            await NotificationAppService.UpdateStateAsync(notification.NotificationId, Notifications.UserNotificationState.Read);
-            
-
-            await InvokeAsync(() => {
-                OnSetNotificationRead.InvokeAsync();
-            });
-        }
-
-        //
-        var componentProvider = NotificationComponentProviderSelector.Get(notification.NotificationName);
-        await componentProvider.NotificationClickAsync(
-            new Notifications.Components.NotificationClickArgs(
-                notification.Data, 
-                notification.EntityTypeName, 
-                notification.EntityId)
-            );           
-    }
-
     string FormatNotificationTime(DateTime notificationTime)
     {
         TimeSpan nowTimeSpan = new TimeSpan(Clock.Now.Ticks);

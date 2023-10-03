@@ -1,5 +1,9 @@
-﻿<Icon Name="IconName.Grin" IconSize="IconSize.Large" TextColor="TextColor.Primary"></Icon>
+﻿@using Dignite.Abp.Notifications.Components;
+@using NotificationCenterSample.Notifications;
+
+@inherits NotificationIconComponentBase
+<Icon Name="IconName.Grin" IconSize="IconSize.Large" TextColor="TextColor.Primary"></Icon>
 
 @code {
-
+    public override string NotificationName { get; } = NotificationCenterSampleNotifications.TestNotification;
 }

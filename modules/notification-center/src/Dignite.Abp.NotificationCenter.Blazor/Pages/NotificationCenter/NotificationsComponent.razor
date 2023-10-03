@@ -1,6 +1,6 @@
 @using Volo.Abp.AspNetCore.Components
 @inject INotificationAppService NotificationAppService
-@inject INotificationComponentProviderSelector NotificationComponentProviderSelector
+@inject INotificationIconComponentSelector NotificationIconComponentSelector
 @inject INotificationDataComponentSelector NotificationDataComponentSelector
 @inherits AbpComponentBase
 
@@ -9,14 +9,21 @@
 {    
     @foreach (var item in userNotifications)
     {
-        var componentProvider = NotificationComponentProviderSelector.Get(item.NotificationName);
+        var notificationIconComponent = NotificationIconComponentSelector.GetOrNull(item.NotificationName);
         var notificationDataComponent = NotificationDataComponentSelector.Get(item.Data.Type);
         var notificationDataParameters = new Dictionary<string, object>() {
             { "NotificationData",item.Data}
         };
         <Div Class="notification-item" Padding="Padding.Is3.OnX.Is2.FromTop" Flex="Flex.JustifyContent.Start">
             <Div Class="notification-icon" Border="Border.Rounded.Is1" Flex="Flex.AlignItems.Center.JustifyContent.Center" Margin="Margin.Is2.FromEnd" Position="Position.Relative">
-                <DynamicComponent Type="componentProvider.IconComponentType"></DynamicComponent>
+                @if (notificationIconComponent == null)
+                {
+                    <DefaultNotificationIconComponent></DefaultNotificationIconComponent>
+                }
+                else
+                {
+                    <DynamicComponent Type="notificationIconComponent.GetType()"></DynamicComponent>
+                }
                 @if (item.State == Notifications.UserNotificationState.Unread)
                 {
                     <Badge Color="Color.Danger" Pill Position="Position.Absolute.Top.Is0.Start.Is100.Translate.Middle" Border="Border.Light.OnAll.RoundedCircle" Padding="Padding.Is1">
@@ -31,8 +38,19 @@
                     </Small>
                     <Small>@(FormatNotificationTime(item.CreationTime))</Small>
                 </Div>
-                <Div @onclick="()=>NotificationClick(item)" Class="notification-data">
-                    <DynamicComponent Type="@notificationDataComponent.GetType()" Parameters="@notificationDataParameters"></DynamicComponent>                    
+                <Div Class="notification-data">
+                    @if (notificationDataComponent == null)
+                    {
+                        <Alert Color="Color.Warning">
+                            <AlertMessage>
+                                Notification data component of "@item.Data.Type" not found!
+                            </AlertMessage>
+                        </Alert>
+                    }
+                    else
+                    {
+                        <DynamicComponent Type="@notificationDataComponent.GetType()" Parameters="@notificationDataParameters"></DynamicComponent>
+                    }                  
                 </Div>
             </Div>
         </Div>

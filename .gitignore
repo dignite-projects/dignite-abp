@@ -352,6 +352,25 @@ MigrationBackup/
 # vs for Mac
 .DS_Store
 
-# 
+# Dignite ABP
+build/outputs
+nupkg/push.ps1
+
+# Identity Server temp signature file
+tempkey.jwk
+
+# ABP Analyzing files
+# [Disabled for now] *.abppkg.analyze.json
+
+# appsettings.secrets.json
+appsettings.secrets.json
+deploy/nuget-api-key.txt
+deploy/npm-auth-token.txt
+deploy/ssh-password.txt
+deploy/github-api-key.txt
+deploy/_run_all_log.txt
+
+
+# libs and upload files
 **/samples/**/wwwroot/libs/**
 **/samples/**/wwwroot/host/**

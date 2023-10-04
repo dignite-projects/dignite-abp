@@ -5,14 +5,12 @@
 ## 安装
 
 > 如果你使用的是[Pure Theme](Pure-Theme.md)，则已经包含了该模块。
-> 
 
-在 ABP 项目中，可以通过安装 `Dignite.Abp.AspNetCore.Mvc.UI` NuGet 包来实现多租户视图功能。同时，需要将 `[DependsOn(typeof(DigniteAbpAspNetCoreMvcUiModule))]` 添加到项目的 ABP 模块依赖中。
-
+在 ABP 项目中，可以通过安装 `Dignite.Abp.AspNetCore.Mvc.UI` NuGet 包来实现多租户视图功能。同时，需要将 `[DependsOn(typeof(DigniteAbpAspNetCoreMvcUiModule))]` 添加到项目的 ABP 模块依赖列表中。
 
 ## 示例
 
-### `Views`示例：
+### `Views`示例
 
 ````csharp
 public class HomeController : AbpController
@@ -23,24 +21,26 @@ public class HomeController : AbpController
     }
 }
 ````
+
 租主的 `View` 路径：
 `~/Views/Home/Index.cshtml`
 
 租户的 `View` 路径：
 `~/Tenants/{租户名称}/Views/Home/Index.cshtml`
 
-### `Partial Views`示例：
+### `Partial Views`示例
 
 ````csharp
 <partial name="_toolbar" model="Model"></partial>
 ````
+
 租主的 `Partial View` 路径：
 `~/Views/_toolbar.cshtml`
 
 租户的 `View` 路径：
 `~/Tenants/{租户名称}/Views/_toolbar.cshtml`
 
-### `Area Views`示例：
+### `Area Views`示例
 
 ````csharp
 [Area("Products")]
@@ -52,15 +52,17 @@ public class HomeController : AbpController
     }
 }
 ````
+
 租主的 `View` 路径：
 `~/Areas/Products/Views/Home/Index.cshtml`
 
 租户的 `View` 路径：
 `~/Tenants/{租户名称}/Areas/Products/Views/Home/Index.cshtml`
 
-### `View Components`示例：
+### `View Components`示例
 
 假设我们在 `/Components/MainNavbar/` 目录中创建了一个名为 `MainNavbarViewComponent` 的 View Component：
+
 ````csharp
 public class MainNavbarViewComponent : AbpViewComponent
 {
@@ -70,6 +72,7 @@ public class MainNavbarViewComponent : AbpViewComponent
     }
 }
 ````
+
 租主的 `View` 路径：
 `~/Components/MainNavbar/Default.cshtml`
 
@@ -77,10 +80,7 @@ public class MainNavbarViewComponent : AbpViewComponent
 `~/Tenants/{租户名称}/Components/MainNavbar/Default.cshtml`
 
 > 如果未找到租户的视图路径，系统自动寻找并使用租主的视图，以上几种视图类型均适应。
-> 
-
 > 除此之外，ASP.NET Core中其他视图发现功能也可以正常使用。
-> 
 
 ## 多租户主题
 

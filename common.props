@@ -1,22 +1,40 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>3.0.0</Version>
+    <Version>1.0.0</Version>
     <NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>
     <PackageIconUrl>https://dignite.com/assets/dignite_nupkg.png</PackageIconUrl>
-    <PackageProjectUrl>https://dignite.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://dignite.com/dignite-abp</PackageProjectUrl>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/dignite-projects/dignite-abp/</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>NuGet.md</PackageReadmeFile>
+    <PackageTags>aspnetcore abp framework web angular maui blazor mvc csharp webapp</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Include symbol files (*.pdb) in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="..\..\NuGet.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(UsingMicrosoftNETSdkWeb)' != 'true' AND '$(UsingMicrosoftNETSdkRazor)' != 'true'">
+    <None Remove="*.abppkg.analyze.json" />
+    <Content Include="*.abppkg.analyze.json">
+		<Pack>true</Pack>
+		<PackagePath>content\</PackagePath>
+	</Content>
+    <None Remove="*.abppkg.json" />
+    <Content Include="*.abppkg.json">
+		<Pack>true</Pack>
+		<PackagePath>content\</PackagePath>
+    </Content>
   </ItemGroup>
   <ItemGroup Condition="$(AssemblyName.EndsWith('HttpApi.Client'))">
     <EmbeddedResource Include="**\*generate-proxy.json" />

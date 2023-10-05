@@ -1,42 +1,42 @@
 {
   "items": [
     {
-      "text": "通知系统",
+      "text": "通知システム",
       "items": [
         {
-          "text": "通知系统核心",
+          "text": "通知システムコア",
           "path": "Notifications.md"
         },
         {
-          "text": "通知中心模块",
+          "text": "通知センターモジュール",
           "path": "Notification-Center.md"
         },
         {
-          "text": "Blazor",
+          "text": "Blazor 版",
           "path": "Blazor-Notification-Center.md"
         }
       ]
     },
     {
-      "text": "表单引擎",
+      "text": "動的フォームエンジン",
       "items": [
         {
-          "text": "动态表单",
+          "text": "動的フォーム",
           "path": "Dynamic-Forms.md"
         },
         {
-          "text": "自定义字段基础模块",
+          "text": "カスタム・フィールド・ベース",
           "path": "Field-Customizing.md"
         },
         {
-          "text": "Blazor 动态表单组件",
+          "text": "Blazor版コンポーネント",
           "items": [
             {
-              "text": "开发 Blazor 动态表单组件",
+              "text": "開発 Blazor 版コンポーネント",
               "path": "Blazor-Dynamic-Form-Components.md"
             },
             {
-              "text": "Blazorise 版动态表单组件",
+              "text": "Blazorise 版コンポーネント",
               "path": "Blazorise-Dynamic-Form-Components.md"
             }
           ]
@@ -44,14 +44,14 @@
       ]
     },
     {
-      "text": "文件管理",
+      "text": "文書管理",
       "items": [
         {
-          "text": "文件存储管理",
+          "text": "文書保管管理",
           "path": "Files.md"
         },
         {
-          "text": "文件管理器",
+          "text": "文書管理者",
           "path": "File-Explorer.md"
         },
         {
@@ -59,7 +59,7 @@
           "path": "Blazor-File-Explorer.md"
         },
         {
-          "text": "Blazor 文件动态表单组件",
+          "text": "Blazor 版コンポーネント",
           "path": "Dynamic-Forms-Files.md"
         }
       ]
@@ -78,32 +78,32 @@
       ]
     },
     {
-      "text": "多租户视图",
+      "text": "多テナントの ビュー UI",
       "path": "Views-MultiTenancy.md"
     },
     {
-      "text": "多租户本地化",
+      "text": "多テナント ローカライズ",
       "path": "Localization-MultiTenancy.md"
     },
     {
-      "text": "BlazoriseUI 组件",
+      "text": "BlazoriseUI コンポーネント",
       "path": "BlazoriseUI-Component.md"
     },
     {
       "text": "Ckeditor",
       "items": [
         {
-          "text": "Blazor Ckeditor 组件",
+          "text": "Blazor Ckeditor コンポーネント",
           "path": "Blazor-Ckeditor-Component.md"
         },
         {
-          "text": "CkEditor 动态表单",
+          "text": "CkEditor 動的フォーム",
           "path": "Dynamic-Forms-CkEditor.md"
         }
       ]
     },
     {
-      "text": "贡献指南",
+      "text": "寄付のガイドライン",
       "path": "Contribution/Index.md"
     }
   ]

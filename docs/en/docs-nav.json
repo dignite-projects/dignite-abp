@@ -1,42 +1,42 @@
 {
   "items": [
     {
-      "text": "通知系统",
+      "text": "Notification System",
       "items": [
         {
-          "text": "通知系统核心",
+          "text": "Notification system core",
           "path": "Notifications.md"
         },
         {
-          "text": "通知中心模块",
+          "text": "Notification Centre Module",
           "path": "Notification-Center.md"
         },
         {
-          "text": "Blazor",
+          "text": "Blazor Edition",
           "path": "Blazor-Notification-Center.md"
         }
       ]
     },
     {
-      "text": "表单引擎",
+      "text": "Dynamic Forms engine",
       "items": [
         {
-          "text": "动态表单",
+          "text": "Dynamic Forms",
           "path": "Dynamic-Forms.md"
         },
         {
-          "text": "自定义字段基础模块",
+          "text": "Custom field base",
           "path": "Field-Customizing.md"
         },
         {
-          "text": "Blazor 动态表单组件",
+          "text": "Blazor Dynamic form components",
           "items": [
             {
-              "text": "开发 Blazor 动态表单组件",
+              "text": "Developing Blazor Dynamic form components",
               "path": "Blazor-Dynamic-Form-Components.md"
             },
             {
-              "text": "Blazorise 版动态表单组件",
+              "text": "Blazorise Dynamic Forms Component",
               "path": "Blazorise-Dynamic-Form-Components.md"
             }
           ]
@@ -44,22 +44,22 @@
       ]
     },
     {
-      "text": "文件管理",
+      "text": "File Explorer",
       "items": [
         {
-          "text": "文件存储管理",
+          "text": "File Storing",
           "path": "Files.md"
         },
         {
-          "text": "文件管理器",
+          "text": "File Explorer",
           "path": "File-Explorer.md"
         },
         {
-          "text": "Blazor",
+          "text": "Blazor Edition",
           "path": "Blazor-File-Explorer.md"
         },
         {
-          "text": "Blazor 文件动态表单组件",
+          "text": "Blazor Dynamic Form Component",
           "path": "Dynamic-Forms-Files.md"
         }
       ]
@@ -78,32 +78,32 @@
       ]
     },
     {
-      "text": "多租户视图",
+      "text": "Multi-Tenant Views",
       "path": "Views-MultiTenancy.md"
     },
     {
-      "text": "多租户本地化",
+      "text": "Multi-Tenant Localization",
       "path": "Localization-MultiTenancy.md"
     },
     {
-      "text": "BlazoriseUI 组件",
+      "text": "BlazoriseUI Component",
       "path": "BlazoriseUI-Component.md"
     },
     {
       "text": "Ckeditor",
       "items": [
         {
-          "text": "Blazor Ckeditor 组件",
+          "text": "Blazor Ckeditor Component",
           "path": "Blazor-Ckeditor-Component.md"
         },
         {
-          "text": "CkEditor 动态表单",
+          "text": "CkEditor Dynamic Form Component",
           "path": "Dynamic-Forms-CkEditor.md"
         }
       ]
     },
     {
-      "text": "贡献指南",
+      "text": "Contribution Guidelines",
       "path": "Contribution/Index.md"
     }
   ]

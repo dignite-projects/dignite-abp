@@ -1,4 +1,4 @@
-# Dignite abp-modules
+# Dignite Abp
 
 Adding to the ecology of the ABP framework: Adds notification system, dynamic forms module, file manager, Pure Theme, and other enhancements.
 

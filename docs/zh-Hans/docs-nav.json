@@ -12,7 +12,7 @@
           "path": "Notification-Center.md"
         },
         {
-          "text": "Blazor",
+          "text": "Blazor 版",
           "path": "Blazor-Notification-Center.md"
         }
       ]
@@ -36,7 +36,7 @@
               "path": "Blazor-Dynamic-Form-Components.md"
             },
             {
-              "text": "Blazorise 版动态表单组件",
+              "text": "Blazorise 版",
               "path": "Blazorise-Dynamic-Form-Components.md"
             }
           ]
@@ -55,11 +55,11 @@
           "path": "File-Explorer.md"
         },
         {
-          "text": "Blazor",
+          "text": "Blazor 版",
           "path": "Blazor-File-Explorer.md"
         },
         {
-          "text": "Blazor 文件动态表单组件",
+          "text": "Blazor 版文件动态表单组件",
           "path": "Dynamic-Forms-Files.md"
         }
       ]

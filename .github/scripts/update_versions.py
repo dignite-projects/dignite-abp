@@ -23,11 +23,11 @@ def create_pr():
     repo = g.get_repo("dignite-projects/dignite-abp")
 
     branch_name = f"update-latest-versions-{os.environ['GITHUB_REF'].split('/')[-1]}"
-    base = repo.get_branch("dev")
+    base = repo.get_branch("main")
     repo.create_git_ref(ref=f"refs/heads/{branch_name}", sha=base.commit.sha)
 
     # Get the current latest-versions.json file and its sha
-    contents = repo.get_contents("latest-versions.json", ref="dev")
+    contents = repo.get_contents("latest-versions.json", ref="main")
     file_sha = contents.sha
 
     # Update the file in the repo
@@ -42,7 +42,7 @@ def create_pr():
     try:
         pr = repo.create_pull(title="Update latest-versions.json",
                         body="Automated PR to update the latest-versions.json file.",
-                        head=branch_name, base="dev")
+                        head=branch_name, base="main")
     except Exception as e:
         print(f"Error while creating PR: {e}")
 

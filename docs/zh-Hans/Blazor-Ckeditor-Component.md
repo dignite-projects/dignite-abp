@@ -1,47 +1,47 @@
 # Blazor Ckeditor 组件
 
-````json
+``` json
 //[doc-params]
 {
     "UI": ["Blazor", "BlazorServer"]
 }
-````
+```
 
-Ckeditor 的 Blazor 版,适用于Blazor server和 Blazor WebAssembly
+Ckeditor 的 Blazor 版本，适用于 Blazor Server 和 Blazor WebAssembly。
 
 ![Blazor Ckeditor 组件](images/ckeditor.jpg)
 
 ## 安装
 
-* 将 `Dignite.Abp.AspNetCore.Components.CkEditor` Nuget 包安装到 Blazor 项目中
+* 在 Blazor 项目中安装 `Dignite.Abp.AspNetCore.Components.CkEditor` NuGet 包。
 
 {{if UI == "Blazor"}}
 
-* 将 `Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly` NuGet 包安装到 Blazor WebAssembly Web 项目中。
+* 在 Blazor WebAssembly Web 项目中安装 `Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly` NuGet 包。
 
-* 添加 `DigniteAbpAspNetCoreComponentsCkEditorWebAssemblyModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpAspNetCoreComponentsCkEditorWebAssemblyModule`。
 
-* 在Blazor项目中执行一次 [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)
+* 在 Blazor 项目中执行一次 [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)。
 
 {{end}}
 
 {{if UI == "BlazorServer"}}
 
-* 将 `Dignite.Abp.AspNetCore.Components.CkEditor.Server` NuGet 包安装到 Blazor Server Web 项目中。
+* 在 Blazor Server Web 项目中安装 `Dignite.Abp.AspNetCore.Components.CkEditor.Server` NuGet 包。
 
-* 添加 `DigniteAbpAspNetCoreComponentsCkEditorServerModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中.
+* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpAspNetCoreComponentsCkEditorServerModule`。
 
 {{end}}
 
 ## 使用方法
 
-在页面顶部引入如下命名空间
+在页面顶部引入以下命名空间：
 
 ```csharp
 @using Dignite.Abp.AspNetCore.Components.CkEditor
 ```
 
-### 基于用法
+### 基本用法
 
 ```html
 <CkEditor @bind-Content="Content">
@@ -49,18 +49,18 @@ Ckeditor 的 Blazor 版,适用于Blazor server和 Blazor WebAssembly
 ```
 
 ```csharp
-    public partial class TestCkEditor
-    {
-        // 获取或设置 Ckeditor 内容
-        public string Content{ get; set; } = "CkEditor Default Content";
-    }
+public partial class TestCkEditor
+{
+    // 获取或设置 Ckeditor 内容
+    public string Content { get; set; } = "CkEditor 默认内容";
+}
 ```
 
 ### 上传图片
 
-首先设置图片存储的容器，具体操作方法请参见 [ABP BlobStoring](https://docs.abp.io/zh-Hans/abp/latest/Blob-Storing) 和 [Dignite Abp Files](Files.md)。
+首先设置图片存储的容器，请参考 [ABP BlobStoring](https://docs.abp.io/zh-Hans/abp/latest/Blob-Storing) 和 [Dignite Abp Files](Files.md) 中的具体操作方法。
 
-> 本例假定已创建了名为 `TestPicStore` 的容器.
+> 本例假设已创建名为 `TestPicStore` 的容器。
 
 ```html
 <CkEditor @bind-Content="Content" ImagesContainerName="TestPicStore">
@@ -69,30 +69,30 @@ Ckeditor 的 Blazor 版,适用于Blazor server和 Blazor WebAssembly
 
 ![Blazor Ckeditor 上传图片](images/ckeditor-insert-pic.jpg)
 
-点击`插入图像`工具，选择本机文件将上传至名为 `TestPicStore` 的容器中，并插入编辑区。
+点击 `插入图像` 工具，选择本地文件将上传到名为 `TestPicStore` 的容器中，并插入编辑区。
 
 ### 插入视频媒体
 
 ![Blazor Ckeditor 上传图片](images/ckeditor-insert-media.jpg)
 
-除`Ckeditor`默认支持的媒体外，本组件提供了`腾讯视频`、`优酷视频`、`西瓜视频`的支持。
+除 `Ckeditor` 默认支持的媒体外，本组件还支持 `腾讯视频`、`优酷视频` 和 `西瓜视频`。
 
 #### 视频媒体解析
 
-由于`Ckeditor`将插入的媒体转换为如下代码：
+由于 `Ckeditor` 会将插入的媒体转换为以下代码：
 
 ```html
 <figure class="media"><oembed url="https://www.youtube.com/watch?v=Xf3ZUfESLeo"></oembed></figure>
 ```
 
-因此需要在输出页面解析`Ckeditor`中的视频媒体，参考代码如下：
+因此，需要在输出页面中解析 `Ckeditor` 中的视频媒体，示例代码如下：
 
 ```javascript
 /**
  * 解析ckeditor中引入的视频
  */
 $(function () {
-    // Select all <figure> elements with class "media"
+    // 选择所有带有类名 "media" 的 <figure> 元素
     var figureElements = document.querySelectorAll('figure.media');
     var mediaEmbedProviders = [
         {
@@ -111,8 +111,7 @@ $(function () {
         }
     ];
 
-
-    // Loop through each <figure> element
+    // 遍历每个 <figure> 元素
     figureElements.forEach(function (figure) {
         var oembedElement = figure.firstChild;
         mediaEmbedProviders.forEach(function (provider) {

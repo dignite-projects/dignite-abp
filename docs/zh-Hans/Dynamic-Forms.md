@@ -2,18 +2,18 @@
 
 `Dignite.Abp.DynamicForms` 定义了一组在程序运行时可动态管理对象扩展数据的表单，以及获取、存储对象扩展数据的通用规范，常应用于商品SKU、在线调研、CMS等含有自定义字段的系统。
 
-`Dignite.Abp.DynamicForms`与`[Volo.Abp.ObjectExtending](https://docs.abp.io/zh-Hans/abp/latest/Object-Extensions)`的区别：
+`Dignite.Abp.DynamicForms` 与 `[Volo.Abp.ObjectExtending](https://docs.abp.io/zh-Hans/abp/latest/Object-Extensions)` 的区别：
 
 - `Volo.Abp.ObjectExtending` 在程序开发阶段，由开发人员以编程方式扩展对象额外属性；
 - `Dignite.Abp.DynamicForms` 在程序运行期间，由管理员自定义对象的字段；
 
-`Dignite.Abp.DynamicForms`由两部分组成：
+`Dignite.Abp.DynamicForms` 由两部分组成：
 
 1. 表单引擎
-   `Dignite.Abp.DynamicForms`提供了文本框、下拉菜单、富文本编辑、日期选择、文件上传、数字框等简单类型表单，以及表格、矩阵等复杂类型表单。
+   `Dignite.Abp.DynamicForms` 提供了文本框、下拉菜单、富文本编辑、日期选择、文件上传、数字框等简单类型表单，以及表格、矩阵等复杂类型表单。
 
 2. 自定义字段
-  通过自定义字段获取或设置动态表单的数据。
+   通过自定义字段获取或设置动态表单的数据。
 
 > 动态表单需要配合带有自定义字段的业务对象一起使用，我们推荐基于 [自定义字段基础模块](Field-Customizing.md) 构建业务对象。
 
@@ -21,7 +21,7 @@
 
 - 将 `Dignite.Abp.DynamicForms` Nuget 包安装到 Blazor 项目中
 
-- 添加 `DigniteAbpDynamicFormsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+- 添加 `DigniteAbpDynamicFormsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 ## 获取表单列表
 
@@ -71,7 +71,7 @@ public class DemoAppService : ApplicationService
 
 ## 开发一个新动态表单
 
-继承`FormBase`抽象类，创建一个动态表单类：
+继承 `FormBase` 抽象类，创建一个动态表单类：
 
 - Name
 
@@ -87,7 +87,7 @@ public class DemoAppService : ApplicationService
 
 - GetConfiguration 方法
 
-    返回获取动态表单配置的方法，获取`Textbox`动态表单配置的参考代码：
+    返回获取动态表单配置的方法，获取 `Textbox` 动态表单配置的参考代码：
 
     ```csharp
     public override FormConfigurationBase GetConfiguration(FormConfigurationDictionary fieldConfiguration)
@@ -148,7 +148,7 @@ public class SimpleTextboxForm : FormBase
 `SimpleTextboxConfiguration` 动态表单配置类：
 
 ```csharp
-public class SimpleTextboxConfiguration:FormConfigurationBase
+public class SimpleTextboxConfiguration : FormConfigurationBase
 {
     public string Placeholder
     {
@@ -167,7 +167,8 @@ public class SimpleTextboxConfiguration:FormConfigurationBase
     {
     }
 
-    public SimpleTextboxConfiguration() : base()
+    public SimpleTextboxConfiguration()
+        : base()
     {
     }
 }
@@ -211,6 +212,8 @@ public class CustomizeFieldDemo : Entity<Guid>, ICustomizeFieldInfo
 
     public string DefaultValue { get; set; }
 
+
+
     /// <summary>
     /// Field <see cref="IForm.Name"/>
     /// </summary>
@@ -227,7 +230,7 @@ public class CustomizeFieldDemo : Entity<Guid>, ICustomizeFieldInfo
 继承该接口创建一个产品类示例：
 
 ```csharp
-public class Product: FullAuditedAggregateRoot<Guid>, IHasCustomFields
+public class Product : FullAuditedAggregateRoot<Guid>, IHasCustomFields
 {
     /// <summary>
     /// Product Cateogry Id
@@ -284,20 +287,20 @@ public class Product: FullAuditedAggregateRoot<Guid>, IHasCustomFields
 
 - SetDefaultsForCustomizeFields
 
-    检查业务对象的自定义字段字典表，当未设置业务对象的自定义字段值时，该方法将从`ICustomizeFieldInfo`中读取`DefaultValue`值，并为自定义字段赋值。
+    检查业务对象的自定义字段字典表，当未设置业务对象的自定义字段值时，该方法将从 `ICustomizeFieldInfo` 中读取 `DefaultValue` 值，并为自定义字段赋值。
 
 - SetCustomizeFieldsToRegularProperties
 
     将自定义字段值映射给业务对象中同名的字段。
 
-> 如果使用的是[AutoMapper](https://automapper.org/)库，同时在映射配置文件中使用了 `MapCustomizeFields()` 方法，参数`mapToRegularProperties`值设定为`true`，程序将自动调用业务对象的`SetCustomizeFieldsToRegularProperties`扩展方法。
+> 如果使用的是 [AutoMapper](https://automapper.org/) 库，同时在映射配置文件中使用了 `MapCustomizeFields()` 方法，参数 `mapToRegularProperties` 值设定为 `true`，程序将自动调用业务对象的 `SetCustomizeFieldsToRegularProperties` 扩展方法。
 
 ### 业务对象自定义字段值的验证
 
-业务对象的 `Dto` 继承自 `CustomizableObject` 抽象类，实现抽象类中`GetFieldDefinitions`方法，进行数据验证。
+业务对象的 `Dto` 继承自 `CustomizableObject` 抽象类，实现抽象类中 `GetFieldDefinitions` 方法，进行数据验证。
 
 ````csharp
-public class ProductEditDto: CustomizableObject<CustomizeFieldDemo>
+public class ProductEditDto : CustomizableObject<CustomizeFieldDemo>
 {
     ///<summary>
     /// Get the definition information of the field for data validation
@@ -313,17 +316,17 @@ public class ProductEditDto: CustomizableObject<CustomizeFieldDemo>
 
 - MapCustomizeFieldsTo 方法
 
-    `MapCustomizeFieldsTo` 是`IHasCustomFields`的扩展方法，用于以受控方式将自定义字段从一个对象复制到另一个对象. 示例:
+    `MapCustomizeFieldsTo` 是 `IHasCustomFields` 的扩展方法，用于以受控方式将自定义字段从一个对象复制到另一个对象. 示例:
 
     ````csharp
     entry.MapCustomizeFieldsTo(entryDto);
     ````
 
-    `MapCustomizeFieldsTo` 需要在**两侧**(本例中是`Entry` 和 `EntryDto`)实现`IHasCustomFields`接口。
+    `MapCustomizeFieldsTo` 需要在**两侧**(本例中是 `Entry` 和 `EntryDto`)实现 `IHasCustomFields` 接口。
 
 - 指定自定义字段映射
 
-    默认情况下自动映射全部自定义字段，通过`MapCustomizeFieldsTo`中`fields`参数，可以映射指定的自定义字段，如下所示：
+    默认情况下自动映射全部自定义字段，通过 `MapCustomizeFieldsTo` 中 `fields` 参数，可以映射指定的自定义字段，如下所示：
 
     ````csharp
     entry.MapCustomizeFieldsTo(
@@ -332,11 +335,11 @@ public class ProductEditDto: CustomizableObject<CustomizeFieldDemo>
     );
     ````
 
-    以上代码示例`entry`对象仅向`entryDto`对象映射"FieldName1"、"FieldName1"两个自定义字段。
+    以上代码示例 `entry` 对象仅向 `entryDto` 对象映射 "FieldName1"、"FieldName1" 两个自定义字段。
 
 - 忽略字段
 
-    默认情况下不会忽略任何自定义字段的映射，通过`MapCustomizeFieldsTo`中`ignoredFields`参数，可以在映射操作中忽略某些字段:
+    默认情况下不会忽略任何自定义字段的映射，通过 `MapCustomizeFieldsTo` 中 `ignoredFields` 参数，可以在映射操作中忽略某些字段:
 
     ````csharp
     identityUser.MapCustomizeFieldsTo(
@@ -349,7 +352,7 @@ public class ProductEditDto: CustomizableObject<CustomizeFieldDemo>
 
 - AutoMapper集成
 
-    如果你使用的是[AutoMapper](https://automapper.org/)库，`Dignite.Abp.DynamicForms`还提供了一种扩展方法来利用上面定义的 `MapCustomizeFieldsTo` 方法.
+    如果你使用的是 [AutoMapper](https://automapper.org/) 库，`Dignite.Abp.DynamicForms` 还提供了一种扩展方法来利用上面定义的 `MapCustomizeFieldsTo` 方法.
 
     你可以在映射配置文件中使用 `MapCustomizeFields()` 方法.
 
@@ -364,7 +367,7 @@ public class ProductEditDto: CustomizableObject<CustomizeFieldDemo>
     }
     ````
 
-    它与 `MapCustomizeFieldsTo()` 方法具有相同的参数.
+    它与 `MapCustomizeFieldsTo()` 方法具有相同的参数。
 
 ## 后续阅读
 

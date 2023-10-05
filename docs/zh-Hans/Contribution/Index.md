@@ -1,27 +1,29 @@
 # 贡献指南
 
-Dignite ABP是基于[Abp Framework](https://github.com/abpframework)构建的开源项目，早期是为Dignite内部使用，现在正式开源为ABP框架生态添砖加瓦。
-
-本指南旨在帮助任何想要为Dignite ABP项目做出贡献的人。
+**Dignite ABP** 是一个基于 [Abp Framework](https://github.com/abpframework) 构建的开源项目。最初是为 Dignite 内部使用而创建，现在已正式成为 ABP 框架生态中的一部分，为其增添了新的功能和价值。
 
 ## 贡献代码
 
-你可以将Pull request(拉取请求)发送到Github存储库.
+如果你想为 **Dignite ABP** 项目做出贡献，你可以通过以下步骤提交 Pull Request（拉取请求）：
 
-- 从Github克隆[ABP存储库](https://github.com/dignite-projects/dignite-abp)。
-- 进行必要的更改。
-- 发送Pull request(拉取请求)。
+1. 从 **ABP 存储库** 克隆项目代码，存储库地址：[https://github.com/dignite-projects/dignite-abp](https://github.com/dignite-projects/dignite-abp)。
 
-在进行任何更改之前,请在[Github问题](https://github.com/dignite-projects/dignite-abp/issues)上进行讨论。
+2. 进行必要的代码修改。
 
-### Bug修复 & 增强功能
+3. 提交 Pull Request（拉取请求）。
 
-你可能希望修复已知Bug或处理计划的增强功能. 请参阅Github上的[问题列表](https://github.com/dignite-projects/dignite-abp/issues)。
+在进行任何代码更改之前，请务必在 [GitHub 问题](https://github.com/dignite-projects/dignite-abp/issues) 中进行讨论，以确保你的贡献符合项目的方向和要求。
+
+### Bug 修复和功能增强
+
+如果你希望修复已知的 Bug 或者为项目添加新功能，请查看 [GitHub 问题列表](https://github.com/dignite-projects/dignite-abp/issues)。
 
 ### 功能请求
 
-如果你对框架或模块有功能的想法, 请在Github上[创建一个问题](https://github.com/dignite-projects/dignite-abp/issues)或参加现有的讨论. 如果它被社区所接受你就可以实现它。
+如果你有关于框架或模块的新功能想法，可以在 GitHub 上创建一个新的问题或参与现有的讨论。如果社区接受了你的提议，你可以开始实现这个功能。
 
-## Bug 报告
+## 报告 Bug
 
-如果你发现任何Bug, 请[在Github存储库上创建一个问题](https://github.com/dignite-projects/dignite-abp/issues/new)。
+如果你在使用项目时发现了任何 Bug，请在 [GitHub 存储库上创建一个新的问题](https://github.com/dignite-projects/dignite-abp/issues/new) 来报告 Bug。我们将会尽快进行处理和修复。
+
+我们感谢你的贡献和反馈，这将有助于不断改进和完善 **Dignite ABP** 项目。

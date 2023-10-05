@@ -18,13 +18,13 @@
 
 ## 创建字段实体类
 
-`CustomizeFieldDefinitionBase`是定义字段实体类的抽象类，它是 [ICustomizeFieldInfo](Dynamic-Forms.md#定义字段信息) 接口的实现。
+`CustomizeFieldDefinitionBase` 是定义字段实体类的抽象类，它是 [ICustomizeFieldInfo](Dynamic-Forms.md#定义字段信息) 接口的实现。
 
 > 继承 `ICustomizeFieldInfo` 创建字段实体类也是可以的，但继承自`CustomizeFieldDefinitionBase`创建字段实体类可以减少代码。
 
 示例:
 
-````csharp
+```csharp
 public class ProductFieldDefinition : CustomizeFieldDefinitionBase
 {    
     /// <summary>
@@ -32,15 +32,15 @@ public class ProductFieldDefinition : CustomizeFieldDefinitionBase
     /// </summary>
     public string Group { get; set; }
 }
-````
+```
 
 ## 创建业务对象实体类
 
-[IHasCustomFields](Dynamic-Forms.md#含有自定义字段的业务对象)是含有自定义字段值实体类的接口，用于管理自定义字段的值。
+[IHasCustomFields](Dynamic-Forms.md#含有自定义字段的业务对象) 是含有自定义字段值实体类的接口，用于管理自定义字段的值。
 
 示例：
 
-````csharp
+```csharp
 public class Product : AuditedAggregateRoot<Guid>,IHasCustomFields
 {    
     /// <summary>
@@ -58,17 +58,17 @@ public class Product : AuditedAggregateRoot<Guid>,IHasCustomFields
     /// </summary>
     public CustomFieldDictionary CustomFields { get; set; }
 }
-````
+```
 
 ## 配置 Ef Core 实体
 
-`Dignite.Abp.FieldCustomizing.EntityFrameworkCore`有一些实用的扩展方法配置`ICustomizeFieldInfo`接口和`IHasCustomFields`接口的实现类。
+`Dignite.Abp.FieldCustomizing.EntityFrameworkCore` 有一些实用的扩展方法配置 `ICustomizeFieldInfo` 接口和 `IHasCustomFields` 接口的实现类。
 
 - `ConfigureCustomizableFieldDefinitions()` 方法
 
     是配置字段定义实体属性和约定的方法，在你的 `DbContext` `OnModelCreating` 方法中做以下配置:
 
-    ````csharp
+    ```csharp
     protected override void OnModelCreating(ModelBuilder builder)
     {
         //Always call the base method
@@ -88,13 +88,13 @@ public class Product : AuditedAggregateRoot<Guid>,IHasCustomFields
             b.Property(q => q.Group).HasMaxLength(64);
         });
     }
-    ````
+    ```
 
 - `ConfigureObjectCustomizedFields()` 方法
 
     是配置含有自定义字段值实体属性和约定的方法，在你的 `DbContext` `OnModelCreating` 方法中做以下配置:
 
-    ````csharp
+    ```csharp
     protected override void OnModelCreating(ModelBuilder builder)
     {
         //Always call the base method
@@ -114,7 +114,7 @@ public class Product : AuditedAggregateRoot<Guid>,IHasCustomFields
             b.Property(q => q.Name).HasMaxLength(128);
         });
     }
-    ````
+    ```
 
 ## 推荐阅读
 

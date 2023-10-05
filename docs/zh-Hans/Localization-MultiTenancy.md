@@ -1,38 +1,38 @@
 # 多租户本地化
 
-在Razor视图/Page中每个租户都能有一套独立的本地化，一个典型的应用场景是用于网站设计，每一个租户的网站都可以使用一套本地化系统。
+多租户本地化允许每个租户拥有自己独立的本地化内容。这个功能非常适合用于网站设计等场景，每个租户的网站可以使用适合其特定需求的本地化系统。
 
-## Installation
+## 安装
 
-* 将 `Dignite.Abp.Localization` NuGet 包安装到 Web 项目中。
-* 添加 `DigniteAbpLocalizationModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中.
+1. 在您的 Web 项目中安装 `Dignite.Abp.Localization` NuGet 包。
+2. 将 `DigniteAbpLocalizationModule` 添加到您的 [模块类](https://docs.abp.io/zh-Hans/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-## 创建一个本地化资源文件
+## 创建本地化资源文件
 
-在`/Localization/`目录下创建一个本地化资源文件类，并为该类添加`MultiTenancyLocalizationResourceName`属性，例如：
+在 `/Localization/` 目录下创建一个本地化资源文件类，并为该类添加 `MultiTenancyLocalizationResourceName` 属性，例如：
 
-````C#
+```csharp
 [MultiTenancyLocalizationResourceName("CmsResource")]
 public class CmsResource
 {
 }
-````
+```
 
-租主的 JSON 文件位于 `/Tenants/Localization/` 文件夹下，如下图所示：
+租户的 JSON 本地化文件位于 `/Tenants/Localization/` 文件夹下。文件夹根据租户名称创建，如下所示：
 
 ![localization-resource-json-files](images/localization-resource-json-files.jpg)
 
-租户的 JSON 文件位于 `/Tenants/{租户名称}/Localization/` 文件夹下，如下图所示：
+每个租户的 JSON 本地化文件位于 `/Tenants/{租户名称}/Localization/` 文件夹下，如下图所示：
 
 ![tenant-localization-resource-json-files](images/tenant-localization-resource-json-files.jpg)
 
-JSON 本地化文件内容如下所示：
+JSON 本地化文件的内容如下所示：
 
-````json
+```json
 {
   "HelloWorld": "Hello World!"
 }
-````
+```
 
 ## 获取本地化文本
 
@@ -40,7 +40,7 @@ JSON 本地化文件内容如下所示：
 
 只需注入 `IStringLocalizer<TResource>` 服务并如下所示使用即可：
 
-````csharp
+```csharp
 public class MyService : ITransientDependency
 {
     private readonly IStringLocalizer<CmsResource> _localizer;
@@ -55,20 +55,20 @@ public class MyService : ITransientDependency
         var str = _localizer["HelloWorld"];
     }
 }
-````
+```
 
-### 在Razor 视图/Pages中使用
+### 在 Razor 视图/Pages 中使用
 
-在Razor 视图/Pages中注入 `IStringLocalizer<TResource>` 服务：
+在 Razor 视图/Pages 中注入 `IStringLocalizer<TResource>` 服务，如下所示：
 
-````c#
+```csharp
 @inject IStringLocalizer<CmsResource> _localizer
 
 <h1>@_localizer["HelloWorld"]</h1>
-````
+```
 
 ### 格式化参数
 
-格式参数可以在本地化键之后传递。如果您的信息是 `Hello {0}, welcome!`，那么您可以向本地化器传递`{0}`参数，如`_localizer["HelloMessage", "John"]`。
+您可以在本地化键之后传递格式化参数。例如，如果您的消息是 `Hello {0}, welcome!`，您可以将 `{0}` 参数传递给本地化器，如 `_localizer["HelloMessage", "John"]`。
 
-> 有关使用本地化的详细信息，请参阅 [微软本地化文档](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization)。
+> 欲了解更多有关使用本地化的详细信息，请参阅 [微软本地化文档](https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/localization)。

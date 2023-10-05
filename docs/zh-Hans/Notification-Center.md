@@ -1,98 +1,90 @@
 # 通知中心模块
 
-````json
+```json
 //[doc-params]
 {
     "DB": ["EF", "Mongo"]
 }
-````
+```
 
-通知中心模块是Abp 应用模块，可以方便插入到你的应用系统中，实现发布、接收通知。
+通知中心模块是 Abp 应用程序模块，可轻松集成到您的应用系统中，以实现通知的发布和接收功能。
 
 ## 安装
 
-- 将 `Dignite.Abp.NotificationCenter.Domain.Shared` Nuget 包安装到 `Domain.Shared` 项目中
+1. 将 `Dignite.Abp.NotificationCenter.Domain.Shared` NuGet 包安装到 `Domain.Shared` 项目中。
 
-    添加 `DigniteAbpNotificationCenterDomainSharedModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+   将 `DigniteAbpNotificationCenterDomainSharedModule` 添加到您的 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-- 将 `Dignite.Abp.NotificationCenter.Domain` Nuget 包安装到 Domain 项目中
+2. 将 `Dignite.Abp.NotificationCenter.Domain` NuGet 包安装到 Domain 项目中。
 
-    添加 `DigniteAbpNotificationCenterDomainModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+   同样，在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 中添加 `DigniteAbpNotificationCenterDomainModule`。
 
-- 将 `Dignite.Abp.Notifications.Identity` Nuget 包安装到 Domain 项目中
+3. 如果使用 Entity Framework Core（EF），则将 `Dignite.Abp.NotificationCenter.EntityFrameworkCore` NuGet 包安装到 Entity Framework Core 项目中。
 
-    添加 `DigniteAbpNotificationsIdentityModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+   添加 `DigniteAbpNotificationCenterEntityFrameworkCoreModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-{{if DB == "EF"}}
+   在 `OnModelCreating()` 方法中添加以下配置：
 
-- 将 `Dignite.Abp.NotificationCenter.EntityFrameworkCore` Nuget 包安装到 EntityFrameworkCore 项目中
+   ```csharp
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+   {
+       base.OnModelCreating(modelBuilder);
 
-    添加 `DigniteAbpNotificationCenterEntityFrameworkCoreModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+       modelBuilder.ConfigurePermissionManagement();
+       modelBuilder.ConfigureSettingManagement();
+       modelBuilder.ConfigureAuditLogging();
+       modelBuilder.ConfigureIdentity();
+       modelBuilder.ConfigureFeatureManagement();
+       modelBuilder.ConfigureTenantManagement();
+       modelBuilder.ConfigureNotificationCenter(); // 添加此行以配置 NotificationCenter 模块
+   }
+   ```
 
-    添加 `builder.ConfigureNotificationCenter()` 到 `OnModelCreating()` 方法中:
+   打开 Visual Studio 的包管理控制台，选择 `DbMigrations` 作为默认项目，然后运行以下命令以为通知中心模块添加迁移：
 
-    ```csharp
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+   ```csharp
+   add-migration Added_NotificationCenter_Module
+   ```
 
-        modelBuilder.ConfigurePermissionManagement();
-        modelBuilder.ConfigureSettingManagement();
-        modelBuilder.ConfigureAuditLogging();
-        modelBuilder.ConfigureIdentity();
-        modelBuilder.ConfigureFeatureManagement();
-        modelBuilder.ConfigureTenantManagement();
-        modelBuilder.ConfigureNotificationCenter(); //Add this line to configure the NotificationCenter Module
-    }
-    ```
+   然后执行以下命令以更新数据库：
 
-    打开 Visual Studio 的 包管理控制台 选择 `DbMigrations` 做为默认项目. 然后编写以下命令为文档模块添加迁移.
+   ```csharp
+   update-database
+   ```
 
-    ```csharp
-    add-migration Added_NotificationCenter_Module
-    ```
+4. 如果使用 MongoDB，将 `Dignite.Abp.NotificationCenter.MongoDB` NuGet 包安装到 MongoDB 项目中。
 
-    现在更新数据库
+   添加 `DigniteAbpNotificationCenterMongoDbModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-    ```csharp
-    update-database
-    ```
+   同样，在 `OnModelCreating()` 方法中添加以下配置：
 
-{{end}}
+   ```csharp
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+   {
+       base.OnModelCreating(modelBuilder);
 
-{{if DB == "Mongo"}}
+       modelBuilder.ConfigurePermissionManagement();
+       modelBuilder.ConfigureSettingManagement();
+       modelBuilder.ConfigureAuditLogging();
+       modelBuilder.ConfigureIdentity();
+       modelBuilder.ConfigureFeatureManagement();
+       modelBuilder.ConfigureTenantManagement();
+       modelBuilder.ConfigureNotificationCenter(); // 添加此行以配置 NotificationCenter 模块
+   }
+   ```
 
-- 将 `Dignite.Abp.NotificationCenter.MongoDB` Nuget 包安装到 MongoDB 项目中
+5. 将 `Dignite.Abp.Notifications.Identity` NuGet 包安装到 Domain 项目中。
 
-    添加 `DigniteAbpNotificationCenterMongoDbModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+   同样，在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 中添加 `DigniteAbpNotificationsIdentityModule`。
 
-    添加 `builder.ConfigureNotificationCenter()` 到 `OnModelCreating()` 方法中:
+6. 将 `Dignite.Abp.NotificationCenter.Application.Contracts` NuGet 包安装到 Application.Contracts 项目中。
 
-    ```csharp
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
+   添加 `DigniteAbpNotificationCenterApplicationContractsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-        modelBuilder.ConfigurePermissionManagement();
-        modelBuilder.ConfigureSettingManagement();
-        modelBuilder.ConfigureAuditLogging();
-        modelBuilder.ConfigureIdentity();
-        modelBuilder.ConfigureFeatureManagement();
-        modelBuilder.ConfigureTenantManagement();
-        modelBuilder.ConfigureNotificationCenter(); //Add this line to configure the NotificationCenter Module
-    }
-    ```
+7. 将 `Dignite.Abp.NotificationCenter.Application` NuGet 包安装到 Application 项目中。
 
-{{end}}
+   添加 `DigniteAbpNotificationCenterApplicationModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。
 
-- 将 `Dignite.Abp.NotificationCenter.Application.Contracts` Nuget 包安装到 Application.Contracts 项目中
+8. 将 `Dignite.Abp.NotificationCenter.HttpApi` NuGet 包安装到 HttpApi 项目中。
 
-    添加 `DigniteAbpNotificationCenterApplicationContractsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
-
-- 将 `Dignite.Abp.NotificationCenter.Application` Nuget 包安装到 Application 项目中
-
-    添加 `DigniteAbpNotificationCenterApplicationModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
-
-- 将 `Dignite.Abp.NotificationCenter.HttpApi` Nuget 包安装到 HttpApi 项目中
-
-    添加 `DigniteAbpNotificationCenterHttpApiModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
+   添加 `DigniteAbpNotificationCenterHttpApiModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中。

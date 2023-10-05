@@ -1,20 +1,20 @@
-# Blazor动态表单组件
+# Blazor Dynamic Form Component
 
-本文将介绍如何开发与用户数据交互的Blazor动态表单组件。
+This article will introduce how to develop a Blazor dynamic form component that interacts with user data.
 
-动态表单组件分为三个部分：表单配置组件、表单组件、表单数据组件，下面我们依次介绍。
+The dynamic form component consists of three parts: the form configuration component, the form component, and the form data component. Below, we will introduce them one by one.
 
-## 安装
+## Installation
 
-* 将 `Dignite.Abp.DynamicForms.Components` NuGet 包安装到即将开发Blazor动态表单组件的项目中。
+* Install the `Dignite.Abp.DynamicForms.Components` NuGet package in the project where you will be developing the Blazor dynamic form component.
 
-* 添加 `DigniteAbpDynamicFormsComponentsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的`[DependsOn(...)]`属性列表中。
+* Add `DigniteAbpDynamicFormsComponentsModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
-## 表单配置组件
+## Form Configuration Component
 
-表单配置组件用于配置动态表单的参数。
+The form configuration component is used to configure the parameters of the dynamic form.
 
-继承 `ConfigurationComponentBase` 类创建一个动态表单组件，代码示例：
+Create a dynamic form component by inheriting the `ConfigurationComponentBase` class, as shown in the code example below:
 
 ```csharp
 @using Dignite.Abp.DynamicForms.CkEditor
@@ -57,25 +57,24 @@
 </Validation>
 ```
 
-### IConfigurationComponentSelector 接口
+### IConfigurationComponentSelector Interface
 
-本接口提供了 `IConfigurationComponent Get(string formName)` 方法，可通过该方法获取动态表单的配置组件。
+This interface provides the `IConfigurationComponent Get(string formName)` method, which allows you to obtain an instance of the configuration component for a specific dynamic form.
 
-通过注入 `IConfigurationComponentSelector` 接口，获取指定动态表单名称的 `IConfigurationComponent` 实例，示例：
+You can inject the `IConfigurationComponentSelector` interface and use it to get an `IConfigurationComponent` instance for a specified dynamic form name, as shown in the example below:
 
 ```csharp
 @inject IConfigurationComponentSelector ConfigurationComponentSelector
 @code{
     var component = configurationComponentSelector.Get("CkEditor");
 }
-
 ```
 
-## 表单组件
+## Form Component
 
-表单组件用于系统与用户之间的数据交互。
+The form component is used for data interaction between the system and users.
 
-继承 `FormComponentBase` 类创建一个动态表单组件，代码示例：
+Create a dynamic form component by inheriting the `FormComponentBase` class, as shown in the code example below:
 
 ```csharp
 @using Dignite.Abp.DynamicForms.CkEditor
@@ -129,11 +128,11 @@
 }
 ```
 
-### IFormComponentSelector 接口
+### IFormComponentSelector Interface
 
-本接口提供了 `IFormComponent Get(string formName)` 方法，可通过该方法获取动态表单的组件。
+This interface provides the `IFormComponent Get(string formName)` method, which allows you to obtain an instance of the form component for a specific dynamic form.
 
-通过注入 `IFormComponentSelector` 接口，获取指定动态表单名称的 `IFormComponent` 实例，示例：
+You can inject the `IFormComponentSelector` interface and use it to get an `IFormComponent` instance for a specified dynamic form name, as shown in the example below:
 
 ```csharp
 @inject IFormComponentSelector FormComponentSelector
@@ -142,11 +141,11 @@
 }
 ```
 
-## 表单数据组件
+## Form Data Component
 
-表单数据组件用于在UI上呈现表单数据。
+The form data component is used to display form data on the UI.
 
-继承 `FieldComponentBase` 类创建一个动态表单组件，代码示例：
+Create a dynamic form component by inheriting the `FieldComponentBase` class, as shown in the code example below:
 
 ```csharp
 @using Dignite.Abp.DynamicForms.CkEditor
@@ -175,11 +174,11 @@
 }
 ```
 
-### IFieldComponentSelector 接口
+### IFieldComponentSelector Interface
 
-本接口提供了 `IFieldComponent Get(string formName)` 方法，可通过该方法获取动态表单的组件。
+This interface provides the `IFieldComponent Get(string formName)` method, which allows you to obtain an instance of the field component for a specific dynamic form.
 
-通过注入 `IFieldComponentSelector` 接口，获取指定动态表单名称的 `IFieldComponent` 实例，示例：
+You can inject the `IFieldComponentSelector` interface and use it to get an `IFieldComponent` instance for a specified dynamic form name, as shown in the example below:
 
 ```csharp
 @inject IFieldComponentSelector FieldComponentSelector
@@ -188,4 +187,4 @@
 }
 ```
 
-> 以上内容的介绍请参照 [CkEditor动态表单](https://github.com/dignite-projects/dignite-abp/tree/main/modules/ckeditor-component/Dignite.Abp.DynamicForms.Components.CkEditor)
+> For more information, please refer to the [CkEditor Dynamic Form](https://github.com/dignite-projects/dignite-abp/tree/main/modules/ckeditor-component/Dignite.Abp.DynamicForms.Components.CkEditor) source code.

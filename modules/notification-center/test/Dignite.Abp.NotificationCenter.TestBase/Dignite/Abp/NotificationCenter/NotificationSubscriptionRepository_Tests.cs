@@ -21,6 +21,8 @@ public abstract class NotificationSubscriptionRepository_Tests<TStartupModule> :
     [Fact]
     public async Task GetListForUserAsync()
     {
+        var sdfsdf = await _notificationSubscriptionRepository.GetListAsync();
+
         var notifications = await _notificationSubscriptionRepository.GetListAsync(
             _notificationCenterTestData.User1Id
             );

@@ -74,8 +74,8 @@ public class NotificationCenterDataSeedContributor : IDataSeedContributor, ITran
             _guidGenerator.Create(),
             _notificationCenterTestData.User1Id,
             _notificationCenterTestData.Notification1Name,
-            _notificationCenterTestData.EntityType1Name,
-            _notificationCenterTestData.Entity1Id,
+            null,
+            null,
             _clock.Now,
             _currentTenant.Id
             );

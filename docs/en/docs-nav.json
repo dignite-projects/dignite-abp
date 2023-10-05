@@ -29,14 +29,14 @@
           "path": "Field-Customizing.md"
         },
         {
-          "text": "Blazor Dynamic form components",
+          "text": "Blazor components",
           "items": [
             {
-              "text": "Developing Blazor Dynamic form components",
+              "text": "Developing components",
               "path": "Blazor-Dynamic-Form-Components.md"
             },
             {
-              "text": "Blazorise Dynamic Forms Component",
+              "text": "Blazorise component",
               "path": "Blazorise-Dynamic-Form-Components.md"
             }
           ]

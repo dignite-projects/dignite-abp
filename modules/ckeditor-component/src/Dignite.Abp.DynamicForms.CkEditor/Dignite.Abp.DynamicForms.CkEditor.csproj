@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="..\..\..\configureawait.props" />
-	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
 	</ItemGroup>
 
 </Project>

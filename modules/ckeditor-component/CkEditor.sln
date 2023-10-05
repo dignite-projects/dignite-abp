@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.CkEditor", "Dignite.Abp.DynamicForms.CkEditor\Dignite.Abp.DynamicForms.CkEditor.csproj", "{07F271D1-2B52-415D-A295-3814B0333BE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.CkEditor", "src\Dignite.Abp.DynamicForms.CkEditor\Dignite.Abp.DynamicForms.CkEditor.csproj", "{07F271D1-2B52-415D-A295-3814B0333BE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor", "Dignite.Abp.AspNetCore.Components.CkEditor\Dignite.Abp.AspNetCore.Components.CkEditor.csproj", "{166BAE34-E08D-4E38-8E34-C200829C97E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor", "src\Dignite.Abp.AspNetCore.Components.CkEditor\Dignite.Abp.AspNetCore.Components.CkEditor.csproj", "{166BAE34-E08D-4E38-8E34-C200829C97E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor.Server", "Dignite.Abp.AspNetCore.Components.CkEditor.Server\Dignite.Abp.AspNetCore.Components.CkEditor.Server.csproj", "{1EE14F57-FD87-4A20-805D-04EEEE8162F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Components.CkEditor.Server", "src\Dignite.Abp.AspNetCore.Components.CkEditor.Server\Dignite.Abp.AspNetCore.Components.CkEditor.Server.csproj", "{1EE14F57-FD87-4A20-805D-04EEEE8162F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components.CkEditor", "Dignite.Abp.DynamicForms.Components.CkEditor\Dignite.Abp.DynamicForms.Components.CkEditor.csproj", "{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms.Components.CkEditor", "src\Dignite.Abp.DynamicForms.Components.CkEditor\Dignite.Abp.DynamicForms.Components.CkEditor.csproj", "{28D3F9D8-4947-4AF6-8CDD-62DF8AFB70B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly", "Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly\Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly.csproj", "{23FD4010-9F21-4049-9836-47034665339C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly", "src\Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly\Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly.csproj", "{23FD4010-9F21-4049-9836-47034665339C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

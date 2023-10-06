@@ -37,10 +37,6 @@ $publishGithubReleaseParams = @{
 ./1-fetch-and-build.ps1 $branch $newVersion
 ./2-nuget-pack.ps1
 ./3-nuget-push.ps1
-#./4-npm-publish-mvc.ps1
-#./5-npm-publish-angular.ps1
-#./6-git-commit.ps1
-./7-publish-github-release.ps1 @publishGithubReleaseParams
-#./8-download-release-zip.ps1
+./4-publish-github-release.ps1 @publishGithubReleaseParams
 
 Stop-Transcript

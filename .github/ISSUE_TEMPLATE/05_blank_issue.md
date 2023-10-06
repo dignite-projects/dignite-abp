@@ -9,7 +9,7 @@ assignees: ''
 
 ### Documentation
 
-Please check the official documentation before asking questions: https://docs.dignite.com/en/abp
+Please check the official documentation before asking questions: https://learn.dignite.com/en/abp
 
 ### GitHub Issues
 

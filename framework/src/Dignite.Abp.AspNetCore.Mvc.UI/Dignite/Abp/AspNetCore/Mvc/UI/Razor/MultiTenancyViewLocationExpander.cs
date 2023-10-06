@@ -11,7 +11,7 @@ using Volo.Abp.MultiTenancy;
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Razor;
 public class MultiTenancyViewLocationExpander : IViewLocationExpander
 {
-    private const string _languageKey = "___language";
+    private const string _cultureKey = "___culture";
     private const string _tenancyNameKEY = "___tenantName";
     private const string _webComponentPathKey = "___webComponentPath";
 
@@ -28,9 +28,9 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
 
     public void PopulateValues([NotNull] ViewLocationExpanderContext context)
     {
-        // Using CurrentUICulture so it loads the locale specific resources for the views.
-        if (!string.IsNullOrEmpty(CultureInfo.CurrentUICulture.Name))
-            context.Values[_languageKey] = CultureInfo.CurrentUICulture.Name;
+        // Using CurrentCulture so it loads the locale specific resources for the views.
+        if (!string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name))
+            context.Values[_cultureKey] = CultureInfo.CurrentCulture.Name;
 
         // Using CurrentTenant so it loads the tenant specific resources for the views.
         if (_currentTenantLazy.Value.Id.HasValue)
@@ -89,7 +89,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
         var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
-        var language = "." + context.Values.GetOrDefault(_languageKey);
+        var culture = "." + context.Values.GetOrDefault(_cultureKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;
 
@@ -97,9 +97,9 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         if (!string.IsNullOrEmpty(webComponentPath))
         {
             _viewLocations = new string[] {
-                $"/Themes/{currentThemeName}/" + webComponentPath + language + RazorViewEngine.ViewExtension,
+                $"/Themes/{currentThemeName}/" + webComponentPath + culture + RazorViewEngine.ViewExtension,
                 $"/Themes/{currentThemeName}/" + webComponentPath + RazorViewEngine.ViewExtension,
-                webComponentPath + language + RazorViewEngine.ViewExtension,
+                webComponentPath + culture + RazorViewEngine.ViewExtension,
                 webComponentPath + RazorViewEngine.ViewExtension
             };
         }
@@ -111,12 +111,12 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
                 "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension,
-                "/Areas/{2}/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Areas/{1}/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Areas/{2}/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Areas/{1}/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
                 "/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
             };
@@ -128,12 +128,12 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Themes/"+currentThemeName+"/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Themes/"+currentThemeName+"/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
                 "/Themes/"+currentThemeName+"/Shared/{0}" + RazorViewEngine.ViewExtension,
-                "/Views/{1}/{0}" + language + RazorViewEngine.ViewExtension,
-                "/Shared/{0}" + language + RazorViewEngine.ViewExtension,
+                "/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
                 "/Shared/{0}" + RazorViewEngine.ViewExtension
             };

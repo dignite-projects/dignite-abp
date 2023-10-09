@@ -7,11 +7,11 @@
 <Field Horizontal="@(!IsChild)">
     <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
     <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <FilePickerComponent ContainerName="@(FormConfiguration.FileContainerName)" 
-            Multiple="@FormConfiguration.UploadFileMultiple"
-            SelectedFiles="@Files"
-            SelectedFilesChanged="OnFilesChanged"
-                                Validator="@ValidateIsRequired">
+        <FilePickerComponent ContainerName="@(FormConfiguration.FileContainerName)"
+                             Multiple="@FormConfiguration.UploadFileMultiple"
+                             FileDescriptors="@Files"
+                             FileDescriptorsChanged="OnFilesChanged"
+                             Validator="@ValidateIsRequired">
         </FilePickerComponent>
         <FieldHelp>@FormConfiguration.Description</FieldHelp>
     </FieldBody>

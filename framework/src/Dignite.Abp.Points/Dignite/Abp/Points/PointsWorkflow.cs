@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 using RulesEngine.Models;
 using Volo.Abp.Localization;
 
 namespace Dignite.Abp.Points;
+
+[Serializable]
 public class PointsWorkflow
 {
     public PointsWorkflow(string name, ILocalizableString displayName, ILocalizableString description = null, IList<ScopedParam> globalParams = null, params Rule[] rules)
@@ -12,6 +17,7 @@ public class PointsWorkflow
         Description = description;
         GlobalParams = globalParams;
         Rules = rules;
+        Configuration = new PointsWorkflowConfigurationDictionary();
     }
 
     /// <summary>
@@ -23,12 +29,14 @@ public class PointsWorkflow
     /// Display name of the points.
     /// Optional.
     /// </summary>
+    [JsonIgnore]
     public ILocalizableString DisplayName { get; set; }
 
     /// <summary>
     /// Description for the points.
     /// Optional.
     /// </summary>
+    [JsonIgnore]
     public ILocalizableString Description { get; set; }
 
     /// <summary>
@@ -40,4 +48,10 @@ public class PointsWorkflow
     /// list of rules.
     /// </summary>
     public IEnumerable<Rule> Rules { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [NotNull]
+    public PointsWorkflowConfigurationDictionary Configuration { get; set; }
 }

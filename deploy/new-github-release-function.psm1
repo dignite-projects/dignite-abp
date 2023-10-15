@@ -68,8 +68,8 @@ function New-GitHubRelease
 		GitHubUsername = 'deadlydog'
 		GitHubRepositoryName = 'New-GitHubRelease'
 		GitHubAccessToken = 'SomeLongHexidecimalString'
-		ReleaseName = "New-GitHubRelease v1.0.0"
-		TagName = "v1.0.0"
+		ReleaseName = "New-GitHubRelease v1.1.0"
+		TagName = "v1.1.0"
 		ReleaseNotes = "This release contains the following changes: ..."
 		AssetFilePaths = @('C:\MyProject\Installer.exe','C:\MyProject\Documentation.md')
 		IsPreRelease = $false

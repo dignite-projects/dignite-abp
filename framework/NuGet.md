@@ -4,7 +4,7 @@ This package is a part of the [Dignite ABP](https://dignite.com/dignite-abp).
 
 ### Adding to the ecology of the ABP framework
 
-Adds notification system, dynamic forms module, file manager, Pure Theme, and other enhancements.
+Adds points system, dynamic forms module, file manager, Pure Theme, and other enhancements.
 
 ### For more information, check out the below links
 
@@ -18,7 +18,7 @@ Adds notification system, dynamic forms module, file manager, Pure Theme, and ot
 
 ## 🚀 Key Features of the Dignite ABP
 
-🟡 Notification System
+🟡 Points System
 
 🟡 Dynamic Forms Module
 

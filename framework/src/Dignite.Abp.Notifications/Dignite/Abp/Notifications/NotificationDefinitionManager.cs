@@ -120,7 +120,7 @@ public abstract class NotificationDefinitionManager : INotificationDefinitionMan
 
     protected virtual IDictionary<string, NotificationDefinition> CreateNotificationDefinitions()
     {
-        var settings = new Dictionary<string, NotificationDefinition>();
+        var notifications = new Dictionary<string, NotificationDefinition>();
 
         using (var scope = ServiceProvider.CreateScope())
         {
@@ -131,11 +131,11 @@ public abstract class NotificationDefinitionManager : INotificationDefinitionMan
 
             foreach (var provider in providers)
             {
-                provider.Define(new NotificationDefinitionContext(settings));
+                provider.Define(new NotificationDefinitionContext(notifications));
             }
         }
 
-        return settings;
+        return notifications;
     }
 
     protected virtual async Task<bool> FeatureCheckAsync(NotificationDefinition notificationDefinition)

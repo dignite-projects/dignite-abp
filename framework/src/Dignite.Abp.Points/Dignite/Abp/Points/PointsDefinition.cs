@@ -15,11 +15,6 @@ public class PointsDefinition
     public string Name { get; private set; }
 
     /// <summary>
-    /// Specify the type of points;
-    /// </summary>
-    public PointsType PointsType { get; private set; } = PointsType.General;
-
-    /// <summary>
     /// Display name of the points.
     /// Optional.
     /// </summary>
@@ -41,19 +36,16 @@ public class PointsDefinition
     /// Initializes a new instance of the <see cref="PointsDefinition"/> class.
     /// </summary>
     /// <param name="name">Unique name of the points.</param>
-    /// <param name="pointsType">Specify the type of points;</param>
     /// <param name="displayName">Display name of the points.</param>
     /// <param name="description">Description for the points</param>
     /// <param name="workflows">Workflows for defining points</param>
     public PointsDefinition(
         [NotNull] string name, 
-        PointsType pointsType = PointsType.General, 
         ILocalizableString displayName = null, 
         ILocalizableString description = null,
         params PointsWorkflow[] workflows)
     {
         Name = name;
-        PointsType = pointsType;
         DisplayName = displayName;
         Description = description;
         Workflows =  workflows;

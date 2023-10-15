@@ -35,7 +35,6 @@ public class TestPointsDefinitionProvider : PointsDefinitionProvider
         context.Add(
             new PointsDefinition(
                 "test-points-definition", 
-                PointsType.General, 
                 null, null, 
                 new PointsWorkflow(
                     "test-points-workflow", null, null, null, 

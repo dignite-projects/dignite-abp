@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Components" Version="7.3.0" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components" Version="7.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

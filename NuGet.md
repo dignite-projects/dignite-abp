@@ -14,7 +14,7 @@ Adds notification system, dynamic forms module, file manager, Pure Theme, and ot
 
 🔗Samples: <https://github.com/dignite-projects/dignite-abp/tree/main/samples>
 
-🔗Documentation: <https://learn.dignite.com/zh-hans/abp>
+🔗Documentation: <https://learn.dignite.com/documents/en/abp>
 
 ## 🚀 Key Features of the Dignite ABP
 

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+	
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <AssemblyName>Dignite.Abp.UserPoints.Domain</AssemblyName>
+    <PackageId>Dignite.Abp.UserPoints.Domain</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.4.0" />
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Points\Dignite.Abp.Points.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.UserPoints.Domain.Shared\Dignite.Abp.UserPoints.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

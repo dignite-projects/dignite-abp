@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.UserPoints.Domain.Shared": {
+      "path": "src/Dignite.Abp.UserPoints.Domain.Shared/Dignite.Abp.UserPoints.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.Domain": {
+      "path": "src/Dignite.Abp.UserPoints.Domain/Dignite.Abp.UserPoints.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.Application.Contracts": {
+      "path": "src/Dignite.Abp.UserPoints.Application.Contracts/Dignite.Abp.UserPoints.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.Application": {
+      "path": "src/Dignite.Abp.UserPoints.Application/Dignite.Abp.UserPoints.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.UserPoints.EntityFrameworkCore/Dignite.Abp.UserPoints.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.MongoDB": {
+      "path": "src/Dignite.Abp.UserPoints.MongoDB/Dignite.Abp.UserPoints.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.HttpApi": {
+      "path": "src/Dignite.Abp.UserPoints.HttpApi/Dignite.Abp.UserPoints.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.HttpApi.Client": {
+      "path": "src/Dignite.Abp.UserPoints.HttpApi.Client/Dignite.Abp.UserPoints.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Dignite.Abp.UserPoints.TestBase": {
+      "path": "test/Dignite.Abp.UserPoints.TestBase/Dignite.Abp.UserPoints.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Abp.UserPoints.EntityFrameworkCore.Tests/Dignite.Abp.UserPoints.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.MongoDB.Tests": {
+      "path": "test/Dignite.Abp.UserPoints.MongoDB.Tests/Dignite.Abp.UserPoints.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.Domain.Tests": {
+      "path": "test/Dignite.Abp.UserPoints.Domain.Tests/Dignite.Abp.UserPoints.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.Application.Tests": {
+      "path": "test/Dignite.Abp.UserPoints.Application.Tests/Dignite.Abp.UserPoints.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.HttpApi.Host": {
+      "path": "host/Dignite.Abp.UserPoints.HttpApi.Host/Dignite.Abp.UserPoints.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp/Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Dignite.Abp.UserPoints.AuthServer": {
+      "path": "host/Dignite.Abp.UserPoints.AuthServer/Dignite.Abp.UserPoints.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Dignite.Abp.UserPoints.Host.Shared": {
+      "path": "host/Dignite.Abp.UserPoints.Host.Shared/Dignite.Abp.UserPoints.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

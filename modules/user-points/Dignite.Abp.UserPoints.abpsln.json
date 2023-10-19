@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.Abp.UserPoints": {
+      "path": "Dignite.Abp.UserPoints.abpmdl.json"
+    }
+  }
+}

@@ -12,7 +12,8 @@ $solutionPaths = @(
 		"../modules/file-explorer",
 		"../modules/files",
 		"../modules/notification-center",
-		"../modules/pure-theme"
+		"../modules/pure-theme",
+		"../modules/user-points"
 	)
 
 if ($full -eq "-f")

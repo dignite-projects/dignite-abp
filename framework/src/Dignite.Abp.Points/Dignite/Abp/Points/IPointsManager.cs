@@ -16,7 +16,7 @@ public interface IPointsManager
     /// <param name="reSettings"></param>
     /// <param name="input"></param>
     /// <returns>Returns the result of calculating the points</returns>
-    Task<int> PointsCalculationAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, object input = null);
+    Task<int> CalculatePointsAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, object input = null);
 
     /// <summary>
     /// Calculate points according to specified points workflow rules
@@ -26,5 +26,5 @@ public interface IPointsManager
     /// <param name="reSettings"></param>
     /// <param name="ruleParams">A variable member of rule parameters</param>
     /// <returns>Returns the result of calculating the points</returns>
-    Task<int> PointsCalculationAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, params RuleParameter[] ruleParams);
+    Task<int> CalculatePointsAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, params RuleParameter[] ruleParams);
 }

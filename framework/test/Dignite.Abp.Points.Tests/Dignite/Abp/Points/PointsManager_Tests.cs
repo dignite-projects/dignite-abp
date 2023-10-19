@@ -23,7 +23,7 @@ public class PointsManager_Tests : PointsTestBase
             Age = 16
         });
 
-        var points = await _pointsManager.PointsCalculationAsync(
+        var points = await _pointsManager.CalculatePointsAsync(
             "test-points-definition", 
             "test-points-workflow", 
             null,

@@ -20,6 +20,8 @@ Adds notification system, dynamic forms module, file manager, Pure Theme, and ot
 
 🟡 Notification System
 
+🟡 User Points
+
 🟡 Dynamic Forms Module
 
 🟡 Files Explorer

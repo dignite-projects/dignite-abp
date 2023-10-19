@@ -30,7 +30,7 @@ public class PointsManager : IPointsManager, ISingletonDependency
     /// <param name="input"></param>
     /// <param name="reSettings"></param>
     /// <returns>Returns the result of calculating the points</returns>
-    public async Task<int> PointsCalculationAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, object input = null)
+    public async Task<int> CalculatePointsAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, object input = null)
     {
         var re = await InstantiatedRulesEngineAsync(pointsDefinitionName, workflowName, reSettings);
         List<RuleResultTree> resultList = await re.ExecuteAllRulesAsync(workflowName, input);
@@ -47,7 +47,7 @@ public class PointsManager : IPointsManager, ISingletonDependency
     /// <param name="reSettings"></param>
     /// <param name="ruleParams">A variable member of rule parameters</param>
     /// <returns>Returns the result of calculating the points</returns>
-    public async Task<int> PointsCalculationAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, params RuleParameter[] ruleParams)
+    public async Task<int> CalculatePointsAsync(string pointsDefinitionName, string workflowName, ReSettings reSettings = null, params RuleParameter[] ruleParams)
     {
         var re = await InstantiatedRulesEngineAsync(pointsDefinitionName, workflowName, reSettings);
         List<RuleResultTree> resultList = await re.ExecuteAllRulesAsync(workflowName, ruleParams);

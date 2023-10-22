@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="7.3.0" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="7.4.0" />
 		<ProjectReference Include="..\Dignite.Abp.AspNetCore.Components.Web.PureTheme\Dignite.Abp.AspNetCore.Components.Web.PureTheme.csproj" />
 	</ItemGroup>
 </Project>

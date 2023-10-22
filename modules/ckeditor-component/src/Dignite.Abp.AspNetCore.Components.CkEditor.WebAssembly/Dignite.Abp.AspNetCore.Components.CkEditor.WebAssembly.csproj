@@ -8,7 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Dignite.Abp.AspNetCore.Components.CkEditor\Dignite.Abp.AspNetCore.Components.CkEditor.csproj" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="7.3.0" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="7.4.0" />
 	</ItemGroup>
 
 </Project>

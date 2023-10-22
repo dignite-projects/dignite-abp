@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.3.0" />
+	<PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <ProjectReference Include="..\Dignite.FileExplorer.EntityFrameworkCore.Tests\Dignite.FileExplorer.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>

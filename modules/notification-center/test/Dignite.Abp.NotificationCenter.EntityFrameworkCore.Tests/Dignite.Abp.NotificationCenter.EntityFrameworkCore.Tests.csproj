@@ -19,7 +19,7 @@
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
     <ProjectReference Include="..\..\src\Dignite.Abp.NotificationCenter.EntityFrameworkCore\Dignite.Abp.NotificationCenter.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.TestBase\Dignite.Abp.NotificationCenter.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.3.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.4.0" />
   </ItemGroup>
 
 </Project>

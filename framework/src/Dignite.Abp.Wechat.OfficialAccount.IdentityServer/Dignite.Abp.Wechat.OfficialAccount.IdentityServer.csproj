@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\configureawait.props" />
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <AssemblyName>Dignite.Wechat.Mp.IdentityServer</AssemblyName>
+    <PackageId>Dignite.Wechat.Mp.IdentityServer</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dignite\Abp\Wechat\OfficialAccount\IdentityServer\Localization\Resources\*.json" />
+    <Content Remove="Dignite\Abp\Wechat\OfficialAccount\IdentityServer\Localization\Resources\*.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4" Version="4.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dignite.Abp.Wechat.OfficialAccount\Dignite.Abp.Wechat.OfficialAccount.csproj" />
+  </ItemGroup>
+
+</Project>

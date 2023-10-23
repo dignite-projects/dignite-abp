@@ -5,8 +5,8 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
-    <AssemblyName>Dignite.Wechat</AssemblyName>
-    <PackageId>Dignite.Wechat</PackageId>
+    <AssemblyName>Dignite.Abp.Wechat</AssemblyName>
+    <PackageId>Dignite.Abp.Wechat</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

@@ -5,8 +5,8 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net7.0</TargetFrameworks>
-    <AssemblyName>Dignite.Wechat.Mp</AssemblyName>
-    <PackageId>Dignite.Wechat.Mp</PackageId>
+    <AssemblyName>Dignite.Abp.Wechat.MiniProgram</AssemblyName>
+    <PackageId>Dignite.Abp.Wechat.MiniProgram</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -15,17 +15,10 @@
     <RootNamespace />
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\en.json" />
-    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hans.json" />
-    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hant.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\en.json" />
-    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hans.json" />
-    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hant.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\*.json" />
+		<Content Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\*.json" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.0" />

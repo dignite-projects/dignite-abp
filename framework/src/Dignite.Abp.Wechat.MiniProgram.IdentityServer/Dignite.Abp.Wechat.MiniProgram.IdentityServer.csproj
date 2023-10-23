@@ -5,8 +5,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
-    <AssemblyName>Dignite.Wechat.Mp.IdentityServer</AssemblyName>
-    <PackageId>Dignite.Wechat.Mp.IdentityServer</PackageId>
+    <AssemblyName>Dignite.Abp.Wechat.MiniProgram.IdentityServer</AssemblyName>
+    <PackageId>Dignite.Abp.Wechat.MiniProgram.IdentityServer</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

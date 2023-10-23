@@ -74,7 +74,8 @@ $solutions = (
     "modules/file-explorer",
     "modules/files",
     "modules/notification-center",
-    "modules/pure-theme"
+    "modules/pure-theme",
+    "modules/user-points"
 )
 
 # List of projects
@@ -91,6 +92,12 @@ $projects = (
     "framework/src/Dignite.Abp.Notifications.Components",
     "framework/src/Dignite.Abp.Notifications.Shared",
     "framework/src/Dignite.Abp.Notifications.SignalRNotifier",
+    "framework/src/Dignite.Abp.Points",
+    "framework/src/Dignite.Abp.Wechat",
+    "framework/src/Dignite.Abp.Wechat.MiniProgram",
+    "framework/src/Dignite.Abp.Wechat.MiniProgram.IdentityServer",
+    "framework/src/Dignite.Abp.Wechat.OfficialAccount",
+    "framework/src/Dignite.Abp.Wechat.OfficialAccount.IdentityServer",
 
     # modules/ckeditor-component
     "modules/ckeditor-component/src/Dignite.Abp.AspNetCore.Components.CkEditor",
@@ -148,5 +155,16 @@ $projects = (
     "modules/pure-theme/src/Dignite.Abp.AspNetCore.Components.Server.PureTheme",
     "modules/pure-theme/src/Dignite.Abp.AspNetCore.Components.Web.PureTheme",
     "modules/pure-theme/src/Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme",
-    "modules/pure-theme/src/Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure"
+    "modules/pure-theme/src/Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure",
+
+    # modules/user-points
+    "modules/user-points/src/Dignite.Abp.UserPoints.Application",
+    "modules/user-points/src/Dignite.Abp.UserPoints.Application.Contracts",
+    "modules/user-points/src/Dignite.Abp.UserPoints.Domain",
+    "modules/user-points/src/Dignite.Abp.UserPoints.Domain.Shared",
+    "modules/user-points/src/Dignite.Abp.UserPoints.EntityFrameworkCore",
+    "modules/user-points/src/Dignite.Abp.UserPoints.HttpApi",
+    "modules/user-points/src/Dignite.Abp.UserPoints.HttpApi.Client",
+    "modules/user-points/src/Dignite.Abp.UserPoints.Installer",
+    "modules/user-points/src/Dignite.Abp.UserPoints.MongoDB"
 )

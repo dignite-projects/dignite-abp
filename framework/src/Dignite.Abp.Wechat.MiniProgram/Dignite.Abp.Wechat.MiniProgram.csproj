@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\configureawait.props" />
+  <Import Project="..\..\..\common.props" />
+
+  <PropertyGroup>
+	  <TargetFrameworks>net7.0</TargetFrameworks>
+    <AssemblyName>Dignite.Wechat.Mp</AssemblyName>
+    <PackageId>Dignite.Wechat.Mp</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\en.json" />
+    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hans.json" />
+    <None Remove="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hant.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\en.json" />
+    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hans.json" />
+    <EmbeddedResource Include="Dignite\Abp\Wechat\MiniProgram\Localization\Resources\zh-Hant.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dignite.Abp.Wechat\Dignite.Abp.Wechat.csproj" />
+  </ItemGroup>
+</Project>

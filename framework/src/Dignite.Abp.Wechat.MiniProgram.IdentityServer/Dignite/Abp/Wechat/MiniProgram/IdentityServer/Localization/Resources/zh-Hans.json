@@ -1,0 +1,7 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "DigniteWechatMpIdentityServerSettings.ClientId": "IdentityServer客户端Id",
+    "DigniteWechatMpIdentityServerSettings.ClientSecret": "IdentityServer客户端密码"
+  }
+}

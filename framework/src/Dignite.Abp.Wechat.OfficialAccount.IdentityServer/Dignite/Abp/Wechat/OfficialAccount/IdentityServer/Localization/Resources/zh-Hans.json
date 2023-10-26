@@ -1,7 +1,0 @@
-{
-  "culture": "zh-Hans",
-  "texts": {
-    "IdentityServer.ClientId": "IdentityServer客户端Id",
-    "IdentityServer.ClientSecret": "IdentityServer客户端密码"
-  }
-}

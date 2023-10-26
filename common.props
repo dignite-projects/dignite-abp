@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/dignite-projects/dignite-abp/</RepositoryUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>NuGet.md</PackageReadmeFile>
-    <PackageTags>aspnetcore abp framework web angular maui blazor mvc csharp webapp</PackageTags>
+    <PackageTags>notification dynamic-forms files-explorer puretheme multi-tenant-localization multi-tenant-views blazoriseUI ckeditor</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Include symbol files (*.pdb) in the built .nupkg -->
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>

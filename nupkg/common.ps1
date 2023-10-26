@@ -93,11 +93,6 @@ $projects = (
     "framework/src/Dignite.Abp.Notifications.Shared",
     "framework/src/Dignite.Abp.Notifications.SignalRNotifier",
     "framework/src/Dignite.Abp.Points",
-    "framework/src/Dignite.Abp.Wechat",
-    "framework/src/Dignite.Abp.Wechat.MiniProgram",
-    "framework/src/Dignite.Abp.Wechat.MiniProgram.IdentityServer",
-    "framework/src/Dignite.Abp.Wechat.OfficialAccount",
-    "framework/src/Dignite.Abp.Wechat.OfficialAccount.IdentityServer",
 
     # modules/ckeditor-component
     "modules/ckeditor-component/src/Dignite.Abp.AspNetCore.Components.CkEditor",

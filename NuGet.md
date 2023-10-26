@@ -36,8 +36,6 @@ Adds notification system, dynamic forms module, file manager, Pure Theme, and ot
 
 🟡 Ckeditor Component
 
-🟡 Wechat SDK
-
 ### 📘 Supported Database Providers
 
 🔵 Entity Framework Core

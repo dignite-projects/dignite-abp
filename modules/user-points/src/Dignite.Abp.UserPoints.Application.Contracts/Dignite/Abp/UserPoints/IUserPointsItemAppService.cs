@@ -11,12 +11,12 @@ public interface IUserPointsItemAppService : IApplicationService
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<PagedResultDto<UserPointsItemDto>> GetMyPointsAsync(GetMyPointsInput input);
+    Task<PagedResultDto<UserPointsItemDto>> GetUserPointsItemsAsync(GetUserPointsItemsInput input);
 
     /// <summary>
     /// Calculate the number of points that have expired within a specified time period
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<int> CalculatePointsAsync(CalculateExpiryPointsInput input);
+    Task<int> GetUserTotalPointsAsync(GetUserTotalPointsInput input);
 }

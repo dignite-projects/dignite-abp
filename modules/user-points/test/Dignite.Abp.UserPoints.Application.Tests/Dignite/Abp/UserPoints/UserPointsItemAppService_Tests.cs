@@ -20,7 +20,7 @@ public class UserPointsItemAppService_Tests : UserPointsApplicationTestBase
     [Fact]
     public async Task GetMyPointsAsync()
     {
-        var myPoints = await _userPointsItemAppService.GetMyPointsAsync(new GetMyPointsInput());
+        var myPoints = await _userPointsItemAppService.GetUserPointsItemsAsync(new GetUserPointsItemsInput());
 
         myPoints.TotalCount.ShouldBeGreaterThan(0);
         myPoints.Items.Any(x => x.PointsType== PointsType.General).ShouldBeTrue();
@@ -29,7 +29,7 @@ public class UserPointsItemAppService_Tests : UserPointsApplicationTestBase
     [Fact]
     public async Task CalculatePointsAsync()
     {
-        var points = await _userPointsItemAppService.CalculatePointsAsync(new CalculateExpiryPointsInput(_clock.Now.AddYears(3)));
+        var points = await _userPointsItemAppService.GetUserTotalPointsAsync(new GetUserTotalPointsInput(_clock.Now.AddYears(3)));
 
         points.ShouldBeGreaterThan(0);
     }

@@ -18,10 +18,11 @@ public class EfCoreUserPointsItemRepository : EfCoreRepository<IUserPointsDbCont
         _clock = clock;
     }
 
-    public async Task<int> CalculatePointsAsync(Guid userId,
-        DateTime expirationDate, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
+    public async Task<int> GetUserTotalPointsAsync(Guid userId,
+        DateTime? expirationDate, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
     {
-        return await  (await GetDbSetAsync()).Where(e => e.UserId == userId && e.PointsType == pointsType && e.ExpirationDate<expirationDate && e.ExpirationDate> _clock.Now)
+        return await  (await GetDbSetAsync()).Where(e => e.UserId == userId && e.PointsType == pointsType)
+            .WhereIf(expirationDate.HasValue, e=> e.ExpirationDate<expirationDate && e.ExpirationDate> _clock.Now)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
             .SumAsync(p => p.Points);

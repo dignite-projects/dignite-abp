@@ -15,9 +15,9 @@ public class UserPointsItemAppService : UserPointsAppService, IUserPointsItemApp
     }
 
     [Authorize]
-    public async Task<int> CalculatePointsAsync(CalculateExpiryPointsInput input)
+    public async Task<int> GetUserTotalPointsAsync(GetUserTotalPointsInput input)
     {
-        return await _userPointsItemRepository.CalculatePointsAsync(
+        return await _userPointsItemRepository.GetUserTotalPointsAsync(
             CurrentUser.Id.Value,
             input.ExpirationDate,
             input.PointsType,
@@ -26,7 +26,7 @@ public class UserPointsItemAppService : UserPointsAppService, IUserPointsItemApp
     }
 
     [Authorize]
-    public async Task<PagedResultDto<UserPointsItemDto>> GetMyPointsAsync(GetMyPointsInput input)
+    public async Task<PagedResultDto<UserPointsItemDto>> GetUserPointsItemsAsync(GetUserPointsItemsInput input)
     {
         var count = await _userPointsItemRepository.GetCountAsync(
             CurrentUser.Id.Value,

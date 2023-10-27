@@ -21,10 +21,11 @@ public class MongoUserPointsItemRepository : MongoDbRepository<IUserPointsMongoD
         _clock = clock;
     }
 
-    public virtual async Task<int> CalculatePointsAsync(Guid userId, DateTime expirationDate, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
+    public virtual async Task<int> GetUserTotalPointsAsync(Guid userId, DateTime? expirationDate, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken)).Where(e => e.UserId == userId && e.PointsType == pointsType && e.ExpirationDate < expirationDate && e.ExpirationDate > _clock.Now)
+        return await (await GetMongoQueryableAsync(cancellationToken)).Where(e => e.UserId == userId && e.PointsType == pointsType)
+            .WhereIf(expirationDate.HasValue, e => e.ExpirationDate < expirationDate && e.ExpirationDate > _clock.Now)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
             .As<IMongoQueryable<UserPointsItem>>()

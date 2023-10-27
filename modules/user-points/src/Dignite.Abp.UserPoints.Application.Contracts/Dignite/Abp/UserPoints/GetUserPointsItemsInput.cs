@@ -1,25 +1,18 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.UserPoints;
-public class CalculateExpiryPointsInput
+public class GetUserPointsItemsInput: PagedResultRequestDto
 {
-    public CalculateExpiryPointsInput(DateTime expirationDate)
-    {
-        ExpirationDate = expirationDate;
-        PointsType = PointsType.General;
-    }
-
-    public CalculateExpiryPointsInput(DateTime expirationDate, string pointsDefinitionName, string pointsWorkflowName)
-    {
-        ExpirationDate = expirationDate;
-        PointsDefinitionName = pointsDefinitionName;
-        PointsWorkflowName = pointsWorkflowName;
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public DateTime? StartTime { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public DateTime ExpirationDate { get; set; }
+    public DateTime? EndTime { get; set; }
 
     /// <summary>
     /// Gets or sets the of <see cref="Abp.Points.PointsDefinition.Name"/>

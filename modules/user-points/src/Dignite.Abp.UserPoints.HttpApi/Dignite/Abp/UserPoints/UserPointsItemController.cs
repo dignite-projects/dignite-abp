@@ -19,17 +19,17 @@ public class UserPointsItemController : UserPointsController, IUserPointsItemApp
     }
 
     [HttpGet]
-    [Route("calculate-points")]
+    [Route("get-user-total-points")]
     [Authorize]
-    public async Task<int> CalculatePointsAsync(CalculateExpiryPointsInput input)
+    public async Task<int> GetUserTotalPointsAsync(GetUserTotalPointsInput input)
     {
-        return await _userPointsItemAppService.CalculatePointsAsync(input);
+        return await _userPointsItemAppService.GetUserTotalPointsAsync(input);
     }
 
     [HttpGet]
-    [Route("my-points")]
-    public async Task<PagedResultDto<UserPointsItemDto>> GetMyPointsAsync(GetMyPointsInput input)
+    [Route("get-user-points-items")]
+    public async Task<PagedResultDto<UserPointsItemDto>> GetUserPointsItemsAsync(GetUserPointsItemsInput input)
     {
-        return await _userPointsItemAppService.GetMyPointsAsync(input);
+        return await _userPointsItemAppService.GetUserPointsItemsAsync(input);
     }
 }

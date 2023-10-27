@@ -18,6 +18,13 @@ public class MongoUserPointsOrderRepository : MongoDbRepository<IUserPointsMongo
     {
     }
 
+    public async Task<UserPointsOrder> FindByBusinessOrderAsync(string businessOrderType, string businessOrderNumber, CancellationToken cancellationToken = default)
+    {
+        cancellationToken = GetCancellationToken(cancellationToken);
+        return await (await GetMongoQueryableAsync(cancellationToken))
+            .FirstOrDefaultAsync(upo => upo.BusinessOrderType == businessOrderType && upo.BusinessOrderNumber == businessOrderNumber, cancellationToken);
+    }
+
     public virtual async Task<int> GetCountAsync(Guid userId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);

@@ -15,6 +15,11 @@ public class EfCoreUserPointsOrderRepository : EfCoreRepository<IUserPointsDbCon
     {
     }
 
+    public async Task<UserPointsOrder> FindByBusinessOrderAsync(string businessOrderType, string businessOrderNumber, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+            .FirstOrDefaultAsync(upo => upo.BusinessOrderNumber == businessOrderType && upo.BusinessOrderNumber == businessOrderNumber);
+    }
 
     public async Task<int> GetCountAsync(Guid userId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken cancellationToken = default)
     {

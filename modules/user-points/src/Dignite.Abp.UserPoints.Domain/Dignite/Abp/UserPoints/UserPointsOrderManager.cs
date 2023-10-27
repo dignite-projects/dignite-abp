@@ -119,4 +119,9 @@ public class UserPointsOrderManager : DomainService
 
         await PointsOrderRepository.DeleteAsync(pointsOrder);
     }
+
+    public virtual async Task<UserPointsOrder> FindByBusinessOrderAsync(string businessOrderType, string businessOrderNumber)
+    {
+        return await PointsOrderRepository.FindByBusinessOrderAsync(businessOrderType, businessOrderNumber);
+    }
 }

@@ -21,4 +21,6 @@ public interface IUserPointsOrderRepository : IBasicRepository<UserPointsOrder, 
         int skipCount = 0,
         CancellationToken cancellationToken = default
          );
+
+    Task<UserPointsOrder> FindByBusinessOrderAsync(string businessOrderType, string businessOrderNumber, CancellationToken cancellationToken = default);
 }

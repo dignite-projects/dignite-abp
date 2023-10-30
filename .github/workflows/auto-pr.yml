@@ -1,8 +1,8 @@
-name: Merge branch main with rel-1.3
+name: Merge branch main with rel-1.3.1
 on:
   push:
     branches:
-      - rel-1.3
+      - rel-1.3.1
 permissions:
   contents: read
 
@@ -18,13 +18,13 @@ jobs:
           ref: main
       - name: Reset promotion branch
         run: |
-          git fetch origin rel-1.3:rel-1.3
-          git reset --hard rel-1.3
+          git fetch origin rel-1.3.1:rel-1.3.1
+          git reset --hard rel-1.3.1
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           branch: auto-merge/rel-1-3/${{github.run_number}}
-          title: Merge branch main with rel-1.3
-          body: This PR generated automatically to merge main with rel-1.3. Please review the changed files before merging to prevent any errors that may occur.
+          title: Merge branch main with rel-1.3.1
+          body: This PR generated automatically to merge main with rel-1.3.1. Please review the changed files before merging to prevent any errors that may occur.
           reviewers: ${{github.actor}}
           token: ${{ github.token }}

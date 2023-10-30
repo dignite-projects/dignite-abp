@@ -3,6 +3,11 @@
 namespace Dignite.Abp.UserPoints;
 public class GetUserTotalPointsInput
 {
+    public GetUserTotalPointsInput()
+    {
+        PointsType = PointsType.General;
+    }
+
     public GetUserTotalPointsInput(DateTime? expirationDate)
     {
         ExpirationDate = expirationDate;

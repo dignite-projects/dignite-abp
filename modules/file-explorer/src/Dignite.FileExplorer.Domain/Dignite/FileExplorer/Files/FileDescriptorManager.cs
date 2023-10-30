@@ -63,7 +63,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                                         [CanBeNull] string entityId)
     {
         var blobName = (await GenerateBlobNameAsync(containerName));
-        blobName += Path.GetExtension(stream.FileName).EnsureStartsWith('.'); //Add the extended name
+        //blobName += Path.GetExtension(stream.FileName).EnsureStartsWith('.'); //Add the extended name
         var fileDescriptor = new FileDescriptor(
                     GuidGenerator.Create(),
                     containerName,

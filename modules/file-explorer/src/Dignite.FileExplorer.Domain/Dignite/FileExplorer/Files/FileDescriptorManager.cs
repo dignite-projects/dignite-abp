@@ -90,7 +90,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
         {
             await remoteStream.GetStream().CopyToAsync(ms);
             ms.Position = 0;
-            return await base.CreateAsync(file, ms);
+            return await base.CreateAsync(file, ms,true);
         }
     }
 

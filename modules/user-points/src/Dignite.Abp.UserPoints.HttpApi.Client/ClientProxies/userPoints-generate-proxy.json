@@ -1,0 +1,245 @@
+{
+  "modules": {
+    "userPoints": {
+      "rootPath": "userPoints",
+      "remoteServiceName": "UserPoints",
+      "controllers": {
+        "Dignite.Abp.UserPoints.UserPointsItemController": {
+          "controllerName": "UserPointsItem",
+          "controllerGroupName": "UserPointsItem",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dignite.Abp.UserPoints.UserPointsItemController",
+          "interfaces": [
+            {
+              "type": "Dignite.Abp.UserPoints.IUserPointsItemAppService",
+              "name": "IUserPointsItemAppService",
+              "methods": [
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Dignite.Abp.UserPoints.GetUserPointsItemsInput, Dignite.Abp.UserPoints.Application.Contracts",
+                      "type": "Dignite.Abp.UserPoints.GetUserPointsItemsInput",
+                      "typeSimple": "Dignite.Abp.UserPoints.GetUserPointsItemsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<Dignite.Abp.UserPoints.UserPointsItemDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Dignite.Abp.UserPoints.UserPointsItemDto>"
+                  }
+                },
+                {
+                  "name": "GetTotalPointsAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Dignite.Abp.UserPoints.GetUserTotalPointsInput, Dignite.Abp.UserPoints.Application.Contracts",
+                      "type": "Dignite.Abp.UserPoints.GetUserTotalPointsInput",
+                      "typeSimple": "Dignite.Abp.UserPoints.GetUserTotalPointsInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Int32",
+                    "typeSimple": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetTotalPointsAsyncByInput": {
+              "uniqueName": "GetTotalPointsAsyncByInput",
+              "name": "GetTotalPointsAsync",
+              "httpMethod": "GET",
+              "url": "api/UserPoints/total-points",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.UserPoints.GetUserTotalPointsInput, Dignite.Abp.UserPoints.Application.Contracts",
+                  "type": "Dignite.Abp.UserPoints.GetUserTotalPointsInput",
+                  "typeSimple": "Dignite.Abp.UserPoints.GetUserTotalPointsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "ExpirationDate",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsDefinitionName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsWorkflowName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsType",
+                  "jsonName": null,
+                  "type": "Dignite.Abp.UserPoints.PointsType",
+                  "typeSimple": "Dignite.Abp.UserPoints.PointsType",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dignite.Abp.UserPoints.IUserPointsItemAppService"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/UserPoints",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.UserPoints.GetUserPointsItemsInput, Dignite.Abp.UserPoints.Application.Contracts",
+                  "type": "Dignite.Abp.UserPoints.GetUserPointsItemsInput",
+                  "typeSimple": "Dignite.Abp.UserPoints.GetUserPointsItemsInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "StartTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "EndTime",
+                  "jsonName": null,
+                  "type": "System.DateTime?",
+                  "typeSimple": "string?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsDefinitionName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsWorkflowName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "PointsType",
+                  "jsonName": null,
+                  "type": "Dignite.Abp.UserPoints.PointsType",
+                  "typeSimple": "Dignite.Abp.UserPoints.PointsType",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Dignite.Abp.UserPoints.UserPointsItemDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Dignite.Abp.UserPoints.UserPointsItemDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.UserPoints.IUserPointsItemAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

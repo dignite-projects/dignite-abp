@@ -25,8 +25,4 @@
     <Content Remove="**\*generate-proxy.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dignite\Abp\UserPoints\" />
-  </ItemGroup>
-
 </Project>

@@ -2,6 +2,8 @@
 
 Adding to the ecology of the ABP framework: Adds notification system, dynamic forms module, file manager, Pure Theme, and other enhancements.
 
+> Dignite Abp 1.4.0 is built on Abp Framework 7.4.0, and Abp Framework 7.4.0 is based on .NET Framework 7.0. To run Dignite Abp 1.4.0 smoothly, please ensure that your computer has .NET Framework 7.0 installed.
+
 ## Dignite Abp Modules
 
 ### Notification System

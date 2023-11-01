@@ -34,12 +34,4 @@ public abstract class UserPointsItemRepository_Tests<TStartupModule> : UserPoint
         result.ShouldNotBeEmpty();
         result.Count.ShouldBe(1);
     }
-
-    [Fact]
-    public async Task CalculatePointsAsync_ShouldWorkProperly_WithUserId_Within2years()
-    {
-        var result = await _userPointsItemRepository.GetUserTotalPointsAsync(_testData.User1Id, _clock.Now.AddYears(2), PointsType.General);
-
-        result.ShouldBe(10);
-    }
 }

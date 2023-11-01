@@ -27,12 +27,4 @@ public interface IUserPointsItemRepository: IBasicRepository<UserPointsItem, Gui
         int skipCount = 0,
         CancellationToken cancellationToken = default
          );
-
-    Task<int> GetUserTotalPointsAsync(
-        Guid userId,
-        DateTime? expirationDate,
-        PointsType pointsType = PointsType.General,
-        string pointsDefinitionName = null,
-        string pointsWorkflowName = null,
-        CancellationToken cancellationToken = default);
 }

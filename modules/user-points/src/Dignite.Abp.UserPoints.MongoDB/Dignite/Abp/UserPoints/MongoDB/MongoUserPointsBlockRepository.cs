@@ -35,12 +35,13 @@ public class MongoUserPointsBlockRepository : MongoDbRepository<IUserPointsMongo
             .ToListAsync(cancellationToken);
     }
 
-    public virtual async Task<int> GetUserAvailablePointsAsync(Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null,
+    public virtual async Task<int> GetUserAvailablePointsAsync(Guid userId, DateTime? expirationDate = null, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null,
         CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         return await(await GetMongoQueryableAsync(cancellationToken))
             .Where(e => e.UserPointsItem.UserId == userId && e.UserPointsItem.PointsType == pointsType && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
+            .WhereIf(expirationDate.HasValue, e => e.UserPointsItem.ExpirationDate < expirationDate)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.UserPointsItem.PointsWorkflowName == pointsWorkflowName)
             .As<IMongoQueryable<UserPointsBlock>>()

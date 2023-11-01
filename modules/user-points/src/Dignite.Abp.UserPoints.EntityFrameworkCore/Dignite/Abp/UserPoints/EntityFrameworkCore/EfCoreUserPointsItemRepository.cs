@@ -6,27 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.Timing;
 
 namespace Dignite.Abp.UserPoints.EntityFrameworkCore;
 public class EfCoreUserPointsItemRepository : EfCoreRepository<IUserPointsDbContext, UserPointsItem, Guid>, IUserPointsItemRepository
 {
-    private readonly IClock _clock;
-    public EfCoreUserPointsItemRepository(IDbContextProvider<IUserPointsDbContext> dbContextProvider, IClock clock)
+    public EfCoreUserPointsItemRepository(IDbContextProvider<IUserPointsDbContext> dbContextProvider)
         : base(dbContextProvider)
     {
-        _clock = clock;
     }
 
-    public async Task<int> GetUserTotalPointsAsync(Guid userId,
-        DateTime? expirationDate, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
-    {
-        return await  (await GetDbSetAsync()).Where(e => e.UserId == userId && e.PointsType == pointsType)
-            .WhereIf(expirationDate.HasValue, e=> e.ExpirationDate<expirationDate && e.ExpirationDate> _clock.Now)
-            .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
-            .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
-            .SumAsync(p => p.Points);
-    }
 
     public async Task<int> GetCountAsync(Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? StartTime = null, DateTime? EndTime = null, CancellationToken cancellationToken = default)
     {

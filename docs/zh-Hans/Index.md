@@ -2,6 +2,8 @@
 
 为ABP框架生态添砖加瓦，增加通知系统、动态表单模块、文件管理器、Pure Theme，以及其他增强功能。
 
+> Dignite Abp 1.4.0 是基于 Abp Framework 7.4.0 构建的，而 Abp Framework 7.4.0 是建立在 .NET Framework 7.0 基础上的。为了顺利运行 Dignite Abp 1.4.0，请确保您的计算机上已安装了 .NET Framework 7.0。
+
 ## Dignite Abp 模块
 
 ### 通知系统

@@ -43,7 +43,7 @@ public class EfCoreUserPointsBlockRepository : EfCoreRepository<IUserPointsDbCon
     protected virtual async Task<IQueryable<UserPointsBlock>> GetQueryableAsync(
          Guid userId, DateTime? expirationDate = null, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null)
     {
-        return (await GetDbSetAsync()).Where(e => e.UserPointsItem.UserId == userId && e.UserPointsItem.PointsType == pointsType && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
+        return (await GetDbSetAsync()).Where(e => !e.UserPointsItem.IsDeleted && e.UserPointsItem.UserId == userId && e.UserPointsItem.PointsType == pointsType && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
             .WhereIf(expirationDate.HasValue, e => e.UserPointsItem.ExpirationDate < expirationDate)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.UserPointsItem.PointsWorkflowName == pointsWorkflowName);

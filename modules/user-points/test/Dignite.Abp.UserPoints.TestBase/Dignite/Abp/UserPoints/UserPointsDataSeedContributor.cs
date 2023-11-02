@@ -57,7 +57,6 @@ public class UserPointsDataSeedContributor : IDataSeedContributor, ITransientDep
             input2);
 
         await _userPointsItemManager.CreateAsync(
-            _guidGenerator.Create(),
             _testData.PointsDefinitionName,
             _testData.PointsWorkflow1Name,
             PointsType.General,

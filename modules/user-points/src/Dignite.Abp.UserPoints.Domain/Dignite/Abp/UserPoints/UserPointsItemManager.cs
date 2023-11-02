@@ -26,7 +26,6 @@ public class UserPointsItemManager: DomainService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="id"></param>
     /// <param name="pointsDefinitionName"></param>
     /// <param name="pointsWorkflowName"></param>
     /// <param name="pointsType"></param>
@@ -40,7 +39,6 @@ public class UserPointsItemManager: DomainService
     /// <exception cref="AbpException"></exception>
     /// <exception cref="PointsNonFactorValueException"></exception>
     public virtual async Task<UserPointsItem> CreateAsync(
-        Guid id,
         string pointsDefinitionName,
         string pointsWorkflowName,
         PointsType pointsType,
@@ -59,7 +57,15 @@ public class UserPointsItemManager: DomainService
             throw new PointsNonFactorValueException(points,PointsBlockOptions.Factor);
         }
 
-        var pointsItem = new UserPointsItem(id,pointsDefinitionName,pointsWorkflowName,pointsType,points,expirationDate,userId,tenantId);
+        var pointsItem = new UserPointsItem(
+            GuidGenerator.Create(),
+            pointsDefinitionName,
+            pointsWorkflowName,
+            pointsType,
+            points,
+            expirationDate,
+            userId,
+            tenantId);
 
         // Creating Points Item
         await UserPointsItemRepository.InsertAsync(pointsItem);

@@ -4,5 +4,5 @@ public class UserPointsRemoteServiceConsts
 {
     public const string RemoteServiceName = "UserPoints";
 
-    public const string ModuleName = "userPoints";
+    public const string ModuleName = "user-points";
 }

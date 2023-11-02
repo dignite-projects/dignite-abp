@@ -105,7 +105,6 @@ public class UserPointsOrderManager : DomainService
             foreach (var redeem in pointsOrder.Redeems)
             {
                 await PointsItemManager.CreateAsync(
-                    GuidGenerator.Create(),
                     redeem.PointsDefinitionName,
                     redeem.PointsWorkflowName,
                     redeem.PointsType,

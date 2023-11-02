@@ -27,6 +27,7 @@ public class UserPointsItemController : UserPointsController, IUserPointsItemApp
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<PagedResultDto<UserPointsItemDto>> GetListAsync(GetUserPointsItemsInput input)
     {
         return await _userPointsItemAppService.GetListAsync(input);

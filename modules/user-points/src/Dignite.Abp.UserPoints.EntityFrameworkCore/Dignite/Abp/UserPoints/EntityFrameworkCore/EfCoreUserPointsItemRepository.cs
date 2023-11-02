@@ -16,15 +16,15 @@ public class EfCoreUserPointsItemRepository : EfCoreRepository<IUserPointsDbCont
     }
 
 
-    public async Task<int> GetCountAsync(Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? StartTime = null, DateTime? EndTime = null, CancellationToken cancellationToken = default)
+    public async Task<int> GetCountAsync(Guid userId, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? StartTime = null, DateTime? EndTime = null, CancellationToken cancellationToken = default)
     {
-        return await(await GetQueryableAsync(userId, pointsType, pointsDefinitionName, pointsWorkflowName, StartTime, EndTime))
+        return await(await GetQueryableAsync(userId,  pointsDefinitionName, pointsWorkflowName, StartTime, EndTime))
             .CountAsync();
     }
 
-    public async Task<List<UserPointsItem>> GetListAsync(Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? StartTime = null, DateTime? EndTime = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
+    public async Task<List<UserPointsItem>> GetListAsync(Guid userId,  string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? StartTime = null, DateTime? EndTime = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
-        return await(await GetQueryableAsync(userId, pointsType, pointsDefinitionName, pointsWorkflowName, StartTime, EndTime))
+        return await(await GetQueryableAsync(userId, pointsDefinitionName, pointsWorkflowName, StartTime, EndTime))
             .OrderByDescending(o => o.CreationTime)
             .PageBy(skipCount, maxResultCount)
             .ToListAsync();
@@ -36,12 +36,13 @@ public class EfCoreUserPointsItemRepository : EfCoreRepository<IUserPointsDbCont
     }
 
     protected virtual async Task<IQueryable<UserPointsItem>> GetQueryableAsync(
-         Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? startTime = null, DateTime? endTime = null)
+         Guid userId, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? startTime = null, DateTime? endTime = null)
     {
-        return (await GetDbSetAsync()).Where(e => e.UserId == userId && e.PointsType == pointsType)
-            .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
-            .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
-            .WhereIf(startTime.HasValue, e => e.CreationTime >= startTime.Value)
-            .WhereIf(endTime.HasValue, e => e.CreationTime < endTime.Value);
+        return (await GetDbSetAsync()).Where(upi => upi.UserId == userId)
+            .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upi => upi.PointsType== PointsType.General)
+            .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), upi => upi.PointsDefinitionName == pointsDefinitionName)
+            .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), upi => upi.PointsWorkflowName == pointsWorkflowName)
+            .WhereIf(startTime.HasValue, upi => upi.CreationTime >= startTime.Value)
+            .WhereIf(endTime.HasValue, upi => upi.CreationTime < endTime.Value);
     }
 }

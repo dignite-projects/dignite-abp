@@ -26,9 +26,9 @@ public class UserPointsItemManager: DomainService
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="pointsType"></param>
     /// <param name="pointsDefinitionName"></param>
     /// <param name="pointsWorkflowName"></param>
-    /// <param name="pointsType"></param>
     /// <param name="points">
     /// The points value is usually calculated by the <see cref="IPointsManager.CalculatePointsAsync(string, string, RulesEngine.Models.ReSettings, object)" /> or <see cref="IPointsManager.CalculatePointsAsync(string, string, RulesEngine.Models.ReSettings, RulesEngine.Models.RuleParameter[])" /> methods
     /// </param>
@@ -39,9 +39,9 @@ public class UserPointsItemManager: DomainService
     /// <exception cref="AbpException"></exception>
     /// <exception cref="PointsNonFactorValueException"></exception>
     public virtual async Task<UserPointsItem> CreateAsync(
+        PointsType pointsType,
         string pointsDefinitionName,
         string pointsWorkflowName,
-        PointsType pointsType,
         int points,
         DateTime expirationDate,
         Guid userId,

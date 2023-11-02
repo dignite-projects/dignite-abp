@@ -20,18 +20,18 @@ public class EfCoreUserPointsBlockRepository : EfCoreRepository<IUserPointsDbCon
     }
 
 
-    public async Task<List<UserPointsBlock>> GetTopAvailableListAsync(int top, Guid userId, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
+    public async Task<List<UserPointsBlock>> GetTopAvailableListAsync(int top, Guid userId, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
     {
-        return await(await GetQueryableAsync(userId, null, pointsType, pointsDefinitionName, pointsWorkflowName))
+        return await(await GetQueryableAsync(userId, null, pointsDefinitionName, pointsWorkflowName))
             .Include(b=>b.UserPointsItem)
             .OrderBy(b=>b.UserPointsItem.ExpirationDate)
             .Take(top)
             .ToListAsync();
     }
 
-    public async Task<int> GetUserAvailablePointsAsync(Guid userId, DateTime? expirationDate = null, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
+    public async Task<int> GetUserAvailablePointsAsync(Guid userId, DateTime? expirationDate = null, string pointsDefinitionName = null, string pointsWorkflowName = null, CancellationToken cancellationToken = default)
     {
-        return await (await GetQueryableAsync(userId, expirationDate, pointsType, pointsDefinitionName, pointsWorkflowName))
+        return await (await GetQueryableAsync(userId, expirationDate, pointsDefinitionName, pointsWorkflowName))
             .SumAsync(b=>b.UserPointsItem.Points);
     }
 
@@ -41,11 +41,12 @@ public class EfCoreUserPointsBlockRepository : EfCoreRepository<IUserPointsDbCon
     }
 
     protected virtual async Task<IQueryable<UserPointsBlock>> GetQueryableAsync(
-         Guid userId, DateTime? expirationDate = null, PointsType pointsType = PointsType.General, string pointsDefinitionName = null, string pointsWorkflowName = null)
+         Guid userId, DateTime? expirationDate = null, string pointsDefinitionName = null, string pointsWorkflowName = null)
     {
-        return (await GetDbSetAsync()).Where(e => !e.UserPointsItem.IsDeleted && e.UserPointsItem.UserId == userId && e.UserPointsItem.PointsType == pointsType && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
-            .WhereIf(expirationDate.HasValue, e => e.UserPointsItem.ExpirationDate < expirationDate)
-            .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
-            .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.UserPointsItem.PointsWorkflowName == pointsWorkflowName);
+        return (await GetDbSetAsync()).Where(e => !e.UserPointsItem.IsDeleted && e.UserPointsItem.UserId == userId && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
+            .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upb => upb.UserPointsItem.PointsType == PointsType.General)
+            .WhereIf(expirationDate.HasValue, upb => upb.UserPointsItem.ExpirationDate < expirationDate)
+            .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), upb => upb.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
+            .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), upb => upb.UserPointsItem.PointsWorkflowName == pointsWorkflowName);
     }
 }

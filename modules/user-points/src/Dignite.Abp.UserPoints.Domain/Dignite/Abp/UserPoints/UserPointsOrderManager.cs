@@ -48,7 +48,7 @@ public class UserPointsOrderManager : DomainService
         string pointsWorkflowName = null,
         Guid? tenantId=null)
     {
-        var availablePointsBlocks = await PointsBlockRepository.GetTopAvailableListAsync(points / PointsBlockOptions.Factor, userId, pointsType, pointsDefinitionName, pointsWorkflowName);        
+        var availablePointsBlocks = await PointsBlockRepository.GetTopAvailableListAsync(points / PointsBlockOptions.Factor, userId, pointsDefinitionName, pointsWorkflowName);        
         if (availablePointsBlocks.Count < points / PointsBlockOptions.Factor)
         {
             throw new InsufficientAvailablePointsException(points);
@@ -105,9 +105,9 @@ public class UserPointsOrderManager : DomainService
             foreach (var redeem in pointsOrder.Redeems)
             {
                 await PointsItemManager.CreateAsync(
+                    redeem.PointsType,
                     redeem.PointsDefinitionName,
                     redeem.PointsWorkflowName,
-                    redeem.PointsType,
                     redeem.Points,
                     redeem.ExpirationDate,
                     pointsOrder.UserId,

@@ -28,7 +28,7 @@ public abstract class UserPointsItemRepository_Tests<TStartupModule> : UserPoint
     [Fact]
     public async Task GetPagedListAsync_ShouldWorkProperly_WithUserId_WhileGetting10_WithoutSorting()
     {
-        var result = await _userPointsItemRepository.GetListAsync(_testData.User1Id, PointsType.General);
+        var result = await _userPointsItemRepository.GetListAsync(_testData.User1Id);
 
         result.ShouldNotBeNull();
         result.ShouldNotBeEmpty();

@@ -26,7 +26,7 @@ public abstract class UserPointsBlockRepository_Tests<TStartupModule> : UserPoin
     [Fact]
     public async Task CalculatePointsAsync_ShouldWorkProperly_WithUserId_Within2years()
     {
-        var result = await _userPointsBlockRepository.GetUserAvailablePointsAsync(_testData.User1Id, null, PointsType.General);
+        var result = await _userPointsBlockRepository.GetUserAvailablePointsAsync(_testData.User1Id);
 
         result.ShouldBe(10);
     }

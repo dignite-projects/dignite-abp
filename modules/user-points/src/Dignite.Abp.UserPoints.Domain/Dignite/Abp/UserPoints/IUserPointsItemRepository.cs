@@ -9,7 +9,6 @@ public interface IUserPointsItemRepository: IBasicRepository<UserPointsItem, Gui
 {
     Task<int> GetCountAsync(
         Guid userId,
-        PointsType pointsType = PointsType.General,
         string pointsDefinitionName = null,
         string pointsWorkflowName = null,
         DateTime? startTime = null,
@@ -18,7 +17,6 @@ public interface IUserPointsItemRepository: IBasicRepository<UserPointsItem, Gui
          );
     Task<List<UserPointsItem>> GetListAsync(
         Guid userId,
-        PointsType pointsType = PointsType.General,
         string pointsDefinitionName = null,
         string pointsWorkflowName = null,
         DateTime? startTime = null,

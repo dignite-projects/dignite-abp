@@ -22,7 +22,6 @@ public class UserPointsItemAppService : UserPointsAppService, IUserPointsItemApp
         return await _userPointsBlockRepository.GetUserAvailablePointsAsync(
             CurrentUser.Id.Value,
             input.ExpirationDate,
-            input.PointsType,
             input.PointsDefinitionName,
             input.PointsWorkflowName);
     }
@@ -32,14 +31,12 @@ public class UserPointsItemAppService : UserPointsAppService, IUserPointsItemApp
     {
         var count = await _userPointsItemRepository.GetCountAsync(
             CurrentUser.Id.Value,
-            input.PointsType,
             input.PointsDefinitionName,
             input.PointsWorkflowName,
             input.StartTime,
             input.EndTime);
         var result = await _userPointsItemRepository.GetListAsync(
             CurrentUser.Id.Value,
-            input.PointsType,
             input.PointsDefinitionName,
             input.PointsWorkflowName,
             input.StartTime,

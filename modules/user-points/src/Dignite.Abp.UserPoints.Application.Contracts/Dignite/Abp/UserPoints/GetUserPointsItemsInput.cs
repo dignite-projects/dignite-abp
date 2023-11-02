@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.UserPoints;
@@ -7,30 +8,32 @@ public class GetUserPointsItemsInput: PagedResultRequestDto
     /// <summary>
     /// 
     /// </summary>
+    [CanBeNull]
     public DateTime? StartTime { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
+    [CanBeNull]
     public DateTime? EndTime { get; set; }
 
     /// <summary>
-    /// Gets or sets the of <see cref="Abp.Points.PointsDefinition.Name"/>
+    /// 
     /// </summary>
-    public virtual string PointsDefinitionName { get; protected set; }
+    [CanBeNull]
+    public DateTime? ExpirationDate { get; set; }
 
     /// <summary>
-    /// Gets or sets the of <see cref="Abp.Points.PointsWorkflow.Name"/>
+    /// Gets or sets the of Points Definition Name.
+    /// If <see cref="PointsDefinitionName"/> and <see cref="PointsWorkflowName"/> are both null, then query all generic points
     /// </summary>
-    public virtual string PointsWorkflowName { get; protected set; }
+    [CanBeNull]
+    public virtual string PointsDefinitionName { get; set; }
 
     /// <summary>
-    /// The types of points are divided into two types: general points and specialized points.
-    /// The default value is <see cref="PointsType.General"/>.
+    /// Gets or sets the of Points Workflow Name
+    /// If <see cref="PointsDefinitionName"/> and <see cref="PointsWorkflowName"/> are both null, then query all generic points
     /// </summary>
-    /// <remarks>
-    /// General points can be used for any;
-    /// Specialized points can be used for specified orders;
-    /// </remarks>
-    public virtual PointsType PointsType { get; protected set; } = PointsType.General;
+    [CanBeNull]
+    public virtual string PointsWorkflowName { get; set; }
 }

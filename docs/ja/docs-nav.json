@@ -18,6 +18,19 @@
       ]
     },
     {
+      "text": "ポイント",
+      "items":[
+        {
+          "text": "ポイントコア",
+          "path": "Points.md"
+        },
+        {
+          "text": "ユーザーポイントモジュール",
+          "path": "User-Points.md"
+        }
+      ]
+    },
+    {
       "text": "動的フォームエンジン",
       "items": [
         {

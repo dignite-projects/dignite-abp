@@ -18,6 +18,19 @@
       ]
     },
     {
+      "text": "Points",
+      "items":[
+        {
+          "text": "Points Core",
+          "path": "Points.md"
+        },
+        {
+          "text": "User Points Module",
+          "path": "User-Points.md"
+        }
+      ]
+    },
+    {
       "text": "Dynamic Forms engine",
       "items": [
         {

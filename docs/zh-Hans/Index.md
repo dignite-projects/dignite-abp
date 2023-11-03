@@ -6,7 +6,7 @@
 
 ## Dignite Abp 模块
 
-### 通知系统
+### 通知
 
 参考Asp.Net Boilerplate的通知系统，移植到Abp Framework。使用简单的代码发布通知，实现系统内实时通知，开发者还可以实现自己的通知方式。
 
@@ -14,7 +14,13 @@
 
 - [示例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
-### 动态表单模块
+### 积分
+
+积分能够增强用户参与度、建立忠诚度、激励用户积极参与和贡献，可广泛应用于电子商务、社交媒体、游戏、教育和健康等系统中。
+
+- [文档](Points.md)
+
+### 动态表单
 
 动态表单可以使系统管理者在线动态自定义业务对象实体的字段，主要应用于商城系统中商品的SKU、投票调研系统、CMS等系统。
 

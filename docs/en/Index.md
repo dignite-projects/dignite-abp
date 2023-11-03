@@ -14,6 +14,12 @@ Referencing the notification system from Asp.Net Boilerplate, ported to the Abp 
 
 - [Sample](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
+### Points
+
+Points enhance user engagement, build loyalty, and incentivize active participation and contribution, and can be used in a wide range of systems such as e-commerce, social media, gaming, education, and health.
+
+- [Document](Points.md)
+
 ### Dynamic Forms Module
 
 Dynamic forms allow system administrators to dynamically customize the fields of business object entities online, mainly applied to SKUs of goods in shopping mall systems, polling and research systems, CMS and other systems.

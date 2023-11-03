@@ -18,6 +18,12 @@ Dynamic forms allow system administrators to dynamically customize the fields of
 
 - [Document](https://learn.dignite.com/documents/en/abp/latest/Dynamic-Forms)
 
+### Points System
+
+Points enhance user engagement, build loyalty, and incentivize active participation and contribution, and can be used in a wide range of systems such as e-commerce, social media, gaming, education, and health.
+
+- [Document](https://learn.dignite.com/documents/en/abp/latest/Points)
+
 ### Files Explorer
 
 Dignite Abp Files is developed based on ABP BlobStoring and provides file type validation and file size validation for the file upload process. Developers can also extend additional processing events.

@@ -46,8 +46,11 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
         if (overrideExisting)
         {
-            if (await FileStore.BlobNameExistsAsync(file.ContainerName, file.BlobName, cancellationToken))
-                await DeleteAsync(file);
+            var existFile = await FileStore.FindByBlobNameAsync(file.ContainerName, file.BlobName, cancellationToken);
+            if (existFile!=null)
+            {
+                await DeleteAsync(existFile);
+            }
         }
         else
         {
@@ -60,7 +63,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         await FileHandlers(file, stream);
 
         //Save file information to database
-        await SaveFileInformationAsync(file, stream, cancellationToken);
+        file = await SaveFileInformationAsync(file, stream, cancellationToken);
 
         if (file.ReferBlobName.IsNullOrEmpty())
         {
@@ -200,14 +203,15 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     /// <param name="stream"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private async Task SaveFileInformationAsync(
+    private async Task<TFile> SaveFileInformationAsync(
         [NotNull] TFile file,
         Stream stream,
         CancellationToken cancellationToken = default)
     {
+
         var md5 = stream.Md5();
         var md5ExistingFile = await FileStore.FindByMd5Async(file.ContainerName, md5, cancellationToken);
-        if (md5ExistingFile == null)
+        if (md5ExistingFile == null || md5ExistingFile.BlobName==file.BlobName)
         {
             file.SetSize(stream.Length);
             file.SetMd5(md5);
@@ -220,5 +224,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
         //Save file information to database
         await FileStore.CreateAsync(file, false, cancellationToken);
+
+        return file;
     }
 }

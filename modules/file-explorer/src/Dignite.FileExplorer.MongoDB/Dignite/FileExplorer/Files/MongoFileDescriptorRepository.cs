@@ -23,7 +23,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
     {
         var token = GetCancellationToken(cancellationToken);
         return await (await GetMongoQueryableAsync(token))
-            .AnyAsync(x => x.ContainerName == containerName && x.BlobName == blobName, token);
+            .AnyAsync(x => x.ContainerName == containerName && x.BlobName == blobName && x.ReferBlobName == null, token);
     }
 
     public async Task<bool> Md5ExistsAsync(string containerName, string md5, CancellationToken cancellationToken = default)
@@ -43,7 +43,7 @@ public class MongoFileDescriptorRepository : MongoDbRepository<IFileExplorerMong
     public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
-        return await FindAsync(x => x.ContainerName == containerName && x.BlobName == blobName, false, token);
+        return await FindAsync(x => x.ContainerName == containerName && x.BlobName == blobName && x.ReferBlobName == null, false, token);
     }
 
     public async Task<FileDescriptor> FindByMd5Async(string containerName, string md5, CancellationToken cancellationToken = default)

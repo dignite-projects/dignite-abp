@@ -23,7 +23,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     public async Task<bool> BlobNameExistsAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-                   .AnyAsync(b => b.ContainerName == containerName && b.BlobName == blobName && b.ReferBlobName==null, GetCancellationToken(cancellationToken));
+                   .AnyAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
     public async Task<bool> Md5ExistsAsync(string containerName, string md5, CancellationToken cancellationToken = default)
@@ -41,7 +41,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
     public async Task<FileDescriptor> FindByBlobNameAsync(string containerName, string blobName, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-                   .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.BlobName == blobName && b.ReferBlobName == null, GetCancellationToken(cancellationToken));
+                   .FirstOrDefaultAsync(b => b.ContainerName == containerName && b.BlobName == blobName, GetCancellationToken(cancellationToken));
     }
 
     public async Task<FileDescriptor> FindByMd5Async(string containerName, string md5, CancellationToken cancellationToken = default)

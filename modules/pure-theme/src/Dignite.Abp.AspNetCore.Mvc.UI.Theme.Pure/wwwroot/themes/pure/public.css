@@ -28,13 +28,12 @@ a:focus {
     --bs-dropdown-link-active-bg: transparent;
 }
 .dropdown-toggle::after {
-    margin-left: 0rem;
-    line-height: 1.3rem;
+    line-height: 1rem;
     content: '›';
-    font-size: 1.9rem;
+    font-size: 1.75rem;
     font-weight: 500;
     border: none;
-    vertical-align: 0rem;
+    vertical-align: -.25rem;
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
 }
@@ -50,10 +49,6 @@ a:focus {
 }
 .card {
     --bs-card-inner-border-radius: 0.5rem;
-}
-.btn {
-    --bs-btn-padding-x: 1rem;
-    --bs-btn-border-radius: 50rem;
 }
 
 
@@ -113,8 +108,8 @@ a:focus {
         margin-left: 0.5rem;
         position: relative;
         display: inline-flex;
-        -moz-column-gap: 10px;
-        column-gap: 10px;
+        -moz-column-gap: 5px;
+        column-gap: 5px;
         align-items: center;
         font-size: 1.125rem;
         font-weight: 500;

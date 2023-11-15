@@ -372,5 +372,5 @@ deploy/_run_all_log.txt
 
 
 # libs and upload files
-**/samples/**/wwwroot/libs/**
-**/samples/**/wwwroot/host/**
+**/wwwroot/libs/**
+**/wwwroot/host/**

@@ -102,6 +102,14 @@ Love ABP Framework? **Please give a star** to this repository :star:
 
   Migrate an existing project to the Abp platform, leverages its powerful capabilities, making the project more competitive, maintainable, and scalable.
 
+## Calling on Kind Hearts
+
+Looking for a kind volunteer who is willing to provide server hosting for our Dignite documentation site. Currently, the Dignite docs are hosted on an Alibaba Cloud server in the China region, and the frequent inaccessibility of https://learn.dignite.com/ is due to network restrictions in mainland China.
+
+We need a server located outside mainland China to ensure smooth access for users worldwide. If there's a generous individual willing to offer server support in such a location, the Dignite open-source team would be immensely grateful.
+
+Thank you for your support!
+
 ## Contact Us
 
 - Company Name

@@ -1,0 +1,11 @@
+{
+  "culture": "en",
+  "texts": {
+    "CmsKit.Favourites": "Favorites",
+    "CmsKit:Favourite:0001": "Unable to rate entity {EntityType}.",
+    "Favourite": "Favorites",
+    "Feature:CmsKitGroup": "Cms Kit",
+    "Feature:FavouriteEnable": "Favorites",
+    "Feature:FavouriteEnableDescription": "The Favorites feature in CMS Kit allows users to bookmark articles, products, and more."
+  }
+}

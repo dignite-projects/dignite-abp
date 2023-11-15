@@ -1,0 +1,11 @@
+{
+  "culture": "ja",
+  "texts": {
+    "CmsKit.Favourites": "お気に入り",
+    "CmsKit:Favourite:0001": "エンティティ {EntityType} を評価できません。",
+    "Favourite": "お気に入り",
+    "Feature:CmsKitGroup": "Cms Kit",
+    "Feature:FavouriteEnable": "お気に入り",
+    "Feature:FavouriteEnableDescription": "CMS Kitのお気に入り機能は、ユーザーが記事、製品などをブックマークできるようにします。"
+  }
+}

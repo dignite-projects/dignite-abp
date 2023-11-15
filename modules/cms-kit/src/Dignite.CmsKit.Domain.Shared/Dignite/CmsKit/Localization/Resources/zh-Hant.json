@@ -1,0 +1,11 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "CmsKit.Favourites": "收藏",
+    "CmsKit:Favourite:0001": "無法對實體 {EntityType} 進行評級。",
+    "Favourite": "收藏",
+    "Feature:CmsKitGroup": "Cms Kit",
+    "Feature:FavouriteEnable": "收藏",
+    "Feature:FavouriteEnableDescription": "CMS Kit 的收藏功能允許用戶收藏文章、商品等實體。"
+  }
+}

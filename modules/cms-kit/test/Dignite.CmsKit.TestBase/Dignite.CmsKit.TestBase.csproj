@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>Dignite.CmsKit</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+	  <PackageReference Include="NSubstitute" Version="$(NSubstitutePackageVersion)" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+	  <PackageReference Include="Shouldly" Version="$(ShouldlyPackageVersion)" />
+	  <PackageReference Include="xunit" Version="$(xUnitPackageVersion)" />
+	  <PackageReference Include="xunit.extensibility.execution" Version="$(xUnitExtensibilityExecutionPackageVersion)" />
+	  <PackageReference Include="xunit.runner.visualstudio" Version="$(xUnitRunnerVisualstudioPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.Authorization" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.TestBase" Version="7.4.0" />
+    <ProjectReference Include="..\..\src\Dignite.CmsKit.Domain\Dignite.CmsKit.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

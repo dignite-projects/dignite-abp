@@ -10,8 +10,7 @@ public class CmsKitFeatureDefinitionProvider : FeatureDefinitionProvider
 {
     public override void Define(IFeatureDefinitionContext context)
     {
-        var group = context.AddGroup(CmsKitFeatures.GroupName,
-            L("Feature:CmsKitGroup"));
+        var group = context.GetGroupOrNull(Volo.CmsKit.Features.CmsKitFeatures.GroupName);
 
         if (GlobalFeatureManager.Instance.IsEnabled<FavouritesFeature>())
         {

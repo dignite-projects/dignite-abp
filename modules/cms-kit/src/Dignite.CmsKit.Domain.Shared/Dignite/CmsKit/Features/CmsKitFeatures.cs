@@ -1,7 +1,5 @@
 ﻿namespace Dignite.CmsKit.Features;
 public static class CmsKitFeatures
 {
-    public const string GroupName = "DigniteCmsKit";
-
-    public const string FavouriteEnable = GroupName + ".FavouriteEnable";
+    public const string FavouriteEnable = Volo.CmsKit.Features.CmsKitFeatures.GroupName + ".FavouriteEnable";
 }

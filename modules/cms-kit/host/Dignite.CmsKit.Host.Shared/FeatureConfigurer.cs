@@ -11,6 +11,7 @@ namespace Dignite.CmsKit
         {
             OneTimeRunner.Run(() =>
             {
+                GlobalFeatureManager.Instance.Modules.CmsKit().EnableAll();
                 GlobalFeatureManager.Instance.Modules.DigniteCmsKit().EnableAll();
             });
         }

@@ -23,6 +23,7 @@ public class CmsKitTestBaseModule : AbpModule
     {
         OneTimeRunner.Run(() =>
         {
+            GlobalFeatureManager.Instance.Modules.CmsKit().EnableAll();
             GlobalFeatureManager.Instance.Modules.DigniteCmsKit().EnableAll();
         });
     }

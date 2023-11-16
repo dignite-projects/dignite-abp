@@ -15,7 +15,7 @@ public class EfCoreFavouriteRepository : EfCoreRepository<ICmsKitDbContext, Favo
     {
     }
 
-    public virtual async Task<Favourite> GetCurrentUserFavouriteAsync(string entityType, string entityId, Guid userId,
+    public virtual async Task<Favourite> GetFavouriteAsync(string entityType, string entityId, Guid userId,
         CancellationToken cancellationToken = default)
     {
         Check.NotNullOrWhiteSpace(entityType, nameof(entityType));

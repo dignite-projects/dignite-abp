@@ -17,18 +17,17 @@ public class FavouriteManager : DomainService
         FavouriteDefinitionStore = favouriteDefinitionStore;
     }
 
-    public async Task<Favourite> SetStarAsync(Guid userId, string entityType, string entityId)
+    public async Task<Favourite> CreateAsync(Guid userId, string entityType, string entityId)
     {
-        var currentUserFavourite = await FavouriteRepository.GetCurrentUserFavouriteAsync(entityType, entityId, userId);
-
-        if (currentUserFavourite != null)
-        {
-            return currentUserFavourite;
-        }
-
         if (!await FavouriteDefinitionStore.IsDefinedAsync(entityType))
         {
             throw new EntityCantHaveFavouriteException(entityType);
+        }
+
+        var favourite = await FavouriteRepository.GetFavouriteAsync(entityType, entityId, userId);
+        if (favourite != null)
+        {
+            return favourite;
         }
 
         return await FavouriteRepository.InsertAsync(

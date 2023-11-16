@@ -30,7 +30,7 @@ public class FavouritePublicAppService : CmsKitPublicAppServiceBase, IFavouriteP
     {
         var userId = CurrentUser.GetId();
 
-        var favourite = await FavouriteManager.SetStarAsync(userId, entityType, entityId);
+        var favourite = await FavouriteManager.CreateAsync(userId, entityType, entityId);
 
         return ObjectMapper.Map<Favourite, FavouriteDto>(favourite);
     }
@@ -38,7 +38,7 @@ public class FavouritePublicAppService : CmsKitPublicAppServiceBase, IFavouriteP
     [Authorize]
     public virtual async Task DeleteAsync(string entityType, string entityId)
     {
-        var favourite = await FavouriteRepository.GetCurrentUserFavouriteAsync(entityType, entityId, CurrentUser.GetId());
+        var favourite = await FavouriteRepository.GetFavouriteAsync(entityType, entityId, CurrentUser.GetId());
 
         if (favourite.CreatorId != CurrentUser.GetId())
         {

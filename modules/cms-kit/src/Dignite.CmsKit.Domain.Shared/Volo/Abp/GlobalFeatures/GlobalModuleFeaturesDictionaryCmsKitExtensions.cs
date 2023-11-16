@@ -14,7 +14,7 @@ public static class GlobalModuleFeaturesDictionaryCmsKitExtensions
 
         return modules
                 .GetOrAdd(
-                    GlobalCmsKitFeatures.ModuleName,
+                    CmsKit.GlobalFeatures.GlobalCmsKitFeatures.ModuleName,
                     _ => new GlobalCmsKitFeatures(modules.FeatureManager)
                 )
             as GlobalCmsKitFeatures;

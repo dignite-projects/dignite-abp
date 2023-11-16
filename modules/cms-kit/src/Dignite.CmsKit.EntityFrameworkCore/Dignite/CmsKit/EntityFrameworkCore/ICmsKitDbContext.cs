@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.CmsKit;
 
 namespace Dignite.CmsKit.EntityFrameworkCore;
 
-[ConnectionStringName(DigniteCmsKitDbProperties.ConnectionStringName)]
+[ConnectionStringName(AbpCmsKitDbProperties.ConnectionStringName)]
 public interface ICmsKitDbContext : IEfCoreDbContext
 {
     DbSet<Favourite> Favourites { get; }

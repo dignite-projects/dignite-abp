@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.GlobalFeatures;
+using Volo.CmsKit;
 
 namespace Dignite.CmsKit.EntityFrameworkCore;
 
@@ -19,7 +20,7 @@ public static class CmsKitDbContextModelCreatingExtensions
         {
             builder.Entity<Favourite>(r =>
             {
-                r.ToTable(DigniteCmsKitDbProperties.DbTablePrefix + "Favourites", DigniteCmsKitDbProperties.DbSchema);
+                r.ToTable(AbpCmsKitDbProperties.DbTablePrefix + "Favourites", AbpCmsKitDbProperties.DbSchema);
 
                 r.ConfigureByConvention();
 

@@ -1,4 +1,4 @@
-﻿using Dignite.CmsKit.Entities;
+﻿using Volo.CmsKit.Entities;
 
 namespace Dignite.CmsKit.Favourites;
 

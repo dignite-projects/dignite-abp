@@ -9,8 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts" Version="7.4.0" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain.Shared\Dignite.CmsKit.Domain.Shared.csproj" />
   </ItemGroup>
 

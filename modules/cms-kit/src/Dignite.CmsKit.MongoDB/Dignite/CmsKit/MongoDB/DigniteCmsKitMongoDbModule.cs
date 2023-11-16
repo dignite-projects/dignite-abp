@@ -2,15 +2,15 @@
 using Dignite.CmsKit.MongoDB.Favourites;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
-using Volo.Abp.MongoDB;
+using Volo.CmsKit.MongoDB;
 
 namespace Dignite.CmsKit.MongoDB;
 
 [DependsOn(
     typeof(DigniteCmsKitDomainModule),
-    typeof(AbpMongoDbModule)
+    typeof(CmsKitMongoDbModule)
     )]
-public class CmsKitMongoDbModule : AbpModule
+public class DigniteCmsKitMongoDbModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

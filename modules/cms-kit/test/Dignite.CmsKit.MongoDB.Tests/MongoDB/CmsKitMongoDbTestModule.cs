@@ -7,7 +7,7 @@ namespace Dignite.CmsKit.MongoDB;
 
 [DependsOn(
     typeof(CmsKitTestBaseModule),
-    typeof(CmsKitMongoDbModule)
+    typeof(DigniteCmsKitMongoDbModule)
     )]
 public class CmsKitMongoDbTestModule : AbpModule
 {

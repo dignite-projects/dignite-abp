@@ -8,13 +8,12 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using Volo.CmsKit;
 
 namespace Dignite.CmsKit;
 
 [DependsOn(
-    typeof(AbpValidationModule),
-    typeof(AbpGlobalFeaturesModule),
-    typeof(AbpFeaturesModule)
+    typeof(CmsKitDomainSharedModule)
 )]
 public class DigniteCmsKitDomainSharedModule : AbpModule
 {

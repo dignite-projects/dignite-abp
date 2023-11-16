@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.Public.HttpApi" Version="7.4.0" />
     <ProjectReference Include="..\Dignite.CmsKit.Application.Contracts\Dignite.CmsKit.Application.Contracts.csproj" />
   </ItemGroup>
 

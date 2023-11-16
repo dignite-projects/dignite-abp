@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Volo.CmsKit;
 
 namespace Dignite.CmsKit.Favourites;
 

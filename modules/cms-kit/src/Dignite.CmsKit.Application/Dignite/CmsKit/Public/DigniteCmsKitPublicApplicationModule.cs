@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using Volo.CmsKit.Public;
+
 namespace Dignite.CmsKit.Public;
 
 [DependsOn(
     typeof(DigniteCmsKitDomainModule),
     typeof(DigniteCmsKitPublicApplicationContractsModule),
-    typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
+    typeof(CmsKitPublicApplicationModule)
     )]
 public class DigniteCmsKitPublicApplicationModule : AbpModule
 {

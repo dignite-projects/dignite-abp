@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.CmsKit;
+using Volo.CmsKit.EntityFrameworkCore;
 
 namespace Dignite.CmsKit.EntityFrameworkCore;
 
-[ConnectionStringName(DigniteCmsKitDbProperties.ConnectionStringName)]
+[ConnectionStringName(AbpCmsKitDbProperties.ConnectionStringName)]
 public class CmsKitDbContext : AbpDbContext<CmsKitDbContext>, ICmsKitDbContext
 {
     public DbSet<Favourite> Favourites { get; set; }
@@ -20,6 +22,7 @@ public class CmsKitDbContext : AbpDbContext<CmsKitDbContext>, ICmsKitDbContext
     {
         base.OnModelCreating(builder);
 
+        builder.ConfigureCmsKit();
         builder.ConfigureDigniteCmsKit();
     }
 }

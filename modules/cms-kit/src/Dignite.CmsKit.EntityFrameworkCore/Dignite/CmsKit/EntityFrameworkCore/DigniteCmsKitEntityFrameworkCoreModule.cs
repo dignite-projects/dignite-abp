@@ -2,12 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.CmsKit.EntityFrameworkCore;
 
 namespace Dignite.CmsKit.EntityFrameworkCore;
 
 [DependsOn(
     typeof(DigniteCmsKitDomainModule),
-    typeof(AbpEntityFrameworkCoreModule)
+    typeof(CmsKitEntityFrameworkCoreModule)
 )]
 public class DigniteCmsKitEntityFrameworkCoreModule : AbpModule
 {

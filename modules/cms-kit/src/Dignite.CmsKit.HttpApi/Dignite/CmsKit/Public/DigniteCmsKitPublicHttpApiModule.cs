@@ -4,11 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.CmsKit.Public;
 
 namespace Dignite.CmsKit.Public;
 
 [DependsOn(
-    typeof(AbpAspNetCoreMvcModule),
+    typeof(CmsKitPublicHttpApiModule),
     typeof(DigniteCmsKitPublicApplicationContractsModule))]
 public class DigniteCmsKitPublicHttpApiModule : AbpModule
 {

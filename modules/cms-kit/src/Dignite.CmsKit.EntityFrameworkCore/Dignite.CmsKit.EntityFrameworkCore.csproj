@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" Version="7.4.0" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain\Dignite.CmsKit.Domain.csproj" />
   </ItemGroup>
 

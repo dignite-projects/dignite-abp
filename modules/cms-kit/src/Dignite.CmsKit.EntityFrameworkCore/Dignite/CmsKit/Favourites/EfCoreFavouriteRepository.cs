@@ -1,11 +1,15 @@
 ﻿using Dignite.CmsKit.EntityFrameworkCore;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using System.Linq;
 
 namespace Dignite.CmsKit.Favourites;
 
@@ -15,7 +19,7 @@ public class EfCoreFavouriteRepository : EfCoreRepository<ICmsKitDbContext, Favo
     {
     }
 
-    public virtual async Task<Favourite> GetFavouriteAsync(string entityType, string entityId, Guid userId,
+    public virtual async Task<Favourite> GetAsync(string entityType, string entityId, Guid userId,
         CancellationToken cancellationToken = default)
     {
         Check.NotNullOrWhiteSpace(entityType, nameof(entityType));
@@ -28,4 +32,10 @@ public class EfCoreFavouriteRepository : EfCoreRepository<ICmsKitDbContext, Favo
         return favourite;
     }
 
+    public async Task<List<Favourite>> GetListByUserAsync([NotNull] string entityType, Guid userId, CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+            .Where(f => f.EntityType == entityType && f.CreatorId == userId)
+            .ToListAsync(cancellationToken);
+    }
 }

@@ -24,7 +24,7 @@ public class FavouriteManager : DomainService
             throw new EntityCantHaveFavouriteException(entityType);
         }
 
-        var favourite = await FavouriteRepository.GetFavouriteAsync(entityType, entityId, userId);
+        var favourite = await FavouriteRepository.GetAsync(entityType, entityId, userId);
         if (favourite != null)
         {
             return favourite;

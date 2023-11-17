@@ -20,7 +20,7 @@ public abstract class FavouriteRepository_Tests<TStartupModule> : CmsKitTestBase
     [Fact]
     public async Task GetCurrentUserFavouriteAsync()
     {
-        var userRating = await _favouriteRepository.GetFavouriteAsync(_cmsKitTestData.EntityType1,
+        var userRating = await _favouriteRepository.GetAsync(_cmsKitTestData.EntityType1,
             _cmsKitTestData.EntityId1, _cmsKitTestData.User1Id);
 
         userRating.ShouldNotBeNull();

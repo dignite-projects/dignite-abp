@@ -32,7 +32,7 @@ public class EfCoreFavouriteRepository : EfCoreRepository<ICmsKitDbContext, Favo
         return favourite;
     }
 
-    public async Task<List<Favourite>> GetListAsync([NotNull] string entityType, Guid userId, CancellationToken cancellationToken = default)
+    public async Task<List<Favourite>> GetListByUserAsync([NotNull] string entityType, Guid userId, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
             .Where(f => f.EntityType == entityType && f.CreatorId == userId)

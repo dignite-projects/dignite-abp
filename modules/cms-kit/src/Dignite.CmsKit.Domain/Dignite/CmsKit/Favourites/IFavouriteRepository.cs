@@ -15,7 +15,7 @@ public interface IFavouriteRepository : IBasicRepository<Favourite, Guid>
         Guid userId,
         CancellationToken cancellationToken = default
     );
-    Task<List<Favourite>> GetListAsync(
+    Task<List<Favourite>> GetListByUserAsync(
         [NotNull] string entityType,
         Guid userId,
         CancellationToken cancellationToken = default

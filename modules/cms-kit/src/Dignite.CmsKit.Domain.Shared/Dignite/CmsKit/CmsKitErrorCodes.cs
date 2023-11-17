@@ -6,4 +6,8 @@ public static class CmsKitErrorCodes
     {
         public const string EntityCantHaveFavourite = "CmsKit:Favourite:0001";
     }
+    public static class Visits
+    {
+        public const string EntityCantHaveVisit = "CmsKit:Visit:0001";
+    }
 }

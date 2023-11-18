@@ -1,10 +1,8 @@
-﻿using Dignite.CmsKit.Features;
+﻿using System.Threading.Tasks;
+using Dignite.CmsKit.Features;
 using Dignite.CmsKit.GlobalFeatures;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Volo.Abp;
-using Volo.Abp.Application.Dtos;
 using Volo.Abp.Features;
 using Volo.Abp.GlobalFeatures;
 
@@ -29,13 +27,5 @@ public class VisitPublicController : CmsKitPublicControllerBase, IVisitPublicApp
     public async Task<VisitDto> CreateAsync(string entityType, string entityId, CreateVisitInput input)
     {
         return await VisitPublicAppService.CreateAsync(entityType, entityId, input);
-    }
-
-    [HttpGet]
-    [Route("{entityType}")]
-    [Authorize]
-    public async Task<ListResultDto<VisitDto>> GetListByCurrentUserAsync(string entityType, GetVisitListByCurrentUserInput input)
-    {
-        return await VisitPublicAppService.GetListByCurrentUserAsync(entityType,input);
     }
 }

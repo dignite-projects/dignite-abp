@@ -1,4 +1,5 @@
 ﻿using Dignite.CmsKit.Favourites;
+using Dignite.CmsKit.Visits;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain.Entities.Events.Distributed;
@@ -25,9 +26,11 @@ public class DigniteCmsKitDomainModule : AbpModule
 
         Configure<AbpDistributedEntityEventOptions>(options =>
         {
-            options.EtoMappings.Add<Favourite, FavouriteEto>(typeof(DigniteCmsKitDomainModule));
+            options.EtoMappings.Add<Favourite, FavouriteEto>();
+            options.EtoMappings.Add<Visit, VisitEto>();
 
             options.AutoEventSelectors.Add<Favourite>();
+            options.AutoEventSelectors.Add<Visit>();
         });
 
     }

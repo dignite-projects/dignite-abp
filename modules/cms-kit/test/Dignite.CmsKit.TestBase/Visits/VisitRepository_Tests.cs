@@ -20,7 +20,7 @@ public abstract class VisitRepository_Tests<TStartupModule> : CmsKitTestBase<TSt
     [Fact]
     public async Task GetCurrentUserVisitsAsync()
     {
-        var result = await _visitRepository.GetListByUserAsync(_cmsKitTestData.EntityType1,_cmsKitTestData.User1Id);
+        var result = await _visitRepository.GetEntityIdsListByUserAsync(_cmsKitTestData.EntityType1,_cmsKitTestData.User1Id);
 
         result.ShouldNotBeNull();
         result.Count.ShouldBe(1);

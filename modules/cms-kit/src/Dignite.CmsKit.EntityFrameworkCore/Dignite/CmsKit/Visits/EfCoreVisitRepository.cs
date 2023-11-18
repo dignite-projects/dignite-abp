@@ -19,11 +19,14 @@ public class EfCoreVisitRepository : EfCoreRepository<ICmsKitDbContext, Visit, G
     }
 
 
-    public async Task<List<Visit>> GetListByUserAsync([NotNull] string entityType, Guid userId, DateTime? visitDate = null, CancellationToken cancellationToken = default)
+    public async Task<List<string>> GetEntityIdsListByUserAsync([NotNull] string entityType, Guid userId, DateTime? visitDate = null, CancellationToken cancellationToken = default)
     {
-        return await(await GetDbSetAsync())
-            .Where(f => f.EntityType == entityType && f.CreatorId == userId)
-            .WhereIf(visitDate.HasValue, v=>v.CreationTime>visitDate.Value.Date && v.CreationTime<visitDate.Value.Date.AddDays(1))
-            .ToListAsync(cancellationToken);
+        return await (await GetDbSetAsync())
+            .Where(v => v.EntityType == entityType && v.CreatorId == userId)
+            .WhereIf(visitDate.HasValue, v => v.CreationTime > visitDate.Value.Date && v.CreationTime < visitDate.Value.Date.AddDays(1))
+            .OrderByDescending(v=>v.CreationTime)
+            .GroupBy(v => v.EntityId)
+            .Select(v => v.Key)
+            .ToListAsync(GetCancellationToken(cancellationToken));
     }
 }

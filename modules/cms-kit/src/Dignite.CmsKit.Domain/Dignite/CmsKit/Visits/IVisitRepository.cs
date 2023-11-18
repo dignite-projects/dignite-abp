@@ -9,7 +9,7 @@ namespace Dignite.CmsKit.Visits;
 
 public interface IVisitRepository : IBasicRepository<Visit, Guid>
 {
-    Task<List<Visit>> GetListByUserAsync(
+    Task<List<string>> GetEntityIdsListByUserAsync(
         [NotNull] string entityType,
         Guid userId,
         DateTime? visitDate=null,

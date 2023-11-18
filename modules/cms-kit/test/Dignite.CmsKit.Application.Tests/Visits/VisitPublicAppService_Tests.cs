@@ -78,16 +78,4 @@ public class VisitPublicAppService_Tests : CmsKitApplicationTestBase
                 .ShouldBeTrue();
         });
     }
-
-    [Fact]
-    public async Task GetListByCurrentUserAsync()
-    {
-        _currentUser.Id.Returns(_cmsKitTestData.User1Id);
-
-        var vists = await _visitAppService.GetListByCurrentUserAsync(
-            _cmsKitTestData.EntityType1,
-            new GetVisitListByCurrentUserInput());
-
-        vists.Items.Any().ShouldBeTrue();
-    }
 }

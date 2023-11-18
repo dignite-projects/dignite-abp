@@ -38,7 +38,7 @@ public class FavouritePublicAppService : CmsKitPublicAppServiceBase, IFavouriteP
     [Authorize]
     public virtual async Task DeleteAsync(string entityType, string entityId)
     {
-        var favourite = await FavouriteRepository.GetAsync(entityType, entityId, CurrentUser.GetId());
+        var favourite = await FavouriteRepository.GetCurrentUserAsync(entityType, entityId, CurrentUser.GetId());
 
         if (favourite.CreatorId != CurrentUser.GetId())
         {

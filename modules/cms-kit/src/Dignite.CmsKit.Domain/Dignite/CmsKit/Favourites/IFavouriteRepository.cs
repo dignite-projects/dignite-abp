@@ -9,7 +9,7 @@ namespace Dignite.CmsKit.Favourites;
 
 public interface IFavouriteRepository : IBasicRepository<Favourite, Guid>
 {
-    Task<Favourite> GetAsync(
+    Task<Favourite> GetCurrentUserAsync(
         [NotNull] string entityType,
         [NotNull] string entityId,
         Guid userId,

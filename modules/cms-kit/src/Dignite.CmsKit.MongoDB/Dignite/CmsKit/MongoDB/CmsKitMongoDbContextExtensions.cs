@@ -1,4 +1,5 @@
 ﻿using Dignite.CmsKit.Favourites;
+using Dignite.CmsKit.Visits;
 using Volo.Abp;
 using Volo.Abp.MongoDB;
 using Volo.CmsKit;
@@ -15,6 +16,11 @@ public static class CmsKitMongoDbContextExtensions
         builder.Entity<Favourite>(x =>
         {
             x.CollectionName = AbpCmsKitDbProperties.DbTablePrefix + "Favourites";
+        });
+
+        builder.Entity<Visit>(x =>
+        {
+            x.CollectionName = AbpCmsKitDbProperties.DbTablePrefix + "Visits";
         });
     }
 }

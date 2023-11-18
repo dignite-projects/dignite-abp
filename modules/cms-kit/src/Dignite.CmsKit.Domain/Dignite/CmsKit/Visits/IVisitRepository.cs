@@ -12,6 +12,7 @@ public interface IVisitRepository : IBasicRepository<Visit, Guid>
     Task<List<Visit>> GetListByUserAsync(
         [NotNull] string entityType,
         Guid userId,
+        DateTime? visitDate=null,
         CancellationToken cancellationToken = default
     );
 }

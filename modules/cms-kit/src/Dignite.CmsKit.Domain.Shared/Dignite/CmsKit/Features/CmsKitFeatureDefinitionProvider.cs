@@ -20,6 +20,15 @@ public class CmsKitFeatureDefinitionProvider : FeatureDefinitionProvider
             L("Feature:FavouriteEnableDescription"),
             new ToggleStringValueType());
         }
+
+        if (GlobalFeatureManager.Instance.IsEnabled<VisitsFeature>())
+        {
+            group.AddFeature(CmsKitFeatures.VisitEnable,
+            "true",
+            L("Feature:VisitEnable"),
+            L("Feature:VisitEnableDescription"),
+            new ToggleStringValueType());
+        }
     }
 
     private static LocalizableString L(string name)

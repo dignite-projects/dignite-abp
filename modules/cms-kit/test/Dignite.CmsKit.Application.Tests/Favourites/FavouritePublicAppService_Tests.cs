@@ -32,17 +32,17 @@ public class FavouritePublicAppService_Tests : CmsKitApplicationTestBase
     {
         _currentUser.Id.Returns(_cmsKitTestData.User1Id);
 
-        var newRating = await _favouriteAppService.CreateAsync(
+        var newFavourite = await _favouriteAppService.CreateAsync(
             _cmsKitTestData.EntityType1,
             _cmsKitTestData.EntityId2);
 
         UsingDbContext(context =>
         {
-            var ratings = context.Set<Favourite>().Where(x =>
+            var favourites = context.Set<Favourite>().Where(x =>
                 x.EntityId == _cmsKitTestData.EntityId2 && x.EntityType == _cmsKitTestData.EntityType1).ToList();
 
-            ratings
-                .Any(c => c.Id == newRating.Id && c.CreatorId == newRating.CreatorId)
+            favourites
+                .Any(c => c.Id == newFavourite.Id && c.CreatorId == newFavourite.CreatorId)
                 .ShouldBeTrue();
         });
     }

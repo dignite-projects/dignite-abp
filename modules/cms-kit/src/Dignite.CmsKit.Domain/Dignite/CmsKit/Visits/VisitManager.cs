@@ -17,17 +17,17 @@ public class VisitManager : DomainService
         VisitDefinitionStore = visitDefinitionStore;
     }
 
-    public async Task<Visit> CreateAsync(Guid userId, string entityType, string entityId)
+    public async Task<Visit> CreateAsync(
+        string entityType,
+        string entityId,
+        string userAgent,
+        string clientIpAddress,
+        int duration,
+        Guid? userId)
     {
         if (!await VisitDefinitionStore.IsDefinedAsync(entityType))
         {
             throw new EntityCantHaveVisitException(entityType);
-        }
-
-        var visit = await VisitRepository.GetVisitAsync(entityType, entityId, userId);
-        if (visit != null)
-        {
-            return visit;
         }
 
         return await VisitRepository.InsertAsync(
@@ -35,6 +35,9 @@ public class VisitManager : DomainService
                 GuidGenerator.Create(),
                 entityType,
                 entityId,
+                userAgent,
+                clientIpAddress,
+                duration,
                 userId,
                 CurrentTenant.Id
             )

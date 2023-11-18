@@ -6,7 +6,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace Dignite.CmsKit.Visits;
 
-public class Visit : BasicAggregateRoot<Guid>, IHasCreationTime, IMayHaveCreator
+public class Visit : BasicAggregateRoot<Guid>, IHasCreationTime,IMayHaveCreator
 {
     public virtual Guid? TenantId { get; protected set; }
 
@@ -19,11 +19,11 @@ public class Visit : BasicAggregateRoot<Guid>, IHasCreationTime, IMayHaveCreator
     public string ClientIpAddress { get; protected set; }
 
     /// <summary>
-    /// Represents the length of time a user browsing
+    /// Duration the length of seconds a user browsing
     /// </summary>
     public int Duration { get; protected set; }
 
-    public virtual Guid? CreatorId { get; set; }
+    public virtual Guid? CreatorId { get; protected set; }
 
     public virtual DateTime CreationTime { get; set; }
 

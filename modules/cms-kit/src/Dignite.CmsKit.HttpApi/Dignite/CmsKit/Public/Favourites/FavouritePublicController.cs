@@ -23,19 +23,19 @@ public class FavouritePublicController : CmsKitPublicControllerBase, IFavouriteP
         FavouritePublicAppService = favouritePublicAppService;
     }
 
-    [HttpPut]
+    [HttpPost]
     [Route("{entityType}/{entityId}")]
     [Authorize]
-    public virtual Task<FavouriteDto> CreateAsync(string entityType, string entityId)
+    public virtual async Task<FavouriteDto> CreateAsync(string entityType, string entityId)
     {
-        return FavouritePublicAppService.CreateAsync(entityType, entityId);
+        return await FavouritePublicAppService.CreateAsync(entityType, entityId);
     }
 
     [HttpDelete]
     [Route("{entityType}/{entityId}")]
     [Authorize]
-    public virtual Task DeleteAsync(string entityType, string entityId)
+    public virtual async Task DeleteAsync(string entityType, string entityId)
     {
-        return FavouritePublicAppService.DeleteAsync(entityType, entityId);
+        await FavouritePublicAppService.DeleteAsync(entityType, entityId);
     }
 }

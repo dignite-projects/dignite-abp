@@ -20,12 +20,12 @@ public abstract class FavouriteRepository_Tests<TStartupModule> : CmsKitTestBase
     [Fact]
     public async Task GetCurrentUserFavouriteAsync()
     {
-        var userRating = await _favouriteRepository.GetCurrentUserAsync(_cmsKitTestData.EntityType1,
+        var userFavourite = await _favouriteRepository.GetCurrentUserAsync(_cmsKitTestData.EntityType1,
             _cmsKitTestData.EntityId1, _cmsKitTestData.User1Id);
 
-        userRating.ShouldNotBeNull();
-        userRating.EntityId.ShouldBe(_cmsKitTestData.EntityId1);
-        userRating.EntityType.ShouldBe(_cmsKitTestData.EntityType1);
-        userRating.CreatorId.ShouldBe(_cmsKitTestData.User1Id);
+        userFavourite.ShouldNotBeNull();
+        userFavourite.EntityId.ShouldBe(_cmsKitTestData.EntityId1);
+        userFavourite.EntityType.ShouldBe(_cmsKitTestData.EntityType1);
+        userFavourite.CreatorId.ShouldBe(_cmsKitTestData.User1Id);
     }
 }

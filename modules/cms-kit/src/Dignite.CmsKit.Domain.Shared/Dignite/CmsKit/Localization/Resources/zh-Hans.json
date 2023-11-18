@@ -2,10 +2,15 @@
   "culture": "zh-Hans",
   "texts": {
     "CmsKit.Favourites": "收藏",
-    "CmsKit:Favourite:0001": "无法对实体 {EntityType} 进行评级。",
+    "CmsKit:Favourite:0001": "无法对实体 {EntityType} 进行收藏。",
     "Favourite": "收藏",
     "Feature:CmsKitGroup": "Cms Kit",
     "Feature:FavouriteEnable": "收藏",
-    "Feature:FavouriteEnableDescription": "CMS Kit的收藏功能允许用户收藏文章、商品等。"
+    "Feature:FavouriteEnableDescription": "CMS Kit的收藏功能允许用户收藏文章、商品等。",
+    "CmsKit.Visits": "浏览",
+    "CmsKit:Visit:0001": "无法记录浏览实体 {EntityType} 的信息。",
+    "Visit": "浏览",
+    "Feature:VisitEnable": "浏览",
+    "Feature:VisitEnableDescription": "CMS Kit的浏览功能,记录用户浏览文章、商品的信息等。"
   }
 }

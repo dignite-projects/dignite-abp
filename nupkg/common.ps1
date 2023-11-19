@@ -75,7 +75,8 @@ $solutions = (
     "modules/files",
     "modules/notification-center",
     "modules/pure-theme",
-    "modules/user-points"
+    "modules/user-points",
+    "modules/cms-kit"
 )
 
 # List of projects
@@ -161,5 +162,16 @@ $projects = (
     "modules/user-points/src/Dignite.Abp.UserPoints.HttpApi",
     "modules/user-points/src/Dignite.Abp.UserPoints.HttpApi.Client",
     "modules/user-points/src/Dignite.Abp.UserPoints.Installer",
-    "modules/user-points/src/Dignite.Abp.UserPoints.MongoDB"
+    "modules/user-points/src/Dignite.Abp.UserPoints.MongoDB",
+
+    # modules/cms-kit
+    "modules/cms-kit/src/Dignite.CmsKit.Application",
+    "modules/cms-kit/src/Dignite.CmsKit.Application.Contracts",
+    "modules/cms-kit/src/Dignite.CmsKit.Domain",
+    "modules/cms-kit/src/Dignite.CmsKit.Domain.Shared",
+    "modules/cms-kit/src/Dignite.CmsKit.EntityFrameworkCore",
+    "modules/cms-kit/src/Dignite.CmsKit.HttpApi",
+    "modules/cms-kit/src/Dignite.CmsKit.HttpApi.Client",
+    "modules/cms-kit/src/Dignite.CmsKit.Installer",
+    "modules/cms-kit/src/Dignite.CmsKit.MongoDB"
 )

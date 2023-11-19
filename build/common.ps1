@@ -13,7 +13,8 @@ $solutionPaths = @(
 		"../modules/files",
 		"../modules/notification-center",
 		"../modules/pure-theme",
-		"../modules/user-points"
+		"../modules/user-points",
+		"../modules/cms-kit"
 	)
 
 if ($full -eq "-f")

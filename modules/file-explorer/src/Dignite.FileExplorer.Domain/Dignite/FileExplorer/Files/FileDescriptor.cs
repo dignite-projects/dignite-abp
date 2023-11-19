@@ -10,8 +10,8 @@ public class FileDescriptor : FileBase, ICreationAuditedObject, IDeletionAudited
     protected FileDescriptor()
     { }
 
-    public FileDescriptor(Guid id, string containerName, string blobName, string name, string mineType, Guid? directoryId, string entityId, Guid? tenantId)
-        : base(id, containerName, blobName, name, mineType)
+    public FileDescriptor(Guid id, string containerName, string blobName, string name, string mimeType, Guid? directoryId, string entityId, Guid? tenantId)
+        : base(id, containerName, blobName, name, mimeType)
     {
         DirectoryId = directoryId;
         EntityId = entityId;

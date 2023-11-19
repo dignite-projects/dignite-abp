@@ -2,7 +2,7 @@
 
 `Dignite.Abp.DynamicForms` defines a set of forms for managing extension data of objects dynamically at runtime. It provides a common specification for retrieving, storing, and managing extension data, which is commonly used in systems with custom fields such as product SKUs, online surveys, CMS, and more.
 
-`Dignite.Abp.DynamicForms` vs. `[Volo.Abp.ObjectExtending](https://docs.abp.io/en/abp/latest/Object-Extensions)`:
+`Dignite.Abp.DynamicForms` vs. [Volo.Abp.ObjectExtending](https://docs.abp.io/en/abp/latest/Object-Extensions):
 
 - `[Volo.Abp.ObjectExtending]` extends objects with additional properties programmatically during development.
 - `Dignite.Abp.DynamicForms` allows administrators to define fields for objects dynamically during runtime.
@@ -21,7 +21,7 @@
 
 To get started with `Dignite.Abp.DynamicForms`, follow these steps:
 
-- Install the `Dignite.Abp.DynamicForms` NuGet package in your Blazor project.
+- Install the `Dignite.Abp.DynamicForms` Nuget package into the `Domain.Shared` project of the Abp project.
 
 - Add `DigniteAbpDynamicFormsModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 

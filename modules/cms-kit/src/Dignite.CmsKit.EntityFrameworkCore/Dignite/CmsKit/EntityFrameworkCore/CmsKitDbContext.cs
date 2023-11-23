@@ -24,7 +24,6 @@ public class CmsKitDbContext : AbpDbContext<CmsKitDbContext>, ICmsKitDbContext
     {
         base.OnModelCreating(builder);
 
-        builder.ConfigureCmsKit();
         builder.ConfigureDigniteCmsKit();
     }
 }

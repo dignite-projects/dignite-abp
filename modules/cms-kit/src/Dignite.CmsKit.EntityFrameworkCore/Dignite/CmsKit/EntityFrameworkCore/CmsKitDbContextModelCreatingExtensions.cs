@@ -6,6 +6,7 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.GlobalFeatures;
 using Volo.CmsKit;
 using Dignite.CmsKit.Visits;
+using Volo.CmsKit.EntityFrameworkCore;
 
 namespace Dignite.CmsKit.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ public static class CmsKitDbContextModelCreatingExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
+        builder.ConfigureCmsKit();
 
         if (GlobalFeatureManager.Instance.IsEnabled<FavouritesFeature>())
         {

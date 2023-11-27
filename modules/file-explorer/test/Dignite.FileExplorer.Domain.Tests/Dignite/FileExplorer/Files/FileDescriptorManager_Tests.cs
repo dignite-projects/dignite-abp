@@ -6,6 +6,7 @@ using Shouldly;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Dignite.FileExplorer.Files;
 
@@ -29,6 +30,7 @@ public class FileDescriptorManager_Tests : FileExplorerDomainTestBase
 
         var files = await _fileDescriptorManager.CreateAsync<DefaultContainer>(
             stream,
+            null,
             null,
             new FakeEntity(Guid.NewGuid())
             );

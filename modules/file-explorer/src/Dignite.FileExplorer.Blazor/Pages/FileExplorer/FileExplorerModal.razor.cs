@@ -26,6 +26,8 @@ public partial class FileExplorerModal
 
     protected string ContainerName { get; set; }
 
+    protected string CellName { get; set; }
+
     protected string EntityId { get; set; }
     protected FileContainerConfigurationDto Configuration { get; set; }
 
@@ -136,12 +138,13 @@ public partial class FileExplorerModal
         return base.UpdateGetListInputAsync();
     }
 
-    public virtual async Task OpenAsync(string containerName, string entityId)
+    public virtual async Task OpenAsync(string containerName, string cellName, string entityId)
     {
         try
         {
             CurrentPage = 1;
             ContainerName = containerName;
+            CellName = cellName;
             EntityId = entityId;
             GetListInput.DirectoryId = null;
 
@@ -211,6 +214,7 @@ public partial class FileExplorerModal
             file.Status = FileUploadStatus.Progressing;
             var input = new CreateFileInput();
             input.ContainerName = ContainerName;
+            input.CellName = CellName; 
             input.DirectoryId = GetListInput.DirectoryId;
             input.EntityId = EntityId;
             input.File = new RemoteStreamContent(

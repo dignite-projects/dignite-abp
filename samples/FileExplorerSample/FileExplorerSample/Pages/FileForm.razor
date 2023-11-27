@@ -11,7 +11,7 @@
                     Send file stream with form
                 </CardHeader>
                 <CardBody>
-                    <FileEditComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="7c804a75-665c-c575-13e5-3a07b0bbb0fe">
+                    <FileEditComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" CellName="cell1" Multiple="true" EntityId="7c804a75-665c-c575-13e5-3a07b0bbb0fe">
                     </FileEditComponent>
                 </CardBody>
             </Card>
@@ -22,7 +22,7 @@
                     Select uploaded files
                 </CardHeader>
                 <CardBody>
-                    <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" Multiple="true" EntityId="@EntityId" @bind-FileDescriptors="@Files">                        
+                    <FilePickerComponent ContainerName="@(FileExplorerSample.Services.SampleContainer.SampleContainerName)" CellName="cell1" Multiple="true" EntityId="@EntityId" @bind-FileDescriptors="@Files">
                     </FilePickerComponent>
                     <hr />
                     <h5>

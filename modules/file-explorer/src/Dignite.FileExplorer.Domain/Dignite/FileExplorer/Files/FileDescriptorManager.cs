@@ -26,12 +26,13 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
     /// <returns></returns>
     public virtual async Task<FileDescriptor> CreateAsync<TContainer>(
                                         [NotNull] IRemoteStreamContent stream,
+                                        [CanBeNull] string cellName,
                                         [CanBeNull] Guid? directoryId,
                                         [CanBeNull] IEntity entity)
         where TContainer : class
     {
         var containerName = BlobContainerNameAttribute.GetContainerName<TContainer>();
-        return await CreateAsync(containerName, stream, directoryId, entity);
+        return await CreateAsync(containerName, stream, cellName, directoryId, entity);
     }
 
     /// <summary>
@@ -45,12 +46,14 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
     public virtual async Task<FileDescriptor> CreateAsync(
                                         [NotNull] string containerName,
                                         [NotNull] IRemoteStreamContent stream,
+                                        [CanBeNull] string cellName,
                                         [CanBeNull] Guid? directoryId,
                                         [CanBeNull] IEntity entity)
     {
         return await CreateAsync(
             containerName,
             stream,
+            cellName,
             directoryId,
             entity == null ? null : GetEntityKey(entity)
             );
@@ -59,9 +62,26 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
     public virtual async Task<FileDescriptor> CreateAsync(
                                         [NotNull] string containerName,
                                         [NotNull] IRemoteStreamContent stream,
+                                        [CanBeNull] string cellName,
                                         [CanBeNull] Guid? directoryId,
                                         [CanBeNull] string entityId)
     {
+        var configuration = BlobContainerConfigurationProvider.Get(containerName);
+        var fileGrid = configuration.GetFileGridConfiguration();
+        var fileCells = fileGrid.FileCells;
+
+        if ((fileCells == null || !fileCells.Any()) && !cellName.IsNullOrEmpty())
+        {
+            throw new FileCellNameNotApplicableException();
+        }
+        if (fileCells != null && fileCells.Any())
+        {
+            if(cellName.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(cellName));
+            else if(!fileCells.Any(c=>c.Name.Equals(cellName,StringComparison.InvariantCultureIgnoreCase)))
+                throw new FileCellNameNotFoundException();
+        }
+
         var blobName = (await GenerateBlobNameAsync(containerName));
         //blobName += Path.GetExtension(stream.FileName).EnsureStartsWith('.'); //Add the extended name
         var fileDescriptor = new FileDescriptor(
@@ -70,6 +90,7 @@ public class FileDescriptorManager : FileManager<FileDescriptor, FileDescriptorS
                     blobName,
                     stream.FileName,
                     stream.ContentType,
+                    cellName,
                     directoryId,
                     entityId,
                     CurrentTenant.Id);

@@ -1,4 +1,6 @@
-﻿namespace Dignite.FileExplorer.Files;
+﻿using System.Collections.Generic;
+
+namespace Dignite.FileExplorer.Files;
 public class FileContainerConfigurationDto
 {
     /// <summary>
@@ -10,6 +12,8 @@ public class FileContainerConfigurationDto
     /// 
     /// </summary>
     public string[] AllowedFileTypeNames { get; set; }
+
+    public IReadOnlyList<FileCellDto> FileCells { get; set; }
 
 
     /// <summary>

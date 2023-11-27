@@ -10,4 +10,9 @@ public static class FileExplorerErrorCodes
         public const string InvalidMove = "FileExplorer:Directory:0004";
         public const string ForbidMovingToChild = "FileExplorer:Directory:0005";
     }
+    public static class Files
+    {
+        public const string CellNameNotApplicable = "FileExplorer:File:0001";
+        public const string CellNameNotFound = "FileExplorer:File:0002";
+    }
 }

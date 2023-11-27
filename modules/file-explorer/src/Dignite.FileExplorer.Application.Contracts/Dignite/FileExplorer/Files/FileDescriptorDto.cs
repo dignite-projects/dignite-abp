@@ -13,6 +13,8 @@ public class FileDescriptorDto : CreationAuditedEntityDto<Guid>
 
     public string BlobName { get; set; }
 
+    public string CellName { get; set; }
+
     /// <summary>
     /// Directory in container
     /// </summary>

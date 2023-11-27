@@ -1,6 +1,3 @@
-
-
-using Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 using Dignite.FileExplorer.Files;
 
 namespace FileExplorerSample.Pages;

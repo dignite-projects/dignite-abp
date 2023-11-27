@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Abp.BlobStoring;
 using Dignite.FileExplorer.Permissions;
@@ -8,7 +9,6 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Authorization;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
 
@@ -37,12 +37,12 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
         // Build a temporary file for authorization verification
-        var tempFileDescriptor = new FileDescriptor(Guid.NewGuid(), input.ContainerName, string.Empty, string.Empty, string.Empty, input.DirectoryId, input.EntityId, CurrentTenant.Id);
+        var tempFileDescriptor = new FileDescriptor(Guid.NewGuid(), input.ContainerName, string.Empty, string.Empty, string.Empty, input.CellName, input.DirectoryId, input.EntityId, CurrentTenant.Id);
         tempFileDescriptor.CreatorId = CurrentUser.Id;
         await AuthorizationService.CheckAsync(tempFileDescriptor, CommonOperations.Create);
 
         // formal start of file creation
-        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.DirectoryId, input.EntityId);
+        var fileDescriptor = await _fileManager.CreateAsync(input.ContainerName, input.File, input.CellName, input.DirectoryId, input.EntityId);
         return ObjectMapper.Map<FileDescriptor, FileDescriptorDto>(fileDescriptor);
     }
 
@@ -52,6 +52,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         var entity = await _fileRepository.GetAsync(id);
         entity.DirectoryId= input.DirectoryId;
         entity.Name = input.Name;
+        entity.CellName = input.CellName;
         await AuthorizationService.CheckAsync(entity, CommonOperations.Update);
         await _fileRepository.UpdateAsync(entity);
         return ObjectMapper.Map<FileDescriptor, FileDescriptorDto>(entity);
@@ -141,6 +142,15 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         dto.UpdateFilePermissionName= authorizationConfiguration.UpdateFilePermissionName;
         dto.DeleteFilePermissionName= authorizationConfiguration.DeleteFilePermissionName;
         dto.GetFilePermissionName= authorizationConfiguration.GetFilePermissionName;
+        dto.FileCells = configuration
+            .GetFileGridConfiguration()
+            .FileCells
+            .Select(c=>
+                new FileCellDto(
+                    c.Name,
+                    c.DisplayName?.Localize(StringLocalizerFactory)
+                    )
+                ).ToList();
 
         return Task.FromResult(dto);
     }

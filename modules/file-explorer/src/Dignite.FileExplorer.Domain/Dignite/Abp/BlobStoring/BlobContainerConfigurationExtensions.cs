@@ -16,8 +16,6 @@ public static class BlobContainerConfigurationExtensions
     }
 
 
-    #region Image resize handler configuration extenisions
-
     public static ImageResizeHandlerConfiguration GetImageResizeConfiguration(
         this BlobContainerConfiguration containerConfiguration)
     {
@@ -42,5 +40,19 @@ public static class BlobContainerConfigurationExtensions
         }
     }
 
-    #endregion Image resize handler configuration extenisions
+
+    public static FileGridConfiguration GetFileGridConfiguration(
+        this BlobContainerConfiguration containerConfiguration)
+    {
+        return new FileGridConfiguration(containerConfiguration);
+    }
+
+    public static void SetFileGridConfiguration(
+        this BlobContainerConfiguration containerConfiguration,
+        Action<FileGridConfiguration> configureAction = null)
+    {
+        if (configureAction != null)
+            configureAction(new FileGridConfiguration(containerConfiguration));
+    }
+
 }

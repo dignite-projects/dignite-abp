@@ -6,6 +6,8 @@
     "FileExplorer:Directory:0003": "目錄名無效！",
     "FileExplorer:Directory:0004": "無效的移動！",
     "FileExplorer:Directory:0005": "禁止移動到子目錄！",
+    "FileExplorer:File:0001": "單元格名稱不適用！",
+    "FileExplorer:File:0002": "單元格名稱不可用！",
     "FileExplorer": "文件管理器",
     "Permission:FileExplorer": "文件管理器",
     "Permission:Management": "管理文件",

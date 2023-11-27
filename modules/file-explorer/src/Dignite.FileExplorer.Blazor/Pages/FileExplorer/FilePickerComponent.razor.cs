@@ -27,6 +27,9 @@ public partial class FilePickerComponent
     [Parameter]
     public string ContainerName { get; set; }
 
+    [Parameter]
+    public string CellName { get; set; }
+
     /// <summary>
     /// 
     /// </summary>
@@ -119,7 +122,7 @@ public partial class FilePickerComponent
     {
         await OpeningFileExplorerModal.InvokeAsync();
 
-        await _fileExplorerModal.OpenAsync(ContainerName, EntityId);
+        await _fileExplorerModal.OpenAsync(ContainerName, CellName, EntityId);
     }
 
     protected internal virtual async Task RemoveFileAsync(FileDescriptorDto fileDescriptor)

@@ -6,6 +6,8 @@
     "FileExplorer:Directory:0003": "The directory name is invalid!",
     "FileExplorer:Directory:0004": "Invalid move!",
     "FileExplorer:Directory:0005": "Moving to subdirectories is prohibited!",
+    "FileExplorer:File:0001": "Cell Name Not Applicable!",
+    "FileExplorer:File:0002": "Cell name not available！",
     "FileExplorer": "File Explorer",
     "Permission:FileExplorer": "File Explorer",
     "Permission:Management": "Manage Files",

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Dignite.Abp.Files;
+using JetBrains.Annotations;
 using Volo.Abp.Content;
 using Volo.Abp.Validation;
 
@@ -19,6 +20,10 @@ public class CreateFileInput
     [Required]
     [DynamicStringLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxContainerNameLength))]
     public string ContainerName { get; set; }
+
+    [CanBeNull]
+    [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxCellNameLength))]
+    public string CellName { get; set; }
 
     /// <summary>
     /// Directory in container

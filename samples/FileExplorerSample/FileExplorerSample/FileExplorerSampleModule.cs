@@ -60,6 +60,7 @@ using Dignite.Abp.BlobStoring;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.BlobStoring.FileSystem;
 using Microsoft.AspNetCore.Cors;
+using FileExplorerSample.BlobStoring;
 
 namespace FileExplorerSample;
 
@@ -174,7 +175,7 @@ public class FileExplorerSampleModule : AbpModule
                     });
                     container.AddFileTypeCheckHandler(handler =>
                     {
-                        handler.AllowedFileTypeNames = new string[] { ".jpg", ".png", ".gif" };
+                        handler.AllowedFileTypeNames = new string[] { ".jpg", ".jpeg", ".png", ".gif" };
                     });
                     container.AddImageResizeHandler(handler =>
                     {
@@ -189,6 +190,12 @@ public class FileExplorerSampleModule : AbpModule
                         config.DeleteFilePermissionName = FileExplorerSamplePermissions.Files.Delete;
                         config.SetAuthorizationHandler<SampleEntityResourceAuthorizationHandler>();
                     });
+                    container.SetFileGridConfiguration(fg => fg.FileCells = new List<FileCell>
+                    {
+                        new FileCell("cell1")
+                    });
+
+                    container.SetBlobNameGenerator<YearMonthBlobNameGenerator>();
                 });
         });
         Configure<AbpBlobStoringOptions>(options =>

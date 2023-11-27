@@ -40,6 +40,7 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.ConfigureAbpFiles();
 
             //Properties
+            b.Property(q => q.CellName).HasMaxLength(FileDescriptorConsts.MaxCellNameLength);
             b.Property(q => q.EntityId).HasMaxLength(FileDescriptorConsts.MaxEntityIdLength);
 
             //Indexes

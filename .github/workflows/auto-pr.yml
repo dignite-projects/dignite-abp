@@ -1,13 +1,13 @@
-name: Merge branch main with rel-1.5
+name: Merge branch main with rel-1.6
 on:
   push:
     branches:
-      - rel-1.5
+      - rel-1.6
 permissions:
   contents: read
 
 jobs:
-  merge-main-with-rel-1-5:
+  merge-main-with-rel-1-6:
     permissions:
       contents: write  # for peter-evans/create-pull-request to create branch
       pull-requests: write  # for peter-evans/create-pull-request to create a PR
@@ -18,13 +18,13 @@ jobs:
           ref: main
       - name: Reset promotion branch
         run: |
-          git fetch origin rel-1.5:rel-1.5
-          git reset --hard rel-1.5
+          git fetch origin rel-1.5:rel-1.6
+          git reset --hard rel-1.6
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: auto-merge/rel-1-5/${{github.run_number}}
-          title: Merge branch main with rel-1.5
-          body: This PR generated automatically to merge main with rel-1.5 Please review the changed files before merging to prevent any errors that may occur.
+          branch: auto-merge/rel-1-6/${{github.run_number}}
+          title: Merge branch main with rel-1.6
+          body: This PR generated automatically to merge main with rel-1.6 Please review the changed files before merging to prevent any errors that may occur.
           reviewers: ${{github.actor}}
           token: ${{ github.token }}

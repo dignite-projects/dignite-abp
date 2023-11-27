@@ -10,13 +10,16 @@ public class FileDescriptor : FileBase, ICreationAuditedObject, IDeletionAudited
     protected FileDescriptor()
     { }
 
-    public FileDescriptor(Guid id, string containerName, string blobName, string name, string mimeType, Guid? directoryId, string entityId, Guid? tenantId)
+    public FileDescriptor(Guid id, string containerName, string blobName, string name, string mimeType, string cellName, Guid? directoryId, string entityId, Guid? tenantId)
         : base(id, containerName, blobName, name, mimeType)
     {
+        CellName = cellName;
         DirectoryId = directoryId;
         EntityId = entityId;
         TenantId = tenantId;
     }
+
+    public string CellName { get; set; }
 
     /// <summary>
     /// Directory in container

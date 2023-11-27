@@ -36,6 +36,9 @@ public partial class FileEditComponent
     [Parameter]
     public string ContainerName { get; set; }
 
+    [Parameter]
+    public string CellName { get; set; }
+
     /// <summary>
     /// 
     /// </summary>

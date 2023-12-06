@@ -3,7 +3,9 @@ using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
@@ -47,6 +49,7 @@ public class DigniteAbpAspNetCoreMvcUiPureThemeModule : AbpModule
                 .Add(PureThemeBundles.Styles.Public, bundle =>
                 {
                     bundle
+                        .AddBaseBundles(StandardBundles.Styles.Global)
                         .AddContributors(typeof(PureThemePublicStyleContributor));
                 });
 
@@ -55,6 +58,7 @@ public class DigniteAbpAspNetCoreMvcUiPureThemeModule : AbpModule
                 .Add(PureThemeBundles.Scripts.Pubilc, bundle =>
                 {
                     bundle
+                        .AddBaseBundles(StandardBundles.Scripts.Global)
                         .AddContributors(typeof(PureThemePublicScriptContributor));
                 });
         });

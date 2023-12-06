@@ -28,25 +28,6 @@ Pure Theme 提供了 Public 布局：
 
 ![Blazor Pure Theme](images/aspnetcore-puretheme.jpg)
 
-在 Public 布局中，CSS 和 JS 文件经过了精简处理。以下是精简后的代码演示：
-
-```html
-<link rel="stylesheet" href="/libs/abp/core/abp.css?_v=638260250098203318" />
-<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css?_v=638260250098536014" />
-<link rel="stylesheet" href="/libs/@fortawesome/fontawesome-free/css/all.css?_v=638260250098193346" />
-<link rel="stylesheet" href="/libs/@fortawesome/fontawesome-free/css/v4-shims.css?_v=638260250098203318" />
-<link rel="stylesheet" href="/themes/pure/public.css?_v=638315126001630796" />
-```
-
-```html
-<script src="/libs/abp/utils/abp-utils.umd.min.js?_v=638207453649800000"></script>
-<script src="/libs/abp/core/abp.js?_v=638260250098413048"></script>
-<script src="/libs/jquery/jquery.js?_v=638260250098890227"></script>
-<script src="/libs/abp/jquery/abp.jquery.js?_v=638260250236301165"></script>
-<script src="/libs/bootstrap/js/bootstrap.bundle.js?_v=638260250098569464"></script>
-<script src="/themes/pure/public.js?_v=638315126001630796"></script>
-```
-
 ## 示例
 
 请前往 [GitHub](https://github.com/dignite-projects/dignite-abp/tree/main/samples/PureTheme.BlazorServerSample) 下载示例，并按照说明运行以体验它。

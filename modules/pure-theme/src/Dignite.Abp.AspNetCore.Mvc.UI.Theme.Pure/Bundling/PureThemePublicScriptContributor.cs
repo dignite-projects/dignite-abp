@@ -17,7 +17,7 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
     typeof(JQueryValidationUnobtrusiveScriptContributor),
     typeof(JQueryFormScriptContributor),
     typeof(Sweetalert2ScriptContributor),
-    typeof(ToastrScriptBundleContributor),
+    typeof(ToastrScriptBundleContributor)
     )]
 public class PureThemePublicScriptContributor : BundleContributor
 {

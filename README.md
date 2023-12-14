@@ -32,6 +32,12 @@ Dignite Abp Files is developed based on ABP BlobStoring and provides file type v
 
 - [Sample](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
 
+### Cms Kit
+
+Developed based on [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index), added [**Favourite**](Favourite.md) feature and [**Visit**](Visit.md) feature.
+
+- [Document](https://learn.dignite.com/en/abp/latest/Cms-Kit/Index)
+
 ### Pure Theme
 
 Abp theme packages developed by Dignite Abp team, including both Blazor and MVC versions. The Blazor version is based on BlazoriseUI, while the MVC version is built on Bootstrap.

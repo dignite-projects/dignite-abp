@@ -1,3 +1,10 @@
+
+- [日本語](README.ja.md)
+
+- [简体中文](README.zh_Hans.md)
+
+- [繁體中文](README.zh_Hant.md)
+
 # Dignite abp-modules
 
 Adding to the ecology of the ABP framework: Adds notification system, dynamic forms module, file manager, Pure Theme, and other enhancements.

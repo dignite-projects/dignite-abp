@@ -1,3 +1,10 @@
+
+- [English](README.md)
+
+- [日本語](README.ja.md)
+
+- [繁體中文](README.zh_Hant.md)
+
 # Dignite ABP 模块
 
 为 ABP 框架生态系统增添力量：添加通知系统、动态表单模块、文件管理器、Pure 主题等增强功能。

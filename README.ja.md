@@ -1,3 +1,10 @@
+
+- [English](README.md)
+
+- [简体中文](README.zh_Hans.md)
+
+- [繁體中文](README.zh_Hant.md)
+
 # Dignite ABP モジュール
 
 ABP フレームワークのエコロジーに追加: 通知システム、動的フォームモジュール、ファイルマネージャー、Pureテーマなどの拡張機能を追加。

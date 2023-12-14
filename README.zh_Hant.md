@@ -1,3 +1,10 @@
+
+- [English](README.md)
+
+- [日本語](README.ja.md)
+
+- [简体中文](README.zh_Hans.md)
+
 # Dignite ABP 模組
 
 添增 ABP 框架生態系：增加通知系統、動態表單模組、檔案管理員、Pure 主題等其他增強功能。

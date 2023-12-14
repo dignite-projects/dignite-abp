@@ -7,7 +7,7 @@ public class GlobalCmsKitFeatures : GlobalModuleFeatures
 {
     public const string ModuleName = "DigniteCmsKit";
     public FavouritesFeature Favourites => GetFeature<FavouritesFeature>();
-    public VisitsFeature Visitss => GetFeature<VisitsFeature>();
+    public VisitsFeature Visits => GetFeature<VisitsFeature>();
 
     public GlobalCmsKitFeatures([NotNull] GlobalFeatureManager featureManager)
         : base(featureManager)

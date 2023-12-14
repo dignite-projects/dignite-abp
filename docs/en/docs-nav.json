@@ -78,6 +78,23 @@
       ]
     },
     {
+      "text": "CMS Kit",
+      "items": [
+        {
+          "text": "CMS Kit Module",
+          "path": "Cms-Kit/Index.md"
+        },
+        {
+          "text": "Favourite",
+          "path": "Cms-Kit/Favourite.md"
+        },
+        {
+          "text": "Visit",
+          "path": "Cms-Kit/Visit.md"
+        }
+      ]
+    },
+    {
       "text": "Pure Theme",
       "items": [
         {

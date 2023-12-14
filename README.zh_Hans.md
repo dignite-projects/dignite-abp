@@ -15,7 +15,7 @@
 
 参考 Asp.Net Boilerplate 的通知系统，移植到 ABP 框架中。使用简单的代码发送通知，并在系统内实现实时通知，同时支持电子邮件通知。开发人员还可以实现自己的通知方法。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Notifications)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Notifications)
 
 - [示例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
@@ -23,19 +23,19 @@
 
 动态表单允许系统管理员在线动态自定义业务对象实体的字段，主要应用于购物商城系统中商品的 SKU、投票和研究系统、CMS 等系统。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Dynamic-Forms)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Dynamic-Forms)
 
 ### 积分系统
 
 积分增强用户参与、建立忠诚度，并激励积极参与和贡献，可在电子商务、社交媒体、游戏、教育和医疗等广泛领域使用。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Points)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Points)
 
 ### 文件浏览器
 
 Dignite ABP Files 是基于 ABP BlobStoring 开发的，为文件上传过程提供文件类型验证和文件大小验证。开发人员还可以扩展附加处理事件。
 
-- [文档](https://learn.dignite.com/en/abp/latest/File-Explorer)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/File-Explorer)
 
 - [示例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
 
@@ -43,13 +43,13 @@ Dignite ABP Files 是基于 ABP BlobStoring 开发的，为文件上传过程提
 
 基于 [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) 开发，添加了 [**Favourite**](Favourite.md) 功能和 [**Visit**](Visit.md) 功能。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Cms-Kit/Index)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Cms-Kit/Index)
 
 ### Pure 主题
 
 由 Dignite ABP 团队开发的 Abp 主题包，包括 Blazor 和 MVC 版本。Blazor 版本基于 BlazoriseUI，而 MVC 版本基于 Bootstrap 构建。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Pure-Theme)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Pure-Theme)
 
 - [示例](https://github.com/dignite-projects/dignite-abp/tree/main/modules/pure-theme)
 
@@ -57,37 +57,37 @@ Dignite ABP Files 是基于 ABP BlobStoring 开发的，为文件上传过程提
 
 每个租户可以拥有独立的视图 UI 集，开发人员可以轻松个性化租户 UI。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Views-MultiTenancy)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Views-MultiTenancy)
 
 ### 多租户本地化
 
 每个租户可以拥有独立的语言包，用于个性化租户内容呈现。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Localization-MultiTenancy)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Localization-MultiTenancy)
 
 ### BlazoriseUI 组件
 
 基于 Blazorise 开发的一系列 Blazor 组件，包括支持拖放的树组件和扩展功能的 DataGrid 等。
 
-- [文档](https://learn.dignite.com/en/abp/latest/BlazoriseUI-Component)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/BlazoriseUI-Component)
 
 ### Ckeditor 组件
 
 用于 Asp.net Blazor 的 Ckeditor 组件，支持服务器模式和 WebAssembly 模式。此外，它与动态表单模块兼容。
 
-- [文档](https://learn.dignite.com/en/abp/latest/Blazor-Ckeditor-Component)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Blazor-Ckeditor-Component)
 
 ## 想要贡献？
 
 Dignite ABP 基于 [Abp Framework](https://github.com/abpframework) 构建的开源项目，最初用于 Dignite 内部使用，现在正式对 ABP 框架生态系统进行开源补充。
 
-如果您想成为这个项目的一部分，请参阅[贡献指南](https://learn.dignite.com/en/abp/latest/Contribution/Index)。
+如果您想成为这个项目的一部分，请参阅[贡献指南](https://learn.dignite.com/zh-Hans/abp/latest/Contribution/Index)。
 
 ## 官方链接
 
 - <a href="https://dignite.com/dignite-abp" target="_blank">官方网站</a>
 
-- <a href="https://learn.dignite.com/en/abp" target="_blank">文档</a>
+- <a href="https://learn.dignite.com/zh-Hans/abp" target="_blank">文档</a>
 
 ## 支持 Dignite ABP
 

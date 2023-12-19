@@ -95,9 +95,28 @@
 
     添加 `FileExplorerHttpApiModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
 
-## 
+## 配置文件网格
 
-## 图片处理器
+文件网格可以对容器分隔为多个单元格，方便将文件分单元格存储。
+
+例如：一辆车的图片分为外观、内饰、其他三个单元格
+
+````csharp
+Configure<AbpBlobStoringOptions>(options =>
+{
+    options.Containers.Configure<CarPictureContainer>(container =>
+    {        
+        container.SetFileGridConfiguration(fg => fg.FileCells = new List<FileCell>
+        {
+            new FileCell("appearance",L("appearance")),               //外观
+            new FileCell("interior",L("interior")),                   //内饰
+            new FileCell("other",L("other")),                          //其他
+        });
+    });
+});
+````
+
+## 配置图片处理器
 
 本模块新增图片处理器，当上传的图片宽度或高度超出配置的尺寸时，处理器自动压缩图片的宽度和高度。
 
@@ -242,6 +261,10 @@ Configure<AbpBlobStoringOptions>(options =>
     文件存储容器的名称。
     > 关于存储容器参见 [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer)
 
+  - CellName
+
+    文件存储单元格的名称。
+
   - Multiple
 
     是否允许多选文件。
@@ -305,6 +328,10 @@ Configure<AbpBlobStoringOptions>(options =>
 
     文件存储容器的名称。
     > 关于存储容器参见 [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer)
+    
+  - CellName
+
+    文件存储单元格的名称。
 
   - Multiple
 

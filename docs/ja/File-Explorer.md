@@ -91,6 +91,27 @@
 
    [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics)の`[DependsOn(...)]`プロパティリストに`FileExplorerHttpApiModule`を追加します。
 
+## ファイルグリッドの設定
+
+ファイルグリッドを使うと、コンテナを複数のセルに分けることができ、セルにファイルを簡単に格納することができます。
+
+例えば、車の写真を外装、内装、その他の3つのセルに分ける。
+
+````csharp
+Configure<AbpBlobStoringOptions>(options =>
+{
+    options.Containers.Configure<CarPictureContainer>(container =>
+    {        
+        container.SetFileGridConfiguration(fg => fg.FileCells = new List<FileCell>
+        {
+            new FileCell("appearance",L("appearance")),               //外装
+            new FileCell("interior",L("interior")),                   //内装
+            new FileCell("other",L("other")),                          //その他
+        });
+    });
+});
+````
+
 ## 画像の幅と高さのリサイズハンドラー
 
 このモジュールには、アップロードされた画像の幅または高さが設定されたサイズを超える場合、ハンドラーが自動的に画像の幅と高さを圧縮する機能が追加されています。
@@ -240,6 +261,10 @@ container =>
     ファイルの格納コンテナの名前。
     > [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer)についてはこちらを参照してください。
 
+  - CellName
+
+    ファイル保存セルの名前。
+
   - Multiple
 
     複数のファイルの選択を許可するかどうか。
@@ -303,6 +328,10 @@ container =>
 
     ファイルの格納コンテナの名前。
     > [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer)についてはこちらを参照してください。
+
+  - CellName
+
+    ファイル保存セルの名前。
 
   - Multiple
 

@@ -95,6 +95,27 @@ The File Explorer is an application module for the ABP framework used to upload 
 
   Add `FileExplorerHttpApiModule` to the `[DependsOn(...)]` property list in the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
+## Configuring the File Grid
+
+The file grid allows you to separate containers into cells, making it easier to store files in cells.
+
+For example, a picture of a car is divided into three cells: appearance, interior, and others.
+
+````csharp
+Configure<AbpBlobStoringOptions>(options =>
+{
+    options.Containers.Configure<CarPictureContainer>(container =>
+    {        
+        container.SetFileGridConfiguration(fg => fg.FileCells = new List<FileCell>
+        {
+            new FileCell("appearance",L("appearance")),               //Appearance
+            new FileCell("interior",L("interior")),                   //Interior
+            new FileCell("other",L("other")),                          //Others
+        });
+    });
+});
+````
+
 ## Image Width and Height Resizer
 
 This module introduces an image width and height resizer. When the uploaded image's width or height exceeds the configured dimensions, the resizer automatically compresses the image's width and height.
@@ -241,6 +262,10 @@ Users can select files without immediately uploading them to the server. They ar
     Name of the file storage container.
     > For more information about storage containers, see [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer).
 
+  - CellName
+
+    The name of the file storage cell.
+
   - Multiple
 
     Whether to allow multiple file selection.
@@ -304,6 +329,10 @@ Users can select previously uploaded files or immediately upload a new file.
 
     Name of the file storage container.
     > For more information about storage containers, see [Typed IBlobContainer](https://docs.abp.io/en/abp/latest/Blob-Storing#typed-iblobcontainer).
+
+  - CellName
+
+    The name of the file storage cell.
 
   - Multiple
 

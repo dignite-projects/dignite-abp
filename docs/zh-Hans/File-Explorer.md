@@ -95,9 +95,11 @@
 
     添加 `FileExplorerHttpApiModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]`属性列表中。
 
-## 图片宽高尺寸处理器
+## 
 
-本模块新增图片宽高尺寸处理器，当上传的图片宽度或高度超出配置的尺寸时，处理器自动压缩图片的宽度和高度。
+## 图片处理器
+
+本模块新增图片处理器，当上传的图片宽度或高度超出配置的尺寸时，处理器自动压缩图片的宽度和高度。
 
 在`ConfigureServices` 方法中配置允许上传的文件类型：
 

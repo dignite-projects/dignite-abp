@@ -139,7 +139,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
                     }
                 }
 
-                return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, entity?.Size, true);
+                return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, stream.Length, true);
             }
         }
         return null;

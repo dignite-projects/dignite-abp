@@ -122,7 +122,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 
             if (stream != null)
             {
-                if (imageResize!=null)
+                if (imageResize!=null && (imageResize.Width>0 || imageResize.Height>0))
                 {
                     if (ImageFormatHelper.IsValidImage(stream, ImageFormatHelper.AllowedImageUploadFormats))
                     {

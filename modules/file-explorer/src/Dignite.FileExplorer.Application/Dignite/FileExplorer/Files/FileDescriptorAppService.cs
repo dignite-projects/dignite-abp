@@ -135,12 +135,11 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
                         if (result.State == ImageProcessState.Done)
                         {
                             stream = result.Result;
-                            return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, stream.Length, true);
                         }
                     }
                 }
 
-                return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, stream.Length, true);
+                return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, entity?.Size, true);
             }
         }
         return null;

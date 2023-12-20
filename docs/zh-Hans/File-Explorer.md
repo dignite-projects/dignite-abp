@@ -234,9 +234,46 @@ Configure<AbpBlobStoringOptions>(options =>
 });
 ````
 
-## 文件上传
+## HttpApi层
 
-### 文件组件
+### FileDescriptorController
+
+- `上传文件`
+  接口地址：api/file-explorer/files
+  Http方法：post
+  
+- `更新文件信息`
+  接口地址：api/file-explorer/files
+  Http方法：put
+
+- `删除文件`
+  接口地址：api/file-explorer/files/{id}
+  Http方法：delete
+
+- `获取文件信息`
+  接口地址：api/file-explorer/files/{id}
+  Http方法：get
+  
+- `获取文件列表`
+  接口地址：api/file-explorer/files
+  Http方法：get
+  
+- `获取容器配置`
+  接口地址：api/file-explorer/files/configuration
+  Http方法：get
+
+- `下载文件`
+  接口地址：api/file-explorer/files/download/{containerName}/{*blobName}
+  Http方法：get
+
+- `获取文件流`
+  接口地址：api/file-explorer/files/{containerName}/{*blobName}
+  Http方法：get
+  裁切图片的参数：在api url中指定返回图片的宽度和高度，例如：api/file-explorer/files/{containerName}/{*blobName}?Width=600&Height=400
+
+## 适用于Blazor的文件上传组件
+
+### 文件上传组件
 
 用户选择文件后不会马上上传文件到服务器，当提交整个表单时，一起提交到服务器端。
 ![FileEditComponent](images/FileEditComponent.png)

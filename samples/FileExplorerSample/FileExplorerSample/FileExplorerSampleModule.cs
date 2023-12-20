@@ -175,7 +175,7 @@ public class FileExplorerSampleModule : AbpModule
                     });
                     container.AddFileTypeCheckHandler(handler =>
                     {
-                        handler.AllowedFileTypeNames = new string[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        handler.AllowedFileTypeNames = new string[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
                     });
                     container.AddImageResizeHandler(handler =>
                     {

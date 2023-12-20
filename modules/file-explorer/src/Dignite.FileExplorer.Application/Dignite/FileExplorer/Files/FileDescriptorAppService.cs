@@ -124,15 +124,18 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
             {
                 if (imageResize!=null)
                 {
-                    var result = await _imageResizer.ResizeAsync(
+                    if (ImageFormatHelper.IsValidImage(stream, ImageFormatHelper.AllowedImageUploadFormats))
+                    {
+                        var result = await _imageResizer.ResizeAsync(
                         stream,
                         new ImageResizeArgs(imageResize.Width, imageResize.Height, ImageResizeMode.Crop),
                         entity?.MimeType
                         );
 
-                    if (result.State == ImageProcessState.Done)
-                    {
-                        stream = result.Result;
+                        if (result.State == ImageProcessState.Done)
+                        {
+                            stream = result.Result;
+                        }
                     }
                 }
 

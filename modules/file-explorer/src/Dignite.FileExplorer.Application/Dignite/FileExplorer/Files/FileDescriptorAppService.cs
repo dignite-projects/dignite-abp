@@ -7,10 +7,12 @@ using Dignite.Abp.BlobStoring;
 using Dignite.FileExplorer.Permissions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Content;
+using Volo.Abp.Imaging;
 
 namespace Dignite.FileExplorer.Files;
 
@@ -20,17 +22,20 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
     private readonly FileDescriptorManager _fileManager;
     private readonly IBlobContainerFactory _blobContainerFactory;
     private readonly IBlobContainerConfigurationProvider _blobContainerConfigurationProvider;
+    private readonly IImageResizer _imageResizer;
 
     public FileDescriptorAppService(
         IFileDescriptorRepository blobRepository,
         FileDescriptorManager fileManager,
         IBlobContainerFactory blobContainerFactory,
-        IBlobContainerConfigurationProvider blobContainerConfigurationProvider)
+        IBlobContainerConfigurationProvider blobContainerConfigurationProvider,
+        IImageResizer imageResizer)
     {
         _fileRepository = blobRepository;
         _fileManager = fileManager;
         _blobContainerFactory = blobContainerFactory;
         _blobContainerConfigurationProvider = blobContainerConfigurationProvider;
+        _imageResizer = imageResizer;
     }
 
     [Authorize]
@@ -100,7 +105,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
             );
     }
 
-    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
+    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName, ImageResizeInput imageResize = null)
     {
         var entity = await _fileManager.GetOrNullAsync(containerName, blobName);
 
@@ -117,6 +122,20 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 
             if (stream != null)
             {
+                if (imageResize!=null)
+                {
+                    var result = await _imageResizer.ResizeAsync(
+                        stream,
+                        new ImageResizeArgs(imageResize.Width, imageResize.Height, ImageResizeMode.Crop),
+                        entity?.MimeType
+                        );
+
+                    if (result.State == ImageProcessState.Done)
+                    {
+                        stream = result.Result;
+                    }
+                }
+
                 return new RemoteStreamContent(stream, entity?.Name, entity?.MimeType, entity?.Size, true);
             }
         }

@@ -60,7 +60,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
         }
 
         //Give it to the handlers before saving
-        await FileHandlers(file, stream);
+        stream = await FileHandlers(file, stream);
 
         //Save file information to database
         file = await SaveFileInformationAsync(file, stream, cancellationToken);
@@ -163,7 +163,7 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
     /// <param name="file"></param>
     /// <param name="stream"></param>
     /// <returns></returns>
-    private async Task FileHandlers(TFile file, Stream stream)
+    private async Task<Stream> FileHandlers(TFile file, Stream stream)
     {
         var configuration = BlobContainerConfigurationProvider.Get(file.ContainerName);
         // blob process handlers
@@ -182,8 +182,11 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
                     await handler.ExecuteAsync(context);
                 }
+                return context.BlobStream;
             }
         }
+
+        return stream;
     }
 
     protected virtual Task CheckFileAsync([NotNull] TFile file)

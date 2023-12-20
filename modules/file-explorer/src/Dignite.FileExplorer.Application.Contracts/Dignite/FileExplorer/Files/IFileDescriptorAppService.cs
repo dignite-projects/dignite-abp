@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Volo.Abp.Application.Services;
@@ -9,12 +10,13 @@ namespace Dignite.FileExplorer.Files;
 public interface IFileDescriptorAppService : ICrudAppService<FileDescriptorDto, Guid, GetFilesInput, CreateFileInput, UpdateFileInput>
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
     /// <param name="containerName"></param>
     /// <param name="blobName"></param>
+    /// <param name="imageResize"></param>
     /// <returns></returns>
-    Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName);
+    Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName, ImageResizeInput imageResize =null);
 
     /// <summary>
     /// 

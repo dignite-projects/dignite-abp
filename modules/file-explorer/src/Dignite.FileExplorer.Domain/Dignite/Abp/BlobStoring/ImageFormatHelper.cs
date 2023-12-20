@@ -8,6 +8,7 @@ using SixLabors.ImageSharp.Formats.Bmp;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.Formats.Webp;
 
 namespace Dignite.Abp.BlobStoring;
 
@@ -19,6 +20,7 @@ public class ImageFormatHelper
             PngFormat.Instance,
             GifFormat.Instance,
             BmpFormat.Instance,
+            WebpFormat.Instance,
         };
 
     public static string AllowedImageFormatsJoint => string.Join(",", AllowedImageUploadFormats.Select(x => x.Name));

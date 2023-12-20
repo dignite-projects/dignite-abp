@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
@@ -89,9 +90,9 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
 
     [HttpGet]
     [Route("{containerName}/{*blobName}")]
-    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName)
+    public virtual async Task<IRemoteStreamContent> GetStreamAsync([NotNull] string containerName, [NotNull] string blobName, ImageResizeInput imageResize = null)
     {
-        return await _fileAppService.GetStreamAsync(containerName, blobName);
+        return await _fileAppService.GetStreamAsync(containerName, blobName, imageResize);
     }
 
     private string GetFileUrl(FileDescriptorDto file)

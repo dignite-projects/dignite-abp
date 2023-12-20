@@ -15,7 +15,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
+	<PackageReference Include="Volo.Abp.Imaging.Abstractions" Version="7.4.0" />
+	<PackageReference Include="Volo.Abp.Imaging.ImageSharp" Version="7.4.0" />
 	<PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.0" />
     <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.4.0" />
     <ProjectReference Include="..\..\..\files\src\Dignite.Abp.Files.Domain\Dignite.Abp.Files.Domain.csproj" />

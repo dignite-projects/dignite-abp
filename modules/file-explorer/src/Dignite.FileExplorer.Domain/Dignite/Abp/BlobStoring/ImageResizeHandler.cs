@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Imaging;
 
 namespace Dignite.Abp.BlobStoring;
 
@@ -11,9 +11,17 @@ namespace Dignite.Abp.BlobStoring;
 /// </summary>
 public class ImageResizeHandler : IFileHandler, ITransientDependency
 {
+    private readonly IImageResizer _imageResizer;
+    private readonly IImageCompressor _imageCompressor;
+
+    public ImageResizeHandler(IImageResizer imageResizer, IImageCompressor imageCompressor)
+    {
+        _imageResizer = imageResizer;
+        _imageCompressor = imageCompressor;
+    }
+
     public async Task ExecuteAsync(FileHandlerContext context)
     {
-        var position = context.BlobStream.Position;
         var configuration = context.ContainerConfiguration.GetImageResizeConfiguration();
 
         if (ImageFormatHelper.IsValidImage(context.BlobStream, ImageFormatHelper.AllowedImageUploadFormats))
@@ -35,27 +43,54 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
 
                 if (image.Width > configuration.ImageWidth || image.Height > configuration.ImageHeight)
                 {
-                    image.Metadata.ExifProfile = null;
-                    image.Metadata.XmpProfile = null;
-                    image.Mutate(x =>
+                    var resizeResult = await _imageResizer.ResizeAsync(
+                        context.BlobStream,
+                        new ImageResizeArgs(configuration.ImageWidth, configuration.ImageHeight, ImageResizeMode.Max),
+                        context.File.MimeType
+                        );
+                    if (resizeResult.State == ImageProcessState.Done)
                     {
-                        x.Resize(new ResizeOptions()
+                        context.BlobStream = resizeResult.Result;
+                    }
+                    else
+                    {
+                        if (resizeResult.Result is not null && context.BlobStream != resizeResult.Result && resizeResult.Result.CanRead)
                         {
-                            Mode = ResizeMode.Max,
-                            Size = new Size(configuration.ImageWidth, configuration.ImageHeight)
-                        });
-                    });
+                            context.BlobStream = resizeResult.Result;
+                        }
+                        else
+                        {
+                            throw new BusinessException(
+                                code: "Dignite.Abp.BlobStoring:010006",
+                                message: resizeResult.State.ToString()
+                            );
+                        }
+                    }
+                }
 
-                    var encoder = new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder()
+                //Compressed image
+                var compressResult = await _imageCompressor.CompressAsync(
+                    context.BlobStream, /* A stream object that represents an image */
+                    mimeType: context.File.MimeType
+                );
+
+                if (compressResult.State == ImageProcessState.Done)
+                {
+                    context.BlobStream = compressResult.Result;
+                }
+                else
+                {
+                    if (compressResult.Result is not null && context.BlobStream != compressResult.Result && compressResult.Result.CanRead)
                     {
-                        Quality = 90
-                    };
-
-                    image.Save(context.BlobStream, encoder);
-
-                    // Length of clipping stream
-                    context.BlobStream.SetLength(context.BlobStream.Position);
-                    context.BlobStream.Position = 0;
+                        context.BlobStream = compressResult.Result;
+                    }
+                    else
+                    {
+                        throw new BusinessException(
+                            code: "Dignite.Abp.BlobStoring:010006",
+                            message: compressResult.State.ToString()
+                        );
+                    }
                 }
             }
         }

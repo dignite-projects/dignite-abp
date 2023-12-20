@@ -5,7 +5,7 @@ public class ImageResizeInput
     {
     }
 
-    public ImageResizeInput(int width, int height)
+    public ImageResizeInput(int? width, int? height)
     {
         Width = width;
         Height = height;

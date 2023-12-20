@@ -128,7 +128,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
                     {
                         var result = await _imageResizer.ResizeAsync(
                         stream,
-                        new ImageResizeArgs(imageResize.Width, imageResize.Height, ImageResizeMode.Crop),
+                        new ImageResizeArgs(imageResize.Width>0?imageResize.Width:null, imageResize.Height>0?imageResize.Height:null, ImageResizeMode.Crop),
                         entity?.MimeType
                         );
 

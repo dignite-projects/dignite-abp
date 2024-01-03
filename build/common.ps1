@@ -7,14 +7,14 @@ $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 # List of solutions used only in development mode
 $solutionPaths = @(
 		"../framework",
-		"../modules/ckeditor-component",
+		"../modules/ckeditor-component",,
+		"../modules/cms-kit"
 		"../modules/field-customizing",
 		"../modules/file-explorer",
 		"../modules/files",
 		"../modules/notification-center",
 		"../modules/pure-theme",
-		"../modules/user-points",
-		"../modules/cms-kit"
+		"../modules/user-points"
 	)
 
 if ($full -eq "-f")

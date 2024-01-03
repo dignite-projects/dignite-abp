@@ -15,7 +15,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.MongoDB" Version="7.4.5" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Domain\Dignite.Abp.NotificationCenter.Domain.csproj" />
   </ItemGroup>
 

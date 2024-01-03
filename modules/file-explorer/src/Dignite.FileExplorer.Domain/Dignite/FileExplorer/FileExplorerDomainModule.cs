@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain;
 using Volo.Abp.Domain.Entities.Events.Distributed;
-using Volo.Abp.Imaging;
 using Volo.Abp.Modularity;
 
 namespace Dignite.FileExplorer;
@@ -14,9 +13,7 @@ namespace Dignite.FileExplorer;
     typeof(AbpDddDomainModule),
     typeof(FileExplorerDomainSharedModule),
     typeof(DigniteAbpFilesDomainModule),
-    typeof(AbpAutoMapperModule),
-    typeof(AbpImagingAbstractionsModule),
-    typeof(AbpImagingImageSharpModule)
+    typeof(AbpAutoMapperModule)
 )]
 public class FileExplorerDomainModule : AbpModule
 {

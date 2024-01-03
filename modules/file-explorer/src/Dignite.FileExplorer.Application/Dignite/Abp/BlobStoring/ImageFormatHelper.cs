@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -25,22 +24,12 @@ public class ImageFormatHelper
 
     public static string AllowedImageFormatsJoint => string.Join(",", AllowedImageUploadFormats.Select(x => x.Name));
 
-    public static IImageFormat GetImageRawFormat(Stream stream)
-    {
-        using (var image = Image.Load(stream, out var imageFormat))
-        {
-            stream.Position = 0;
-            return imageFormat;
-        }
-    }
 
-    public static bool IsValidImage(Stream stream, ICollection<IImageFormat> validFormats)
+    public static bool IsValidImage(string mimeType, ICollection<IImageFormat> validFormats)
     {
         try
         {
-            var imageFormat = GetImageRawFormat(stream);
-
-            return validFormats.Contains(imageFormat);
+            return validFormats.Any(img => img.MimeTypes.Any(mt => mimeType.Equals(mt)));
         }
         catch
         {

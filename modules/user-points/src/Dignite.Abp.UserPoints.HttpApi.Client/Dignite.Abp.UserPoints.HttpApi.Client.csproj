@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Http.Client" Version="7.4.0" />
+		<PackageReference Include="Volo.Abp.Http.Client" Version="7.4.5" />
 		<ProjectReference Include="..\Dignite.Abp.UserPoints.Application.Contracts\Dignite.Abp.UserPoints.Application.Contracts.csproj" />
 	</ItemGroup>
 	<ItemGroup>

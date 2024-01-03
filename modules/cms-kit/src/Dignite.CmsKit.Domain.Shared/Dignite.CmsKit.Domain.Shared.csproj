@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.Domain.Shared" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.Domain.Shared" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>

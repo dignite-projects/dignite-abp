@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Imaging;
 using Volo.Abp.Modularity;
 
 namespace Dignite.FileExplorer;
@@ -12,7 +13,9 @@ namespace Dignite.FileExplorer;
     typeof(FileExplorerDomainModule),
     typeof(FileExplorerApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(AbpImagingAbstractionsModule),
+    typeof(AbpImagingImageSharpModule)
     )]
 public class FileExplorerApplicationModule : AbpModule
 {

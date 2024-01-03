@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 
 	<Import Project="..\..\..\..\configureawait.props" />
@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="7.4.5" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.Application.Contracts\Dignite.Abp.UserPoints.Application.Contracts.csproj" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.Domain\Dignite.Abp.UserPoints.Domain.csproj" />
   </ItemGroup>

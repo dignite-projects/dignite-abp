@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.MongoDB" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.MongoDB" Version="7.4.5" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain\Dignite.CmsKit.Domain.csproj" />
   </ItemGroup>
 

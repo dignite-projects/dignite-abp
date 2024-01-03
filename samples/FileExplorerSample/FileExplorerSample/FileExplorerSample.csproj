@@ -15,60 +15,60 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Identity.Blazor.Server" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor.Server" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Featuremanagement.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Featuremanagement.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Featuremanagement.HttpApi" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.Featuremanagement.Blazor.Server" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.Featuremanagement.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Featuremanagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Featuremanagement.HttpApi" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Featuremanagement.Blazor.Server" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="7.4.0" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="7.4.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,7 +101,7 @@
     <ProjectReference Include="..\..\..\modules\file-explorer\src\Dignite.FileExplorer.HttpApi\Dignite.FileExplorer.HttpApi.csproj" />
     <ProjectReference Include="..\..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Components.Server.PureTheme\Dignite.Abp.AspNetCore.Components.Server.PureTheme.csproj" />
     <ProjectReference Include="..\..\..\modules\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj" />
-	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.4.0" />
+	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.4.5" />
   </ItemGroup>
 
 </Project>

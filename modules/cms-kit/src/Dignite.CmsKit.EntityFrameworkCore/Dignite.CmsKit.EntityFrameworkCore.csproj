@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\..\..\configureawait.props" />
 	<Import Project="..\..\..\..\common.props" />
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" Version="7.4.0" />
+    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" Version="7.4.5" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain\Dignite.CmsKit.Domain.csproj" />
   </ItemGroup>
 

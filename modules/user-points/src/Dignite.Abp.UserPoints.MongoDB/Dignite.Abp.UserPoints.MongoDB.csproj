@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 
 	<Import Project="..\..\..\..\configureawait.props" />
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.MongoDB" Version="7.4.0" />
+    <PackageReference Include="Volo.Abp.MongoDB" Version="7.4.5" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.Domain\Dignite.Abp.UserPoints.Domain.csproj" />
   </ItemGroup>
 

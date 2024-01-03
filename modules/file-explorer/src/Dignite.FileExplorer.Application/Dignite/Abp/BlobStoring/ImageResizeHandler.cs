@@ -24,7 +24,7 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
     {
         var configuration = context.ContainerConfiguration.GetImageResizeConfiguration();
 
-        if (ImageFormatHelper.IsValidImage(context.BlobStream, ImageFormatHelper.AllowedImageUploadFormats))
+        if (ImageFormatHelper.IsValidImage(context.File.MimeType, ImageFormatHelper.AllowedImageUploadFormats))
         {
             using (Image image = await Image.LoadAsync(context.BlobStream))
             {

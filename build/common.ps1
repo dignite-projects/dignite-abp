@@ -7,8 +7,8 @@ $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 # List of solutions used only in development mode
 $solutionPaths = @(
 		"../framework",
-		"../modules/ckeditor-component",,
-		"../modules/cms-kit"
+		"../modules/ckeditor-component",
+		"../modules/cms-kit",
 		"../modules/field-customizing",
 		"../modules/file-explorer",
 		"../modules/files",

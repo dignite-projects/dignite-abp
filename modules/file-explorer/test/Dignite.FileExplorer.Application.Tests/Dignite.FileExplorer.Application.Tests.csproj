@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\src\Dignite.FileExplorer.Application\Dignite.FileExplorer.Application.csproj" />
     <ProjectReference Include="..\Dignite.FileExplorer.Domain.Tests\Dignite.FileExplorer.Domain.Tests.csproj" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.4.5" />
   </ItemGroup>
 
 </Project>

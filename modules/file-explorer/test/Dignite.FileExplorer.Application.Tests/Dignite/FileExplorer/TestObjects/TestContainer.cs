@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.BlobStoring;
 
-namespace Dignite.Abp.Files.TestObjects;
+namespace Dignite.FileExplorer.TestObjects;
 
 [BlobContainerName(Name)]
 public class TestContainer

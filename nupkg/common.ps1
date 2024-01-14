@@ -70,7 +70,6 @@ function Read-File {
 $solutions = (
     "framework",
     "modules/ckeditor-component",
-    "modules/field-customizing",
     "modules/file-explorer",
     "modules/files",
     "modules/notification-center",
@@ -102,13 +101,6 @@ $projects = (
     "modules/ckeditor-component/src/Dignite.Abp.DynamicForms.CkEditor",
     "modules/ckeditor-component/src/Dignite.Abp.DynamicForms.Components.CkEditor",
         
-    # modules/field-customizing
-    "modules/field-customizing/src/Dignite.Abp.FieldCustomizing.Domain",
-    "modules/field-customizing/src/Dignite.Abp.FieldCustomizing.Domain.Shared",
-    "modules/field-customizing/src/Dignite.Abp.FieldCustomizing.EntityFrameworkCore",
-    "modules/field-customizing/src/Dignite.Abp.FieldCustomizing.Installer",
-    "modules/field-customizing/src/Dignite.Abp.FieldCustomizing.MongoDB",
-
     # modules/file-explorer
     "modules/file-explorer/src/Dignite.Abp.DynamicForms.Components.FileExplorer",
     "modules/file-explorer/src/Dignite.Abp.DynamicForms.FileExplorer",

@@ -1,7 +1,7 @@
 {
   "culture": "en",
   "texts": {
-    "CkEditorFormDisplayName": "CkEditor",
+    "FormControl:CkEditor": "CkEditor",
     "ImagesContainerName": "Images Container Name",
     "InitialContent": "Initial Content"
   }

@@ -1,0 +1,22 @@
+﻿@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormConfigurationComponentBase<TextEditFormControl,TextEditConfiguration>
+
+
+<Validation>
+<Field>
+    <FieldLabel>@L["Placeholder"]</FieldLabel>
+    <TextEdit @bind-Text="@FormConfiguration.Placeholder" />
+</Field>
+</Validation>
+<Field>
+    <FieldLabel>@L["TextEditMode"]</FieldLabel>
+    <RadioGroup TValue="TextEditMode" Name="textboxMode" @bind-CheckedValue="@FormConfiguration.Mode">
+        <Radio TValue="TextEditMode" Value="@TextEditMode.SingleLine">@L["SingleLine"]</Radio>
+        <Radio TValue="TextEditMode" Value="@TextEditMode.MultipleLine">@L["MultipleLine"]</Radio>
+    </RadioGroup>
+</Field>
+<Field>
+    <FieldLabel>@L["CharLimit"]</FieldLabel>
+    <NumericEdit @bind-Value="@FormConfiguration.CharLimit" />
+</Field>
+

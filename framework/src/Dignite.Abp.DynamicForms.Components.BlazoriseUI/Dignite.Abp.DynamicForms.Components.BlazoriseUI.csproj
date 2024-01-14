@@ -8,10 +8,6 @@
   </PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Nanoid" Version="2.1.0" />
-	</ItemGroup>
-	
-	<ItemGroup>
 	  <ProjectReference Include="..\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj" />
 	  <ProjectReference Include="..\Dignite.Abp.DynamicForms.Components\Dignite.Abp.DynamicForms.Components.csproj" />
 	</ItemGroup>

@@ -1,0 +1,101 @@
+﻿@using Dignite.Abp.DynamicForms.Select
+@inherits FormConfigurationComponentBase<SelectFormControl,SelectConfiguration>
+
+
+<Field>
+    <FieldLabel>@L["SelectListItem"]</FieldLabel>
+    <Table>
+        <TableHeader>
+            <TableRow>
+                <TableHeaderCell>@L["SelectListItemText"]</TableHeaderCell>
+                <TableHeaderCell>@L["SelectListItemValue"]</TableHeaderCell>
+                <TableHeaderCell>@L["Selected"]</TableHeaderCell>
+                <TableHeaderCell>
+                    <Button @onclick="@AddSelectListItem"><Icon Name="IconName.PlusCircle" /></Button>
+                </TableHeaderCell>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach(var item in Options)
+            {
+                <TableRow>
+                    <TableRowCell>                        
+                        <Validation Validator="((e)=>RequiredValidate(e))">
+                        <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" />
+                        </Validation>
+                        </TableRowCell>
+                    <TableRowCell>                        
+                        <Validation Validator="((e)=>RequiredValidate(e))">
+                        <TextEdit Text="@item.Value" TextChanged="@(value=>OnSelectListItemValueChanged(value,item))" />
+                        </Validation>
+                        </TableRowCell>
+                    <TableRowCell><Check TValue="bool" Checked="@item.Selected" CheckedChanged="@(selected=>OnSelectListItemSelectedChanged(selected,item))"></Check></TableRowCell>
+                    <TableRowCell>
+                        <Button @onclick="@(e => RemoveSelectListItem(e, item))"><Icon Name="IconName.Remove" /></Button>
+                    </TableRowCell>
+                </TableRow>
+            }
+        </TableBody>
+    </Table>
+</Field>
+
+<Validation>
+<Field>
+    <FieldLabel>@L["NullText"]</FieldLabel>
+    <TextEdit @bind-Text="@FormConfiguration.NullText" />
+</Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@FormConfiguration.Multiple">@L["Multiple"]</Check>
+</Field>
+
+@code{
+
+    List<SelectListItem> Options;
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Options = FormConfiguration.Options;
+    }
+
+    private void RemoveSelectListItem(MouseEventArgs e,SelectListItem item)
+    {
+        Options.Remove(item);
+        FormConfiguration.Options=Options;
+    }
+    private void AddSelectListItem()
+    {
+        Options.Add(new SelectListItem());
+        FormConfiguration.Options=Options;
+    }
+
+    Task OnSelectListItemTextChanged( string text ,SelectListItem item)
+    {
+        item.Text = text;
+        FormConfiguration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    Task OnSelectListItemValueChanged( string value,SelectListItem item )
+    {
+        item.Value = value;
+        FormConfiguration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    Task OnSelectListItemSelectedChanged( bool selected,SelectListItem item )
+    {
+        item.Selected = selected;
+        FormConfiguration.Options=Options;
+
+        return Task.CompletedTask;
+    }
+    
+    void RequiredValidate(ValidatorEventArgs e)
+    {
+        e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+}

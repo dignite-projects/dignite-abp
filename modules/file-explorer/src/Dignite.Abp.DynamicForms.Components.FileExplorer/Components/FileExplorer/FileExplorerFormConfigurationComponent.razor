@@ -1,0 +1,13 @@
+﻿@using Dignite.Abp.DynamicForms.FileExplorer
+@inherits FormConfigurationComponentBase<FileExplorerFormControl,FileExplorerConfiguration>
+
+
+<Validation Validator="@ValidationRule.IsNotEmpty">
+    <Field>
+        <FieldLabel>@L["FileContainerName"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.FileContainerName" />
+    </Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@FormConfiguration.UploadFileMultiple">@L["UploadFileMultiple"]</Check>
+</Field>

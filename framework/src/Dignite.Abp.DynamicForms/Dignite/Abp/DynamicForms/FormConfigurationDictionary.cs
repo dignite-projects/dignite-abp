@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Dignite.Abp.DynamicForms;
 
 /// <summary>
-/// Configuration Item Dictionary for Dynamic Forms
+/// Configuration Item Dictionary for Forms
 /// </summary>
 [Serializable]
 public class FormConfigurationDictionary : Dictionary<string, string>

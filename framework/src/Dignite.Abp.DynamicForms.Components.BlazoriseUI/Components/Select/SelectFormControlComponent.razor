@@ -1,0 +1,96 @@
+﻿@using Dignite.Abp.DynamicForms.Select
+@using System.Text.Json;
+@inherits FormControlComponentBase<SelectFormControl,SelectConfiguration,List<string>>
+
+<Validation Validator="@ValidateIsRequired">
+    <Field>
+        <FieldLabel>@Field.DisplayName</FieldLabel>
+        <FieldBody>
+            @if (FormConfiguration.Multiple)
+            { 
+            <Select TValue="string" SelectedValues="@Values" SelectedValuesChanged="@OnSelectedValuesChanged" Multiple="true">                
+                @foreach(var option in FormConfiguration.Options)
+                {
+                    <SelectItem Value="@option.Value">@option.Text</SelectItem>
+                }
+            </Select>
+            }
+            else
+            {
+            <Select TValue="string" SelectedValue="@(Values.Any()?Values[0]:FormConfiguration.NullText)" SelectedValueChanged="@OnSelectedValueChanged">
+                @if (!FormConfiguration.NullText.IsNullOrEmpty())
+                {
+                    <SelectItem Value="@FormConfiguration.NullText">@FormConfiguration.NullText</SelectItem>
+                }
+                @foreach(var option in FormConfiguration.Options)
+                {
+                    <SelectItem Value="@option.Value">@option.Text</SelectItem>
+                }
+            </Select>
+            }
+            <FieldHelp>@Field.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+
+
+@code{
+
+    private List<string> Values = new List<string>();
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        //
+        if (Values==null || !Values.Any())
+        {
+            if (FormConfiguration.Options.Any(o => o.Selected))
+            {
+                Values = FormConfiguration.Options.Where(o => o.Selected).Select(o => o.Value).ToList();
+                Field.Value = Values;
+            }
+            else if (FormConfiguration.NullText.IsNullOrEmpty() && FormConfiguration.Options.Any())
+            {
+                Values = new List<string>();
+                Values.Add(FormConfiguration.Options.First().Value);
+                Field.Value = Values;
+            }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Field.Value != null)
+        {
+            try
+            {
+                Values = JsonSerializer.Deserialize<List<string>>(Field.Value.ToString());
+            }
+            catch
+            { }
+        }
+    }
+
+    void ValidateIsRequired( ValidatorEventArgs e )
+    {
+        if (Field.Required.HasValue && Field.Required.Value)
+        {
+            e.Status = (e.Value == null || e.Value.ToString()==FormConfiguration.NullText) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
+    }
+
+    async Task OnSelectedValueChanged(string value )
+    {
+        Values.Clear();
+        Values.Add(value);
+        await OnValueChanged(Values);
+    }
+
+    //
+    async Task OnSelectedValuesChanged(IReadOnlyList<string> values )
+    {
+        Values = values.ToList(); 
+        await OnValueChanged(Values);
+    }
+}

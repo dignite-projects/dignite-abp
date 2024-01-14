@@ -1,0 +1,12 @@
+﻿@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormViewComponentBase<TextEditFormControl,TextEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @Field.Value?.ToString()
+    </FieldBody>
+</Field>
+
+@code{
+}

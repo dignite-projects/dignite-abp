@@ -1,0 +1,25 @@
+﻿@using Dignite.Abp.DynamicForms.Switch
+@inherits FormControlComponentBase<SwitchFormControl,SwitchConfiguration,bool>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>      
+        <Switch TValue="bool" Checked="@Checked(Field.Value)" CheckedChanged="@OnValueChanged"></Switch>
+        <FieldHelp>@Field.Description</FieldHelp>
+    </FieldBody>
+</Field>
+
+
+@code{
+    private bool Checked(object value)
+    {
+        if (value == null)
+            return false;
+        else
+        {
+            bool defaultChecked = false;
+            bool.TryParse(value.ToString(), out defaultChecked);
+            return defaultChecked;
+        }
+    }
+}

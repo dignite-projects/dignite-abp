@@ -1,0 +1,23 @@
+﻿@using Dignite.Abp.DynamicForms.DateEdit
+@inherits FormConfigurationComponentBase<DateEditFormControl,DateEditConfiguration>
+
+
+<Validation>
+<Field>
+    <FieldLabel>@L["DateEditMode"]</FieldLabel>
+    <RadioGroup TValue="Dignite.Abp.DynamicForms.DateEdit.DateInputMode" Name="DateInputMode" @bind-CheckedValue="@FormConfiguration.InputMode">
+        <Radio TValue="Dignite.Abp.DynamicForms.DateEdit.DateInputMode" Value="@Dignite.Abp.DynamicForms.DateEdit.DateInputMode.Date">@L["Date"]</Radio>
+        <Radio TValue="Dignite.Abp.DynamicForms.DateEdit.DateInputMode" Value="@Dignite.Abp.DynamicForms.DateEdit.DateInputMode.DateTime">@L["DateTime"]</Radio>
+        <Radio TValue="Dignite.Abp.DynamicForms.DateEdit.DateInputMode" Value="@Dignite.Abp.DynamicForms.DateEdit.DateInputMode.Month">@L["Month"]</Radio>
+    </RadioGroup>
+</Field>
+</Validation>
+<Field>
+    <FieldLabel>@L["Min"]</FieldLabel>
+    <DateEdit TValue="DateTimeOffset?" InputMode="Blazorise.DateInputMode.DateTime" @bind-Date="@FormConfiguration.Min" />
+</Field>
+<Field>
+    <FieldLabel>@L["Max"]</FieldLabel>
+    <DateEdit TValue="DateTimeOffset?" InputMode="Blazorise.DateInputMode.DateTime" @bind-Date="@FormConfiguration.Max" />
+</Field>
+

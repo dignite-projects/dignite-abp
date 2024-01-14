@@ -1,0 +1,35 @@
+﻿@using Dignite.Abp.DynamicForms.CkEditor
+@using Dignite.Abp.AspNetCore.Components.CkEditor
+@inherits FormControlComponentBase<CkEditorFormControl,CkEditorConfiguration,string>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        <CkEditor Content="@_content" Options="Options" ImagesContainerName="@ImagesContainerName" ContentChanged=OnValueChanged>
+        </CkEditor>
+        <FieldHelp>@Field.Description</FieldHelp>
+    </FieldBody>
+</Field>
+
+    @code {
+    private string _content;
+
+    protected string ImagesContainerName
+    {
+        get
+        {
+            return FormConfiguration.ImagesContainerName;
+        }
+
+    } 
+
+    protected CkEditorOptions Options { get; } = CkEditorOptions.Default;
+
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        _content = Field.Value==null? FormConfiguration.InitialContent:Field.Value.ToString();
+    }
+
+}

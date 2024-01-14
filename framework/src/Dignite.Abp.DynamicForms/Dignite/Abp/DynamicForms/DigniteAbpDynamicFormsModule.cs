@@ -20,7 +20,7 @@ public class DigniteAbpDynamicFormsModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<AbpDynamicFormsResource>("en")
+                .Add<DigniteAbpDynamicFormsResource>("en")
                 .AddVirtualJson("/Dignite/Abp/DynamicForms/Localization/Resources");
         });
     }

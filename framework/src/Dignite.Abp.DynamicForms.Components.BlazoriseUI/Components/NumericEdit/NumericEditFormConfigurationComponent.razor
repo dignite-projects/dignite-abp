@@ -1,0 +1,33 @@
+﻿@using Dignite.Abp.DynamicForms.NumericEdit
+@inherits FormConfigurationComponentBase<NumericEditFormControl,NumericEditConfiguration>
+
+
+<Field>
+    <FieldLabel>@L["Min"]</FieldLabel>
+    <NumericEdit TValue="decimal?" @bind-Value="@FormConfiguration.Min" />
+</Field>
+<Field>
+    <FieldLabel>@L["Max"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Max" />
+</Field>
+<Field>
+    <FieldLabel>@L["NumericDecimals"]</FieldLabel>
+    <NumericEdit TValue="int"  @bind-Value="@FormConfiguration.Decimals" />
+</Field>
+<Field>
+    <FieldLabel>@L["NumericStep"]</FieldLabel>
+    <NumericEdit TValue="decimal?"  @bind-Value="@FormConfiguration.Step" />    
+    <FieldHelp>
+        @L["NumericStepHelp"]
+    </FieldHelp>
+</Field>
+
+<Field>
+    <FieldLabel>@L["FormatSpecifier"]</FieldLabel>
+    <TextEdit MaxLength="8" @bind-Text="@FormConfiguration.FormatSpecifier">
+        <FieldHelp>
+            See:<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings#standard-format-specifiers" target="_blank">https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings</a>
+        </FieldHelp>
+    </TextEdit>
+</Field>
+

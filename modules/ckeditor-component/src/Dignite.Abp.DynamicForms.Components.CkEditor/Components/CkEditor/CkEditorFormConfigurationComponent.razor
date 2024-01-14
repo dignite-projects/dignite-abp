@@ -1,0 +1,17 @@
+﻿@using Dignite.Abp.DynamicForms.CkEditor
+@inherits FormConfigurationComponentBase<CkEditorFormControl,CkEditorConfiguration>
+
+
+<Validation Validator="@ValidationRule.IsNotEmpty">
+    <Field>
+        <FieldLabel>@L["ImagesContainerName"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.ImagesContainerName" />
+    </Field>
+</Validation>
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["InitialContent"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.InitialContent" />
+    </Field>
+</Validation>

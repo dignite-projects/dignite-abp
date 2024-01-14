@@ -4,7 +4,7 @@ This package is a part of the [Dignite ABP](https://dignite.com/dignite-abp).
 
 ### Adding to the ecology of the ABP framework
 
-Adds points system, dynamic forms module, file manager, Pure Theme, and other enhancements.
+Adds points system, forms module, file manager, Pure Theme, and other enhancements.
 
 ### For more information, check out the below links
 
@@ -20,7 +20,7 @@ Adds points system, dynamic forms module, file manager, Pure Theme, and other en
 
 🟡 Points System
 
-🟡 Dynamic Forms Module
+🟡 Forms Module
 
 🟡 Files Explorer
 

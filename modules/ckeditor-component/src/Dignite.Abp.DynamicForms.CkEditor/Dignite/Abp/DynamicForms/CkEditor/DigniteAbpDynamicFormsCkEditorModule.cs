@@ -21,9 +21,9 @@ public class DigniteAbpDynamicFormsCkEditorModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<AbpDynamicFormsCkEditorResource>("en")
+                .Add<DigniteAbpDynamicFormsCkEditorResource>("en")
                 .AddVirtualJson("/Dignite/Abp/DynamicForms/CkEditor/Localization/Resources")
-                .AddBaseTypes(typeof(AbpDynamicFormsResource)); //Inherit from an existing resource
+                .AddBaseTypes(typeof(DigniteAbpDynamicFormsResource)); //Inherit from an existing resource
         });
     }
 }

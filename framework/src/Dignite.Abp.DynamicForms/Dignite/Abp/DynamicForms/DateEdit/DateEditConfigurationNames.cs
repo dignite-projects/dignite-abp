@@ -2,7 +2,7 @@
 
 public static class DateEditConfigurationNames
 {
-    public const string InputMode = "DateEditField.InputMode";
-    public const string Max = "DateEditField.Max";
-    public const string Min = "DateEditField.Min";
+    public const string InputMode = "DateEdit.InputMode";
+    public const string Max = "DateEdit.Max";
+    public const string Min = "DateEdit.Min";
 }

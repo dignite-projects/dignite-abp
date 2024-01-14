@@ -1,0 +1,25 @@
+﻿@using Dignite.Abp.DynamicForms.CkEditor
+@inherits FormViewComponentBase<CkEditorFormControl,CkEditorConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        <div class="content">
+            @if (Value != null)
+            {
+                @((MarkupString)Value)
+            }
+        </div>
+    </FieldBody>
+</Field>
+
+@code {
+    private string Value { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Value = Field.Value?.ToString();
+    }
+
+}

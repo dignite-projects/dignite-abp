@@ -18,11 +18,14 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Localization" Version="7.4.5" />
-	<PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
      <EmbeddedResource Include="Dignite\Abp\DynamicForms\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dignite\Abp\DynamicForms\Localization\Resources\ja.json" />
   </ItemGroup>
 
 </Project>

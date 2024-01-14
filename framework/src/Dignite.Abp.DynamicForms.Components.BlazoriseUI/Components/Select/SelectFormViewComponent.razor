@@ -1,0 +1,32 @@
+﻿@using Dignite.Abp.DynamicForms.Select
+@using System.Text.Json;
+@inherits FormViewComponentBase<SelectFormControl,SelectConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @if (Values != null)
+        {
+            @FormConfiguration.Options.Where(o=>Values.Contains( o.Value)).Select(o=>o.Text).JoinAsString(",")
+        }
+    </FieldBody>
+</Field>
+
+
+@code{
+    private IReadOnlyList<string> Values = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Field.Value != null)
+        {
+            try
+            {
+                Values = JsonSerializer.Deserialize<List<string>>(Field.Value.ToString());
+            }
+            catch
+            { }
+        }
+    }
+}

@@ -21,9 +21,9 @@ public class DigniteAbpDynamicFormsFileExplorerModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<AbpDynamicFormsFileExplorerResource>("en")
+                .Add<DigniteAbpDynamicFormsFileExplorerResource>("en")
                 .AddVirtualJson("/Dignite/Abp/DynamicForms/FileExplorer/Localization/Resources")
-                .AddBaseTypes(typeof(AbpDynamicFormsResource)); //Inherit from an existing resource
+                .AddBaseTypes(typeof(DigniteAbpDynamicFormsResource)); //Inherit from an existing resource
         });
     }
 }

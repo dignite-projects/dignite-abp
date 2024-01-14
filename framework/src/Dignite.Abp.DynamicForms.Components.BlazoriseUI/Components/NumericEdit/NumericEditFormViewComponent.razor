@@ -1,0 +1,38 @@
+﻿@using Dignite.Abp.DynamicForms.NumericEdit
+
+@inherits FormViewComponentBase<NumericEditFormControl,NumericEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @if (value.HasValue)
+        {
+            @if (FormConfiguration.FormatSpecifier.IsNullOrEmpty())
+            {
+                <Text>@value</text>
+            }
+            else
+            {
+                <Text>@(value.Value.ToString(FormConfiguration.FormatSpecifier))</text>                
+            }
+        }
+    </FieldBody>
+</Field>
+
+@code{
+    private decimal? value = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Field.Value != null)
+        {
+            decimal convertValue;
+            if (decimal.TryParse(Field.Value.ToString(), out convertValue))
+            {
+                value = convertValue;
+            }
+        }
+    }
+
+}

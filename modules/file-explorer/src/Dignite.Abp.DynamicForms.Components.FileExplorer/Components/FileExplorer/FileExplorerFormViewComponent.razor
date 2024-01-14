@@ -1,0 +1,50 @@
+﻿@using Dignite.Abp.DynamicForms.FileExplorer
+@using Dignite.FileExplorer.Files;
+@using System.Text.Json;
+@inherits FormViewComponentBase<FileExplorerFormControl,FileExplorerConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @if (Files != null && Files.Any())
+        {
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderCell>@L["FileName"]</TableHeaderCell>
+                    <TableHeaderCell>@L["FileSize"]</TableHeaderCell>
+                    <TableHeaderCell></TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                    @foreach (var item in Files)
+                {
+                    <TableRow>
+                        <TableRowCell>@item.Name</TableRowCell>
+                        <TableRowCell>@FileSizeFormatter.FormatSize(item.Size)</TableRowCell>
+                        <TableRowCell>
+                            <Button Color="Color.Primary"><Icon Name="@IconName.FileDownload"></Icon></Button>
+                        </TableRowCell>
+                    </TableRow>
+                }
+            </TableBody>
+        </Table>
+        }
+    </FieldBody>
+</Field>
+
+@code {
+    private List<FileDescriptorDto> Files = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Field.Value != null)
+        {
+            Files = JsonSerializer.Deserialize<List<FileDescriptorDto>>(
+                Field.Value == null ? "[]":Field.Value.ToString(),
+                new JsonSerializerOptions()
+            );
+        }
+    }
+}

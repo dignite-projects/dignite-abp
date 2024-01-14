@@ -1,0 +1,52 @@
+﻿@using Dignite.Abp.DynamicForms.FileExplorer
+@using Dignite.FileExplorer.Blazor.Pages.FileExplorer
+@using Dignite.FileExplorer.Files;
+@using System.Text.Json;
+@inherits FormControlComponentBase<FileExplorerFormControl,FileExplorerConfiguration,List<FileDescriptorDto>>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        <FilePickerComponent ContainerName="@(FormConfiguration.FileContainerName)"
+                             Multiple="@FormConfiguration.UploadFileMultiple"
+                             FileDescriptors="@Files"
+                             FileDescriptorsChanged="OnValueChanged"
+                             Validator="@ValidateIsRequired">
+        </FilePickerComponent>
+        <FieldHelp>@Field.Description</FieldHelp>
+    </FieldBody>
+</Field>
+
+    @code{
+    private List<FileDescriptorDto> Files = new();
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        var value = Field.Value;
+        if (value != null)
+        {
+            try
+            {
+                Files = JsonSerializer.Deserialize<List<FileDescriptorDto>>(
+                    value.ToString(),
+                    new JsonSerializerOptions(JsonSerializerDefaults.Web) // For a description of the parameters for deserialization, please refer to https://khalidabuhakmeh.com/solving-dotnet-json-deserialization-issues
+                );
+            }
+            catch
+            {
+            }
+        }
+    }
+
+
+    void ValidateIsRequired( ValidatorEventArgs e )
+    {
+        if (Field.Required.HasValue && Field.Required.Value)
+        {
+            e.Status = Files.Any() ? ValidationStatus.Success : ValidationStatus.Error;
+            e.ErrorText = L["PleaseSelectFiles"];
+        }
+    }
+}

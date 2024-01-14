@@ -1,0 +1,7 @@
+﻿@using Dignite.Abp.DynamicForms.Switch
+@inherits FormConfigurationComponentBase<SwitchFormControl,SwitchConfiguration>
+
+
+<Field>
+        <Check TValue="bool" @bind-Checked="@FormConfiguration.Default">@L["DefaultValue"]</Check>
+</Field>

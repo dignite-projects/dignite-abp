@@ -1,0 +1,42 @@
+﻿@using Dignite.Abp.DynamicForms.DateEdit
+@inherits FormViewComponentBase<DateEditFormControl,DateEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        <Text>
+            @if(value!=null)
+            {
+                @switch(FormConfiguration.InputMode)
+                {
+                    case Dignite.Abp.DynamicForms.DateEdit.DateInputMode.Date:
+                        <Text>@value.Value.ToString("d")</Text>
+                        break;
+                    case Dignite.Abp.DynamicForms.DateEdit.DateInputMode.Month:
+                        <Text>@value.Value.ToString("y")</Text>
+                        break;
+                    default:
+                        <Text>@value.Value.ToString("U")</Text>
+                        break;
+                }
+            }
+        </Text>
+    </FieldBody>
+</Field>
+
+@code{
+    private DateTime? value = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        if (Field.Value != null)
+        {
+            DateTime convertValue;
+            if (DateTime.TryParse(Field.Value.ToString(), out convertValue))
+            {
+                value = convertValue;
+            }
+        }
+    }
+}

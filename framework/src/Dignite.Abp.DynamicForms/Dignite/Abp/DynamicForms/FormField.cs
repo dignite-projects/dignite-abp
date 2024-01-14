@@ -7,9 +7,12 @@ namespace Dignite.Abp.DynamicForms;
 /// </summary>
 public class FormField
 {
-    protected FormField() { }
+    public FormField() {
+        FormConfiguration = new();
+    }
 
     public FormField(string name, string displayName, string description, string formControlName, FormConfigurationDictionary formConfiguration, bool? required=null, object value=null)
+        :this()
     {
         Name = name;
         DisplayName = displayName;

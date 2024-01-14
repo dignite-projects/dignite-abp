@@ -9,7 +9,6 @@ $solutionPaths = @(
 		"../framework",
 		"../modules/ckeditor-component",
 		"../modules/cms-kit",
-		"../modules/field-customizing",
 		"../modules/file-explorer",
 		"../modules/files",
 		"../modules/notification-center",

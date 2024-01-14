@@ -17,9 +17,9 @@ public class SelectFormControl : FormControlBase
     {
         var configuration = new SelectConfiguration(args.Field.FormConfiguration);
 
-        if (args.Field.Value != null && !args.Field.Value.ToString().IsNullOrWhiteSpace())
+        if (args.Field.Value != null)
         {
-            var value = JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString());
+            var value = (List<string>)args.Field.Value;
             if (value.Except(configuration.Options.Select(x => x.Value)).Any())
             {
                 args.ValidationErrors.Add(

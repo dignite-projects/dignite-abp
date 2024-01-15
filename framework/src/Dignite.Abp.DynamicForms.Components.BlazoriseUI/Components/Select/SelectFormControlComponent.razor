@@ -66,6 +66,10 @@
             Values = JsonSerializer.Deserialize<List<string>>(Field.Value.ToString());
             await ChangeValueAsync(Values);
         }
+        else
+        {
+            FormConfiguration.Options.Add(new SelectListItem("", "",false));
+        }
     }
 
     void ValidateIsRequired( ValidatorEventArgs e )

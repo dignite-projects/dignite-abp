@@ -158,10 +158,10 @@ public partial class FileExplorerModal
             //
             DirectoryTreeComponentParameters = new Dictionary<string, object>
             {
-                { "ContainerName", containerName },
-                { "Configuration", Configuration },
-                { "SelectedDirectory", null},
-                { "SelectedDirectoryChanged", EventCallback.Factory.Create<DirectoryDescriptorInfoDto>(
+                { nameof(DirectoryTreeComponent.ContainerName), containerName },
+                { nameof(DirectoryTreeComponent.Configuration), Configuration },
+                { nameof(DirectoryTreeComponent.SelectedDirectory), null},
+                { nameof(DirectoryTreeComponent.SelectedDirectoryChanged), EventCallback.Factory.Create<DirectoryDescriptorInfoDto>(
                                             this, 
                                             SelectedDirectoryChanged
                                             )}
@@ -293,8 +293,8 @@ public partial class FileExplorerModal
     {
         FileDataGridRef.SelectedItem = null;
         FileDataGridRef.SelectedItems = null;
-        DirectoryTreeComponentParameters.Remove("SelectedDirectory");
-        DirectoryTreeComponentParameters.Add("SelectedDirectory", e);
+        DirectoryTreeComponentParameters.Remove(nameof(DirectoryTreeComponent.SelectedDirectory));
+        DirectoryTreeComponentParameters.Add(nameof(DirectoryTreeComponent.SelectedDirectory), e);
         CurrentDirectory = e;
         GetListInput.DirectoryId = e == null ? null : e.Id;
         BreadcrumbItems = e == null ? null : e.GetParentList(AllDirectories)

@@ -166,7 +166,7 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         dto.GetFilePermissionName= authorizationConfiguration.GetFilePermissionName;
         dto.FileCells = configuration
             .GetFileGridConfiguration()
-            .FileCells
+            .FileCells?
             .Select(c=>
                 new FileCellDto(
                     c.Name,

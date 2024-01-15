@@ -1,6 +1,5 @@
 using System;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.Collections;
 
 namespace Dignite.Abp.BlobStoring;
 

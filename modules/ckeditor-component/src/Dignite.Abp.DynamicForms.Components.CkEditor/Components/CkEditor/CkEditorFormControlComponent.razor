@@ -5,7 +5,7 @@
 <Field>
     <FieldLabel>@Field.DisplayName</FieldLabel>
     <FieldBody>
-        <CkEditor Content="@_content" Options="Options" ImagesContainerName="@ImagesContainerName" ContentChanged=OnValueChanged>
+        <CkEditor Content="@_content" Options="Options" ImagesContainerName="@ImagesContainerName" ContentChanged=ChangeValueAsync>
         </CkEditor>
         <FieldHelp>@Field.Description</FieldHelp>
     </FieldBody>

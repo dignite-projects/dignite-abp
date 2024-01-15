@@ -7,7 +7,7 @@
         <FieldBody>
             @if (FormConfiguration.Mode == TextEditMode.SingleLine)
             {
-                <TextEdit Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@OnValueChanged">
+                <TextEdit Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
                     <Feedback>
                         <ValidationError />
                     </Feedback>
@@ -15,7 +15,7 @@
             }
             else
             {
-                <MemoEdit Rows="5" AutoSize Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@OnValueChanged">
+                <MemoEdit Rows="5" AutoSize Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
                     <Feedback>
                         <ValidationError />
                     </Feedback>
@@ -28,12 +28,11 @@
 
 
     @code{
-
-    void ValidateIsRequired( ValidatorEventArgs e )
+    void ValidateIsRequired(ValidatorEventArgs e)
     {
-        var value = Convert.ToString( e.Value );
-        if (Field.Required.HasValue&&Field.Required.Value)
+        if (Field.Required.HasValue && Field.Required.Value)
         {
+            var value = e.Value == null ? string.Empty : Convert.ToString(e.Value);
             e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
         }
     }

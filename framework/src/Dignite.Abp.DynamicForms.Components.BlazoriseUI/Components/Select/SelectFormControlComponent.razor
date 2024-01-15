@@ -34,7 +34,7 @@
 </Validation>
 
 
-@code{
+    @code{
 
     private List<string> Values = new List<string>();
 
@@ -58,17 +58,13 @@
         }
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
         if (Field.Value != null)
         {
-            try
-            {
-                Values = JsonSerializer.Deserialize<List<string>>(Field.Value.ToString());
-            }
-            catch
-            { }
+            Values = JsonSerializer.Deserialize<List<string>>(Field.Value.ToString());
+            await ChangeValueAsync(Values);
         }
     }
 
@@ -84,13 +80,13 @@
     {
         Values.Clear();
         Values.Add(value);
-        await OnValueChanged(Values);
+        await ChangeValueAsync(Values);
     }
 
     //
     async Task OnSelectedValuesChanged(IReadOnlyList<string> values )
     {
         Values = values.ToList(); 
-        await OnValueChanged(Values);
+        await ChangeValueAsync(Values);
     }
 }

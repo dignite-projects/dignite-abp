@@ -6,8 +6,8 @@ using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.DynamicForms.Components;
 
-public abstract class FormControlComponentBase<TForm, TFormConfiguration,TValueType> : AbpComponentBase, IFormControlComponent, ITransientDependency
-    where TForm : IFormControl
+public abstract class FormControlComponentBase<TFormControl, TFormConfiguration, TFormControlValueType> : AbpComponentBase, IFormControlComponent, ITransientDependency
+    where TFormControl : IFormControl
     where TFormConfiguration : FormConfigurationBase, new()
 {
     public Type FormControlType { get; private set; }
@@ -18,12 +18,12 @@ public abstract class FormControlComponentBase<TForm, TFormConfiguration,TValueT
     public FormField Field { get; set; }
 
     [Parameter]
-    public EventCallback<FormField> OnFormControlValueChanged { get; set; }
+    public EventCallback<FormField> OnChangedValueAsync { get; set; }
 
     protected FormControlComponentBase()
     {
         LocalizationResource = typeof(DigniteAbpDynamicFormsModule);
-        FormControlType = typeof(TForm);
+        FormControlType = typeof(TFormControl);
         FormConfiguration = new TFormConfiguration();
     }
 
@@ -33,11 +33,11 @@ public abstract class FormControlComponentBase<TForm, TFormConfiguration,TValueT
         FormConfiguration.ConfigurationDictionary = Field.FormConfiguration;
     }
 
-    protected virtual async Task OnValueChanged(TValueType value)
+    protected virtual async Task ChangeValueAsync(TFormControlValueType value)
     {
         Field.Value = value;
 
-        if (OnFormControlValueChanged.HasDelegate)
-            await OnFormControlValueChanged.InvokeAsync(Field);
+        if (OnChangedValueAsync.HasDelegate)
+            await OnChangedValueAsync.InvokeAsync(Field);
     }
 }

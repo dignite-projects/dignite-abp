@@ -4,7 +4,7 @@
 <Field>
     <FieldLabel>@Field.DisplayName</FieldLabel>
     <FieldBody>      
-        <Switch TValue="bool" Checked="@Checked(Field.Value)" CheckedChanged="@OnValueChanged"></Switch>
+        <Switch TValue="bool" Checked="@Checked(Field.Value)" CheckedChanged="@ChangeValueAsync"></Switch>
         <FieldHelp>@Field.Description</FieldHelp>
     </FieldBody>
 </Field>

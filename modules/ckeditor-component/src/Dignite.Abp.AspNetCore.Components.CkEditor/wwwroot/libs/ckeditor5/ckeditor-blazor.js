@@ -1,4 +1,4 @@
-﻿
+﻿window.dignite = {};
 (() => {
     let ImagesContainerName = '';
 
@@ -131,7 +131,7 @@
         // get the API interface address for uploading images
         _getUploadImageUrl() {
             // dignite.appSettings from Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/readAppSettingsJson.js
-            var remoteServiceUrl = dignite.appSettings == undefined ? "" : dignite.appSettings.RemoteServices.Default.BaseUrl;
+            var remoteServiceUrl = (dignite.appSettings == undefined) ? "" : dignite.appSettings.RemoteServices.Default.BaseUrl;
             return remoteServiceUrl+'/api/file-explorer/files?ContainerName=' + ImagesContainerName;
         }
     }

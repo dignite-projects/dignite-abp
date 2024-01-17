@@ -50,8 +50,7 @@
 .b-bar-vertical-inline .b-bar-item .b-bar-icon,
 .b-bar-vertical-popout .b-bar-item .b-bar-icon,
 .b-bar-vertical-small .b-bar-item .b-bar-icon {
-    font-size: 1.0rem;
-    width: 2.5rem;
+    width: 1.5rem;
     text-align: center;
     color: var(--bs-primary)
 }

@@ -11,7 +11,7 @@ public class FormField
         FormConfiguration = new();
     }
 
-    public FormField(string name, string displayName, string description, string formControlName, FormConfigurationDictionary formConfiguration, bool? required=null, object value=null)
+    public FormField(string name, string displayName, string description, string formControlName, FormConfigurationDictionary formConfiguration, bool required, object value=null)
         :this()
     {
         Name = name;
@@ -55,7 +55,7 @@ public class FormField
     [NotNull]
     public virtual FormConfigurationDictionary FormConfiguration { get; set; }
 
-    public bool? Required { get; set; }
+    public bool Required { get; set; }
 
     /// <summary>
     /// Field value

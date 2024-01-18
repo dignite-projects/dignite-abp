@@ -30,7 +30,7 @@
     @code{
     void ValidateIsRequired(ValidatorEventArgs e)
     {
-        if (Field.Required.HasValue && Field.Required.Value)
+        if (Field.Required)
         {
             var value = e.Value == null ? string.Empty : Convert.ToString(e.Value);
             e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;

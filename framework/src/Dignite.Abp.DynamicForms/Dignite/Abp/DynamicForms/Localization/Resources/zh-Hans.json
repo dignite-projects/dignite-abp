@@ -31,6 +31,7 @@
     "FormatSpecifier": "格式说明符",
     "Max": "最大值",
     "Min": "最小值",
+    "ValidateValue:Required": "{0} 字段要求必填！",
     "Validate:NotDateType": "{0} 值非日期类型！",
     "Validate:CannotBeGreaterThan": "{0} 值不能大于 {1}！",
     "Validate:CannotBeLessThan": "{0} 值不能小于 {1}！",

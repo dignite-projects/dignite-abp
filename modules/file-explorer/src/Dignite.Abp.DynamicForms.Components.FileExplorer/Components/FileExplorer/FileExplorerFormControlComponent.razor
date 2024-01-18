@@ -43,7 +43,7 @@
 
     void ValidateIsRequired( ValidatorEventArgs e )
     {
-        if (Field.Required.HasValue && Field.Required.Value)
+        if (Field.Required)
         {
             e.Status = Files.Any() ? ValidationStatus.Success : ValidationStatus.Error;
             e.ErrorText = L["PleaseSelectFiles"];

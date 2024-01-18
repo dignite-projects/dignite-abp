@@ -48,6 +48,17 @@ public class NumericEditFormControl : FormControlBase
                         ));
             }
         }
+        else
+        {
+            if (args.Field.Required)
+            {
+                args.ValidationErrors.Add(
+                    new System.ComponentModel.DataAnnotations.ValidationResult(
+                        L["Validate:Required", args.Field.DisplayName],
+                        new[] { args.Field.Name }
+                        ));
+            }
+        }
     }
 
     public override FormConfigurationBase GetConfiguration(FormConfigurationDictionary fieldConfiguration)

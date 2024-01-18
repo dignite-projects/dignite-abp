@@ -74,7 +74,7 @@
 
     void ValidateIsRequired( ValidatorEventArgs e )
     {
-        if (Field.Required.HasValue && Field.Required.Value)
+        if (Field.Required)
         {
             e.Status = (e.Value == null || e.Value.ToString()==FormConfiguration.NullText) ? ValidationStatus.Error : ValidationStatus.Success;
         }

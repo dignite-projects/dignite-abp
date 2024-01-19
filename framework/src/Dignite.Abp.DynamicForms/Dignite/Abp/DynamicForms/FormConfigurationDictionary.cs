@@ -7,13 +7,13 @@ namespace Dignite.Abp.DynamicForms;
 /// Configuration Item Dictionary for Forms
 /// </summary>
 [Serializable]
-public class FormConfigurationDictionary : Dictionary<string, string>
+public class FormConfigurationDictionary : Dictionary<string, object>
 {
     public FormConfigurationDictionary()
     {
     }
 
-    public FormConfigurationDictionary(IDictionary<string, string> dictionary)
+    public FormConfigurationDictionary(IDictionary<string, object> dictionary)
         : base(dictionary)
     {
     }

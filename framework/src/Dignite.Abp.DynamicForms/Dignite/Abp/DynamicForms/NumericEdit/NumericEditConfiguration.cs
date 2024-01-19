@@ -8,17 +8,17 @@ public class NumericEditConfiguration : FormConfigurationBase
     /// Maximum number of decimal places after the decimal separator.
     /// </summary>
     public int Decimals {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<int>(NumericEditConfigurationNames.Decimals, 2);
+        get => ConfigurationDictionary.GetConfiguration<int>(NumericEditConfigurationNames.Decimals, 2);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Decimals, value);
     }
 
     public decimal? Max {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<decimal?>(NumericEditConfigurationNames.Max);
+        get => ConfigurationDictionary.GetConfiguration<decimal?>(NumericEditConfigurationNames.Max);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Max, value);
     }
 
     public decimal? Min {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<decimal?>(NumericEditConfigurationNames.Min);
+        get => ConfigurationDictionary.GetConfiguration<decimal?>(NumericEditConfigurationNames.Min);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Min, value);
     }
 
@@ -26,7 +26,7 @@ public class NumericEditConfiguration : FormConfigurationBase
     /// Specifies the interval between valid values.
     /// </summary>
     public decimal? Step {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<decimal?>(NumericEditConfigurationNames.Step);
+        get => ConfigurationDictionary.GetConfiguration<decimal?>(NumericEditConfigurationNames.Step);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.Step, value);
     }
 
@@ -34,7 +34,7 @@ public class NumericEditConfiguration : FormConfigurationBase
     /// Format Specifier
     /// </summary>
     public string FormatSpecifier {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(NumericEditConfigurationNames.FormatSpecifier, null);
+        get => ConfigurationDictionary.GetConfiguration<string>(NumericEditConfigurationNames.FormatSpecifier, null);
         set => ConfigurationDictionary.SetConfiguration(NumericEditConfigurationNames.FormatSpecifier, value);
     }
 

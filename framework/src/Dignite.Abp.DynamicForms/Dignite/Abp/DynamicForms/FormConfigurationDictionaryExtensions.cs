@@ -1,6 +1,10 @@
-﻿using System.Text.Encodings.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using Volo.Abp;
+using Volo.Abp.Reflection;
 
 namespace Dignite.Abp.DynamicForms;
 
@@ -11,16 +15,48 @@ public static class FormConfigurationDictionaryExtensions
         return source.ContainsKey(name);
     }
 
-    public static TConfiguration GetConfigurationOrDefault<TConfiguration>(this FormConfigurationDictionary source, string name, TConfiguration defaultValue = default)
+    public static object? GetConfiguration(this FormConfigurationDictionary source, string name, object? defaultValue = null)
     {
-        if (!source.HasConfiguration(name))
+        return source.GetOrDefault(name)
+               ?? defaultValue;
+    }
+
+    public static TConfiguration GetConfiguration<TConfiguration>(this FormConfigurationDictionary source, string name, TConfiguration defaultValue = default)
+    {
+        var value = source.GetConfiguration(name);
+        if (value == null)
         {
             return defaultValue;
         }
-        var configurationAsJson = source[name];
-        var options = new JsonSerializerOptions();
-        options.Converters.Add(new JsonStringEnumConverter());
-        return JsonSerializer.Deserialize<TConfiguration>(configurationAsJson, options);
+
+        try
+        {
+            var conversionType = typeof(TConfiguration);
+            if (TypeHelper.IsNullable(conversionType))
+            {
+                conversionType = conversionType.GetFirstGenericArgumentIfNullable();
+            }
+
+
+            if (conversionType.IsEnum)
+            {
+                return (TConfiguration)value;
+            }
+
+            return (TConfiguration)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString()!)!;
+        }
+        catch
+        {
+            if (value.GetType() == typeof(JsonElement))
+            {
+                return JsonSerializer.Deserialize<TConfiguration>(value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            }
+            else
+            {
+                return (TConfiguration)value;
+            }
+        }
+
     }
 
     public static void SetConfiguration<TConfiguration>(
@@ -28,13 +64,7 @@ public static class FormConfigurationDictionaryExtensions
         string name,
         TConfiguration value)
     {
-        var options = new JsonSerializerOptions
-        {
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            WriteIndented = true
-        };
-        var configurationAsJson = JsonSerializer.Serialize(value, options);
-        source[name] = configurationAsJson;
+        source[name] = value;
     }
 
     public static void RemoveConfiguration(this FormConfigurationDictionary source, string name)

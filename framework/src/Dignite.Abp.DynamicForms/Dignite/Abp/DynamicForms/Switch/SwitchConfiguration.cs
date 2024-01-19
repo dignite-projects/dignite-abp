@@ -3,7 +3,7 @@
 public class SwitchConfiguration : FormConfigurationBase
 {
     public bool Default{
-        get => ConfigurationDictionary.GetConfigurationOrDefault(SwitchConfigurationNames.Default, false);
+        get => ConfigurationDictionary.GetConfiguration(SwitchConfigurationNames.Default, false);
         set => ConfigurationDictionary.SetConfiguration(SwitchConfigurationNames.Default, value);
     }
 

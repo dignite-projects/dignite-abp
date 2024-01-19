@@ -6,11 +6,11 @@ public class CkEditorConfiguration : FormConfigurationBase
 {
     [Required]
     public string ImagesContainerName {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(CkEditorConfigurationNames.ImagesContainerName, null);
+        get => ConfigurationDictionary.GetConfiguration<string>(CkEditorConfigurationNames.ImagesContainerName, null);
         set => ConfigurationDictionary.SetConfiguration(CkEditorConfigurationNames.ImagesContainerName, value);
     }
     public string InitialContent {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(CkEditorConfigurationNames.InitialContent, "");
+        get => ConfigurationDictionary.GetConfiguration<string>(CkEditorConfigurationNames.InitialContent, "");
         set => ConfigurationDictionary.SetConfiguration(CkEditorConfigurationNames.InitialContent, value);
     }
 

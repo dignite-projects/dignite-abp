@@ -5,13 +5,13 @@ namespace Dignite.Abp.DynamicForms.FileExplorer;
 public class FileExplorerConfiguration : FormConfigurationBase
 {
     public string FileContainerName {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<string>(FileExplorerConfigurationNames.FileContainerName, null);
+        get => ConfigurationDictionary.GetConfiguration<string>(FileExplorerConfigurationNames.FileContainerName, null);
         set => ConfigurationDictionary.SetConfiguration(FileExplorerConfigurationNames.FileContainerName, value);
     }
 
     [Required]
     public bool UploadFileMultiple {
-        get => ConfigurationDictionary.GetConfigurationOrDefault(FileExplorerConfigurationNames.UploadFileMultiple, false);
+        get => ConfigurationDictionary.GetConfiguration(FileExplorerConfigurationNames.UploadFileMultiple, false);
         set => ConfigurationDictionary.SetConfiguration(FileExplorerConfigurationNames.UploadFileMultiple, value);
     }
 

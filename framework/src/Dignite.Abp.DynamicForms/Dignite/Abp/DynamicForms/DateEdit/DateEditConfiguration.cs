@@ -7,17 +7,17 @@ public class DateEditConfiguration : FormConfigurationBase
 {
     [Required]
     public DateInputMode InputMode {
-        get => ConfigurationDictionary.GetConfigurationOrDefault(DateEditConfigurationNames.InputMode, DateInputMode.Date);
+        get => ConfigurationDictionary.GetConfiguration(DateEditConfigurationNames.InputMode, DateInputMode.Date);
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.InputMode, value);
     }
 
-    public DateTimeOffset? Max {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<DateTimeOffset?>(DateEditConfigurationNames.Max);
+    public DateTime? Max {
+        get => ConfigurationDictionary.GetConfiguration<DateTime?>(DateEditConfigurationNames.Max);
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.Max, value);
     }
 
-    public DateTimeOffset? Min {
-        get => ConfigurationDictionary.GetConfigurationOrDefault<DateTimeOffset?>(DateEditConfigurationNames.Min);
+    public DateTime? Min {
+        get => ConfigurationDictionary.GetConfiguration<DateTime?>(DateEditConfigurationNames.Min);
         set => ConfigurationDictionary.SetConfiguration(DateEditConfigurationNames.Min, value);
     }
 

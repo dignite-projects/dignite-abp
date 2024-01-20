@@ -1,11 +1,8 @@
-
-.tree-view-title .p-1 {
-    margin: 0;
-    padding: 0 !important;
+.b-tree-view-node-title > span {
+    display:block;
 }
-
 /* tree select component*/
 .tree-select-container {
-    max-height:50vh;
-    overflow-y:auto;
+    max-height: 50vh;
+    overflow-y: auto;
 }

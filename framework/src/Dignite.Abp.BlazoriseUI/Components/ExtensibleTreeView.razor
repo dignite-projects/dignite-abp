@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Components.Web
 
 <div ondragover="event.preventDefault();">
-    <TreeView TNode="TNode" Nodes="@Nodes"
+    <TreeView @ref="TreeRef" TNode="TNode" Nodes="@Nodes"
               GetChildNodes="@GetChildNodes"
               HasChildNodes="@HasChildNodes"
               ExpandedNodes="@ExpandedNodes"
@@ -18,17 +18,17 @@
                 <div draggable="true" @key="@(key)"
                      @ondragstart="() => DraggingNode = context"
                      @ondragend="()=> DraggingNode = default(TNode)"
-                     @ondrag="@(()=> DraggingNode=context)" style="position:relative; margin-bottom:9px;">
+                     @ondrag="@(()=> DraggingNode=context)" style="position:relative;">
                     @NodeContent(context)
                     @if (DraggingNode is not null)
                     {
                         var isAvailableDragging = DragEnterNode != null && DragEnterNode.GetHashCode() != DraggingNode.GetHashCode() && context.GetHashCode() == DragEnterNode.GetHashCode();
-                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodePosition.Inside)?Border.Primary:Border.Is0" Width="Width.Is100" Height="Height.Is100" Position="Position.Absolute.Top.Is0.Start.Is0"
+                        <Div Border="(isAvailableDragging && DragEnterPosition == DragEnterNodePosition.Inside)?Border.Primary:Border.Is0" Width="Width.Is100" Height="Height.Is100" Position="Position.Absolute.Top.Is0.Start.Is0"
                                 @ondragenter="@(()=>DragEnter(context, DragEnterNodePosition.Inside))"
                                 @ondrop="@(()=> Dropped())">
                         </Div>
 
-                        <Div Border="(isAvailableDragging && DragEnterArea == DragEnterNodePosition.Bottom)?Border.Is3.Primary.OnTop:Border.Is0" style="bottom:-9px; height:6px;" Width="Width.Is100" Position="Position.Absolute.Start.Is0"
+                        <Div Border="(isAvailableDragging && DragEnterPosition == DragEnterNodePosition.Bottom)?Border.Is3.Primary.OnTop:Border.Is0" style="bottom:-9px; height:6px;" Width="Width.Is100" Position="Position.Absolute.Start.Is0"
                                 @ondragenter="@(()=>DragEnter(context, DragEnterNodePosition.Bottom))"
                                 @ondrop="@(()=> Dropped())">
                         </Div>
@@ -40,5 +40,5 @@
                 @NodeContent(context)
             }
         </NodeContent>
-</TreeView>
+    </TreeView>
 </div>

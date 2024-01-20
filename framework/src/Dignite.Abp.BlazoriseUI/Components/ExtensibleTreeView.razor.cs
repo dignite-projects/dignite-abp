@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Blazorise.TreeView;
 using Microsoft.AspNetCore.Components;
 
 namespace Dignite.Abp.BlazoriseUI.Components;
 public partial class ExtensibleTreeView<TNode>: ComponentBase
 {
+    public TreeView<TNode> TreeRef;
+
     #region Members
 
     /// <summary>
@@ -20,7 +24,7 @@ public partial class ExtensibleTreeView<TNode>: ComponentBase
     /// <summary>
     /// 
     /// </summary>
-    private DragEnterNodePosition? DragEnterArea;
+    private DragEnterNodePosition? DragEnterPosition;
     #endregion
 
     #region Properties
@@ -72,17 +76,22 @@ public partial class ExtensibleTreeView<TNode>: ComponentBase
     #endregion
 
     #region Methods
-    void DragEnter(TNode node, DragEnterNodePosition area)
+    void DragEnter(TNode node, DragEnterNodePosition position)
     {
         DragEnterNode = node;
-        DragEnterArea = area;
+        DragEnterPosition = position;
     }
 
-    async void Dropped()
+    async Task Dropped()
     {
-        await NodeDropped.InvokeAsync(new DropNode<TNode>(DraggingNode, DragEnterNode, DragEnterArea.Value));
+        await NodeDropped.InvokeAsync(new DropNode<TNode>(DraggingNode, DragEnterNode, DragEnterPosition.Value));
 
         await this.InvokeAsync(() => this.StateHasChanged());
+    }
+
+    public async Task Reload()
+    {
+        await TreeRef.Reload();
     }
     #endregion
 

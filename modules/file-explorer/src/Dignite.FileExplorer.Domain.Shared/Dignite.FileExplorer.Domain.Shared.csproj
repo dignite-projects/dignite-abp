@@ -21,6 +21,10 @@
 		<Content Remove="Dignite\FileExplorer\Localization\Resources\*.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Dignite\FileExplorer\Localization\Resources\ja.json" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Validation" Version="7.4.5" />
   </ItemGroup>

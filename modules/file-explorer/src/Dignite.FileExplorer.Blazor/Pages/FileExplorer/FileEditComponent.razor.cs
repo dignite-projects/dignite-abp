@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blazorise;
 using Dignite.FileExplorer.Files;
+using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Components;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
@@ -25,6 +26,7 @@ public partial class FileEditComponent
 
     public FileEditComponent(IFileDescriptorAppService fileDescriptorAppService)
     {
+        LocalizationResource = typeof(FileExplorerResource);
         FileDescriptorAppService = fileDescriptorAppService;
         Configuration = new FileContainerConfigurationDto();
     }

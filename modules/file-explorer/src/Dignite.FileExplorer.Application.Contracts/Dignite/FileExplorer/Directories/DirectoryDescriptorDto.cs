@@ -3,7 +3,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace Dignite.FileExplorer.Directories;
 
-public class DirectoryDescriptorDto : AuditedEntityDto<Guid>
+public class DirectoryDescriptorDto : ExtensibleAuditedEntityDto<Guid>
 {
     /// <summary>
     /// Container name of blob
@@ -19,4 +19,5 @@ public class DirectoryDescriptorDto : AuditedEntityDto<Guid>
     ///
     /// </summary>
     public Guid? ParentId { get; set; }
+    public int Order { get; set; }
 }

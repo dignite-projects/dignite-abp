@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Abp.BlobStoring;
 using Volo.Abp.Domain.Services;
 
 namespace Dignite.FileExplorer.Directories;
 
-public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
+public class DirectoryManager : DomainService
 {
     protected ContainerNameValidator ContainerNameValidator { get; }
     protected IDirectoryDescriptorRepository DirectoryDescriptorRepository { get; }
@@ -16,7 +17,7 @@ public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
         ContainerNameValidator = containerNameValidator;
     }
 
-    public async Task<DirectoryDescriptor> CreateAsync(Guid userId, string containerName, string name, Guid? parentId = null)
+    public virtual async Task<DirectoryDescriptor> CreateAsync(Guid userId, string containerName, string name, Guid? parentId = null)
     {
         ContainerNameValidator.Validate(containerName);
 
@@ -34,13 +35,11 @@ public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
             order + 1,
             CurrentTenant.Id
             );
-        await DirectoryDescriptorRepository.InsertAsync(directory);
-        return directory;
+        return await DirectoryDescriptorRepository.InsertAsync(directory);
     }
 
-    public async Task MoveAsync(DirectoryDescriptor directory, Guid? parentId)
+    public virtual async Task<DirectoryDescriptor> MoveAsync(DirectoryDescriptor directory, Guid? parentId,int order)
     {
-        var containerName = directory.ContainerName;
         if (parentId.HasValue)
         {
             var parent = await DirectoryDescriptorRepository.GetAsync(parentId.Value);
@@ -48,28 +47,32 @@ public class DirectoryManager : DomainService, IDirectoryManager, IDomainService
             {
                 throw new DirectoryInvalidMoveException();
             }
-            containerName = parent.ContainerName;
         }
 
-        //
-        if (await DirectoryDescriptorRepository.NameExistsAsync(directory.CreatorId.Value, containerName, directory.Name, parentId, directory.Id))
+        var children = await DirectoryDescriptorRepository.GetListAsync(directory.CreatorId.Value, directory.ContainerName, parentId);
+        foreach (var item in children.Where(d=>d.Order>=order && d.Id!=directory.Id))
         {
-            throw new DirectoryAlreadyExistException(directory.Name);
+            item.Order=item.Order+1;
+            await DirectoryDescriptorRepository.UpdateAsync(item);
         }
 
         directory.ParentId = parentId;
-        await DirectoryDescriptorRepository.UpdateAsync(directory);
+        directory.Order = order;
+        return await DirectoryDescriptorRepository.UpdateAsync(directory);
     }
 
-    public async Task RenameAsync(DirectoryDescriptor directory, string newName)
+    public virtual async Task<DirectoryDescriptor> RenameAsync(DirectoryDescriptor directory, string newName)
     {
         //
-        if (await DirectoryDescriptorRepository.NameExistsAsync(directory.CreatorId.Value, directory.ContainerName, newName, directory.ParentId, directory.Id))
+        if (!directory.Name.Equals(newName, StringComparison.CurrentCultureIgnoreCase))
         {
-            throw new DirectoryAlreadyExistException(newName);
+            if (await DirectoryDescriptorRepository.NameExistsAsync(directory.CreatorId.Value, directory.ContainerName, newName, directory.ParentId))
+            {
+                throw new DirectoryAlreadyExistException(newName);
+            }
         }
 
         directory.Name = newName;
-        await DirectoryDescriptorRepository.UpdateAsync(directory);
+        return await DirectoryDescriptorRepository.UpdateAsync(directory);
     }
 }

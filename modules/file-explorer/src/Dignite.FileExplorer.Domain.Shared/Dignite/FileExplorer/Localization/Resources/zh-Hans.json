@@ -15,7 +15,6 @@
     "NewDirectory": "新建目录",
     "DirectoryName": "目录名",
     "DeletionConfirmationMessage": "确认删除 {0} 吗？",
-    "SuccessfullyDeleted": "删除成功！",
     "FileName": "文件名",
     "FileSize": "文件大小",
     "CreationTime": "创建时间",

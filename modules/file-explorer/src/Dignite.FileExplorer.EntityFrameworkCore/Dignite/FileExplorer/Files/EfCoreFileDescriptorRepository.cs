@@ -79,7 +79,7 @@ public class EfCoreFileDescriptorRepository : EfCoreRepository<IFileExplorerDbCo
             containerName, creatorId, directoryId, filter, entityId
         );
 
-        return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} asc" : sorting)
+        return await query.OrderBy(sorting.IsNullOrWhiteSpace() ? $"{nameof(FileDescriptor.CreationTime)} desc" : sorting)
             .PageBy(skipCount, maxResultCount)
             .ToListAsync(cancellationToken);
     }

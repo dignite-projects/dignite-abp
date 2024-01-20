@@ -20,40 +20,6 @@ public class EfCoreDirectoryDescriptorRepository : EfCoreRepository<IFileExplore
     {
     }
 
-    public async Task<bool> AnyChildrenAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
-    {
-        return await (await GetDbSetAsync())
-                   .AnyAsync(b => b.ContainerName == containerName && b.CreatorId == creatorId && b.ParentId == parentId, GetCancellationToken(cancellationToken));
-    }
-
-    public async Task<DirectoryDescriptor> FindByNameAsync(Guid creatorId, string containerName, Guid? parentId, string name, CancellationToken cancellationToken = default)
-    {
-        return await base.FindAsync(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId && dd.ParentId == parentId && dd.Name == name, true, GetCancellationToken(cancellationToken));
-    }
-
-    public async Task<int> GetCountAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
-    {
-        cancellationToken = GetCancellationToken(cancellationToken);
-        var query = await GetListQueryAsync(
-            creatorId, containerName, parentId
-        );
-
-        return await query.CountAsync(cancellationToken);
-    }
-
-    public async Task<List<DirectoryDescriptor>> GetListAsync(Guid creatorId, string containerName, Guid? parentId, int skipCount = 0, int maxResultCount = int.MaxValue, CancellationToken cancellationToken = default)
-    {
-        cancellationToken = GetCancellationToken(cancellationToken);
-
-        var query = await GetListQueryAsync(
-            creatorId, containerName, parentId
-        );
-
-        return await query.OrderBy(dd => dd.Order)
-            .PageBy(skipCount, maxResultCount)
-            .ToListAsync(cancellationToken);
-    }
-
     public async Task<int> GetMaxOrderAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
@@ -65,14 +31,20 @@ public class EfCoreDirectoryDescriptorRepository : EfCoreRepository<IFileExplore
         return await query.DefaultIfEmpty().MaxAsync(d=> (int?)d.Order)??0;
     }
 
-    public async Task<bool> NameExistsAsync(Guid creatorId, string containerName, string name, Guid? parentId, Guid? ignoredId = null, CancellationToken cancellationToken = default)
+    public async Task<bool> NameExistsAsync(Guid creatorId, string containerName, string name, Guid? parentId, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
-            .WhereIf(ignoredId.HasValue, dd => dd.Id != ignoredId)
             .AnyAsync(b => b.ContainerName == containerName && b.CreatorId == creatorId && b.ParentId == parentId && b.Name == name, GetCancellationToken(cancellationToken));
     }
 
-    public async Task<List<DirectoryDescriptor>> GetAllListByUserAsync(Guid creatorId, string containerName, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<List<DirectoryDescriptor>> GetListAsync(Guid creatorId, string containerName, Guid? parentId, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        return await (await GetListQueryAsync(
+            creatorId, containerName, parentId
+        )).ToListAsync();
+    }
+
+    public async Task<List<DirectoryDescriptor>> GetAllByUserAsync(Guid creatorId, string containerName, CancellationToken cancellationToken = default(CancellationToken))
     {
         return await (await GetDbSetAsync())
             .Where(dd => dd.ContainerName == containerName && dd.CreatorId == creatorId)

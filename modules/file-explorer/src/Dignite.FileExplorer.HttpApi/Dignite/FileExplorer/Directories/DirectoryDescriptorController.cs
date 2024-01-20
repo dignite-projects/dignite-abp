@@ -47,12 +47,6 @@ public class FileDescriptorController : AbpController, IDirectoryDescriptorAppSe
         return await _directoryAppService.GetListAsync(input);
     }
 
-    [HttpGet]
-    [Route("my/{containerName}")]
-    public async Task<ListResultDto<DirectoryDescriptorInfoDto>> GetMyAsync(string containerName)
-    {
-        return await _directoryAppService.GetMyAsync(containerName);
-    }
 
     [HttpPut]
     [Route("{id:guid}/move")]

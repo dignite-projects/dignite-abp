@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Blazorise;
 using Dignite.Abp.BlazoriseUI.Components;
 using Dignite.FileExplorer.Directories;
 using Dignite.FileExplorer.Files;
@@ -12,8 +14,9 @@ using Microsoft.AspNetCore.Components;
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class DirectoryTreeComponent
 {
-    protected IList<DirectoryDescriptorInfoDto> AllDirectories = new List<DirectoryDescriptorInfoDto>();
-    protected IList<DirectoryDescriptorInfoDto> ExpandedNodes = new List<DirectoryDescriptorInfoDto>();
+    protected ExtensibleTreeView<DirectoryDescriptorInfoDto> ExtensibleTreeViewRef;
+    protected ObservableCollection<DirectoryDescriptorInfoDto> AllDirectories = new ();
+    protected ObservableCollection<DirectoryDescriptorInfoDto> ExpandedNodes = new ();
 
     [Parameter] public DirectoryDescriptorInfoDto SelectedDirectory { get; set; }
     [Parameter] public EventCallback<DirectoryDescriptorInfoDto> SelectedDirectoryChanged { get; set; }
@@ -36,11 +39,13 @@ public partial class DirectoryTreeComponent
     {
         try
         {
-            var result = await AppService.GetMyAsync(ContainerName);
-
+            var result = await AppService.GetListAsync(
+                new GetDirectoriesInput { 
+                    ContainerName = ContainerName,
+                });
             Entities = result.Items;
-
-            AllDirectories = Entities.ToList();
+            AllDirectories = new ObservableCollection<DirectoryDescriptorInfoDto>(Entities);
+            SelectedDirectory = null;
         }
         catch (Exception ex)
         {
@@ -55,15 +60,84 @@ public partial class DirectoryTreeComponent
     }
 
 
-    protected virtual async void OnDroped(DropNode<DirectoryDescriptorInfoDto> dropNode)
+    protected virtual async Task OnDroped(DropNode<DirectoryDescriptorInfoDto> dropNode)
     {
-        if (dropNode.Node.Id == dropNode.Target.Id)
+        var source = dropNode.Source;
+        var target = dropNode.Target;
+        var position = dropNode.Position;
+
+        // forbid moving to child nodes
+        if (dropNode.Source.Children.FindById(target.Id) != null)
+        {
+            await Message.Error(L[FileExplorerErrorCodes.Directories.ForbidMovingToChild]);
             return;
+        }
 
         //
-        await MoveAsync(dropNode.Node, dropNode.Target, dropNode.Area);
+        if (source.ParentId.HasValue)
+        {
+            var parent = AllDirectories.FindById(source.ParentId.Value);
+            parent.RemoveChild(source);
+        }
+        else
+        {
+            AllDirectories.RemoveAll(ou => ou.Id == source.Id);
+        }
 
-        await this.InvokeAsync(() => this.StateHasChanged());
+        //
+        if (position == DragEnterNodePosition.Inside)
+        {
+            Guid parentId = target.Id;
+            int order = target.Children.Max(x => x.Order as int?) ?? 0;
+            order = order + 1;
+            source.ParentId = parentId;
+            source.Order = order;
+
+            //
+            target.AddChild(source);
+            //Expand current node
+            if (!ExpandedNodes.Any(n => n.Id == target.Id))
+            {
+                ExpandedNodes.Add(target);
+            }
+            await MoveInDatabaseAsync(source.Id, parentId, order);
+        }
+        else if (position == DragEnterNodePosition.Bottom)
+        {
+            Guid? parentId = null;
+            int order = target.Order + 1;
+            if (target.ParentId.HasValue)
+            {
+                var parent = AllDirectories.FindById(target.ParentId.Value);
+                parentId = parent.Id;
+
+                source.ParentId = parentId;
+                source.Order = order;
+                MoveNode(source, target, parent.Children);
+            }
+            else
+            {
+                parentId = null;
+
+                source.ParentId = parentId;
+                source.Order = order;
+                MoveNode(source, target,AllDirectories);
+            }
+            await MoveInDatabaseAsync(source.Id, parentId, order);
+        }
+
+        //
+        await OnSelectDescriptorChanged(source);
+        await ExtensibleTreeViewRef.Reload();
+    }
+
+    private void MoveNode(DirectoryDescriptorInfoDto source, DirectoryDescriptorInfoDto target, ObservableCollection<DirectoryDescriptorInfoDto> list)
+    {
+        foreach (var item in list.Where(i => i.Order > target.Order && i.Id != source.Id))
+        {
+            item.Order = item.Order + 1;
+        }
+        list.InsertAfter(target, source);
     }
 
     protected virtual async Task OnAddRootDirectoryClicked()
@@ -93,35 +167,37 @@ public partial class DirectoryTreeComponent
 
     protected override async Task OnCreatedEntityAsync()
     {
-        if (!NewEntity.ParentId.HasValue) //add root directory
+        if (NewEntity.ParentId.HasValue)
         {
-            await GetEntitiesAsync();
-            ExpandedNodes.Clear();
-        }
-        else
-        {
-            var currentNode = AllDirectories.FindById(NewEntity.ParentId.Value);
+            var result = (await AppService.GetListAsync(
+                new GetDirectoriesInput
+                {
+                    ContainerName = ContainerName,
+                })).Items.FindById(NewEntity.ParentId.Value);
+            var parent = AllDirectories.FindById(NewEntity.ParentId.Value);
 
-            var children = (await AppService.GetListAsync(new GetDirectoriesInput
+            await InvokeAsync(() =>
             {
-                CreatorId=CurrentUser.Id,
-                ContainerName = ContainerName,
-                ParentId = currentNode.Id
-            })).Items;
-
-            currentNode.Children.Clear();
-            foreach (var ou in children)
-            {
-                currentNode.AddChild(ou);
-            }
+                foreach (var item in result.Children)
+                {
+                    if (!parent.Children.Any(d => d.Id == item.Id))
+                    {
+                        parent.Children.Add(item);
+                    }
+                }
+            });
 
             //Expand current node
-            if (!ExpandedNodes.Any(n => n.Id == currentNode.Id))
+            if (!ExpandedNodes.Any(n => n.Id == parent.Id))
             {
-                ExpandedNodes.Add(currentNode);
+                ExpandedNodes.Add(parent);
             }
+            await ExtensibleTreeViewRef.Reload();
         }
-
+        else //add root directory
+        {
+            await GetEntitiesAsync();
+        }
         await InvokeAsync(CreateModal.Hide);
     }
 
@@ -145,11 +221,14 @@ public partial class DirectoryTreeComponent
                 var parent = AllDirectories.FindById(node.ParentId.Value);
                 parent.RemoveChild(node);
                 SelectedDirectory = parent;
+                await OnSelectDescriptorChanged(SelectedDirectory);
+                await ExtensibleTreeViewRef.Reload();
             }
             else
             {
-                await GetEntitiesAsync();
+                AllDirectories.Remove(node);
                 SelectedDirectory = null;
+                await OnSelectDescriptorChanged(SelectedDirectory);
             }
         }
     }
@@ -157,80 +236,14 @@ public partial class DirectoryTreeComponent
     protected override async Task OnDeletedEntityAsync()
     {
         await InvokeAsync(StateHasChanged);
-        await Notify.Success(L["SuccessfullyDeleted"]);
     }
 
-    protected virtual async Task MoveAsync(DirectoryDescriptorInfoDto source, DirectoryDescriptorInfoDto target, DragEnterNodePosition position)
+    protected virtual async Task MoveInDatabaseAsync(Guid sourceId,Guid? parentId,int order)
     {
-        // forbid moving to child nodes
-        if (source.Children.FindById(target.Id)!=null)
-        {
-            await Message.Error(L[FileExplorerErrorCodes.Directories.ForbidMovingToChild]);
-            return;
-        }
-
-        //
-        if (source.ParentId.HasValue)
-        {
-            var parent=AllDirectories.FindById(source.ParentId.Value);
-            parent.RemoveChild(source);
-        }
-        else
-        {
-            AllDirectories.RemoveAll(ou => ou.Id == source.Id);
-        }
-
-        //
-        if (position == DragEnterNodePosition.Inside)
-        {
-            source.ParentId = target.Id;
-            if (target.HasChildren)
-            {
-                if (!target.Children.Any())
-                {
-                    var children = (await AppService.GetListAsync(new GetDirectoriesInput
-                    {
-                        CreatorId=CurrentUser.Id,
-                        ContainerName= source.ContainerName,
-                        ParentId = target.Id
-                    })).Items;
-
-                    foreach (var ou in children)
-                    {
-                        target.AddChild(ou);
-                    }
-                }
-            }
-
-            //
-            target.AddChild(source);
-            //Expand current node
-            if (!ExpandedNodes.Any(n => n.Id == target.Id))
-            {
-                ExpandedNodes.Add(target);
-            }
-        }
-        else if (position == DragEnterNodePosition.Bottom)
-        {
-            if (target.ParentId.HasValue)
-            {
-                source.ParentId = target.ParentId;
-                AllDirectories.FindById(target.ParentId.Value).Children.InsertAfter(target, source);
-            }
-            else
-            {
-                source.ParentId = null;
-                AllDirectories.InsertAfter(target, source);
-            }
-        }
-
         // move api
         await AppService.MoveAsync(
-            source.Id,
-            new MoveDirectoryInput
-            {
-                TargetId = target.Id,
-                Position = position == DragEnterNodePosition.Inside ? DirectoryMovePosition.Inside : DirectoryMovePosition.Bottom
-            });
+            sourceId,
+            new MoveDirectoryInput(parentId, order)
+            );
     }
 }

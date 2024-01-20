@@ -8,7 +8,7 @@
 @if (HasCreatePermission)
 {
     <Div Flex="Flex.JustifyContent.Between.AlignItems.Center" Margin="Margin.Is2.FromBottom">
-        <Div Padding="Padding.Is2.FromStart">
+        <Div>
             <Strong>
                 @L["MyDirectories"]
             </Strong>
@@ -21,14 +21,14 @@
     </Div>
 }
 
-<ExtensibleTreeView TNode="DirectoryDescriptorInfoDto" Draggable
-                       Nodes="@AllDirectories"
-                       SelectedNode="@SelectedDirectory"
-                       SelectedNodeChanged="@OnSelectDescriptorChanged"
-                       ExpandedNodes="@ExpandedNodes"
-                       GetChildNodes="x => x.Children"
-                       HasChildNodes="x => x.HasChildren"
-                       NodeDropped="@OnDroped">
+<ExtensibleTreeView @ref="ExtensibleTreeViewRef" TNode="DirectoryDescriptorInfoDto" Draggable
+                     Nodes="@AllDirectories"
+                     SelectedNode="@SelectedDirectory"
+                     SelectedNodeChanged="@OnSelectDescriptorChanged"
+                     ExpandedNodes="@ExpandedNodes"
+                     GetChildNodes="x => x.Children"
+                     HasChildNodes="x => x.Children.Any()"
+                     NodeDropped="@OnDroped">
     <NodeContent>
         <Dropdown>
             <Button Color="(SelectedDirectory!=null && SelectedDirectory.Id==context.Id)? Color.Secondary: Color.Light" Padding="Padding.Is0.FromTop.Is0.FromBottom.Is1.FromStart.Is1.FromEnd">@context.Name</Button>

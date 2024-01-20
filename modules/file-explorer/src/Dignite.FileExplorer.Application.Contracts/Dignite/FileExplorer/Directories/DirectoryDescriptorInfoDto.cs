@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
+using System.Collections.ObjectModel;
 using Volo.Abp.Application.Dtos;
 
 namespace Dignite.FileExplorer.Directories;
@@ -10,7 +9,7 @@ public class DirectoryDescriptorInfoDto: ExtensibleEntityDto<Guid>, IEquatable<D
 {
     public DirectoryDescriptorInfoDto() : base()
     {
-        Children = new List<DirectoryDescriptorInfoDto>();
+        Children = new ObservableCollection<DirectoryDescriptorInfoDto>();
     }
 
     /// <summary>
@@ -27,10 +26,9 @@ public class DirectoryDescriptorInfoDto: ExtensibleEntityDto<Guid>, IEquatable<D
     ///
     /// </summary>
     public Guid? ParentId { get; set; }
+    public int Order { get; set; }
 
-    public bool HasChildren { get; private set; }
-
-    public IList<DirectoryDescriptorInfoDto> Children { get; set; }
+    public ObservableCollection<DirectoryDescriptorInfoDto> Children { get; set; }
 
 
     public bool Equals(DirectoryDescriptorInfoDto other)
@@ -40,7 +38,6 @@ public class DirectoryDescriptorInfoDto: ExtensibleEntityDto<Guid>, IEquatable<D
 
     public void AddChild(DirectoryDescriptorInfoDto ou)
     {
-        this.HaveChildren(true);
         ou.ParentId = this.Id;
         this.Children.Add(ou);
     }
@@ -48,12 +45,5 @@ public class DirectoryDescriptorInfoDto: ExtensibleEntityDto<Guid>, IEquatable<D
     public void RemoveChild(DirectoryDescriptorInfoDto ou)
     {
         this.Children.RemoveAll(c => ou.Id == c.Id);
-        if (!Children.Any())
-            this.HaveChildren(false);
-    }
-
-    public void HaveChildren(bool hasChild)
-    {
-        this.HasChildren = hasChild;
     }
 }

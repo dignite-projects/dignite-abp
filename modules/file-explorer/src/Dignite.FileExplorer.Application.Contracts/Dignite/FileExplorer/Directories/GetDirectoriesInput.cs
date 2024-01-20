@@ -1,15 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Application.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Dignite.FileExplorer.Directories;
 
-public class GetDirectoriesInput : PagedResultRequestDto
+public class GetDirectoriesInput
 {
-    public Guid? CreatorId { get; set; }
 
     [Required]
     public string ContainerName { get; set; }
-
-    public Guid? ParentId { get; set; }
 }

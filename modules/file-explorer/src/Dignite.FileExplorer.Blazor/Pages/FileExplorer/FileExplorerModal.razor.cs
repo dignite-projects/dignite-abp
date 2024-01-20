@@ -76,7 +76,6 @@ public partial class FileExplorerModal
                 new EntityAction
                 {
                     Icon= "fa-trash",
-                    Text = L["Delete"],
                     Visible = (data) => CurrentUser.GetId() == data.As<FileDescriptorDto>().CreatorId,
                     Clicked = async (data) => await DeleteEntityAsync(data.As<FileDescriptorDto>()),
                     ConfirmationMessage = (data) => GetDeleteConfirmationMessage(data.As<FileDescriptorDto>())
@@ -150,7 +149,7 @@ public partial class FileExplorerModal
 
             await InvokeAsync(_modal.Show);
 
-            AllDirectories = (await DirectoryDescriptorAppService.GetMyAsync(ContainerName)).Items;
+            AllDirectories = (await DirectoryDescriptorAppService.GetListAsync(new GetDirectoriesInput { ContainerName=containerName})).Items;
             await GetEntitiesAsync();
             Configuration = await FileDescriptorAppService.GetFileContainerConfigurationAsync(ContainerName);
             MaxFileSize = Configuration.MaxBlobSize == 0 ? long.MaxValue : (Configuration.MaxBlobSize * 1024);
@@ -196,7 +195,7 @@ public partial class FileExplorerModal
                 && AllDirectories.FindById(GetListInput.DirectoryId.Value) == null
                 )
             {
-                AllDirectories = (await DirectoryDescriptorAppService.GetMyAsync(ContainerName)).Items;
+                AllDirectories = (await DirectoryDescriptorAppService.GetListAsync(new GetDirectoriesInput { ContainerName = ContainerName })).Items;
             }
 
             // start upload

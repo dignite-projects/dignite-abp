@@ -13,7 +13,6 @@ public class FileExplorerApplicationAutoMapperProfile : Profile
             .Ignore(fd=>fd.Url);
         CreateMap<DirectoryDescriptor, DirectoryDescriptorDto>();
         CreateMap<DirectoryDescriptor, DirectoryDescriptorInfoDto>()
-            .Ignore(x => x.HasChildren)
             .Ignore(x => x.Children);
     }
 }

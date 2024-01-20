@@ -15,7 +15,6 @@
     "NewDirectory": "New Directory",
     "DirectoryName": "Directory Name",
     "DeletionConfirmationMessage": "Are you sure you want to delete {0}?",
-    "SuccessfullyDeleted": "Deleted successfully!",
     "FileName": "File Name",
     "FileSize": "File Size",
     "CreationTime": "Creation Time",

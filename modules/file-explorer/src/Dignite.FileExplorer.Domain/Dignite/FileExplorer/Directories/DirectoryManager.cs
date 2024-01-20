@@ -61,18 +61,18 @@ public class DirectoryManager : DomainService
         return await DirectoryDescriptorRepository.UpdateAsync(directory);
     }
 
-    public virtual async Task<DirectoryDescriptor> RenameAsync(DirectoryDescriptor directory, string newName)
+    public virtual async Task<DirectoryDescriptor> UpdateAsync(DirectoryDescriptor directory, string name)
     {
         //
-        if (!directory.Name.Equals(newName, StringComparison.CurrentCultureIgnoreCase))
+        if (!directory.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase))
         {
-            if (await DirectoryDescriptorRepository.NameExistsAsync(directory.CreatorId.Value, directory.ContainerName, newName, directory.ParentId))
+            if (await DirectoryDescriptorRepository.NameExistsAsync(directory.CreatorId.Value, directory.ContainerName, name, directory.ParentId))
             {
-                throw new DirectoryAlreadyExistException(newName);
+                throw new DirectoryAlreadyExistException(name);
             }
         }
 
-        directory.Name = newName;
+        directory.Name = name;
         return await DirectoryDescriptorRepository.UpdateAsync(directory);
     }
 }

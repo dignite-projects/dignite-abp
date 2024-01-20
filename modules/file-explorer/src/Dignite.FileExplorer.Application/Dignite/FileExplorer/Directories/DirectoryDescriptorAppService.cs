@@ -69,7 +69,7 @@ public class DirectoryDescriptorAppService : FileExplorerAppService, IDirectoryD
     {
         var entity = await _directoryRepository.GetAsync(id, false);
         await AuthorizationService.CheckAsync(entity, CommonOperations.Update);
-        await _directoryManager.RenameAsync(entity, input.Name);
+        await _directoryManager.UpdateAsync(entity, input.Name);
         return
             ObjectMapper.Map<DirectoryDescriptor, DirectoryDescriptorDto>(entity);
     }

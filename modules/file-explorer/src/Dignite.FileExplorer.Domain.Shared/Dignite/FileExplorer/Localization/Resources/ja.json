@@ -1,0 +1,29 @@
+{
+  "culture": "ja",
+  "texts": {
+    "FileExplorer:Directory:0001": "ディレクトリはすでに存在しています！",
+    "FileExplorer:Directory:0002": "ディレクトリが存在しません！",
+    "FileExplorer:Directory:0003": "ディレクトリ名が無効です！",
+    "FileExplorer:Directory:0004": "無効な移動です！",
+    "FileExplorer:Directory:0005": "サブディレクトリへの移動は禁止されています！",
+    "FileExplorer:File:0001": "セル名は適用されません！",
+    "FileExplorer:File:0002": "セル名は利用できません！",
+    "FileExplorer": "ファイルエクスプローラー",
+    "Permission:FileExplorer": "ファイルエクスプローラー",
+    "Permission:Management": "ファイルの管理",
+    "MyDirectories": "私のディレクトリ",
+    "NewDirectory": "新しいディレクトリ",
+    "DirectoryName": "ディレクトリ名",
+    "DeletionConfirmationMessage": "{0} を削除してもよろしいですか？",
+    "FileName": "ファイル名",
+    "FileSize": "ファイルサイズ",
+    "CreationTime": "作成日時",
+    "ExceedsMaximumSize": "アップロードされたファイルのサイズは {0} を超えてはいけません。",
+    "AllFiles": "すべてのファイル",
+    "UploadFiles": "ファイルのアップロード",
+    "Confirm": "確認",
+    "Directory": "ディレクトリ",
+    "SelectFile": "ファイルを選択",
+    "DirectoryName{0}AlreadyExist": "ディレクトリ名「{0}」はすでに存在しています！"
+  }
+}

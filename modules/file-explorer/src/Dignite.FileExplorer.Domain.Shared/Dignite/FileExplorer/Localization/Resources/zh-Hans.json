@@ -23,6 +23,7 @@
     "UploadFiles": "上传文件",
     "Confirm": "确定",
     "Directory": "目录",
-    "SelectFile": "选择文件"
+    "SelectFile": "选择文件",
+    "DirectoryName{0}AlreadyExist": "文件夹名称 {0} 已存在！"
   }
 }

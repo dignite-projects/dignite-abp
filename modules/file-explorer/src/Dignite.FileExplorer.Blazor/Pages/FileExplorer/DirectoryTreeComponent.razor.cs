@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Blazorise;
 using Dignite.Abp.BlazoriseUI.Components;
@@ -10,6 +11,7 @@ using Dignite.FileExplorer.Files;
 using Dignite.FileExplorer.Localization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Dignite.FileExplorer.Blazor.Pages.FileExplorer;
 public partial class DirectoryTreeComponent
@@ -245,5 +247,65 @@ public partial class DirectoryTreeComponent
             sourceId,
             new MoveDirectoryInput(parentId, order)
             );
+    }
+    private Task CreateNameExistsValidatorAsync(ValidatorEventArgs e, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var name = Convert.ToString(e.Value);
+        if (!name.IsNullOrEmpty())
+        {
+            if (NewEntity.ParentId.HasValue)
+            {
+                var parent = AllDirectories.FindById(NewEntity.ParentId.Value);
+                e.Status = parent.Children.Any(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                    ? ValidationStatus.Error
+                    : ValidationStatus.Success;
+
+                e.ErrorText = L["DirectoryName{0}AlreadyExist", name];
+            }
+            else
+            {
+                e.Status = AllDirectories.Any(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                    ? ValidationStatus.Error
+                    : ValidationStatus.Success;
+
+                e.ErrorText = L["DirectoryName{0}AlreadyExist", name];
+            }
+        }
+        else
+        {
+            e.Status = ValidationStatus.Error;
+        }
+        return Task.CompletedTask;
+    }
+    private Task EditNameExistsValidatorAsync(ValidatorEventArgs e, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var name = Convert.ToString(e.Value);
+        if (!name.IsNullOrEmpty())
+        {
+            if (SelectedDirectory.ParentId.HasValue)
+            {
+                var parent = AllDirectories.FindById(SelectedDirectory.ParentId.Value);
+                e.Status = parent.Children.Any(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase) && x.Id!=SelectedDirectory.Id)
+                    ? ValidationStatus.Error
+                    : ValidationStatus.Success;
+
+                e.ErrorText = L["DirectoryName{0}AlreadyExist", name];
+            }
+            else
+            {
+                e.Status = AllDirectories.Any(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase) && x.Id != SelectedDirectory.Id)
+                    ? ValidationStatus.Error
+                    : ValidationStatus.Success;
+
+                e.ErrorText = L["DirectoryName{0}AlreadyExist", name];
+            }
+        }
+        else
+        {
+            e.Status = ValidationStatus.Error;
+        }
+        return Task.CompletedTask;
     }
 }

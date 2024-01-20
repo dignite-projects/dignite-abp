@@ -56,7 +56,7 @@
                 </Blazorise.ModalHeader>
                 <Blazorise.ModalBody>
                     <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
-                        <Blazorise.Validation MessageLocalizer="@LH.Localize">
+                        <Blazorise.Validation MessageLocalizer="@LH.Localize" AsyncValidator="CreateNameExistsValidatorAsync">
                             <Blazorise.Field>
                                 <Blazorise.FieldLabel>@L["DirectoryName"]</Blazorise.FieldLabel>
                                 <Blazorise.TextEdit @bind-Text="@NewEntity.Name" Autofocus="true">
@@ -89,7 +89,7 @@
                 </Blazorise.ModalHeader>
                 <Blazorise.ModalBody>
                     <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
-                        <Blazorise.Validation MessageLocalizer="@LH.Localize">
+                            <Blazorise.Validation MessageLocalizer="@LH.Localize" AsyncValidator="EditNameExistsValidatorAsync">
                             <Blazorise.Field>
                                 <Blazorise.FieldLabel>@L["DirectoryName"]</Blazorise.FieldLabel>
                                 <Blazorise.TextEdit @bind-Text="@EditingEntity.Name" Autofocus="true">

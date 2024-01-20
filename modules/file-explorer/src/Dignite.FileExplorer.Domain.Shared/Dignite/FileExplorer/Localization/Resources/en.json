@@ -23,6 +23,7 @@
     "UploadFiles": "Upload Files",
     "Confirm": "OK",
     "Directory": "Directory",
-    "SelectFile": "Select File"
+    "SelectFile": "Select File",
+    "DirectoryName{0}AlreadyExist": "The directory name \"{0}\" already exist!"
   }
 }

@@ -21,7 +21,7 @@
                 <TableRow>
                     <TableRowCell>                        
                         <Validation Validator="((e)=>RequiredValidate(e))">
-                        <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" />
+                        <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" Blur="((args)=>ItemTextboxBlur(item))" />
                         </Validation>
                         </TableRowCell>
                     <TableRowCell>                        
@@ -49,14 +49,19 @@
     <Check TValue="bool" @bind-Checked="@FormConfiguration.Multiple">@L["Multiple"]</Check>
 </Field>
 
+@System.Text.Json.JsonSerializer.Serialize(FormConfiguration)
 @code{
 
     List<SelectListItem> Options;
-    
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         Options = FormConfiguration.Options;
+        if (!FormConfiguration.Options.Any())
+        {
+            Options.Add(new SelectListItem());
+        }
     }
 
     private void RemoveSelectListItem(MouseEventArgs e,SelectListItem item)
@@ -91,11 +96,19 @@
 
         return Task.CompletedTask;
     }
-    
+
     void RequiredValidate(ValidatorEventArgs e)
     {
         e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
             ? ValidationStatus.Error
             : ValidationStatus.Success;
+    }
+
+    private void ItemTextboxBlur(SelectListItem item)
+    {
+        if (!item.Text.IsNullOrEmpty() && item.Value.IsNullOrEmpty())
+        {
+            item.Value = "item-" + Options.IndexOf(item);
+        }
     }
 }

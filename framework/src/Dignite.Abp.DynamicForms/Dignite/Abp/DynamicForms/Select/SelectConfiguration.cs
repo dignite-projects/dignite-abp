@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Dignite.Abp.DynamicForms;
 
 namespace Dignite.Abp.DynamicForms.Select;
 

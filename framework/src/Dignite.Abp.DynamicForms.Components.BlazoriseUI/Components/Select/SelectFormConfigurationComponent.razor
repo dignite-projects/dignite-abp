@@ -49,7 +49,6 @@
     <Check TValue="bool" @bind-Checked="@FormConfiguration.Multiple">@L["Multiple"]</Check>
 </Field>
 
-@System.Text.Json.JsonSerializer.Serialize(FormConfiguration)
 @code{
 
     List<SelectListItem> Options;

@@ -1,0 +1,8 @@
+{
+  "culture": "ja",
+  "texts": {
+    "FormControl:CkEditor": "CKEditor",
+    "ImagesContainerName": "画像コンテナ名",
+    "InitialContent": "初期コンテンツ"
+  }
+}

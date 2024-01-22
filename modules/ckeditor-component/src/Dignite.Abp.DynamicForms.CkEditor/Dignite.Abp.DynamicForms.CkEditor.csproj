@@ -20,6 +20,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Dignite\Abp\DynamicForms\CkEditor\Localization\Resources\ja.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
 	</ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿{
   "culture": "zh-Hant",
   "texts": {
-    "FormControl:CkEditor": "CkEditor",
+    "FormControl:CkEditor": "CKEditor",
     "ImagesContainerName": "圖片容器名稱",
-    "InitialContent": "初始化内容"
+    "InitialContent": "初始内容"
   }
 }

@@ -2,6 +2,7 @@
 @using Blazorise;
 @using Blazorise.DataGrid;
 @using Microsoft.JSInterop
+@using System.Reflection
 @using Volo.Abp.Data
 @using Volo.Abp.BlazoriseUI.Components.ObjectExtending
 @using Volo.Abp.BlazoriseUI.Components
@@ -110,12 +111,31 @@
                         {
                             @if (column.ValueConverter == null)
                             {
-                                <DataGridColumn TItem="TItem"
+                                var property = typeof(TItem).GetProperty(column.Data);
+                                if (property.PropertyType == typeof(Boolean))
+                                {
+                                    <DataGridColumn TItem="TItem" Field="@column.Data" Caption="@column.Title" Sortable="@column.Sortable">
+                                        <DisplayTemplate>
+                                            @if ((bool)property.GetValue(context))
+                                            {                                    
+                                                <Icon class="text-success" Name="IconName.Check" />
+                                            }
+                                            else
+                                            {
+                                                <Icon class="text-danger" Name="IconName.Times" />
+                                            }
+                                        </DisplayTemplate>
+                                    </DataGridColumn>                                    
+                                }
+                                else
+                                {
+                                    <DataGridColumn TItem="TItem"
                                                 Field="@column.Data"
                                                 Caption="@column.Title"
                                                 Sortable="@column.Sortable"
                                                 DisplayFormat="@column.DisplayFormat"
                                                 DisplayFormatProvider="@column.DisplayFormatProvider"/>
+                                }
                             }
                             else
                             {

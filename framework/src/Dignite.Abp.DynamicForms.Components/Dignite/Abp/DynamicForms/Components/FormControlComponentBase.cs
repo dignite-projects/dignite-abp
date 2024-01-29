@@ -29,8 +29,8 @@ public abstract class FormControlComponentBase<TFormControl, TFormConfiguration,
 
     protected override void OnInitialized()
     {
-        base.OnInitialized();
         FormConfiguration.ConfigurationDictionary = Field.FormConfiguration;
+        base.OnInitialized();
     }
 
     protected virtual async Task ChangeValueAsync(TFormControlValueType value)

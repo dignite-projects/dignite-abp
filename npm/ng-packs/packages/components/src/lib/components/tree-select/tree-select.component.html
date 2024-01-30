@@ -1,0 +1,7 @@
+<div ngbDropdown #dropdown="ngbDropdown" >
+    <input type="text" class="form-select " ngDefaultcontrol [placeholder]="placeholder" [disabled]="disabled" [(ngModel)]="searchValue" (input)="searchChange($event)" ngbDropdownToggle />
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 100%;max-height: 40vh;overflow: auto;">
+        <nz-tree [nzData]="_nodes" [nzSearchValue]="searchValue" (nzClick)="nzEvent($event)">
+        </nz-tree>
+    </div>
+</div>

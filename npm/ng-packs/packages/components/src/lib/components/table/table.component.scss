@@ -1,0 +1,12 @@
+.ngx-datatable.dignite-table.scroll-vertical {
+    height: calc(100vh - 42px - 4.25rem - 54px - 50px);
+    
+}
+
+::ng-deep .ngx-datatable.dignite-table .datatable-body .datatable-body-row .datatable-body-cell {
+    overflow: visible !important;
+}
+
+// ::ng-deep .ngx-datatable.dignite-table .datatable-footer .datatable-pager li.active a{
+//     background-color: var(--lpx-primary);
+// }

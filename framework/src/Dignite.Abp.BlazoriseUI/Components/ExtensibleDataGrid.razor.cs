@@ -44,6 +44,8 @@ public partial class ExtensibleDataGrid<TItem> : ComponentBase
 
     [Parameter] public int? ExtraHeight { get; set; }
 
+    [Parameter] public bool Resizable { get; set; }
+
     protected virtual RenderFragment RenderCustomTableColumnComponent(Type type, object data)
     {
         return (builder) =>

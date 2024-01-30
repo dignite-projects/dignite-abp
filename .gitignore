@@ -140,6 +140,8 @@ _TeamCity*
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
+.history/*
+/.angular/cache
 
 # NCrunch
 _NCrunch_*

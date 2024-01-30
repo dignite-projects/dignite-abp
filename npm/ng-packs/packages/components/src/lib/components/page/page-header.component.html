@@ -1,0 +1,15 @@
+<div class="row entry-row">
+    <div class="row  col-auto">
+        <h1 class="content-header-title col">
+            <i class="fa fa-arrow-left me-1" *ngIf="back" (click)="goBack()" role="button" aria-hidden="true"></i>
+            {{title}}
+        </h1>
+    </div>
+    <div class="col  ">
+        <div class=" row justify-content-end ">
+            <div class="col-auto ">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

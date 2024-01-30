@@ -1,0 +1,12 @@
+<ng-template #imageModalContent let-modal>
+	<div class="modal-header">
+        <ng-container *ngTemplateOutlet="digniteHeader" id="modal-basic-title"></ng-container>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <ng-container *ngTemplateOutlet="digniteBody"></ng-container>
+	</div>
+	<div class="modal-footer"  *ngIf="digniteFooter">
+        <ng-container *ngTemplateOutlet="digniteFooter"></ng-container>
+	</div>
+</ng-template>

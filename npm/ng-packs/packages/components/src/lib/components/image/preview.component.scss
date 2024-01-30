@@ -1,0 +1,33 @@
+.dignite-image-preview{
+    position: relative;
+    overflow: hidden;
+    
+    .preview-operate{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #00000050;
+        display: none ;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all .25s linear;
+    }
+   
+}
+.dignite-image-preview:hover {
+    .preview-operate{
+        display: flex;
+    }
+}
+
+::ng-deep.dignite-preview{
+    .modal-content{
+        background-color: transparent;
+        color: #ffffff;
+    }
+}
+.modal-body-preview{
+    transition: all .2s;
+}

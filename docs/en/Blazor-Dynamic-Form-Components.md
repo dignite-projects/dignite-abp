@@ -1,190 +1,143 @@
-# Blazor Dynamic Form Component
+# Blazor Dynamic Form Components
 
-This article will introduce how to develop a Blazor dynamic form component that interacts with user data.
+This article will introduce how to develop interactive Blazor dynamic form components for user data.
 
-The dynamic form component consists of three parts: the form configuration component, the form component, and the form data component. Below, we will introduce them one by one.
+Dynamic form components are divided into three categories: form configuration components, form control components, and form data display components. Let's explore each one.
 
 ## Installation
 
-* Install the `Dignite.Abp.DynamicForms.Components` NuGet package in the project where you will be developing the Blazor dynamic form component.
+* Install the `Dignite.Abp.DynamicForms.Components` NuGet package into the project where you are developing the Blazor dynamic form components.
 
-* Add `DigniteAbpDynamicFormsComponentsModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `DigniteAbpDynamicFormsComponentsModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
-## Form Configuration Component
+## Form Configuration Components
 
-The form configuration component is used to configure the parameters of the dynamic form.
+Form configuration components are used to configure the parameters of dynamic forms.
 
-Create a dynamic form component by inheriting the `ConfigurationComponentBase` class, as shown in the code example below:
+Inherit from the `FormConfigurationComponentBase` class to create a dynamic form component. Here's an example of the code:
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits ConfigurationComponentBase<CkEditorForm,CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormConfigurationComponentBase<TextEditFormControl, TextEditConfiguration>
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
-            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
-        </TextEdit>
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["Description"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.Description" />
+        <FieldLabel>@L["Placeholder"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.Placeholder" />
     </Field>
 </Validation>
 <Field>
-    <Check TValue="bool" @bind-Checked="@FormConfiguration.Required">@L["IsRequired"]</Check>
+    <FieldLabel>@L["TextEditMode"]</FieldLabel>
+    <RadioGroup TValue="TextEditMode" Name="textboxMode" @bind-CheckedValue="@FormConfiguration.Mode">
+        <Radio TValue="TextEditMode" Value="@TextEditMode.SingleLine">@L["SingleLine"]</Radio>
+        <Radio TValue="TextEditMode" Value="@TextEditMode.MultipleLine">@L["MultipleLine"]</Radio>
+    </RadioGroup>
 </Field>
-<Validation Validator="@ValidationRule.IsNotEmpty">
-    <Field>
-        <FieldLabel>@L["ImagesContainerName"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.ImagesContainerName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["InitialContent"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.InitialContent" />
-    </Field>
-</Validation>
-```
-
-### IConfigurationComponentSelector Interface
-
-This interface provides the `IConfigurationComponent Get(string formName)` method, which allows you to obtain an instance of the configuration component for a specific dynamic form.
-
-You can inject the `IConfigurationComponentSelector` interface and use it to get an `IConfigurationComponent` instance for a specified dynamic form name, as shown in the example below:
-
-```csharp
-@inject IConfigurationComponentSelector ConfigurationComponentSelector
-@code{
-    var component = configurationComponentSelector.Get("CkEditor");
-}
-```
-
-## Form Component
-
-The form component is used for data interaction between the system and users.
-
-Create a dynamic form component by inheriting the `FormComponentBase` class, as shown in the code example below:
-
-```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@using Dignite.Abp.AspNetCore.Components.CkEditor
-@inherits FormComponentBase<CkEditorForm,CkEditorConfiguration>
-
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <CkEditor @bind-Content="Content" Options="Options" ImagesContainerName="@ImagesContainerName">
-        </CkEditor>
-        <FieldHelp>@FormConfiguration.Description</FieldHelp>
-    </FieldBody>
+<Field>
+    <FieldLabel>@L["CharLimit"]</FieldLabel>
+    <NumericEdit @bind-Value="@FormConfiguration.CharLimit" />
 </Field>
-
-@code {
-    private string _content;
-    protected string Content
-    {
-        get
-        {
-            return _content;
-        }
-        set
-        {
-            _content = value;
-            CustomizableObject.SetField(Field.Name, value);
-        }
-    }
-
-    protected string ImagesContainerName
-    {
-        get
-        {
-            return FormConfiguration.ImagesContainerName;
-        }
-    } 
-
-    protected CkEditorOptions Options { get; } = CkEditorOptions.Default;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        _content = CustomizableObject.GetField(Field.Name, FormConfiguration.InitialContent)?.ToString();
-    }
-}
 ```
 
-### IFormComponentSelector Interface
+### IFormConfigurationComponentSelector Interface
 
-This interface provides the `IFormComponent Get(string formName)` method, which allows you to obtain an instance of the form component for a specific dynamic form.
+This interface provides the `IFormConfigurationComponent Get(string formControlName)` method, which allows you to obtain the configuration component for a dynamic form.
 
-You can inject the `IFormComponentSelector` interface and use it to get an `IFormComponent` instance for a specified dynamic form name, as shown in the example below:
+By injecting the `IFormConfigurationComponentSelector` interface, you can get an instance of `IFormConfigurationComponent` for a specified dynamic form name. Example:
 
 ```csharp
-@inject IFormComponentSelector FormComponentSelector
+@inject IFormConfigurationComponentSelector ConfigurationComponentSelector
 @code{
-    var component = FormComponentSelector.Get("CkEditor");
+    var component = configurationComponentSelector.Get("TextEdit");
 }
 ```
 
-## Form Data Component
+## Form Control Components
 
-The form data component is used to display form data on the UI.
+Form control components are used for data interaction between the system and users.
 
-Create a dynamic form component by inheriting the `FieldComponentBase` class, as shown in the code example below:
+Inherit from the `FormControlComponentBase` class to create a dynamic form component. Here's an example of the code:
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits FieldComponentBase<CkEditorForm,CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormControlComponentBase<TextEditFormControl, TextEditConfiguration, string>
 
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <div class="content">
-            @if (Value != null)
+<Validation Validator="@ValidateIsRequired">
+    <Field>
+        <FieldLabel>@Field.DisplayName</FieldLabel>
+        <FieldBody>
+            @if (FormConfiguration.Mode == TextEditMode.SingleLine)
             {
-                @((MarkupString)Value)
+                <TextEdit Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
             }
-        </div>
-    </FieldBody>
-</Field>
-
-@code {
-    private string Value { get; set; }
-
-    protected override void OnInitialized()
+            else
+            {
+                <MemoEdit Rows="5" AutoSize Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </MemoEdit>
+            }
+            <FieldHelp>@Field.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+@code{
+    void ValidateIsRequired(ValidatorEventArgs e)
     {
-        base.OnInitialized();
-        Value = CustomizableObject.GetField(Field.Name)?.ToString();
+        if (Field.Required)
+        {
+            var value = e.Value == null ? string.Empty : Convert.ToString(e.Value);
+            e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
     }
 }
 ```
 
-### IFieldComponentSelector Interface
+### IFormControlComponentSelector Interface
 
-This interface provides the `IFieldComponent Get(string formName)` method, which allows you to obtain an instance of the field component for a specific dynamic form.
+This interface provides the `IFormControlComponent Get(string formControlName)` method, which allows you to obtain the control component for a dynamic form.
 
-You can inject the `IFieldComponentSelector` interface and use it to get an `IFieldComponent` instance for a specified dynamic form name, as shown in the example below:
+By injecting the `IFormControlComponentSelector` interface, you can get an instance of `IFormControlComponent` for a specified dynamic form name. Example:
 
 ```csharp
-@inject IFieldComponentSelector FieldComponentSelector
+@inject IFormControlComponentSelector FormComponentSelector
 @code{
-    var component = FieldComponentSelector.Get("CkEditor");
+    var component = FormComponentSelector.Get("TextEdit");
 }
 ```
 
-> For more information, please refer to the [CkEditor Dynamic Form](https://github.com/dignite-projects/dignite-abp/tree/main/modules/ckeditor-component/Dignite.Abp.DynamicForms.Components.CkEditor) source code.
+## Form Data Display Components
+
+Form data display components are used to present form data on the UI.
+
+Inherit from the `FormViewComponentBase` class to create a dynamic form component. Here's an example of the code:
+
+```csharp
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormViewComponentBase<TextEditFormControl, TextEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @Field.Value?.ToString()
+    </FieldBody>
+</Field>
+```
+
+### IFormViewComponentSelector Interface
+
+This interface provides the `IFormViewComponent Get(string formControlName)` method, which allows you to obtain the view component for a dynamic form.
+
+By injecting the `IFormViewComponentSelector` interface, you can get an instance of `IFormViewComponent` for a specified dynamic form name. Example:
+
+```csharp
+@inject IFormViewComponentSelector FieldComponentSelector
+@code{
+    var component = FieldComponentSelector.Get("TextEdit");
+}
+```

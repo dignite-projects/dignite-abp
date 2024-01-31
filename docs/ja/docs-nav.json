@@ -31,15 +31,11 @@
       ]
     },
     {
-      "text": "動的フォームエンジン",
+      "text": "動的フォーム",
       "items": [
         {
-          "text": "動的フォーム",
+          "text": "動的フォーム・コア",
           "path": "Dynamic-Forms.md"
-        },
-        {
-          "text": "カスタム・フィールド・ベース",
-          "path": "Field-Customizing.md"
         },
         {
           "text": "Blazor版コンポーネント",

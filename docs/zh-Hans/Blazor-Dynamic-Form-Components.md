@@ -2,7 +2,7 @@
 
 本文将介绍如何开发与用户数据交互的Blazor动态表单组件。
 
-动态表单组件分为三个部分：表单配置组件、表单组件、表单数据组件，下面我们依次介绍。
+动态表单组件分为三类：表单配置组件、表单控件组件、表单数据展示组件，下面我们依次介绍。
 
 ## 安装
 
@@ -14,178 +14,130 @@
 
 表单配置组件用于配置动态表单的参数。
 
-继承 `ConfigurationComponentBase` 类创建一个动态表单组件，代码示例：
+继承 `FormConfigurationComponentBase` 类创建一个动态表单组件，代码示例：
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits ConfigurationComponentBase<CkEditorForm,CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormConfigurationComponentBase<TextEditFormControl,TextEditConfiguration>
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
-            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
-        </TextEdit>
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["Description"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.Description" />
+        <FieldLabel>@L["Placeholder"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.Placeholder" />
     </Field>
 </Validation>
 <Field>
-    <Check TValue="bool" @bind-Checked="@FormConfiguration.Required">@L["IsRequired"]</Check>
+    <FieldLabel>@L["TextEditMode"]</FieldLabel>
+    <RadioGroup TValue="TextEditMode" Name="textboxMode" @bind-CheckedValue="@FormConfiguration.Mode">
+        <Radio TValue="TextEditMode" Value="@TextEditMode.SingleLine">@L["SingleLine"]</Radio>
+        <Radio TValue="TextEditMode" Value="@TextEditMode.MultipleLine">@L["MultipleLine"]</Radio>
+    </RadioGroup>
 </Field>
-<Validation Validator="@ValidationRule.IsNotEmpty">
-    <Field>
-        <FieldLabel>@L["ImagesContainerName"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.ImagesContainerName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["InitialContent"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.InitialContent" />
-    </Field>
-</Validation>
-```
-
-### IConfigurationComponentSelector 接口
-
-本接口提供了 `IConfigurationComponent Get(string formName)` 方法，可通过该方法获取动态表单的配置组件。
-
-通过注入 `IConfigurationComponentSelector` 接口，获取指定动态表单名称的 `IConfigurationComponent` 实例，示例：
-
-```csharp
-@inject IConfigurationComponentSelector ConfigurationComponentSelector
-@code{
-    var component = configurationComponentSelector.Get("CkEditor");
-}
-
-```
-
-## 表单组件
-
-表单组件用于系统与用户之间的数据交互。
-
-继承 `FormComponentBase` 类创建一个动态表单组件，代码示例：
-
-```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@using Dignite.Abp.AspNetCore.Components.CkEditor
-@inherits FormComponentBase<CkEditorForm,CkEditorConfiguration>
-
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <CkEditor @bind-Content="Content" Options="Options" ImagesContainerName="@ImagesContainerName">
-        </CkEditor>
-        <FieldHelp>@FormConfiguration.Description</FieldHelp>
-    </FieldBody>
+<Field>
+    <FieldLabel>@L["CharLimit"]</FieldLabel>
+    <NumericEdit @bind-Value="@FormConfiguration.CharLimit" />
 </Field>
-
-@code {
-    private string _content;
-    protected string Content
-    {
-        get
-        {
-            return _content;
-        }
-        set
-        {
-            _content = value;
-            CustomizableObject.SetField(Field.Name, value);
-        }
-    }
-
-    protected string ImagesContainerName
-    {
-        get
-        {
-            return FormConfiguration.ImagesContainerName;
-        }
-    } 
-
-    protected CkEditorOptions Options { get; } = CkEditorOptions.Default;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        _content = CustomizableObject.GetField(Field.Name, FormConfiguration.InitialContent)?.ToString();
-    }
-}
 ```
 
-### IFormComponentSelector 接口
+### IFormConfigurationComponentSelector 接口
 
-本接口提供了 `IFormComponent Get(string formName)` 方法，可通过该方法获取动态表单的组件。
+本接口提供了 `IFormConfigurationComponent Get(string formControlName)` 方法，可通过该方法获取动态表单的配置组件。
 
-通过注入 `IFormComponentSelector` 接口，获取指定动态表单名称的 `IFormComponent` 实例，示例：
+通过注入 `IFormConfigurationComponentSelector` 接口，获取指定动态表单名称的 `IFormConfigurationComponent` 实例，示例：
 
 ```csharp
-@inject IFormComponentSelector FormComponentSelector
+@inject IFormConfigurationComponentSelector ConfigurationComponentSelector
 @code{
-    var component = FormComponentSelector.Get("CkEditor");
+    var component = configurationComponentSelector.Get("TextEdit");
 }
 ```
 
-## 表单数据组件
+## 表单控件组件
 
-表单数据组件用于在UI上呈现表单数据。
+表单控件组件用于系统与用户之间的数据交互。
 
-继承 `FieldComponentBase` 类创建一个动态表单组件，代码示例：
+继承 `FormControlComponentBase` 类创建一个动态表单组件，代码示例：
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits FieldComponentBase<CkEditorForm,CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormControlComponentBase<TextEditFormControl,TextEditConfiguration,string>
 
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <div class="content">
-            @if (Value != null)
+<Validation Validator="@ValidateIsRequired">
+    <Field>
+        <FieldLabel>@Field.DisplayName</FieldLabel>
+        <FieldBody>
+            @if (FormConfiguration.Mode == TextEditMode.SingleLine)
             {
-                @((MarkupString)Value)
+                <TextEdit Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
             }
-        </div>
-    </FieldBody>
-</Field>
-
-@code {
-    private string Value { get; set; }
-
-    protected override void OnInitialized()
+            else
+            {
+                <MemoEdit Rows="5" AutoSize Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </MemoEdit>
+            }
+            <FieldHelp>@Field.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+@code{
+    void ValidateIsRequired(ValidatorEventArgs e)
     {
-        base.OnInitialized();
-        Value = CustomizableObject.GetField(Field.Name)?.ToString();
+        if (Field.Required)
+        {
+            var value = e.Value == null ? string.Empty : Convert.ToString(e.Value);
+            e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
     }
 }
 ```
 
-### IFieldComponentSelector 接口
+### IFormControlComponentSelector 接口
 
-本接口提供了 `IFieldComponent Get(string formName)` 方法，可通过该方法获取动态表单的组件。
+本接口提供了 `IFormControlComponent Get(string formControlName)` 方法，可通过该方法获取动态表单的控件组件。
 
-通过注入 `IFieldComponentSelector` 接口，获取指定动态表单名称的 `IFieldComponent` 实例，示例：
+通过注入 `IFormControlComponentSelector` 接口，获取指定动态表单名称的 `IFormControlComponent` 实例，示例：
 
 ```csharp
-@inject IFieldComponentSelector FieldComponentSelector
+@inject IFormControlComponentSelector FormComponentSelector
 @code{
-    var component = FieldComponentSelector.Get("CkEditor");
+    var component = FormComponentSelector.Get("TextEdit");
 }
 ```
 
-> 以上内容的介绍请参照 [CkEditor动态表单](https://github.com/dignite-projects/dignite-abp/tree/main/modules/ckeditor-component/Dignite.Abp.DynamicForms.Components.CkEditor)
+## 表单数据展示组件
+
+表单数据展示组件用于在UI上呈现表单数据。
+
+继承 `FormViewComponentBase` 类创建一个动态表单组件，代码示例：
+
+```csharp
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormViewComponentBase<TextEditFormControl,TextEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @Field.Value?.ToString()
+    </FieldBody>
+</Field>
+```
+
+### IFormViewComponentSelector 接口
+
+本接口提供了 `IFormViewComponent Get(string formControlName)` 方法，可通过该方法获取动态表单的组件。
+
+通过注入 `IFormViewComponentSelector` 接口，获取指定动态表单名称的 `IFormViewComponent` 实例，示例：
+
+```csharp
+@inject IFormViewComponentSelector FieldComponentSelector
+@code{
+    var component = FieldComponentSelector.Get("TextEdit");
+}
+```

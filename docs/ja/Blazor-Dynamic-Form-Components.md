@@ -1,186 +1,145 @@
-# Blazor ダイナミックフォームコンポーネント
+# Blazorダイナミックフォームコンポーネント
 
-この記事では、ユーザーデータと対話するBlazorダイナミックフォームコンポーネントの開発方法について説明します。
+本記事では、ユーザーデータとの対話を可能にするためのBlazorダイナミックフォームコンポーネントの開発方法について説明します。
 
-ダイナミックフォームコンポーネントは、フォーム構成コンポーネント、フォームコンポーネント、フォームデータコンポーネントの3つの部分に分かれています。以下、それぞれを順番に紹介します。
+ダイナミックフォームコンポーネントは、フォームの構成パラメータを設定するために使用されます。フォーム構成コンポーネント、フォームコントロールコンポーネント、フォームデータ表示コンポーネントの3つのカテゴリに分かれています。以下、それぞれについて説明します。
 
 ## インストール
 
 * Blazorダイナミックフォームコンポーネントを開発するプロジェクトに `Dignite.Abp.DynamicForms.Components` NuGet パッケージをインストールします。
 
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに `DigniteAbpDynamicFormsComponentsModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpDynamicFormsComponentsModule` を追加します。
 
 ## フォーム構成コンポーネント
 
-フォーム構成コンポーネントは、ダイナミックフォームのパラメータを構成するために使用されます。
+フォーム構成コンポーネントは、ダイナミックフォームのパラメータを設定するために使用されます。
 
-`ConfigurationComponentBase` クラスを継承して、ダイナミックフォームコンポーネントを作成します。以下にコード例を示します：
+`FormConfigurationComponentBase` クラスを継承してダイナミックフォームコンポーネントを作成します。以下はコードの例です：
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits ConfigurationComponentBase<CkEditorForm, CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormConfigurationComponentBase<TextEditFormControl, TextEditConfiguration>
 
 <Validation>
     <Field>
-        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
-        <TextEdit MaxLength="CustomizeFieldInfoConsts.MaxDisplayNameLength" @bind-Text="@Field.DisplayName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["FieldName"]</FieldLabel>
-        <TextEdit Pattern="@CustomizeFieldInfoConsts.NameRegularExpression" MaxLength="CustomizeFieldInfoConsts.MaxNameLength" @bind-Text="@Field.Name">
-            <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
-        </TextEdit>
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["Description"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.Description" />
+        <FieldLabel>@L["Placeholder"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.Placeholder" />
     </Field>
 </Validation>
 <Field>
-    <Check TValue="bool" @bind-Checked="@FormConfiguration.Required">@L["IsRequired"]</Check>
+    <FieldLabel>@L["TextEditMode"]</FieldLabel>
+    <RadioGroup TValue="TextEditMode" Name="textboxMode" @bind-CheckedValue="@FormConfiguration.Mode">
+        <Radio TValue="TextEditMode" Value="@TextEditMode.SingleLine">@L["SingleLine"]</Radio>
+        <Radio TValue="TextEditMode" Value="@TextEditMode.MultipleLine">@L["MultipleLine"]</Radio>
+    </RadioGroup>
 </Field>
-<Validation Validator="@ValidationRule.IsNotEmpty">
-    <Field>
-        <FieldLabel>@L["ImagesContainerName"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.ImagesContainerName" />
-    </Field>
-</Validation>
-<Validation>
-    <Field>
-        <FieldLabel>@L["InitialContent"]</FieldLabel>
-        <TextEdit @bind-Text="@FormConfiguration.InitialContent" />
-    </Field>
-</Validation>
-```
-
-### IConfigurationComponentSelector インターフェース
-
-このインターフェースは、指定されたダイナミックフォームの設定コンポーネントのインスタンスを取得できる `IConfigurationComponent Get(string formName)` メソッドを提供し、指定されたダイナミックフォーム名の `IConfigurationComponent` インスタンスを取得するために `IConfigurationComponentSelector` インターフェースをインジェクトして使用できます。以下は例です：
-
-```csharp
-@inject IConfigurationComponentSelector ConfigurationComponentSelector
-@code{
-    var component = configurationComponentSelector.Get("CkEditor");
-}
-```
-
-## フォームコンポーネント
-
-フォームコンポーネントは、システムとユーザー間のデータのやり取りに使用されます。
-
-`FormComponentBase` クラスを継承してダイナミックフォームコンポーネントを作成します。以下にコード例を示します：
-
-```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@using Dignite.Abp.AspNetCore.Components.CkEditor
-@inherits FormComponentBase<CkEditorForm,CkEditorConfiguration>
-
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <CkEditor @bind-Content="Content" Options="Options" ImagesContainerName="@ImagesContainerName">
-        </CkEditor>
-        <FieldHelp>@FormConfiguration.Description</FieldHelp>
-    </FieldBody>
+<Field>
+    <FieldLabel>@L["CharLimit"]</FieldLabel>
+    <NumericEdit @bind-Value="@FormConfiguration.CharLimit" />
 </Field>
-
-@code {
-    private string _content;
-    protected string Content
-    {
-        get
-        {
-            return _content;
-        }
-        set
-        {
-            _content = value;
-            CustomizableObject.SetField(Field.Name, value);
-        }
-    }
-
-   
-
- protected string ImagesContainerName
-    {
-        get
-        {
-            return FormConfiguration.ImagesContainerName;
-        }
-    } 
-
-    protected CkEditorOptions Options { get; } = CkEditorOptions.Default;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        _content = CustomizableObject.GetField(Field.Name, FormConfiguration.InitialContent)?.ToString();
-    }
-}
 ```
 
-### IFormComponentSelector インターフェース
+### IFormConfigurationComponentSelector インターフェース
 
-このインターフェースは、指定されたダイナミックフォームのフォームコンポーネントのインスタンスを取得できる `IFormComponent Get(string formName)` メソッドを提供し、指定されたダイナミックフォーム名の `IFormComponent` インスタンスを取得するために `IFormComponentSelector` インターフェースをインジェクトして使用できます。以下は例です：
+このインターフェースは `IFormConfigurationComponent Get(string formControlName)` メソッドを提供し、このメソッドを使用してダイナミックフォームの構成コンポーネントを取得できます。
+
+`IFormConfigurationComponentSelector` インターフェースを注入することで、指定されたダイナミックフォーム名の `IFormConfigurationComponent` インスタンスを取得できます。例：
 
 ```csharp
-@inject IFormComponentSelector FormComponentSelector
+@inject IFormConfigurationComponentSelector ConfigurationComponentSelector
 @code{
-    var component = FormComponentSelector.Get("CkEditor");
+    var component = configurationComponentSelector.Get("TextEdit");
 }
 ```
 
-## フォームデータコンポーネント
+## フォームコントロールコンポーネント
 
-フォームデータコンポーネントは、フォームデータをUI上で表示するために使用されます。
+フォームコントロールコンポーネントは、システムとユーザー間のデータ相互作用に使用されます。
 
-`FieldComponentBase` クラスを継承してダイナミックフォームコンポーネントを作成します。以下にコード例を示します：
+`FormControlComponentBase` クラスを継承してダイナミックフォームコンポーネントを作成します。以下はコードの例です：
 
 ```csharp
-@using Dignite.Abp.DynamicForms.CkEditor
-@inherits FieldComponentBase<CkEditorForm,CkEditorConfiguration>
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormControlComponentBase<TextEditFormControl, TextEditConfiguration, string>
 
-<Field Horizontal="@(!IsChild)">
-    <FieldLabel ColumnSize="ColumnSize.Is2.OnDesktop" hidden="@IsChild">@Field.DisplayName</FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.Is10.OnDesktop">
-        <div class="content">
-            @if (Value != null)
+<Validation Validator="@ValidateIsRequired">
+    <Field>
+        <FieldLabel>@Field.DisplayName</FieldLabel>
+        <FieldBody>
+            @if (FormConfiguration.Mode == TextEditMode.SingleLine)
             {
-                @((MarkupString)Value)
+                <TextEdit Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
             }
-        </div>
-    </FieldBody>
-</Field>
-
-@code {
-    private string Value { get; set; }
-
-    protected override void OnInitialized()
+            else
+            {
+                <MemoEdit Rows="5" AutoSize Placeholder="@FormConfiguration.Placeholder" MaxLength="@FormConfiguration.CharLimit" Text="@Field.Value?.ToString()" TextChanged="@ChangeValueAsync">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </MemoEdit>
+            }
+            <FieldHelp>@Field.Description</FieldHelp>
+        </FieldBody>
+    </Field>
+</Validation>
+@code{
+    void ValidateIsRequired(ValidatorEventArgs e)
     {
-        base.OnInitialized();
-        Value = CustomizableObject.GetField(Field.Name)?.ToString();
+        if (Field.Required)
+        {
+            var value = e.Value == null ? string.Empty : Convert.ToString(e.Value);
+            e.Status = string.IsNullOrWhiteSpace(value) ? ValidationStatus.Error : ValidationStatus.Success;
+        }
     }
 }
 ```
 
-### IFieldComponentSelector インターフェース
+### IFormControlComponentSelector インターフェース
 
-このインターフェースは、指定されたダイナミックフォームのフィールドコンポーネントのインスタンスを取得できる `IFieldComponent Get(string formName)` メソッドを提供し、指定されたダイナミックフォーム名の `IFieldComponent` インスタンスを取得するために `IFieldComponentSelector` インターフェースをインジェクトして使用できます。以下は例です：
+このインターフェースは `IFormControlComponent Get(string formControlName)` メソッドを提供し、このメソッドを使用してダイナミックフォームのコントロールコンポーネントを取得できます。
+
+`IFormControlComponentSelector` インターフェースを注入することで、指定されたダイナミックフォーム名の `IFormControlComponent` インスタンスを取得できます。例：
 
 ```csharp
-@inject IFieldComponentSelector FieldComponentSelector
+@inject IFormControlComponentSelector FormComponentSelector
 @code{
-    var component = FieldComponentSelector.Get("CkEditor");
+    var component = FormComponentSelector.Get("TextEdit");
 }
 ```
 
-> 詳細については、[CkEditor Dynamic Form](https://github.com/dignite-projects/dignite-abp/tree/main/modules/ckeditor-component/Dignite.Abp.DynamicForms.Components.CkEditor)のソースコードを参照してください。
+## フォームデータ表示コンポーネント
+
+フォームデータ表示コンポーネントは、UI上でフォームデータを表示するために使用されます。
+
+`FormViewComponentBase` クラスを継承してダイナミックフォームコンポーネントを作成します。以下はコードの例です：
+
+```csharp
+@using Dignite.Abp.DynamicForms.Textbox
+@inherits FormViewComponentBase<TextEditFormControl, TextEditConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @Field.Value?.ToString()
+    </FieldBody>
+</Field>
+```
+
+### IFormViewComponentSelector インターフェース
+
+このインターフェースは `
+
+IFormViewComponent Get(string formControlName)` メソッドを提供し、このメソッドを使用してダイナミックフォームのビューコンポーネントを取得できます。
+
+`IFormViewComponentSelector` インターフェースを注入することで、指定されたダイナミックフォーム名の `IFormViewComponent` インスタンスを取得できます。例：
+
+```csharp
+@inject IFormViewComponentSelector FieldComponentSelector
+@code{
+    var component = FieldComponentSelector.Get("TextEdit");
+}
+```

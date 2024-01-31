@@ -31,15 +31,11 @@
       ]
     },
     {
-      "text": "表单引擎",
+      "text": "动态表单",
       "items": [
         {
-          "text": "动态表单",
+          "text": "动态表单核心",
           "path": "Dynamic-Forms.md"
-        },
-        {
-          "text": "自定义字段基础模块",
-          "path": "Field-Customizing.md"
         },
         {
           "text": "Blazor 动态表单组件",

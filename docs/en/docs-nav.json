@@ -31,15 +31,11 @@
       ]
     },
     {
-      "text": "Dynamic Forms engine",
+      "text": "Dynamic Forms",
       "items": [
         {
-          "text": "Dynamic Forms",
+          "text": "Dynamic Forms Core",
           "path": "Dynamic-Forms.md"
-        },
-        {
-          "text": "Custom field base",
-          "path": "Field-Customizing.md"
         },
         {
           "text": "Blazor components",

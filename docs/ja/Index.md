@@ -2,7 +2,7 @@
 
 ABPフレームワークのエコロジーを加える, 通知システム、ダイナミック・フォーム・モジュール、ファイル・マネージャー、ピュア・テーマなどの機能強化。
 
-> Dignite Abp 1.4.0はAbp Framework 7.4.0の上に構築されており、Abp Framework 7.4.0は.NET Framework 7.0に基づいています。Dignite Abp 1.4.0をスムーズに実行するために、お使いのコンピュータに.NET Framework 7.0がインストールされていることを確認してください。
+> Dignite Abp 2.0.0はAbp Framework 7.4.5の上に構築されており、Abp Framework 7.4.5は.NET Framework 7.0に基づいています。Dignite Abp 2.0.0をスムーズに実行するために、お使いのコンピュータに.NET Framework 7.0がインストールされていることを確認してください。
 
 ## Dignite Abp Modules
 

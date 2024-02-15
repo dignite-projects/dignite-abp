@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
@@ -16,10 +15,12 @@ public class SelectFormControl : FormControlBase
     public override void Validate(FormControlValidateArgs args)
     {
         var configuration = new SelectConfiguration(args.Field.FormConfiguration);
+        var value = args.Field.Value == null ?
+                    new List<string>()
+                    : JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));        
 
         if (args.Field.Value != null)
         {
-            var value = (List<string>)args.Field.Value;
             if (value.Except(configuration.Options.Select(x => x.Value)).Any())
             {
                 args.ValidationErrors.Add(
@@ -31,7 +32,6 @@ public class SelectFormControl : FormControlBase
         }
         else
         {
-            var value = (List<string>)args.Field.Value;
             if (!value.Any() && args.Field.Required)
             {
                 args.ValidationErrors.Add(

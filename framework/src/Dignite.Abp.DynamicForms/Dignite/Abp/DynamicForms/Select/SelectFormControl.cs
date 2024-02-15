@@ -15,9 +15,11 @@ public class SelectFormControl : FormControlBase
     public override void Validate(FormControlValidateArgs args)
     {
         var configuration = new SelectConfiguration(args.Field.FormConfiguration);
-        var value = args.Field.Value == null ?
-                    new List<string>()
-                    : JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));        
+        var value = args.Field.Value == null ? 
+            new List<string>() 
+            : args.Field.Value.GetType() == typeof(JsonElement)
+                        ? JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web))
+                        : (List<string>)args.Field.Value;    
 
         if (args.Field.Value != null)
         {

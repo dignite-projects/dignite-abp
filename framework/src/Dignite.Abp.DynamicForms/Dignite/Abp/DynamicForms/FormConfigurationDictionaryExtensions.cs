@@ -40,12 +40,19 @@ public static class FormConfigurationDictionaryExtensions
 
             if (conversionType.IsEnum)
             {
-                return (TConfiguration)value;
+                if (Enum.IsDefined(conversionType, (int)(long)value))
+                {
+                    return (TConfiguration)Enum.ToObject(conversionType, (int)(long)value);
+                }
+                else
+                {
+                    return defaultValue;
+                }
             }
 
             return (TConfiguration)TypeDescriptor.GetConverter(conversionType).ConvertFromInvariantString(value.ToString()!)!;
         }
-        catch
+        catch(Exception exc)
         {
             if (value.GetType() == typeof(JsonElement))
             {

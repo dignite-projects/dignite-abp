@@ -18,8 +18,8 @@ public class SelectFormControl : FormControlBase
         var value = args.Field.Value == null ? 
             new List<string>() 
             : args.Field.Value.GetType() == typeof(JsonElement)
-                        ? JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web))
-                        : (List<string>)args.Field.Value;    
+                        ? JsonSerializer.Deserialize<List<string>>(args.Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web))  //This is the way to get data in webassembly mode.
+                        : (List<string>)args.Field.Value;                                                                                               //This is the way to get data in blazorserver mode.
 
         if (args.Field.Value != null)
         {

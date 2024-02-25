@@ -97,10 +97,8 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         if (!string.IsNullOrEmpty(webComponentPath))
         {
             _viewLocations = new string[] {
-                $"/Themes/{currentThemeName}/" + webComponentPath + culture + RazorViewEngine.ViewExtension,
-                $"/Themes/{currentThemeName}/" + webComponentPath + RazorViewEngine.ViewExtension,
-                webComponentPath + culture + RazorViewEngine.ViewExtension,
-                webComponentPath + RazorViewEngine.ViewExtension
+                "/"+webComponentPath + culture + RazorViewEngine.ViewExtension,
+                "/"+webComponentPath + RazorViewEngine.ViewExtension
             };
         }
         else if (!string.IsNullOrEmpty(context.AreaName))
@@ -111,14 +109,10 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension,
                 "/Areas/{2}/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Areas/{1}/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Areas/{1}/Views/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Areas/{2}/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Areas/{1}/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Areas/{1}/Views/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
         else
@@ -128,14 +122,10 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
              * {0} - View Name
              */
             _viewLocations = new string[] {
-                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Themes/"+currentThemeName+"/Shared/{0}" + RazorViewEngine.ViewExtension,
                 "/Views/{1}/{0}" + culture + RazorViewEngine.ViewExtension,
-                "/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
+                "/Views/Shared/{0}" + culture + RazorViewEngine.ViewExtension,
                 "/Views/{1}/{0}" + RazorViewEngine.ViewExtension,
-                "/Shared/{0}" + RazorViewEngine.ViewExtension
+                "/Views/Shared/{0}" + RazorViewEngine.ViewExtension
             };
         }
 

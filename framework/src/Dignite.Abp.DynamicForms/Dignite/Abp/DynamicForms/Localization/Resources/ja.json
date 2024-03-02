@@ -31,6 +31,7 @@
     "FormatSpecifier": "フォーマット指定子",
     "Max": "最大値",
     "Min": "最小値",
+    "Validate:Required": "{0} フィールド必須！",
     "Validate:NotDateType": "{0} の値は日付型ではありません！",
     "Validate:CannotBeGreaterThan": "{0} の値は {1} より大きくできません！",
     "Validate:CannotBeLessThan": "{0} の値は {1} より小さくできません！",

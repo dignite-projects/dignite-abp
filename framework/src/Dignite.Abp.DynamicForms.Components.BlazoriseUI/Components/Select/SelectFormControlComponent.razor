@@ -80,7 +80,9 @@
     async Task OnSelectedValueChanged(string value )
     {
         Values.Clear();
-        Values.Add(value);
+        if(!value.IsNullOrWhiteSpace())
+            Values.Add(value);
+
         await ChangeValueAsync(Values);
     }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dignite.Abp.DynamicForms.Textbox;
+namespace Dignite.Abp.DynamicForms.TextEdit;
 
 public class TextEditFormControl : FormControlBase
 {

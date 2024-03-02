@@ -21,7 +21,7 @@
                 <TableRow>
                     <TableRowCell>                        
                         <Validation Validator="((e)=>RequiredValidate(e))">
-                        <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" Blur="((args)=>ItemTextboxBlur(item))" />
+                            <TextEdit Text="@item.Text" TextChanged="@(text=>OnSelectListItemTextChanged(text,item))" Blur="((args)=>ItemTextEditBlur(item))" />
                         </Validation>
                         </TableRowCell>
                     <TableRowCell>                        
@@ -103,7 +103,7 @@
             : ValidationStatus.Success;
     }
 
-    private void ItemTextboxBlur(SelectListItem item)
+    private void ItemTextEditBlur(SelectListItem item)
     {
         if (!item.Text.IsNullOrEmpty() && item.Value.IsNullOrEmpty())
         {

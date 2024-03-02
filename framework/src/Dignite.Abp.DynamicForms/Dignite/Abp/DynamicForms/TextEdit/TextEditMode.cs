@@ -1,4 +1,4 @@
-﻿namespace Dignite.Abp.DynamicForms.Textbox;
+﻿namespace Dignite.Abp.DynamicForms.TextEdit;
 
 public enum TextEditMode
 {

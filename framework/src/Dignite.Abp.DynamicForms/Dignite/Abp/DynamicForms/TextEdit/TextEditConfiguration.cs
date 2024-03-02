@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dignite.Abp.DynamicForms.Textbox;
+namespace Dignite.Abp.DynamicForms.TextEdit;
 
 public class TextEditConfiguration : FormConfigurationBase
 {

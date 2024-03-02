@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.DynamicForms.Textbox;
+﻿using Dignite.Abp.DynamicForms.TextEdit;
 using Shouldly;
 using Xunit;
 
@@ -14,7 +14,7 @@ public class FormControlSelector_Tests : DynamicFormsTestBase
     }
 
     [Fact]
-    public void Should_Select_Textbox_Field_Provider()
+    public void Should_Select_TextEdit_Field_Provider()
     {
         _selector.Get(TextEditFormControl.ControlName).ShouldBeAssignableTo<TextEditFormControl>();
     }

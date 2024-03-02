@@ -17,11 +17,8 @@
             }
             else
             {
-            <Select TValue="string" SelectedValue="@(Values.Any()?Values[0]:FormConfiguration.NullText)" SelectedValueChanged="@OnSelectedValueChanged">
-                @if (!FormConfiguration.NullText.IsNullOrEmpty())
-                {
-                    <SelectItem Value="@FormConfiguration.NullText">@FormConfiguration.NullText</SelectItem>
-                }
+            <Select TValue="string" SelectedValue="@(Values.Any()?Values[0]:"")" SelectedValueChanged="@OnSelectedValueChanged">                
+                <SelectItem Value="String.Empty">@FormConfiguration.NullText</SelectItem>                
                 @foreach(var option in FormConfiguration.Options)
                 {
                     <SelectItem Value="@option.Value">@option.Text</SelectItem>

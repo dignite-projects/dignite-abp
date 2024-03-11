@@ -22,8 +22,8 @@ public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
     {
         if (!_currentTenant.Name.IsNullOrEmpty())
         {
-            resourcesPath = Path.Combine(resourcesPath, _currentTenant.Name);
-            resourceName = _currentTenant.Name+"."+resourceName;
+            //resourcesPath = Path.Combine(resourcesPath, _currentTenant.Name);
+            resourceName = _currentTenant.Name + "." + resourceName;
         }
         return base.CreateJsonStringLocalizer(resourcesPath, resourceName);
     }

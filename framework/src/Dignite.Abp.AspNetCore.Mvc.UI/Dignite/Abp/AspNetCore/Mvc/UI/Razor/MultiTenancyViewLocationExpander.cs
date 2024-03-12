@@ -67,13 +67,14 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     {
         var _viewLocations = GetViewLocations(context);
         var tenantName = context.Values.GetOrDefault(_tenancyNameKEY);
+        var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
 
         if (!string.IsNullOrEmpty(tenantName))
         {
             var tenantViewLocations = new List<string>();
             foreach (var viewLocation in _viewLocations)
             {
-                tenantViewLocations.Add("/Tenants/" + tenantName + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantName + "/Themes/" + currentThemeName + viewLocation);
             }
 
             tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();
@@ -81,14 +82,20 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         }
         else
         {
-            viewLocations = _viewLocations.Concat(viewLocations);
+            var tenantViewLocations = new List<string>();
+            foreach (var viewLocation in _viewLocations)
+            {
+                tenantViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
+            }
+
+            tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();
+            viewLocations = tenantViewLocations.Concat(viewLocations);
         }
         return viewLocations;
     }
 
     public IList<string> GetViewLocations([NotNull] ViewLocationExpanderContext context)
     {
-        var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
         var culture = "." + context.Values.GetOrDefault(_cultureKey);
         var webComponentPath = context.Values.GetOrDefault(_webComponentPathKey);
         IList<string> _viewLocations;

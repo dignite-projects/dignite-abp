@@ -20,7 +20,7 @@ public class CmsResource
 
 Host の JSON ファイルは `/Tenants/Localization/` フォルダーにあります。
 
-![localization-resource-json-files](images/localization-resource-json-files.jpg)
+![localization-resource-json-files](images/localization-resource-json-files.png)
 
 テナントの名前に基づいたフォルダーが `/Tenants/{テナント名}/Localization/` に作成されます。
 

@@ -20,7 +20,7 @@ public class CmsResource
 
 JSON localization files for tenants are located in the `/Localization/` folder.
 
-![localization-resource-json-files](images/localization-resource-json-files.jpg)
+![localization-resource-json-files](images/localization-resource-json-files.png)
 
 Folders are created based on the names of the tenants in the `/Tenants/{TenantName}/Localization/` folder.
 

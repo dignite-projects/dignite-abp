@@ -75,6 +75,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
             foreach (var viewLocation in _viewLocations)
             {
                 tenantViewLocations.Add("/Tenants/" + tenantName + "/Themes/" + currentThemeName + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantName + viewLocation);
             }
 
             tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();
@@ -82,14 +83,14 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         }
         else
         {
-            var tenantViewLocations = new List<string>();
+            var hostViewLocations = new List<string>();
             foreach (var viewLocation in _viewLocations)
             {
-                tenantViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
+                hostViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
             }
 
-            tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();
-            viewLocations = tenantViewLocations.Concat(viewLocations);
+            hostViewLocations = hostViewLocations.Concat(_viewLocations).ToList();
+            viewLocations = hostViewLocations.Concat(viewLocations);
         }
         return viewLocations;
     }

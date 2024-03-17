@@ -18,7 +18,13 @@ public class CmsResource
 }
 ```
 
-テナントごとの JSON ファイルは `/Tenants/Localization/` フォルダーにあります。テナントの名前に基づいたフォルダーが `/Tenants/{テナント名}/Localization/` に作成されます。
+Host の JSON ファイルは `/Tenants/Localization/` フォルダーにあります。
+
+![localization-resource-json-files](images/localization-resource-json-files.jpg)
+
+テナントの名前に基づいたフォルダーが `/Tenants/{テナント名}/Localization/` に作成されます。
+
+![tenant-localization-resource-json-files](images/tenant-localization-resource-json-files.jpg)
 
 JSON ローカライゼーション ファイルの内容は次のようになります:
 

@@ -18,11 +18,11 @@ public class CmsResource
 }
 ```
 
-租户的 JSON 本地化文件位于 `/Tenants/Localization/` 文件夹下。文件夹根据租户名称创建，如下所示：
+租主的 JSON 本地化文件位于 `/Localization/` 文件夹下。
 
 ![localization-resource-json-files](images/localization-resource-json-files.jpg)
 
-每个租户的 JSON 本地化文件位于 `/Tenants/{租户名称}/Localization/` 文件夹下，如下图所示：
+租户的 JSON 本地化文件位于 `/Tenants/{租户名称}/Localization/` 文件夹下，如下图所示：
 
 ![tenant-localization-resource-json-files](images/tenant-localization-resource-json-files.jpg)
 

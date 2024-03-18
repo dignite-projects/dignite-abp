@@ -1,10 +1,11 @@
 ﻿using System;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.MultiTenancy;
 
 namespace Dignite.FileExplorer.Files;
 
 [Serializable]
-public class FileDescriptorDto : CreationAuditedEntityDto<Guid>
+public class FileDescriptorDto : CreationAuditedEntityDto<Guid>, IMultiTenant
 {
 
     public string EntityId { get; set; }
@@ -27,4 +28,6 @@ public class FileDescriptorDto : CreationAuditedEntityDto<Guid>
     public string MimeType { get; set; }
 
     public string Url { get; set; }
+
+    public Guid? TenantId { get; set; }
 }

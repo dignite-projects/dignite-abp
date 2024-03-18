@@ -24,8 +24,7 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     {
         _fileAppService = fileAppService;
     }
-
-    [IgnoreAntiforgeryToken]
+        
     [HttpPost]
     public async Task<FileDescriptorDto> CreateAsync(CreateFileInput input)
     {
@@ -97,6 +96,6 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
 
     private string GetFileUrl(FileDescriptorDto file)
     {
-        return $"{Request.Scheme}://{Request.Host.Value}/{RoutePrefix}/{file.ContainerName}/{file.BlobName}";
+        return $"{Request.Scheme}://{Request.Host.Value}/{RoutePrefix}/{file.ContainerName}/{file.BlobName}?__tenant={file.TenantId}";
     }
 }

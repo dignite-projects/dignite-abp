@@ -1,5 +1,8 @@
-﻿namespace Dignite.Abp.DynamicForms.Select;
+﻿using System;
 
+namespace Dignite.Abp.DynamicForms.Select;
+
+[Serializable]
 public class SelectListItem
 {
     public SelectListItem()

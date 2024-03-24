@@ -5,12 +5,6 @@ namespace Dignite.Abp.Localization;
 
 public class MultiTenancyLocalizationResourceNameAttribute : Attribute
 {
-    public string Name { get; }
-
-    public MultiTenancyLocalizationResourceNameAttribute(string name)
-    {
-        Name = name;
-    }
 
     public static MultiTenancyLocalizationResourceNameAttribute GetOrNull(Type resourceType)
     {
@@ -18,10 +12,5 @@ public class MultiTenancyLocalizationResourceNameAttribute : Attribute
             .GetCustomAttributes(true)
             .OfType<MultiTenancyLocalizationResourceNameAttribute>()
             .FirstOrDefault();
-    }
-
-    public static string GetName(Type resourceType)
-    {
-        return GetOrNull(resourceType)?.Name ?? resourceType.FullName;
     }
 }

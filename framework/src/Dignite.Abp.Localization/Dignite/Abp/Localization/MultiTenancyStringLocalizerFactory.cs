@@ -25,7 +25,7 @@ public class MultiTenancyStringLocalizerFactory : AbpStringLocalizerFactory
     public override IStringLocalizer Create(Type resourceSource)
     {
         if (MultiTenancyLocalizationResourceNameAttribute.GetOrNull(resourceSource) != null)
-            return _jsonStringLocalizerFactory.Create(resourceSource);
+            return _jsonStringLocalizerFactory.CreateByMultiTenancy(resourceSource);
         else
             return base.Create(resourceSource);
     }

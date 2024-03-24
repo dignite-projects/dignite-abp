@@ -43,11 +43,8 @@ public static class MultiTenancyLocalizationServiceCollectionExtensions
 
     internal static void AddJsonLocalizationServices(IServiceCollection services)
     {
-        services.TryAddSingleton(typeof(AbpStringLocalizerFactory), typeof(AbpStringLocalizerFactory));
         services.TryAddSingleton(typeof(MultiTenancyJsonStringLocalizerFactory), typeof(MultiTenancyJsonStringLocalizerFactory));
         services.Replace(ServiceDescriptor.Singleton<IStringLocalizerFactory, MultiTenancyStringLocalizerFactory>());
-        services.AddSingleton<ResourceManagerStringLocalizerFactory>();
-        services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
     }
 
     internal static void AddJsonLocalizationServices(

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Dignite.FileExplorer;
 using SixLabors.ImageSharp;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
@@ -34,7 +35,7 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
                     if (image.Width < configuration.ImageWidth || image.Height < configuration.ImageHeight)
                     {
                         throw new BusinessException(
-                            code: "Dignite.Abp.BlobStoring:010004",
+                            code: FileExplorerErrorCodes.Files.ImageSizeTooSmall,
                             message: "Image size must be larger than Preset!",
                             details: "Uploaded image must be larger than: " + configuration.ImageWidth + "x" + configuration.ImageHeight
                         );
@@ -61,7 +62,7 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
                         else
                         {
                             throw new BusinessException(
-                                code: "Dignite.Abp.BlobStoring:010006",
+                                code: FileExplorerErrorCodes.Files.ImageResizeFailure,
                                 message: resizeResult.State.ToString()
                             );
                         }
@@ -87,7 +88,7 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
                     else
                     {
                         throw new BusinessException(
-                            code: "Dignite.Abp.BlobStoring:010006",
+                            code: FileExplorerErrorCodes.Files.ImageCompressionFailure,
                             message: compressResult.State.ToString()
                         );
                     }

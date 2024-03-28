@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.Files;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 
@@ -26,7 +27,7 @@ public class FileTypeCheckHandler : IFileHandler, ITransientDependency
                 if (!fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.Contains(fileExtensionName.ToLower()))
                 {
                     throw new BusinessException(
-                        code: "Dignite.Abp.BlobStoring:010002",
+                        code: DigniteFileErrorCodes.Files.InvalidImageType,
                         message: "File type is incompatible!" + "File type should be one of" + fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.JoinAsString("/") + "!",
                         details: "File type should be one of" + fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.JoinAsString("/") + "!"
                     );
@@ -35,7 +36,7 @@ public class FileTypeCheckHandler : IFileHandler, ITransientDependency
             else
             {
                 throw new BusinessException(
-                    code: "Dignite.Abp.BlobStoring:010003",
+                    code: DigniteFileErrorCodes.Files.MissingFileExtension,
                     message: "File type is unrecognized!",
                     details: "Cannot get the file type of uploaded file!"
                 );

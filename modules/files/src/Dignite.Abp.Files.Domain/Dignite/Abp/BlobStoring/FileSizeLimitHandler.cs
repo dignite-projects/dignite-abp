@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Dignite.Abp.Files;
 using Volo.Abp;
 using Volo.Abp.DependencyInjection;
 
@@ -15,9 +16,9 @@ public class FileSizeLimitHandler : IFileHandler, ITransientDependency
         if (configuration.MaxFileSize * 1024 < context.BlobStream.Length)
         {
             throw new BusinessException(
-                code: "Dignite.Abp.BlobStoring:010008",
-                message: "Blob object is too large",
-                details: $"The blob object size cannot exceed {configuration.MaxFileSize}M!"
+                code: DigniteFileErrorCodes.Files.FileTooLarge,
+                message: "File object is too large",
+                details: $"The file object size cannot exceed {configuration.MaxFileSize}M!"
             );
         }
 

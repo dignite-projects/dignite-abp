@@ -109,7 +109,7 @@
         _setWebAssemblyAuthorization() {
             // dignite.appSettings from Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/readAppSettingsJson.js
             if (dignite.appSettings !== undefined) {
-                // Authorization is stored in SessionStorage in WebAssembly mode, and the key value structure example 'oidc.user:https://localhost:44357:RibenZhiye_Blazor'
+                // Authorization is stored in SessionStorage in WebAssembly mode, and the key value structure example 'oidc.user:https://localhost:44357:Cms_Blazor'
                 // Splice the tokenKey using the following code and get authorization string
                 var tokenKey = "oidc.user:" + dignite.appSettings.AuthServer.Authority + ":" + dignite.appSettings.AuthServer.ClientId;
                 var token = sessionStorage.getItem(tokenKey);
@@ -131,7 +131,7 @@
         // get the API interface address for uploading images
         _getUploadImageUrl() {
             // dignite.appSettings from Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly/libs/ckeditor5/readAppSettingsJson.js
-            var remoteServiceUrl = (dignite.appSettings == undefined) ? "" : dignite.appSettings.RemoteServices.Default.BaseUrl;
+            var remoteServiceUrl = (dignite.appSettings == undefined) ? "" : dignite.appSettings.RemoteServices.FileExplorer.BaseUrl;
             return remoteServiceUrl+'/api/file-explorer/files?ContainerName=' + ImagesContainerName;
         }
     }

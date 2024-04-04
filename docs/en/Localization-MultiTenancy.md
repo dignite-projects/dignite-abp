@@ -12,7 +12,7 @@ Multi-tenant localization allows each tenant to have its own set of localized co
 Create a localization resource file class under the `/Localization/` directory and add a `MultiTenancyLocalizationResourceName` attribute to the class, for example:
 
 ```csharp
-[MultiTenancyLocalizationResourceName("CmsResource")]
+[MultiTenancyLocalizationResourceName]
 public class CmsResource
 {
 }
@@ -20,7 +20,7 @@ public class CmsResource
 
 JSON localization files for tenants are located in the `/Localization/` folder.
 
-![localization-resource-json-files](images/localization-resource-json-files.png)
+![localization-resource-json-files](images/localization-resource-json-files.png)![alt text](image.png)
 
 Folders are created based on the names of the tenants in the `/Tenants/{TenantName}/Localization/` folder.
 

@@ -12,7 +12,7 @@
 在 `/Localization/` 目录下创建一个本地化资源文件类，并为该类添加 `MultiTenancyLocalizationResourceName` 属性，例如：
 
 ```csharp
-[MultiTenancyLocalizationResourceName("CmsResource")]
+[MultiTenancyLocalizationResourceName]
 public class CmsResource
 {
 }

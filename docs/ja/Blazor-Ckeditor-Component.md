@@ -23,6 +23,14 @@ CkeditorのBlazorバージョンは、Blazor ServerとBlazor WebAssemblyに適�
 
 * Blazorプロジェクトで[abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)を実行します。
 
+* appsettings.json`ファイルの`RemoteServices`ノードの下に以下の設定を追加する：
+  
+  ``` json
+  "FileExplorer": {
+    "BaseUrl": "https://localhost:44321"
+  }
+  ```
+
 {{end}}
 
 {{if UI == "BlazorServer"}}

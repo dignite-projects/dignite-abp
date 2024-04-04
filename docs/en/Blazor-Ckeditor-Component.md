@@ -23,6 +23,14 @@ The Blazor version of Ckeditor is suitable for both Blazor Server and Blazor Web
 
 * Run [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle) once in your Blazor project.
 
+* Add the following configuration under the `RemoteServices` node in the `appsettings.json` file:
+  
+  ``` json
+  "FileExplorer": {
+    "BaseUrl": "https://localhost:44321"
+  }
+  ```
+
 {{end}}
 
 {{if UI == "BlazorServer"}}

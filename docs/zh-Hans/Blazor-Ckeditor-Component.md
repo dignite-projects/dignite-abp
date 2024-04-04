@@ -23,6 +23,14 @@ Ckeditor 的 Blazor 版本，适用于 Blazor Server 和 Blazor WebAssembly。
 
 * 在 Blazor 项目中执行一次 [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)。
 
+* 在`appsettings.json`文件中`RemoteServices`节点下添加如下配置:
+  
+  ``` json
+  "FileExplorer": {
+    "BaseUrl": "https://localhost:44321"
+  }
+  ```
+
 {{end}}
 
 {{if UI == "BlazorServer"}}

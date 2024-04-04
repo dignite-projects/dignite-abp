@@ -148,3 +148,7 @@ public class SimpleTextboxConfiguration : FormConfigurationBase
 - [Blazor ダイナミックフォームコンポーネント](Blazor-Dynamic-Form-Components.md)
 
     Blazorダイナミックフォームコンポーネントの開発方法を教えます。
+
+## 最良の例
+
+- [Dignite Cms](https://dignite.com/dignite-cms)

@@ -148,3 +148,7 @@ public class SimpleTextboxConfiguration : FormConfigurationBase
 - [Blazor 动态表单组件](Blazor-Dynamic-Form-Components.md)
 
     教你如何开发 Blazor 动态表单组件。
+
+## 动态表单的最佳范例
+
+- [Dignite Cms](https://dignite.com/dignite-cms)

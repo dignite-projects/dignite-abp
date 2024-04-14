@@ -1,26 +1,21 @@
-﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Menu;
-@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Brand
-@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Toolbar
-
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-horizontal">
-    <div class="navbar-brand">
-        @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Brand
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Menu
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.NavbarToolbar
+<header class="pure-navbar-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarNav" aria-controls="mainNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
+            <div class="collapse navbar-collapse" id="mainNavbarNav">
+                <ul class="navbar-nav me-auto">
+                    @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
+                </ul>
+            </div>
+            <div class="navbar-toolbar">
+                @(await Component.InvokeAsync<NavbarToolbarViewComponent>())
+            </div>
+        </nav>
     </div>
-    <div class="collapse navbar-collapse justify-content-center" id="main-navbar-collapse">
-        <ul class="navbar-nav">
-            @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
-        </ul>
-    </div>
-    <div class="navbar-toolbars">
-        <ul class="navbar-nav">
-            @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
-            <li class="nav-item">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar-collapse" aria-controls="main-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="navbar-horizontal-overlay" data-header="overlay">
-</div>
+</header>

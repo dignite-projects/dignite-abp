@@ -1,4 +1,5 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.BottomNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.MainNavbar
@@ -34,7 +35,7 @@
 
 <!DOCTYPE html>
 
-<html lang="@CultureInfo.CurrentUICulture.Name" dir="@rtl">
+<html lang="@CultureInfo.CurrentUICulture.Name" dir="@rtl" data-bs-theme="dark">
 <head>
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Public)
 
@@ -43,6 +44,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@pageTitle</title>
 
+    <script src="~/themes/pure/color-mode-switch.js"></script>
     <abp-style-bundle name="@PureThemeBundles.Styles.Public" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
@@ -55,6 +57,7 @@
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Public)
     
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
+    @(await Component.InvokeAsync<BottomNavbarViewComponent>())
     
     @RenderSection("content_toolbar", false)
 

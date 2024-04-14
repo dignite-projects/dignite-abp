@@ -7,7 +7,7 @@
     var menu = await MenuManager.GetAsync(PureMenus.SiteMap);
 }
 
-<div class="container-fluid bg-primary text-white py-5">
+<div class="container-fluid py-5">
     <div class="container">
         <div class="row mb-5">
             @foreach (var group in menu.Groups)
@@ -22,7 +22,7 @@
                             {
                                 var url = Url.IsLocalUrl(item.Url) ? Url.Content(item.Url.EnsureStartsWith('~')) : item.Url;
                                 <li class="list-group-item border-0 bg-transparent">
-                                    <a class="nav-link text-white underline-animate underline-animate-white d-inline" href="@url">
+                                    <a class="nav-link text-white underline-animate d-inline" href="@url">
                                         @item.DisplayName
                                     </a>
                                 </li>
@@ -40,7 +40,7 @@
                 <li class="list-inline-item">@BrandingProvider.AppName Co., Ltd.</li>
             </ul>
             <ul class="list-inline ms-md-auto">
-                <li class="list-inline-item">Web Design By <a href="//dignite.com" class="text-reset underline-animate underline-animate-white">Dignite</a></li>
+                <li class="list-inline-item">Web Design By <a href="//dignite.com" class="text-reset underline-animate">Dignite</a></li>
             </ul>
         </div>
     </div>

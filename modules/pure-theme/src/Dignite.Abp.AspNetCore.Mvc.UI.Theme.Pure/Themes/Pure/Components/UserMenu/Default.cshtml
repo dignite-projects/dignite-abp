@@ -1,0 +1,42 @@
+﻿@using Localization.Resources.AbpUi
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.MultiTenancy
+@using Volo.Abp.UI.Navigation
+@using Volo.Abp.Users
+@inject ICurrentUser CurrentUser
+@inject ICurrentTenant CurrentTenant
+@inject IHtmlLocalizer<AbpUiResource> L
+@model ApplicationMenu
+
+<div class="dropdown">
+    <a class="nav-link" href="#" id="Toolbar_UserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="@CurrentUser.UserName">
+        @if (CurrentUser.TenantId != null)
+        {
+            <small><i>@CurrentTenant.Name</i>\</small>
+            @CurrentUser.UserName
+        }
+        else
+        {
+            @CurrentUser.UserName
+        }
+    </a>
+
+    @if (Model.Items.Any())
+    {
+        <div class="dropdown-menu dropdown-menu-lg-end border-0" aria-labelledby="Toolbar_UserMenu">
+            @foreach (var menuItem in Model.Items)
+            {
+                var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+                var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+                var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.Content(menuItem.Url);
+                <a class="dropdown-item  @cssClass @disabled" href="@url" target="@menuItem.Target" id="@menuItem.ElementId">
+                    @if (menuItem.Icon != null)
+                    {
+                        <i class="@menuItem.Icon"></i>
+                    }
+                    @menuItem.DisplayName
+                </a>                    
+            }
+        </div>
+    }
+</div>

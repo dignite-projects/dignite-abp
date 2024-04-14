@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.UI.Razor;
+﻿using Dignite.Abp.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;

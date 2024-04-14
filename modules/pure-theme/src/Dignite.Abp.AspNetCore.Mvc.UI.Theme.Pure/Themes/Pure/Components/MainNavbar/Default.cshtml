@@ -1,25 +1,19 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Brand
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Menu
-@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Toolbar
-<header id="main-navbar-container">
-    <nav class="navbar navbar-light navbar-expand-lg">
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.NavbarToolbar
+<header class="pure-navbar-wrapper">
+    <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarNav" aria-controls="mainNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
-        <div class="collapse navbar-collapse justify-content-center" id="main-navbar-collapse">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="mainNavbarNav">
+            <ul class="navbar-nav me-auto">
                 @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
             </ul>
         </div>
-        <div class="navbar-toolbars">
-            <ul class="navbar-nav">
-                @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
-                <li class="nav-item d-lg-none">
-                    <button class="btn btn-outline-primary px-3 ms-2 border-primary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar-collapse" aria-controls="main-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                </li>
-            </ul>
+        <div class="navbar-toolbar">
+            @(await Component.InvokeAsync<NavbarToolbarViewComponent>())
         </div>
     </nav>
 </header>
-<div class="navbar-overlay" data-header="overlay" id="navbar-overlay">
-</div>

@@ -6,6 +6,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
+	  <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,10 +28,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Themes\Pure\Components\Toolbar\" />
-    <Folder Include="Toolbars\" />
   </ItemGroup>
 </Project>

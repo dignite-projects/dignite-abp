@@ -20,13 +20,19 @@ window.dignite =
  * Relevant code for the main navigation bar
  */
 $(document).ready(function () {
-    var navbarContainer = document.getElementById('main-navbar-container');//Get the navigation bar container
+    var navbarContainer = document.getElementsByClassName('pure-navbar-wrapper')[0];//Get the navigation bar container
     if (navbarContainer === null)
         return false;
 
+    //
+    let overlay = document.createElement("div");
+    overlay.className = "navbar-overlay";
+    overlay.id = "navbar-overlay";
+    document.body.appendChild(overlay);
+
+    //
     var bodyElement = document.getElementsByTagName('body')[0];
     var navbar = navbarContainer.getElementsByClassName('navbar');//Get the navigation bar
-    var overlay = document.getElementById('navbar-overlay'); // Get the navigation bar overlay
     var dropdowns = navbarContainer.querySelectorAll('.navbar-nav > .nav-item > .dropdown'); //Get every menu in the navigation bar, excluding submenus
 
     /**
@@ -45,7 +51,7 @@ $(document).ready(function () {
             }
             var dropdownMenu = event.currentTarget.querySelector('.dropdown-menu');
             var height = dropdownMenu.offsetHeight + 100;    // Set the height of the navigation bar menu element
-            navbarContainer.style.setProperty('--navbar-horizontal-height', height + 'px');
+            navbarContainer.style.setProperty('min-height', height + 'px');
 
             // expand menu
             if (!navbarContainer.classList.contains('has-subnav-open')) {
@@ -74,7 +80,7 @@ $(document).ready(function () {
              */
             if ((!navbarExpanded && !event.target.parentElement.classList.contains('dropdown-submenu'))
                 || (expandedDropdown == event.target)) {
-                navbarContainer.style.removeProperty('--navbar-horizontal-height');
+                navbarContainer.style.removeProperty('min-height');
                 navbarContainer.classList.remove('has-subnav-open');
                 overlay.classList.remove('show');
                 bodyElement.style.removeProperty('overflow');

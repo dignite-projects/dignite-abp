@@ -1,12 +1,51 @@
 ﻿@page
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+@addTagHelper *, Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure
 @inject IThemeManager ThemeManager
 @model Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Pages.IndexModel
 @{
     Layout = ThemeManager.CurrentTheme.GetPublicLayout();
 }
-<h1>Pure Theme Demo</h1>
+@section content_toolbar {
+    <page-navbar title="Home" menu-name="@NavbarConsts.HomeMenus" toolbar-name="@NavbarConsts.HomeTools"></page-navbar>
+}
 
-<p>Check the <a href="/Components">Components</a>.</p>
+<h1 class="my-5">Pure Theme Demo</h1>
 
-<div style="height:1500px;"></div>
+<h2>Color Modes</h2>
+<div class="mb-5">
+    <button type="button" class="btn btn-secondary" data-bs-theme-value="auto">Auto Mode</button>
+    <button type="button" class="btn btn-dark" data-bs-theme-value="dark">Dark Mode</button>
+    <button type="button" class="btn btn-light" data-bs-theme-value="light">Light Mode</button>
+</div>
+
+<h2>Animation of underline </h2>
+<div class="row mb-5">
+    <div class="col-md-4">
+        <a href="#" class="underline-animate">A Link</a>
+    </div>
+    <div class="col-md-4">
+        <h3>
+        <a href="#" class="underline-animate fw-semibold">A semibold Link</a>
+        </h3>
+    </div>
+    <div class="col-md-4">
+        <h1>
+        <a href="#" class="underline-animate fw-bolder">A bolder Link</a>
+        </h1>
+    </div>
+    <div class="col-md-4">
+        <div class="bg-black p-2">
+            <a href="#" class="underline-animate text-white">A white Link</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="bg-white p-2">
+            <a href="#" class="underline-animate text-black">A black Link</a>
+        </div>
+    </div>
+</div>
+<div class="my-5">
+    <img src="https://cn.bing.com/th?id=OHR.SpringApple_ZH-CN0101917345_1920x1080.jpg" class="img-fluid">
+</div>

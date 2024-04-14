@@ -13,6 +13,10 @@ public class PureThemeDemoMenuContributor : IMenuContributor
         {
             AddPublicMenuItems(context);
         }
+        if (context.Menu.Name == NavbarConsts.HomeMenus)
+        {
+            AddHomePageMenuItems(context);
+        }
 
         return Task.CompletedTask;
     }
@@ -25,29 +29,12 @@ public class PureThemeDemoMenuContributor : IMenuContributor
 
         var items = new List<ApplicationMenuItem>()
             {
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Alerts, "Alerts", url: "/Components/Alerts"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Badges, "Badges", url: "/Components/Badges"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Borders, "Borders", url: "/Components/Borders"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Breadcrumbs, "Breadcrumbs", url: "/Components/Breadcrumbs"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Buttons, "Buttons", url: "/Components/Buttons"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.ButtonGroups, "Button Groups", url: "/Components/ButtonGroups"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Cards, "Cards", url: "/Components/Cards"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Carousel, "Carousel", url: "/Components/Carousel"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Collapse, "Collapse", url: "/Components/Collapse"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Dropdowns, "Dropdowns", url: "/Components/Dropdowns"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.DynamicForms, "Dynamic Forms", url: "/Components/DynamicForms"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.FormElements, "Form Elements", url: "/Components/FormElements"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Grids, "Grids", url: "/Components/Grids"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.ListGroups, "List Groups", url: "/Components/ListGroups"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Modals, "Modals", url: "/Components/Modals"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Navs, "Navs", url: "/Components/Navs"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Navbars, "Navbars", url: "/Components/Navbars"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Paginator, "Paginator", url: "/Components/Paginator"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Popovers, "Popovers", url: "/Components/Popovers"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.ProgressBars, "Progress Bars", url: "/Components/ProgressBars"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Tables, "Tables", url: "/Components/Tables"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Tabs, "Tabs", url: "/Components/Tabs"),
-                new ApplicationMenuItem(PureThemeDemoMenus.Components.Tooltips, "Tooltips", url: "/Components/Tooltips")
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Alerts, "Alerts", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Badges, "Badges", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Borders, "Borders", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Breadcrumbs, "Breadcrumbs", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Buttons, "Buttons", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.ButtonGroups, "Button Groups", url: "#"),
             };
 
         items.OrderBy(x => x.Name)
@@ -56,9 +43,71 @@ public class PureThemeDemoMenuContributor : IMenuContributor
 
         context.Menu.AddItem(menuItem);
 
+        context.Menu.AddItem(new ApplicationMenuItem("like", "Like", "#"));
 
+        var disabledLink = new ApplicationMenuItem("disabled", "Disabled", "#");
+        disabledLink.IsDisabled = true;
+        context.Menu.AddItem(disabledLink);
+
+
+        /*******  multilevel menu  **********************************************************/
+        var servicesMenuItem1 = new ApplicationMenuItem(
+                "Services",
+                "Services"
+            );
+
+        var servicesMenuItem2 = new ApplicationMenuItem(
+                "ChildServices",
+                "Child Services"
+            );
+        servicesMenuItem2.AddItem(new ApplicationMenuItem("WebDevelopment","Web Development", url: "#"));
+        servicesMenuItem2.AddItem(new ApplicationMenuItem("Ecommerce","Ecommerce", url: "#"));
+        servicesMenuItem2.AddItem(new ApplicationMenuItem("SoftwareDevelopment","Software Development", url: "#"));
+        servicesMenuItem2.AddItem(new ApplicationMenuItem("DigniteSupport","Dignite Support", url: "#"));
+        servicesMenuItem1.AddItem(servicesMenuItem2);
+
+
+        var servicesMenuItem3 = new ApplicationMenuItem(
+                "ChildServices",
+                "Child Services"
+            );
+        servicesMenuItem3.AddItem(new ApplicationMenuItem("WebDevelopment","Web Development", url: "#"));
+        servicesMenuItem3.AddItem(new ApplicationMenuItem("Ecommerce", "Ecommerce", url: "#"));
+        servicesMenuItem3.AddItem(new ApplicationMenuItem("SoftwareDevelopment","Software Development", url: "#"));
+        servicesMenuItem2.AddItem(new ApplicationMenuItem("DigniteSupport","Dignite Support", url: "#"));
+        servicesMenuItem1.AddItem(servicesMenuItem3);
+
+        servicesMenuItem1.AddItem(new ApplicationMenuItem("WebDevelopment","Web Development", url: "#"));
+        servicesMenuItem1.AddItem(new ApplicationMenuItem("Ecommerce", "Ecommerce", url: "#"));
+        servicesMenuItem1.AddItem(new ApplicationMenuItem("SoftwareDevelopment","Software Development", url: "#"));
+        servicesMenuItem1.AddItem(new ApplicationMenuItem("DigniteSupport","Dignite Support", url: "#"));
+        context.Menu.AddItem(servicesMenuItem1);
+    }
+    private void AddHomePageMenuItems(MenuConfigurationContext context)
+    {
+        var menuItem = new ApplicationMenuItem(PureThemeDemoMenus.Components.Root, "Components");
+
+        var items = new List<ApplicationMenuItem>()
+            {
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Alerts, "Alerts", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Badges, "Badges", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Borders, "Borders", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Breadcrumbs, "Breadcrumbs", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.Buttons, "Buttons", url: "#"),
+                new ApplicationMenuItem(PureThemeDemoMenus.Components.ButtonGroups, "Button Groups", url: "#"),
+            };
+
+        items.OrderBy(x => x.Name)
+             .ToList()
+             .ForEach(x => menuItem.AddItem(x));
+
+        context.Menu.AddItem(menuItem);
 
         context.Menu.AddItem(new ApplicationMenuItem("like", "Like", "#"));
-        context.Menu.AddItem(new ApplicationMenuItem("disabled", "Disabled", "#"));
+
+        var disabledLink = new ApplicationMenuItem("disabled", "Disabled", "#");
+        disabledLink.IsDisabled = true;
+        context.Menu.AddItem(disabledLink);
+
     }
 }

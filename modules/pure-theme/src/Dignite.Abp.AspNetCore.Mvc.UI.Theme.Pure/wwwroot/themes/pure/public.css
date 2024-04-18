@@ -57,16 +57,18 @@ body.abp-public-layout > .container-fluid {
 .pure-navbar-wrapper {
     position: absolute;
     width: 100%;
-    top: 0px;
+    top: .75rem;
     transition: all .3s ease 0s;
     border-radius: 1.75rem;
-    min-height: var(--body-padding-top);
     z-index: 1022;
     width: calc(100% - 2rem);
     margin-left: 1rem;
     margin-right: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    background-color: rgba(var(--bs-body-bg-rgb),.8);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 .pure-navbar-wrapper .navbar-brand {
     transition: all .3s ease 0s;
@@ -107,6 +109,7 @@ body.abp-public-layout > .container-fluid {
     background-color: rgba(var(--bs-body-bg-rgb),.8);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    z-index: 1022;
 }
 
 @media (max-width: 991px) {
@@ -116,6 +119,7 @@ body.abp-public-layout > .container-fluid {
         margin-right: 0rem;
         padding-left: 0rem;
         padding-right: 0rem;
+        border-radius: 0rem;
         background-color: rgba(var(--bs-body-bg-rgb),.9);
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
@@ -243,6 +247,30 @@ body.abp-public-layout > .container-fluid {
     backdrop-filter: blur(10px);
     box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 }
+@media (min-width: 992px) {
+
+    /**** nav-like style ****/
+    .page-navbar .navbar-nav .nav-link {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
+        position: relative;
+        /* Animation of the underline */
+        background: linear-gradient(90deg, var(--bs-nav-link-color), var(--bs-nav-link-color));
+        background-size: 0 1px;
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+        transition: 0.5s all;
+    }
+
+    .page-navbar .navbar-nav .nav-link:hover,
+    .page-navbar .navbar-nav .nav-link:focus,
+    .page-navbar .navbar-nav .nav-link.active,
+    .page-navbar .navbar-nav .nav-link.show {
+        background-size: 100% 1px;
+    }
+}
 
 /** Animation of underline **/
 .underline-animate {
@@ -253,38 +281,47 @@ body.abp-public-layout > .container-fluid {
     transition: 0.5s all;
     text-decoration: none;
 }
-.underline-animate:hover {
-    background-size: 100% 1px;
-}
-.underline-animate.fw-medium,
-.underline-animate.fw-semibold{
-    background-size: 0 2px;
-}
-.underline-animate.fw-medium:hover,
-.underline-animate.fw-semibold:hover{
-    background-size: 100% 2px;
-}
-.underline-animate.fw-bolder {
-    background-size: 0 4px;
-}
-.underline-animate.fw-bolder:hover {
-    background-size: 100% 4px;
-}
-.underline-animate.text-white {
-    background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,1));
-    background-size: 0 1px;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-}
-.underline-animate.text-white:hover {
-    background-size: 100% 1px;
-}
-.underline-animate.text-black {
-    background: linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,1));
-    background-size: 0 1px;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-}
-.underline-animate.text-black:hover {
-    background-size: 100% 1px;
-}
+
+    .underline-animate:hover {
+        background-size: 100% 1px;
+    }
+
+    .underline-animate.fw-medium,
+    .underline-animate.fw-semibold {
+        background-size: 0 2px;
+    }
+
+        .underline-animate.fw-medium:hover,
+        .underline-animate.fw-semibold:hover {
+            background-size: 100% 2px;
+        }
+
+    .underline-animate.fw-bolder {
+        background-size: 0 4px;
+    }
+
+        .underline-animate.fw-bolder:hover {
+            background-size: 100% 4px;
+        }
+
+    .underline-animate.text-white {
+        background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,1));
+        background-size: 0 1px;
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+    }
+
+        .underline-animate.text-white:hover {
+            background-size: 100% 1px;
+        }
+
+    .underline-animate.text-black {
+        background: linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,1));
+        background-size: 0 1px;
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+    }
+
+        .underline-animate.text-black:hover {
+            background-size: 100% 1px;
+        }

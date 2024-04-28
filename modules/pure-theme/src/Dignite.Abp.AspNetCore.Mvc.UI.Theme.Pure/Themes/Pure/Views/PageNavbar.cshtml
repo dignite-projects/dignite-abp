@@ -1,73 +1,81 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.TagHelpers
 @model PageNavbarModel
 
-<nav class="page-navbar navbar navbar-expand-lg sticky-top">
+<nav class="page-navbar navbar navbar-expand-lg sticky-top" role="navigation">
     <div class="container">
-    <div class="navbar-brand">@Model.Title</div>
-    <div class="collapse navbar-collapse justify-content-end order-2 order-md-1" id="page-navbar-collapse">
-        <ul class="navbar-nav">
-            @foreach (var menuItem in Model.Menu.Items)
-            {
-                var currentUrl = Context.Request.Path.Value;
-                var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
-                var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
-                var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
-                var isActive = currentUrl.StartsWith(url) && url != "/" ? "active" : string.Empty;
-                if (menuItem.IsLeaf)
-                {
-                    if (menuItem.Url != null)
-                    {
-                        <li class="nav-item @cssClass" id="@menuItem.ElementId">
-                            <a class="nav-link @disabled @isActive" href="@url" target="@menuItem.Target">
-                                @if (menuItem.Icon != null)
-                                {
-                                    if (menuItem.Icon.StartsWith("fa"))
-                                    {
-                                        <i class="@menuItem.Icon"></i>
-                                    }
-                                }
-                                @menuItem.DisplayName
-                            </a>
-                        </li>
-                    }
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="nav-link @disabled @isActive dropdown-toggle" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (menuItem.Icon != null)
-                                {
-                                    if (menuItem.Icon.StartsWith("fa"))
-                                    {
-                                        <i class="@menuItem.Icon"></i>
-                                    }
-                                }
-                                @menuItem.DisplayName
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="Menu_@(menuItem.Name)">
-                                @foreach (var childMenuItem in menuItem.Items)
-                                {
-                                    @await Html.PartialAsync("_PageNavbarMenuItem", childMenuItem)
-                                }
-                            </div>
-                        </div>
-                    </li>
-                }
-            }
-        </ul>
-    </div>
-
-    <div class="navbar-toolbar order-1 order-md-2">
-        <div class="d-lg-none">
-            <button class="btn px-2 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#page-navbar-collapse" aria-controls="page-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-chevron-down mx-1" aria-hidden="true"></i>
-            </button>
-        </div>
-        @foreach (var toolbarItem in Model.Toolbar.Items.OrderBy(i => i.Order))
+        <div class="navbar-brand">@Model.Title</div>
+        @if (Model.Menu.Items.Any())
         {
-            @(await Component.InvokeAsync(toolbarItem.ComponentType))
+            <div class="collapse navbar-collapse justify-content-end order-2 order-md-1" id="page-navbar-collapse">
+                <ul class="navbar-nav">
+                    @foreach (var menuItem in Model.Menu.Items)
+                    {
+                        var currentUrl = Context.Request.Path.Value;
+                        var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+                        var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+                        var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
+                        var isActive = currentUrl.StartsWith(url) && url != "/" ? "active" : string.Empty;
+                        if (menuItem.IsLeaf)
+                        {
+                            if (menuItem.Url != null)
+                            {
+                                <li class="nav-item @cssClass" id="@menuItem.ElementId">
+                                    <a class="nav-link @disabled @isActive" href="@url" target="@menuItem.Target">
+                                        @if (menuItem.Icon != null)
+                                        {
+                                            if (menuItem.Icon.StartsWith("fa"))
+                                            {
+                                                <i class="@menuItem.Icon"></i>
+                                            }
+                                        }
+                                        @menuItem.DisplayName
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a class="nav-link @disabled @isActive dropdown-toggle" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @if (menuItem.Icon != null)
+                                        {
+                                            if (menuItem.Icon.StartsWith("fa"))
+                                            {
+                                                <i class="@menuItem.Icon"></i>
+                                            }
+                                        }
+                                        @menuItem.DisplayName
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="Menu_@(menuItem.Name)">
+                                        @foreach (var childMenuItem in menuItem.Items)
+                                        {
+                                            @await Html.PartialAsync("_PageNavbarMenuItem", childMenuItem)
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
         }
-        </div>
+        @if (Model.Menu.Items.Any() || Model.Toolbar.Items.Any())
+        {
+            <div class="navbar-toolbar order-1 order-md-2">
+                @if (Model.Menu.Items.Any())
+                {
+                    <div class="d-lg-none">
+                        <button class="btn px-2 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#page-navbar-collapse" aria-controls="page-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-chevron-down mx-1" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                }
+                @foreach (var toolbarItem in Model.Toolbar.Items.OrderBy(i => i.Order))
+                {
+                    @(await Component.InvokeAsync(toolbarItem.ComponentType))
+                }
+            </div>
+        }
     </div>
 </nav>

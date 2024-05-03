@@ -87,10 +87,10 @@ public class ImageResizeHandler : IFileHandler, ITransientDependency
                     }
                     else
                     {
-                        throw new BusinessException(
-                            code: FileExplorerErrorCodes.Files.ImageCompressionFailure,
-                            message: compressResult.State.ToString()
-                        );
+                        //throw new BusinessException(
+                        //    code: FileExplorerErrorCodes.Files.ImageCompressionFailure,
+                        //    message: compressResult.State.ToString()
+                        //);
                     }
                 }
             }

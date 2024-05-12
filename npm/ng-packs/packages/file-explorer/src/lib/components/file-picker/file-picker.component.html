@@ -1,0 +1,32 @@
+<button class="btn btn-sm btn-primary ms-2 float-end" type="button" (click.stop)="ModalOpen = true">{{'FileExplorer::SelectFile' | abpLocalization}}</button>
+<fe-file-modal [(visible)]="ModalOpen" [selectPickerFile]="selectFormFile" [multiple]="_multiple"  (selectFilefn)="_selectFilefn($event)" [fileContainerName]="_fileContainerName"></fe-file-modal>
+<table class="table" *ngIf="_fileShowTable.length>0">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">{{'FileExplorer::FileName' | abpLocalization}}</th>
+            <th scope="col">{{'FileExplorer::FileSize' | abpLocalization}}</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of _fileShowTable;let i =index">
+            <tr>
+                <td>
+                    <fe-file-preview [width]="'80px'" [src]="item.url" [name]="item.name" [type]="item.mimeType" [preview]="true"></fe-file-preview>
+                </td>
+                <th scope="row">
+                    <div>{{item.name}}</div>
+                </th>
+                <td >{{_FileApiService.formatFileSize(item.size)}}</td>
+                <td>
+                    <button class="btn btn-sm p-0 btn-light " (click.stop)="deleteFileTableItem(i,item)">
+                        <i class="fas fa-trash p-2"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+

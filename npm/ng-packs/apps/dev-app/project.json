@@ -113,7 +113,7 @@
             "inject": true,
             "bundleName": "bootstrap-icons"
           },
-          "apps/dev-app/src/styles.scss"
+          "src/styles.scss"
         ],
         "scripts": []
       },

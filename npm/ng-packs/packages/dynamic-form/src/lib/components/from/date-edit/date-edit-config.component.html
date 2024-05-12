@@ -1,0 +1,40 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpForms::DateEditMode' | abpLocalization}}</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [value]="_DateEditInterfaces.Date"
+                        formControlName="DateEdit.InputMode" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        {{'DigniteAbpForms::Date' | abpLocalization}}
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [value]="_DateEditInterfaces.DateTime"
+                        formControlName="DateEdit.InputMode" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        {{'DigniteAbpForms::DateTime' | abpLocalization}}
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [value]="_DateEditInterfaces.Month"
+                        formControlName="DateEdit.InputMode" id="flexRadioDefault3">
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        {{'DigniteAbpForms::Month' | abpLocalization}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpForms::Min' | abpLocalization}}</label>
+            <input type="datetime-local" class="form-control" step="1" formControlName="DateEdit.Min">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpForms::Max' | abpLocalization}}</label>
+            <input type="datetime-local" class="form-control" step="1" formControlName="DateEdit.Max">
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>

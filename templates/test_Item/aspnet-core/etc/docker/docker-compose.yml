@@ -1,0 +1,105 @@
+version: '3.7'
+
+services:
+  test_item-angular:
+    image: mycompanyname/test_item-angular:latest
+    container_name: test_item-angular
+    build:
+      context: ../../../
+      dockerfile: angular/Dockerfile.local
+    ports:
+      - "4200:80"
+    depends_on:
+      - test_item-api
+    volumes:
+      - ./dynamic-env.json://usr/share/nginx/html/dynamic-env.json
+    networks:
+      - abp-network
+
+  test_item-api:
+    image: mycompanyname/test_item-api:latest
+    container_name: test_item-api
+    hostname: test_item-api
+    build:
+      context: ../../
+      dockerfile: src/test_Item.HttpApi.Host/Dockerfile.local
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80;
+      - Kestrel__Certificates__Default__Path=/root/certificate/localhost.pfx
+      - Kestrel__Certificates__Default__Password=d56d56b8-b1df-41ce-a102-9e8c458b58de
+      - App__SelfUrl=https://localhost:44354
+      - App__AngularUrl=http://localhost:4200
+      - App_CorsOrigins=http://localhost:4200
+      - App__HealthCheckUrl=http://test_item-api/health-status
+      - AuthServer__RequireHttpsMetadata=false
+      - AuthServer__Authority=https://localhost:44354
+      - App__RedirectAllowedUrls=http://localhost:4200
+      - ConnectionStrings__Default=Data Source=sql-server;Initial Catalog=test_Item;User Id=sa;Password=myPassw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;
+      - Redis__Configuration=redis
+    ports:
+      - "44354:443"
+    depends_on:
+      sql-server:
+        condition: service_healthy
+      redis:
+        condition: service_healthy  
+    restart: on-failure    
+    volumes:
+      - ./certs:/root/certificate
+    networks:
+      - abp-network
+  
+
+  db-migrator:
+    image: mycompanyname/test_item-db-migrator:latest
+    container_name: db-migrator
+    build:
+      context: ../../
+      dockerfile: src/test_Item.DbMigrator/Dockerfile.local
+    environment:
+      - OpenIddict__Applications__test_Item_App__RootUrl=http://localhost:4200
+      - OpenIddict__Applications__test_Item_Swagger__RootUrl=https://localhost:44354
+      - ConnectionStrings__Default=Data Source=sql-server;Initial Catalog=test_Item;User Id=sa;Password=myPassw0rd;MultipleActiveResultSets=true;TrustServerCertificate=True;
+      - Redis__Configuration=redis
+    depends_on:
+      sql-server:
+        condition: service_healthy
+    networks:
+      - abp-network    
+  
+  sql-server:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1434:1433"
+    environment:
+      SA_PASSWORD: "myPassw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqldata:/var/opt/mssql
+    networks:
+      - abp-network  
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S sql-server -U sa -P "myPassw0rd" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+  
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - abp-network  
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]      
+
+volumes:
+  sqldata:
+    name: test_item_sqldata
+networks:
+  abp-network:
+    name: test_item-network
+    driver: bridge

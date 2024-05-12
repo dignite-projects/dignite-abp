@@ -1,0 +1,26 @@
+<form [formGroup]="_entity">
+    <div [formGroupName]="_parentFiledName" class="entry-control-page">
+        <div class="mb-2">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <ng-container *ngIf="_fields.field.formConfiguration['Entry.Multiple']; else elseTemplate">
+                <div class="form-select">
+                    <nz-select [nzMaxTagCount]="5" (nzOnSearch)="SelectChange($event)" nzShowSearch  nzMode="multiple"  [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                    formControlName="{{_fields.field.name}}">
+                        <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <div class="form-select">
+                    <nz-select nzShowSearch (nzOnSearch)="SelectChange($event)" [nzMaxMultipleCount]="1"  nzMode="multiple" [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                    formControlName="{{_fields.field.name}}">
+                        <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </div>
+            </ng-template>
+
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

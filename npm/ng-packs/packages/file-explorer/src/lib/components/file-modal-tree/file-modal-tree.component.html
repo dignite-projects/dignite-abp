@@ -1,0 +1,63 @@
+<div class="card-header  p-0 mb-1 d-flex justify-content-between align-items-center">
+    <h6 class="h6 mb-0">{{'FileExplorer::MyDirectories' | abpLocalization}}</h6>
+    <button type="button" class="btn btn-light btn-sm ms-2" (click.stop)="addDescriptorBtn()"><i
+            class="fas fa-plus-circle" aria-hidden="true"></i></button>
+</div>
+<nz-tree [nzData]="fileGroupList" class="ng-zorro-antd-tree" nzDraggable nzBlockNode nzShowIcon
+    [nzExpandedIcon]="multiExpandedIconTpl" (nzOnDrop)="nzEvent($event)" [nzBeforeDrop]="beforeDrop"
+    (nzClick)="activeNode($event)" (nzExpandChange)="nzExpandChange($event)" [nzTreeTemplate]="nzTreeTemplate">
+    <ng-template #nzTreeTemplate let-node let-origin="origin">
+        <div class="custom-node d-inline-block   ng-star-inserted dropdown" [title]="node.title">
+            <div #dropdown="ngbDropdown" class="d-inline-block" ngbDropdown placement="bottom" container="body">
+                <div class="btn-group" [class.selected]="isNodeSelected(node)">
+                    <button class="btn btn-sm  p-0 px-1">{{ node.title }}</button>
+                    <button class="btn btn-sm  p-0" (click)="handleClick($event)" ngbDropdownToggle
+                        [class.dropdown-toggle]="false" aria-hidden="true">
+                        <i class="fas fa-caret-down text-muted p-1"></i>
+                    </button>
+                </div>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem
+                        (click.stop)="addDescriptorBtn(node)">{{'FileExplorer::NewDirectory' | abpLocalization}}</button>
+                    <button ngbDropdownItem
+                        (click.stop)="addDescriptorBtn(node,true)">{{'AbpUi::Edit' | abpLocalization}}</button>
+                    <button ngbDropdownItem
+                        (click.stop)="deleteDescriptorBtn(node)">{{'AbpUi::Delete' | abpLocalization}}</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #multiExpandedIconTpl let-node let-origin="origin">
+        <ng-container *ngIf="node.children.length > 0">
+            <i [class]="node.isExpanded ? 'fas fa-caret-down' : 'fas fa-caret-right'"></i>
+        </ng-container>
+    </ng-template>
+</nz-tree>
+
+
+<abp-modal [(visible)]="ModalDescriptorOpen" [busy]="ModalDescriptorBusy"
+    (visibleChange)="ModalDescriptorVisibleChange($event)">
+    <ng-template #abpHeader>
+        <h3>{{theNodeBeingEdited?('AbpUi::Edit' | abpLocalization):('FileExplorer::NewDirectory' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="ModalDescriptorForm; else loaderRef">
+            <form class="sites-modal-form" #myForm="ngForm" [formGroup]="ModalDescriptorForm"
+                (ngSubmit)="createOrEditSave()">
+                <button type="submit" #ModalFormDescriptorSubmit style="display: none"></button>
+                <div class="mb-3">
+                    <label class="form-label">{{'FileExplorer::DirectoryName' | abpLocalization}}</label>
+                    <input type="email" class="form-control" formControlName="name">
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check"
+            (click)="ModalFormDescriptorSubmit.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

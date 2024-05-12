@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <RootNamespace>test_Item</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\test_Item.Domain.Shared\test_Item.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Saas.Host.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Gdpr.Application.Contracts" Version="7.4.5" />
+  </ItemGroup>
+
+</Project>

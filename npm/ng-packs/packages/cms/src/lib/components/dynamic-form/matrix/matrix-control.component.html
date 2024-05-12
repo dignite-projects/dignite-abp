@@ -1,0 +1,42 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties">
+        <div class="mb-2">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <div [formArrayName]="_fields.field.name">
+                <ng-container *ngFor="let item of fieldNameControl.controls;let i=index">
+                    <div class="card mb-3 border " [formGroupName]="i">
+                        <div class="card-header d-flex align-items-center justify-content-between border-bottom pt-1">
+                            <div>{{item.value.displayName}}</div>
+                            <button class="btn btn-sm btn-light p-0" (click.stop)="deleteMatrixControl(i)"><i
+                                    class="fas fa-trash p-2"></i></button>
+                        </div>
+                        <div class="card-body">
+                            <ng-container *ngFor="let el of MatrixBlockTypesList;let il =index">
+                                <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
+                                    <ng-container *ngFor="let elf of el.fields; let fi=index">
+                                        <ng-container>
+                                            <df-dynamic [entity]="item"
+                                                [fields]="{ field: elf,displayName:elf.displayName }"
+                                                [selected]="_selected ? _selected[i][_parentFiledName][elf.name]: ''"
+                                                [parentFiledName]="'extraProperties'" [culture]="_culture"></df-dynamic>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <ng-container *ngFor="let item of MatrixBlockTypesList;let i =index">
+                        <button type="button" class="btn btn-primary btn-sm" (click.stop)="addMatrixControl(item)"><i
+                                class="fas fa-plus me-1"></i>{{item.displayName}}</button>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+    </div>
+    <button type="submit" style="display: none" #submitclick></button>
+</form>

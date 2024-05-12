@@ -1,0 +1,5 @@
+FROM nginx:alpine-slim
+WORKDIR /app
+COPY dist/test_Item /usr/share/nginx/html
+COPY dynamic-env.json /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf

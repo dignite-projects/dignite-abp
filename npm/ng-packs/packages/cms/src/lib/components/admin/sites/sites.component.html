@@ -1,0 +1,154 @@
+<abp-page [title]="'Cms::Sites' | abpLocalization" [toolbar]="true">
+    <div class="sites-page">
+        <div class="card">
+            <div class="card-body px-2 py-sm-2 border-bottom">
+                <div class="input-group">
+                    <input type="text" class="form-control" [(ngModel)]="filters.filter"
+                        [placeholder]="'AbpUi::Search' | abpLocalization" />
+                    <button class="btn btn-primary px-3" type="button" id="button-addon2" (click)="list.get()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-0">
+            <div class="card-body p-0">
+                <div class="table-responsive table-fixed-header">
+                    <ngx-datatable class="material container-height" [rows]="data.items" [list]="list"
+                        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                        [scrollbarV]="true" [virtualization]="false" [externalPaging]="true" [count]="data.totalCount">
+                        <ngx-datatable-column [name]="'Cms::DisplayName' | abpLocalization" prop="displayName">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::Name' | abpLocalization" prop="name">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::IsActive' | abpLocalization" prop="isActive">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <i class="fas fa-check text-success" *ngIf="value"></i>
+                                <i class="fas fa-times text-danger" *ngIf="!value"></i>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::Host' | abpLocalization" prop="host">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::CreationTime' | abpLocalization" prop="creationTime">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value | date : 'yyyy-MM-dd hh-mm-ss' }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <div ngbDropdown container="body">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
+                                        {{'AbpUi::Actions' | abpLocalization}}
+                                    </button>
+                                    <div ngbDropdownMenu>
+                                        <button ngbDropdownItem
+                                            (click)="EditSitesBtn(row)">{{'AbpUi::Edit' | abpLocalization}}</button>
+                                        <button ngbDropdownItem
+                                            (click)="deletefield(row)">{{'AbpUi::Delete' | abpLocalization}}</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+</abp-page>
+
+
+<!-- <dignite-page [title]="'Cms::Sites' | abpLocalization" [back]="false" [class]="'sites-page'">
+    <ng-template #pageHeader>
+        <button type="button" class="btn btn-primary btn-sm ms-2" (click.stop)="createSitesBtn()">
+            <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::New' | abpLocalization}}
+        </button>
+    </ng-template>
+    <ng-template #pageBody>
+        
+    </ng-template>
+</dignite-page> -->
+
+<abp-modal [(visible)]="createSitesOpen" [busy]="modalBusy" (visibleChange)="createGroupVisibleChange($event)">
+    <ng-template #abpHeader>
+        <h3>{{selected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="createOrEditForm; else loaderRef">
+            <form class="sites-modal-form" #myForm="ngForm" [formGroup]="createOrEditForm"
+                (ngSubmit)="createOrEditSave()">
+                <button type="submit" #createModalSubmit style="display: none"></button>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="displayName"
+                        (blur)="disPlayNameInputBlur($event)" />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::Name' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="name" />
+                    <div class="text-danger invalid-feedback" *ngIf="nameInput.errors?.repetition">
+                        {{nameInput.errors?.repetition}}
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::Host' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="host" />
+                    <div class="text-danger invalid-feedback" *ngIf="hostInput.errors?.repetition">
+                        {{hostInput.errors?.repetition}}
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="true" formControlName="isActive"
+                            id="flexRadioDefault1" />
+                        <label class="form-check-label" for="flexRadioDefault1"> {{'Cms::IsActive' | abpLocalization}}
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::Languages' | abpLocalization}}</label>
+                    <ul class="list-group list-group-flush">
+                        <ng-container *ngFor="let item of languages; let i = index">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input class="form-check-input me-1" type="checkbox" [value]="item.cultureName"
+                                        id="firstRadio{{ i }}" [checked]="item.ischecked"
+                                        (change)="languagesChange($event);!item.ischecked" />
+                                    <label class="form-check-label" for="firstRadio{{ i }}">{{ item.displayName
+                                        }}</label>
+                                </div>
+                                <ng-container *ngIf="item.ischecked">
+                                    <div class="text-primary" *ngIf="item.isDefault">{{'Cms::Default' | abpLocalization}}
+                                    </div>
+                                    <div (click.stop)="setDefault(item)" *ngIf="!item.isDefault">
+                                        {{'Cms::SetDefault' | abpLocalization}}</div>
+                                </ng-container>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check"
+            (click)="createModalSubmit.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

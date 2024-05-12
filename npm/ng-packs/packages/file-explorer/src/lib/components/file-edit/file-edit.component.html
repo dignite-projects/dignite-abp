@@ -1,0 +1,35 @@
+<div class="input-group mb-2">
+    <input type="file" class="form-control" #fileEdit [multiple]="_multiple" (change)="getFileChange($event)">
+</div>
+
+<table class="table" *ngIf="filesTableData.length>0">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">{{'FileExplorer::FileName' | abpLocalization}}</th>
+            <th scope="col">{{'FileExplorer::FileSize' | abpLocalization}}</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of filesTableData;let i =index">
+            <tr>
+                <td>
+                    <fe-file-preview [width]="'80px'" [src]="item.src" [name]="item.name" [type]="item.type" [preview]="true"></fe-file-preview>
+                </td>
+                <th scope="row">
+                    <div>{{item.name}}</div>
+                    <div class="form-text text-danger" *ngIf="item.size > sizeLimit">
+                        {{'FileExplorer::ExceedsMaximumSize' |
+                        abpLocalization:_FileApiService.formatFileSize(sizeLimit)}}</div>
+                </th>
+                <td>{{item.fileSize}}</td>
+                <td>
+                    <button class="btn btn-sm p-0 btn-light " (click.stop)="deleteFileTableItem(i,item)">
+                        <i class="fas fa-trash p-2"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

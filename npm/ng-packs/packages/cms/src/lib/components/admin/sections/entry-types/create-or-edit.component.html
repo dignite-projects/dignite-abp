@@ -1,0 +1,191 @@
+<form class="row g-3 needs-validation" [formGroup]="newEntity" (ngSubmit)="save()">
+    <abp-page [title]="entryTypesId ? ('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)" [toolbar]="true">
+        <div class="create-or-edit-entry-type-page">
+            <div class="card">
+                <button type="submit" style="display: none;" #submitclick></button>
+                <div class="card-body">
+                    <div class="">
+                        <div class="mb-2">
+                            <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
+                            <input type="text" class="form-control" formControlName="displayName"
+                                (blur)="disPlayNameInputBlur($event)" placeholder="" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">{{'Cms::Name' | abpLocalization}}</label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="" />
+                        </div>
+                        <div formArrayName="fieldTabs">
+                            <div class="mb-2">
+                                <label class="form-label">{{'Cms::FieldLayout' | abpLocalization}}</label>
+                                <div class="container">
+                                    <!--  -->
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <ul ngbNav #nav="ngbNav" [(activeId)]="navActive" class="nav nav-tabs">
+                                                <ng-container *ngFor="let item of resultSource; let i = index">
+                                                    <li [ngbNavItem]="i">
+                                                        <button type="button" ngbDropdown ngbNavLink>
+                                                            {{ item.name }}
+                                                            <span class="ms-1" (click.stop)="$event.stopPropagation()"
+                                                                ngbDropdownToggle></span>
+                                                            <div ngbDropdownMenu style="z-index: 999;">
+                                                                <li ngbDropdownItem type="button"
+                                                                    (click.stop)="editFieldTabs(item,i)">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    {{'AbpUi::Edit' | abpLocalization}}
+                                                                </li>
+                                                                <li ngbDropdownItem
+                                                                    *ngIf="resultSource.length !== 1" type="button"
+                                                                    (click.stop)="deleteFieldTabs(i)">
+                                                                    <i class="fas fa-trash"></i>
+                                                                    {{'AbpUi::Delete' | abpLocalization}}
+                                                                </li>
+                                                            </div>
+                                                        </button>
+                                                        <ng-template ngbNavContent>
+                                                            <div class="p-2" ondragover="event.preventDefault();"
+                                                                (drop)="dragToResultSourceDropped(item,i)" style="height: 100%;">
+                                                                <p class="form-text" *ngIf="item.fields.length === 0">
+                                                                    {{'Cms::DragAndDropFieldTips' | abpLocalization}}
+                                                                </p>
+                                                                <ul class="list-group" style="height: 100%;">
+                                                                    <ng-container
+                                                                        *ngFor="let el of item.fields; let iel = index">
+                                                                        <li draggable="true"
+                                                                            (dragstart)="fromResultSourceDragStart(el)"
+                                                                            (drop)="dragToResultSourceItemDropped(iel)"
+                                                                            class="list-group-item d-flex align-items-center justify-content-between py-1" style="position: unset;">
+                                                                            {{ el.displayName }}
+                                                                            <button class="p-0 btn btn-sm btn-light"
+                                                                                (click.stop)="EditFieldModalOpen(el,iel)"
+                                                                                type="button"><i
+                                                                                    class="fas fa-wrench p-sm-1"
+                                                                                    role="button"></i></button>
+                                                                        </li>
+                                                                    </ng-container>
+                                                                </ul>
+                                                                
+                                                            </div>
+                                                        </ng-template>
+                                                    </li>
+                                                </ng-container>
+                                                <li class="nav-item" role="presentation">
+                                                    <button type="button" class="nav-link"
+                                                        (click.stop)="addFieldTabs()">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                        {{'Cms::NewTab' | abpLocalization}}
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <div [ngbNavOutlet]="nav" class="mt-2 bordernNavs p-0"></div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div ngbAccordion #accordion="ngbAccordion"
+                                                ondragover="event.preventDefault();" (drop)="dragToDataSourceDropped()"
+                                                style="min-height: 80px;">
+                                                <ng-container *ngFor="let item of fieldGroupList; let i = index">
+                                                    <div [ngbAccordionItem]="item.name" *ngIf="item.fields.length > 0">
+                                                        <h2 ngbAccordionHeader>
+                                                            <button ngbAccordionButton>{{
+                                                                ('Cms::'+item.name) | abpLocalization }}</button>
+                                                        </h2>
+                                                        <div ngbAccordionCollapse>
+                                                            <div ngbAccordionBody>
+                                                                <ng-template>
+                                                                    <ul class="list-group">
+                                                                        <ng-container
+                                                                            *ngFor="let el of item.fields; let ii = index">
+                                                                            <li draggable="true"
+                                                                                (dragstart)="fromDataSourceDragStart(el,ii,i)"
+                                                                                class="list-group-item">
+                                                                                {{ el.displayName }}
+                                                                            </li>
+                                                                        </ng-container>
+                                                                    </ul>
+                                                                </ng-template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </abp-page>
+
+</form>
+
+<abp-modal [(visible)]="visibleTabsOpen" [busy]="modalBusy" (visibleChange)="VisibleTabsChange($event)">
+    <ng-template #abpHeader>
+        <h3>{{ editFieldTabsSelect ? ('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="editFieldTabsFrom; else loaderRef">
+            <form class="sites-modal-form" [formGroup]="editFieldTabsFrom" (ngSubmit)="editFieldTabsSave()">
+                <button type="submit" #editFieldTabsModalSubmitBtn style="display: none"></button>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::Name' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="" />
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check" [disabled]="!editFieldTabsFrom.valid"
+            (click)="editFieldTabsModalSubmitBtn.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>
+
+
+<abp-modal [(visible)]="visibleEditFieldOpen" [busy]="modalBusy" (visibleChange)="VisibleEditFieldChange($event)">
+    <ng-template #abpHeader>
+        <h3>{{'AbpUi::Edit' | abpLocalization}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="editFieldFrom; else loaderRef">
+            <form class="sites-modal-form" [formGroup]="editFieldFrom" (ngSubmit)="editFieldSave()">
+                <button type="submit" #editFieldModalSubmitBtn style="display: none"></button>
+                <div class="mb-2">
+                    <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="displayName" placeholder="" />
+                </div>
+                <div class="mb-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="true" formControlName="required"
+                            id="required" />
+                        <label class="form-check-label" for="required"> {{'Cms::Required' | abpLocalization}} </label>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="true" formControlName="showOnList"
+                            id="showOnList" />
+                        <label class="form-check-label" for="showOnList"> {{'Cms::ShowOnList' | abpLocalization}} </label>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check" [disabled]="!editFieldFrom.valid"
+            (click)="editFieldModalSubmitBtn.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

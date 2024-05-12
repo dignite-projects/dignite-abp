@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "name": "my-app",
+  "private": true,
+  "dependencies": {
+    "@volo/abp.aspnetcore.mvc.ui.theme.leptonx": "~2.4.7",
+    "@volo/account": "~7.4.5"
+  }
+}

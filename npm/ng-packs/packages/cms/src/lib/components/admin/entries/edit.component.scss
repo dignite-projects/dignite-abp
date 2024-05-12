@@ -1,0 +1,26 @@
+::ng-deep .edit-entry-page {
+    .dignite_page {
+        height: calc(100vh - 32px - 53px - 40px);
+        overflow: auto;
+        background: transparent;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 0.475rem 1.25rem;
+    }
+    .cursor-move{
+        cursor: move;
+    }
+    .bordernNavs{
+        border: var(--bs-border-width) solid var(--lpx-border-color);
+        padding-left: inherit;
+        padding-right: inherit;
+    }
+    .flex-between{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+

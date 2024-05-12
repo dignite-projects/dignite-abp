@@ -1,26 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
-@keyframes donut-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+:root .lpx-theme-dark {
+  --lpx-logo: url('/assets/images/logo/logo-light.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
 }
-.donut {
-  display: inline-block;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #7983ff;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: donut-spin 1.2s linear infinite;
+:root .lpx-theme-dim {
+  --lpx-logo: url('/assets/images/logo/logo-light.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
+}
 
-  &.centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+:root .lpx-theme-light {
+  --lpx-logo: url('/assets/images/logo/logo-dark.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
+}
+
+
+:root{
+  --lpx-theme-light-bg: url('/assets/images/login/login-bg-img-light.svg');
+  --lpx-theme-dim-bg: url('/assets/images/login/login-bg-img-dim.svg');
+  --lpx-theme-dark-bg: url('/assets/images/login/login-bg-img-dark.svg');
 }

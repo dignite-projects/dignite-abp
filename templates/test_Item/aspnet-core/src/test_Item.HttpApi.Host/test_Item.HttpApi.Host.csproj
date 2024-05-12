@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>test_Item</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'test_Item.HttpApi.Host' " />
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.0-rc2.6" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.0.0-rc2.6" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0-rc2.6" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="7.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="7.0.14" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.OpenIddict" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.Impersonation" Version="7.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonX" Version="2.4.*-*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\test_Item.Application\test_Item.Application.csproj" />
+    <ProjectReference Include="..\test_Item.EntityFrameworkCore\test_Item.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\test_Item.HttpApi\test_Item.HttpApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+</Project>

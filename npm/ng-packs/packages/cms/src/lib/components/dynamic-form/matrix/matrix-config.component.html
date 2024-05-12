@@ -1,0 +1,147 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-2">
+            <label class="form-label">{{'Cms::::FormControl:Matrix' | abpLocalization}}</label>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <li class="list-group-item d-flex align-items-center justify-content-between"
+                            aria-current="true">
+                            {{'Cms::MatrixBlockType' | abpLocalization}}
+                            <button class="btn btn-light btn-sm p-0" (click.stop)="addMatrixBlockType()">
+                                <i class="fas fa-plus-circle p-1"></i>
+                            </button>
+                        </li>
+                        <ng-container *ngFor="let item of MatrixBlockTypes.controls;let i =index">
+                            <button type="button" (click.stop)="selectMatrixBlockChange(i)"
+                                class="list-group-item d-flex align-items-center justify-content-between list-group-item-action "
+                                [class.active]="i===selectMatrixBlockIndex">
+                                <div>
+                                    <div>{{item.value.displayName}}</div>
+                                    <div>{{item.value.name}}</div>
+                                </div>
+                                <div ngbDropdown class="d-inline-block">
+                                    <button type="button" class="btn btn-light btn-sm" id="dropdownBasic1"
+                                        style="z-index: 8;" ngbDropdownToggle></button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="z-index: 9;">
+                                        <button ngbDropdownItem
+                                            (click.stop)="EditMatrixBlock(item.value)">{{'AbpUi::Edit' | abpLocalization}}</button>
+                                        <button ngbDropdownItem
+                                            (click.stop)="DeleteMatrixBlock(i)">{{'AbpUi::Delete' | abpLocalization}}</button>
+                                    </div>
+                                </div>
+                            </button>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="list-group" *ngIf="MatrixBlockTypes?.controls.length>0">
+                        <li class="list-group-item d-flex align-items-center justify-content-between"
+                            aria-current="true">
+                            {{'Cms::Fields' | abpLocalization}}
+                            <button class="btn btn-light btn-sm p-0" (click.stop)="addMatrixField()">
+                                <i class="fas fa-plus-circle p-1"></i>
+                            </button>
+                        </li>
+                        <ng-container *ngFor="let item of MatrixBlockTypes.controls;let i =index">
+                            <ng-container *ngIf="i === selectMatrixBlockIndex">
+                                <ng-container *ngFor="let el of item.controls['fields'].controls;let fi =index">
+                                    <button type="button" (click.stop)="selectMatrixFieldChange(i,fi)"
+                                        class="list-group-item d-flex align-items-center justify-content-between list-group-item-action "
+                                        [class.active]="fi===selectMatrixFieldIndex">
+                                        <div>
+                                            <div>{{el.value.displayName}}</div>
+                                            <div>{{el.value.name}}</div>
+                                        </div>
+                                        <button type="button"
+                                            (click.stop)="deleteMatrixField(item.controls['fields'],fi)"
+                                            class="btn btn-sm btn-li">{{'AbpUi::Delete' | abpLocalization}}</button>
+                                    </button>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-md-6" formArrayName="MatrixBlockTypes">
+                    <ng-container *ngFor="let item of MatrixBlockTypes.controls;let i =index">
+                        <div [formGroupName]="i" [hidden]="i !== selectMatrixBlockIndex">
+                            <div formArrayName="fields">
+                                <ng-container *ngFor="let itemf of item.controls['fields'].controls;let fi =index">
+                                    <div [formGroupName]="fi" [hidden]="fi !== selectMatrixFieldIndex">
+                                        <div class="mb-2">
+                                            <label class="form-label"
+                                                for="displayName">{{'Cms::DisplayName' | abpLocalization}}</label>
+                                            <input type="text" class="form-control" formControlName="displayName"
+                                                (blur)="MatrixFieldDisplayNameInputBlur($event)">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label"
+                                                for="name">{{'DigniteAbpForms::FieldName' | abpLocalization}}</label>
+                                            <input type="text" class="form-control" formControlName="name">
+                                            <div class="form-text">
+                                                {{'DigniteAbpForms::FieldNameHelpText' | abpLocalization}}</div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label"
+                                                for="description">{{'Cms::Description' | abpLocalization}}</label>
+                                            <input type="text" class="form-control" formControlName="description">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label"
+                                                for="formControlName">{{'Cms::FieldType' | abpLocalization}}</label>
+                                            <select class="form-select" formControlName="formControlName" (change)="setConfigComponent()">
+                                                <ng-container *ngFor="let itemC of _FieldControlGroup;let i =index">
+                                                    <option [value]="itemC.name">{{itemC.displayName}}</option>
+                                                </ng-container>
+                                            </select>
+                                        </div>
+                                        <ng-container *ngIf="itemf.value.formControlName&&item">
+                                            <df-dynamic [type]="itemf.value.formControlName" [entity]="item"
+                                                [selected]="_selected?_selected['formConfiguration']['MatrixBlockTypes'][i]['fields'][fi]:''"></df-dynamic>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>
+
+
+
+<abp-modal [(visible)]="matrixModalOpen" [busy]="modalBusy" (visibleChange)="matrixModalVisibleChange($event)" >
+    <ng-template #abpHeader>
+        <h3>{{isMatrixEdit?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="matrixModalForm; else loaderRef">
+            <form class="sites-modal-form" #myForm="ngForm" [formGroup]="matrixModalForm"
+                (ngSubmit)="createOrEditSave()">
+                <button type="submit" #matrixModalModalSubmit style="display: none"></button>
+                <div class="mb-2">
+                    <label class="form-label" for="displayName">{{'Cms::DisplayName' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="displayName"
+                        (blur)="displayNameInputBlur($event)">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="name">{{'Cms::Name' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check"
+            (click)="matrixModalModalSubmit.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

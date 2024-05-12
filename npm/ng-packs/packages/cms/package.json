@@ -1,0 +1,19 @@
+{
+  "name": "@dignite-ng/expand.cms",
+  "version": "0.0.19",
+  "peerDependencies": {
+    "@angular/common": "^16.2.0",
+    "@angular/core": "^16.2.0",
+    "pinyin-pro": "^3.19.6",
+    "@dignite-ng/expand.dynamic-form": "^0.0.10",
+    "@dignite-ng/expand.file-explorer": "^0.0.10"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "publishConfig":{
+    "access":"public",
+    "registry":"https://registry.npmjs.org/"
+}
+}

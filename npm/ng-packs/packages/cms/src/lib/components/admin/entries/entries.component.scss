@@ -1,0 +1,80 @@
+::ng-deep.sites-page {
+    .dignite_page {
+        background: transparent;
+    }
+
+    .list-group-flush>.list-group-item:first-child {
+        border-top-width: var(--bs-list-group-border-width);
+    }
+
+    .card-header {
+
+        input {
+            flex: 2 1 auto;
+        }
+
+        .form-select {
+            padding: 0.475rem 3.75rem 0.475rem 1.25rem;
+        }
+    }
+
+    .container-height {
+        height: calc(100vh - 220px);
+    }
+    .morentr{
+        border: 2px  solid transparent;
+    }
+
+    .borderdrag {
+        border: 2px  solid var(--ck-color-selector-column-resizer-hover) !important;
+    }
+    .borderdragtd{
+        background-color: var(--ck-color-selector-column-resizer-hover) !important;
+    }
+
+    .testtr {
+        border-color: transparent;
+        td {
+            padding: 2px;
+        }
+    }
+    .testtr:hover{
+        background-color: transparent;
+    }
+
+
+
+}
+
+.cdk-drag-preview {
+    display: table;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+    border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+::ng-deep.sites-modal-form {
+    .form-control {
+        padding: 0.4rem 1.25rem;
+    }
+}

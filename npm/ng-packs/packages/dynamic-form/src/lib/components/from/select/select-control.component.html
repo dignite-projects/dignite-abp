@@ -1,0 +1,26 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties">
+        <div class="mb-2">
+            <label class="form-label"  *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <ng-container *ngIf="formConfiguration['Select.Multiple']; else elseTemplate">
+                <select class="form-select" multiple formControlName="{{_fields.field.name}}">
+                    <ng-container *ngFor="let item of _fields.field.formConfiguration['Select.Options'];let i =index">
+                        <option [value]="item.value">{{item.text}}</option>
+                    </ng-container>
+                </select>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <select class="form-select" [multiple]="false"
+                    formControlName="{{_fields.field.name}}">
+                    <option>{{formConfiguration['Select.NullText']}}</option>
+                    <ng-container *ngFor="let item of formConfiguration['Select.Options'];let i =index">
+                        <option [value]="item.Value" >{{item.Text}}</option>
+                    </ng-container>
+                </select>
+            </ng-template>
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

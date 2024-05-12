@@ -1,0 +1,14 @@
+<form [formGroup]="Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpDynamicFormsCkEditor::ImagesContainerName' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="Ckeditor.ImagesContainerName">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpDynamicFormsCkEditor::InitialContent' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="Ckeditor.InitialContent">
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>

@@ -1,0 +1,17 @@
+<form [formGroup]="_entity">
+    <div [formGroupName]="_parentFiledName">
+        <div class="mb-2">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <ng-container *ngIf="_fields.field.formConfiguration['TextEdit.Mode'] ===_TextEditMode.SingleLine">
+                <input type="text" class="form-control" formControlName="{{_fields.field.name}}"
+                    [placeholder]="_fields.field.formConfiguration['TextEdit.Placeholder']" />
+            </ng-container>
+            <ng-container *ngIf="_fields.field.formConfiguration['TextEdit.Mode'] === _TextEditMode.MultipleLine">
+                <textarea class="form-control" formControlName="{{_fields.field.name}}"
+                    [placeholder]="_fields.field.formConfiguration['TextEdit.Placeholder']" rows="3"></textarea>
+            </ng-container>
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

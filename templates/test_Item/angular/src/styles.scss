@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root .lpx-theme-dark {
+  --lpx-logo: url('/assets/images/logo/logo-light.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
+}
+
+:root .lpx-theme-light {
+  --lpx-logo: url('/assets/images/logo/logo-dark.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
+}
+:root{
+  --lpx-theme-light-bg: url('/assets/images/login/login-bg-img-light.svg');
+  --lpx-theme-dim-bg: url('/assets/images/login/login-bg-img-dim.svg');
+  --lpx-theme-dark-bg: url('/assets/images/login/login-bg-img-dark.svg');
+}

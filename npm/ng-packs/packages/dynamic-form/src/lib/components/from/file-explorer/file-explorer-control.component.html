@@ -1,0 +1,11 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties">
+        <div class="mb-2">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <fe-file-picker [selectFormFile]="selectedFileGroup" [multiple]="formConfiguration['FileExplorer.UploadFileMultiple']"
+                (selectedFileChange)="_selectedFileChange($event)"></fe-file-picker>
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

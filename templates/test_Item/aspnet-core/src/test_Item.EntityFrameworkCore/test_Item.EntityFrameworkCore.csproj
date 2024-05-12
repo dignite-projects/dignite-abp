@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>test_Item</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\test_Item.Domain\test_Item.Domain.csproj" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.OpenIddict.Pro.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Identity.Pro.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.LanguageManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Saas.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.TextTemplateManagement.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Gdpr.EntityFrameworkCore" Version="7.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>compile; contentFiles; build; buildMultitargeting; buildTransitive; analyzers; native</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,106 @@
+<abp-page [title]="'Cms::Entries' | abpLocalization" [toolbar]="true">
+    <abp-page-toolbar-container *ngIf="entryTypeList.length < 1" class="col "></abp-page-toolbar-container>
+    <abp-page-toolbar-container *ngIf="entryTypeList.length > 1" class="col ">
+        <div class="row justify-content-end mx-0 gap-2" *abpPermission="'CmsAdmin.Entry.Create'">
+            <div class="col-auto px-0 pt-0">
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-primary btn-sm ms-2" id="dropdownBasic1" ngbDropdownToggle>
+                        <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::New' | abpLocalization}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <ng-container *ngFor="let item of entryTypeList">
+                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}">{{item.displayName}}</button>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </abp-page-toolbar-container>
+    <div id="sites-page" class="sites-page">
+        <div class="card">
+            <div class="card-body px-2 py-sm-2 border-bottom">
+                <div class="input-group" [formGroup]="filtersForm">
+                    <select class="form-select col-auto" formControlName="siteId"  (change)="siteIdChange()">
+                        <ng-container *ngFor="let item of siteList">
+                            <option [value]="item.id">{{item.displayName}}</option>
+                        </ng-container>
+                    </select>
+                    <select class="form-select col-auto" formControlName="sectionId"  (change)="sectionIdChange()">
+                        <ng-container *ngFor="let item of SiteOfSectionList">
+                            <option [value]="item.id">{{item.displayName}}</option>
+                        </ng-container>
+                    </select>
+                    <select class="form-select col-auto" formControlName="culture"  (change)="cultureChange()">
+                        <ng-container *ngFor="let item of sectionLanguagesList">
+                            <option [value]="item.cultureName">{{item.displayName}}</option>
+                        </ng-container>
+                    </select>
+                    <input type="text" class="form-control" formControlName="filter"
+                        [placeholder]="'AbpUi::Search' | abpLocalization" />
+                    <button class="btn btn-primary px-3" type="button" id="button-addon2" (click)="resetData()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-0">
+
+            <div class="card-body p-0">
+                <div class="table-responsive table-fixed-header">
+                        <ngx-datatable class="material container-height" [rows]="data.items" [list]="list"
+                            [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                            [scrollbarV]="true" [virtualization]="false" [externalPaging]="true"
+                            [count]="data.totalCount">
+                            <ngx-datatable-column [name]="'Cms::EntryType' | abpLocalization" prop="entryTypeId">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <ng-container *ngFor="let item of entryTypeList">
+                                        <ng-container *ngIf="item.id === value">{{item.displayName}}</ng-container>
+                                    </ng-container>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ value }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{ value }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <ng-container *ngFor="let item of _entryStatusOptions">
+                                        <ng-container *ngIf="item.value=== value">{{ 'Cms::Enum:EntryStatus:'+item.key |
+                                            abpLocalization }}</ng-container>
+                                    </ng-container>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column [name]="'Cms::PublishTime' | abpLocalization" prop="publishTime">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    {{value | date: 'YYYY/MM/dd HH:m:s' }}
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column [sortable]="false">
+                                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                    <div ngbDropdown container="body">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
+                                            {{'AbpUi::Actions' | abpLocalization}}
+                                        </button>
+                                        <div ngbDropdownMenu>
+                                            <button ngbDropdownItem
+                                                routerLink="/cms/admin/entries/{{row.id}}/edit">{{'AbpUi::Edit' |
+                                                abpLocalization}}</button>
+                                            <button ngbDropdownItem (click)="deletefield(row)">{{'AbpUi::Delete' |
+                                                abpLocalization}}</button>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</abp-page>

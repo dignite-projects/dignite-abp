@@ -1,0 +1,15 @@
+<form [formGroup]="_entity">
+    <div [formGroupName]="_parentFiledName">
+        <div class="mb-2">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <input type="number" class="form-control" formControlName="{{_fields.field.name}}"
+                [placeholder]="_fields.field.formConfiguration['NumericEditField.Placeholder']||''"
+                [min]="_fields.field.formConfiguration['NumericEditField.Min']"
+                [max]="_fields.field.formConfiguration['NumericEditField.Max']"
+                [step]="_fields.field.formConfiguration['NumericEditField.Step']" (input)="inputchange($event)" />
+            <div class="form-text" *ngIf="_fields.field.description">{{_fields.field.description}}</div>
+        </div>
+
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

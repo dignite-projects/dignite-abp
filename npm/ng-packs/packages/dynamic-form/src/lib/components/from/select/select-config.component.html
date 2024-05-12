@@ -1,0 +1,59 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpForms::SelectListItem' | abpLocalization}}</label>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{'DigniteAbpForms::SelectListItemText' | abpLocalization}}</th>
+                        <th scope="col">{{'DigniteAbpForms::SelectListItemValue' | abpLocalization}}</th>
+                        <th scope="col">{{'DigniteAbpForms::SelectListItemValue' | abpLocalization}}</th>
+                        <th scope="col" style="width: 1%;">
+                            <button class="btn btn-light btn-sm" (click.stop)="addSelectOptions()">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="Select.Options">
+                    <ng-container *ngFor="let item of SelectOptions.controls;let i=index">
+                        <tr [formGroupName]="i">
+                            <td><input type="text" class="form-control" formControlName="Text" (change)="textChange($event,i)"></td>
+                            <td><input type="text" class="form-control" formControlName="Value"></td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox"  formControlName="Selected" id="selected">
+                                </div>
+                            </td>
+                            <td scope="row" style="width: 1%;">
+                                <button class="btn btn-light btn-sm" (click.stop)="deleteSelectOptions(i)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </td>
+                        </tr> 
+                    </ng-container>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="mb-2">
+            <label class="form-label">{{'DigniteAbpForms::NullText' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="Select.NullText">
+        </div>
+        <div class="mb-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" formControlName="Select.Multiple"
+                    id="Multiple">
+                <label class="form-check-label" for="Multiple">
+                    {{'DigniteAbpForms::Multiple' | abpLocalization}}
+                </label>
+            </div>
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>

@@ -1,11 +1,9 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as DescriptorService from '../../../proxy/dignite/file-explorer/directories';
-import * as FileService from '../../../proxy/dignite/file-explorer/files';
 
 
 @Component({
-  selector: 'df-file-explorer-control',
+  selector: 'fe-file-explorer-control',
   templateUrl: './file-explorer-control.component.html',
   styleUrls: ['./file-explorer-control.component.scss']
 })

@@ -19,9 +19,7 @@ export class CreateOrUpdateEntryInputBase {
     versionNotes:any=[null]
     /**版本 */
     initialVersionId: any = [null]
-
     extraProperties: FormGroup | undefined = new FormGroup({})
-
     constructor(data?: CreateOrUpdateEntryInputBase) {
         if (data) {
             for (const key in data) {
@@ -30,7 +28,6 @@ export class CreateOrUpdateEntryInputBase {
                 }
             }
         }
-
     }
 }
 

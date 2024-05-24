@@ -1,8 +1,7 @@
-/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { ABP, ConfigStateService, LIST_QUERY_DEBOUNCE_TIME, ListService, LocalizationService, PagedResultDto } from '@abp/ng.core';
 import { ToasterService, ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
-import { Component, ViewChild, OnInit, ViewContainerRef, ElementRef } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
+import { Component, ViewChild, OnInit,  ElementRef } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { GetSitesInput, SiteDto, SiteAdminService } from '../../../proxy/admin/sites';
 import { ColumnMode } from "@swimlane/ngx-datatable";
 import { finalize } from 'rxjs/operators';
@@ -17,11 +16,7 @@ import { Observable } from 'rxjs';
   templateUrl: './sites.component.html',
   styleUrls: ['./sites.component.scss'],
   providers: [
-      // [Required]
       ListService,
-      // [Optional]
-      // Provide this token if you want a different debounce time.
-      // Default is 300. Cannot be 0. Any value below 100 is not recommended.
       { provide: LIST_QUERY_DEBOUNCE_TIME, useValue: 500 },
     {
       provide: EXTENSIONS_IDENTIFIER,
@@ -39,59 +34,39 @@ export class SitesComponent implements OnInit {
     private configState: ConfigStateService,
     private _LocalizationService: LocalizationService,
     private _CmsApiService: CmsApiService,
-  ) {
-  }
-
-
-
-
-
+  ) {}
   /**创建站点模态框状态 */
   createSitesOpen: boolean = false
-
   /**用于确定模态的繁忙状态是否为真 */
   modalBusy: boolean = false
   /**创建站点表单 */
   createOrEditForm: FormGroup | undefined;
-
   get languagesInput() {
     return this.createOrEditForm.get('languages').value
   }
-
   /**语言列表 */
   languages: any[]
-
   /**站点给定的表单值 */
   selected: any
-
   /**表单控件模板-动态赋值表单控件 */
   @ViewChild('createModalSubmit', { static: false }) createModalSubmit: ElementRef;
-
-
   ColumnMode = ColumnMode;
   data: PagedResultDto<SiteDto> = {
     items: [],
     totalCount: 0,
   };
-
   filters = {} as GetSitesInput;
-
-  
   ngOnInit(): void {
     this.hookToQuery()
   }
-
   hookToQuery() {
     const getData = (query: ABP.PageQueryParams) => this._SiteAdminService.getList({
       ...query,
       ...this.filters,
     });
-
     const setData = (list: PagedResultDto<SiteDto>) => (this.data = list);
     this.list.hookToQuery(getData).subscribe(setData);
   }
-
-
   /**删除字段 */
   deletefield(row: any) {
     this.confirmation.warn(
@@ -105,10 +80,8 @@ export class SitesComponent implements OnInit {
           this.list.get()
         })
       }
-
     });
   }
-
   /**创建站点模态框状态改变 */
   createGroupVisibleChange(event) {
     if (!event) {
@@ -116,7 +89,6 @@ export class SitesComponent implements OnInit {
       return
     }
   }
-
   /**选择语言改变 */
   languagesChange(event) {
     let checked = event.target.checked
@@ -147,12 +119,12 @@ export class SitesComponent implements OnInit {
   }
   /**表单保存提交 */
   createOrEditSave() {
+    if (!this.createOrEditForm.valid) return
     if (this.selected) {
       return this.EditSave()
     }
     this.createSave()
   }
-
   /**创建站点保存 */
   createSave() {
     let input = this.createOrEditForm.value
@@ -178,9 +150,6 @@ export class SitesComponent implements OnInit {
       this.list.get()
     })
   }
-
-
-
   /**创建站点按钮 */
   createSitesBtn() {
     this.createSitesOpen = true
@@ -193,9 +162,6 @@ export class SitesComponent implements OnInit {
     })
     this.setFromLangguages()
   }
-
-
-
   /**编辑站点按钮 */
   EditSitesBtn(rows) {
     this.createSitesOpen = true
@@ -211,7 +177,6 @@ export class SitesComponent implements OnInit {
       this.setFromLangguages()
     })
   }
-
   /**设置字段控件异步验证 */
   setAsyncValidatorsFn() {
     this.createOrEditForm.setControl('name', new FormControl(this.nameInput.value || '', {
@@ -220,9 +185,6 @@ export class SitesComponent implements OnInit {
       updateOn: 'blur'
     }))
   }
-
-
-
   /**更新语言和默认状态 */
   updateLanguages(siteLanguages) {
     this.languages.forEach(language => {
@@ -233,15 +195,12 @@ export class SitesComponent implements OnInit {
       }
     });
   }
-
-
   get nameInput() {
     return this.createOrEditForm.get('name')
   }
   get hostInput() {
     return this.createOrEditForm.get('host')
   }
-
   /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event) {
     let value = event.target.value
@@ -250,7 +209,6 @@ export class SitesComponent implements OnInit {
     if (nameInput.value) return
     nameInput.patchValue(pinyin)
   }
-
   /**name定义自定义异步验证 */
   nameRepetitionAsyncValidator() {
     return (ctrl: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
@@ -289,5 +247,4 @@ export class SitesComponent implements OnInit {
       });
     };
   }
-
 }

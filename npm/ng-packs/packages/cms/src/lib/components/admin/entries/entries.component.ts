@@ -131,8 +131,7 @@ export class EntriesComponent implements OnInit {
   /**获取版块下的语言列表 */
   getSectionLanguagesList() {
     return new Promise((resolve, rejects) => {
-      // 板块列表 */
-      let SiteOfSectionList = this.SiteOfSectionList
+  
       //获取所有语言 */
       let languages = this.configState.getDeep('localization.languages')
       //当前选择的板块id

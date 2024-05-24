@@ -58,7 +58,7 @@
             </ngx-datatable-column>
             <ngx-datatable-column [name]="'FileExplorer::CreationTime' | abpLocalization" prop="creationTime" [flexGrow]="2">
               <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                {{ value | date : 'YYYY/MM/dd HH:m:s' }}
+                {{ value | date : 'YYYY/MM/dd HH:mm:s' }}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [flexGrow]="1">

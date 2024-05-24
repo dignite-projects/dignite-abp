@@ -65,12 +65,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'file',
-    loadChildren: () => import('@dignite-ng/expand.file-explorer').then(m => m.FileExplorerModule),
-  },
-  {
-    path: 'cms',
-    loadChildren: () => import('@dignite-ng/expand.cms').then(m => m.CmsModule.forLazy()),
+    path: 'dynamic-form-test',
+    loadChildren: () =>
+      import('./dynamic-form-test/dynamic-form-test.module').then(
+        m => m.DynamicFormTestModule,
+      ),
   },
 ];
 

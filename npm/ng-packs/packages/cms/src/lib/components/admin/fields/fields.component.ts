@@ -1,7 +1,7 @@
 
 import { ABP, LIST_QUERY_DEBOUNCE_TIME, ListService, LocalizationService, PagedResultDto } from '@abp/ng.core';
 import { ToasterService, ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FieldAdminService, FieldDto, GetFieldsInput } from '../../../proxy/admin/fields';
 import { ColumnMode } from "@swimlane/ngx-datatable";

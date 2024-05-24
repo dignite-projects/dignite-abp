@@ -1,0 +1,18 @@
+<form class="row g-3 needs-validation" [formGroup]="newEntity" (ngSubmit)="save()">
+    <abp-page [title]="'表单控件'" [toolbar]="true">
+        <button type="submit" style="display: none;" #submitclick></button>
+        <div class="card  p-2">
+            <div class="mb-2" *ngIf="fieldDetails&&newEntity&&systemculture">
+                <df-dynamic [entity]="newEntity" [fields]="{field:fieldDetails,displayName:fieldDetails.displayName}" [selected]="fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : ''"
+                    [parentFiledName]="'extraProperties'" [culture]="systemculture"></df-dynamic>
+                    --{{fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : ''}}**
+            </div>
+        </div>
+<!-- {{fieldDetails?.extraProperties[fieldDetails.name]}} -->
+        <!-- [culture]="cultureinput.value" -->
+        <!-- fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : '' -->
+
+
+
+    </abp-page>
+</form>

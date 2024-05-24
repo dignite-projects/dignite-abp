@@ -1,0 +1,12 @@
+<form class="row g-3 needs-validation" [formGroup]="newEntity" (ngSubmit)="save()">
+    <abp-page [title]="'Cms::EditField' | abpLocalization" [toolbar]="true">
+        <div class="create-field-page">
+            <button type="submit" style="display: none;" #submitclick></button>
+            <div class="card">
+                <div class="card-body">
+                    <app-create-or-edit-field [Entity]="newEntity" [selected]="fieldDetails"></app-create-or-edit-field>
+                </div>
+            </div>
+        </div>
+    </abp-page>
+</form>

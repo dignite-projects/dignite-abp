@@ -1,6 +1,7 @@
-import { Component, ElementRef, Input, Renderer2, RendererFactory2, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Component, ElementRef, Inject, Input, Renderer2, ViewChild, inject, } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isBase64UploadAdapter } from './ckEditorUpload';
+import { RestService } from '@abp/ng.core';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh.js';
 import '@ckeditor/ckeditor5-build-classic/build/translations/de.js';
@@ -18,96 +19,128 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/sk';
 import '@ckeditor/ckeditor5-build-classic/build/translations/ja.js';
 import '@ckeditor/ckeditor5-build-classic/build/translations/es.js';
 import '@ckeditor/ckeditor5-build-classic/build/translations/vi.js';
-import { isBase64UploadAdapter } from './ckEditorUpload';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ConfigStateService, CoreModule, RestService } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
-
-
+import { DOCUMENT } from '@angular/common';
+import { ConfigStateService } from '@abp/ng.core';
+declare var ClassicEditor: any;
 @Component({
   selector: 'df-ck-editor-control',
   templateUrl: './ck-editor-control.component.html',
   styleUrls: ['./ck-editor-control.component.scss'],
-  standalone: true,
-  imports: [
-    CKEditorModule,
-    FormsModule,
-    CoreModule,
-    ThemeSharedModule,
-    ReactiveFormsModule,
-  ]
 })
 export class CkEditorControlComponent {
 
-  languagesMap={
-    ar:'ar',
-    cs:'cs',
-    en:'en',
-    hi:'hi',
-    fi:'fi',
-    hu:'hu',
-    fr:'fr',
-    it:'it',
-    'en-GB':'en-gb',
-    'pt-BR':'pt-br',
-    'zh-Hant':'zh',
-    'zh-Hans':'zh-cn',
-    tr:'tr',
-    sk:'sk',
-    'de-DE':'de',
-    es:'es',
-    ja:'ja',
-    vi:'vi',
+ 
+  private _restService: RestService = inject(RestService)
+  private config: ConfigStateService = inject(ConfigStateService)
+  languagesMap = {
+    ar: 'ar',
+    cs: 'cs',
+    en: 'en',
+    hi: 'hi',
+    fi: 'fi',
+    hu: 'hu',
+    fr: 'fr',
+    it: 'it',
+    'en-GB': 'en-gb',
+    'pt-BR': 'pt-br',
+    'zh-Hant': 'zh',
+    'zh-Hans': 'zh-cn',
+    tr: 'tr',
+    sk: 'sk',
+    'de-DE': 'de',
+    es: 'es',
+    ja: 'ja',
+    vi: 'vi',
   }
 
-
+  @ViewChild('ckeditor', { static: true }) ckeditor: ElementRef | undefined;
+  public Editor: any;
   constructor(
-    private fb: FormBuilder,
-    private restService: RestService,
-    private config: ConfigStateService
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
+    this.addScript('https://cdn.ckeditor.com/ckeditor5/41.4.1/classic/ckeditor.js')
+  }
+
+  addScript(url: string) {
+    const script = this.renderer.createElement('script');
+    this.renderer.setAttribute(script, 'type', 'text/javascript');
+    this.renderer.setAttribute(script, 'src', url);
+    script.onload = () => {
+      this._init_Editor();
+    }
+    this.renderer.appendChild(this.document.head, script);
+  }
+
+  ClassicEditor_view:any
+  // 初始化富文本
+  _init_Editor() {
     const currentCulture = this.config.getOne("localization")?.currentCulture?.name;
-    this.editorConfig={
+  
+    ClassicEditor.create(this.ckeditor?.nativeElement, {
       language: this.languagesMap[currentCulture],
-      placeholder: '',
       toolbar: {
-        removeItems: ['mediaEmbed'],
+        items: [
+          'heading', '|', 'Alignment', 'FontSize', 'FontColor', 'FontFamily', 'Highlight', '|',
+          'bold', 'italic',
+          'link', '|',
+          'bulletedList', 'numberedList',
+          'insertTable', '|',
+          'uploadImage', 'ImageResize', '|',
+          'undo', 'redo'
+        ],
+        viewportTopOffset: 30,
         shouldNotGroupWhenFull: true
       },
-      styles: [
-        'alignCenter',
-        'alignLeft',
-        'alignRight'
-      ],
       image: {
         toolbar: [
-          'imageTextAlternative', 'toggleImageCaption', '|',
-          'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', 'imageStyle:side', '|',
-          , 'resizeImage'
+          'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+          '|',
+          'resizeImage',
+          '|',
+          'imageTextAlternative'
         ],
-        insert: {
-          integrations: [
-            'insertImageViaUrl'
-          ]
+        styles: [
+          'alignLeft', 'alignCenter', 'alignRight'
+        ],
+        resizeOptions: [{
+          name: 'resizeImage:original',
+          label: 'Original',
+          value: null
+        },
+        {
+          name: 'resizeImage:25',
+          label: '25%',
+          value: '25'
+        },
+        {
+          name: 'resizeImage:50',
+          label: '50%',
+          value: '50'
+        },
+        {
+          name: 'resizeImage:75',
+          label: '75%',
+          value: '75'
         }
-  
-      }
-    }
-   }
-  public Editor = ClassicEditor;
+        ],
+      },
 
-  /**富文本配置 */
-  editorConfig = {}
-  //**富文本加载完成 */
-  public onReady(editor: any): void {
-    let that = this
-    editor.plugins.get('FileRepository').createUploadAdapter = function (loader: any) {
-      return new isBase64UploadAdapter(loader, that.imagesContainerName,that.restService);
-    };
+    }).then((editor: any) => {
+      this.Editor = editor;
+      this.dataLoaded()
+      var _this = this
+      editor.plugins.get('FileRepository').createUploadAdapter = function (loader: any) {
+        return new isBase64UploadAdapter(loader, _this.imagesContainerName, _this._restService);
+      };
+      editor.model.document.on('change:data', () => {
+        const data = editor.getData();
+        this.setckeditorInput(data)
+      });
+    }).catch((err: any) => {
+      console.log(err)
+    });
   }
-  /**富文本内容改变 */
-  public onChange({ editor }: any) {
-  }
 
 
 
@@ -115,15 +148,7 @@ export class CkEditorControlComponent {
 
 
 
-
-
-
-
-
-
-
-
-
+  private fb = inject(FormBuilder)
 
   /**表单实体 */
   _entity: FormGroup | undefined
@@ -157,25 +182,40 @@ export class CkEditorControlComponent {
   }
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
 
-
   get extraProperties() {
     return this._entity.get('extraProperties') as FormGroup
   }
+  get ckeditorInput() {
+    return this.extraProperties.get(this._fields.field.name) as FormGroup
+  }
   /**数据加载完成 */
   async dataLoaded() {
-    if (this._fields && this._entity) {
+    if (this._fields && this._entity && this.Editor) {
       await this.AfterInit()
+      let fillingIn=this._selected||this._fields.field.formConfiguration['Ckeditor.InitialContent']
+      this.Editor.setData(fillingIn);
+      this.setckeditorInput(fillingIn)
+
       this.submitclick.nativeElement.click();
     }
   }
+
+  invalidfeedback = false
+  //设置值
+  setckeditorInput(val) {
+    this.invalidfeedback = true
+    this.ckeditorInput.patchValue(val)
+  }
+
   /**图片容器名称 */
-  imagesContainerName: any
+  imagesContainerName: any = 111
   AfterInit() {
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve) => {
       let ValidatorsArray = []
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required)
       }
+
       let newControl = this.fb.control(this._selected ? this._selected : this._fields.field.formConfiguration['Ckeditor.InitialContent'], ValidatorsArray)
       this.extraProperties.setControl(this._fields.field.name, newControl)
       this.imagesContainerName = this._fields.field.formConfiguration['Ckeditor.ImagesContainerName']

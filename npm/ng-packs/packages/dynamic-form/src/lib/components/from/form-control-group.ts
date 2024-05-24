@@ -1,9 +1,7 @@
-// import { TableConfigComponent, TableControlComponent, MatrixConfigComponent, MatrixControlComponent } from "@dignite-ng/expand.cms";
 import  { FieldControlGroupInterfaces } from "../../interfaces";
 import { CkEditorConfigComponent, CkEditorControlComponent } from "./ck-editor";
 import { DateEditConfigComponent } from "./date-edit/date-edit-config.component";
 import { DateEditControlComponent } from "./date-edit/date-edit-control.component";
-import { FileExplorerConfigComponent, FileExplorerControlComponent } from "./file-explorer";
 import { NumbericEditConfigComponent } from "./numeric-edit/numberic-edit-config.component";
 import { NumbericEditControlComponent } from "./numeric-edit/numberic-edit-control.component";
 import { SelectConfigComponent, SelectControlComponent } from "./select";
@@ -46,12 +44,6 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
         // fieldViewComponent:TextBoxViewComponent,
     },
      {
-        displayName: '文件管理',
-        name: 'FileExplorer',
-        fieldConfigComponent: FileExplorerConfigComponent,
-        fieldComponent: FileExplorerControlComponent,
-        // fieldViewComponent:TextBoxViewComponent,
-    }, {
         displayName: 'CkEditor',
         name: 'CkEditor',
         fieldConfigComponent: CkEditorConfigComponent,
@@ -59,7 +51,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
         // fieldViewComponent:TextBoxViewComponent,
     },
 ];
-export function getExcludeAssignControl(typeName) {
+export function getExcludeAssignControl(typeName?) {
     // return FieldControlGroup.filter(el => el.name !== typeName)
     return FieldControlGroup
 }

@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef, ChangeDetectionStrategy ,ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { AbstractControl, ValidationErrors } from '@angular/forms';  
+import { Component, ElementRef, Input, ViewChild,ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateEditInterfaces } from '../../../enums/date-edit-interfaces';
   
 @Component({

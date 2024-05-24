@@ -1,8 +1,7 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild,  inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EntryAdminService } from '../../../proxy/admin/entries';
 import { EntryStatus } from '../../../proxy/entries/entry-status.enum';
-import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({

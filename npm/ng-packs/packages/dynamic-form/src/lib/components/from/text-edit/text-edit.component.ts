@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TextEditMode } from '../../../enums/text-edit-mode';
 import { TextEditConfig } from './text-edit-config';
@@ -13,7 +13,6 @@ export class TextEditComponent {
   constructor(
     private fb: FormBuilder,
   ) {
-
   }
 
   _TextEditMode = TextEditMode

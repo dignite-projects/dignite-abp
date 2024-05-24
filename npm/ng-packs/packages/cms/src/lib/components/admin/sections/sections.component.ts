@@ -61,7 +61,6 @@ export class SectionsComponent implements OnInit {
     })
   }
 
-
   /**版块列表 */
   siteList: any[] = []
   /*** */
@@ -220,8 +219,6 @@ export class SectionsComponent implements OnInit {
       }
     });
   }
-
-
 
   /**name表单控件 */
   get displayNameInput() {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FieldGroupAdminService } from '../proxy/admin/fields/field-group-admin.service';
 import { FieldGroupDto } from '../proxy/admin/fields/models';
-import { finalize } from 'rxjs/operators';
 import { FormAdminService } from '../proxy/admin/dynamic-forms';
 
 @Injectable({

@@ -1,4 +1,4 @@
-import {Component, Inject, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import {Component,Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import type{ FieldControlGroupInterfaces } from '../../interfaces';
 import { FieldControlGroup } from '../from';
@@ -16,7 +16,6 @@ export class DynamicComponent {
   @Input()
   public set selected(v: any) {
     this._selected = v || '';
-   
     if(v) this.dataLoaded(1)
   }
 
@@ -71,8 +70,6 @@ export class DynamicComponent {
 
   /**表单控件组 */
   _fieldControlGroup: FieldControlGroupInterfaces[] = FieldControlGroup
-
-
   /**数据加载完成 */
   dataLoaded(val) {
     if (this._entity) {
@@ -80,7 +77,7 @@ export class DynamicComponent {
         let fieldControlItem = this._fieldControlGroup.find(el => el.name === this._type)
         this.loadfieldConfigComponent(fieldControlItem)
       }
-      if (this._fields && this._parentFiledName) {
+      if (this._fields && this._parentFiledName&&this._culture) {
         /**表单控件组中的项 */
         let fieldControlItem = this._fieldControlGroup.find(el => el.name === this._fields.field.formControlName)
         this.loadfieldComponent(fieldControlItem)
@@ -106,6 +103,7 @@ export class DynamicComponent {
   /**加载动态表单组件 */
   loadfieldComponent(FieldControlItem?: FieldControlGroupInterfaces) {
     // this.FormControlRef.clear
+   
     //清空了容器中的所有组件
     this.FormComponentsRef?.clear();
     if (!FieldControlItem || !FieldControlItem.fieldComponent) return

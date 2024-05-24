@@ -13,7 +13,7 @@
                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}">{{item.displayName}}</button>
                         </ng-container>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </abp-page-toolbar-container>
@@ -25,12 +25,12 @@
                         <ng-container *ngFor="let item of siteList">
                             <option [value]="item.id">{{item.displayName}}</option>
                         </ng-container>
-                    </select>
+                    </select> 
                     <select class="form-select col-auto" formControlName="sectionId"  (change)="sectionIdChange()">
                         <ng-container *ngFor="let item of SiteOfSectionList">
                             <option [value]="item.id">{{item.displayName}}</option>
                         </ng-container>
-                    </select>
+                    </select> 
                     <select class="form-select col-auto" formControlName="culture"  (change)="cultureChange()">
                         <ng-container *ngFor="let item of sectionLanguagesList">
                             <option [value]="item.cultureName">{{item.displayName}}</option>
@@ -45,7 +45,6 @@
             </div>
         </div>
         <div class="card mb-0">
-
             <div class="card-body p-0">
                 <div class="table-responsive table-fixed-header">
                         <ngx-datatable class="material container-height" [rows]="data.items" [list]="list"
@@ -79,7 +78,7 @@
                             </ngx-datatable-column>
                             <ngx-datatable-column [name]="'Cms::PublishTime' | abpLocalization" prop="publishTime">
                                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                    {{value | date: 'YYYY/MM/dd HH:m:s' }}
+                                    {{value | date: 'YYYY/MM/dd HH:mm:s' }}
                                 </ng-template>
                             </ngx-datatable-column>
                             <ngx-datatable-column [sortable]="false">

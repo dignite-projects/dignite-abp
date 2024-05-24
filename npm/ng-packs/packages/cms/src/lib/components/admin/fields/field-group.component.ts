@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FieldGroupAdminService, FieldGroupDto } from '../../../proxy/admin/fields';
+import { FieldGroupAdminService } from '../../../proxy/admin/fields';
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
-import { finalize, switchMap, tap } from 'rxjs/operators';
+import { finalize} from 'rxjs/operators';
 import { FieldAbstractsService } from '../../../services/field-abstracts.service';
 import { LocalizationService } from '@abp/ng.core';
 

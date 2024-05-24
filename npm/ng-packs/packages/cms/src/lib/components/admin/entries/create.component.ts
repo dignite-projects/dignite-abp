@@ -8,7 +8,6 @@ import { LocalizationService } from '@abp/ng.core';
 import { EntryAdminService } from '../../../proxy/admin/entries';
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.theme.shared/extensions';
 import { ECmsComponent } from '../../../enums/ecms-component';
-import { CmsApiService } from '../../../services';
 import { UpdateListService } from '../../../services/update-list.service';
 
 
@@ -77,6 +76,8 @@ export class CreateComponent implements OnInit {
     let input = this.newEntity.value
     input.publishTime = new Date(new Date(input.publishTime).getTime() + (8 * 60 * 60 * 1000)).toISOString()
     input.culture=this.newEntity.get('culture').value
+    console.log(input,'保存',this.newEntity);
+    
     if (!this.newEntity.valid) return
     this._EntryAdminService.create(input).subscribe(res => {
       this.toaster.success(this._LocalizationService.instant(`CmsKit::SavedSuccessfully`));

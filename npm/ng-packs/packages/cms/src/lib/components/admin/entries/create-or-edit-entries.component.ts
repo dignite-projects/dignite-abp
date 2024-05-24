@@ -1,14 +1,13 @@
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { AfterContentInit, Component, Input, QueryList, ViewChild, ViewChildren, ViewContainerRef, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AfterContentInit, Component, Input, QueryList,  ViewChildren, ViewContainerRef } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {Router } from '@angular/router';
 import { EntryAdminService } from '../../../proxy/admin/entries';
 import { SectionAdminService } from '../../../proxy/admin/sections';
 import { Observable } from 'rxjs';
 import { DatePipe, Location } from '@angular/common';
 import { CmsApiService } from '../../../services';
-import { CreateDynamicComponentsService } from '@dignite-ng/expand.dynamic-form';
 
 @Component({
   selector: 'cms-create-or-edit-entries',
@@ -144,7 +143,6 @@ export class CreateOrEditEntriesComponent implements AfterContentInit {
   /**表单控件模板-动态表单配置组件 */
   @ViewChildren('FormDynamicontrolRef', { read: ViewContainerRef }) FormDynamicontrolRef: QueryList<ViewContainerRef>;
 
-  // private _CreateDynamicComponentsService = inject(CreateDynamicComponentsService)
 
 
 

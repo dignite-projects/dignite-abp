@@ -23,13 +23,8 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { OpeniddictproConfigModule } from '@volo/abp.ng.openiddictpro/config';
 import { FeatureManagementModule } from '@abp/ng.feature-management';
 import { AbpOAuthModule } from '@abp/ng.oauth';
-import { FileConfigModule } from '@dignite-ng/expand.file-explorer/config';
 import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
-import { CmsModule } from '@dignite-ng/expand.cms';
-
+import { dynamic_form_ROUTE_PROVIDER } from './dynamic-form-test/route.provider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -60,20 +55,14 @@ import { CmsModule } from '@dignite-ng/expand.cms';
       privacyPolicyUrl: 'gdpr-cookie-consent/privacy',
       cookiePolicyUrl: 'gdpr-cookie-consent/cookie',
     }),
-    FileConfigModule.forRoot(),
-    DynamicFormModule.forRoot({
-      // cmsFieldControlGroup: FieldControlGroup
-    }),
-    CmsConfigModule.forRoot(),
-    CmsModule,
+    DynamicFormModule.forRoot(),
+ 
 
   
     
   ],
   providers: [APP_ROUTE_PROVIDER,
-    
-   
-
+    dynamic_form_ROUTE_PROVIDER
   ],
   bootstrap: [AppComponent],
 })

@@ -32,7 +32,6 @@ export class EditComponent implements OnInit {
     private _EntryAdminService: EntryAdminService,
     private router: Router,
     private _LocalizationService: LocalizationService,
-    private _CmsApiService: CmsApiService,
   ) { }
   private fb=inject(FormBuilder)
   private _updateListService=inject(UpdateListService)

@@ -1,5 +1,5 @@
-import { Injectable, NgModule, inject } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {  NgModule} from '@angular/core';
+import { Routes, RouterModule} from '@angular/router';
 import {
   CreateComponent,
   CreateFieldComponent,
@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     resolve: [CmsExtensionsResolver, appentStyle],
     children: [
-      {
+      { 
         path: 'entries',
 
         children: [
@@ -105,5 +105,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class CmsRoutingModule {
-
 }

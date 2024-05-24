@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NumbericEditConfig } from './numberic-edit-config';
 
 @Component({

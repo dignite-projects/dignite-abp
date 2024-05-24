@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import { CreateOrUpdateFieldInputBase } from './create-or-update-field-input-base';
+import { Component, Input,  ViewChild, ViewContainerRef } from '@angular/core';
 import { FieldAbstractsService } from '../../../services/field-abstracts.service';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CmsApiService } from '../../../services/cms-api.service';
 import { Observable } from 'rxjs';
 import { FieldAdminService } from '../../../proxy/admin/fields';
 import { LocalizationService } from '@abp/ng.core';
-import { CreateDynamicComponentsService } from '@dignite-ng/expand.dynamic-form';
 @Component({
   selector: 'cms-create-or-edit-field',
   templateUrl: './create-or-edit-field.component.html',
@@ -53,7 +51,6 @@ export class CreateOrEditFieldComponent {
    
   }
 
-  private _CreateDynamicComponentsService=inject(CreateDynamicComponentsService)
 
   async dataLoaded() {
     if (this._FieldAbstractsService.fromControlList.length == 0) {

@@ -14,9 +14,7 @@
                             <ng-container *ngIf="el&&_entity">
                                 <df-dynamic [entity]="_entity" [fields]="el"
                                     [selected]="entrySelect ? entrySelect.extraProperties[el.field.name] : ''"
-                                    [parentFiledName]="'extraProperties'" [culture]="cultureinput.value" ></df-dynamic>
-
-
+                                    [parentFiledName]="'extraProperties'" [culture]="cultureinput.value"></df-dynamic>
                             </ng-container>
                         </ng-container>
                     </ng-container>
@@ -63,7 +61,7 @@
                             <ng-container *ngFor="let item of AllVersionsList">
                                 <li class="list-group-item flex-between">
                                     <div>
-                                        {{item.initialVersionId?(item.creationTime| date: 'YYYY/MM/dd HH:m:s'):('Cms::InitialVersion' | abpLocalization)}}
+                                        {{item.initialVersionId?(item.creationTime| date: 'YYYY/MM/dd HH:mm:s'):('Cms::InitialVersion' | abpLocalization)}}
                                         <span class="badge text-bg-success ms-1"
                                             *ngIf="item.isActivatedVersion">{{'Cms::IsActive' | abpLocalization}}</span>
                                         <span class="badge text-bg-primary ms-1"

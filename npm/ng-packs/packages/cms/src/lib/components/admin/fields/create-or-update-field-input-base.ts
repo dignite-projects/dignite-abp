@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup, Validators } from "@angular/forms";
 
 export class CreateOrUpdateFieldInputBase {
     /**分组id */

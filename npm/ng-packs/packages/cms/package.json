@@ -1,12 +1,12 @@
 {
   "name": "@dignite-ng/expand.cms",
-  "version": "0.0.19",
+  "version": "0.0.23",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0",
     "pinyin-pro": "^3.19.6",
-    "@dignite-ng/expand.dynamic-form": "^0.0.10",
-    "@dignite-ng/expand.file-explorer": "^0.0.10"
+    "@dignite-ng/expand.dynamic-form": "^0.0.11",
+    "@dignite-ng/expand.file-explorer": "^0.0.11"
   },
   "dependencies": {
     "tslib": "^2.3.0"

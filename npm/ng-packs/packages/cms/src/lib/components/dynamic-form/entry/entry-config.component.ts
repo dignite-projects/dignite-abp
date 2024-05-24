@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { EntryConfig } from './entry-config';
 import { SiteAdminService } from '../../../proxy/admin/sites';
 import { SectionAdminService } from '../../../proxy/admin/sections';

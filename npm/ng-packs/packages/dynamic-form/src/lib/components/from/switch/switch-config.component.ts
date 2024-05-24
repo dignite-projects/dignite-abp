@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,  FormGroup } from '@angular/forms';
 import { SwitchConfig } from './switch-config';
 @Component({
   selector: 'df-switch-config',

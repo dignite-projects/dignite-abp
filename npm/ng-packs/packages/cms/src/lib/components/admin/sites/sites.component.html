@@ -40,7 +40,7 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column [name]="'Cms::CreationTime' | abpLocalization" prop="creationTime">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                {{ value | date : 'yyyy-MM-dd hh-mm-ss' }}
+                                {{ value | date : 'yyyy-MM-dd hh:mm:ss' }}
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column [sortable]="false">
@@ -62,26 +62,8 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-
 </abp-page>
-
-
-<!-- <dignite-page [title]="'Cms::Sites' | abpLocalization" [back]="false" [class]="'sites-page'">
-    <ng-template #pageHeader>
-        <button type="button" class="btn btn-primary btn-sm ms-2" (click.stop)="createSitesBtn()">
-            <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::New' | abpLocalization}}
-        </button>
-    </ng-template>
-    <ng-template #pageBody>
-        
-    </ng-template>
-</dignite-page> -->
-
 <abp-modal [(visible)]="createSitesOpen" [busy]="modalBusy" (visibleChange)="createGroupVisibleChange($event)">
     <ng-template #abpHeader>
         <h3>{{selected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
@@ -93,7 +75,7 @@
         <ng-container *ngIf="createOrEditForm; else loaderRef">
             <form class="sites-modal-form" #myForm="ngForm" [formGroup]="createOrEditForm"
                 (ngSubmit)="createOrEditSave()">
-                <button type="submit" #createModalSubmit style="display: none"></button>
+                <button type="submit" #createModalSubmit  style="display: none"></button>
                 <div class="mb-2">
                     <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
                     <input type="text" class="form-control" formControlName="displayName"

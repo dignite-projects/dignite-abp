@@ -1,9 +1,9 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FileExplorerConfig } from './file-explorer-config';
 
 @Component({
-  selector: 'df-file-explorer-config',
+  selector: 'fe-file-explorer-config',
   templateUrl: './file-explorer-config.component.html',
   styleUrls: ['./file-explorer-config.component.scss']
 })

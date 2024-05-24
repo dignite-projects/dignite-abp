@@ -15,9 +15,6 @@ import {
   FieldsComponent,
   SectionsComponent,
   SitesComponent,
-
-} from './components';
-import {
   MatrixConfigComponent,
   MatrixControlComponent,
   TableConfigComponent,
@@ -25,26 +22,18 @@ import {
   EntryConfigComponent,
   EntryControlComponent,
   FieldControlGroup
-} from "./components/dynamic-form";
-import { DateAdapter } from '@abp/ng.theme.shared/extensions';
+} from './components';
 import {
-  NgbDateAdapter,
   NgbDropdownModule,
   NgbNavModule,
   NgbAccordionModule,
 } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxValidateCoreModule } from '@ngx-validate/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 import { PageModule } from '@abp/ng.components/page';
-import { CommercialUiConfigModule } from '@volo/abp.commercial.ng.ui/config';
 import { CMS_TOOLBAR_ACTION_CONTRIBUTORS } from './toolbar';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import {  DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import { RouteReuseStrategy } from '@angular/router';
-import { SimpleReuseStrategy } from './services/simple-reuse-strategy';
+import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
+import { fielFieldControlGroup } from '@dignite-ng/expand.file-explorer';
 
 @NgModule({
   declarations: [
@@ -71,20 +60,14 @@ import { SimpleReuseStrategy } from './services/simple-reuse-strategy';
     CoreModule,
     ThemeSharedModule,
     CmsRoutingModule,
-    NgbDropdownModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgxValidateCoreModule,
     NgbNavModule,
     NgbAccordionModule,
-    DragDropModule,
+    NgbDropdownModule,
     PageModule,
-    CommercialUiConfigModule,
     NzSelectModule,
-    NzTableModule,
-    ScrollingModule,
     DynamicFormModule.forRoot({
-      cmsFieldControlGroup: FieldControlGroup
+      cmsFieldControlGroup: [...FieldControlGroup,...fielFieldControlGroup]
     }),
   ],
   exports: [
@@ -96,8 +79,6 @@ import { SimpleReuseStrategy } from './services/simple-reuse-strategy';
     EntryControlComponent,
   ],
   providers: [
-    { provide: NgbDateAdapter, useClass: DateAdapter },
-    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
   ],
 
 })

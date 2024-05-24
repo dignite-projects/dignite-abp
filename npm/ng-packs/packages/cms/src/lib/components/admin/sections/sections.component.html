@@ -1,6 +1,5 @@
 <abp-page [title]="'Cms::Sections' | abpLocalization" [toolbar]="true">
     <div class="sections-page">
-
         <div class="card ">
             <div class="card-body px-2 py-sm-2 border-bottom">
                 <div class="input-group">
@@ -76,7 +75,7 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column [name]="'Cms::CreationTime' | abpLocalization" prop="creationTime">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                {{ value | date : 'yyyy-MM-dd hh-mm-ss' }}
+                                {{ value | date : 'yyyy-MM-dd hh:mm:ss' }}
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column [sortable]="false">
@@ -98,15 +97,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </abp-page>
-
-
-
-
 <abp-modal [(visible)]="visibleOpen" [busy]="modalBusy" (visibleChange)="VisibleChange($event)">
     <ng-template #abpHeader>
         <h3>{{selected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
@@ -184,7 +176,6 @@
     </ng-template>
     <ng-template #abpFooter>
         <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
-        <!--  [disabled]="!this.createOrEditForm.valid" -->
         <abp-button iconClass="fa fa-check" (click)="createOrEditModalSubmitBtn.nativeElement.click()">{{'AbpUi::Save' |
             abpLocalization}}</abp-button>
     </ng-template>

@@ -23,13 +23,7 @@ function configureRoutes(routes: RoutesService) {
         layout: eLayoutType.application,
         requiredPolicy: 'digbite_cms_ng.Dashboard.Host  || digbite_cms_ng.Dashboard.Tenant',
       },
-      {
-        path: '/field/create',
-        name: '字段',
-        iconClass: 'fas fa-chart-line',
-        order: 3,
-        layout: eLayoutType.application,
-      },
+    
     ]);
   };
 }

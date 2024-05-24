@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -72,10 +72,10 @@ export class SelectControlComponent {
         let selectValue = isMultiple ? [] : ''
         this.formConfiguration['Select.Options'].forEach(el => {
           if (el.Selected) {
-            selectValue = isMultiple ? [...selectValue, el.value] : [el.value];
+            selectValue = isMultiple ? [...selectValue, el.value||el.Value] : [el.value||el.Value];
+            console.log(selectValue,'selectValueselectValue',this.formConfiguration['Select.Options']);
           }
         });
-
         this._selected = selectValue;
       }
       let newControl = this.fb.control(this._selected, ValidatorsArray)

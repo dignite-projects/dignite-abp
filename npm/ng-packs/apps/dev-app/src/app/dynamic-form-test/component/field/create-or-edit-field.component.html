@@ -1,0 +1,33 @@
+<form [formGroup]="_Entity">
+
+    <div class="mb-2">
+        <label class="form-label" for="displayName">{{'DigniteAbpForms::FieldDisplayName' | abpLocalization}}</label>
+        <input type="text" class="form-control" formControlName="displayName" (blur)="disPlayNameInputBlur($event)">
+    </div>
+    <div class="mb-2">
+        <label class="form-label" for="name">{{'DigniteAbpForms::FieldName' | abpLocalization}}</label>
+        <input type="text" class="form-control" formControlName="name" (input)="nameInputBlur($event)">
+        <div class="text-danger invalid-feedback" *ngIf="nameInput.errors?.repetition">
+            {{nameInput.errors?.repetition}}
+        </div>
+        <div class="form-text">{{'DigniteAbpForms::FieldNameHelpText' | abpLocalization}}</div>
+    </div>
+    <div class="mb-2">
+        <label class="form-label" for="formControlName">{{'Cms::FieldType' | abpLocalization}}</label>
+        <div class="input-group">
+            <ng-container *ngFor="let item of FieldControlGroup;let i=index">
+                <div class="form-check me-2">
+                    <input class="form-check-input" type="radio" formControlName="formControlName"
+                        id="createEditDefault{{i}}" [value]="item.name">
+                    <label class="form-check-label" for="createEditDefault{{i}}">
+                        {{item.displayName}}
+                    </label>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <ng-container *ngIf="formControlName.value&&_Entity"> 
+        <df-dynamic [type]="formControlName.value" [entity]="_Entity" [selected]="_selected"></df-dynamic>
+    </ng-container>
+
+</form>

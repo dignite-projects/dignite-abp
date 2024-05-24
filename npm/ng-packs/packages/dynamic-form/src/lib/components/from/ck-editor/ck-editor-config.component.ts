@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CkEditorConfig } from './ck-editor-config';
 
 @Component({
@@ -18,17 +18,17 @@ export class CkEditorConfigComponent {
   _selected: any
   @Input()
   public set selected(v: any) {
-    this._selected = v ||''
+    this._selected = v || ''
 
     this.dataLoaded()
   }
   /**表单控件类型 */
- _type: any
- @Input()
- public set type(v: any) {
-   this._type = v
-   this.dataLoaded()
- }
+  _type: any
+  @Input()
+  public set type(v: any) {
+    this._type = v
+    this.dataLoaded()
+  }
   get formConfiguration() {
     return this.Entity.get('formConfiguration') as FormGroup
   }
@@ -36,7 +36,7 @@ export class CkEditorConfigComponent {
 
   async dataLoaded() {
     // if (this.Entity && (this._selected || this._selected === '')) {
-      if (this.Entity && this._type){
+    if (this.Entity && this._type) {
       await this.AfterInit()
       // this.submitclick.nativeElement.click();
     }
@@ -45,7 +45,7 @@ export class CkEditorConfigComponent {
   AfterInit() {
     return new Promise((resolve, rejects) => {
       this.Entity.setControl('formConfiguration', this.fb.group(new CkEditorConfig()))
-      if (this._selected&&this._selected.formControlName==this._type) {
+      if (this._selected && this._selected.formControlName == this._type) {
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration
         })

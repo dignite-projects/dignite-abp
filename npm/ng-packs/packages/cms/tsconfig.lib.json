@@ -3,10 +3,10 @@
   "extends": "../../tsconfig.prod.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "target": "es2015",
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
+    "module": "esnext",
     "types": [],
     "lib": [
       "dom",

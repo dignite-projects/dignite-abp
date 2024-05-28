@@ -1,6 +1,6 @@
 {
   "name": "abp-ng-packs",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
@@ -44,7 +44,6 @@
   },
   "private": true,
   "devDependencies": {
-    
     "@angular-devkit/build-angular": "~17.0.0",
     "@angular-devkit/core": "~17.0.0",
     "@angular-devkit/schematics": "~17.0.0",
@@ -65,7 +64,6 @@
     "@angular/platform-browser-dynamic": "~17.0.0",
     "@angular/router": "~17.0.0",
     "@fortawesome/fontawesome-free": "^6.0.0",
-    "@ng-bootstrap/ng-bootstrap": "~16.0.0",
     "@ngneat/spectator": "^15.0.0",
     "@ngx-validate/core": "^0.2.0",
     "@nx/angular": "~17.1.0",
@@ -148,12 +146,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.0.0",
-    "@ckeditor/ckeditor5-angular": "^7.0.1",
-    "@ckeditor/ckeditor5-build-classic": "^41.3.1",
-    "@ckeditor/ckeditor5-core": "^41.2.0",
-    "@ckeditor/ckeditor5-engine": "^41.2.0",
-    "@ckeditor/ckeditor5-utils": "^41.2.0",
-    "@ckeditor/ckeditor5-watchdog": "^41.2.0",
+    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
     "pinyin-pro": "3.19.6"
   },
   "lint-staged": {
@@ -161,6 +154,5 @@
       "npx prettier --write --config .prettierrc "
     ]
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

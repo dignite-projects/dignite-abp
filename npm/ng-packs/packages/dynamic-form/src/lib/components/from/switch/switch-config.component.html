@@ -4,11 +4,12 @@
             <div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" formControlName="Switch.Default"
-                        id="SwitchRadioDefault1">
-                    <label class="form-check-label" for="SwitchRadioDefault1">
+                        id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
                         {{'DigniteAbpForms::DefaultValue' | abpLocalization}}
                     </label>
                 </div>
+                
             </div>
         </div>
         <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;" #submitclick></button>

@@ -128,6 +128,8 @@ export class CkEditorControlComponent {
 
     }).then((editor: any) => {
       this.Editor = editor;
+
+
       this.dataLoaded()
       var _this = this
       editor.plugins.get('FileRepository').createUploadAdapter = function (loader: any) {
@@ -195,7 +197,6 @@ export class CkEditorControlComponent {
       let fillingIn=this._selected||this._fields.field.formConfiguration['Ckeditor.InitialContent']
       this.Editor.setData(fillingIn);
       this.setckeditorInput(fillingIn)
-
       this.submitclick.nativeElement.click();
     }
   }

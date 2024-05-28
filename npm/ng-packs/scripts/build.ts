@@ -24,7 +24,7 @@ import fse from 'fs-extra';
         'build',
         '--prod',
         '--projects',
-        'components,core',
+        'cms,dynamic-form,file-explorer',
         '--parallel',
         '1',
         '--skip-nx-cache',

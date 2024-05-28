@@ -14,8 +14,8 @@
     "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@dignite-ng/expand.components": ["packages/components/src/public-api.ts"],
-      "@dignite-ng/expand.core": ["packages/core/src/public-api.ts"],
+      // "@dignite-ng/expand.components": ["packages/components/src/public-api.ts"],
+      // "@dignite-ng/expand.core": ["packages/core/src/public-api.ts"],
       "@dignite-ng/expand.generators": ["packages/generators/src/index.ts"],
       "@dignite-ng/expand.file-explorer": ["packages/file-explorer/src/public-api.ts"],
       "@dignite-ng/expand.file-explorer/config": ["packages/file-explorer/config/src/public-api.ts"],

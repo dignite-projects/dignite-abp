@@ -43,6 +43,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
         fieldComponent: DateEditControlComponent,
         // fieldViewComponent:TextBoxViewComponent,
     },
+
      {
         displayName: 'CkEditor',
         name: 'CkEditor',

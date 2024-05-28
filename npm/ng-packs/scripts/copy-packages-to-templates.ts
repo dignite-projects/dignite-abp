@@ -8,8 +8,8 @@ const defaultTemplatePath = '../../../templates';
 const packageMap = {
   // account: 'ng.account',
   // 'account-core': 'ng.account.core',
-  components: 'expand.components',
-  core: 'expand.core',
+  // components: 'expand.components',
+  // core: 'expand.core',
   // 'feature-management': 'ng.feature-management',
   // identity: 'ng.identity',
   // 'permission-management': 'ng.permission-management',
@@ -17,6 +17,9 @@ const packageMap = {
   // 'tenant-management': 'ng.tenant-management',
   // 'theme-basic': 'ng.theme.basic',
   // 'theme-shared': 'ng.theme.shared',
+  cms: 'expand.cms',
+  'dynamic-form': 'expand.dynamic-form',
+  'file-explorer': 'expand.file-explorer',
   schematics: 'expand.schematics',
   // oauth: 'ng.oauth',
 };

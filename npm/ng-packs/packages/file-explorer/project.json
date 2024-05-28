@@ -1,0 +1,45 @@
+{
+  "name": "file-explorer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/file-explorer/src",
+  "prefix": "dignite",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/packages/file-explorer"],
+      "options": {
+        "project": "packages/file-explorer/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/file-explorer/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/file-explorer/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/file-explorer"],
+      "options": {
+        "jestConfig": "packages/file-explorer/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/file-explorer/src/**/*.ts",
+          "packages/file-explorer/src/**/*.html",
+          "packages/file-explorer/extensible/**/*.ts",
+          "packages/file-explorer/extensible/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

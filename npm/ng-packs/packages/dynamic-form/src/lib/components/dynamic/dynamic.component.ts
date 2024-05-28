@@ -16,6 +16,7 @@ export class DynamicComponent {
   @Input()
   public set selected(v: any) {
     this._selected = v || '';
+   
     if(v) this.dataLoaded(1)
   }
 

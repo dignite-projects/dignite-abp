@@ -10,26 +10,11 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.Localization
 @using Volo.Abp.MultiTenancy;
-@using Volo.Abp.Ui.Branding
 @using Volo.Abp.Ui.LayoutHooks;
-@inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
-
-    var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
-
-    if (PageLayout.Content.Title != null)
-    {
-        if (!string.IsNullOrWhiteSpace(pageTitle))
-        {
-            pageTitle = " | " + pageTitle;
-        }
-
-        pageTitle = PageLayout.Content.Title + pageTitle;
-    }
-
     var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
 }
 
@@ -42,7 +27,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@pageTitle</title>
+    @await RenderSectionAsync("seotags", true)
 
     <script src="~/themes/pure/color-mode-switch.js"></script>
     <abp-style-bundle name="@PureThemeBundles.Styles.Public" />

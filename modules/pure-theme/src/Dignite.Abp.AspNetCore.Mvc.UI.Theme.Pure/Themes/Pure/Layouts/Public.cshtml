@@ -1,7 +1,6 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.BottomNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
-@using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.MainNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.PageFooter
@@ -11,7 +10,6 @@
 @using Volo.Abp.Localization
 @using Volo.Abp.MultiTenancy;
 @using Volo.Abp.Ui.LayoutHooks;
-@inject IPageLayout PageLayout
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
@@ -23,10 +21,6 @@
 <html lang="@CultureInfo.CurrentUICulture.Name" dir="@rtl">
 <head>
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Public)
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @await RenderSectionAsync("seotags", true)
 
     <script src="~/themes/pure/color-mode-switch.js"></script>

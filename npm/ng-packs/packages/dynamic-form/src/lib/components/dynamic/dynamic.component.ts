@@ -1,7 +1,7 @@
 import {Component,Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import type{ FieldControlGroupInterfaces } from '../../interfaces';
-import { FieldControlGroup } from '../from';
+import { FieldControlGroup } from '../form';
 
 @Component({
   selector: 'df-dynamic',
@@ -104,13 +104,11 @@ export class DynamicComponent {
   /**加载动态表单组件 */
   loadfieldComponent(FieldControlItem?: FieldControlGroupInterfaces) {
     // this.FormControlRef.clear
-   
     //清空了容器中的所有组件
     this.FormComponentsRef?.clear();
     if (!FieldControlItem || !FieldControlItem.fieldComponent) return
     //在容器中创建组件
     const { instance } = this.FormComponentsRef?.createComponent(FieldControlItem.fieldComponent);//创建组件模板
-    
     // this.formConfigCompoent = instance
     /**向创建的组件模板中传值 */
     instance.entity = this._entity

@@ -1,0 +1,45 @@
+{
+  "name": "ck-editor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/ck-editor/src",
+  "prefix": "dignite",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/packages/ck-editor"],
+      "options": {
+        "project": "packages/ck-editor/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/ck-editor/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/ck-editor/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/ck-editor"],
+      "options": {
+        "jestConfig": "packages/ck-editor/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/ck-editor/src/**/*.ts",
+          "packages/ck-editor/src/**/*.html",
+          "packages/ck-editor/extensible/**/*.ts",
+          "packages/ck-editor/extensible/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

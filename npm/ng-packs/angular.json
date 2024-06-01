@@ -6,7 +6,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
- 
     "dev-app": {
       "projectType": "application",
       "schematics": {
@@ -172,9 +171,8 @@
               },
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "apps/dev-app/src/styles.scss"
-
             ],
-            "scripts": [ ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -256,9 +254,6 @@
         }
       }
     }
-
-   
-   
   },
   "defaultProject": "dev-app"
 }

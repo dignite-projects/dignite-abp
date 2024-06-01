@@ -2,10 +2,8 @@ import { ABP, LIST_QUERY_DEBOUNCE_TIME, ListService, LocalizationService, PagedR
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.theme.shared/extensions';
 import { Component, inject } from '@angular/core';
 import { DynamicComponent } from '../../enums';
-import { ToasterService, ConfirmationService } from '@abp/ng.theme.shared';
 import { Router } from '@angular/router';
 import { ColumnMode } from '@swimlane/ngx-datatable';
-import { ApiService } from '../../services';
 import { FieldDataService } from '../../services/field-data.service';
 
 @Component({
@@ -19,7 +17,7 @@ import { FieldDataService } from '../../services/field-data.service';
     // Provide this token if you want a different debounce time.
     // Default is 300. Cannot be 0. Any value below 100 is not recommended.
     { provide: LIST_QUERY_DEBOUNCE_TIME, useValue: 500 },
-  
+
     {
       provide: EXTENSIONS_IDENTIFIER,
       useValue: DynamicComponent.Fields,
@@ -28,20 +26,10 @@ import { FieldDataService } from '../../services/field-data.service';
 })
 export class FieldsComponent {
 
-  constructor(
-    // public readonly list: ListService,
-    private toaster: ToasterService,
-    private confirmation: ConfirmationService,
-    private _LocalizationService: LocalizationService,
-    // private router: Router,
-    // private _ApiService: ApiService,
-  ) {
-    
-  }
-  private _FieldDataService=inject(FieldDataService)
-  public readonly list=inject(ListService)
-  private router=inject(Router)
-  private _ApiService=inject(ApiService)
+  constructor() {}
+  private _FieldDataService = inject(FieldDataService)
+  public readonly list = inject(ListService)
+  private router = inject(Router)
   /**表格单元格布局类型 */
   ColumnMode = ColumnMode;
 
@@ -58,19 +46,11 @@ export class FieldsComponent {
 
   ngOnInit(): void {
     this.hookToQuery()
-    // this._UpdateListService.updateListEvent.subscribe(() => {
-    //   this.list.get()
-    // });
   }
-  getData(){
+  getData() {
     this.list.get()
   }
-  /**字段分组选择回调 */
-  // fieldGroupChange(event) {
-  //   this.filters.groupId = event
-  //   this.list.page=0
-  //   this.list.get()
-  // }
+
 
   /**使用abp的list获取表格的字段数据列表 */
   hookToQuery() {
@@ -80,7 +60,6 @@ export class FieldsComponent {
     });
     const setData = (list: PagedResultDto<any>) => {
       this.data = list
-      console.log(list);
     };
     this.list.hookToQuery(getData).subscribe(setData);
   }
@@ -92,21 +71,5 @@ export class FieldsComponent {
         queryParams: {}
       }
     )
-  }
-
-  /**删除字段 */
-  deletefield(row: any) {
-    // this.confirmation.warn(
-    //   row.displayName,
-    //   this._LocalizationService.instant(`AbpUi::ItemWillBeDeletedMessage`),
-    // ).subscribe((status: Confirmation.Status) => {
-    //   if (status == 'confirm') {
-    //     this._FieldAdminService.delete(row.id).pipe(finalize(() => {
-    //     })).subscribe(res => {
-    //       this.toaster.success(this._LocalizationService.instant(`AbpUi::SuccessfullyDeleted`));
-    //       this.list.get()
-    //     })
-    //   }
-    // });
   }
 }

@@ -1,0 +1,10 @@
+<!-- options -->
+<ck-editor-base
+  [imageContainerName]="'images'"
+  [content]="contentValue"
+  [options]="ckOptions"
+  (contentChange)="ckEditorChange($event)"
+  (ready)="onReady($event)"
+></ck-editor-base>
+<!-- [currentCulture]="currentCulture" -->
+

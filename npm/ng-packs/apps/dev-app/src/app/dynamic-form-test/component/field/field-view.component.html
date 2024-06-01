@@ -5,14 +5,7 @@
             <div class="mb-2" *ngIf="fieldDetails&&newEntity&&systemculture">
                 <df-dynamic [entity]="newEntity" [fields]="{field:fieldDetails,displayName:fieldDetails.displayName}" [selected]="fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : ''"
                     [parentFiledName]="'extraProperties'" [culture]="systemculture"></df-dynamic>
-                    --{{fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : ''}}**
             </div>
         </div>
-<!-- {{fieldDetails?.extraProperties[fieldDetails.name]}} -->
-        <!-- [culture]="cultureinput.value" -->
-        <!-- fieldDetails.extraProperties ? fieldDetails.extraProperties[fieldDetails.name] : '' -->
-
-
-
     </abp-page>
 </form>

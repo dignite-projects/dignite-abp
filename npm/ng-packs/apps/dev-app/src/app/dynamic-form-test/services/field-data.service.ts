@@ -30,8 +30,6 @@ export class FieldDataService {
   /**获取字段列表 */
   getFieldList(condition): Observable<any> {
     let list=this.fieldList.filter(el=>el.displayName.includes(condition.filter))
-    // console.log(list,condition);
-    
     list.slice(condition.skipCount,condition.maxResultCount)
     return of({
       totalCount:list.length,

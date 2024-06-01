@@ -63,12 +63,7 @@ export class FieldViewComponent {
         extraProperties:this.fieldDetails.extraProperties
       })
     }else{
-
     }
-    console.log(_fieldId, 'queryParams',this.fieldDetails);
-
-
-
   }
   /**获取指定字段的信息 */
   getFieldId() {
@@ -84,7 +79,6 @@ export class FieldViewComponent {
   /**保存 */
   save() {
     let input = this.newEntity.value
-    console.log(input, '保存', this.newEntity);
     if (!this.newEntity.valid) return
     this._FieldDataService.setFieldExtraProperties(this.fieldId,input).subscribe(res=>{
       this._location.back()

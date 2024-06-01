@@ -1,2 +1,2 @@
-export * from './from'
+export * from './form'
 export * from './dynamic'

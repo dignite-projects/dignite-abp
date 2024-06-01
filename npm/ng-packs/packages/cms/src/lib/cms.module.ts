@@ -34,6 +34,7 @@ import { CMS_TOOLBAR_ACTION_CONTRIBUTORS } from './toolbar';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
 import { fielFieldControlGroup } from '@dignite-ng/expand.file-explorer';
+import { ckEditorFieldControlGroup } from '@dignite-ng/expand.ck-editor';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { fielFieldControlGroup } from '@dignite-ng/expand.file-explorer';
     PageModule,
     NzSelectModule,
     DynamicFormModule.forRoot({
-      cmsFieldControlGroup: [...FieldControlGroup,...fielFieldControlGroup]
+      cmsFieldControlGroup: [...FieldControlGroup,...fielFieldControlGroup,...ckEditorFieldControlGroup]
     }),
   ],
   exports: [

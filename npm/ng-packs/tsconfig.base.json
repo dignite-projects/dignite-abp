@@ -22,6 +22,8 @@
       "@dignite-ng/expand.dynamic-form": ["packages/dynamic-form/src/public-api.ts"],
       "@dignite-ng/expand.cms": ["packages/cms/src/public-api.ts"],
       "@dignite-ng/expand.cms/config": ["packages/cms/config/src/public-api.ts"],
+      "@dignite-ng/expand.ck-editor": ["packages/ck-editor/src/public-api.ts"],
+      // "@dignite-ng/expand.ckeditor5-custom-build": ["packages/ck-editor/src/public-api.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

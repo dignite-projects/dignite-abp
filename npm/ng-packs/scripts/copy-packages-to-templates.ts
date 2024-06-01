@@ -21,6 +21,8 @@ const packageMap = {
   'dynamic-form': 'expand.dynamic-form',
   'file-explorer': 'expand.file-explorer',
   schematics: 'expand.schematics',
+  'ck-editor': 'expand.ck-editor',
+  'ckeditor5-custom-build': 'expand.ckeditor5-custom-build',
   // oauth: 'ng.oauth',
 };
 program.option('-t, --templates  <templates>', 'template dirs', false);

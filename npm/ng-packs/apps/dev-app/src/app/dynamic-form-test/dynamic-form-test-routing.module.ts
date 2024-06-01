@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateFieldComponent, EditFieldComponent, FieldViewComponent, FieldsComponent } from './component';
 import { AuthGuard, PermissionGuard } from '@abp/ng.core';
 import { DynamicExtensionsResolver } from './toolbar';
+import { CkEditorDemoComponent } from './component/ck-editor-demo/ck-editor-demo.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
         component: FieldViewComponent
       }
     ]
+  },{
+    path:'ck-editor',
+    component:CkEditorDemoComponent
   }
 ];
 

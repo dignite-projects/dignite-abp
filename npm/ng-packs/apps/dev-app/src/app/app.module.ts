@@ -23,8 +23,16 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { OpeniddictproConfigModule } from '@volo/abp.ng.openiddictpro/config';
 import { FeatureManagementModule } from '@abp/ng.feature-management';
 import { AbpOAuthModule } from '@abp/ng.oauth';
-import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
+// import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
+// import { CkEditorModule } from '@dignite-ng/expand.ck-editor';
 import { dynamic_form_ROUTE_PROVIDER } from './dynamic-form-test/route.provider';
+// import { DynamicFormModule, FieldControlGroup } from '@dignite-ng/expand.dynamic-form';
+// import { ckEditorFieldControlGroup } from '@dignite-ng/expand.ck-editor';
+import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
+import { DynamicFormModule, FieldControlGroup } from '@dignite-ng/expand.dynamic-form';
+import { fielFieldControlGroup } from '@dignite-ng/expand.file-explorer';
+import { ckEditorFieldControlGroup } from '@dignite-ng/expand.ck-editor';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,10 +63,10 @@ import { dynamic_form_ROUTE_PROVIDER } from './dynamic-form-test/route.provider'
       privacyPolicyUrl: 'gdpr-cookie-consent/privacy',
       cookiePolicyUrl: 'gdpr-cookie-consent/cookie',
     }),
-    DynamicFormModule.forRoot(),
- 
-
-  
+    CmsConfigModule.forRoot(),
+    DynamicFormModule.forRoot({
+      cmsFieldControlGroup: [...FieldControlGroup,...fielFieldControlGroup,...ckEditorFieldControlGroup]
+    }),
     
   ],
   providers: [APP_ROUTE_PROVIDER,

@@ -1,11 +1,10 @@
 {
   "name": "@dignite-ng/expand.dynamic-form",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0",
-    "pinyin-pro": "^3.19.6",
-    "@ckeditor/ckeditor5-build-classic": "^41.2.0"
+    "pinyin-pro": "^3.19.6"
   },
   "dependencies": {
     "tslib": "^2.3.0"

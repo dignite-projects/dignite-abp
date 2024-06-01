@@ -24,15 +24,6 @@ import { FieldDataService } from '../../services/field-data.service';
 export class EditFieldComponent {
 
   constructor(
-    // private fb: FormBuilder,
-    // public _FieldAbstractsService: FieldAbstractsService,
-    // public _FieldAdminService: FieldAdminService,
-    // private route: ActivatedRoute,
-    // private toaster: ToasterService,
-    // public _location: Location,
-    // public _LocalizationService: LocalizationService,
-    // public _ApiService: ApiService,
-    // private router: Router,
   ) { }
   private fb = inject(FormBuilder)
   private route = inject(ActivatedRoute)
@@ -58,10 +49,7 @@ export class EditFieldComponent {
 
 
   ngOnInit() {
-    console.log(111111, '_fieldId');
     const _fieldId = this.route.snapshot.params.id;
-    console.log(_fieldId, '_fieldId');
-
     if (_fieldId) {
       this.fieldId = _fieldId;
       this.newEntity = this.fb.group(new CreateOrUpdateFieldInputBase());
@@ -71,32 +59,15 @@ export class EditFieldComponent {
           ...this.fieldDetails,
         });
       })
-      // await Promise.all([
-      //   this._FieldAbstractsService.getFromControlList(),
-      //   this.getFieldEdit(),
-      // ]);
-      // this.newEntity.patchValue({
-      //   ...this.fieldDetails,
-      // });
     }
   }
 
-  /**获取字段详情 */
-  getFieldEdit() {
-    return new Promise((resolve, reject) => {
-      // this._FieldAdminService.get(this.fieldId).subscribe(res => {
-      //   res.groupId = res.groupId ? res.groupId : ''
-      //   this.fieldDetails = res
-      //   resolve(res)
-      // })
-    })
-  }
+
 
   /**触发提交按钮 */
   submitclickBtn() {
     this.submitclick.nativeElement.click()
   }
-  // private _UpdateListService=inject(UpdateListService)
 
   /**保存表单 */
   save() {
@@ -106,12 +77,5 @@ export class EditFieldComponent {
     this._FieldDataService.editField(this.fieldId,input).subscribe(()=>{
       this._location.back()
     })
-    // this._FieldAdminService.update(this.fieldId, input).subscribe((res => {
-    //   this.toaster.success(this._LocalizationService.instant(`CmsKit::SavedSuccessfully`));
-    //   this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
-    //     this.router.navigate([`/cms/admin/fields`]);
-    //     this._UpdateListService.updateList();
-    //   });
-    // }))
   }
 }

@@ -24,7 +24,7 @@ import fse from 'fs-extra';
         'build',
         '--prod',
         '--projects',
-        'cms,dynamic-form,file-explorer',
+        'cms,dynamic-form,file-explorer,ck-editor,ckeditor5-custom-build',
         '--parallel',
         '1',
         '--skip-nx-cache',

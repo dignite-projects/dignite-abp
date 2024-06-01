@@ -14,12 +14,12 @@ import {
   NumbericEditControlComponent,
   DateEditConfigComponent,
   DateEditControlComponent,
-  CkEditorConfigComponent,
   SelectConfigComponent,
   SelectControlComponent,
   AddFieldControlGroup,
   DynamicComponent,
-  CkEditorControlComponent,
+  // CkEditorConfigComponent,
+  // CkEditorControlComponent,
 } from './components';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -35,11 +35,11 @@ import {
     NumbericEditControlComponent,
     DateEditConfigComponent,
     DateEditControlComponent,
-    CkEditorConfigComponent,
     SelectConfigComponent,
     SelectControlComponent,
     DynamicComponent,
-    CkEditorControlComponent
+    // CkEditorConfigComponent,
+    // CkEditorControlComponent
 
   ],
   imports: [
@@ -61,7 +61,7 @@ import {
     NumbericEditControlComponent,
     DateEditConfigComponent,
     DateEditControlComponent,
-    CkEditorConfigComponent,
+    // CkEditorConfigComponent,
     SelectConfigComponent,
     SelectControlComponent,
     DynamicComponent,

@@ -71,6 +71,11 @@ const routes: Routes = [
         m => m.DynamicFormTestModule,
       ),
   },
+  {
+    path: 'cms',
+    loadChildren: () =>
+      import('@dignite-ng/expand.cms').then(m => m.CmsModule.forLazy()),
+  },
 ];
 
 @NgModule({

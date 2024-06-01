@@ -18,13 +18,7 @@ export class CreateOrEditFieldComponent {
 
   private _ApiService = inject(ApiService)
   constructor(
-    // private _FieldAdminService: FieldAdminService,
-    // private _LocalizationService: LocalizationService,
-
   ) {
-    // if (this._FieldAbstractsService.fieldGroupList.length == 0) {
-    //   this._FieldAbstractsService.getfieldGroupList()
-    // }
   }
   /**表单字段类型组 */
   FieldControlGroup: FieldControlGroupInterfaces[] = getExcludeAssignControl()
@@ -57,27 +51,14 @@ export class CreateOrEditFieldComponent {
 
 
   async dataLoaded() {
-    console.log(this.FieldControlGroup, 'dataLoaded');
-
-    // if (this._FieldAbstractsService.fromControlList.length == 0) {
-    //   await this._FieldAbstractsService.getFromControlList()
-    // }
-
     if (this._Entity) {
       if (!this.formControlName.value) {
         this._Entity.patchValue({
           formControlName: this.FieldControlGroup[0]?.name,
         })
       }
-      // this._Entity.setControl('name', new FormControl(this.nameInput.value||'', {
-      //   validators: Validators.required,
-      //   asyncValidators: [this.repetitionAsyncValidator()] ,
-      //   updateOn: 'blur'
-      // }))
     }
   }
-
-
 
   /**name表单控件 */
   get nameInput() {
@@ -97,27 +78,5 @@ export class CreateOrEditFieldComponent {
     if (nameInput.value) return
     nameInput.patchValue(pinyin)
   }
-  // /**定义异步验证方法 */
-  // repetitionAsyncValidator() {
-  //   return (ctrl: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-  //     return new Promise(resolve => {
-  //       if (ctrl.value == this._selected?.name||!ctrl.value) {
-  //         resolve(null);
-  //         return
-  //       }
-  //       this._FieldAdminService.nameExists(ctrl.value).subscribe(res => {
-  //         if (res) {
-  //           resolve({ repetition: this._LocalizationService.instant(`Cms::FieldName{0}AlreadyExist`, ctrl.value) });
-  //         } else {
-  //           resolve(null);
-  //         }
-  //       })
-  //     });
-  //   };
-  // }
-
-
-
-
 
 }

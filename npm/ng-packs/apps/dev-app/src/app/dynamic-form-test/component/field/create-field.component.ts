@@ -22,21 +22,11 @@ import { Location } from '@angular/common';
 export class CreateFieldComponent {
 
   constructor(
-    // private fb: FormBuilder,
-    // public _FieldAdminService: FieldAdminService,
-    // private toaster: ToasterService,
-    // public _location: Location,
-    // public _LocalizationService: LocalizationService,
-    // public _CmsApiService: CmsApiService,
-    // private router: Router,
-   
   ) { }
-  // private _UpdateListService=inject(UpdateListService)
   private fb=inject(FormBuilder)
   private _FieldDataService=inject(FieldDataService)
   private _LocalizationService=inject(LocalizationService)
   private toaster=inject(ToasterService)
-  // private _location=inject(Location)
   public _location=inject(Location)
  
   /**表单实体 */
@@ -59,7 +49,7 @@ export class CreateFieldComponent {
   save() {
     let input = this.newEntity.value
     if (!this.newEntity.valid) return
-    console.log(input,'保存表单');
+    // console.log(input,'保存表单');
     this._FieldDataService.addFieldList(input).then(res=>{
       this.toaster.success(this._LocalizationService.instant(`CmsKit::SavedSuccessfully`));
       this._location.back()

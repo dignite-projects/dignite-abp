@@ -5,11 +5,11 @@
   </ng-template>
   <ng-template #abpBody>
     <div class="row file-explorer-modal-body file-modal">
-      <div class="col-3" style="overflow: auto; height: calc(100vh - 240px)">
+      <div class="col-3" *ngIf="createDirectoryPermissionName"  style="overflow: auto; height: calc(100vh - 240px)">
         <fe-file-modal-tree [theSelectedTreeNode]="_theSelectedTreeNode" (nodeClick)="_nodeClick($event)"
           [fileContainerName]="_fileContainerName"></fe-file-modal-tree>
       </div>
-      <div class="col-9" style="height: calc(100vh - 240px)">
+      <div [class]="createDirectoryPermissionName?'col-9':'col-12'" style="height: calc(100vh - 240px)">
         <div class="mb-2 d-flex justify-content-between align-items-center">
           <div class="btn-link" role=button style="flex: 2" (click)="lookAllFile()">{{'FileExplorer::AllFiles' | abpLocalization}}</div>
           <div class="input-group form-file" style="flex: 2">
@@ -98,8 +98,8 @@
                       </th>
                       <td>{{ item.fileSize }}</td>
                       <td>
-                        <i *ngIf="item.status == 1" class="fas fa-check text-primary"></i>
-                        <i *ngIf="item.status == 2" class="fas fa-times-circle text-danger"></i>
+                        <i *ngIf="item.status === 1" class="fas fa-check text-primary"></i>
+                        <i *ngIf="item.status === 2" class="fas fa-times-circle text-danger"></i>
                       </td>
                     </tr>
                   </ng-container>

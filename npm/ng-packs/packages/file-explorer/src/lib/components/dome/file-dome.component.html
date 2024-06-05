@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-header py-2 border-bottom">Send file stream with form</div>
             <div class="card-body">
-                <fe-file-picker  [selectFormFile]="selectedFileGroup" (selectedFileChange)="_selectedFileChange($event)" ></fe-file-picker>
+                <fe-file-picker  [selectFormFile]="selectedFileGroup" fileContainerName="SampleContainer" (selectedFileChange)="_selectedFileChange($event)" ></fe-file-picker>
             </div>
         </div>
     </div>

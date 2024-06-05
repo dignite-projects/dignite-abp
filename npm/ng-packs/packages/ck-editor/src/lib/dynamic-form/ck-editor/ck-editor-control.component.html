@@ -2,9 +2,8 @@
     <div formGroupName="extraProperties">
         <div class="mb-2">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
-            {{imagesContainerName}}
-            <ck-editor-base [imageContainerName]="imagesContainerName" [content]="ckEditorValue" [options]="ckOptions"
-                (contentChange)="ckEditorChange($event)"></ck-editor-base>
+            <ckeditor [editor]="Editor" *ngIf="Editor" [config]="ckOptions" (ready)="onReady($event)" [formControlName]="_fields.field.name">
+            </ckeditor>
             <ng-container *ngIf="ckeditorInput?.errors?.required&&invalidfeedback">
                 <div class="text-danger ">
                     {{'DigniteAbpForms::Validate:Required' | abpLocalization:' '}}

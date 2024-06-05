@@ -1,6 +1,25 @@
-import { ConfigStateService } from '@abp/ng.core';
+import { ConfigStateService, RestService } from '@abp/ng.core';
 import { Component, ElementRef,  Input, ViewChild, inject, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import "ckeditor5-custom-build/build/translations/zh-cn"
+import "ckeditor5-custom-build/build/translations/de-ch";
+import "ckeditor5-custom-build/build/translations/en-gb";
+import "ckeditor5-custom-build/build/translations/pt-br";
+import "ckeditor5-custom-build/build/translations/zh";
+import "ckeditor5-custom-build/build/translations/de";
+import "ckeditor5-custom-build/build/translations/ar";
+import "ckeditor5-custom-build/build/translations/cs";
+import "ckeditor5-custom-build/build/translations/hi";
+import "ckeditor5-custom-build/build/translations/fi";
+import "ckeditor5-custom-build/build/translations/hu";
+import "ckeditor5-custom-build/build/translations/fr";
+import "ckeditor5-custom-build/build/translations/it";
+import "ckeditor5-custom-build/build/translations/sk";
+import "ckeditor5-custom-build/build/translations/ja";
+import "ckeditor5-custom-build/build/translations/es";
+import "ckeditor5-custom-build/build/translations/vi";
+import { LanguagesMap } from '../../enums/languages-map';
+import { isBase64UploadAdapter } from './ckEditorUpload';
 
 @Component({
   selector: 'ck-editor-control',
@@ -9,60 +28,79 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CkEditorControlComponent {
   private config: ConfigStateService = inject(ConfigStateService)
+  private _restService: RestService = inject(RestService)
   /**ck-Editor的值 */
   ckEditorValue: any = '<p>aubznahsj</p>'
   /**系统语言 */
   currentCulture = this.config.getOne("localization")?.currentCulture?.name;
-  /**ck-editor配置 */
-  ckOptions: any = {
-    language: this.currentCulture,
-    toolbar: {
-      items: [
-        'heading', '|',
-        'bold', 'italic',
-        'link', '|',
-        'bulletedList', 'numberedList',
-        'insertTable', '|',
-        'uploadImage', '|',
-        'undo', 'redo'
-      ],
-      viewportTopOffset: 30,
-      shouldNotGroupWhenFull: true
-    },
-    image: {
-      toolbar: [
-        'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
-        '|',
-        'resizeImage',
-        '|',
-        'imageTextAlternative'
-      ],
-      styles: [
-        'alignLeft', 'alignCenter', 'alignRight'
-      ],
-      resizeOptions: [{
-        name: 'resizeImage:original',
-        label: 'Original',
-        value: null
-      },
-      {
-        name: 'resizeImage:25',
-        label: '25%',
-        value: '25'
-      },
-      {
-        name: 'resizeImage:50',
-        label: '50%',
-        value: '50'
-      },
-      {
-        name: 'resizeImage:75',
-        label: '75%',
-        value: '75'
+
+    /** 语言目录，匹配系统语言，设置ckeditor的语言 */
+    languagesMap=LanguagesMap
+
+  public Editor: any;
+  constructor() {
+    import('ckeditor5/build/ckeditor').then(res => {
+      this.Editor = res.default
+      this.ckOptions = {
+        language: this.languagesMap[this.currentCulture],
+        toolbar: {
+          items: [
+            'heading', '|',
+            'bold', 'italic',
+            'link', '|',
+            'bulletedList', 'numberedList',
+            'insertTable', '|',
+            'uploadImage', '|',
+            'undo', 'redo'
+          ],
+          viewportTopOffset: 30,
+          shouldNotGroupWhenFull: true
+        },
+        image: {
+          toolbar: [
+            'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            '|',
+            'resizeImage',
+            '|',
+            'imageTextAlternative'
+          ],
+          styles: [
+            'alignLeft', 'alignCenter', 'alignRight'
+          ],
+          resizeOptions: [{
+            name: 'resizeImage:original',
+            label: 'Original',
+            value: null
+          },
+          {
+            name: 'resizeImage:25',
+            label: '25%',
+            value: '25'
+          },
+          {
+            name: 'resizeImage:50',
+            label: '50%',
+            value: '50'
+          },
+          {
+            name: 'resizeImage:75',
+            label: '75%',
+            value: '75'
+          }
+          ],
+        },
       }
-      ],
-    },
+    })
   }
+  public onReady(editor){
+    let _this=this
+    editor.plugins.get('FileRepository').createUploadAdapter = function (loader: any) {
+      return new isBase64UploadAdapter(loader, _this.imagesContainerName, _this._restService);
+    };
+  }
+
+  /**ck-editor配置 */
+  ckOptions: any 
   /**富文本内容改变 */
   ckEditorChange(event) {
     this.setckeditorInput(event)

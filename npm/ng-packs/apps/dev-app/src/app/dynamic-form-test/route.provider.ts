@@ -14,13 +14,7 @@ function configureRoutes(routes: RoutesService) {
         order: 3,
         layout: eLayoutType.application,
       },
-      {
-        path: 'dynamic-form-test/ck-editor',
-        name: 'ck-editor Demo',
-        iconClass: 'fas fa fa-pencil-square-o',
-        order: 3,
-        layout: eLayoutType.application,
-      },
+   
     //   {
     //     path: '/dashboard',
     //     name: '::Menu:Dashboard',

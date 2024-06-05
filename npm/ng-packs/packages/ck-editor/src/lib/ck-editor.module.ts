@@ -5,15 +5,12 @@ import { CoreModule } from '@abp/ng.core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { CkEditorConfigComponent, CkEditorControlComponent } from './dynamic-form';
-import { CkEditorBaseComponent } from './components';
-
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
     CkEditorControlComponent,
     CkEditorConfigComponent,
-    CkEditorBaseComponent
   ],
   imports: [
     FormsModule,
@@ -21,11 +18,9 @@ import { CkEditorBaseComponent } from './components';
     ThemeSharedModule,
     ReactiveFormsModule,
     CkEditorRoutingModule,
+    CKEditorModule
   ],
   exports: [
-    // CkEditorControlComponent,
-    // CkEditorConfigComponent,
-    CkEditorBaseComponent
   ]
 })
 export class CkEditorModule { }

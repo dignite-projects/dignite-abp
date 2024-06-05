@@ -105,8 +105,6 @@
     "@volo/abp.ng.text-template-management": "~7.4.5",
     "@volosoft/abp.ng.theme.lepton-x": "~2.4.0",
     "angular-oauth2-oidc": "^15.0.0",
-    "bootstrap": "^5.0.0",
-    "bootstrap-icons": "^1.0.0",
     "chart.js": "^3.0.0",
     "cypress": "^7.0.0",
     "dotenv": "10.0.0",
@@ -130,7 +128,6 @@
     "lerna": "^4.0.0",
     "lint-staged": "^13.0.0",
     "ng-packagr": "17.0.0",
-    "ng-zorro-antd": "^17.0.0",
     "nx": "~17.1.0",
     "perfect-scrollbar": "^1.0.0",
     "pinyin-pro": "3.19.6",
@@ -154,5 +151,10 @@
     "**/*.{js,jsx,ts,tsx,html,css,scss}": [
       "npx prettier --write --config .prettierrc "
     ]
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-angular": "^7.0.1",
+    "@dignite-ng/expand.cms": "^0.0.25",
+    "ckeditor5-custom-build": "./ckeditor5"
   }
 }

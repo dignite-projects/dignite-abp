@@ -6,24 +6,11 @@ import program from "commander";
 const defaultTemplates = ['app', 'app-nolayers', 'module'];
 const defaultTemplatePath = '../../../templates';
 const packageMap = {
-  // account: 'ng.account',
-  // 'account-core': 'ng.account.core',
-  // components: 'expand.components',
-  // core: 'expand.core',
-  // 'feature-management': 'ng.feature-management',
-  // identity: 'ng.identity',
-  // 'permission-management': 'ng.permission-management',
-  // 'setting-management': 'ng.setting-management',
-  // 'tenant-management': 'ng.tenant-management',
-  // 'theme-basic': 'ng.theme.basic',
-  // 'theme-shared': 'ng.theme.shared',
-  cms: 'expand.cms',
   'dynamic-form': 'expand.dynamic-form',
   'file-explorer': 'expand.file-explorer',
   schematics: 'expand.schematics',
   'ck-editor': 'expand.ck-editor',
   'ckeditor5-custom-build': 'expand.ckeditor5-custom-build',
-  // oauth: 'ng.oauth',
 };
 program.option('-t, --templates  <templates>', 'template dirs', false);
 program.option('-p, --template-path <templatePath>', 'root template path', false);

@@ -76,6 +76,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@dignite-ng/expand.cms').then(m => m.CmsModule.forLazy()),
   },
+  {
+    path: 'file',
+    loadChildren: () =>
+      import('@dignite-ng/expand.file-explorer').then(m => m.FileExplorerModule),
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,0 @@
-<form class="row g-3 needs-validation" [formGroup]="newEntity" (ngSubmit)="save(draftType)">
-    <abp-page [title]="'AbpUi::Edit' | abpLocalization" [toolbar]="true">
-        <button type="submit" style="display: none" #submitclick></button>
-        <ng-container *ngIf="entrySelect">
-            <cms-create-or-edit-entries [entity]="newEntity" [ParentQueryParams]="queryParams"
-                [parentEntrySelect]="entrySelect" [isEdit]="true"></cms-create-or-edit-entries>
-        </ng-container>
-    </abp-page>
-</form>

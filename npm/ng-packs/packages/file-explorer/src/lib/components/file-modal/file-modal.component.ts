@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
 import * as FileService from '../../proxy/dignite/file-explorer/files';
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
 import { PagedResultDto, ABP, ListService, Rest, RestService, LocalizationService, LIST_QUERY_DEBOUNCE_TIME } from '@abp/ng.core';
-import { FileDescriptorDto, GetFilesInput } from '../../proxy/dignite/file-explorer/files';
+import { FileDescriptorDto, FileDescriptorService, GetFilesInput } from '../../proxy/dignite/file-explorer/files';
 import { FileApiService } from '../../services/file-api.service';
 import { SelectionType } from '@swimlane/ngx-datatable';
 var that
@@ -31,7 +31,18 @@ export class FileModalComponent {
     private _LocalizationService: LocalizationService,
   ) {
     that = this
+    
   }
+
+  private _FileDescriptorService=inject(FileDescriptorService)
+  /**获取目录配置 */
+  getFilesConfiguration(){
+    this._FileDescriptorService.getFileContainerConfiguration(this._fileContainerName).subscribe(res=>{
+      this.createDirectoryPermissionName=res.createDirectoryPermissionName
+    })
+  }
+  /**目录的权限名称 */
+  createDirectoryPermissionName:string=null
 
   /**图片容器 */
   _fileContainerName: string
@@ -40,6 +51,7 @@ export class FileModalComponent {
     if (v) {
       this._fileContainerName = v;
       this.loadData()
+     
     }
   }
 
@@ -104,6 +116,7 @@ export class FileModalComponent {
   loadData() {
     if (this.ModalOpen && this._fileContainerName) {
       this.hookToQuery()
+      this.getFilesConfiguration()
     }
   }
 

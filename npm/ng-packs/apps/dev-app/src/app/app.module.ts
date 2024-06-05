@@ -34,6 +34,10 @@ import { fielFieldControlGroup } from '@dignite-ng/expand.file-explorer';
 import { ckEditorFieldControlGroup } from '@dignite-ng/expand.ck-editor';
 
 
+import { FileConfigModule } from '@dignite-ng/expand.file-explorer/config';
+
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -67,6 +71,7 @@ import { ckEditorFieldControlGroup } from '@dignite-ng/expand.ck-editor';
     DynamicFormModule.forRoot({
       cmsFieldControlGroup: [...FieldControlGroup,...fielFieldControlGroup,...ckEditorFieldControlGroup]
     }),
+    FileConfigModule.forRoot()
     
   ],
   providers: [APP_ROUTE_PROVIDER,

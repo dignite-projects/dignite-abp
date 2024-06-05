@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { FileApiService } from '../../services/file-api.service';
+import { FileDescriptorService } from '../../proxy/dignite/file-explorer/files';
 
 @Component({
   selector: 'fe-file-picker',
@@ -9,10 +10,13 @@ import { FileApiService } from '../../services/file-api.service';
 export class FilePickerComponent implements OnChanges{
 
 
+
   constructor(
     private _FileApiService: FileApiService,
   ) {
+  
   }
+
 
    /**是否多选 */
    _multiple: boolean = false

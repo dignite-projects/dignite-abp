@@ -12,18 +12,14 @@
     "module": "esnext",
     "lib": ["es2017", "dom"],
     "baseUrl": "./",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      // "@dignite-ng/expand.components": ["packages/components/src/public-api.ts"],
-      // "@dignite-ng/expand.core": ["packages/core/src/public-api.ts"],
       "@dignite-ng/expand.generators": ["packages/generators/src/index.ts"],
       "@dignite-ng/expand.file-explorer": ["packages/file-explorer/src/public-api.ts"],
       "@dignite-ng/expand.file-explorer/config": ["packages/file-explorer/config/src/public-api.ts"],
       "@dignite-ng/expand.dynamic-form": ["packages/dynamic-form/src/public-api.ts"],
-      "@dignite-ng/expand.cms": ["packages/cms/src/public-api.ts"],
-      "@dignite-ng/expand.cms/config": ["packages/cms/config/src/public-api.ts"],
       "@dignite-ng/expand.ck-editor": ["packages/ck-editor/src/public-api.ts"],
-      // "@dignite-ng/expand.ckeditor5-custom-build": ["packages/ck-editor/src/public-api.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

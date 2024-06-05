@@ -15,7 +15,6 @@ import {
 } from './component';
 import { DynamicFormModule } from '@dignite-ng/expand.dynamic-form';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CkEditorDemoComponent } from './component/ck-editor-demo/ck-editor-demo.component';
 import { ckEditorFieldControlGroup, CkEditorModule } from '@dignite-ng/expand.ck-editor';
 
 
@@ -26,7 +25,6 @@ import { ckEditorFieldControlGroup, CkEditorModule } from '@dignite-ng/expand.ck
     FieldsComponent,
     EditFieldComponent,
     FieldViewComponent,
-    CkEditorDemoComponent
   ],
   imports: [
     CommonModule,

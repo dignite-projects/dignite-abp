@@ -64,7 +64,7 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
             }
 
             // File descriptor associated entity authorization check handler
-            if (!resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null)
+            if (!resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null && !permissionName.IsNullOrEmpty())
             {
                 using (var scope = ServiceProvider.CreateScope())
                 {

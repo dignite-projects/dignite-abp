@@ -16,5 +16,5 @@ public abstract class FileDescriptorEntityAuthorizationHandlerBase<TResource> : 
         await AuthorizationService.CheckAsync(resource, requirement);
     }
 
-    public abstract Task<TResource> GetResourceAsync(FileDescriptor file);
+    protected abstract Task<TResource> GetResourceAsync(FileDescriptor file);
 }

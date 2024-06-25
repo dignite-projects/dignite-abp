@@ -8,7 +8,7 @@ namespace FileExplorerSample.Services;
 
 public class SampleEntityResourceAuthorizationHandler : FileDescriptorEntityAuthorizationHandlerBase<SampleEntity>, ITransientDependency
 {
-    public override Task<SampleEntity> GetResourceAsync(FileDescriptor file)
+    protected override Task<SampleEntity> GetResourceAsync(FileDescriptor file)
     {
         var resource = new SampleEntity();
         return Task.FromResult(resource);

@@ -6,7 +6,7 @@ namespace Dignite.FileExplorer.TestObjects;
 
 public class TestFileDescriptorEntityAuthorizationHandler : FileDescriptorEntityAuthorizationHandlerBase<TestEntity>
 {
-    public override Task<TestEntity> GetResourceAsync(FileDescriptor file)
+    protected override Task<TestEntity> GetResourceAsync(FileDescriptor file)
     {
         var resource = new TestEntity();
         return Task.FromResult(resource);

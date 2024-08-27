@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Dignite.Abp.NotificationCenter.Blazor.WebAssembly.Toolbar;
+using Dignite.Abp.NotificationCenter.Blazor.WebAssembly.Pages.NotificationCenter;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Toolbars;
@@ -18,7 +18,7 @@ public class NotificationCenterToolbarContributor : IToolbarContributor
 
             if (authenticationStateProvider != null)
             {
-                context.Toolbar.Items.Insert(0, new ToolbarItem(typeof(NotificationReminder)));
+                context.Toolbar.Items.Insert(0, new ToolbarItem(typeof(NotificationsTool)));
             }
         }
 

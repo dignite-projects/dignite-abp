@@ -63,8 +63,12 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
                 }
             }
 
+            if(resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null && !permissionName.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException(nameof(resource.EntityId), "The EntityId parameter is missing.");
+            }
             // File descriptor associated entity authorization check handler
-            if (!resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null && !permissionName.IsNullOrEmpty())
+            else if (!resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null && !permissionName.IsNullOrEmpty())
             {
                 using (var scope = ServiceProvider.CreateScope())
                 {

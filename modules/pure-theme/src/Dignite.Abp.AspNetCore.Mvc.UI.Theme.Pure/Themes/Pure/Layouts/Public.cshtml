@@ -21,7 +21,8 @@
 <html lang="@CultureInfo.CurrentUICulture.Name" dir="@rtl">
 <head>
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Public)
-    @await RenderSectionAsync("seotags", true)
+
+    @await RenderSectionAsync("seotags", false)
 
     <script src="~/themes/pure/color-mode-switch.js"></script>
     <abp-style-bundle name="@PureThemeBundles.Styles.Public" />

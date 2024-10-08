@@ -1,0 +1,10 @@
+﻿{
+  "selectedKubernetesProfile": null,
+  "solutionRunner": {
+    "selectedProfile": null,
+    "targetFrameworks": [],
+    "applicationsWithAlwaysBuild": [],
+    "applicationBatchStartStates": [],
+    "folderBatchStartStates": []
+  }
+}

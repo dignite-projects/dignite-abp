@@ -9,9 +9,4 @@ public class FileCellNameNotApplicableException : BusinessException
         Code = FileExplorerErrorCodes.Files.CellNameNotApplicable;
     }
 
-    public FileCellNameNotApplicableException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-        Code = FileExplorerErrorCodes.Files.CellNameNotApplicable;
-    }
 }

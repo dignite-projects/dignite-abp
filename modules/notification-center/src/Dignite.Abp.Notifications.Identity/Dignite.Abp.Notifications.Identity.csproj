@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AssemblyName>Dignite.Abp.Notifications.Identity</AssemblyName>
     <PackageId>Dignite.Abp.Notifications.Identity</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -15,13 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Volo.Abp.Authorization" Version="7.4.5" />
-	<PackageReference Include="Volo.Abp.Identity.Domain" Version="7.4.5" />
+	<PackageReference Include="Volo.Abp.Authorization" />
+	<PackageReference Include="Volo.Abp.Identity.Domain" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Notifications\Dignite.Abp.Notifications.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Volo.Abp.Identity.Domain" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net8.0</TargetFrameworks>
 		<AssemblyName>Dignite.Abp.NotificationCenter.Application</AssemblyName>
 		<PackageId>Dignite.Abp.NotificationCenter.Application</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -15,8 +15,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AutoMapper" Version="7.4.5" />
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Application.Contracts\Dignite.Abp.NotificationCenter.Application.Contracts.csproj" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Domain\Dignite.Abp.NotificationCenter.Domain.csproj" />
   </ItemGroup>

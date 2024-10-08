@@ -5,7 +5,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AssemblyName>Dignite.Abp.UserPoints.Domain.Tests</AssemblyName>
     <PackageId>Dignite.Abp.UserPoints.Domain.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.EntityFrameworkCore.Tests\Dignite.Abp.UserPoints.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

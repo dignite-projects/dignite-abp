@@ -5,7 +5,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AssemblyName>Dignite.Abp.UserPoints.EntityFrameworkCore.Tests</AssemblyName>
     <PackageId>Dignite.Abp.UserPoints.EntityFrameworkCore.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -16,11 +16,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(MicrosoftEntityFrameworkCorePackageVersion)" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
     <ProjectReference Include="..\..\src\Dignite.Abp.UserPoints.EntityFrameworkCore\Dignite.Abp.UserPoints.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.TestBase\Dignite.Abp.UserPoints.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
 
 </Project>

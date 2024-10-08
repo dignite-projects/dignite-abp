@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>2.1.4</Version>
+    <Version>3.0.0-rc.1</Version>
     <NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>
     <PackageIconUrl>https://dignite.com/assets/dignite_nupkg.png</PackageIconUrl>
     <PackageProjectUrl>https://dignite.com/dignite-abp</PackageProjectUrl>
@@ -19,7 +19,7 @@
     <None Include="..\..\NuGet.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Include="Microsoft.SourceLink.GitHub">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

@@ -9,9 +9,4 @@ public class FileCellNameNotFoundException : BusinessException
         Code = FileExplorerErrorCodes.Files.CellNameNotFound;
     }
 
-    public FileCellNameNotFoundException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-        Code = FileExplorerErrorCodes.Files.CellNameNotFound;
-    }
 }

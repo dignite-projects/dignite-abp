@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
 		<AssemblyName>Dignite.Abp.NotificationCenter.HttpApi.Client</AssemblyName>
 		<PackageId>Dignite.Abp.NotificationCenter.HttpApi.Client</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -15,7 +15,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Http.Client" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Http.Client" />
     <ProjectReference Include="..\Dignite.Abp.NotificationCenter.Application.Contracts\Dignite.Abp.NotificationCenter.Application.Contracts.csproj" />
   </ItemGroup>
 

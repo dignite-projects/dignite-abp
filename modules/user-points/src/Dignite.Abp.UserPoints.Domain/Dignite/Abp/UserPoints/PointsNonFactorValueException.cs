@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Volo.Abp;
 
 namespace Dignite.Abp.UserPoints;
@@ -17,8 +16,4 @@ public class PointsNonFactorValueException : BusinessException
         WithData(nameof(DignitePointsBlockOptions.Factor), factor);
     }
 
-    public PointsNonFactorValueException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-    }
 }

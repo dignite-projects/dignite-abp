@@ -2,7 +2,7 @@
 
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.TestBase</AssemblyName>
 		<PackageId>Dignite.FileExplorer.TestBase</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -13,15 +13,15 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="NSubstitute" Version="4.3.0" />
-    <PackageReference Include="Shouldly" Version="4.1.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.5" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="7.4.5" />
-    <PackageReference Include="Volo.Abp.TestBase" Version="7.4.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.extensibility.execution" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.TestBase" />
     <ProjectReference Include="..\..\src\Dignite.FileExplorer.Domain\Dignite.FileExplorer.Domain.csproj" />
   </ItemGroup>
 

@@ -7,7 +7,7 @@ public static class StreamExtensions
 {
     public static string Md5(this Stream stream)
     {
-        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+        var md5 = MD5.Create();
         md5.ComputeHash(stream);
         byte[] b = md5.Hash;
         md5.Clear();

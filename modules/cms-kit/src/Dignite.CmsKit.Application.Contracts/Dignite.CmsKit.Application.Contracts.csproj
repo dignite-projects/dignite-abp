@@ -4,12 +4,12 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
 	  <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts" Version="7.4.5" />
+    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain.Shared\Dignite.CmsKit.Domain.Shared.csproj" />
   </ItemGroup>
 

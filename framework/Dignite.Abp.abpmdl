@@ -1,0 +1,74 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.Notifications.SignalRNotifier": {
+      "path": "src/Dignite.Abp.Notifications.SignalRNotifier/Dignite.Abp.Notifications.SignalRNotifier.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Notifications": {
+      "path": "src/Dignite.Abp.Notifications/Dignite.Abp.Notifications.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.DynamicForms.Tests": {
+      "path": "test/Dignite.Abp.DynamicForms.Tests/Dignite.Abp.DynamicForms.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.DynamicForms.Components": {
+      "path": "src/Dignite.Abp.DynamicForms.Components/Dignite.Abp.DynamicForms.Components.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Notifications.Tests": {
+      "path": "test/Dignite.Abp.Notifications.Tests/Dignite.Abp.Notifications.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.BlazoriseUI": {
+      "path": "src/Dignite.Abp.BlazoriseUI/Dignite.Abp.BlazoriseUI.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Notifications.Shared": {
+      "path": "src/Dignite.Abp.Notifications.Shared/Dignite.Abp.Notifications.Shared.abppkg",
+      "folder": "src"
+    },
+    "AbpTestBase": {
+      "path": "test/AbpTestBase/AbpTestBase.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.DynamicForms.Components.Tests": {
+      "path": "test/Dignite.Abp.DynamicForms.Components.Tests/Dignite.Abp.DynamicForms.Components.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.Notifications.Components": {
+      "path": "src/Dignite.Abp.Notifications.Components/Dignite.Abp.Notifications.Components.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.DynamicForms.Components.BlazoriseUI": {
+      "path": "src/Dignite.Abp.DynamicForms.Components.BlazoriseUI/Dignite.Abp.DynamicForms.Components.BlazoriseUI.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.DynamicForms": {
+      "path": "src/Dignite.Abp.DynamicForms/Dignite.Abp.DynamicForms.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Localization": {
+      "path": "src/Dignite.Abp.Localization/Dignite.Abp.Localization.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.AspNetCore.Mvc.UI": {
+      "path": "src/Dignite.Abp.AspNetCore.Mvc.UI/Dignite.Abp.AspNetCore.Mvc.UI.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Points": {
+      "path": "src/Dignite.Abp.Points/Dignite.Abp.Points.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.Points.Tests": {
+      "path": "test/Dignite.Abp.Points.Tests/Dignite.Abp.Points.Tests.abppkg",
+      "folder": "test"
+    }
+  }
+}

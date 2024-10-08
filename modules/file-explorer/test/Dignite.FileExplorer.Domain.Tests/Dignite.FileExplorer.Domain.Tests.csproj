@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.Domain.Tests</AssemblyName>
 		<PackageId>Dignite.FileExplorer.Domain.Tests</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <ProjectReference Include="..\Dignite.FileExplorer.EntityFrameworkCore.Tests\Dignite.FileExplorer.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 

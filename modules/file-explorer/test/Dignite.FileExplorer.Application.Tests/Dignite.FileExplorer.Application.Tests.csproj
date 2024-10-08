@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.Application.Tests</AssemblyName>
 		<PackageId>Dignite.FileExplorer.Application.Tests</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -14,8 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dignite.FileExplorer.Application\Dignite.FileExplorer.Application.csproj" />
     <ProjectReference Include="..\Dignite.FileExplorer.Domain.Tests\Dignite.FileExplorer.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="7.4.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+	  <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" />
   </ItemGroup>
 
 </Project>

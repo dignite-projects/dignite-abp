@@ -3,15 +3,15 @@
   <Import Project="..\..\..\common.test.props" />
 
   <PropertyGroup>
-	<TargetFramework>net7.0</TargetFramework>
+	<TargetFramework>net8.0</TargetFramework>
     <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\..\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
 	<ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
-    <PackageReference Include="Volo.Abp.Autofac" Version="7.4.5" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkPackageVersion)" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
   </ItemGroup>
 
 </Project>

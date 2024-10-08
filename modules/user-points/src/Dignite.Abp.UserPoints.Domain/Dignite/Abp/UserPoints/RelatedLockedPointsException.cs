@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Volo.Abp;
 
 namespace Dignite.Abp.UserPoints;
@@ -16,8 +15,4 @@ public class RelatedLockedPointsException : BusinessException
         WithData(nameof(UserPointsItem.Points), points);
     }
 
-    public RelatedLockedPointsException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-    }
 }

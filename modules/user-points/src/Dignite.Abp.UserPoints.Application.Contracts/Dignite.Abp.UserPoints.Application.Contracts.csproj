@@ -4,7 +4,7 @@
   <Import Project="..\..\..\..\common.props" />
 	
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
     <AssemblyName>Dignite.Abp.UserPoints.Application.Contracts</AssemblyName>
     <PackageId>Dignite.Abp.UserPoints.Application.Contracts</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.4.5" />
-    <PackageReference Include="Volo.Abp.Authorization" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Authorization" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.Domain.Shared\Dignite.Abp.UserPoints.Domain.Shared.csproj" />
   </ItemGroup>
 

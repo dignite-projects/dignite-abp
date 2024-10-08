@@ -16,8 +16,4 @@ public class InsufficientAvailablePointsException : BusinessException
         WithData(nameof(UserPointsItem.Points), points);
     }
 
-    public InsufficientAvailablePointsException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-    }
 }

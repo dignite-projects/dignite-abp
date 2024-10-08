@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
 	  <AssemblyName>Dignite.Abp.Files.Domain</AssemblyName>
 	  <PackageId>Dignite.Abp.Files.Domain</PackageId>
 	  <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
     <ProjectReference Include="..\Dignite.Abp.Files.Domain.Shared\Dignite.Abp.Files.Domain.Shared.csproj" />
-    <PackageReference Include="Volo.Abp.BlobStoring" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.BlobStoring" />
   </ItemGroup>
 </Project>

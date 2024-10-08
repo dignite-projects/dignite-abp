@@ -1,0 +1,9 @@
+{
+  "id": "f3110207-7357-4466-aaf0-c9615308a09f",
+  "template": "empty",
+  "modules": {
+    "Dignite.Abp": {
+      "path": "Dignite.Abp.abpmdl"
+    }
+  }
+}

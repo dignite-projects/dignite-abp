@@ -3,7 +3,7 @@
 	<Import Project="..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>Dignite.Abp.Notifications.Components</AssemblyName>
 		<PackageId>Dignite.Abp.Notifications.Components</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.Components" Version="7.4.5" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -4,13 +4,13 @@
 	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 		<RootNamespace />
 	</PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.VirtualFileSystem" Version="7.4.5" />
+        <PackageReference Include="Volo.Abp.VirtualFileSystem" />
     </ItemGroup>
 
     <ItemGroup>

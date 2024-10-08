@@ -5,7 +5,7 @@
 	<Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <AssemblyName>Dignite.Abp.UserPoints.EntityFrameworkCore</AssemblyName>
     <PackageId>Dignite.Abp.UserPoints.EntityFrameworkCore</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.4.5" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
     <ProjectReference Include="..\Dignite.Abp.UserPoints.Domain\Dignite.Abp.UserPoints.Domain.csproj" />
   </ItemGroup>
 

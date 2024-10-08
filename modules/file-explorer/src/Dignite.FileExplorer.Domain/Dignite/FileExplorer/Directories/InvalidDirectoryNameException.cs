@@ -5,11 +5,6 @@ namespace Dignite.FileExplorer.Directories;
 
 public class InvalidDirectoryNameException : BusinessException
 {
-    public InvalidDirectoryNameException(SerializationInfo serializationInfo, StreamingContext context)
-        : base(serializationInfo, context)
-    {
-    }
-
     public InvalidDirectoryNameException(string directoryName)
     {
         DirectoryName = directoryName;

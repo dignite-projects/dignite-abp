@@ -41,7 +41,7 @@ Dignite ABP Files 是基於 ABP BlobStoring 開發的，為檔案上傳過程提
 
 ### Cms Kit
 
-基於 [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) 開發，新增了 [**Favourite**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Favourite) 功能和 [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 功能。
+基於 [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) 開發，新增了 [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 功能。
 
 - [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Cms-Kit/Index)
 

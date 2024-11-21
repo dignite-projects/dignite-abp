@@ -41,7 +41,7 @@ Dignite ABP Files は ABP BlobStoring を基に開発され、ファイルのア
 
 ### Cms Kit
 
-[Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) を基に開発され、[**Favourite**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Favourite) 機能と [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 機能が追加されました。
+[Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) を基に開発され、[**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 機能が追加されました。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Index)
 

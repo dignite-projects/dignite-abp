@@ -9,7 +9,6 @@
 
 This module is developed based on [Abp Cms Kit](https://docs.abp.io/en/abp/latest/Modules/Cms-Kit/Index) and adds the following features:
 
-* Provides [**Favorite**](Favourite.md) functionality, allowing users to add favorites/collections for any resource.
 * Provides [**Visit**](Visit.md) functionality, recording visits to any resource.
 
 ## Installation
@@ -109,12 +108,11 @@ GlobalFeatureManager.Instance.Modules.DigniteCmsKit(cmsKit =>
 });
 ```
 
-You may prefer to enable these features one by one rather than enabling all at once. The following example only enables the [Favorite](Favourite.md) and [Visit](Visit.md) features:
+You may prefer to enable these features one by one rather than enabling all at once. The following example only enables the [Visit](Visit.md) features:
 
 ````csharp
 GlobalFeatureManager.Instance.Modules.DigniteCmsKit(cmsKit =>
 {
-    cmsKit.Favourites.Enable();
     cmsKit.Visits.Enable();
 });
 ````

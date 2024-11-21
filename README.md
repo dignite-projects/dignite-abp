@@ -41,7 +41,7 @@ Dignite Abp Files is developed based on ABP BlobStoring and provides file type v
 
 ### Cms Kit
 
-Developed based on [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index), added [**Favourite**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Favourite) feature and [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) feature.
+Developed based on [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index), added [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) feature.
 
 - [Document](https://learn.dignite.com/en/abp/latest/Cms-Kit/Index)
 

@@ -9,7 +9,6 @@
 
 このモジュールは [Abp Cms Kit](https://docs.abp.io/en/abp/latest/Modules/Cms-Kit/Index) をベースに開発され、以下の機能が追加されています:
 
-* [**お気に入り**](Favourite.md) 機能を提供し、ユーザーが任意のリソースにお気に入り/コレクションを追加できます。
 * [**訪問**](Visit.md) 機能を提供し、任意のリソースへの訪問を記録します。
 
 ## インストール

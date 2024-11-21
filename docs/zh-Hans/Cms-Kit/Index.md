@@ -9,7 +9,6 @@
 
 此模块是基于 [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) 开发，增加了以下几个功能：
 
-* 提供 [**喜欢**](Favourite.md) 功能，用户添加对任何资源的喜欢/收藏功能.
 * 提供 [**访问**](Visit.md) 功能，记录对任何资源的访问功能.
 
 ## 安装
@@ -109,12 +108,11 @@ GlobalFeatureManager.Instance.Modules.DigniteCmsKit(cmsKit =>
 });
 ```
 
-你可能更愿意逐个启用这些功能, 而不是启用全部功能. 以下示例仅启用了 [喜欢](Favourite.md) 和 [访问记录](Visit.md) 功能:
+你可能更愿意逐个启用这些功能, 而不是启用全部功能. 以下示例启用了 [访问记录](Visit.md) 功能:
 
 ````csharp
 GlobalFeatureManager.Instance.Modules.DigniteCmsKit(cmsKit =>
 {
-    cmsKit.Favourites.Enable();
     cmsKit.Visits.Enable();
 });
 ````

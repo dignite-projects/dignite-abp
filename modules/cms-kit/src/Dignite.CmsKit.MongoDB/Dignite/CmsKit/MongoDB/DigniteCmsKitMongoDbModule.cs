@@ -1,6 +1,4 @@
-﻿using Dignite.CmsKit.Favourites;
-using Dignite.CmsKit.MongoDB.Favourites;
-using Dignite.CmsKit.MongoDB.Visits;
+﻿using Dignite.CmsKit.MongoDB.Visits;
 using Dignite.CmsKit.Visits;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -18,7 +16,6 @@ public class DigniteCmsKitMongoDbModule : AbpModule
     {
         context.Services.AddMongoDbContext<CmsKitMongoDbContext>(options =>
         {
-            options.AddRepository<Favourite, MongoFavouriteRepository>();
             options.AddRepository<Visit, MongoVisitRepository>();
         });
     }

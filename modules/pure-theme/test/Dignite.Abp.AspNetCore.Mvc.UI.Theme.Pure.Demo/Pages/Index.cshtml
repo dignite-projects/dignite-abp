@@ -1,14 +1,11 @@
 ﻿@page
-@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo
-@using Volo.Abp.AspNetCore.Mvc.UI.Theming;
-@addTagHelper *, Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure
-@inject IThemeManager ThemeManager
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus
 @model Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Pages.IndexModel
 @{
-    Layout = ThemeManager.CurrentTheme.GetPublicLayout();
-}
-@section content_toolbar {
-    <page-navbar title="Home" menu-name="@NavbarConsts.HomeMenus" toolbar-name="@NavbarConsts.HomeTools"></page-navbar>
+    PageLayout.Content.Title = "Home Page";
+    PageLayout.Content.MenuItemName = PureThemeDemoMenus.Home;
+    PageLayout.Content.BreadCrumb.ShowHome = false;
+    PageLayout.Content.BreadCrumb.ShowCurrent = false;
 }
 
 <h1 class="my-5">Pure Theme Demo</h1>
@@ -19,6 +16,7 @@
     <button type="button" class="btn btn-dark" data-bs-theme-value="dark">Dark Mode</button>
     <button type="button" class="btn btn-light" data-bs-theme-value="light">Light Mode</button>
 </div>
+
 
 <h2>Animation of underline </h2>
 <div class="row mb-5">
@@ -36,16 +34,10 @@
         </h1>
     </div>
     <div class="col-md-4">
-        <div class="bg-black p-2">
-            <a href="#" class="underline-animate text-white">A white Link</a>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="bg-white p-2">
-            <a href="#" class="underline-animate text-black">A black Link</a>
-        </div>
+        <a href="#" class="underline-animate text-secondary">Text Secondary Link</a>
     </div>
 </div>
 <div class="my-5">
     <img src="https://cn.bing.com/th?id=OHR.SpringApple_ZH-CN0101917345_1920x1080.jpg" class="img-fluid">
 </div>
+<div class="bg-black" style="height:500px;"></div>

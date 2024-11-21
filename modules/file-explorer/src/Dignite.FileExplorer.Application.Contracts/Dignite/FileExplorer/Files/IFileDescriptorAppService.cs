@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Content;
 
@@ -24,6 +24,22 @@ public interface IFileDescriptorAppService : ICrudAppService<FileDescriptorDto, 
     /// <param name="containerName"></param>
     /// <returns></returns>
     Task<FileContainerConfigurationDto> GetFileContainerConfigurationAsync([NotNull] string containerName);
+
+    /// <summary>
+    /// No user login required to access files that do not require authorization
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="entityId"></param>
+    /// <returns></returns>
+    Task<ListResultDto<FileDescriptorDto>> GetListByEntityIdAsync([NotNull] string containerName, [NotNull] string entityId);
+
+    /// <summary>
+    /// Users with administrative privileges can delete all files, while users without administrative privileges can only delete the current user's files.
+    /// </summary>
+    /// <param name="containerName"></param>
+    /// <param name="entityId"></param>
+    /// <returns></returns>
+    Task DeleteByEntityIdAsync([NotNull] string containerName, [NotNull] string entityId);
 
     /*
     TODO:

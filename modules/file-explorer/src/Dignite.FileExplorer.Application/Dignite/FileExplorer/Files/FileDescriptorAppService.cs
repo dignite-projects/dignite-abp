@@ -7,7 +7,6 @@ using Dignite.Abp.BlobStoring;
 using Dignite.FileExplorer.Permissions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authorization;
-using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.BlobStoring;
@@ -71,6 +70,18 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
         {
             await AuthorizationService.CheckAsync(result, CommonOperations.Delete);
             await _fileManager.DeleteAsync(result);
+        }
+    }
+
+    [Authorize]
+    public async Task DeleteByEntityIdAsync([NotNull] string containerName, string entityId)
+    {
+        var allowDelete = await AuthorizationService.IsGrantedAsync(FileExplorerPermissions.Files.Management);
+        var creatorId = allowDelete?null:CurrentUser.Id;
+        var result = await _fileRepository.GetListAsync(containerName, creatorId, null, null, entityId);
+        foreach (var file in result)
+        {
+            await _fileManager.DeleteAsync(file);
         }
     }
 
@@ -176,4 +187,19 @@ public class FileDescriptorAppService : ApplicationService, IFileDescriptorAppSe
 
         return Task.FromResult(dto);
     }
+
+
+    public async Task<ListResultDto<FileDescriptorDto>> GetListByEntityIdAsync([NotNull] string containerName, string entityId)
+    {
+        //Verify authorization using a virtual file
+        var virtualFileDescriptorEntity = new FileDescriptor(Guid.NewGuid(), containerName, Guid.NewGuid().ToString(), "virtualFileName.jpg", "image/jpeg", null, null, entityId, CurrentTenant.Id);
+        await AuthorizationService.CheckAsync(virtualFileDescriptorEntity, CommonOperations.Get);
+
+        var result = await _fileRepository.GetListAsync(containerName, null, null, null, entityId);
+
+        return new ListResultDto<FileDescriptorDto>(
+            ObjectMapper.Map<List<FileDescriptor>, List<FileDescriptorDto>>(result)
+            );
+    }
+
 }

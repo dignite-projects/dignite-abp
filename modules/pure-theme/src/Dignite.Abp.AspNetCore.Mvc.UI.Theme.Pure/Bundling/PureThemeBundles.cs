@@ -4,11 +4,11 @@ public static class PureThemeBundles
 {
     public static class Styles
     {
-        public const string Public = "Pure.Public";
+        public const string Global = "Pure.Global";
     }
 
     public static class Scripts
     {
-        public const string Pubilc = "Pure.Public";
+        public const string Global = "Pure.Global";
     }
 }

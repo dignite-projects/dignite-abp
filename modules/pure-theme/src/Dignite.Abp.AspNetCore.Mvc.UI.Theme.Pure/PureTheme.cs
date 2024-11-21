@@ -5,8 +5,12 @@ using Volo.Abp.DependencyInjection;
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 
 [ThemeName(Name)]
-public class PureTheme : MultiTenancyThemeBase, ITransientDependency
+public class PureTheme : MultiTenancyThemeBase, ITheme, ITransientDependency
 {
     public const string Name = "Pure";
 
+    public override string GetLayout(string name, bool fallbackToDefault = true)
+    {
+        return base.GetLayout(name, fallbackToDefault);
+    }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Dignite.CmsKit.Visits;
+using Volo.Abp.Validation;
 
 namespace Dignite.CmsKit.Public.Visits;
 
@@ -7,9 +9,11 @@ namespace Dignite.CmsKit.Public.Visits;
 public class CreateVisitInput
 {
     [Required]
+    [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxUserAgentLength))]
     public string UserAgent { get; set; }
 
     [Required]
+    [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxClientIpAddressLength))]
     public string ClientIpAddress { get; set; }
 
     /// <summary>

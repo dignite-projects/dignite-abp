@@ -1,0 +1,8 @@
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Footer.FooterLinks
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Footer.ShortcutMenu
+
+<footer class="container my-5 d-none d-sm-none d-md-none d-lg-block" id="layout-footer">
+    @(await Component.InvokeAsync<ShortcutMenuViewComponent>())
+    <hr />
+    @(await Component.InvokeAsync<FooterLinksViewComponent>())
+</footer>

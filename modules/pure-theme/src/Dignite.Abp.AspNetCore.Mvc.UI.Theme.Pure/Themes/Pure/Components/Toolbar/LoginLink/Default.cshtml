@@ -1,0 +1,7 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Localization.Resources.AbpUi
+@inject IHtmlLocalizer<AbpUiResource> L
+<a class="btn" role="button" href="~/Account/Login">
+    <i class="fas fa-user"></i>
+    <span class="d-none d-sm-none d-md-none d-lg-inline">@L["Login"]</span>
+</a>

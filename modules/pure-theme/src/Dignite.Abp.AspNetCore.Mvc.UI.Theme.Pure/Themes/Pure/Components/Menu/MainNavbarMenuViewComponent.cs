@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.UI.Navigation;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Components.Menu;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Menu;
 
 [ViewComponent(Name = "Menu")]
 public class MainNavbarMenuViewComponent : AbpViewComponent

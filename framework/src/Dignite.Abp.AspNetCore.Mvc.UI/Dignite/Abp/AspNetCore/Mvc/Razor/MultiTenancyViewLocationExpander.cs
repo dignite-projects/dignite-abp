@@ -75,7 +75,7 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
             foreach (var viewLocation in _viewLocations)
             {
                 tenantViewLocations.Add("/Tenants/" + tenantName + "/Themes/" + currentThemeName + viewLocation);
-                tenantViewLocations.Add("/Tenants/" + tenantName + viewLocation);
+                tenantViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
             }
 
             tenantViewLocations = tenantViewLocations.Concat(_viewLocations).ToList();

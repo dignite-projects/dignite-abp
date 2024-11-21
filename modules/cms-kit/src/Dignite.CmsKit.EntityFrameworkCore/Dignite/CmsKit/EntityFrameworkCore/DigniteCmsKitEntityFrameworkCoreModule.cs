@@ -1,5 +1,4 @@
-﻿using Dignite.CmsKit.Favourites;
-using Dignite.CmsKit.Visits;
+﻿using Dignite.CmsKit.Visits;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 using Volo.CmsKit.EntityFrameworkCore;
@@ -16,7 +15,6 @@ public class DigniteCmsKitEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<CmsKitDbContext>(options =>
         {
-            options.AddRepository<Favourite, EfCoreFavouriteRepository>();
             options.AddRepository<Visit, EfCoreVisitRepository>();
         });
     }

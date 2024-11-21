@@ -24,31 +24,23 @@
 
     setTheme(getPreferredTheme())
 
-    const showActiveTheme = (theme, focus = false) => {
-        const themeSwitcher = document.querySelector('#bd-theme')
+    const showActiveTheme = (theme) => {
+        const themeSwitchers = document.querySelectorAll('.color-mode-switch')
 
-        if (!themeSwitcher) {
-            return
-        }
+        for (var i = 0; i < themeSwitchers.length; i++) {
+            var themeSwitcher = themeSwitchers[i];
 
-        const themeSwitcherText = document.querySelector('#bd-theme-text')
-        const activeThemeIcon = document.querySelector('.theme-icon-active use')
-        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-        const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
+            const btnDarkMode = themeSwitcher.querySelector('button[data-bs-theme-value="dark"]');
+            const btnLightMode = themeSwitcher.querySelector('button[data-bs-theme-value="light"]');
 
-        document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-            element.classList.remove('active')
-            element.setAttribute('aria-pressed', 'false')
-        })
-
-        btnToActive.classList.add('active')
-        btnToActive.setAttribute('aria-pressed', 'true')
-        activeThemeIcon.setAttribute('href', svgOfActiveBtn)
-        const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-        themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-
-        if (focus) {
-            themeSwitcher.focus()
+            if (theme == "dark") {
+                btnLightMode.classList.remove('d-none');
+                btnDarkMode.classList.add('d-none')
+            }
+            if (theme == "light") {
+                btnDarkMode.classList.remove('d-none');
+                btnLightMode.classList.add('d-none')
+            }
         }
     }
 
@@ -68,7 +60,7 @@
                     const theme = toggle.getAttribute('data-bs-theme-value')
                     setStoredTheme(theme)
                     setTheme(theme)
-                    showActiveTheme(theme, true)
+                    showActiveTheme(theme)
                 })
             })
     })

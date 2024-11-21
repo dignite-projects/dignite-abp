@@ -1,21 +1,24 @@
 ﻿@using Volo.Abp.UI.Navigation
 @model ApplicationMenuItem
 @{
+    var elementId = string.IsNullOrEmpty(Model.ElementId) ? string.Empty : $"id=\"{Model.ElementId}\"";
     var cssClass = string.IsNullOrEmpty(Model.CssClass) ? string.Empty : Model.CssClass;
     var disabled = Model.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.IsLocalUrl(Model.Url) ? Url.Content(Model.Url.EnsureStartsWith('~')) : Model.Url;
+    var customComponentType = Model.GetComponentTypeOrDefault();
 }
 @if (Model.IsLeaf)
 {
-    if (Model.Url != null)
+    if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
     {
-        <a class="dropdown-item @cssClass @disabled" href="@url" target="@Model.Target" id="@Model.ElementId">
+        @(await Component.InvokeAsync(customComponentType))
+    }
+    else if (Model.Url != null)
+    {
+        <a class="dropdown-item @cssClass @disabled" href="@url" target="@Model.Target" @Html.Raw(elementId)>
             @if (Model.Icon != null)
             {
-                if (Model.Icon.StartsWith("fa"))
-                {
-                    <i class="@Model.Icon"></i>
-                }
+                <i class="@Model.Icon"></i>
             }
             @Model.DisplayName
         </a>
@@ -24,21 +27,25 @@
 else
 {
     <div class="dropdown-submenu">
-        <a role="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @if (Model.Icon != null)
-            {
-                if (Model.Icon.StartsWith("fa"))
+        @if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+        {
+            @(await Component.InvokeAsync(customComponentType))
+        }
+        else
+        {
+            <a role="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (Model.Icon != null)
                 {
                     <i class="@Model.Icon"></i>
                 }
-            }
-            @Model.DisplayName
-        </a>
-        <div class="dropdown-menu border-0">
-            @foreach (var childMenuItem in Model.Items)
-            {
-                @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
-            }
-        </div>
+                @Model.DisplayName
+            </a>
+            <div class="dropdown-menu">
+                @foreach (var childMenuItem in Model.Items)
+                {
+                    @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
+                }
+            </div>
+        }
     </div>
 }

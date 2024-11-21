@@ -2,23 +2,26 @@
 @model ApplicationMenu
 @foreach (var menuItem in Model.Items)
 {
-    var currentUrl = Context.Request.Path.Value;
+    var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";
     var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
     var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
+    var customComponentType = menuItem.GetComponentTypeOrDefault();
+    var currentUrl = Context.Request.Path.Value;
     var isActive = currentUrl.StartsWith(url) && url != "/" ? "active" : string.Empty;
     if (menuItem.IsLeaf)
     {
-        if (menuItem.Url != null)
+        if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
         {
-            <li class="nav-item @cssClass" id="@menuItem.ElementId">
-                <a class="nav-link @disabled @isActive" href="@url" target="@menuItem.Target">
+            @(await Component.InvokeAsync(customComponentType))
+        }
+        else if (menuItem.Url != null)
+        {
+            <li class="nav-item @cssClass" @elementId>
+                <a class="nav-link underline-animate fw-medium px-0 mx-3 @disabled @isActive" href="@url" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {
-                        if (menuItem.Icon.StartsWith("fa"))
-                        {
-                            <i class="@menuItem.Icon"></i>
-                        }
+                        <i class="@menuItem.Icon"></i>
                     }
                     @menuItem.DisplayName
                 </a>
@@ -29,23 +32,28 @@
     {
         <li class="nav-item">
             <div class="dropdown">
-                <a class="nav-link @disabled @isActive dropdown-toggle" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @if (menuItem.Icon != null)
-                    {
-                        if (menuItem.Icon.StartsWith("fa"))
+                @if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+                {
+                    @(await Component.InvokeAsync(customComponentType))
+                }
+                else
+                {
+                    <a class="nav-link underline-animate fw-medium px-0 mx-3 dropdown-toggle @disabled @isActive" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if (menuItem.Icon != null)
                         {
                             <i class="@menuItem.Icon"></i>
                         }
-                    }
-                    @menuItem.DisplayName
-                </a>
-                <div class="dropdown-menu border-0" aria-labelledby="Menu_@(menuItem.Name)">
-                    @foreach (var childMenuItem in menuItem.Items)
-                    {
-                        @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
-                    }
-                </div>
+                        @menuItem.DisplayName
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Menu_@(menuItem.Name)">
+                        @foreach (var childMenuItem in menuItem.Items)
+                        {
+                            @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
+                        }
+                    </div>
+                }
             </div>
         </li>
     }
 }
+

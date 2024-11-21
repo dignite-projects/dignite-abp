@@ -242,6 +242,7 @@
     <PackageVersion Include="Volo.Abp.Imaging.ImageSharp" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.BlobStoring" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Components.Web.Theming" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.Http.Client.IdentityModel.WebAssembly" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.Ddd.Domain" Version="8.3.1" />

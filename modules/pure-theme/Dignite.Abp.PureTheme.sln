@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Comp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure", "src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj", "{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo", "test\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.csproj", "{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI\Dignite.Abp.AspNetCore.Mvc.UI.csproj", "{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo", "test\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.csproj", "{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,14 +43,14 @@ Global
 		{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAA1A435-05A9-4382-B3FA-DAF44BF085EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,8 +60,8 @@ Global
 		{44443EA3-5535-4043-8D83-0B0E4D2966F9} = {E1C95DE6-4CD6-4479-99A7-DD0EE367AA83}
 		{FD3D9012-E5F2-4A21-802B-54A3AD9450C1} = {E1C95DE6-4CD6-4479-99A7-DD0EE367AA83}
 		{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8} = {E1C95DE6-4CD6-4479-99A7-DD0EE367AA83}
-		{EAA1A435-05A9-4382-B3FA-DAF44BF085EB} = {237F113C-20F0-4E0A-9E9E-2E7303C43F89}
 		{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC} = {3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}
+		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB} = {237F113C-20F0-4E0A-9E9E-2E7303C43F89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B9AF205-9F61-4087-ADCC-2E8728C3E4EB}

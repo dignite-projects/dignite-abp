@@ -1,18 +1,21 @@
 ﻿using System.Text.Unicode;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Packages.DatatablesNetBs5;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 [DependsOn(
-    typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+    typeof(AbpAspNetCoreMvcUiThemeSharedModule),
+    typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(DigniteAbpAspNetCoreMvcUiModule)
     )]
 public class DigniteAbpAspNetCoreMvcUiPureThemeModule : AbpModule
@@ -42,24 +45,29 @@ public class DigniteAbpAspNetCoreMvcUiPureThemeModule : AbpModule
             options.FileSets.AddEmbedded<DigniteAbpAspNetCoreMvcUiPureThemeModule>("Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure");
         });
 
+        Configure<AbpToolbarOptions>(options =>
+        {
+            options.Contributors.Add(new PureThemeMainTopToolbarContributor());
+        });
+
         Configure<AbpBundlingOptions>(options =>
         {
             options
                 .StyleBundles
-                .Add(PureThemeBundles.Styles.Public, bundle =>
+                .Add(PureThemeBundles.Styles.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Styles.Global)
-                        .AddContributors(typeof(PureThemePublicStyleContributor));
+                        .AddContributors(typeof(PureThemeGlobalStyleContributor));
                 });
 
             options
                 .ScriptBundles
-                .Add(PureThemeBundles.Scripts.Pubilc, bundle =>
+                .Add(PureThemeBundles.Scripts.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Scripts.Global)
-                        .AddContributors(typeof(PureThemePublicScriptContributor));
+                        .AddContributors(typeof(PureThemeGlobalScriptContributor));
                 });
         });
 

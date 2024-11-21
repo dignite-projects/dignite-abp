@@ -1,0 +1,23 @@
+﻿@using Volo.Abp.UI.Navigation
+@model ApplicationMenu
+
+<nav class="row row-cols-2 row-cols-md-4" aria-label="Shortcut Menus" role="navigation">
+    @foreach (var group in Model.Groups)
+    {
+        var menuItems = Model.Items.Where(m => m.GroupName == group.Name);
+        <div class="col">
+            <div class="card border-0 bg-transparent">
+                <div class="card-header bg-transparent border-0 ps-0">
+                    @group.DisplayName
+                </div>
+                <nav class="nav flex-column">
+                    @foreach (var item in menuItems)
+                    {
+                        var url = string.IsNullOrEmpty(item.Url) ? "#" : Url.IsLocalUrl(item.Url) ? Url.Content(item.Url.EnsureStartsWith('~')) : item.Url;
+                        <a class="nav-link link-secondary ps-0" href="@url" target="@item.Target">@item.DisplayName</a>
+                    }
+                </nav>
+            </div>
+        </div>
+    }
+</nav>

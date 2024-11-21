@@ -22,7 +22,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Sinks.Async" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Demo" />
     <PackageReference Include="Volo.Abp.Autofac" />
   </ItemGroup>
 

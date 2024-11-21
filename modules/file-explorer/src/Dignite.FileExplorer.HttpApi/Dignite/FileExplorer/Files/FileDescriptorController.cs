@@ -47,6 +47,13 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
         await _fileAppService.DeleteAsync(id);
     }
 
+    [HttpDelete]
+    [Route("{containerName}/{entityId}")]
+    public virtual async Task DeleteByEntityIdAsync([NotNull] string containerName, [NotNull] string entityId)
+    {
+        await _fileAppService.DeleteByEntityIdAsync(containerName, entityId);
+    }
+
     [HttpGet]
     [Route("{id:guid}")]
     public async Task<FileDescriptorDto> GetAsync(Guid id)
@@ -73,7 +80,14 @@ public class FileDescriptorController : AbpController, IFileDescriptorAppService
     }
 
     [HttpGet]
-    [Route("configuration")]
+    [Route("{containerName}/{entityId}/all")]
+    public async Task<ListResultDto<FileDescriptorDto>> GetListByEntityIdAsync([NotNull] string containerName, [NotNull] string entityId)
+    {
+        return await _fileAppService.GetListByEntityIdAsync(containerName,entityId);
+    }
+
+    [HttpGet]
+    [Route("{containerName}/configuration")]
     public virtual async Task<FileContainerConfigurationDto> GetFileContainerConfigurationAsync([NotNull] string containerName)
     {
         return await _fileAppService.GetFileContainerConfigurationAsync(containerName);

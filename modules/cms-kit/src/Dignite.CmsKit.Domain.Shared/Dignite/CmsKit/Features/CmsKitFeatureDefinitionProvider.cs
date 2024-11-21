@@ -12,15 +12,6 @@ public class CmsKitFeatureDefinitionProvider : FeatureDefinitionProvider
     {
         var group = context.GetGroupOrNull(Volo.CmsKit.Features.CmsKitFeatures.GroupName);
 
-        if (GlobalFeatureManager.Instance.IsEnabled<FavouritesFeature>())
-        {
-            group.AddFeature(CmsKitFeatures.FavouriteEnable,
-            "true",
-            L("Feature:FavouriteEnable"),
-            L("Feature:FavouriteEnableDescription"),
-            new ToggleStringValueType());
-        }
-
         if (GlobalFeatureManager.Instance.IsEnabled<VisitsFeature>())
         {
             group.AddFeature(CmsKitFeatures.VisitEnable,

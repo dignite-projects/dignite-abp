@@ -1,9 +1,10 @@
-﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.BreadCrumbs
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Footer
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.MainNavbar
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.PageAlerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.ContentTitle
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
@@ -43,7 +44,8 @@
     
     <title>@pageTitle</title>
 
-    <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
+    <script src="~/themes/pure/color-mode-switch.js"></script>
+    <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -57,23 +59,21 @@
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
     <div class="@containerClass">
-        @(await Component.InvokeAsync<PageAlertsViewComponent>())
-        <div id="AbpContentToolbar">
-            <div class="row mb-2">
-                @(await Component.InvokeAsync<ContentTitleViewComponent>())
-                <div class="col">
-                    <div class="text-end">
-                        @await RenderSectionAsync("content_toolbar", false)
-                    </div>
-                </div>
-            </div>
+        <div id="AbpContentToolbar" class="py-2 mb-3 bg-body d-flex justify-content-between align-items-center sticky-top content-toolbar">
+            @(await Component.InvokeAsync<BreadCrumbsViewComponent>())
+            <nav class="nav justify-content-end align-items-center">
+                @await RenderSectionAsync("content_toolbar", false)
+            </nav>
         </div>
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+        @(await Component.InvokeAsync<PageAlertsViewComponent>())
         @RenderBody()
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
     </div>
+    
+    @(await Component.InvokeAsync<FooterViewComponent>())
 
-    <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
+    <abp-script-bundle name="@PureThemeBundles.Scripts.Global" />
 
     <script src="~/Abp/ApplicationLocalizationScript?cultureName=@CultureInfo.CurrentUICulture.Name"></script>
     <script src="~/Abp/ApplicationConfigurationScript"></script>

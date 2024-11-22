@@ -1,0 +1,7 @@
+ui-angular:
+  - npm/ng-packs/*
+  - npm/ng-packs/**/*
+  - npm/ng-packs/**/**/*
+  - npm/ng-packs/**/**/**/*
+  - npm/ng-packs/**/**/**/**/*
+  - npm/ng-packs/**/**/**/**/**/*

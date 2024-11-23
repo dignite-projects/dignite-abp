@@ -8,9 +8,11 @@ public class VisitDto:EntityDto<Guid>
 
     public virtual string EntityId { get;  set; }
 
-    public string UserAgent { get; set; }
+    public virtual string? BrowserInfo { get; set; }
 
-    public string ClientIpAddress { get; set; }
+    public virtual string? DeviceInfo { get; set; }
+
+    public virtual string? ClientIpAddress { get; set; }
 
     /// <summary>
     /// Duration the length of seconds a user browsing

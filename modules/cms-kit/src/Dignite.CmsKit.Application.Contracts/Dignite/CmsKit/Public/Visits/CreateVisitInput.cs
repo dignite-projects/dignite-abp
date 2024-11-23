@@ -9,8 +9,12 @@ namespace Dignite.CmsKit.Public.Visits;
 public class CreateVisitInput
 {
     [Required]
-    [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxUserAgentLength))]
-    public string UserAgent { get; set; }
+    [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxBrowserInfoLength))]
+    public string BrowserInfo { get; set; }
+
+    [Required]
+    [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxDeviceInfoLength))]
+    public string DeviceInfo { get; set; }
 
     [Required]
     [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxClientIpAddressLength))]

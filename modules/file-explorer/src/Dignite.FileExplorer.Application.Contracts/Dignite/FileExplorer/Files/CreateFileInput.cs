@@ -23,7 +23,7 @@ public class CreateFileInput
 
     [CanBeNull]
     [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxCellNameLength))]
-    public string CellName { get; set; }
+    public string? CellName { get; set; }
 
     /// <summary>
     /// Directory in container
@@ -33,8 +33,9 @@ public class CreateFileInput
     /// <summary>
     /// Associated Entity Id
     /// </summary>
+    [CanBeNull]
     [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxEntityIdLength))]
-    public string EntityId { get; set; }
+    public string? EntityId { get; set; }
 
     [Required]
     public IRemoteStreamContent File { get; set; }

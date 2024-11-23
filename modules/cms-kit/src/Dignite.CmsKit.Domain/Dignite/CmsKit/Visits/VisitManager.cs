@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 
 namespace Dignite.CmsKit.Visits;
@@ -20,10 +19,10 @@ public class VisitManager : DomainService
     public async Task<Visit> CreateAsync(
         string entityType,
         string entityId,
-        string userAgent,
-        string clientIpAddress,
-        int duration,
-        Guid? userId)
+        string? browserInfo,
+        string? deviceInfo,
+        string? clientIpAddress,
+        int duration)
     {
         if (!await VisitDefinitionStore.IsDefinedAsync(entityType))
         {
@@ -35,10 +34,10 @@ public class VisitManager : DomainService
                 GuidGenerator.Create(),
                 entityType,
                 entityId,
-                userAgent,
+                browserInfo,
+                deviceInfo,
                 clientIpAddress,
                 duration,
-                userId,
                 CurrentTenant.Id
             )
         );

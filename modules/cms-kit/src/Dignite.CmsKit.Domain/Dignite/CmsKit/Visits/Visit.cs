@@ -14,14 +14,16 @@ public class Visit : BasicAggregateRoot<Guid>, IHasCreationTime,IMayHaveCreator
 
     public virtual string EntityId { get; protected set; }
 
-    public string UserAgent { get; protected set; }
+    public virtual string? BrowserInfo { get; protected set; }
 
-    public string ClientIpAddress { get; protected set; }
+    public virtual string? DeviceInfo { get; protected set; }
+
+    public virtual string? ClientIpAddress { get; protected set; }
 
     /// <summary>
     /// Duration the length of seconds a user browsing
     /// </summary>
-    public int Duration { get; protected set; }
+    public virtual int Duration { get; protected set; }
 
     public virtual Guid? CreatorId { get; protected set; }
 
@@ -36,20 +38,20 @@ public class Visit : BasicAggregateRoot<Guid>, IHasCreationTime,IMayHaveCreator
         Guid id,
         [NotNull] string entityType,
         [NotNull] string entityId,
-        string userAgent,
-        string clientIpAddress,
+        string? browserInfo,
+        string? deviceInfo,
+        string? clientIpAddress,
         int duration,
-        Guid? creatorId,
         Guid? tenantId = null
     )
         : base(id)
     {
         EntityType = Check.NotNullOrWhiteSpace(entityType, nameof(entityType), VisitConsts.MaxEntityTypeLength);
         EntityId = Check.NotNullOrWhiteSpace(entityId, nameof(entityId), VisitConsts.MaxEntityIdLength);
-        UserAgent = userAgent;
+        BrowserInfo = browserInfo;
+        DeviceInfo = deviceInfo;
         ClientIpAddress = clientIpAddress;
         Duration = duration;
-        CreatorId = creatorId;
         TenantId = tenantId;
     }
 }

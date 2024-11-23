@@ -6,7 +6,8 @@ public class VisitConsts
     public static int MaxEntityTypeLength { get; set; } = CmsEntityConsts.MaxEntityTypeLength;
 
     public static int MaxEntityIdLength { get; set; } = CmsEntityConsts.MaxEntityIdLength;
-    public static int MaxClientIpAddressLength { get; set; } = 15;
+    public static int MaxClientIpAddressLength { get; set; } = 64;
 
-    public static int MaxUserAgentLength { get; set; } = 256;
+    public static int MaxBrowserInfoLength { get; set; } = 512;
+    public static int MaxDeviceInfoLength { get; set; } = 128;
 }

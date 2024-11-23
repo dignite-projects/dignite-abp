@@ -9,10 +9,29 @@ namespace Dignite.CmsKit.Visits;
 
 public interface IVisitRepository : IBasicRepository<Visit, Guid>
 {
-    Task<List<string>> GetEntityIdsListByUserAsync(
-        [NotNull] string entityType,
+    Task<long> GetCountAsync(
+        string? entityType=null,
+        string? entityId=null,
+        string? osName=null,
+        Guid? creatorId = null,
+        CancellationToken cancellationToken = default
+        );
+
+    Task<List<Visit>> GetListAsync(
+        string? entityType=null,
+        string? entityId = null,
+        string? osName = null,
+        Guid? creatorId = null,
+        int skipCount=0,
+        int maxResultCount=100,
+        CancellationToken cancellationToken = default
+    );
+
+    Task<List<string>> GetEntityIdsFilteredByUserAsync(
         Guid userId,
-        DateTime? visitDate=null,
+        [NotNull] string entityType,
+        int skipCount = 0,
+        int maxResultCount = 100,
         CancellationToken cancellationToken = default
     );
 }

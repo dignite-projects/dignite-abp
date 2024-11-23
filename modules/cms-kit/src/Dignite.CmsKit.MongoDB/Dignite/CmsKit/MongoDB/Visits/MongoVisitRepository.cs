@@ -19,14 +19,41 @@ public class MongoVisitRepository : MongoDbRepository<ICmsKitMongoDbContext, Vis
     {
     }
 
-    public async Task<List<string>> GetEntityIdsListByUserAsync([NotNull] string entityType, Guid userId, DateTime? visitDate = null, CancellationToken cancellationToken = default)
+    public async Task<long> GetCountAsync(string entityType = null, string entityId = null, string osName = null, Guid? creatorId = null, CancellationToken cancellationToken = default)
+    {
+        cancellationToken = GetCancellationToken(cancellationToken);
+
+        return await (await GetMongoQueryableAsync(cancellationToken))
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(entityType), x => x.EntityType==entityType)
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(entityId), x => x.EntityId == entityId)
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(osName), x => x.DeviceInfo.StartsWith(entityId))
+            .WhereIf<Visit, IMongoQueryable<Visit>>(creatorId.HasValue, x => x.CreatorId == creatorId)
+            .CountAsync(cancellationToken);
+    }
+
+    public async Task<List<string>> GetEntityIdsFilteredByUserAsync(Guid userId, [NotNull] string entityType, int skipCount = 0, int maxResultCount = 100, CancellationToken cancellationToken = default)
     {
         return await(await GetMongoQueryableAsync(cancellationToken))
             .Where(r => r.EntityType == entityType && r.CreatorId == userId)
-            .WhereIf(visitDate.HasValue, v => v.CreationTime > visitDate.Value.Date && v.CreationTime < visitDate.Value.Date.AddDays(1))
             .GroupBy(v => v.EntityId)
             .Select(v => v.Key)
-            .As<IMongoQueryable<string>>()
+            .Skip(skipCount)
+            .Take(maxResultCount)
             .ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<List<Visit>> GetListAsync(string entityType = null, string entityId = null, string osName = null, Guid? creatorId = null, int skipCount = 0, int maxResultCount = 100, CancellationToken cancellationToken = default)
+    {
+        cancellationToken = GetCancellationToken(cancellationToken);
+
+        return await (await GetMongoQueryableAsync(cancellationToken))
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(entityType), x => x.EntityType == entityType)
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(entityId), x => x.EntityId == entityId)
+            .WhereIf<Visit, IMongoQueryable<Visit>>(!string.IsNullOrWhiteSpace(osName), x => x.DeviceInfo.StartsWith(entityId))
+            .WhereIf<Visit, IMongoQueryable<Visit>>(creatorId.HasValue, x => x.CreatorId == creatorId)
+            .OrderByDescending(x => x.CreationTime)
+            .Skip(skipCount)
+            .Take(maxResultCount)
+            .ToListAsync(cancellationToken);
     }
 }

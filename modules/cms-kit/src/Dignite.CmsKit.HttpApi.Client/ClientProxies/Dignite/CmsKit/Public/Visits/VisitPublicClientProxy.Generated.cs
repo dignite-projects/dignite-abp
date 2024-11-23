@@ -26,4 +26,14 @@ public partial class VisitPublicClientProxy : ClientProxyBase<IVisitPublicAppSer
             { typeof(CreateVisitInput), input }
         });
     }
+
+    public virtual async Task<ListResultDto<String>> GetListForUserAsync(string entityType, int skipCount, int maxResultCount)
+    {
+        return await RequestAsync<ListResultDto<String>>(nameof(GetListForUserAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(string), entityType },
+            { typeof(int), skipCount },
+            { typeof(int), maxResultCount }
+        });
+    }
 }

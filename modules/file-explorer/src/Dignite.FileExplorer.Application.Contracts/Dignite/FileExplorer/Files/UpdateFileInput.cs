@@ -10,7 +10,7 @@ public class UpdateFileInput
 
     [CanBeNull]
     [DynamicStringLength(typeof(FileDescriptorConsts), nameof(FileDescriptorConsts.MaxCellNameLength))]
-    public string CellName { get; set; }
+    public string? CellName { get; set; }
 
     /// <summary>
     /// Modify the directory of the file
@@ -22,5 +22,5 @@ public class UpdateFileInput
     /// </summary>
     [CanBeNull]
     [DynamicStringLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxNameLength))]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }

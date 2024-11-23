@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using Dignite.CmsKit.EntityFrameworkCore;
@@ -18,15 +17,50 @@ public class EfCoreVisitRepository : EfCoreRepository<ICmsKitDbContext, Visit, G
     {
     }
 
+    public async Task<long> GetCountAsync(
+        string? entityType=null,
+        string? entityId = null,
+        string? osName = null, 
+        Guid? creatorId = null, 
+        CancellationToken cancellationToken = default)
+    {
+        return await(await GetDbSetAsync())
+            .WhereIf(!entityType.IsNullOrEmpty(), v => v.EntityType == entityType)
+            .WhereIf(!entityId.IsNullOrEmpty(), v => v.EntityId == entityId)
+            .WhereIf(!osName.IsNullOrEmpty(), v => v.DeviceInfo.StartsWith(osName))
+            .WhereIf(creatorId.HasValue, v => v.CreatorId == creatorId)
+            .CountAsync(GetCancellationToken(cancellationToken));
+    }
 
-    public async Task<List<string>> GetEntityIdsListByUserAsync([NotNull] string entityType, Guid userId, DateTime? visitDate = null, CancellationToken cancellationToken = default)
+    public async Task<List<string>> GetEntityIdsFilteredByUserAsync( Guid userId,[NotNull] string entityType, int skipCount = 0, int maxResultCount = 100, CancellationToken cancellationToken = default)
     {
         return await (await GetDbSetAsync())
             .Where(v => v.EntityType == entityType && v.CreatorId == userId)
-            .WhereIf(visitDate.HasValue, v => v.CreationTime > visitDate.Value.Date && v.CreationTime < visitDate.Value.Date.AddDays(1))
-            .OrderByDescending(v=>v.CreationTime)
+            .OrderByDescending(v => v.CreationTime)
             .GroupBy(v => v.EntityId)
             .Select(v => v.Key)
+            .Skip(skipCount)
+            .Take(maxResultCount)
+            .ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
+    public async Task<List<Visit>> GetListAsync(
+        string? entityType = null,
+        string? entityId = null,
+        string? osName = null,
+        Guid? creatorId = null,
+        int skipCount = 0,
+        int maxResultCount = 100,
+        CancellationToken cancellationToken = default)
+    {
+        return await (await GetDbSetAsync())
+            .WhereIf(!entityType.IsNullOrEmpty(), v => v.EntityType == entityType)
+            .WhereIf(!entityId.IsNullOrEmpty(), v => v.EntityId == entityId)
+            .WhereIf(!osName.IsNullOrEmpty(), v => v.DeviceInfo.StartsWith(osName))
+            .WhereIf(creatorId.HasValue, v=>v.CreatorId == creatorId)
+            .OrderByDescending(v=>v.CreationTime)
+            .Skip(skipCount)
+            .Take(maxResultCount)
             .ToListAsync(GetCancellationToken(cancellationToken));
     }
 }

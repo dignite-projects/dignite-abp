@@ -21,8 +21,9 @@ public class VisitManager_Test : CmsKitDomainTestBase
     {
         var visit = await _visitManager.CreateAsync(_cmsKitTestData.EntityType1, _cmsKitTestData.EntityId1, 
             "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36",
+            "windows",
             "22.229.171.46", 
-            60, _cmsKitTestData.User1Id);
+            60);
 
         visit.ShouldNotBeNull();
         visit.Id.ShouldNotBe(Guid.Empty);
@@ -36,9 +37,9 @@ public class VisitManager_Test : CmsKitDomainTestBase
         var exception = await Should.ThrowAsync<EntityCantHaveVisitException>(async () =>
                             await _visitManager.CreateAsync( notConfiguredEntityType, "1",
                             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36",
+                            "windows",
                             "179.45.177.180",
-                            50,
-                            _cmsKitTestData.User1Id
+                            50
                             ));
 
         exception.ShouldNotBeNull();

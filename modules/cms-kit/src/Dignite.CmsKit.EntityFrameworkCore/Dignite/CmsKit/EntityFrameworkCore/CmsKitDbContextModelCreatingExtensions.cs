@@ -29,10 +29,10 @@ public static class CmsKitDbContextModelCreatingExtensions
                 r.Property(x => x.EntityType).IsRequired().HasMaxLength(VisitConsts.MaxEntityTypeLength);
                 r.Property(x => x.EntityId).IsRequired().HasMaxLength(VisitConsts.MaxEntityIdLength);
                 r.Property(x => x.ClientIpAddress).IsRequired().HasMaxLength(VisitConsts.MaxClientIpAddressLength);
-                r.Property(x => x.UserAgent).IsRequired().HasMaxLength(VisitConsts.MaxUserAgentLength);
+                r.Property(x => x.BrowserInfo).IsRequired().HasMaxLength(VisitConsts.MaxBrowserInfoLength);
+                r.Property(x => x.DeviceInfo).IsRequired().HasMaxLength(VisitConsts.MaxDeviceInfoLength);
 
-                r.HasIndex(x => new { x.TenantId, x.EntityType, x.EntityId, x.ClientIpAddress });
-                r.HasIndex(x => new { x.TenantId, x.EntityType, x.EntityId, x.CreatorId });
+                r.HasIndex(x => new { x.TenantId, x.EntityType, x.CreatorId, x.EntityId, x.CreationTime });
 
                 r.ApplyObjectExtensionMappings();
             });

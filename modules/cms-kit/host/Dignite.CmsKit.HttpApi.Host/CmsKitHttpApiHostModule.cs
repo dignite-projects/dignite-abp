@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Dignite.CmsKit.EntityFrameworkCore;
 using Dignite.CmsKit.MultiTenancy;
-using Dignite.CmsKit.Public;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
@@ -34,9 +33,9 @@ using Volo.Abp.VirtualFileSystem;
 namespace Dignite.CmsKit;
 
 [DependsOn(
-    typeof(DigniteCmsKitPublicApplicationModule),
+    typeof(DigniteCmsKitApplicationModule),
     typeof(DigniteCmsKitEntityFrameworkCoreModule),
-    typeof(DigniteCmsKitPublicHttpApiModule),
+    typeof(DigniteCmsKitHttpApiModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AbpAutofacModule),
     typeof(AbpCachingStackExchangeRedisModule),
@@ -76,8 +75,8 @@ public class CmsKitHttpApiHostModule : AbpModule
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Domain.Shared", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Domain", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitPublicApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Application.Contracts", Path.DirectorySeparatorChar)));
-                options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitPublicApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Application", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Application.Contracts", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<DigniteCmsKitApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}Dignite.CmsKit.Application", Path.DirectorySeparatorChar)));
             });
         }
 

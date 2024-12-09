@@ -1,5 +1,6 @@
 ﻿using Dignite.CmsKit.GlobalFeatures;
 using Dignite.CmsKit.Visits;
+using Dignite.FileExplorer.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -17,6 +18,7 @@ public static class CmsKitDbContextModelCreatingExtensions
         Check.NotNull(builder, nameof(builder));
 
         builder.ConfigureCmsKit();
+        builder.ConfigureFileExplorer();
 
         if (GlobalFeatureManager.Instance.IsEnabled<VisitsFeature>())
         {

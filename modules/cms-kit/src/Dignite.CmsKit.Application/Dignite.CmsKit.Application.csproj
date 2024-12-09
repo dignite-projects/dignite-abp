@@ -5,13 +5,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-	  <RootNamespace />
+	<RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.Public.Application" />
+	<PackageReference Include="Volo.CmsKit.Application" />
+    <ProjectReference Include="..\Dignite.CmsKit.Admin.Application\Dignite.CmsKit.Admin.Application.csproj" />
     <ProjectReference Include="..\Dignite.CmsKit.Application.Contracts\Dignite.CmsKit.Application.Contracts.csproj" />
-    <ProjectReference Include="..\Dignite.CmsKit.Domain\Dignite.CmsKit.Domain.csproj" />
+    <ProjectReference Include="..\Dignite.CmsKit.Public.Application\Dignite.CmsKit.Public.Application.csproj" />
   </ItemGroup>
 
 </Project>

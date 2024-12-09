@@ -196,13 +196,26 @@
     <PackageVersion Include="Volo.Abp.Autofac" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Components.WebAssembly.Theming" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Common.Application.Contracts" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Common.Application" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Common.HttpApi" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Common.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Common.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Application.Contracts" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Application" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.HttpApi" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.HttpApi.Client" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Public.Application" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Public.Application.Contracts" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Public.HttpApi" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Public.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Public.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Admin.Application" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Admin.Application.Contracts" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Admin.HttpApi" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Domain" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Domain.Shared" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.EntityFrameworkCore" Version="8.3.1" />
-    <PackageVersion Include="Volo.CmsKit.Public.HttpApi" Version="8.3.1" />
-    <PackageVersion Include="Volo.CmsKit.Public.HttpApi.Client" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.VirtualFileSystem" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.MongoDB" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="8.3.1" />

@@ -213,6 +213,7 @@
     <PackageVersion Include="Volo.CmsKit.Admin.Application" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Admin.Application.Contracts" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Admin.HttpApi" Version="8.3.1" />
+    <PackageVersion Include="Volo.CmsKit.Admin.HttpApi.Client" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Domain" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.Domain.Shared" Version="8.3.1" />
     <PackageVersion Include="Volo.CmsKit.EntityFrameworkCore" Version="8.3.1" />

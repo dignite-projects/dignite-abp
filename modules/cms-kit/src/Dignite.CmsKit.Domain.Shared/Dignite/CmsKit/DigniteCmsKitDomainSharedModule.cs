@@ -1,5 +1,6 @@
 ﻿
 using Dignite.CmsKit.Localization;
+using Dignite.FileExplorer;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -10,7 +11,8 @@ using Volo.CmsKit;
 namespace Dignite.CmsKit;
 
 [DependsOn(
-    typeof(CmsKitDomainSharedModule)
+    typeof(CmsKitDomainSharedModule),
+    typeof(FileExplorerDomainSharedModule)
 )]
 public class DigniteCmsKitDomainSharedModule : AbpModule
 {

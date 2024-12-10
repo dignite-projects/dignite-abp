@@ -9,7 +9,7 @@ namespace Dignite.CmsKit.Public;
 [DependsOn(
     typeof(DigniteCmsKitPublicApplicationContractsModule),
     typeof(CmsKitPublicHttpApiClientModule),
-    typeof(DigniteCmsKitCommonHttpApiClientModule)
+    typeof(DigniteCmsKitCommonHttpApiClientModule),
     typeof(FileExplorerHttpApiClientModule))]
 public class DigniteCmsKitPublicHttpApiClientModule : AbpModule
 {

@@ -12,10 +12,5 @@
     <PackageReference Include="Volo.CmsKit.Common.HttpApi.Client" />
     <ProjectReference Include="..\Dignite.CmsKit.Common.Application.Contracts\Dignite.CmsKit.Common.Application.Contracts.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="**\*generate-proxy.json" />
-    <Content Remove="**\*generate-proxy.json" />
-  </ItemGroup>
-
+	
 </Project>

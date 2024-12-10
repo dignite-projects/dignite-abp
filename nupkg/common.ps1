@@ -165,5 +165,19 @@ $projects = (
     "modules/cms-kit/src/Dignite.CmsKit.HttpApi",
     "modules/cms-kit/src/Dignite.CmsKit.HttpApi.Client",
     "modules/cms-kit/src/Dignite.CmsKit.Installer",
-    "modules/cms-kit/src/Dignite.CmsKit.MongoDB"
+    "modules/cms-kit/src/Dignite.CmsKit.MongoDB",
+    "modules/cms-kit/src/Dignite.CmsKit.Admin.Application",
+    "modules/cms-kit/src/Dignite.CmsKit.Admin.Application.Contracts",
+    "modules/cms-kit/src/Dignite.CmsKit.Admin.HttpApi",    
+    "modules/cms-kit/src/Dignite.CmsKit.Admin.HttpApi.Client",
+    "modules/cms-kit/src/Dignite.CmsKit.Common.Application",
+    "modules/cms-kit/src/Dignite.CmsKit.Common.Application.Contracts",
+    "modules/cms-kit/src/Dignite.CmsKit.Common.HttpApi",
+    "modules/cms-kit/src/Dignite.CmsKit.Common.Web",
+    "modules/cms-kit/src/Dignite.CmsKit.Common.HttpApi.Client",
+    "modules/cms-kit/src/Dignite.CmsKit.Public.Application",
+    "modules/cms-kit/src/Dignite.CmsKit.Public.Application.Contracts",
+    "modules/cms-kit/src/Dignite.CmsKit.Public.HttpApi",
+    "modules/cms-kit/src/Dignite.CmsKit.Public.HttpApi.Client",
+    "modules/cms-kit/src/Dignite.CmsKit.Public.Web"
 )

@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.CmsKit.Common.HttpA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.CmsKit.Common.Web", "src\Dignite.CmsKit.Common.Web\Dignite.CmsKit.Common.Web.csproj", "{D1C909F1-9412-4889-B4A1-A102E4B7CA34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.CmsKit.Admin.HttpApi.Client", "src\Dignite.CmsKit.Admin.HttpApi.Client\Dignite.CmsKit.Admin.HttpApi.Client.csproj", "{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +211,10 @@ Global
 		{D1C909F1-9412-4889-B4A1-A102E4B7CA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1C909F1-9412-4889-B4A1-A102E4B7CA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1C909F1-9412-4889-B4A1-A102E4B7CA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +255,7 @@ Global
 		{B7049A58-B852-4771-ADCD-B18F5B4DEF3B} = {91B9D95C-F877-472E-AF3E-4B660816D828}
 		{C7D17E3A-A7BF-4F89-94A5-791FD6AB3FCF} = {91B9D95C-F877-472E-AF3E-4B660816D828}
 		{D1C909F1-9412-4889-B4A1-A102E4B7CA34} = {91B9D95C-F877-472E-AF3E-4B660816D828}
+		{49AAA5CB-9265-48B7-9980-F7FAC4AB27D7} = {71B91337-5290-4933-BB79-EBB33B0A3386}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

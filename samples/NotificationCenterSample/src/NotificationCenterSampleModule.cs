@@ -172,7 +172,7 @@ public class NotificationCenterSampleModule : AbpModule
         {
             // MVC UI
             options.StyleBundles.Configure(
-                PureThemeBundles.Styles.Public,
+                PureThemeBundles.Styles.Global,
                 bundle =>
                 {
                     bundle.AddFiles("/global-styles.css");

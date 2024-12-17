@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Dignite.CmsKit.Features;
 using Dignite.CmsKit.GlobalFeatures;
 using Microsoft.AspNetCore.Authorization;
@@ -34,9 +35,15 @@ public class VisitPublicController : CmsKitPublicControllerBase, IVisitPublicApp
         var clientIpAddress = WebClientInfoProvider.ClientIpAddress;
         var browserInfo = WebClientInfoProvider.BrowserInfo;
         var deviceInfo = WebClientInfoProvider.DeviceInfo;
-        input.ClientIpAddress = clientIpAddress;
-        input.BrowserInfo = browserInfo;
-        input.DeviceInfo = deviceInfo;
+        if (clientIpAddress.IsNullOrWhiteSpace())
+        {
+            input.ClientIpAddress = clientIpAddress;
+        }
+        if (browserInfo.IsNullOrWhiteSpace())
+        {
+            input.BrowserInfo = browserInfo;
+            input.DeviceInfo = deviceInfo;
+        }
         return await VisitPublicAppService.CreateAsync(entityType, entityId, input);
     }
 

@@ -8,17 +8,15 @@ namespace Dignite.CmsKit.Public.Visits;
 [Serializable]
 public class CreateVisitInput
 {
-    [Required]
     [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxBrowserInfoLength))]
-    public string BrowserInfo { get; set; }
+    public string? BrowserInfo { get; set; }
 
-    [Required]
     [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxDeviceInfoLength))]
-    public string DeviceInfo { get; set; }
+    public string? DeviceInfo { get; set; }
 
     [Required]
     [DynamicMaxLength(typeof(VisitConsts), nameof(VisitConsts.MaxClientIpAddressLength))]
-    public string ClientIpAddress { get; set; }
+    public string? ClientIpAddress { get; set; }
 
     /// <summary>
     /// Represents the length of time a user browsing

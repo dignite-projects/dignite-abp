@@ -47,7 +47,6 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation.Urls;
-using Dignite.CmsKit.Public;
 
 namespace Dignite.CmsKit;
 
@@ -79,7 +78,7 @@ namespace Dignite.CmsKit;
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpTenantManagementHttpApiModule),
-    typeof(DigniteCmsKitPublicApplicationContractsModule),
+    typeof(DigniteCmsKitApplicationContractsModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
     )]

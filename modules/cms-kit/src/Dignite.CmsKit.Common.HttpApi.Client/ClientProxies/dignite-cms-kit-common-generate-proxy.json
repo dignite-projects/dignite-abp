@@ -1,0 +1,52 @@
+{
+  "modules": {
+    "dignite-cms-kit-common": {
+      "rootPath": "dignite-cms-kit-common",
+      "remoteServiceName": "DigniteCmsKitCommon",
+      "controllers": {
+        "Dignite.CmsKit.Brand.BrandController": {
+          "controllerName": "Brand",
+          "controllerGroupName": "Brand",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dignite.CmsKit.Brand.BrandController",
+          "interfaces": [
+            {
+              "type": "Dignite.CmsKit.Brand.IBrandAppService",
+              "name": "IBrandAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Dignite.CmsKit.Brand.BrandDto",
+                    "typeSimple": "Dignite.CmsKit.Brand.BrandDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/cms-kit/brand",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Dignite.CmsKit.Brand.BrandDto",
+                "typeSimple": "Dignite.CmsKit.Brand.BrandDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.CmsKit.Brand.IBrandAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

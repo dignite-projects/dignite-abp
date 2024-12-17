@@ -1,0 +1,83 @@
+{
+  "modules": {
+    "dignite-cms-kit-admin": {
+      "rootPath": "dignite-cms-kit-admin",
+      "remoteServiceName": "DigniteCmsKitAdmin",
+      "controllers": {
+        "Dignite.CmsKit.Admin.Brand.BrandAdminController": {
+          "controllerName": "BrandAdmin",
+          "controllerGroupName": "BrandAdmin",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dignite.CmsKit.Admin.Brand.BrandAdminController",
+          "interfaces": [
+            {
+              "type": "Dignite.CmsKit.Admin.Brand.IBrandAdminAppService",
+              "name": "IBrandAdminAppService",
+              "methods": [
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput, Dignite.CmsKit.Admin.Application.Contracts",
+                      "type": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                      "typeSimple": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/cms-kit/admin/brand",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput, Dignite.CmsKit.Admin.Application.Contracts",
+                  "type": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                  "typeSimple": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                  "typeSimple": "Dignite.CmsKit.Admin.Brand.UpdateBrandInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.CmsKit.Admin.Brand.IBrandAdminAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

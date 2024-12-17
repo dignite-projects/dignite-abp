@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
+	<RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.CmsKit.Public.HttpApi.Client" />
+    <ProjectReference Include="..\Dignite.CmsKit.Common.HttpApi.Client\Dignite.CmsKit.Common.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\Dignite.CmsKit.Public.Application.Contracts\Dignite.CmsKit.Public.Application.Contracts.csproj" />
+	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.FileExplorer.HttpApi.Client\Dignite.FileExplorer.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+</Project>

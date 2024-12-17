@@ -24,10 +24,10 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
             return;
         }
 
-        //首页
+        //Home link component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(HomeLinkViewComponent)));
 
-        //当前用户
+        //Current User component
         if (context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
         {
             context.Toolbar.Items.Add(new ToolbarItem(typeof(UserMenuViewComponent)));
@@ -37,13 +37,13 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
             context.Toolbar.Items.Add(new ToolbarItem(typeof(LoginLinkViewComponent)));
         }
 
-        //语言切换
+        //Language Switch Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(LanguageSwitchViewComponent)));
 
-        //主题色
+        //Color Mode Switch Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(ColorModeSwitchViewComponent)));
 
-        //移动端模式下的更多菜单
+        //Navbar Toggler Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(NavbarTogglerViewComponent)));
     }
 }

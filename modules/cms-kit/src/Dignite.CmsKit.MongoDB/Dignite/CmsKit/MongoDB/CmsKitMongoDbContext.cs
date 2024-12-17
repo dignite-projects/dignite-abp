@@ -1,4 +1,5 @@
 ﻿using Dignite.CmsKit.Visits;
+using Dignite.FileExplorer.MongoDB;
 using MongoDB.Driver;
 using Volo.Abp.Data;
 using Volo.Abp.MongoDB;
@@ -16,6 +17,7 @@ public class CmsKitMongoDbContext : Volo.CmsKit.MongoDB.CmsKitMongoDbContext, IC
     {
         base.CreateModel(modelBuilder);
 
+        modelBuilder.ConfigureFileExplorer();
         modelBuilder.ConfigureCmsKit();
         modelBuilder.DigniteConfigureCmsKit();
     }

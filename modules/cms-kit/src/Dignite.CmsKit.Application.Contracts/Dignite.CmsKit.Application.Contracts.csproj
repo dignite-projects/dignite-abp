@@ -9,8 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.CmsKit.Public.Application.Contracts" />
+	<PackageReference Include="Volo.CmsKit.Application.Contracts" />
+    <ProjectReference Include="..\Dignite.CmsKit.Admin.Application.Contracts\Dignite.CmsKit.Admin.Application.Contracts.csproj" />
     <ProjectReference Include="..\Dignite.CmsKit.Domain.Shared\Dignite.CmsKit.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Dignite.CmsKit.Public.Application.Contracts\Dignite.CmsKit.Public.Application.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

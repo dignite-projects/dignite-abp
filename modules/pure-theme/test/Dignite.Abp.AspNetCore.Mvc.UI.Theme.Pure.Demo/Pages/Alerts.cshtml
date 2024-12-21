@@ -6,37 +6,14 @@
     PageLayout.Content.MenuItemName = PureThemeDemoMenus.Components.Alerts;
     PageLayout.Content.BreadCrumb.Add("Components", "/components");
 }
-@section content_toolbar{
-    <a class="nav-link active underline-animate px-0 mx-3" aria-current="page" href="#">Active</a>
-    <a class="nav-link underline-animate px-0 mx-3" href="#">Link</a>
-    <div class="dropdown">
-        <a class="nav-link dropdown-toggle underline-animate px-0 mx-3" href="#" id="Menu_PureThemeDemo.Components" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Components
-        </a>
-        <div class="dropdown-menu" aria-labelledby="Menu_PureThemeDemo.Components">
-            <a class="dropdown-item  " href="/Alerts" id="MenuItem_PureThemeDemo_Components_Alerts">
-                Alerts
-            </a>
-            <a class="dropdown-item  " href="#" id="MenuItem_PureThemeDemo_Components_Badges">
-                Badges
-            </a>
-            <a class="dropdown-item  " href="#" id="MenuItem_PureThemeDemo_Components_Borders">
-                Borders
-            </a>
-            <a class="dropdown-item  " href="#" id="MenuItem_PureThemeDemo_Components_Breadcrumbs">
-                Breadcrumbs
-            </a>
-            <a class="dropdown-item  " href="#" id="MenuItem_PureThemeDemo_Components_ButtonGroups">
-                Button Groups
-            </a>
-            <a class="dropdown-item  " href="#" id="MenuItem_PureThemeDemo_Components_Buttons">
-                Buttons
-            </a>
-        </div>
-    </div>
-    <button type="button" class="btn">
-        <i class="fa fa-search d-block"></i>
-    </button>
+@section content_toolbar {
+    <nav class="nav">
+        <a class="nav-link active underline-animate px-0 mx-3" aria-current="page" href="#">Active</a>
+        <a class="nav-link underline-animate px-0 mx-3" href="#">Link</a>
+        <button type="button" class="btn">
+            <i class="fa fa-search d-block"></i>
+        </button>
+    </nav>
 }
 
 <h2>Alerts</h2>

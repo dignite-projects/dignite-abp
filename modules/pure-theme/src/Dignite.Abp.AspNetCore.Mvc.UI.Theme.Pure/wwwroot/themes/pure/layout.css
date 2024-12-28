@@ -90,6 +90,13 @@
     text-decoration: none;
 }
 
+.underline-animate.text-secondary {
+    background: linear-gradient(90deg,var(--bs-secondary),var(--bs-secondary));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+}
+
 .underline-animate.nav-link {
     background: linear-gradient(90deg,var(--bs-nav-link-color),var(--bs-nav-link-color));
     background-size: 0 1px;
@@ -99,12 +106,8 @@
 
 .underline-animate:focus,
 .underline-animate.active,
-.underline-animate.show
-.underline-animate:hover,
-.underline-animate.nav-link:hover,
-.underline-animate.nav-link:focus,
-.underline-animate.nav-link.active,
-.underline-animate.nav-link.show {
+.underline-animate.show,
+.underline-animate:hover {
     background-size: 100% 1px;
 }
 
@@ -124,12 +127,12 @@
     background-size: 100% 2px;
 }
 
-.underline-animate.fw-bold
+.underline-animate.fw-bold,
 .underline-animate.fw-bolder {
     background-size: 0 4px;
 }
 
-.underline-animate.fw-bold:hover
+.underline-animate.fw-bold:hover,
 .underline-animate.fw-bolder:hover,
 .underline-animate.fw-bold:focus,
 .underline-animate.fw-bolder:focus,

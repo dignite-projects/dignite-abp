@@ -59,7 +59,7 @@
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
     <div class="@containerClass">
-        <div id="AbpContentToolbar" class="py-2 mb-3 bg-body d-flex align-items-center sticky-top content-toolbar">
+        <div id="AbpContentToolbar" class="bg-body d-flex align-items-center sticky-top content-toolbar">
             @(await Component.InvokeAsync<BreadCrumbsViewComponent>())
             @await RenderSectionAsync("content_toolbar", false)
         </div>

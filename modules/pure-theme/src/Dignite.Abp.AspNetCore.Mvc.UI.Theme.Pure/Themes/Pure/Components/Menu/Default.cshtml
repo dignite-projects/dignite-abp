@@ -1,4 +1,6 @@
-﻿@using Volo.Abp.UI.Navigation
+﻿@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.UI.Navigation
+@inject IPageLayout PageLayout
 @model ApplicationMenu
 @foreach (var menuItem in Model.Items)
 {
@@ -7,8 +9,7 @@
     var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
     var customComponentType = menuItem.GetComponentTypeOrDefault();
-    var currentUrl = Context.Request.Path.Value;
-    var isActive = currentUrl.StartsWith(url) && url != "/" ? "active" : string.Empty;
+    var isActive = menuItem.Name == PageLayout.Content.MenuItemName ? "active" : string.Empty;
     if (menuItem.IsLeaf)
     {
         if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))

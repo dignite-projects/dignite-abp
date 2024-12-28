@@ -1,4 +1,6 @@
-﻿@using Volo.Abp.UI.Navigation
+﻿@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.UI.Navigation
+@inject IPageLayout PageLayout
 @model ApplicationMenuItem
 @{
     var elementId = string.IsNullOrEmpty(Model.ElementId) ? string.Empty : $"id=\"{Model.ElementId}\"";
@@ -6,6 +8,7 @@
     var disabled = Model.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.IsLocalUrl(Model.Url) ? Url.Content(Model.Url.EnsureStartsWith('~')) : Model.Url;
     var customComponentType = Model.GetComponentTypeOrDefault();
+    var isActive = Model.Name == PageLayout.Content.MenuItemName ? "active" : string.Empty;
 }
 @if (Model.IsLeaf)
 {
@@ -15,7 +18,7 @@
     }
     else if (Model.Url != null)
     {
-        <a class="dropdown-item @cssClass @disabled" href="@url" target="@Model.Target" @Html.Raw(elementId)>
+        <a class="dropdown-item @cssClass @disabled @isActive" href="@url" target="@Model.Target" @Html.Raw(elementId)>
             @if (Model.Icon != null)
             {
                 <i class="@Model.Icon"></i>

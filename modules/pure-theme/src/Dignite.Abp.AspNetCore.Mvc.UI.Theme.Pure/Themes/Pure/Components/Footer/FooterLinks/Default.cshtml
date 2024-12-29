@@ -1,13 +1,9 @@
 ﻿@using Volo.Abp.UI.Navigation
-@using Volo.Abp.Ui.Branding
-@inject IBrandingProvider BrandingProvider
 @model ApplicationMenu
 
-<nav class="d-flex align-items-center justify-content-between">
-    <div class="text-secondary">
-        Copyright @DateTime.Now.Year © @BrandingProvider.AppName
-    </div>
-    <ul class="nav">
+@if(Model.Items.Any())
+{
+    <ul class="nav justify-content-center">
         @foreach (var menuItem in Model.Items)
         {
             var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";
@@ -74,4 +70,4 @@
             }
         }
     </ul>
-</nav>
+}

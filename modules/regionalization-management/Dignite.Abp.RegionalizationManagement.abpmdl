@@ -1,0 +1,54 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.RegionalizationManagement.Domain": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.Domain/Dignite.Abp.RegionalizationManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.Application.Contracts": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.Application.Contracts/Dignite.Abp.RegionalizationManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.Application": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.Application/Dignite.Abp.RegionalizationManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.EntityFrameworkCore/Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.HttpApi": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.HttpApi/Dignite.Abp.RegionalizationManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.HttpApi.Client": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.HttpApi.Client/Dignite.Abp.RegionalizationManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.RegionalizationManagement.TestBase": {
+      "path": "test/Dignite.Abp.RegionalizationManagement.TestBase/Dignite.Abp.RegionalizationManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests/Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.RegionalizationManagement.Domain.Tests": {
+      "path": "test/Dignite.Abp.RegionalizationManagement.Domain.Tests/Dignite.Abp.RegionalizationManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.RegionalizationManagement.Application.Tests": {
+      "path": "test/Dignite.Abp.RegionalizationManagement.Application.Tests/Dignite.Abp.RegionalizationManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.RegionalizationManagement.Domain.Shared": {
+      "path": "src/Dignite.Abp.RegionalizationManagement.Domain.Shared/Dignite.Abp.RegionalizationManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    }
+  }
+}

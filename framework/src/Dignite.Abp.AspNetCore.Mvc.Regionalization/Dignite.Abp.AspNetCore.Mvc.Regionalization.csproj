@@ -15,11 +15,9 @@
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
     <RootNamespace />
-    <Version></Version>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
-	  <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI" />
+	  <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dignite.Abp.Regionalization\Dignite.Abp.Regionalization.csproj" />

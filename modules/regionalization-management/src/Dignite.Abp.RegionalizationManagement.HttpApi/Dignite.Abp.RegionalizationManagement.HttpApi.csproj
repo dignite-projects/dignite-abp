@@ -8,8 +8,6 @@
     <AssemblyName>Dignite.Abp.RegionalizationManagement.HttpApi</AssemblyName>
     <PackageId>Dignite.Abp.RegionalizationManagement.HttpApi</PackageId>
     <RootNamespace />
-    <Version></Version>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

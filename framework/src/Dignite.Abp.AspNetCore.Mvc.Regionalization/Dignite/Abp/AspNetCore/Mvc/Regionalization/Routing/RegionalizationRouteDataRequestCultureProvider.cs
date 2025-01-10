@@ -25,7 +25,6 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
     public override async Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
     {
         var providerResultCulture = await base.DetermineProviderCultureResult(httpContext);
-        ArgumentNullException.ThrowIfNull(providerResultCulture);
         string culture, uiCulture;
         if (providerResultCulture == NullProviderCultureResult.Result)
         {
@@ -55,6 +54,7 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
         }
         else
         {
+            ArgumentNullException.ThrowIfNull(providerResultCulture);
             var firstStringSegmentCulture = providerResultCulture.Cultures.First().Value;
             var firstStringSegmentUiCulture = providerResultCulture.UICultures.First().Value;
             ArgumentNullException.ThrowIfNull(firstStringSegmentCulture);

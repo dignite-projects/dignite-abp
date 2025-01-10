@@ -7,8 +7,6 @@
     <AssemblyName>Dignite.Abp.RegionalizationManagement.Application</AssemblyName>
     <PackageId>Dignite.Abp.RegionalizationManagement.Application</PackageId>
     <RootNamespace />
-    <Version></Version>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

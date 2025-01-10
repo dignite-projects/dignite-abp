@@ -12,8 +12,6 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <RootNamespace />
-    <Version></Version>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Dignite\Abp\Regionalization\Resources\*.json" />

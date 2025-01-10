@@ -9,8 +9,6 @@
     <PackageId>Dignite.Abp.RegionalizationManagement.Application.Contracts</PackageId>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <RootNamespace />
-    <Version></Version>
-    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dignite\Abp\RegionalizationManagement\Localization\*.json" />

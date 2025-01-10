@@ -1,0 +1,9 @@
+{
+  "id": "f3f1adb7-235f-4058-b972-3c3253c5f114",
+  "template": "empty",
+  "modules": {
+    "Dignite.Abp.RegionalizationManagement": {
+      "path": "Dignite.Abp.RegionalizationManagement.abpmdl"
+    }
+  }
+}

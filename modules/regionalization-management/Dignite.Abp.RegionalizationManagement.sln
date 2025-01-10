@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.RegionalizationManagement.Host", "host\Dignite.Abp.RegionalizationManagement.Host.csproj", "{721ACE10-0AFE-4824-B6F0-99F00DCA8A23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{C05C970F-7BEA-4AD2-9EDB-0A2F47D9638E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3139A833-5996-4B59-B769-C958E1480DBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AAFFD45B-BE1F-409E-9266-67B53AE8C833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.Application.Contracts", "src\Dignite.Abp.RegionalizationManagement.Application.Contracts\Dignite.Abp.RegionalizationManagement.Application.Contracts.csproj", "{AC5F350B-9B65-403C-8F99-E768B6375827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.Application", "src\Dignite.Abp.RegionalizationManagement.Application\Dignite.Abp.RegionalizationManagement.Application.csproj", "{5136E272-B0FD-43E1-82B1-280E9A22911F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.HttpApi", "src\Dignite.Abp.RegionalizationManagement.HttpApi\Dignite.Abp.RegionalizationManagement.HttpApi.csproj", "{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.HttpApi.Client", "src\Dignite.Abp.RegionalizationManagement.HttpApi.Client\Dignite.Abp.RegionalizationManagement.HttpApi.Client.csproj", "{15AB937F-B20F-47AE-BED3-FBB2659EC8E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.Installer", "src\Dignite.Abp.RegionalizationManagement.Installer\Dignite.Abp.RegionalizationManagement.Installer.csproj", "{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.TestBase", "test\Dignite.Abp.RegionalizationManagement.TestBase\Dignite.Abp.RegionalizationManagement.TestBase.csproj", "{E650B566-F6DA-4DD8-9F1B-D01DAD13120C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.Application.Tests", "test\Dignite.Abp.RegionalizationManagement.Application.Tests\Dignite.Abp.RegionalizationManagement.Application.Tests.csproj", "{E4C28E5F-68C1-46E0-819C-5978ECF28C0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests", "test\Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests\Dignite.Abp.RegionalizationManagement.EntityFrameworkCore.Tests.csproj", "{54045C70-1574-4EB9-A928-926A93DF4FC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{721ACE10-0AFE-4824-B6F0-99F00DCA8A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721ACE10-0AFE-4824-B6F0-99F00DCA8A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721ACE10-0AFE-4824-B6F0-99F00DCA8A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721ACE10-0AFE-4824-B6F0-99F00DCA8A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5F350B-9B65-403C-8F99-E768B6375827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5F350B-9B65-403C-8F99-E768B6375827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5F350B-9B65-403C-8F99-E768B6375827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5F350B-9B65-403C-8F99-E768B6375827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5136E272-B0FD-43E1-82B1-280E9A22911F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5136E272-B0FD-43E1-82B1-280E9A22911F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5136E272-B0FD-43E1-82B1-280E9A22911F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5136E272-B0FD-43E1-82B1-280E9A22911F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AB937F-B20F-47AE-BED3-FBB2659EC8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AB937F-B20F-47AE-BED3-FBB2659EC8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AB937F-B20F-47AE-BED3-FBB2659EC8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AB937F-B20F-47AE-BED3-FBB2659EC8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E650B566-F6DA-4DD8-9F1B-D01DAD13120C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E650B566-F6DA-4DD8-9F1B-D01DAD13120C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E650B566-F6DA-4DD8-9F1B-D01DAD13120C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E650B566-F6DA-4DD8-9F1B-D01DAD13120C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4C28E5F-68C1-46E0-819C-5978ECF28C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4C28E5F-68C1-46E0-819C-5978ECF28C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4C28E5F-68C1-46E0-819C-5978ECF28C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4C28E5F-68C1-46E0-819C-5978ECF28C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54045C70-1574-4EB9-A928-926A93DF4FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54045C70-1574-4EB9-A928-926A93DF4FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54045C70-1574-4EB9-A928-926A93DF4FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54045C70-1574-4EB9-A928-926A93DF4FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{721ACE10-0AFE-4824-B6F0-99F00DCA8A23} = {C05C970F-7BEA-4AD2-9EDB-0A2F47D9638E}
+		{AC5F350B-9B65-403C-8F99-E768B6375827} = {3139A833-5996-4B59-B769-C958E1480DBA}
+		{5136E272-B0FD-43E1-82B1-280E9A22911F} = {3139A833-5996-4B59-B769-C958E1480DBA}
+		{CDB8FF7C-33A8-4D69-AD5F-AAC45E8F26AF} = {3139A833-5996-4B59-B769-C958E1480DBA}
+		{15AB937F-B20F-47AE-BED3-FBB2659EC8E5} = {3139A833-5996-4B59-B769-C958E1480DBA}
+		{EB79DB62-0144-4B79-8B3F-4CCD1CCC483B} = {3139A833-5996-4B59-B769-C958E1480DBA}
+		{E650B566-F6DA-4DD8-9F1B-D01DAD13120C} = {AAFFD45B-BE1F-409E-9266-67B53AE8C833}
+		{E4C28E5F-68C1-46E0-819C-5978ECF28C0F} = {AAFFD45B-BE1F-409E-9266-67B53AE8C833}
+		{54045C70-1574-4EB9-A928-926A93DF4FC7} = {AAFFD45B-BE1F-409E-9266-67B53AE8C833}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9EDE4B38-6130-7008-A24D-7847FDA03B22}
+	EndGlobalSection
+EndGlobal

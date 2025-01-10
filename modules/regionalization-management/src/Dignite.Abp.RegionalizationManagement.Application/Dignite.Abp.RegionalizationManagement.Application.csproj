@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>Dignite.Abp.RegionalizationManagement.Application</AssemblyName>
+    <PackageId>Dignite.Abp.RegionalizationManagement.Application</PackageId>
+    <RootNamespace />
+    <Version></Version>
+    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" />
+    <ProjectReference Include="..\Dignite.Abp.RegionalizationManagement.Application.Contracts\Dignite.Abp.RegionalizationManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

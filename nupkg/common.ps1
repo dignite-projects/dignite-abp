@@ -75,7 +75,8 @@ $solutions = (
     "modules/notification-center",
     "modules/pure-theme",
     "modules/user-points",
-    "modules/cms-kit"
+    "modules/cms-kit",
+    "modules/regionalization-management"
 )
 
 # List of projects
@@ -93,6 +94,8 @@ $projects = (
     "framework/src/Dignite.Abp.Notifications.Shared",
     "framework/src/Dignite.Abp.Notifications.SignalRNotifier",
     "framework/src/Dignite.Abp.Points",
+    "framework/src/Dignite.Abp.AspNetCore.Mvc.Regionalization",
+    "framework/src/Dignite.Abp.Regionalization",
 
     # modules/ckeditor-component
     "modules/ckeditor-component/src/Dignite.Abp.AspNetCore.Components.CkEditor",
@@ -179,5 +182,12 @@ $projects = (
     "modules/cms-kit/src/Dignite.CmsKit.Public.Application.Contracts",
     "modules/cms-kit/src/Dignite.CmsKit.Public.HttpApi",
     "modules/cms-kit/src/Dignite.CmsKit.Public.HttpApi.Client",
-    "modules/cms-kit/src/Dignite.CmsKit.Public.Web"
+    "modules/cms-kit/src/Dignite.CmsKit.Public.Web",
+
+    # modules/regionalization-management
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Application",
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Application.Contracts",
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi",
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi.Client",      
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer"
 )

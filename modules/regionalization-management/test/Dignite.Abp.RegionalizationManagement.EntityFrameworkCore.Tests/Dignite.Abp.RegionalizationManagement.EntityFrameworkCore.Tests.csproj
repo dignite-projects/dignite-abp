@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace />
+    <Version></Version>
+    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
+    <ProjectReference Include="..\Dignite.Abp.RegionalizationManagement.Application.Tests\Dignite.Abp.RegionalizationManagement.Application.Tests.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.RegionalizationManagement.TestBase\Dignite.Abp.RegionalizationManagement.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

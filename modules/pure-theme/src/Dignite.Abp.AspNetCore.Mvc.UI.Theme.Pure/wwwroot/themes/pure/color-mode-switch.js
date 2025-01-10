@@ -22,7 +22,6 @@
         }
     }
 
-    setTheme(getPreferredTheme())
 
     const showActiveTheme = (theme) => {
         const themeSwitchers = document.querySelectorAll('.color-mode-switch')
@@ -34,25 +33,52 @@
             const btnLightMode = themeSwitcher.querySelector('button[data-bs-theme-value="light"]');
 
             if (theme == "dark") {
-                btnLightMode.classList.remove('d-none');
-                btnDarkMode.classList.add('d-none')
+                btnLightMode?.classList.remove('d-none');
+                btnDarkMode?.classList.add('d-none')
             }
-            if (theme == "light") {
-                btnDarkMode.classList.remove('d-none');
-                btnLightMode.classList.add('d-none')
+            else if (theme == "light") {
+                btnDarkMode?.classList.remove('d-none');
+                btnLightMode?.classList.add('d-none')
             }
         }
     }
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const storedTheme = getStoredTheme()
-        if (storedTheme !== 'light' && storedTheme !== 'dark') {
-            setTheme(getPreferredTheme())
+    var setBrandLogo = (theme) => {
+        const brandImgElement = document.querySelectorAll('.navbar-brand img');
+        for (let item of brandImgElement) {
+            if (theme === 'auto') {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            } 
+
+            if (theme == "dark" && dignite.brand.logoReverseUrl != '') {
+                item.src = dignite.brand.logoReverseUrl;
+                item.classList.remove('d-none');
+            }
+            if (theme == "light" && dignite.brand.logoUrl != '') {
+                item.src = dignite.brand.logoUrl;
+                item.classList.remove('d-none');
+            }
         }
+    }
+
+    //Theme switching before the UI code is loaded.
+    setTheme(getPreferredTheme());
+
+    //Listening for changes to the color theme preferences of the user's device (e.g. dark mode or light mode)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        var theme = getStoredTheme();
+        if (!theme) {
+            theme = (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        }
+        setTheme(theme)
+        showActiveTheme(theme)
+        setBrandLogo(theme);
     })
 
+    //Listening for DOM content loading completion events
     window.addEventListener('DOMContentLoaded', () => {
-        showActiveTheme(getPreferredTheme())
+        showActiveTheme(getPreferredTheme());
+        setBrandLogo(getPreferredTheme());
 
         document.querySelectorAll('[data-bs-theme-value]')
             .forEach(toggle => {
@@ -61,6 +87,7 @@
                     setStoredTheme(theme)
                     setTheme(theme)
                     showActiveTheme(theme)
+                    setBrandLogo(theme);
                 })
             })
     })

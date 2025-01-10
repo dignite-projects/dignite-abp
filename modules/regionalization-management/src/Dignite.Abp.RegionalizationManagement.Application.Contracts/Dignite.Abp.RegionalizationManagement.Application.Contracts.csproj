@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
+    <AssemblyName>Dignite.Abp.RegionalizationManagement.Application.Contracts</AssemblyName>
+    <PackageId>Dignite.Abp.RegionalizationManagement.Application.Contracts</PackageId>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+    <Version></Version>
+    <CopyLocalLockFileAssemblies>True</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dignite\Abp\RegionalizationManagement\Localization\*.json" />
+    <Content Remove="Dignite\Abp\RegionalizationManagement\Localization\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+	<PackageReference Include="Volo.Abp.Validation" />
+	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Regionalization\Dignite.Abp.Regionalization.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+</Project>

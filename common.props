@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>3.0.0-rc.18</Version>
+    <Version>3.0.0-rc.20</Version>
     <NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>
     <PackageIconUrl>https://dignite.com/assets/dignite_nupkg.png</PackageIconUrl>
     <PackageProjectUrl>https://dignite.com/dignite-abp</PackageProjectUrl>

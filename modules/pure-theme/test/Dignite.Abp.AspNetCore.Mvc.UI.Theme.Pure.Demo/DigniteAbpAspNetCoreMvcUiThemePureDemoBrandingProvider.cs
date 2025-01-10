@@ -8,4 +8,5 @@ public class DigniteAbpAspNetCoreMvcUiThemePureDemoBrandingProvider : DefaultBra
 {
     public override string AppName => "Dignite";
     public override string LogoUrl => "/images/logo.png";
+    public override string LogoReverseUrl => "/images/logo-reverse.png";
 }

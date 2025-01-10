@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Localization;
@@ -10,10 +11,7 @@ public static class MultiTenancyLocalizationServiceCollectionExtensions
 {
     public static IServiceCollection AddMultiTenancyLocalization(this IServiceCollection services)
     {
-        if (services == null)
-        {
-            throw new ArgumentNullException(nameof(services));
-        }
+        ArgumentNullException.ThrowIfNull(services);
 
         services.AddOptions();
 
@@ -26,15 +24,8 @@ public static class MultiTenancyLocalizationServiceCollectionExtensions
        this IServiceCollection services,
        Action<My.Extensions.Localization.Json.JsonLocalizationOptions> setupAction)
     {
-        if (services == null)
-        {
-            throw new ArgumentNullException(nameof(services));
-        }
-
-        if (setupAction == null)
-        {
-            throw new ArgumentNullException(nameof(setupAction));
-        }
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(setupAction);
 
         AddJsonLocalizationServices(services, setupAction);
 

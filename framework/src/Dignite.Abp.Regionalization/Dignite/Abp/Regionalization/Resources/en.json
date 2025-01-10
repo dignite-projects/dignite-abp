@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+  "texts": {
+    "DisplayName:Abp.Regionalization.DefaultCultureName": "Default country or region's cultural name",
+    "Description:Abp.Regionalization.DefaultCultureName": "App might use your country or region to give you local content.",
+    "DisplayName:Abp.Regionalization.AvailableCultureNames": "Cultural names of available countries or regions",
+    "Description:Abp.Regionalization.AvailableCultureNames": "Cultural names of available countries or regions provided by the application."
+  }
+}

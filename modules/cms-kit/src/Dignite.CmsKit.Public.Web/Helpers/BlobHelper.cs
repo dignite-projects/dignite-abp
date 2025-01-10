@@ -27,7 +27,7 @@ public static class BlobHelper
     /// <returns></returns>
     public static string GetBrandLogoReverseUrl(string logoReverseBlobName, int? width = null, int? height = null)
     {
-        return GetBlobUrl(BlobContainerConsts.BrandLogoContainerName, logoReverseBlobName, width, height);
+        return GetBlobUrl(BlobContainerConsts.BrandLogoReverseContainerName, logoReverseBlobName, width, height);
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public static class BlobHelper
     /// <returns></returns>
     public static string GetBrandIconUrl(string iconBlobName, int? width = null, int? height = null)
     {
-        return GetBlobUrl(BlobContainerConsts.BrandLogoContainerName, iconBlobName, width, height);
+        return GetBlobUrl(BlobContainerConsts.BrandIconContainerName, iconBlobName, width, height);
     }
 
     /// <summary>

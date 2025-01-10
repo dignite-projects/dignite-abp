@@ -42,10 +42,6 @@
     }
 }
 
-.navbar-brand img {
-    max-height: 35px;
-    margin-right: 0.5rem;
-}
 .offcanvas .navbar .dropdown-menu {
     border: none;
 }

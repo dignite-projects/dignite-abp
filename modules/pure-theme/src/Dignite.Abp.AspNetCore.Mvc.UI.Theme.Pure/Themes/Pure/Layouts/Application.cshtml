@@ -43,13 +43,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <title>@pageTitle</title>
-
-    <script src="~/themes/pure/color-mode-switch.js"></script>
     <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
     @await RenderSectionAsync("styles", false)
+
+    <script type="text/javascript">
+        var dignite = dignite || {};
+        dignite.brand = dignite.brand || {};
+        dignite.brand.appName='@BrandingProvider.AppName';
+        dignite.brand.logoUrl='@BrandingProvider.LogoUrl';
+        dignite.brand.logoReverseUrl='@BrandingProvider.LogoReverseUrl';
+    </script>
+    <script src="~/themes/pure/color-mode-switch.js"></script>
 
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
 </head>

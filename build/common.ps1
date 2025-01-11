@@ -14,7 +14,8 @@ $solutionPaths = @(
 		"../modules/notification-center",
 		"../modules/pure-theme",
 		"../modules/regionalization-management",
-		"../modules/user-points"
+		"../modules/user-points",
+		"../modules/tenant-domains"
 	)
 
 if ($full -eq "-f")

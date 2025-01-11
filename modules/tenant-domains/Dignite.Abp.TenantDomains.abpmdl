@@ -1,0 +1,62 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.TenantDomains.Domain": {
+      "path": "src/Dignite.Abp.TenantDomains.Domain/Dignite.Abp.TenantDomains.Domain.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.Application.Contracts": {
+      "path": "src/Dignite.Abp.TenantDomains.Application.Contracts/Dignite.Abp.TenantDomains.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.Application": {
+      "path": "src/Dignite.Abp.TenantDomains.Application/Dignite.Abp.TenantDomains.Application.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.TenantDomains.EntityFrameworkCore/Dignite.Abp.TenantDomains.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.MongoDB": {
+      "path": "src/Dignite.Abp.TenantDomains.MongoDB/Dignite.Abp.TenantDomains.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.HttpApi": {
+      "path": "src/Dignite.Abp.TenantDomains.HttpApi/Dignite.Abp.TenantDomains.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.HttpApi.Client": {
+      "path": "src/Dignite.Abp.TenantDomains.HttpApi.Client/Dignite.Abp.TenantDomains.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.TenantDomains.TestBase": {
+      "path": "test/Dignite.Abp.TenantDomains.TestBase/Dignite.Abp.TenantDomains.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.TenantDomains.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Abp.TenantDomains.EntityFrameworkCore.Tests/Dignite.Abp.TenantDomains.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.TenantDomains.MongoDB.Tests": {
+      "path": "test/Dignite.Abp.TenantDomains.MongoDB.Tests/Dignite.Abp.TenantDomains.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.TenantDomains.Domain.Tests": {
+      "path": "test/Dignite.Abp.TenantDomains.Domain.Tests/Dignite.Abp.TenantDomains.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.TenantDomains.Application.Tests": {
+      "path": "test/Dignite.Abp.TenantDomains.Application.Tests/Dignite.Abp.TenantDomains.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.TenantDomains.Domain.Shared": {
+      "path": "src/Dignite.Abp.TenantDomains.Domain.Shared/Dignite.Abp.TenantDomains.Domain.Shared.abppkg",
+      "folder": "src"
+    }
+  }
+}

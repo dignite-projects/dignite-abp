@@ -280,6 +280,7 @@
     <PackageVersion Include="Volo.Abp.SettingManagement.Blazor.Server" Version="8.3.1" />    
     <PackageVersion Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.MultiTenancy" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />
   </ItemGroup>
 </Project>

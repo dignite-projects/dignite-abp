@@ -76,7 +76,8 @@ $solutions = (
     "modules/pure-theme",
     "modules/user-points",
     "modules/cms-kit",
-    "modules/regionalization-management"
+    "modules/regionalization-management",
+    "modules/tenant-domains"
 )
 
 # List of projects
@@ -189,5 +190,17 @@ $projects = (
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Application.Contracts",
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi",
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi.Client",      
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer"
+    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer",
+    
+    # modules/tenant-domains
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Application",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Application.Contracts",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Domain",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Domain.Shared",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.EntityFrameworkCore",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.HttpApi",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.HttpApi.Client",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Installer",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.MongoDB",
+    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.AspNetCore"
 )

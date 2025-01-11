@@ -98,10 +98,10 @@ namespace Dignite.Abp.RegionalizationManagement.Host;
     typeof(AbpSettingManagementHttpApiModule),
 
     // Regionalization Management module packages
-    typeof(RegionalizationManagementApplicationModule),
-    typeof(RegionalizationManagementHttpApiModule)
+    typeof(AbpRegionalizationManagementApplicationModule),
+    typeof(AbpRegionalizationManagementHttpApiModule)
 )]
-public class RegionalizationManagementHostModule : AbpModule
+public class AbpRegionalizationManagementHostModule : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
     private const bool IsMultiTenant = true;
@@ -253,11 +253,11 @@ public class RegionalizationManagementHostModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<RegionalizationManagementHostModule>();
+            options.FileSets.AddEmbedded<AbpRegionalizationManagementHostModule>();
             if (hostingEnvironment.IsDevelopment())
             {
                 /* Using physical files in development, so we don't need to recompile on changes */
-                options.FileSets.ReplaceEmbeddedByPhysical<RegionalizationManagementHostModule>(hostingEnvironment.ContentRootPath);
+                options.FileSets.ReplaceEmbeddedByPhysical<AbpRegionalizationManagementHostModule>(hostingEnvironment.ContentRootPath);
             }
         });
     }
@@ -266,7 +266,7 @@ public class RegionalizationManagementHostModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(RegionalizationManagementHostModule).Assembly);
+            options.ConventionalControllers.Create(typeof(AbpRegionalizationManagementHostModule).Assembly);
         });
     }
 
@@ -288,14 +288,14 @@ public class RegionalizationManagementHostModule : AbpModule
 
     private void ConfigureAutoMapper(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<RegionalizationManagementHostModule>();
+        context.Services.AddAutoMapperObjectMapper<AbpRegionalizationManagementHostModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
             /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
              * See AutoMapper's documentation to learn what it is:
              * https://docs.automapper.org/en/stable/Configuration-validation.html
              */
-            options.AddMaps<RegionalizationManagementHostModule>(/* validate: true */);
+            options.AddMaps<AbpRegionalizationManagementHostModule>(/* validate: true */);
         });
     }
 

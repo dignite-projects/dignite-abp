@@ -6,13 +6,13 @@ namespace Dignite.Abp.RegionalizationManagement;
 [DependsOn(
     typeof(AbpVirtualFileSystemModule)
     )]
-public class RegionalizationManagementInstallerModule : AbpModule
+public class AbpRegionalizationManagementInstallerModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<RegionalizationManagementInstallerModule>();
+            options.FileSets.AddEmbedded<AbpRegionalizationManagementInstallerModule>();
         });
     }
 }

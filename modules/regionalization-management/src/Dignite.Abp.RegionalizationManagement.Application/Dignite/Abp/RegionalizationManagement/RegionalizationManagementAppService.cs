@@ -8,6 +8,6 @@ public abstract class RegionalizationManagementAppService : ApplicationService
     protected RegionalizationManagementAppService()
     {
         LocalizationResource = typeof(RegionalizationManagementResource);
-        ObjectMapperContext = typeof(RegionalizationManagementApplicationModule);
+        ObjectMapperContext = typeof(AbpRegionalizationManagementApplicationModule);
     }
 }

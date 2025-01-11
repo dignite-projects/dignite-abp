@@ -8,15 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Dignite.Abp.RegionalizationManagement;
 
 [DependsOn(
-    typeof(RegionalizationManagementApplicationContractsModule),
+    typeof(AbpRegionalizationManagementApplicationContractsModule),
     typeof(AbpAspNetCoreMvcModule))]
-public class RegionalizationManagementHttpApiModule : AbpModule
+public class AbpRegionalizationManagementHttpApiModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(RegionalizationManagementHttpApiModule).Assembly);
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(AbpRegionalizationManagementHttpApiModule).Assembly);
         });
     }
 

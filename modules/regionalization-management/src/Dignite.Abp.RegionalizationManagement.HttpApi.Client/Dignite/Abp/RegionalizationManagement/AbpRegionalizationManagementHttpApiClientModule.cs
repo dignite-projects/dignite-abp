@@ -6,20 +6,20 @@ using Volo.Abp.VirtualFileSystem;
 namespace Dignite.Abp.RegionalizationManagement;
 
 [DependsOn(
-    typeof(RegionalizationManagementApplicationContractsModule),
+    typeof(AbpRegionalizationManagementApplicationContractsModule),
     typeof(AbpHttpClientModule))]
-public class RegionalizationManagementHttpApiClientModule : AbpModule
+public class AbpRegionalizationManagementHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddHttpClientProxies(
-            typeof(RegionalizationManagementApplicationContractsModule).Assembly,
+            typeof(AbpRegionalizationManagementApplicationContractsModule).Assembly,
             RegionalizationManagementRemoteServiceConsts.RemoteServiceName
         );
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<RegionalizationManagementHttpApiClientModule>();
+            options.FileSets.AddEmbedded<AbpRegionalizationManagementHttpApiClientModule>();
         });
 
     }

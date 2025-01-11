@@ -15,7 +15,7 @@ namespace Dignite.Abp.RegionalizationManagement;
     typeof(AbpAuthorizationModule),
     typeof(AbpGuidsModule)
 )]
-public class RegionalizationManagementTestBaseModule : AbpModule
+public class AbpRegionalizationManagementTestBaseModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

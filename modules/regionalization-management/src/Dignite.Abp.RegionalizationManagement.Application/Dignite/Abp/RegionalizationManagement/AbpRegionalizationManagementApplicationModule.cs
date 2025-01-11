@@ -7,19 +7,19 @@ using Volo.Abp.SettingManagement;
 namespace Dignite.Abp.RegionalizationManagement;
 
 [DependsOn(
-    typeof(RegionalizationManagementApplicationContractsModule),
+    typeof(AbpRegionalizationManagementApplicationContractsModule),
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
     typeof(AbpSettingManagementDomainModule)
     )]
-public class RegionalizationManagementApplicationModule : AbpModule
+public class AbpRegionalizationManagementApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<RegionalizationManagementApplicationModule>();
+        context.Services.AddAutoMapperObjectMapper<AbpRegionalizationManagementApplicationModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
-            options.AddMaps<RegionalizationManagementApplicationModule>(validate: true);
+            options.AddMaps<AbpRegionalizationManagementApplicationModule>(validate: true);
         });
     }
 }

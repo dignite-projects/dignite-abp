@@ -11,11 +11,11 @@ using Volo.Abp.Uow;
 namespace Dignite.Abp.RegionalizationManagement.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(RegionalizationManagementApplicationTestModule),
+    typeof(AbpRegionalizationManagementApplicationTestModule),
     typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule)
 )]
-public class RegionalizationManagementEntityFrameworkCoreTestModule : AbpModule
+public class AbpRegionalizationManagementEntityFrameworkCoreTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

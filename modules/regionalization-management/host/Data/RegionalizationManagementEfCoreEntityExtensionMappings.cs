@@ -1,6 +1,6 @@
 using Volo.Abp.Threading;
 
-namespace Dignite.Abp.RegionalizationManagement.Data;
+namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
 public static class RegionalizationManagementEfCoreEntityExtensionMappings
 {

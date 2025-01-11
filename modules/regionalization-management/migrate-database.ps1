@@ -1,1 +1,0 @@
-dotnet run --project Dignite.Abp.RegionalizationManagement --migrate-database

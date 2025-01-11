@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Dignite.Abp.RegionalizationManagement.Host.Data;
+using Dignite.Abp.RegionalizationManagement.Host.Localization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
-using Dignite.Abp.RegionalizationManagement.Data;
-using Dignite.Abp.RegionalizationManagement.Localization;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
-using Volo.Abp.Uow;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
@@ -32,24 +31,24 @@ using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.OpenIddict;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.OpenIddict;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Volo.Abp.OpenIddict;
-using Volo.Abp.Security.Claims;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Dignite.Abp.RegionalizationManagement;
+namespace Dignite.Abp.RegionalizationManagement.Host;
 
 [DependsOn(
     // ABP Framework packages
@@ -115,7 +114,7 @@ public class RegionalizationManagementModule : AbpModule
         context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
         {
             options.AddAssemblyResource(
-                typeof(RegionalizationManagementResource)
+                typeof(RegionalizationManagementHostResource)
             );
         });
 
@@ -216,11 +215,11 @@ public class RegionalizationManagementModule : AbpModule
         Configure<AbpLocalizationOptions>(options =>
         {
             options.Resources
-                .Add<RegionalizationManagementResource>("en")
+                .Add<RegionalizationManagementHostResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/RegionalizationManagement");
 
-            options.DefaultResourceType = typeof(RegionalizationManagementResource);
+            options.DefaultResourceType = typeof(RegionalizationManagementHostResource);
 
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
             options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
@@ -246,7 +245,7 @@ public class RegionalizationManagementModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("RegionalizationManagement", typeof(RegionalizationManagementResource));
+            options.MapCodeNamespace("RegionalizationManagementHost", typeof(RegionalizationManagementHostResource));
         });
     }
 

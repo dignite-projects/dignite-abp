@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Dignite.Abp.RegionalizationManagement.Data;
+namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
 public class RegionalizationManagementDbContextFactory : IDesignTimeDbContextFactory<RegionalizationManagementDbContext>
 {

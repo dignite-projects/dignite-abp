@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.DependencyInjection;
 
-namespace Dignite.Abp.RegionalizationManagement.Data;
+namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
 public class RegionalizationManagementEFCoreDbSchemaMigrator : ITransientDependency
 {

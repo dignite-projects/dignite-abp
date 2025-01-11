@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Dignite.Abp.RegionalizationManagement.ObjectMapping;
+namespace Dignite.Abp.RegionalizationManagement.Host.ObjectMapping;
 
 public class RegionalizationManagementAutoMapperProfile : Profile
 {

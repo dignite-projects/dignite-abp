@@ -8,7 +8,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Uow;
 
-namespace Dignite.Abp.RegionalizationManagement.Data;
+namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
 /* Creates initial data that is needed to property run the application
  * and make client-to-server communication possible.

@@ -1,9 +1,9 @@
-using Dignite.Abp.RegionalizationManagement.Data;
+using Dignite.Abp.RegionalizationManagement.Host.Data;
 using Serilog;
 using Serilog.Events;
 using Volo.Abp.Data;
 
-namespace Dignite.Abp.RegionalizationManagement;
+namespace Dignite.Abp.RegionalizationManagement.Host;
 
 public class Program
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Dignite.Abp.RegionalizationManagement.Controllers;
+namespace Dignite.Abp.RegionalizationManagement.Host.Controllers;
 
 public class HomeController : AbpController
 {

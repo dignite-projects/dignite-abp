@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Dignite.Abp.RegionalizationManagement.Migrations
+namespace Dignite.Abp.RegionalizationManagement.Host.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

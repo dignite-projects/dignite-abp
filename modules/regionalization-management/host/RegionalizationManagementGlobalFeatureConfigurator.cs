@@ -1,6 +1,6 @@
 using Volo.Abp.Threading;
 
-namespace Dignite.Abp.RegionalizationManagement;
+namespace Dignite.Abp.RegionalizationManagement.Host;
 
 public static class RegionalizationManagementGlobalFeatureConfigurator
 {

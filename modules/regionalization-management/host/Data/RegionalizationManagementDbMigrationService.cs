@@ -7,7 +7,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 
-namespace Dignite.Abp.RegionalizationManagement.Data;
+namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
 public class RegionalizationManagementDbMigrationService : ITransientDependency
 {

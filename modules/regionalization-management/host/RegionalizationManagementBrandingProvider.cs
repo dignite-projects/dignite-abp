@@ -3,7 +3,7 @@ using Dignite.Abp.RegionalizationManagement.Localization;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
 
-namespace Dignite.Abp.RegionalizationManagement;
+namespace Dignite.Abp.RegionalizationManagement.Host;
 
 [Dependency(ReplaceServices = true)]
 public class RegionalizationManagementBrandingProvider : DefaultBrandingProvider

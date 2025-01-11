@@ -6,11 +6,11 @@ using Dignite.Abp.RegionalizationManagement.Host.Localization;
 namespace Dignite.Abp.RegionalizationManagement.Host;
 
 [Dependency(ReplaceServices = true)]
-public class RegionalizationManagementBrandingProvider : DefaultBrandingProvider
+public class RegionalizationManagementHostBrandingProvider : DefaultBrandingProvider
 {
     private IStringLocalizer<RegionalizationManagementHostResource> _localizer;
 
-    public RegionalizationManagementBrandingProvider(IStringLocalizer<RegionalizationManagementHostResource> localizer)
+    public RegionalizationManagementHostBrandingProvider(IStringLocalizer<RegionalizationManagementHostResource> localizer)
     {
         _localizer = localizer;
     }

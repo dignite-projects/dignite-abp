@@ -3,18 +3,18 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
-public class RegionalizationManagementDbContextFactory : IDesignTimeDbContextFactory<RegionalizationManagementDbContext>
+public class RegionalizationManagementHostDbContextFactory : IDesignTimeDbContextFactory<RegionalizationManagementHostDbContext>
 {
-    public RegionalizationManagementDbContext CreateDbContext(string[] args)
+    public RegionalizationManagementHostDbContext CreateDbContext(string[] args)
     {
-        RegionalizationManagementEfCoreEntityExtensionMappings.Configure();
+        RegionalizationManagementHostEfCoreEntityExtensionMappings.Configure();
 
         var configuration = BuildConfiguration();
 
-        var builder = new DbContextOptionsBuilder<RegionalizationManagementDbContext>()
+        var builder = new DbContextOptionsBuilder<RegionalizationManagementHostDbContext>()
             .UseSqlServer(configuration.GetConnectionString("Default"));
 
-        return new RegionalizationManagementDbContext(builder.Options);
+        return new RegionalizationManagementHostDbContext(builder.Options);
     }
 
     private static IConfigurationRoot BuildConfiguration()

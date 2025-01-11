@@ -12,7 +12,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Migrations
 {
-    [DbContext(typeof(RegionalizationManagementDbContext))]
+    [DbContext(typeof(RegionalizationManagementHostDbContext))]
     [Migration("20250109152731_Initial")]
     partial class Initial
     {

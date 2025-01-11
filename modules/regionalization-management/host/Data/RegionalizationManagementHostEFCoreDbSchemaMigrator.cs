@@ -3,11 +3,11 @@ using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
-public class RegionalizationManagementEFCoreDbSchemaMigrator : ITransientDependency
+public class RegionalizationManagementHostEFCoreDbSchemaMigrator : ITransientDependency
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public RegionalizationManagementEFCoreDbSchemaMigrator(
+    public RegionalizationManagementHostEFCoreDbSchemaMigrator(
         IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -22,7 +22,7 @@ public class RegionalizationManagementEFCoreDbSchemaMigrator : ITransientDepende
          */
 
         await _serviceProvider
-            .GetRequiredService<RegionalizationManagementDbContext>()
+            .GetRequiredService<RegionalizationManagementHostDbContext>()
             .Database
             .MigrateAsync();
     }

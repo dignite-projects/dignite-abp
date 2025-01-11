@@ -4,9 +4,9 @@ using Volo.Abp.Application.Services;
 namespace Dignite.Abp.RegionalizationManagement.Host.Services;
 
 /* Inherit your application services from this class. */
-public abstract class RegionalizationManagementAppService : ApplicationService
+public abstract class RegionalizationManagementHostAppService : ApplicationService
 {
-    protected RegionalizationManagementAppService()
+    protected RegionalizationManagementHostAppService()
     {
         LocalizationResource = typeof(RegionalizationManagementHostResource);
     }

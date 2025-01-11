@@ -45,7 +45,7 @@ public class Program
 
             if (IsMigrateDatabase(args))
             {
-                await app.Services.GetRequiredService<RegionalizationManagementDbMigrationService>().MigrateAsync();
+                await app.Services.GetRequiredService<RegionalizationManagementHostDbMigrationService>().MigrateAsync();
                 return 0;
             }
 

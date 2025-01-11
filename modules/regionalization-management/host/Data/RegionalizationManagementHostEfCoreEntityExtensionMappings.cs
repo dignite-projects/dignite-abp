@@ -2,14 +2,14 @@ using Volo.Abp.Threading;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
-public static class RegionalizationManagementEfCoreEntityExtensionMappings
+public static class RegionalizationManagementHostEfCoreEntityExtensionMappings
 {
     private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
 
     public static void Configure()
     {
-        RegionalizationManagementGlobalFeatureConfigurator.Configure();
-        RegionalizationManagementModuleExtensionConfigurator.Configure();
+        RegionalizationManagementHostGlobalFeatureConfigurator.Configure();
+        RegionalizationManagementHostModuleExtensionConfigurator.Configure();
 
         OneTimeRunner.Run(() =>
         {

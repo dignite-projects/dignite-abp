@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Migrations
 {
-    [DbContext(typeof(RegionalizationManagementDbContext))]
-    partial class RegionalizationManagementDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RegionalizationManagementHostDbContext))]
+    partial class RegionalizationManagementHostDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

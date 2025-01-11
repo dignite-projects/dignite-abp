@@ -141,9 +141,9 @@ public class RegionalizationManagementHostModule : AbpModule
             });
         }
         
-        RegionalizationManagementGlobalFeatureConfigurator.Configure();
-        RegionalizationManagementModuleExtensionConfigurator.Configure();
-        RegionalizationManagementEfCoreEntityExtensionMappings.Configure();
+        RegionalizationManagementHostGlobalFeatureConfigurator.Configure();
+        RegionalizationManagementHostModuleExtensionConfigurator.Configure();
+        RegionalizationManagementHostEfCoreEntityExtensionMappings.Configure();
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -328,7 +328,7 @@ public class RegionalizationManagementHostModule : AbpModule
 
     private void ConfigureEfCore(ServiceConfigurationContext context)
     {
-        context.Services.AddAbpDbContext<RegionalizationManagementDbContext>(options =>
+        context.Services.AddAbpDbContext<RegionalizationManagementHostDbContext>(options =>
         {
             /* You can remove "includeAllEntities: true" to create
              * default repositories only for aggregate roots

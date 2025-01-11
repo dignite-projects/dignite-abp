@@ -2,7 +2,7 @@ using Volo.Abp.Threading;
 
 namespace Dignite.Abp.RegionalizationManagement.Host;
 
-public static class RegionalizationManagementGlobalFeatureConfigurator
+public static class RegionalizationManagementHostGlobalFeatureConfigurator
 {
     private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
 

@@ -2,9 +2,9 @@
 
 namespace Dignite.Abp.RegionalizationManagement.Host.ObjectMapping;
 
-public class RegionalizationManagementAutoMapperProfile : Profile
+public class RegionalizationManagementHostAutoMapperProfile : Profile
 {
-    public RegionalizationManagementAutoMapperProfile()
+    public RegionalizationManagementHostAutoMapperProfile()
     {
         /* Create your AutoMapper object mappings here */
     }

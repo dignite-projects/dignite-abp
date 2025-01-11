@@ -10,9 +10,9 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
-public class RegionalizationManagementDbContext : AbpDbContext<RegionalizationManagementDbContext>
+public class RegionalizationManagementHostDbContext : AbpDbContext<RegionalizationManagementHostDbContext>
 {
-    public RegionalizationManagementDbContext(DbContextOptions<RegionalizationManagementDbContext> options)
+    public RegionalizationManagementHostDbContext(DbContextOptions<RegionalizationManagementHostDbContext> options)
         : base(options)
     {
     }

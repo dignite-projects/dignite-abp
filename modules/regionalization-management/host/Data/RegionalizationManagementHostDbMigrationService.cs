@@ -9,18 +9,18 @@ using Volo.Abp.TenantManagement;
 
 namespace Dignite.Abp.RegionalizationManagement.Host.Data;
 
-public class RegionalizationManagementDbMigrationService : ITransientDependency
+public class RegionalizationManagementHostDbMigrationService : ITransientDependency
 {
-    public ILogger<RegionalizationManagementDbMigrationService> Logger { get; set; }
+    public ILogger<RegionalizationManagementHostDbMigrationService> Logger { get; set; }
 
     private readonly IDataSeeder _dataSeeder;
-    private readonly RegionalizationManagementEFCoreDbSchemaMigrator _dbSchemaMigrator;
+    private readonly RegionalizationManagementHostEFCoreDbSchemaMigrator _dbSchemaMigrator;
     private readonly ITenantRepository _tenantRepository;
     private readonly ICurrentTenant _currentTenant;
 
-    public RegionalizationManagementDbMigrationService(
+    public RegionalizationManagementHostDbMigrationService(
         IDataSeeder dataSeeder,
-        RegionalizationManagementEFCoreDbSchemaMigrator dbSchemaMigrator,
+        RegionalizationManagementHostEFCoreDbSchemaMigrator dbSchemaMigrator,
         ITenantRepository tenantRepository,
         ICurrentTenant currentTenant)
     {
@@ -29,7 +29,7 @@ public class RegionalizationManagementDbMigrationService : ITransientDependency
         _tenantRepository = tenantRepository;
         _currentTenant = currentTenant;
 
-        Logger = NullLogger<RegionalizationManagementDbMigrationService>.Instance;
+        Logger = NullLogger<RegionalizationManagementHostDbMigrationService>.Instance;
     }
 
     public async Task MigrateAsync()

@@ -39,7 +39,7 @@ public class Program
             {
                 builder.Services.AddDataMigrationEnvironment();
             }
-            await builder.AddApplicationAsync<RegionalizationManagementModule>();
+            await builder.AddApplicationAsync<RegionalizationManagementHostModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
 

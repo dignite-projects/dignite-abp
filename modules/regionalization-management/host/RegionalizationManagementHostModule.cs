@@ -101,7 +101,7 @@ namespace Dignite.Abp.RegionalizationManagement.Host;
     typeof(RegionalizationManagementApplicationModule),
     typeof(RegionalizationManagementHttpApiModule)
 )]
-public class RegionalizationManagementModule : AbpModule
+public class RegionalizationManagementHostModule : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
     private const bool IsMultiTenant = true;
@@ -253,11 +253,11 @@ public class RegionalizationManagementModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<RegionalizationManagementModule>();
+            options.FileSets.AddEmbedded<RegionalizationManagementHostModule>();
             if (hostingEnvironment.IsDevelopment())
             {
                 /* Using physical files in development, so we don't need to recompile on changes */
-                options.FileSets.ReplaceEmbeddedByPhysical<RegionalizationManagementModule>(hostingEnvironment.ContentRootPath);
+                options.FileSets.ReplaceEmbeddedByPhysical<RegionalizationManagementHostModule>(hostingEnvironment.ContentRootPath);
             }
         });
     }
@@ -266,7 +266,7 @@ public class RegionalizationManagementModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(RegionalizationManagementModule).Assembly);
+            options.ConventionalControllers.Create(typeof(RegionalizationManagementHostModule).Assembly);
         });
     }
 
@@ -288,14 +288,14 @@ public class RegionalizationManagementModule : AbpModule
 
     private void ConfigureAutoMapper(ServiceConfigurationContext context)
     {
-        context.Services.AddAutoMapperObjectMapper<RegionalizationManagementModule>();
+        context.Services.AddAutoMapperObjectMapper<RegionalizationManagementHostModule>();
         Configure<AbpAutoMapperOptions>(options =>
         {
             /* Uncomment `validate: true` if you want to enable the Configuration Validation feature.
              * See AutoMapper's documentation to learn what it is:
              * https://docs.automapper.org/en/stable/Configuration-validation.html
              */
-            options.AddMaps<RegionalizationManagementModule>(/* validate: true */);
+            options.AddMaps<RegionalizationManagementHostModule>(/* validate: true */);
         });
     }
 

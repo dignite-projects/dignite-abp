@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Comp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure", "src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj", "{D08D8E2C-A32A-4603-95A8-1B5D4865E6E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI\Dignite.Abp.AspNetCore.Mvc.UI.csproj", "{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI.csproj", "{633B0EDB-AF3B-49B8-BCD9-94E22111E8CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp", "{3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}"
 EndProject

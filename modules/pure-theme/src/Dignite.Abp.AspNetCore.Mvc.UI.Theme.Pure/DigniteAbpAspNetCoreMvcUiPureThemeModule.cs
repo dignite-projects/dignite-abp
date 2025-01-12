@@ -16,7 +16,7 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 [DependsOn(
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-    typeof(DigniteAbpAspNetCoreMvcUiModule)
+    typeof(AbpAspNetCoreMvcMultiTenancyUiModule)
     )]
 public class DigniteAbpAspNetCoreMvcUiPureThemeModule : AbpModule
 {

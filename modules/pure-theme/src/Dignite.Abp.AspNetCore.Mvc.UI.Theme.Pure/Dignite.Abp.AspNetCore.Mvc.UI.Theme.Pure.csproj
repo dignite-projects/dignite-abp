@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI\Dignite.Abp.AspNetCore.Mvc.UI.csproj" />
+	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ using Volo.Abp.MultiTenancy;
 namespace Dignite.Abp.AspNetCore.Mvc.UI;
 
 [DependsOn(typeof(Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule))]
-public class DigniteAbpAspNetCoreMvcUiModule : AbpModule
+public class AbpAspNetCoreMvcMultiTenancyUiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

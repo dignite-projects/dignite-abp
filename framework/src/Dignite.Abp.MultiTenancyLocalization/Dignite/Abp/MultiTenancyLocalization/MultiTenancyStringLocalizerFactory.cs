@@ -5,7 +5,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Localization.External;
 
 
-namespace Dignite.Abp.Localization;
+namespace Dignite.Abp.MultiTenancyLocalization;
 
 public class MultiTenancyStringLocalizerFactory : AbpStringLocalizerFactory
 {

@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Localization;
 using Volo.Abp.Localization;
 
-namespace Dignite.Abp.Localization;
+namespace Dignite.Abp.MultiTenancyLocalization;
 
 public static class MultiTenancyLocalizationServiceCollectionExtensions
 {

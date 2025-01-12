@@ -89,7 +89,7 @@ $projects = (
     "framework/src/Dignite.Abp.DynamicForms",
     "framework/src/Dignite.Abp.DynamicForms.Components",
     "framework/src/Dignite.Abp.DynamicForms.Components.BlazoriseUI",
-    "framework/src/Dignite.Abp.Localization",
+    "framework/src/Dignite.Abp.MultiTenancyLocalization",
     "framework/src/Dignite.Abp.Notifications",
     "framework/src/Dignite.Abp.Notifications.Components",
     "framework/src/Dignite.Abp.Notifications.Shared",

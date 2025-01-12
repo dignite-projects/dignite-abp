@@ -11,7 +11,7 @@ using Volo.Abp.MultiTenancy;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Dignite.Abp.Localization;
+namespace Dignite.Abp.MultiTenancyLocalization;
 
 public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
 {

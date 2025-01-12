@@ -5,6 +5,6 @@ public partial class FileExplorerFormControlComponent
 {
     public FileExplorerFormControlComponent()
     {
-        LocalizationResource = typeof(DigniteAbpDynamicFormsFileExplorerResource);
+        LocalizationResource = typeof(AbpDynamicFormsFileExplorerResource);
     }
 }

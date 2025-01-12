@@ -2,6 +2,6 @@
 
 namespace Dignite.Abp.NotificationCenter;
 
-public class NotificationRepository_Tests : NotificationRepository_Tests<DigniteAbpNotificationCenterEntityFrameworkCoreTestModule>
+public class NotificationRepository_Tests : NotificationRepository_Tests<AbpNotificationCenterEntityFrameworkCoreTestModule>
 {
 }

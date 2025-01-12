@@ -84,7 +84,7 @@ $solutions = (
 $projects = (
 
     # framework
-    "framework/src/Dignite.Abp.AspNetCore.Mvc.UI",
+    "framework/src/Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme",
     "framework/src/Dignite.Abp.BlazoriseUI",
     "framework/src/Dignite.Abp.DynamicForms",
     "framework/src/Dignite.Abp.DynamicForms.Components",

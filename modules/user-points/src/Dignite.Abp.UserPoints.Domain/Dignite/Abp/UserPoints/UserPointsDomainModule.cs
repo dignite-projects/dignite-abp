@@ -7,7 +7,7 @@ namespace Dignite.Abp.UserPoints;
 [DependsOn(
     typeof(AbpDddDomainModule),
     typeof(UserPointsDomainSharedModule),
-    typeof(DigniteAbpPointsModule)
+    typeof(AbpPointsModule)
 )]
 public class UserPointsDomainModule : AbpModule
 {

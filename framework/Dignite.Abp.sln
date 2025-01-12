@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.DynamicForms", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.MultiTenancyLocalization", "src\Dignite.Abp.MultiTenancyLocalization\Dignite.Abp.MultiTenancyLocalization.csproj", "{87EB042B-ACF7-4FA5-8553-15EBED66139E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI", "src\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI\Dignite.Abp.AspNetCore.Mvc.MultiTenancyUI.csproj", "{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme", "src\Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme\Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme.csproj", "{E3847E4D-F283-4BA6-BA15-F1C9E723DD74}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Points", "src\Dignite.Abp.Points\Dignite.Abp.Points.csproj", "{19404858-29C0-4223-9393-E40F4C8F255E}"
 EndProject

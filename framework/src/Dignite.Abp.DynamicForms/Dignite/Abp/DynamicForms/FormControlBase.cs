@@ -35,7 +35,7 @@ public abstract class FormControlBase : IFormControl, ITransientDependency
         }
     }
 
-    private Type _localizationResource = typeof(DigniteAbpDynamicFormsResource);
+    private Type _localizationResource = typeof(AbpDynamicFormsResource);
 
     public abstract string Name { get; }
 

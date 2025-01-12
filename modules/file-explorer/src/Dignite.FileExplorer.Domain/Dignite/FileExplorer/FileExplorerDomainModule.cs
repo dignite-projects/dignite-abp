@@ -7,7 +7,7 @@ namespace Dignite.FileExplorer;
 [DependsOn(
     typeof(AbpDddDomainModule),
     typeof(FileExplorerDomainSharedModule),
-    typeof(DigniteAbpFilesDomainModule)
+    typeof(AbpFilesDomainModule)
 )]
 public class FileExplorerDomainModule : AbpModule
 {

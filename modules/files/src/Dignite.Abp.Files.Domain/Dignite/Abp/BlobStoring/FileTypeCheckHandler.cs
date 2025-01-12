@@ -27,7 +27,7 @@ public class FileTypeCheckHandler : IFileHandler, ITransientDependency
                 if (!fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.Contains(fileExtensionName.ToLower()))
                 {
                     throw new BusinessException(
-                        code: DigniteFileErrorCodes.Files.InvalidImageType,
+                        code: FileErrorCodes.Files.InvalidImageType,
                         message: "File type is incompatible!" + "File type should be one of" + fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.JoinAsString("/") + "!",
                         details: "File type should be one of" + fileTypeCheckHandlerConfiguration.AllowedFileTypeNames.JoinAsString("/") + "!"
                     );
@@ -36,7 +36,7 @@ public class FileTypeCheckHandler : IFileHandler, ITransientDependency
             else
             {
                 throw new BusinessException(
-                    code: DigniteFileErrorCodes.Files.MissingFileExtension,
+                    code: FileErrorCodes.Files.MissingFileExtension,
                     message: "File type is unrecognized!",
                     details: "Cannot get the file type of uploaded file!"
                 );

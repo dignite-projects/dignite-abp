@@ -18,7 +18,7 @@ public class ConsoleTestAppHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        using (var application = AbpApplicationFactory.Create<DigniteAbpNotificationCenterConsoleApiClientModule>(options =>
+        using (var application = AbpApplicationFactory.Create<AbpNotificationCenterConsoleApiClientModule>(options =>
         {
             options.Services.ReplaceConfiguration(_configuration);
             options.UseAutofac();

@@ -16,7 +16,7 @@ public class FileSizeLimitHandler : IFileHandler, ITransientDependency
         if (configuration.MaxFileSize * 1024 < context.BlobStream.Length)
         {
             throw new BusinessException(
-                code: DigniteFileErrorCodes.Files.FileTooLarge,
+                code: FileErrorCodes.Files.FileTooLarge,
                 message: "File object is too large",
                 details: $"The file object size cannot exceed {configuration.MaxFileSize}M!"
             );

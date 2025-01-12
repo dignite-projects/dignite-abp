@@ -22,7 +22,7 @@ public static class FileExplorerDbContextModelCreatingExtensions
             b.ConfigureByConvention();
 
             //Properties
-            b.Property(q => q.ContainerName).IsRequired().HasMaxLength(AbpFileConsts.MaxContainerNameLength);
+            b.Property(q => q.ContainerName).IsRequired().HasMaxLength(FileConsts.MaxContainerNameLength);
             b.Property(q => q.Name).IsRequired().HasMaxLength(DirectoryDescriptorConsts.MaxNameLength);
 
             //Indexes

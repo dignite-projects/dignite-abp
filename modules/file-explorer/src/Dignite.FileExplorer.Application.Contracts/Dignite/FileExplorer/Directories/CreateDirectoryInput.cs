@@ -11,7 +11,7 @@ public class CreateDirectoryInput
     /// Container name of blob
     /// </summary>
     [Required]
-    [DynamicMaxLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxContainerNameLength))]
+    [DynamicMaxLength(typeof(FileConsts), nameof(FileConsts.MaxContainerNameLength))]
     public string ContainerName { get; set; }
 
     /// <summary>

@@ -21,6 +21,6 @@ public class UpdateFileInput
     /// Modify the name of the file
     /// </summary>
     [CanBeNull]
-    [DynamicStringLength(typeof(AbpFileConsts), nameof(AbpFileConsts.MaxNameLength))]
+    [DynamicStringLength(typeof(FileConsts), nameof(FileConsts.MaxNameLength))]
     public string? Name { get; set; }
 }

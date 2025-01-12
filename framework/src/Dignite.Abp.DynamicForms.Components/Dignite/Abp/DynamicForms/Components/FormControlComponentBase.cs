@@ -22,7 +22,7 @@ public abstract class FormControlComponentBase<TFormControl, TFormConfiguration,
 
     protected FormControlComponentBase()
     {
-        LocalizationResource = typeof(DigniteAbpDynamicFormsModule);
+        LocalizationResource = typeof(AbpDynamicFormsModule);
         FormControlType = typeof(TFormControl);
         FormConfiguration = new TFormConfiguration();
     }

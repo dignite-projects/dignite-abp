@@ -11,7 +11,7 @@ namespace Dignite.FileExplorer;
 
 [DependsOn(
     typeof(AbpValidationModule),
-    typeof(DigniteAbpFilesDomainSharedModule)
+    typeof(AbpFilesDomainSharedModule)
 )]
 public class FileExplorerDomainSharedModule : AbpModule
 {

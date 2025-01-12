@@ -191,10 +191,10 @@ public abstract class FileManager<TFile, TFileStore> : DomainService
 
     protected virtual Task CheckFileAsync([NotNull] TFile file)
     {
-        Check.NotNullOrWhiteSpace(file.ContainerName, nameof(IFile.ContainerName), AbpFileConsts.MaxContainerNameLength);
-        Check.NotNullOrWhiteSpace(file.BlobName, nameof(IFile.BlobName), AbpFileConsts.MaxBlobNameLength);
-        Check.Length(file.Name, nameof(IFile.Name), AbpFileConsts.MaxNameLength);
-        Check.Length(file.Name, nameof(IFile.MimeType), AbpFileConsts.MaxMimeTypeLength);
+        Check.NotNullOrWhiteSpace(file.ContainerName, nameof(IFile.ContainerName), FileConsts.MaxContainerNameLength);
+        Check.NotNullOrWhiteSpace(file.BlobName, nameof(IFile.BlobName), FileConsts.MaxBlobNameLength);
+        Check.Length(file.Name, nameof(IFile.Name), FileConsts.MaxNameLength);
+        Check.Length(file.Name, nameof(IFile.MimeType), FileConsts.MaxMimeTypeLength);
 
         return Task.CompletedTask;
     }

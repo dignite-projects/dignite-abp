@@ -9,7 +9,7 @@ public class FileExplorerFormControl : FormControlBase
 
     public FileExplorerFormControl()
     {
-        LocalizationResource = typeof(DigniteAbpDynamicFormsFileExplorerResource);
+        LocalizationResource = typeof(AbpDynamicFormsFileExplorerResource);
     }
 
     public override string Name => ControlName;

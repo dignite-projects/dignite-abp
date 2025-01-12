@@ -106,8 +106,8 @@ namespace PureTheme.BlazorServerSample;
     typeof(AbpSettingManagementBlazorServerModule),
 
     // Pure theme module packages
-    typeof(DigniteAbpAspNetCoreComponentsServerPureThemeModule),
-    typeof(DigniteAbpAspNetCoreMvcUiPureThemeModule)
+    typeof(AbpAspNetCoreComponentsServerPureThemeModule),
+    typeof(AbpAspNetCoreMvcUiPureThemeModule)
 )]
 public class BlazorServerSampleModule : AbpModule
 {
@@ -170,7 +170,7 @@ public class BlazorServerSampleModule : AbpModule
         {
             // MVC UI
             options.StyleBundles.Configure(
-                PureThemeBundles.Styles.Public,
+                PureThemeBundles.Styles.Global,
                 bundle =>
                 {
                     bundle.AddFiles("/global-styles.css");

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Dignite.Abp.MultiTenancyDomains.Application</AssemblyName>
+    <PackageId>Dignite.Abp.MultiTenancyDomains.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <ProjectReference Include="..\Dignite.Abp.MultiTenancyDomains.Application.Contracts\Dignite.Abp.MultiTenancyDomains.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.MultiTenancyDomains.Domain\Dignite.Abp.MultiTenancyDomains.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

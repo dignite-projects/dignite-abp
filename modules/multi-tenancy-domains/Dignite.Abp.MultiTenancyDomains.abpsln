@@ -1,0 +1,12 @@
+{
+  "id": "b911af9a-e7b0-4605-b343-83c98abc9eff",
+  "template": "empty",
+  "modules": {
+    "Dignite.Abp.MultiTenancyDomains": {
+      "path": "Dignite.Abp.MultiTenancyDomains.abpmdl"
+    },
+    "Dignite.Abp.MultiTenancyDomains.Host": {
+      "path": "host/Dignite.Abp.MultiTenancyDomains.Host.abpmdl"
+    }
+  }
+}

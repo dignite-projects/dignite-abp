@@ -77,7 +77,7 @@ $solutions = (
     "modules/user-points",
     "modules/cms-kit",
     "modules/regionalization-management",
-    "modules/tenant-domains"
+    "modules/multi-tenancy-domains"
 )
 
 # List of projects
@@ -192,15 +192,15 @@ $projects = (
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi.Client",      
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer",
     
-    # modules/tenant-domains
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Application",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Application.Contracts",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Domain",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Domain.Shared",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.EntityFrameworkCore",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.HttpApi",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.HttpApi.Client",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.Installer",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.MongoDB",
-    "modules/tenant-domains/src/Dignite.Abp.TenantDomains.AspNetCore"
+    # modules/multi-tenancy-domains
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Application",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Application.Contracts",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Domain",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Domain.Shared",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.EntityFrameworkCore",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.HttpApi",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.HttpApi.Client",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Installer",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.MongoDB",
+    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.AspNetCore"
 )

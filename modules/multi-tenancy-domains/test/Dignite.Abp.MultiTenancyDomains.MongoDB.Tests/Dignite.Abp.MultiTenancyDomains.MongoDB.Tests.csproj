@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+	<RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="EphemeralMongo.Core" />
+    <PackageReference Include="EphemeralMongo6.runtime.linux-x64" />
+    <PackageReference Include="EphemeralMongo6.runtime.osx-x64" />
+    <PackageReference Include="EphemeralMongo6.runtime.win-x64" />
+    <ProjectReference Include="..\..\src\Dignite.Abp.MultiTenancyDomains.MongoDB\Dignite.Abp.MultiTenancyDomains.MongoDB.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.MultiTenancyDomains.Application.Tests\Dignite.Abp.MultiTenancyDomains.Application.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

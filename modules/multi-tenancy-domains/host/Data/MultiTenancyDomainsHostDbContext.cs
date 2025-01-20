@@ -33,6 +33,6 @@ public class MultiTenancyDomainsHostDbContext : AbpDbContext<MultiTenancyDomains
         builder.ConfigureTenantManagement();
 
         /* Configure your own entities here */
-        builder.ConfigureTenantDomains();
+        builder.ConfigureMultiTenancyDomains();
     }
 }

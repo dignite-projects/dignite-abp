@@ -2,7 +2,10 @@
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Menu
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.NavbarToolbar
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.OffcanvasNavbar
-<header class="position-relative bg-body d-flex align-items-center py-2 px-lg-5 main-navbar">
+@{
+    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+}
+<header class="@containerClass position-relative bg-body d-flex align-items-center py-2 main-navbar">
     <nav class="navbar navbar-expand-lg d-none d-sm-none d-md-none d-lg-flex">
         @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
         <ul class="navbar-nav">
@@ -12,7 +15,7 @@
     @* To ensure that the action of the toolbar is not affected by the action of the bootstrap navbar, place the toolbar outside of the bootstrap navbar.
        For example: here is a dropdown menu that dynamically adjusts the expanding position of the dropdown menu according to the distance from the screen position, which is very good.
     *@
-    <ul class="nav justify-content-around align-items-center pe-lg-5 main-navbar-toolbar">
+    <ul class="nav justify-content-between align-items-center main-navbar-toolbar">
         @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
     </ul>
 </header>

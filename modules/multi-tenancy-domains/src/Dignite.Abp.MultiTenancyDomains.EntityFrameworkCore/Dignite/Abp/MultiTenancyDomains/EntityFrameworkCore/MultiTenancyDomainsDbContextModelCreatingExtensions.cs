@@ -6,7 +6,7 @@ namespace Dignite.Abp.MultiTenancyDomains.EntityFrameworkCore;
 
 public static class MultiTenancyDomainsDbContextModelCreatingExtensions
 {
-    public static void ConfigureTenantDomains(
+    public static void ConfigureMultiTenancyDomains(
         this ModelBuilder builder)
     {
         Check.NotNull(builder, nameof(builder));
@@ -15,7 +15,7 @@ public static class MultiTenancyDomainsDbContextModelCreatingExtensions
         builder.Entity<TenantDomain>(domain =>
         {
             //Configure table & schema name
-            domain.ToTable(MultiTenancyDomainsDbProperties.DbTablePrefix + "MultiTenancyDomains", MultiTenancyDomainsDbProperties.DbSchema);
+            domain.ToTable(MultiTenancyDomainsDbProperties.DbTablePrefix + "TenantDomains", MultiTenancyDomainsDbProperties.DbSchema);
 
             domain.ConfigureByConvention();
 

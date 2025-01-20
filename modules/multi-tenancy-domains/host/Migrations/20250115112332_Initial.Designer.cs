@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Dignite.Abp.MultiTenancyDomains.Host.Migrations
 {
     [DbContext(typeof(MultiTenancyDomainsHostDbContext))]
-    [Migration("20250111121008_Initial")]
+    [Migration("20250115112332_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

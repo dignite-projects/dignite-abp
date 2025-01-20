@@ -16,10 +16,13 @@
 .main-navbar .dropdown-menu {
     z-index: 1021;
 }
+.main-navbar-toolbar > li:empty {
+    display: none;
+}
 @media screen and (min-width: 992px) {
     .main-navbar-toolbar {
         position: absolute;
-        right: 0;
+        right: calc(var(--bs-gutter-x)* 0.5);
     }
 }
 @media screen and (max-width: 991.98px) {

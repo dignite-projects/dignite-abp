@@ -19,6 +19,6 @@ public class MultiTenancyDomainsDbContext : AbpDbContext<MultiTenancyDomainsDbCo
     {
         base.OnModelCreating(builder);
 
-        builder.ConfigureTenantDomains();
+        builder.ConfigureMultiTenancyDomains();
     }
 }

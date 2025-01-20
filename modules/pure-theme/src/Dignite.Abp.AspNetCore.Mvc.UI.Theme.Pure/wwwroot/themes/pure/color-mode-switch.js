@@ -44,19 +44,21 @@
     }
 
     var setBrandLogo = (theme) => {
-        const brandImgElement = document.querySelectorAll('.navbar-brand img');
-        for (let item of brandImgElement) {
-            if (theme === 'auto') {
-                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            } 
+        if (dignite.brand.logoReverseUrl != '' || dignite.brand.logoUrl != '') {
+            const brandImgElement = document.querySelectorAll('.navbar-brand img');
+            for (let item of brandImgElement) {
+                if (theme === 'auto') {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
 
-            if (theme == "dark" && dignite.brand.logoReverseUrl != '') {
-                item.src = dignite.brand.logoReverseUrl;
-                item.classList.remove('d-none');
-            }
-            if (theme == "light" && dignite.brand.logoUrl != '') {
-                item.src = dignite.brand.logoUrl;
-                item.classList.remove('d-none');
+                if (theme == "dark" && dignite.brand.logoReverseUrl != '') {
+                    item.src = dignite.brand.logoReverseUrl;
+                    item.classList.remove('d-none');
+                }
+                if (theme == "light" && dignite.brand.logoUrl != '') {
+                    item.src = dignite.brand.logoUrl;
+                    item.classList.remove('d-none');
+                }
             }
         }
     }

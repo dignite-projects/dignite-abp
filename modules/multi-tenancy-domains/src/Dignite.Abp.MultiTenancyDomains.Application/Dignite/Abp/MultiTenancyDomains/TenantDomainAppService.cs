@@ -8,7 +8,6 @@ using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.MultiTenancyDomains;
 
-[Authorize(Permissions.MultiTenancyDomainsPermissions.GroupName)]
 public class TenantDomainAppService : ApplicationService, ITenantDomainAppService
 {
     private readonly ITenantDomainRepository _domainRepository;
@@ -25,7 +24,6 @@ public class TenantDomainAppService : ApplicationService, ITenantDomainAppServic
         ObjectMapperContext = typeof(AbpMultiTenancyDomainsApplicationModule);
     }
 
-    [AllowAnonymous]
     public async Task<TenantDomainDto?> FindByDomainNameAsync(string domainName)
     {
         using (_dataFilter.Disable<IMultiTenant>())

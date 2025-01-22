@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.MultiTenancy;
@@ -12,8 +14,11 @@ public class MultiTenancyDomainsTenantResolveContributor : HttpTenantResolveCont
 
     public override string Name => ContributorName;
 
-    public MultiTenancyDomainsTenantResolveContributor()
+    public string[]? IgnoreDomains;
+
+    public MultiTenancyDomainsTenantResolveContributor(string[]? ignoreDomains =null)
     {
+        IgnoreDomains = ignoreDomains;
     }
 
     protected override async Task<string?> GetTenantIdOrNameFromHttpContextOrNullAsync(ITenantResolveContext context, HttpContext httpContext)
@@ -24,6 +29,12 @@ public class MultiTenancyDomainsTenantResolveContributor : HttpTenantResolveCont
         }
 
         var hostName = httpContext.Request.Host.Value;
+
+        if (IgnoreDomains != null && IgnoreDomains.Any(x=>x.Equals(hostName,StringComparison.OrdinalIgnoreCase)))
+        { 
+            return null;
+        }
+
         using (var scope = context.ServiceProvider.CreateScope())
         {
             var tenantDomainAppService = scope.ServiceProvider.GetRequiredService<ITenantDomainAppService>();

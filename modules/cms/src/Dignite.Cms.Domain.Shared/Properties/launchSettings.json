@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Dignite.Cms.Domain.Shared": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57662;http://localhost:57669"
+    }
+  }
+}

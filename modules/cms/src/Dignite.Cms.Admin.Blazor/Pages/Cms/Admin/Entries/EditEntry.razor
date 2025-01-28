@@ -1,0 +1,36 @@
+﻿@page "/cms/admin/entries/{id:guid}/edit"
+
+@using Dignite.Cms.Admin.Entries;
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Permissions
+@using Dignite.Cms.Localization
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inherits AbpComponentBase
+
+
+@attribute [Authorize(CmsAdminPermissions.Entry.Update)]
+@inject IEntryAdminAppService EntryAppService
+@inject ISectionAdminAppService SectionAppService
+@inject NavigationManager Navigation
+
+
+<PageTitle>@L["Edit"]</PageTitle>
+
+@* ************************* PAGE HEADER ************************* *@
+<PageHeader Title="@L["Edit"]"
+            Toolbar="@Toolbar">
+</PageHeader>
+  
+@* ************************* CREATE  ************************* *@        
+<Blazorise.Form>
+    <CascadingValue Value="@Id" Name="EditingEntryId">
+        <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+        @if (EditingEntity != null)
+        {
+            <input type="hidden" name="ConcurrencyStamp" @bind-value="EditingEntity.ConcurrencyStamp" />
+            <CreateOrUpdateEntryComponent Entry="@EditingEntity" Section="@Section"></CreateOrUpdateEntryComponent>
+        }
+        </Blazorise.Validations>
+    </CascadingValue>
+</Blazorise.Form>

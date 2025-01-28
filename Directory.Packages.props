@@ -281,6 +281,25 @@
     <PackageVersion Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.MultiTenancy" Version="8.3.1" />
-    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />    
+    <PackageVersion Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.Http.Client.Web" Version="8.3.1" />    
+    <PackageVersion Include="Volo.Abp.Identity.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.Identity.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Web" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="8.3.1" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.Client" Version="8.3.1" />    
+    <PackageVersion Include="Volo.Abp.Autofac.WebAssembly" Version="8.0.4" />
+    <PackageVersion Include="Volo.Abp.Account.Application.Contracts" Version="8.0.4" />
+    <PackageVersion Include="Volo.Abp.Identity.Blazor.WebAssembly" Version="8.0.4" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" Version="8.0.4" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" Version="8.0.4" />
+    <PackageVersion Include="Sakura.AspNetCore.Mvc.PagedList" Version="3.0.2" />
   </ItemGroup>
 </Project>

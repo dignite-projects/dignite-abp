@@ -1,0 +1,51 @@
+﻿@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Entry
+@using Dignite.Cms.Admin.Entries;
+@using Blazorise.Components
+@inject IEntryAdminAppService EntryAdminAppService;
+@inherits FormControlComponentBase<EntryFormControl,EntryConfiguration,List<Guid>>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @if (FormConfiguration.Multiple)
+        {
+            <Autocomplete TItem="EntryDto"
+                  TValue="Guid"
+                  Data="@EntryDataSource"
+                  ReadData="@OnHandleReadData"
+                  TextField="@(( item ) => item.Title)"
+                  ValueField="@(( item ) => item.Id)"
+                  SelectionMode="AutocompleteSelectionMode.Checkbox"
+                  CloseOnSelection="false"
+                  SelectedValues="MultipleSelectionEntryIds"
+                  SelectedValuesChanged="OnMultipleSelectedValuesChanged"
+                  @bind-SelectedTexts="MultipleSelectionTexts"
+                  Placeholder="@FormConfiguration.Placeholder"
+                  HighlightSearch
+                  Validator="ValidateIsRequired">
+            </Autocomplete> 
+        }
+        else
+        {
+            <Autocomplete TItem="EntryDto"
+                          TValue="Guid?"
+                          Data="@EntryDataSource"
+                          ReadData="@OnHandleReadData"
+                          TextField="@(( item ) => item.Title)"
+                          ValueField="@(( item ) => item.Id)"
+                          SelectionMode="AutocompleteSelectionMode.Default"
+                          @bind-SelectedText="@SelectionText"
+                          SelectedValue="@SelectionEntryId"
+                          SelectedValueChanged="OnSelectedValueChanged"
+                          Placeholder="@FormConfiguration.Placeholder"
+                          HighlightSearch
+                          Validator="@ValidateIsRequired">
+            </Autocomplete>
+        }
+        <Paragraph>
+            <FieldHelp>@Field.Description</FieldHelp>
+        </Paragraph>
+    </FieldBody>
+</Field>
+

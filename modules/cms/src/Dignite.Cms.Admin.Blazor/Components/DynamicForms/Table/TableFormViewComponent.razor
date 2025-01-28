@@ -1,0 +1,69 @@
+﻿@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Table
+@using Dignite.Abp.Data;
+@using System.Text.Json;
+@inject IFormViewComponentSelector formViewComponentSelector
+@inherits FormViewComponentBase<TableFormControl,TableConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>      
+        @if (FormConfiguration.TableColumns.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        @foreach(var column in FormConfiguration.TableColumns)
+                        {
+                        <TableHeaderCell>@column.DisplayName</TableHeaderCell>
+                        }
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <TableBody>
+                    @if(TableRows.Any())
+                    {
+                        @foreach(var row in TableRows)
+                        {
+                            <Blazorise.TableRow>
+                                @foreach(var column in FormConfiguration.TableColumns)
+                                {
+                                    if (!column.FormControlName.IsNullOrEmpty())
+                                    {
+                                        column.Value = row.GetField(column.Name);
+                                        var component = formViewComponentSelector.Get(column.FormControlName);
+                                        var parameters = new Dictionary<string, object>();
+                                        parameters.Add(nameof(IFormViewComponent.Field), column);
+                                        <TableRowCell>
+                                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                        </TableRowCell>
+                                    }
+                                }
+                            </Blazorise.TableRow>
+                        }
+                    }
+                    else
+                    {
+                        <Blazorise.TableRow>
+                            <TableRowCell ColumnSpan="FormConfiguration.TableColumns.Count">
+                                No data available
+                            </TableRowCell>
+                        </Blazorise.TableRow>                        
+                    }
+                </TableBody>
+            </Table>
+            }
+    </FieldBody>
+</Field>
+@code{
+    public List<Dignite.Abp.DynamicForms.Table.TableRow> TableRows = new List<Dignite.Abp.DynamicForms.Table.TableRow>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        var value = Field.Value;
+        if (value != null)
+        {
+            TableRows = JsonSerializer.Deserialize<List<Dignite.Abp.DynamicForms.Table.TableRow>>(value.ToString());
+        }
+    }
+}

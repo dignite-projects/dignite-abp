@@ -1,0 +1,19 @@
+{
+  "description": "Description",
+  "blog": "Blog",
+  "Menu:HomePage": "Home Page",
+  "Menu:Contact": "Contact",
+  "Menu:Services": "Services",
+  "Menu:WebDesign": "Web Design",
+  "Menu:eCommerce": "E-Commerce",
+  "Menu:Learn": "Learn",
+  "Menu:Blog": "Blog",
+  "Menu:Blog-All": "All",
+  "Menu:Blog-company-news": "Company News",
+  "Menu:Blog-tutorials": "Tutorials",
+  "Menu:Blog-essays": "Essays",
+  "no-data-text": "No matching data found!",
+  "search-text-box-placeholder": "Enter search keywords",
+  "updated-on": "Updated on",
+  "contact-us": "Contact Us"
+}

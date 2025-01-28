@@ -1,0 +1,228 @@
+﻿@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Table
+@using Dignite.Abp.DynamicForms.TextEdit
+@using System.Collections.Immutable
+@using Dignite.Cms.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@using Dignite.Cms.Fields
+@inject IEnumerable<IFormControl> AllFormControls
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IFormConfigurationComponentSelector configurationComponentSelector
+@inherits FormConfigurationComponentBase<TableFormControl,TableConfiguration>
+
+
+<Field>
+    <FieldLabel>@L["TableColumns"]</FieldLabel>
+    <Table>
+        <TableHeader>
+            <Blazorise.TableRow>
+                <TableHeaderCell>@L["TableColumnDisplayName"]</TableHeaderCell>
+                <TableHeaderCell>@L["TableColumnName"]</TableHeaderCell>
+                <TableHeaderCell>@L["TableColumnForm"]</TableHeaderCell>
+                <TableHeaderCell>
+                    <Button @onclick="@AddTableColumn"><Icon Name="IconName.PlusCircle" /></Button>
+                </TableHeaderCell>
+            </Blazorise.TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach(var column in TableColumns)
+            {
+                var index = TableColumns.IndexOf(column);
+                <Blazorise.TableRow>
+                    <TableRowCell>
+                        <Validation Validator="((e)=>ValidateColumnDisplayName(e))">
+                            <TextEdit MaxLength="FieldConsts.MaxDisplayNameLength" @bind-Text="@column.DisplayName" Blur="@((args)=>ColumnDisplayNameTextEditBlur(column))" />
+                        </Validation>
+                    </TableRowCell>
+                    <TableRowCell>
+                        <Validation Validator="((e)=>ValidateColumnName(e))">
+                             <TextEdit MaxLength="FieldConsts.MaxNameLength" @bind-Text="@column.Name" />
+                        </Validation>
+                    </TableRowCell>
+                    <TableRowCell>
+                        <Validation Validator="((e)=>ValidateColumnFieldControl(e))">
+                            <Select TValue="string" SelectedValue="@column.FormControlName" SelectedValueChanged="(val => OnSelectedValueChanged((string)val, column))">
+                                <SelectItem TValue="string" Value="null">@L["SelectForm"]</SelectItem>
+                                @if (AvailableFormControls != null)
+                                {
+                                    foreach (var p in AvailableFormControls)
+                                    {
+                                        <SelectItem TValue="string" Value="@p.Name">@p.DisplayName</SelectItem>
+                                    }
+                                }                            
+                            </Select>
+                        </Validation>
+                    </TableRowCell>
+                    <TableRowCell>
+                        <Button @onclick="@(val => OnSelectedValueChanged(column.FormControlName, column))"><Icon Name="IconName.Edit" /></Button>
+                        <Button @onclick="@(val => RemoveTableColumn(val, column))"><Icon Name="IconName.Remove" /></Button>
+                        @if (index > 0)
+                        {
+                            <Button @onclick="@(val => MoveTableColumn(val, column,index-1))"><Icon Name="IconName.ArrowUp" /></Button>
+                        }
+                        @if (index < TableColumns.Count-1)
+                        {
+                            <Button @onclick="@(val => MoveTableColumn(val, column,index+1))"><Icon Name="IconName.ArrowDown" /></Button>
+                        }
+                    </TableRowCell>
+                </Blazorise.TableRow>
+            }
+        </TableBody>
+    </Table>
+</Field>
+
+
+<Blazorise.Modal @ref="FormConfigModal" Closing="@ClosingEditModal">
+    <Blazorise.ModalContent Centered="true">
+        <Blazorise.Form>
+            <Blazorise.ModalHeader>
+                <Blazorise.ModalTitle>@L["FormControlConfiguration"]</Blazorise.ModalTitle>
+                <Blazorise.CloseButton Clicked="CloseAuditModalAsync" />
+            </Blazorise.ModalHeader>
+            <Blazorise.ModalBody>
+                <Blazorise.Validations @ref="@ValidationsRef" Model="@SelectedConfigurationParameters" ValidateOnLoad="false">
+                    <!------------- selected form configuration component ------------------------------------->
+                    @if (SelectedConfigurationType is not null)
+                    {
+                        <DynamicComponent Type="@SelectedConfigurationType" Parameters='@SelectedConfigurationParameters' />
+                    }
+                </Blazorise.Validations>
+            </Blazorise.ModalBody>
+            <Blazorise.ModalFooter>
+                <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseAuditModalAsync">@L["Cancel"]</Blazorise.Button>                                
+                <SubmitButton Clicked="@SaveConfigAsync" />
+            </Blazorise.ModalFooter>
+        </Blazorise.Form>
+    </Blazorise.ModalContent>
+</Blazorise.Modal>
+    @code{
+
+    protected ImmutableList<IFormControl> AvailableFormControls;
+    protected List<FormField> TableColumns;
+
+    protected Type SelectedConfigurationType;
+    protected Dictionary<string, object> SelectedConfigurationParameters = new();
+    protected Modal FormConfigModal;
+    protected Validations ValidationsRef;
+
+    public TableFormConfigurationComponent()
+    {
+        LocalizationResource = typeof(CmsResource);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        AvailableFormControls = AllFormControls.Where(p => p.Name != TableFormControl.ControlName).ToImmutableList();
+        return base.OnInitializedAsync();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        TableColumns = FormConfiguration.TableColumns == null ? new() : FormConfiguration.TableColumns;
+        if (!TableColumns.Any())
+        {
+            AddTableColumn();
+        }
+    }
+    private void AddTableColumn()
+    {
+        var column = new FormField();
+        TableColumns.Add(column);            
+        FormConfiguration.TableColumns=TableColumns;
+    }
+
+    private void RemoveTableColumn(MouseEventArgs e, FormField item)
+    {
+        TableColumns.Remove(item);
+        FormConfiguration.TableColumns=TableColumns;
+    }
+    private void MoveTableColumn(MouseEventArgs e, FormField item, int targetIndex)
+    {
+        TableColumns.MoveItem(tc=>tc==item, targetIndex);
+        FormConfiguration.TableColumns=TableColumns;
+    }
+
+    private async Task OnSelectedValueChanged(string formName, FormField column)
+    {
+        if (!formName.IsNullOrEmpty())
+        {
+            column.FormControlName = formName;
+            if (formName != L["SelectFormControl"].Value)
+            {
+                var component = configurationComponentSelector.Get(formName);
+                SelectedConfigurationType = component.GetType();
+                SelectedConfigurationParameters = new Dictionary<string, object>();
+                SelectedConfigurationParameters.Add(nameof(IFormConfigurationComponent.ConfigurationDictionary), column.FormConfiguration);
+
+                await OpenConfigModalAsync();
+            }
+        }
+    }
+
+    private async Task OpenConfigModalAsync()
+    { 
+        await InvokeAsync(async () =>
+        {
+            StateHasChanged();
+            await FormConfigModal.Show();
+        });
+    }
+
+    private async Task SaveConfigAsync()
+    {
+        try
+        {
+            FormConfiguration.TableColumns = TableColumns;
+            await InvokeAsync(FormConfigModal.Hide);
+        }
+        catch (Exception ex)
+        {
+            await HandleErrorAsync(ex);
+        }        
+    }
+
+    protected virtual Task ClosingEditModal(ModalClosingEventArgs eventArgs)
+    {
+        // cancel close if clicked outside of modal area
+        eventArgs.Cancel = eventArgs.CloseReason == CloseReason.FocusLostClosing;
+
+        return Task.CompletedTask;
+    }
+
+    protected virtual Task CloseAuditModalAsync()
+    {
+        InvokeAsync(FormConfigModal.Hide);
+        return Task.CompletedTask;
+    }
+
+    void ValidateColumnFieldControl(ValidatorEventArgs e)
+    {
+        e.Status = e.Value == null || Convert.ToString(e.Value).IsNullOrWhiteSpace() || Convert.ToString(e.Value) == L["SelectForm"].Value
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+
+    void ColumnDisplayNameTextEditBlur(FormField column)
+    {
+        if (!column.DisplayName.IsNullOrEmpty() && column.Name.IsNullOrEmpty())
+        {
+            column.Name = SlugNormalizer.Normalize(column.DisplayName);
+        }
+    }
+
+    void ValidateColumnDisplayName(ValidatorEventArgs e)
+    {
+        e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+
+    void ValidateColumnName(ValidatorEventArgs e)
+    {
+        e.Status = Convert.ToString(e.Value).IsNullOrWhiteSpace()
+            ? ValidationStatus.Error
+            : ValidationStatus.Success;
+    }
+}

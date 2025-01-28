@@ -1,0 +1,37 @@
+﻿@page "/cms/admin/sections/{sectionId:guid}/entry-types/{id:guid}/edit"
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Localization;
+@using Dignite.Cms.Permissions;
+@using Microsoft.AspNetCore.Authorization;
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@attribute [Authorize(CmsAdminPermissions.Section.Update)]
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IEntryTypeAdminAppService AppService
+@inject ISectionAdminAppService SectionAppService
+@inject NavigationManager Navigation
+@inherits AbpComponentBase
+
+<PageTitle>@L["Edit"]</PageTitle>
+    <PageHeader Title="@L["Edit"]" Toolbar="@Toolbar"></PageHeader>
+<Card>
+    <CardBody>
+        <Blazorise.Form>
+            <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                @if (EditingEntity != null)
+                {
+                    <CreateOrUpdateEntryTypeComponent Entity="EditingEntity" SectionId="SectionId"></CreateOrUpdateEntryTypeComponent>
+                }
+                else
+                {
+                    <Row Class="w-100 align-items-center" Style="height: 150px;">
+                        <Column>
+                            <RadarSpinner />
+                        </Column>
+                    </Row>
+                }
+            </Blazorise.Validations>
+        </Blazorise.Form>
+    </CardBody>
+</Card>
+

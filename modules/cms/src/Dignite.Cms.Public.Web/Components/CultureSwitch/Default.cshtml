@@ -1,0 +1,45 @@
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Http.Extensions;
+@using Dignite.Cms.Public.Web.Components.CultureSwitch;
+@using System.Globalization
+@model CultureSwitchViewComponentModel
+@if (Model.AvailableCultures.Any()&&Model.AvailableCultures.Count>1)
+{
+    var currentCulture = Model.AvailableCultures.First(l => l.Name.Equals(Model.CurrentCultureName, System.StringComparison.OrdinalIgnoreCase));
+    <div class="dropdown">
+        <a class="btn" href="#" id="Menu_CultureSwitch" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="@currentCulture?.NativeName">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <small class="d-none d-lg-inline">
+                @currentCulture?.NativeName
+            </small>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Menu_CultureSwitch">
+            @foreach (var culture in Model.AvailableCultures)
+            {
+                if (Model.CurrentCultureName == culture.Name)
+                {
+                    <span class="dropdown-item active">
+                        @culture.NativeName
+                    </span>
+                }
+                else
+                {
+                    string url;
+                    if (Model.IsMatchingRoute)
+                    {
+                        url = Model.InsertOrReplaceCultureParameter(Context, culture.Name);
+                        url = url.Trim('/') + Context.Request.QueryString.Value;
+                    }
+                    else
+                    {
+                        var uiCultureName = culture.CultureTypes.HasFlag(CultureTypes.NeutralCultures) ? culture.Name : culture.Parent.Name;
+                        url = $"Abp/Languages/Switch?culture={culture.Name}&uiCulture={uiCultureName}&returnUrl={System.Net.WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery())}";
+                    }
+                    <a class="dropdown-item" href="~/@url">
+                        @culture.NativeName
+                    </a>
+                }
+            }
+        </div>
+    </div>
+}

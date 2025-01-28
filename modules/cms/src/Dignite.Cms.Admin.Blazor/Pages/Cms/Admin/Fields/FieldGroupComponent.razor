@@ -1,0 +1,103 @@
+﻿@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Localization;
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inherits AbpCrudPageBase<IFieldGroupAdminAppService, FieldGroupDto, Guid, GetFieldGroupsInput, CreateOrUpdateFieldGroupInput>
+
+
+<Card>
+    <CardHeader Flex="Flex.JustifyContent.Between.AlignItems.Center">
+        <Heading Size="HeadingSize.Is6" Margin="Margin.Is0.FromBottom">@L["FieldGroup"]</Heading>
+        <Button Color="Color.Light" Clicked="OpenCreateModalAsync"><Icon Name="IconName.PlusCircle" /></Button>
+    </CardHeader>
+    <CardBody Padding="Padding.Is0">
+        <AutoHeight ExtraHeight="45">
+            <ListGroup Flush Mode="ListGroupMode.Selectable" @bind-SelectedItem="SelectedGroupName">
+                <ListGroupItem Name="" Clicked="()=>OnItemClick(null)">
+                    @L["AllFields"]
+                </ListGroupItem>
+                @foreach (var item in Entities)
+                {
+                    <ListGroupItem Name="@item.Name" Flex="Flex.JustifyContent.Between.AlignItems.Center" Clicked="()=>OnItemClick(item)">
+                        @item.Name
+                        @if (SelectedGroupName == item.Name)
+                        {
+                            <Div>
+                                <Button Size="Size.Small" Clicked="()=>DeleteEntityAsync(item)" @onclick:stopPropagation="true">
+                                <Icon Name="IconName.Delete" />
+                                </Button>
+                                <Button Size="Size.Small" Clicked="()=>OpenEditModalAsync(item)" @onclick:stopPropagation="true">
+                                <Icon Name="IconName.Edit" />
+                                </Button>
+                            </Div>
+                        }
+                    </ListGroupItem>
+                }
+            </ListGroup>
+        </AutoHeight>
+    </CardBody>
+</Card>
+
+@* ************************* CREATE MODAL ************************* *@
+@if (HasCreatePermission)
+{
+    <Blazorise.Modal @ref="CreateModal" Closing="@ClosingCreateModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["New"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseCreateModalAsync"/>
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                        <Validation MessageLocalizer="@LH.Localize">
+                            <Field>
+                                <FieldLabel>@L["Name"]</FieldLabel>
+                                <TextEdit @bind-Text="NewEntity.Name" Autofocus="true">
+                                    <Feedback>
+                                        <ValidationError />
+                                    </Feedback>
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="@Blazorise.Color.Secondary" Clicked="CloseCreateModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@CreateEntityAsync"/>
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+}
+@* ************************* EDIT MODAL ************************* *@
+@if (HasUpdatePermission)
+{
+    <Blazorise.Modal @ref="EditModal" Closing="@ClosingEditModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["Edit"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseEditModalAsync"/>
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                        <Validation MessageLocalizer="@LH.Localize">
+                            <Field>
+                                <FieldLabel>@L["Name"]</FieldLabel>
+                                <TextEdit @bind-Text="EditingEntity.Name" Autofocus="true">
+                                    <Feedback>
+                                        <ValidationError />
+                                    </Feedback>
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseEditModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@UpdateEntityAsync"/>
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+}

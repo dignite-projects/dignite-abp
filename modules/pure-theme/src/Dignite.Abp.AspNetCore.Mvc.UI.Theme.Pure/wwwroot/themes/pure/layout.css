@@ -88,6 +88,12 @@
     transition: 0.5s all;
     text-decoration: none;
 }
+.underline-animate.nav-link {
+    background: linear-gradient(90deg,var(--bs-nav-link-color),var(--bs-nav-link-color));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+}
 
 .underline-animate.text-secondary {
     background: linear-gradient(90deg,var(--bs-secondary),var(--bs-secondary));
@@ -96,12 +102,6 @@
     background-position: 0 100%;
 }
 
-.underline-animate.nav-link {
-    background: linear-gradient(90deg,var(--bs-nav-link-color),var(--bs-nav-link-color));
-    background-size: 0 1px;
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-}
 
 .underline-animate:focus,
 .underline-animate.active,

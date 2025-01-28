@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "text": "クイックスタート",
+      "path": "quick-start.md"
+    },   
+    {
+      "text": "基本コンセプト",
+      "path": "basic-concept.md"
+    },  
+    {
+      "text": "Mvcウェブサイト開発",
+      "items": [
+        {
+          "text": "基礎",
+          "path": "fundamentals.md"
+        },
+        {
+          "text": "タグヘルパー",
+          "path": "tag-helpers.md"
+        }
+      ]
+    },    
+    {
+      "text": "高度な開発",
+      "path": "advanced-development.md"
+    },  
+    {
+      "text": "インストール方法",
+      "path": "how-to-install.md"
+    },  
+    {
+      "text": "貢献ガイド",
+      "path": "contribution.md"
+    }
+  ]
+}

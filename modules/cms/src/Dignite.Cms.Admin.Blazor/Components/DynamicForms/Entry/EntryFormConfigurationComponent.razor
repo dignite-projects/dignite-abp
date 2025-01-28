@@ -1,0 +1,27 @@
+﻿@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Entry
+@using Dignite.Cms.Localization
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inherits FormConfigurationComponentBase<EntryFormControl,EntryConfiguration>
+
+
+<Validation MessageLocalizer="@LH.Localize" Validator="SectionSelectedValidator">
+    <Field>
+        <FieldLabel>@L["Sections"]</FieldLabel>
+        <Select TValue="Guid" @bind-SelectedValue=FormConfiguration.SectionId>
+            @foreach (var item in Sections)
+            {
+                <SelectItem Value="@item.Id">@item.DisplayName</SelectItem>
+            }
+        </Select>
+    </Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="@FormConfiguration.Multiple">@L["Multiple"]</Check>
+</Field>
+<Validation>
+    <Field>
+        <FieldLabel>@L["Placeholder"]</FieldLabel>
+        <TextEdit @bind-Text="@FormConfiguration.Placeholder" />
+    </Field>
+</Validation>

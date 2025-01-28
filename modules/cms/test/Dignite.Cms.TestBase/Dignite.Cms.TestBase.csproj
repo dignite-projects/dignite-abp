@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.test.props" />
+
+  <PropertyGroup>
+	  <TargetFramework>net8.0</TargetFramework>
+	  <AssemblyName>Dignite.Cms.TestBase</AssemblyName>
+	  <PackageId>Dignite.Cms.TestBase</PackageId>
+	  <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	  <RootNamespace>Dignite.Cms</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" />
+	  <PackageReference Include="NSubstitute" />
+	  <PackageReference Include="Shouldly" />
+	  <PackageReference Include="xunit" />
+	  <PackageReference Include="xunit.extensibility.execution" />
+	  <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.TestBase" />
+    <ProjectReference Include="..\..\src\Dignite.Cms.Domain\Dignite.Cms.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

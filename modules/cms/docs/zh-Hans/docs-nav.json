@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "text": "快速入门",
+      "path": "quick-start.md"
+    },   
+    {
+      "text": "基本概念",
+      "path": "basic-concept.md"
+    },  
+    {
+      "text": "Mvc网站开发",
+      "items": [
+        {
+          "text": "基础知识",
+          "path": "fundamentals.md"
+        },
+        {
+          "text": "Tag Helpers",
+          "path": "tag-helpers.md"
+        }
+      ]
+    },    
+    {
+      "text": "进阶开发",
+      "path": "advanced-development.md"
+    },  
+    {
+      "text": "如何安装",
+      "path": "how-to-install.md"
+    },  
+    {
+      "text": "贡献指南",
+      "path": "contribution.md"
+    }
+  ]
+}

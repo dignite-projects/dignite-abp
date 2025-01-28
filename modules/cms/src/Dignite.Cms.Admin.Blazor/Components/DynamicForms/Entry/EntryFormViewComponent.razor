@@ -1,0 +1,35 @@
+﻿@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Entry
+@using System.Text.Json
+@using Dignite.Cms.Admin.Entries
+@inject IEntryAdminAppService EntryAdminAppService;
+@inherits FormViewComponentBase<EntryFormControl,EntryConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        <ListGroup>
+            @foreach (var item in Entries)
+            {
+                <ListGroupItem>@item.Title</ListGroupItem>
+            }
+        </ListGroup>
+    </FieldBody>
+</Field>
+@code {
+    IReadOnlyList<EntryDto> Entries = new List<EntryDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var value = Field.Value == null ?
+                    new List<Guid>()
+                    : JsonSerializer.Deserialize<List<Guid>>(Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+
+        if (value!=null && value.Any())
+        {
+            Entries = (await EntryAdminAppService.GetListByIdsAsync(FormConfiguration.SectionId, value)).Items;
+        }
+    }
+}

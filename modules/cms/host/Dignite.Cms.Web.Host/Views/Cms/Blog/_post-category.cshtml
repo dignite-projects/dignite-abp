@@ -1,0 +1,13 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Abp.DynamicForms.Select;
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+
+@model EntryFieldViewModel
+@{
+    var categories = Model.Entry.GetField<IEnumerable<string>>(Model.Field.Name, null);
+}
+@if (categories != null && categories.Any())
+{
+    @localizer["Menu:Blog-" + categories.First()]
+}

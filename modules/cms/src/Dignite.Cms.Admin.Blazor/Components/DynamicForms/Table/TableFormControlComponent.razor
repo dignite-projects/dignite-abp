@@ -1,0 +1,98 @@
+﻿@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Table
+@using Dignite.Abp.Data;
+@using System.Text.Json;
+@inject IFormControlComponentSelector fieldControlComponentSelector
+@inherits FormControlComponentBase<TableFormControl,TableConfiguration,List<Dignite.Abp.DynamicForms.Table.TableRow>>
+<style>
+    .table-form-control-row .form-label {
+        display: none;
+    }
+</style>
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @if (FormConfiguration.TableColumns.Any())
+        {
+            <Table>
+                <TableHeader>
+                    <Blazorise.TableRow>
+                        @foreach (var column in FormConfiguration.TableColumns)
+                        {
+                            <TableHeaderCell>@column.DisplayName</TableHeaderCell>
+                        }
+                        <TableHeaderCell Style="width:100px;">
+                            <Button @onclick="@AddTableRow"><Icon Name="IconName.PlusCircle" /></Button>
+                        </TableHeaderCell>
+                    </Blazorise.TableRow>
+                </TableHeader>
+                <TableBody>
+                    @foreach (var row in TableRows)
+                    {
+                        var tableRowIndex = TableRows.IndexOf(row);
+                        <Blazorise.TableRow>
+                            @foreach (var column in FormConfiguration.TableColumns)
+                            {
+                                if (!column.FormControlName.IsNullOrEmpty())
+                                {
+                                    column.Value = row.GetField(column.Name);
+                                    var component = fieldControlComponentSelector.Get(column.FormControlName);
+                                    var parameters = new Dictionary<string, object>();
+                                    parameters.Add(nameof(IFormViewComponent.Field), column);
+                                    parameters.Add(
+                                        nameof(IFormControlComponent.OnChangedValueAsync),
+                                    EventCallback.Factory.Create<FormField>(this, ff => OnFieldValueChangedAsync(ff, tableRowIndex))
+                                    );
+                                    <TableRowCell Class="table-form-control-row">
+                                        <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                                    </TableRowCell>
+                                }
+                            }
+                            <TableRowCell>
+                                <Button @onclick="@(val => RemoveTableRow(row))"><Icon Name="IconName.Remove" /></Button>
+                            </TableRowCell>
+                        </Blazorise.TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
+        <FieldHelp>@Field.Description</FieldHelp>
+    </FieldBody>
+</Field>
+    @code {
+    List<Dignite.Abp.DynamicForms.Table.TableRow> TableRows = new List<Dignite.Abp.DynamicForms.Table.TableRow>();
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        if (Field.Value != null)
+        {
+            TableRows = JsonSerializer.Deserialize<List<Dignite.Abp.DynamicForms.Table.TableRow>>(Field.Value.ToString());
+            await ChangeValueAsync(TableRows);
+        }
+        else
+        {
+            //Initialization data
+            AddTableRow();
+        }
+    }
+    private void AddTableRow()
+    {
+        var row = new Dignite.Abp.DynamicForms.Table.TableRow();
+        foreach (var column in FormConfiguration.TableColumns)
+        {
+            row.ExtraProperties.Add(column.Name, column.Value);
+        }
+        TableRows.Add(row);
+    }
+    private void RemoveTableRow(Dignite.Abp.DynamicForms.Table.TableRow row)
+    {
+        TableRows.Remove(row);
+    }
+    private async Task OnFieldValueChangedAsync(FormField field, int tableRowIndex)
+    {
+        TableRows[tableRowIndex].SetField(field.Name, field.Value);
+        await ChangeValueAsync(TableRows);
+    }
+}

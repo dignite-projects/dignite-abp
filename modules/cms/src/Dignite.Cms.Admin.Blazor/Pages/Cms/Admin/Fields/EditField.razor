@@ -1,0 +1,34 @@
+﻿@page "/cms/admin/fields/{id:guid}/edit"
+@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Localization;
+@using Dignite.Cms.Permissions;
+@using Microsoft.AspNetCore.Authorization;
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@attribute [Authorize(CmsAdminPermissions.Field.Update)]
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IFieldAdminAppService AppService
+@inject NavigationManager Navigation
+@inherits AbpComponentBase
+
+<PageTitle>@L["EditField"]</PageTitle>
+<PageHeader Title="@L["EditField"]" Toolbar="@Toolbar"></PageHeader>
+<Card>
+    <CardBody>
+            @if (EditingEntity != null)
+            {
+                <Validations @ref="@EditValidationsRef" Model="@EditingEntity" ValidateOnLoad="false">
+                    <CreateOrUpdateFieldComponent Entity="EditingEntity"></CreateOrUpdateFieldComponent>
+                </Validations>
+            }
+            else
+            {
+                <Row Class="w-100 align-items-center" Style="height: 150px;">
+                    <Column>
+                        <RadarSpinner />
+                    </Column>
+                </Row>
+            }
+    </CardBody>
+</Card>
+

@@ -1,0 +1,28 @@
+﻿@inject NavigationManager Navigation
+
+@if (Section.EntryTypes.Any())
+{
+    if (Section.EntryTypes.Count == 1)
+    {
+        <Button Color="Color.Primary" Clicked="()=>OnEntryTypeClick(Section.EntryTypes[0].Id)">
+            <Icon Name="IconName.Add"></Icon>
+            @ButtonText</Button>
+    }
+    else
+    {
+        <Dropdown>
+            <DropdownToggle Color="Color.Primary">
+                <Icon Name="IconName.Add"></Icon>
+                @ButtonText
+            </DropdownToggle>
+            <DropdownMenu>
+                @foreach (var item in Section.EntryTypes)
+                {
+                    <DropdownItem Clicked="()=>OnEntryTypeClick(item.Id)">
+                        @item.DisplayName
+                    </DropdownItem>
+                }
+            </DropdownMenu>
+        </Dropdown>
+    }
+}

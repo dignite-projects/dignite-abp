@@ -1,0 +1,32 @@
+﻿@using Dignite.Abp.DynamicForms.Select;
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var items = Model.Entry.GetField<IEnumerable<string>>(Model.Field.Name, null);
+    var configuration = new SelectConfiguration(Model.Field.FormConfiguration);
+}
+@if (items != null)
+{
+    @if (configuration.Multiple)
+    {
+        <ul class="list-inline">
+            @foreach (var item in items)
+            {
+                var option = configuration.Options.FirstOrDefault(o => o.Value == item);
+                <li class="list-inline-item">
+                    @option?.Text
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        if (items.Any())
+        {
+            var option = configuration.Options.FirstOrDefault(o => o.Value == items.First());
+            @option?.Text
+        }
+    }
+}

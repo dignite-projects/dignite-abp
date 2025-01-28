@@ -1,0 +1,26 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.DynamicForms.DateEdit;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var configuration = new DateEditConfiguration(Model.Field.FormConfiguration);
+    DateTime convertValue=DateTime.MinValue;
+    if (Model.Entry.GetField(Model.Field.Name) != null)
+    {
+        DateTime.TryParse(Model.Entry.GetField(Model.Field.Name).ToString(), out convertValue);
+    }
+}
+
+@switch (configuration.InputMode)
+{
+    case DateInputMode.DateTime:
+        @convertValue.ToString("f")
+        break;
+    case DateInputMode.Date:
+        @convertValue.ToString("yyyy MMM dd", CultureInfo.CurrentCulture)
+        break;
+    case DateInputMode.Month:
+        @convertValue.ToString("yyyy MMM", CultureInfo.CurrentCulture)
+        break;
+}

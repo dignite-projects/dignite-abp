@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Blazorise.Bootstrap5" />
+	  <PackageReference Include="Blazorise.Icons.FontAwesome" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Autofac.WebAssembly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor.WebAssembly" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.WebAssembly" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.WebAssembly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Dignite.Cms.Admin.Blazor.WebAssembly\Dignite.Cms.Admin.Blazor.WebAssembly.csproj" />
+    <ProjectReference Include="..\Dignite.Cms.Host.Shared\Dignite.Cms.Host.Shared.csproj" />
+	<ProjectReference Include="..\..\..\pure-theme\src\Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme\Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme.csproj" />
+  </ItemGroup>
+
+</Project>

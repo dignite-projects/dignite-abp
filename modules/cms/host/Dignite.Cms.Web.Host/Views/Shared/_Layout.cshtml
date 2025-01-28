@@ -1,0 +1,31 @@
+﻿@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@inject IThemeManager ThemeManager
+@{
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+}
+
+@section styles {
+    <script>
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+    </script>
+
+    <!-- Dignite global css -->
+    <abp-style-bundle name="website-style">
+        <abp-style src="/website.css"></abp-style>
+    </abp-style-bundle>
+
+    <!-- Other styles -->
+    @await RenderSectionAsync("styles", false)
+}
+@section scripts {
+    <!-- Dignite global js -->
+    <abp-script-bundle name="website-js">
+        <abp-script src="/website.js"></abp-script>
+    </abp-script-bundle>
+    <!-- Other js -->
+    @await RenderSectionAsync("scripts", false)
+}
+@section content_toolbar {
+    @await RenderSectionAsync("content_toolbar", false)
+}
+@RenderBody()

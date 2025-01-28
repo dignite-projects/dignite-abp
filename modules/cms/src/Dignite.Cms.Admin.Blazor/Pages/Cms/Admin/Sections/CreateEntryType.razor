@@ -1,0 +1,29 @@
+﻿@page "/cms/admin/sections/{sectionId:guid}/entry-types/create"
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Localization;
+@using Dignite.Cms.Permissions;
+@using Microsoft.AspNetCore.Authorization;
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@attribute [Authorize(CmsAdminPermissions.Section.Create)]
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IEntryTypeAdminAppService AppService
+@inject ISectionAdminAppService SectionAppService
+@inject NavigationManager Navigation
+@inherits AbpComponentBase
+
+<PageTitle>@L["New"]</PageTitle>
+<PageHeader Title="@L["New"]" Toolbar="@Toolbar"></PageHeader>
+<Card>
+    <CardBody>
+        <Blazorise.Form>
+            <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+                @if (NewEntity != null)
+                {
+                    <CreateOrUpdateEntryTypeComponent Entity="NewEntity" SectionId="SectionId"></CreateOrUpdateEntryTypeComponent>
+                }
+            </Blazorise.Validations>
+        </Blazorise.Form>
+    </CardBody>
+</Card>
+

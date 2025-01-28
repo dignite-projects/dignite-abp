@@ -1,7 +1,0 @@
-{
-  "modules": {
-    "Dignite.CmsKit": {
-      "path": "Dignite.CmsKit.abpmdl.json"
-    }
-  }
-}

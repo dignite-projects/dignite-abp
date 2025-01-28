@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+    <PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+        <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+        <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    </PropertyGroup>
+
+    <ItemGroup>
+		<PackageReference Include="Blazorise.Bootstrap5" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" />
+		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Serilog.Sinks.Async" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+        <PackageReference Include="Sakura.AspNetCore.Mvc.PagedList" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Dignite.Cms.Admin.Blazor.Server\Dignite.Cms.Admin.Blazor.Server.csproj" />
+        <ProjectReference Include="..\..\src\Dignite.Cms.Application\Dignite.Cms.Application.csproj" />
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" />
+        <PackageReference Include="Volo.Abp.Autofac" />
+        <PackageReference Include="Volo.Abp.Swashbuckle" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
+        <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" />
+        <PackageReference Include="Volo.Abp.Account.Application" />
+        <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.FeatureManagement.Application" />
+        <PackageReference Include="Volo.Abp.Identity.Blazor.Server" />
+        <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.Identity.Application" />
+        <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" />
+        <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.TenantManagement.Application" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" />
+        <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Application" />
+        <PackageReference Include="Volo.Abp.PermissionManagement.Application" />
+        <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
+        <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" />
+		<PackageReference Include="Volo.Abp.BlobStoring.FileSystem" />
+        <ProjectReference Include="..\..\src\Dignite.Cms.EntityFrameworkCore\Dignite.Cms.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\src\Dignite.Cms.HttpApi\Dignite.Cms.HttpApi.csproj" />
+        <ProjectReference Include="..\Dignite.Cms.Host.Shared\Dignite.Cms.Host.Shared.csproj" />
+		<ProjectReference Include="..\..\..\pure-theme\src\Dignite.Abp.AspNetCore.Components.Server.PureTheme\Dignite.Abp.AspNetCore.Components.Server.PureTheme.csproj" />
+		<ProjectReference Include="..\..\..\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Logs\**" />
+        <Content Remove="Logs\**" />
+        <EmbeddedResource Remove="Logs\**" />
+        <None Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="Pages\**\*.js">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Pages\**\*.css">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

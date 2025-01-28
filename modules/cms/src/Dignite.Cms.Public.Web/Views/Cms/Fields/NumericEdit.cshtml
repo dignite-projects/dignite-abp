@@ -1,0 +1,21 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.DynamicForms.NumericEdit;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var configuration = new NumericEditConfiguration(Model.Field.FormConfiguration);
+    decimal convertValue=0;
+    if (Model.Entry.GetField(Model.Field.Name) != null)
+    {
+        decimal.TryParse(Model.Entry.GetField(Model.Field.Name).ToString(), out convertValue);
+    }
+}
+@if (configuration.FormatSpecifier.IsNullOrEmpty())
+{
+    @convertValue
+}
+else
+{
+    @convertValue.ToString(configuration.FormatSpecifier)
+}

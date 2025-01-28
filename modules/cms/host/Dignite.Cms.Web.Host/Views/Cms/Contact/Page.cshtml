@@ -1,0 +1,22 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Cms.Public.Web.Models;
+@model EntryViewModel
+@{
+    PageLayout.Content.Title = Model.Entry.Title;
+}
+
+<section class="container my-5">
+    <h1>
+        @Model.Entry.Title
+    </h1>
+</section>
+
+<section class="container mb-5">
+    <h2 class="fs-1 fw-semibold mb-3">
+        <cms-entry-field field-name="TextboxFieldName" entry="Model"></cms-entry-field>
+    </h2>
+    <div class="rich-text">
+        <cms-entry-field field-name="Ckeditor" entry="Model"></cms-entry-field>
+    </div>
+</section>
+

@@ -4,7 +4,7 @@ This package is a part of the [Dignite ABP](https://dignite.com/dignite-abp).
 
 ### Adding to the ecology of the ABP framework
 
-Adds Notification system, User Points system, Dynamic Forms module, File Explorer, Pure Theme, and other enhancements.
+Adds Notification system, Dynamic Forms, User Points system, File Explorer, Cms, and other enhancements.
 
 ### For more information, check out the below links
 
@@ -20,17 +20,23 @@ Adds Notification system, User Points system, Dynamic Forms module, File Explore
 
 🟡 Notification System
 
-🟡 User Points
+🟡 Dynamic Forms
 
-🟡 Dynamic Forms Module
+🟡 User Points system
 
 🟡 Files Explorer
 
+🟡 CMS
+
+🟡 Multi-Tenancy Theme
+
+🟡 Multi-Tenancy Localization
+
+🟡 Regionalization
+
+🟡 Multi-Tenancy Domains
+
 🟡 Pure Theme
-
-🟡 Multi-Tenant Views
-
-🟡 Multi-Tenant Localization
 
 🟡 BlazoriseUI Component
 
@@ -45,6 +51,8 @@ Adds Notification system, User Points system, Dynamic Forms module, File Explore
 ### 🎴 Supported UI Frameworks
 
 🔵 Razor Pages
+
+🔵 Angular
 
 🔵 Blazor Web Assembly
 

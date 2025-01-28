@@ -7,127 +7,134 @@
 
 # Dignite ABP
 
-添增 ABP 框架生態系：增加通知系統、動態表單模組、檔案管理員、Pure 主題等其他增強功能。
+增強 [ABP 框架](https://abp.io/) 生態系：提供通知系統、動態表單、用戶積分、文件管理、CMS、多租戶主題、多租戶本地化、多租戶域名、多租戶區域化等功能擴展。
 
 ## Dignite ABP 模組
 
 ### 通知系統
 
-參照 Asp.Net Boilerplate 的通知系統，移植到 Abp 框架。使用簡單的代碼發送通知，實現系統內的實時通知，以及電子郵件通知。開發人員還可以實現自己的通知方法。
+通過基於 Asp.Net Boilerplate 通知系統開發的 ABP 系統模組，可以實現系統內即時通知、郵件通知，開發者還可以通過實現介面來新增自定義的通知方式。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Notifications)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Notifications)
 
-- [範例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
+- [示例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
-### 動態表單模組
+### 動態表單
 
-動態表單允許系統管理員在線動態自定義業務對象實體的字段，主要應用於購物商城系統的商品 SKU、投票和研究系統、CMS 等系統。
+動態表單允許管理員在線定義業務對象實體的欄位。主要用於商城系統商品 SKU、投票及調查系統、CMS 等。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Dynamic-Forms)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Dynamic-Forms)
 
 ### 積分系統
 
-積分增強了用戶參與、建立忠誠度並激勵積極參與和貢獻，可應用於電子商務、社交媒體、遊戲、教育和健康等各種系統。
+積分系統旨在提高用戶參與度，建立忠誠度，並促進積極參與和貢獻。可應用於電子商務、社交媒體、遊戲、教育、醫療等多個領域。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Points)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Points)
 
-### 檔案瀏覽器
+### 文件管理
 
-Dignite ABP Files 是基於 ABP BlobStoring 開發的，為檔案上傳過程提供檔案類型驗證和檔案大小驗證。開發人員還可以擴展其他處理事件。
+Dignite ABP Files 是基於 ABP BlobStoring 開發的，為文件上傳過程提供了文件類型驗證和文件大小驗證。開發者還可以擴展自定義的處理事件。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/File-Explorer)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/File-Explorer)
 
-- [範例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
+- [示例](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
 
-### Cms Kit
+### CMS
 
-基於 [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) 開發，新增了 [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 功能。
+Dignite CMS 是基於 ABP 框架的 CMS 解決方案，可在線定義欄位以滿足複雜的前端內容展示需求。提供多站點、多語言支持等功能，為不同客戶提供靈活全面的功能。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Cms-Kit/Index)
+- [文檔](https://dignite.com/docs/abp/latest/Cms/Index)
+
+### 支援多租戶專屬功能
+
+#### 多租戶主題
+
+開發者可以為每個租戶自定義自己的 Asp.net MVC 視圖 UI。
+
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Views-MultiTenancy)
+
+#### 多租戶本地化
+
+為每個租戶提供獨立的本地化支持，可單獨顯示租戶內容。
+
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Localization-MultiTenancy)
+
+#### 多租戶區域化
+
+當每個租戶的網站針對不同地區的用戶時，區域化模組提供默認地區，並支持多個可選地區。
+
+#### 多租戶域名
+
+在 SAAS 環境中，客戶可能希望使用自己的域名，多租戶域名模組可以通過自定義域名解析當前租戶。
 
 ### Pure 主題
 
-由 Dignite ABP 團隊開發的 Abp 主題包，包括 Blazor 和 MVC 版本。Blazor 版本基於 BlazoriseUI，而 MVC 版本則建立在 Bootstrap 上。
+Dignite ABP 團隊開發的 ABP 主題包，提供 Blazor 版本和 MVC 版本。Blazor 版本基於 BlazoriseUI，MVC 版本基於 Bootstrap。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Pure-Theme)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Pure-Theme)
 
-- [範例](https://github.com/dignite-projects/dignite-abp/tree/main/modules/pure-theme)
+- [示例](https://github.com/dignite-projects/dignite-abp/tree/main/modules/pure-theme)
 
-### 多租戶視圖
+### BlazoriseUI 組件
 
-每個租戶可以擁有獨立的視圖 UI，開發人員可以輕鬆個性化租戶 UI。
+基於 Blazorise 開發的一系列 Blazor 組件，包括支持拖放的樹形組件和具有擴展功能的 DataGrid。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Views-MultiTenancy)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/BlazoriseUI-Component)
 
-### 多租戶本地化
+### CKEditor 組件
 
-每個租戶可以擁有獨立的語言包，用於個性化租戶內容展示。
+用於 Asp.net Blazor 的 CKEditor 組件，支持服務器模式和 WebAssembly 模式。此外，還提供了[動態表單](https://learn.dignite.com/zh-tw/abp/latest/Dynamic-Forms)組件。
 
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Localization-MultiTenancy)
-
-### BlazoriseUI 元件
-
-基於 Blazorise 開發的一系列 Blazor 元件，包括支援拖放的樹狀元件，擴展功能的 DataGrid 等。
-
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/BlazoriseUI-Component)
-
-### Ckeditor 元件
-
-為 Asp.net Blazor 開發的 Ckeditor 元件，支援 Server 模式和 WebAssembly 模式。此外，它與動態表單模組兼容。
-
-- [文檔](https://learn.dignite.com/zh-Hans/abp/latest/Blazor-Ckeditor-Component)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Blazor-Ckeditor-Component)
 
 ## 想要貢獻嗎？
 
-Dignite ABP 基於 [Abp Framework](https://github.com/abpframework) 構建的開源項目，最初用於 Dignite 內部使用，現在正式對 ABP 框架生態系進行開源擴充。
+Dignite ABP 是一個基於 [Abp Framework](https://github.com/abpframework) 的開源項目，採用 LGPL-3.0 許可證。歡迎您的貢獻！
 
-如果您想參與此項目，請參閱 [貢獻指南](https://learn.dignite.com/zh-Hans/abp/latest/Contribution/Index)。
+如果您想成為項目的一部分，請查看[貢獻指南](https://learn.dignite.com/zh-tw/abp/latest/Contribution/Index)。
 
-## 官方鏈接
+## 官方連結
 
 - <a href="https://dignite.com/dignite-abp" target="_blank">官方網站</a>
 
-- <a href="https://learn.dignite.com/zh-Hans/abp" target="_blank">文件</a>
+- <a href="https://learn.dignite.com/zh-tw/abp" target="_blank">文檔</a>
 
 ## 支持 Dignite ABP
 
-喜歡 ABP 框架嗎？**請給這個存儲庫一顆星星** :star:
+喜歡 ABP 框架嗎？**為這個倉庫加顆星** :star:
 
-## 額外服務
+## 附加服務
 
-- 技術支援
+- 技術支持
 
-  如果需要，我們可以通過電子郵件、論壇等渠道提供遠程技術指導。
+  根據需求，通過電子郵件、論壇或其他渠道提供遠程技術支持。
 
-- Abp 培訓
+- Abp 訓練
 
-  我們為您的開發團隊提供有關 Abp 框架和相關技術的培訓服務。
+  為開發團隊提供有關 Abp 框架及相關技術的培訓。
 
-- 開發顧問
+- 開發諮詢
 
-  我們擁有 Abp 專業知識，可以協助您進
-
-行項目規劃、需求分析、代碼審查等。
+  憑藉 Abp 專業知識，支持項目規劃、需求分析、代碼審查等！
 
 - Abp 模組開發
 
-  以滿足您需求的方式定制 Abp 模組的開發 - 這是我們的專長！
+  根據需求定制開發 Abp 模組——這是我們的專長！
 
 - 遷移至 Abp 平台
 
-  將現有項目遷移到 Abp 平台，發揮其強大的功能，使項目更具競爭力、可維護和可擴展。
+  將現有項目遷移到 Abp 平台，利用其強大功能提升競爭力、可維護性和可擴展性。
 
-## 聯繫我們
+## 聯繫方式
 
 - 公司名稱
 
-  株式会社ディグナイト
+  株式會社 Dignite
 
-- 辦公地點
+- 地址
 
-  大阪市東成区今里 3-11-23，大阪
+  日本大阪府大阪市東成區今里 3-11-23
 
-- 聯繫郵箱
-  
+- 聯繫方式
+
   <hello@dignite.com>
-  

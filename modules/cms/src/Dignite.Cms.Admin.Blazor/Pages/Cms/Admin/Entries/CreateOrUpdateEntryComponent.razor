@@ -1,0 +1,176 @@
+﻿@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.DynamicForms.Components;
+@using Dignite.Abp.Data;
+@using Dignite.Abp.Regionalization
+@using Dignite.Cms.Admin.Blazor.Components
+@using Dignite.Cms.Admin.Entries;
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Localization;
+@using Volo.Abp.Localization;
+@inject NavigationManager Navigation
+@inject IEntryAdminAppService AppService
+@inject ISectionAdminAppService SectionAppService
+@inject IFormControlComponentSelector FormControlComponentSelector
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IRegionalizationProvider RegionalizationProvider
+@inherits AbpComponentBase
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+        <Card>
+            <CardBody>
+                <Validation MessageLocalizer="@LH.Localize">
+                    <Field>
+                        <FieldLabel>@L["Title"]</FieldLabel>
+                            <TextEdit @bind-Text="@Entry.Title" Blur="TitleTextEditBlur">
+                            <Feedback>
+                                <Blazorise.ValidationError/>
+                            </Feedback>
+                        </TextEdit>
+                    </Field>
+                </Validation>
+                <CascadingValue Value="@Entry">
+                @if (CurrentEntryType != null)
+                {
+                    <!------------- Custom Fields ------------------------------------->
+                    @foreach (var tab in CurrentEntryType.FieldTabs)
+                    {
+                        foreach (var ef in tab.Fields)
+                        {
+                            if (ef.Field != null)
+                            {
+                                var formField = new FormField(ef.Field.Name, ef.DisplayName, ef.Field.Description, ef.Field.FormControlName,ef.Field.FormConfiguration, ef.Required, Entry.GetField(ef.Field.Name));
+                                var component = FormControlComponentSelector.Get(ef.Field.FormControlName);
+                                var parameters = new Dictionary<string, object>();
+                                parameters.Add(nameof(IFormControlComponent.Field), formField);
+                                parameters.Add(
+                                    nameof(IFormControlComponent.OnChangedValueAsync),
+                                    EventCallback.Factory.Create<FormField>(this, OnFieldValueChanged)
+                                );
+                                <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>
+                            }
+                        }
+                    }   
+                }
+                </CascadingValue>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+        <Validation MessageLocalizer="@LH.Localize" AsyncValidator="@SlugExistsValidatorAsync">
+            <Field>
+                <Blazorise.FieldLabel>@L["Slug"]</Blazorise.FieldLabel>
+                <Blazorise.TextEdit @bind-Text="@Entry.Slug">
+                    <Feedback>
+                        <Blazorise.ValidationError />
+                    </Feedback>
+                </Blazorise.TextEdit>
+            </Field>
+        </Validation>
+        <Validation MessageLocalizer="@LH.Localize" AsyncValidator="@CultureExistsValidatorAsync">
+            <Field>
+                <Blazorise.FieldLabel>@L["Language"]</Blazorise.FieldLabel>
+                    <Select TValue="string" SelectedValue="Entry.Culture" SelectedValueChanged="@OnCultureSelectedValueChanged" Disabled>
+                    <ChildContent>
+                        @if (Regionalization!=null)
+                    {
+                        @foreach (var item in Regionalization.AvailableCultures)
+                        {
+                            <SelectItem Value="@item">@item.DisplayName</SelectItem>
+                        }
+                    }
+                    </ChildContent>
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </Select>
+            </Field>
+        </Validation>
+        @if (AllEntriesOfStructure!=null && AllEntriesOfStructure.Any())
+        {
+            <Validation MessageLocalizer="@LH.Localize" Validator="@ValidationRule.None">
+                <Field>
+                    <FieldLabel>@L["ParentEntry"]</FieldLabel>
+                    <Select TValue="Guid?" @bind-SelectedValue="@Entry.ParentId">
+                        <SelectItem> </SelectItem>
+                        <StructuredEntriesComponent Entries="AllEntriesOfStructure" Level="0" ParentId="null"></StructuredEntriesComponent>
+                    </Select>
+                </Field>
+            </Validation>            
+        }
+        <Validation MessageLocalizer="@LH.Localize">
+            <Field>
+                <FieldLabel>@L["PublishTime"]</FieldLabel>
+                <DateEdit TValue="DateTime" InputMode="DateInputMode.DateTime" @bind-Date="@Entry.PublishTime">                    
+                    <Feedback>
+                        <Blazorise.ValidationError/>
+                    </Feedback>
+                </DateEdit>
+            </Field>
+        </Validation>
+        @if (AllVersions!=null)
+        {
+            <Field>
+                <FieldLabel>
+                    @L["Version"]
+                </FieldLabel>
+                <ListGroup>
+                    @foreach (var item in AllVersions)
+                    {
+                        var versionTitle = item.InitialVersionId.HasValue ? item.CreationTime.ToString() : L["InitialVersion"];
+                        <ListGroupItem Name="@item.Id.ToString()" Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                            <Div Flex="Flex.JustifyContent.Start">
+                                @versionTitle
+                                @if (item.IsActivatedVersion)
+                                {
+                                    <Badge Color="Color.Success" TextSize="TextSize.Small" Margin="Margin.Is1.FromStart" Pill>@L["Activated"]</Badge>
+                                }
+                                @if (item.Id==EditingEntryId)
+                                {
+                                    <Badge Color="Color.Primary" TextSize="TextSize.Small" Margin="Margin.Is1.FromStart" Pill>@L["Editing"]</Badge>
+                                }
+                            </Div>
+                            <Dropdown>
+                                <DropdownToggle Color="Color.Default">                                    
+                                </DropdownToggle>
+                                <DropdownMenu Shadow="Shadow.Default">
+                                    @if(!item.IsActivatedVersion)
+                                    {
+                                        <DropdownItem Clicked="()=>ActivateAsync(item.Id)"><Icon Name="IconName.Check"></Icon> @L["Activate"]</DropdownItem>
+                                        <DropdownDivider />
+                                    }
+                                    <DropdownItem Clicked="()=>NewVersion(item.Id)"><Icon Name="IconName.Add"></Icon> @L["NewVersion"]</DropdownItem>
+                                        @if (item.Id != EditingEntryId)
+                                    {
+                                        <DropdownDivider />
+                                        <DropdownItem Clicked="()=>EditVersion(item.Id)"><Icon Name="IconName.Edit"></Icon> @L["Edit"]</DropdownItem>
+                                    }
+                                    @if (item.InitialVersionId.HasValue && !item.IsActivatedVersion && item.Id != EditingEntryId)
+                                    {
+                                        <DropdownDivider />
+                                        <DropdownItem Clicked="()=>DeleteVersionAsync(item.Id)"><Icon Name="IconName.Delete"></Icon> @L["Delete"]</DropdownItem>
+                                    }
+                                </DropdownMenu>
+                            </Dropdown>
+                        </ListGroupItem>
+                    }
+                </ListGroup>
+            </Field>
+        }
+        @if ((Entry.GetType() == typeof(CreateEntryInput) && ((CreateEntryInput)Entry).InitialVersionId.HasValue) 
+            || (Entry.GetType() == typeof(UpdateEntryInput))
+            )
+        {
+            <Validation MessageLocalizer="@LH.Localize">
+                <Field>
+                    <FieldLabel>@L["RevisionNotes"]</FieldLabel>
+                    <MemoEdit @bind-Text="@Entry.VersionNotes" AutoSize>
+                        <Feedback>
+                            <ValidationError />
+                        </Feedback>
+                    </MemoEdit>
+                </Field>
+            </Validation>
+        }
+    </Column>
+</Row>

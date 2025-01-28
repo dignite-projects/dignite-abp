@@ -1,0 +1,198 @@
+﻿@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Matrix
+@using Dignite.Abp.DynamicForms.TextEdit;
+@using Dignite.Cms.Fields
+@using Dignite.Cms.Localization
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IFormConfigurationComponentSelector ConfigurationComponentSelector
+@inject IEnumerable<IFormControl> AllFormControls;
+@inherits FormConfigurationComponentBase<MatrixFormControl,MatrixConfiguration>
+
+
+<Validation Validator="@ValidateAll">
+    <Field>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is3.OnDesktop">
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardHeader Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                        <Heading Size="HeadingSize.Is6" Margin="Margin.Is0.FromBottom">@L["MatrixBlockTypes"]</Heading>
+                        <Button Color="Color.Light" Size="Size.Small" Clicked="OpenCreateBlockTypeModal"><Icon Name="IconName.PlusCircle" /></Button>
+                    </CardHeader>
+                    <CardBody Padding="Padding.Is0">
+                        <ListGroup Mode="ListGroupMode.Selectable" SelectedItem="@SelectedBlockType?.Name">
+                            @foreach(var blockType in MatrixBlockTypes)
+                            {
+                                <ListGroupItem Name="@blockType.Name" Border="Border.Is0.RoundedZero" Clicked="()=>SelectBlockTypeAsync(blockType)" Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                                    <Div>
+                                        <Heading Size="HeadingSize.Is6" Margin="Margin.Is1.FromBottom">@blockType.DisplayName</Heading>
+                                        <Paragraph Margin="Margin.Is1.FromBottom">@blockType.Name</Paragraph>
+                                    </Div>
+                                    <Dropdown>
+                                        <DropdownToggle>                                            
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                            <DropdownItem Clicked="()=>OpenEditBlockTypeModal(blockType)"><Icon Name="IconName.Edit"></Icon> @L["Edit"]</DropdownItem>
+                                            <DropdownDivider />
+                                            <DropdownItem Clicked="()=>DeleteBlockTypeAsync(blockType)"><Icon Name="IconName.Delete"></Icon> @L["Delete"]</DropdownItem>
+                                        </DropdownMenu>
+                                    </Dropdown>
+                                </ListGroupItem>
+                            }
+                        </ListGroup>
+                    </CardBody>
+                </Card>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is3.OnDesktop">
+                @if (SelectedBlockType != null)
+                {
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardHeader Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                            <Heading Size="HeadingSize.Is6" Margin="Margin.Is0.FromBottom">@L["Fields"]</Heading>
+                            <Button Color="Color.Light" Size="Size.Small" Clicked="AddFieldAsync"><Icon Name="IconName.PlusCircle" /></Button>
+                        </CardHeader>
+                        <CardBody Padding="Padding.Is0">
+                                <ListGroup Mode="ListGroupMode.Selectable" Border="Border.Is0.RoundedZero" SelectedItem="@SelectedField?.Name">
+                                    @foreach (var field in SelectedBlockType.Fields)
+                                    {
+                                        <ListGroupItem Name="@field.Name" Clicked="()=>SelectFieldAsync(field)" Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                                            <Div>
+                                                <Heading Size="HeadingSize.Is6" Margin="Margin.Is1.FromBottom">@field.DisplayName</Heading>
+                                                <Paragraph Margin="Margin.Is1.FromBottom">@field.Name</Paragraph>
+                                            </Div>
+                                            <Button Color="Color.Default" Size="Size.Small" Clicked="()=>DeleteFieldAsync(field)">@L["Delete"]</Button>
+                                        </ListGroupItem>
+                                    }
+                                </ListGroup>
+                        </CardBody>
+                    </Card>
+                }
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                @if (SelectedField != null)
+                {
+                    <Validations @ref="@FieldValidationsRef" Model="@SelectedField">
+                        <Validation Validator="ValidationRule.IsNotEmpty">
+                            <Field>
+                                <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+                                    <TextEdit MaxLength="FieldConsts.MaxDisplayNameLength" @bind-Text="@SelectedField.DisplayName" Blur="@FieldDisplayNameTextEditBlur" />
+                            </Field>
+                        </Validation>
+                            <Validation Validator="FieldNameExistsValidator">
+                            <Field>
+                                <FieldLabel>@L["FieldName"]</FieldLabel>
+                                    <TextEdit MaxLength="FieldConsts.MaxNameLength" @bind-Text="@SelectedField.Name">
+                                        <Feedback>
+                                            <Blazorise.ValidationError />
+                                        </Feedback>
+                                    </TextEdit>
+                                    <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
+                            </Field>
+                        </Validation>
+                        <Validation>
+                            <Field>
+                                <FieldLabel>@L["Description"]</FieldLabel>
+                                    <TextEdit MaxLength="FieldConsts.MaxDescriptionLength" @bind-Text="@SelectedField.Description">
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+                        <Validation MessageLocalizer="@LH.Localize" Validator="@ValidationRule.None">
+                            <Field>
+                                <FieldLabel>@L["FieldType"]</FieldLabel>
+                                <Select TValue="string" SelectedValue="@SelectedField.FormControlName" SelectedValueChanged="FormTypeChangedAsync">
+                                    @foreach (var item in AvailableFormControls)
+                                    {
+                                        <SelectItem TValue="string" Value="@item.Name">@item.DisplayName</SelectItem>
+                                    }
+                                </Select>
+                            </Field>
+                        </Validation>
+
+                        @if (FieldFormConfigurationComponentType is not null)
+                        {
+                            <DynamicComponent Type="@FieldFormConfigurationComponentType" Parameters='@FieldFormConfigurationComponentParameters' />
+                        }
+                    </Validations>
+                }
+            </Column>
+        </Row>
+    </Field>
+</Validation>
+
+<Blazorise.Modal @ref="CreateBlockTypeModal" Closing="@ClosingCreateBlockTypeModal">
+    <Blazorise.ModalContent Centered="true">
+        <Blazorise.Form>
+            <Blazorise.ModalHeader>
+                <Blazorise.ModalTitle>@L["New"]</Blazorise.ModalTitle>
+                <Blazorise.CloseButton Clicked="CloseCreateBlockTypeModalAsync" />
+            </Blazorise.ModalHeader>
+            <Blazorise.ModalBody>
+                <Blazorise.Validations @ref="@CreateBlockTypeValidationsRef" Model="@NewBlockType" ValidateOnLoad="false">
+                    <Validation Validator="ValidationRule.IsNotEmpty">
+                        <Field>
+                            <FieldLabel>@L["DisplayName"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewBlockType.DisplayName" Blur="((args)=>BlockTypeDisplayNameTextEditBlur(NewBlockType))" >
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation Validator="CreateMatrixBlockTypeNameExistsValidator">
+                        <Field>
+                            <FieldLabel>@L["Name"]</FieldLabel>
+                            <TextEdit @bind-Text="@NewBlockType.Name">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                </Blazorise.Validations>
+            </Blazorise.ModalBody>
+            <Blazorise.ModalFooter>
+                <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseCreateBlockTypeModalAsync">@L["Cancel"]</Blazorise.Button>
+                <SubmitButton Clicked="@CreateBlockType" />
+            </Blazorise.ModalFooter>
+        </Blazorise.Form>
+    </Blazorise.ModalContent>
+</Blazorise.Modal>
+
+<Blazorise.Modal @ref="EditBlockTypeModal" Closing="@ClosingEditBlockTypeModal">
+    <Blazorise.ModalContent Centered="true">
+        <Blazorise.Form>
+            <Blazorise.ModalHeader>
+                <Blazorise.ModalTitle>@L["Edit"]</Blazorise.ModalTitle>
+                <Blazorise.CloseButton Clicked="CloseEditBlockTypeModalAsync" />
+            </Blazorise.ModalHeader>
+            <Blazorise.ModalBody>
+                <Blazorise.Validations @ref="@EditBlockTypeValidationsRef" Model="@EditingBlockType" ValidateOnLoad="false">
+                    <Validation Validator="ValidationRule.IsNotEmpty">
+                        <Field>
+                            <FieldLabel>@L["DisplayName"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingBlockType.DisplayName" Blur="((args)=>BlockTypeDisplayNameTextEditBlur(EditingBlockType))">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Validation Validator="EditingMatrixBlockTypeNameExistsValidator">
+                        <Field>
+                            <FieldLabel>@L["Name"]</FieldLabel>
+                            <TextEdit @bind-Text="@EditingBlockType.Name">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                </Blazorise.Validations>
+            </Blazorise.ModalBody>
+            <Blazorise.ModalFooter>
+                <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseEditBlockTypeModalAsync">@L["Cancel"]</Blazorise.Button>
+                <SubmitButton Clicked="@UpdateBlockType" />
+            </Blazorise.ModalFooter>
+        </Blazorise.Form>
+    </Blazorise.ModalContent>
+</Blazorise.Modal>

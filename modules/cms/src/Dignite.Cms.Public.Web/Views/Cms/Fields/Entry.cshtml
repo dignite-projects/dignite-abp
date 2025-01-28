@@ -1,0 +1,46 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Abp.DynamicForms.Entry
+@using Dignite.Cms.Public.Sections
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Cms.Public.Entries;
+@inject IEntryPublicAppService EntryPublicAppService
+@inject ISectionPublicAppService SectionPublicAppService
+@model EntryFieldViewModel
+@{
+    var configuration = new EntryConfiguration(Model.Field.FormConfiguration);
+    var entryIds = Model.Entry.GetField<List<Guid>>(Model.Field.Name);
+    SectionDto section = null;
+    IReadOnlyList<EntryDto> entries = null;
+    if (entryIds != null && entryIds.Any())
+    {
+        section = await SectionPublicAppService.GetAsync(configuration.SectionId);
+        entries = (await EntryPublicAppService.GetListAsync(
+            new GetEntriesInput
+                    {
+                        SectionId = configuration.SectionId,
+                        EntryIds = entryIds
+                    }
+        )).Items;
+    }
+}
+@if (entries != null && entries.Any())
+{
+    @if (entries.Count>1)
+    {
+        <ul class="list-inline">
+            @foreach (var item in entries)
+            {
+                <li class="list-inline-item">
+                    <a entry="@item" section="section">@item.Title</a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <a entry="@entries[0]" section="section">
+            @entries[0].Title
+        </a>
+    }
+}

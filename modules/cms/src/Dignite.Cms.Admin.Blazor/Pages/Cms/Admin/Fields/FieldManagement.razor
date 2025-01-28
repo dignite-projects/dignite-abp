@@ -1,0 +1,53 @@
+﻿@page "/cms/admin/fields"
+@using Dignite.Cms.Admin.DynamicForms
+@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Localization;
+@using Dignite.Cms.Permissions;
+@using Microsoft.AspNetCore.Authorization;
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@inject IFormAdminAppService FormService
+@inject NavigationManager Navigation
+@attribute [Authorize(CmsAdminPermissions.Field.Default)]
+@inherits AbpCrudPageBase<IFieldAdminAppService, FieldDto, Guid, GetFieldsInput, CreateFieldInput, UpdateFieldInput>
+
+
+<PageTitle>@L["Fields"]</PageTitle>
+
+@* ************************* PAGE HEADER ************************* *@
+<PageHeader Title="@L["Fields"]" BreadcrumbItems="@BreadcrumbItems" Toolbar="@Toolbar" BreadcrumbShowHome="false" BreadcrumbShowCurrent="true"></PageHeader>
+<Row>
+    <Column ColumnSize="ColumnSize.Is3">
+        @* ************************* FIELD GROUPS ************************* *@
+        <FieldGroupComponent OnClickCallback="(data)=>OnGroupChanged(data)"></FieldGroupComponent>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is9">
+
+        @* ************************* PAGE BODY ************************* *@
+        <Card>
+            <CardHeader>
+                <Addons>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit Placeholder="@L["Search"]" @bind-Text="@GetListInput.Filter" />
+                    </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Secondary" Clicked="SearchEntitiesAsync">
+                            <Icon Name="IconName.Search"></Icon>
+                        </Button>
+                    </Addon>
+                </Addons>
+            </CardHeader>
+            <CardBody>
+                @* ************************* DATA GRID ************************* *@
+                <ExtensibleDataGrid TItem="FieldDto"
+                                    Data="@Entities"
+                                    ReadData="@OnDataGridReadAsync"
+                                    TotalItems="@TotalCount"
+                                    ShowPager="true"
+                                    PageSize="@PageSize"
+                                    CurrentPage="@CurrentPage"
+                                    Columns="@FieldManagementTableColumns">
+                </ExtensibleDataGrid>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>

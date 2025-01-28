@@ -1,0 +1,76 @@
+﻿@using Dignite.Cms.Admin.Sections
+@using Dignite.Cms.Localization
+@using Dignite.Cms.Sections;
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject ISectionAdminAppService _sectionAdminAppService;
+@inherits AbpComponentBase
+
+<Validation MessageLocalizer="@LH.Localize" Validator="SectionTypeValidatorAsync">
+    <Field>
+        <FieldLabel>@L["SectionType"]</FieldLabel>
+            <RadioGroup TValue="SectionType" Name="SectionType" @bind-CheckedValue="Entity.Type">
+                @foreach (var item in SectionTypes)
+            {
+                <Radio TValue="SectionType" Value="@item">@L[item.ToLocalizationKey()]</Radio>
+            }
+        </RadioGroup>
+    </Field>
+</Validation>
+<Validation MessageLocalizer="@LH.Localize">
+    <Field>
+        <FieldLabel>@L["DisplayName"]</FieldLabel>
+            <TextEdit @bind-Text="Entity.DisplayName" Blur="DisplayNameTextEditBlur" Autofocus="true">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+    </Field>
+</Validation>
+    <Validation MessageLocalizer="@LH.Localize" AsyncValidator="@NameValidatorAsync">
+    <Field>
+        <FieldLabel>@L["Name"]</FieldLabel>
+        <TextEdit @bind-Text="Entity.Name">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+    </Field>
+</Validation>
+<Validation MessageLocalizer="@LH.Localize" AsyncValidator="RouteValidatorAsync">
+    <Field>
+        <FieldLabel>@L["Route"] 
+            <Anchor TextColor="TextColor.Black50" To="https://learn.dignite.com/en/cms/latest/basic-concept#Section"><Icon Name="IconName.QuestionCircle" /></Anchor>
+        </FieldLabel>
+        <TextEdit @bind-Text="Entity.Route">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+        <FieldHelp>@L["RouteTips"]</FieldHelp>
+        <FieldHelp>
+            <OrderedList>
+                <OrderedListItem>blog</OrderedListItem>
+                <OrderedListItem>blog/{slug}</OrderedListItem>
+                <OrderedListItem>blog/{publishTime:yyyy}/{publishTime:MM}/{slug}</OrderedListItem>
+            </OrderedList>
+        </FieldHelp>
+    </Field>
+</Validation>
+<Validation MessageLocalizer="@LH.Localize">
+    <Field>
+        <FieldLabel>@L["Template"]</FieldLabel>
+        <TextEdit @bind-Text="Entity.Template">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+        <FieldHelp>@L["TemplateTips"]</FieldHelp>
+    </Field>
+</Validation>
+<Field>
+    <Check TValue="bool" @bind-Checked="Entity.IsDefault" Disabled="@(Entity.Type!=SectionType.Single)">@L["IsDefault"]</Check>
+</Field>
+<Field>
+    <Check TValue="bool" @bind-Checked="Entity.IsActive">@L["IsActive"]</Check>
+</Field>
+

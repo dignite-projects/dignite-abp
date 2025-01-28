@@ -1,0 +1,13 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+
+@model EntryViewModel
+@{
+    PageLayout.Content.Title = Model.Entry.Title;
+}
+
+<h1 class="fs-1 text-primary fw-semibold my-5">
+    @Model.Entry.Title
+</h1>
+<section>
+    <cms-entry-field field-name="Services" entry="Model"></cms-entry-field>
+</section>

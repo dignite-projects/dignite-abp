@@ -1,0 +1,90 @@
+﻿@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Matrix
+@using System.Text.Json
+@using Dignite.Abp.Data;
+@inject IFormControlComponentSelector FormComponentSelector
+@inherits FormControlComponentBase<MatrixFormControl,MatrixConfiguration,List<MatrixBlock>>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @foreach(var block in MatrixBlocks)
+        {
+            var matrixBlockIndex = MatrixBlocks.IndexOf(block);
+            var blockType = FormConfiguration.MatrixBlockTypes.FirstOrDefault(t => t.Name == block.MatrixBlockTypeName);
+            if (blockType!=null)
+            {
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardHeader Flex="Flex.JustifyContent.Between">
+                        <Div>
+                            @blockType.DisplayName
+                        </Div>
+                        <Div>
+                            <Button Color="Color.Light" Size="Size.Small" Clicked="()=>RemoveMatrixBlockAsync(block)">
+                                <Icon Name="IconName.Delete"></Icon>
+                            </Button>
+                        </Div>
+                    </CardHeader>
+                    <CardBody>
+                        @foreach (var field in blockType.Fields)
+                        {
+                            field.Value = block.GetField(field.Name);
+                            var component = FormComponentSelector.Get(field.FormControlName);
+                            var parameters = new Dictionary<string, object>();
+                            parameters.Add(nameof(IFormControlComponent.Field), field);
+                            parameters.Add(
+                                nameof(IFormControlComponent.OnChangedValueAsync),
+                                EventCallback.Factory.Create<FormField>(this, ff => MatrixBlockFieldValueChangedAsync(ff, matrixBlockIndex))
+                            );
+                            <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>           
+                        }
+                    </CardBody>
+                </Card>
+            }
+        }
+        <Buttons>
+            @foreach (var blockType in FormConfiguration.MatrixBlockTypes)
+            {
+                <Button Color="Color.Secondary" Clicked="()=>AddMatrixBlockAsync(blockType)">
+                    <Icon Name="IconName.Add"></Icon> @blockType.DisplayName
+                </Button>
+            }
+        </Buttons>
+        <Paragraph>
+            <FieldHelp>@Field.Description</FieldHelp>
+        </Paragraph>
+    </FieldBody>
+</Field>
+
+    @code {
+    List<MatrixBlock> MatrixBlocks = new List<MatrixBlock>();
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var value = Field.Value == null ?
+                    new List<MatrixBlock>()
+                    : JsonSerializer.Deserialize<List<MatrixBlock>>(Field.Value.ToString(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        if (value != null)
+        {
+            MatrixBlocks = value;
+            await ChangeValueAsync(MatrixBlocks);
+        }
+    }
+    private Task AddMatrixBlockAsync(MatrixBlockType blockType)
+    {
+        MatrixBlocks.Add(new MatrixBlock(blockType.Name));
+        return Task.CompletedTask;
+    }
+    private Task RemoveMatrixBlockAsync(MatrixBlock block)
+    {
+        MatrixBlocks.Remove(block);
+        return Task.CompletedTask;
+    }
+    private async Task MatrixBlockFieldValueChangedAsync(FormField field, int matrixBlockIndex)
+    {
+        MatrixBlocks[matrixBlockIndex].SetField(field.Name, field.Value);
+        await ChangeValueAsync(MatrixBlocks);
+    }
+}

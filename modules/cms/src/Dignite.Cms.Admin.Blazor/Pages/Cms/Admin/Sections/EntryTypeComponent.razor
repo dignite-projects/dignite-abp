@@ -1,0 +1,49 @@
+@using System;
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Localization;
+@using Microsoft.Extensions.Localization
+@inject NavigationManager Navigation
+
+@inject IStringLocalizer<CmsResource> L
+
+<Dropdown>
+    <DropdownToggle Color="Color.Link">
+        @L["EntryType"]
+    </DropdownToggle>
+    <DropdownMenu>
+        @if (Section.EntryTypes != null && Section.EntryTypes.Any())
+        {
+            @foreach (var item in Section.EntryTypes)
+            {
+                <DropdownItem Clicked="()=>Edit(item.Id)">@item.DisplayName</DropdownItem>
+            }
+            <DropdownDivider />
+        }
+        <DropdownItem Clicked="Create">
+            <Icon Name="IconName.PlusCircle"></Icon>
+            @L["New"]
+        </DropdownItem>
+    </DropdownMenu>
+</Dropdown>
+
+@code{
+    [Parameter] public object Data { get; set; }
+
+    protected SectionDto Section
+    {
+        get
+        {
+            return Data.As<SectionDto>();
+        }
+    }
+
+    protected void Create()
+    {
+        Navigation.NavigateTo($"cms/admin/sections/{Section.Id}/entry-types/create");
+    }
+
+    protected void Edit(Guid entryTypeId)
+    {
+        Navigation.NavigateTo($"cms/admin/sections/{Section.Id}/entry-types/{entryTypeId}/edit");
+    }
+}

@@ -1,0 +1,260 @@
+﻿@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Admin.Sections;
+@using Dignite.Cms.Localization
+@inject IEntryTypeAdminAppService EntryTypeAdminAppService
+@inject IFieldGroupAdminAppService FieldGroupAppService
+@inject IFieldAdminAppService FieldAppService
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inherits AbpComponentBase
+
+<Validation MessageLocalizer="@LH.Localize">
+    <Field>
+        <FieldLabel>@L["DisplayName"]</FieldLabel>
+        <TextEdit @bind-Text="Entity.DisplayName" Autofocus="true" Blur="DisplayNameTextEditBlur">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+    </Field>
+</Validation>
+<Validation MessageLocalizer="@LH.Localize" AsyncValidator="@NameExistsValidatorAsync">
+    <Field>
+        <FieldLabel>@L["Name"]</FieldLabel>
+        <TextEdit @bind-Text="Entity.Name">
+            <Feedback>
+                <ValidationError />
+            </Feedback>
+        </TextEdit>
+    </Field>
+</Validation>
+    <Field>
+        <FieldLabel>@L["FieldLayout"]</FieldLabel>
+        <Div Flex="Flex.Wrap">
+            <Div>
+                <Tabs SelectedTab="@SelectedFieldTabName" SelectedTabChanged="OnSelectedTabChanged">
+                    <Items>
+                        @foreach (var tab in Entity.FieldTabs)
+                    {
+                        <Tab Name="@tab.Name" Clicked="()=>OnTabClicked(tab.Name)">
+                            <Dropdown Direction="Direction.Up">
+                                @tab.Name
+                                <DropdownToggle Split Size="Size.Small">
+                                 </DropdownToggle>
+                                 <DropdownMenu Shadow="Shadow.Default">
+                                     <DropdownItem Clicked="OpenEditModalAsync">
+                                         <Icon Name="IconName.Edit" /> @L["Edit"]
+                                    </DropdownItem>
+                                    @if (Entity.FieldTabs.Count > 1)
+                                    {
+                                        <DropdownDivider />
+                                        <DropdownItem Clicked="(()=>RemoveFieldTab(tab))">
+                                            <Icon Name="IconName.Delete" />
+                                            @L["Delete"]
+                                        </DropdownItem>
+                                    }
+                                </DropdownMenu>
+                            </Dropdown>
+                        </Tab>
+                    }
+                    <Tab Clicked="OpenCreateModalAsync">
+                        <Icon Name="IconName.PlusCircle" /> @L["NewTab"]
+                    </Tab>
+                </Items>
+                <Content>
+                    @foreach (var tab in Entity.FieldTabs)
+                    {
+                        <TabPanel Name="@tab.Name"
+                                  @ondrop="@(()=> SectionFieldDropped(tab.Name))"
+                                  ondragover="event.preventDefault();">
+                            <Card Border="Border.Is0.OnTop">
+                                <CardBody>
+                                    <ListGroup>
+                                        @foreach (var item in tab.Fields)
+                                        {
+                                            <ListGroupItem draggable="true" @key="@(item.FieldId)" Flex="Flex.JustifyContent.Between.AlignItems.Center"
+                                                           @ondragstart="() => DraggingFieldId = item.FieldId"
+                                                           @ondragend="@(()=> DraggingFieldId=Guid.Empty)"
+                                                           @ondrag="@(()=> DraggingFieldId = item.FieldId)">
+                                                @item.DisplayName
+                                                <Button Color="Color.Light" Size="Size.Small" Clicked="()=>OpenEditFieldModalAsync(item)">
+                                                    <Icon Name="IconName.Wrench" />
+                                                </Button>
+                                            </ListGroupItem>
+                                        }
+                                    </ListGroup>
+                                    @if (!tab.Fields.Any())
+                                    {
+                                        <Span TextColor="TextColor.Secondary">
+                                            @L["DragAndDropFieldTips"]
+                                        </Span>
+                                    }
+                                </CardBody>
+                            </Card>
+                        </TabPanel>
+                    }
+                </Content>
+            </Tabs>
+        </Div>
+        <Div Margin="Margin.IsAuto.FromStart" ondragover="event.preventDefault();" @ondrop="@FieldDropped">            
+            <Accordion>
+                @if (AllFields.Where(f => !f.GroupId.HasValue && !Entity.FieldTabs.SelectMany(ft => ft.Fields).Select(ef => ef.FieldId).Contains(f.Id)).Any())
+                {
+                    var fields = AllFields.Where(f => !f.GroupId.HasValue && !Entity.FieldTabs.SelectMany(ft => ft.Fields).Select(ef => ef.FieldId).Contains(f.Id)).ToList();
+
+                    <Collapse>
+                        <CollapseHeader>
+                            <Heading Size="HeadingSize.Is6" Margin="Margin.Is0.FromBottom">
+                                <AccordionToggle>@L["UngroupedFields"]</AccordionToggle>
+                            </Heading>
+                        </CollapseHeader>
+                        <CollapseBody>
+                            <ListGroup>
+                                @foreach (var item in fields)
+                                {
+                                    <ListGroupItem draggable="true" @key="@(item.Id)"
+                                                   @ondragstart="() => DraggingFieldId = item.Id"
+                                                   @ondragend="@(()=> DraggingFieldId=null)"
+                                                   @ondrag="@(()=> DraggingFieldId = item.Id)"
+                                                   Style="cursor: move;">
+                                                   @item.DisplayName
+                                                   </ListGroupItem>
+                                }
+                            </ListGroup>
+                        </CollapseBody>
+                    </Collapse>                    
+                }
+                @foreach (var group in FieldGroups)
+                {
+                    var fields = AllFields.Where(f => f.GroupId == group.Id && !Entity.FieldTabs.SelectMany(ft => ft.Fields).Select(ef => ef.FieldId).Contains(f.Id)).ToList();
+                    if (fields.Any())
+                    {
+                        <Collapse>
+                            <CollapseHeader>
+                                <Heading Size="HeadingSize.Is6" Margin="Margin.Is0.FromBottom">
+                                    <AccordionToggle>@group.Name</AccordionToggle>
+                                </Heading>
+                            </CollapseHeader>
+                            <CollapseBody>
+                                <ListGroup>
+                                    @foreach (var item in fields)
+                                    {
+                                        <ListGroupItem draggable="true" @key="@(item.Id)"
+                                                       @ondragstart="() => DraggingFieldId = item.Id"
+                                                       @ondragend="@(()=> DraggingFieldId=null)"
+                                                       @ondrag="@(()=> DraggingFieldId = item.Id)"
+                                                       Style="cursor: move;">
+                                                       @item.DisplayName
+                                                       </ListGroupItem>
+                                    }
+                                </ListGroup>
+                            </CollapseBody>
+                        </Collapse>
+                    }
+                }
+            </Accordion>
+        </Div>
+    </Div>
+</Field>
+
+@* ************************* CREATE MODAL ************************* *@
+
+    <Blazorise.Modal @ref="CreateModal" Closing="@ClosingCreateModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["New"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseCreateModalAsync"/>
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@CreateValidationsRef" Model="@NewFieldTab" ValidateOnLoad="false">                        
+                        <Validation MessageLocalizer="@LH.Localize" Validator="NewFieldTabNameValidator">
+                            <Field>
+                                <FieldLabel>@L["Name"]</FieldLabel>
+                                <TextEdit @bind-Text="NewFieldTab.Name">
+                                    <Feedback>
+                                        <ValidationError />
+                                    </Feedback>
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="@Blazorise.Color.Secondary" Clicked="CloseCreateModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@CreateFieldTabAsync" />
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+
+@* ************************* EDIT MODAL ************************* *@
+
+    <Blazorise.Modal @ref="EditModal" Closing="@ClosingEditModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["Edit"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseEditModalAsync"/>
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@EditValidationsRef" Model="@EditingFieldTab" ValidateOnLoad="false">
+                        <Validation MessageLocalizer="@LH.Localize" Validator="EditingFieldTabNameValidator">
+                            <Field>
+                                <FieldLabel>@L["Name"]</FieldLabel>
+                                <TextEdit @bind-Text="EditingFieldTab.Name">
+                                    <Feedback>
+                                        <ValidationError />
+                                    </Feedback>
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseEditModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@UpdateEntityAsync"/>
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>
+
+
+    @* ************************* EDIT FIELD MODAL ************************* *@
+
+    <Blazorise.Modal @ref="EditFieldModal" Closing="@ClosingEditFieldModal">
+        <Blazorise.ModalContent Centered="true">
+            <Blazorise.Form>
+                <Blazorise.ModalHeader>
+                    <Blazorise.ModalTitle>@L["Edit"]</Blazorise.ModalTitle>
+                    <Blazorise.CloseButton Clicked="CloseEditFieldModalAsync" />
+                </Blazorise.ModalHeader>
+                <Blazorise.ModalBody>
+                    <Blazorise.Validations @ref="@EditFieldValidationsRef" Model="@EditingField" ValidateOnLoad="false">
+                        <Validation MessageLocalizer="@LH.Localize">
+                            <Field>
+                                <FieldLabel>@L["DisplayName"]</FieldLabel>
+                                <TextEdit @bind-Text="EditingField.DisplayName">
+                                    <Feedback>
+                                        <ValidationError />
+                                    </Feedback>
+                                </TextEdit>
+                            </Field>
+                        </Validation>
+
+                        <Field>
+                            <Check TValue="bool" @bind-Checked="EditingField.Required">@L["Required"]</Check>
+                        </Field>
+
+                        <Field>
+                            <Check TValue="bool" @bind-Checked="EditingField.ShowOnList">@L["ShowOnList"]</Check>
+                        </Field>
+
+                    </Blazorise.Validations>
+                </Blazorise.ModalBody>
+                <Blazorise.ModalFooter>
+                    <Blazorise.Button Color="Blazorise.Color.Secondary" Clicked="CloseEditFieldModalAsync">@L["Cancel"]</Blazorise.Button>
+                    <SubmitButton Clicked="@UpdateFieldAsync" />
+                </Blazorise.ModalFooter>
+            </Blazorise.Form>
+        </Blazorise.ModalContent>
+    </Blazorise.Modal>

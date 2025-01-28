@@ -1,0 +1,60 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Cms.Public.Web.Models;
+@using Volo.Abp.Settings
+@model EntryViewModel
+@{
+    PageLayout.Content.Title = Model.Entry.Title;
+
+    //
+    IList<QueryingByField> queryParameters = new List<QueryingByField>
+        {
+            new QueryingByField("switch","true")
+        };
+}
+@section scripts
+{
+    <script>
+        console.info("Current Culture Name:" + abp.localization.currentCulture.twoLetterIsoLanguageName);
+    </script>
+}
+
+<section class="my-5">
+    <h1>
+        <cms-entry-field field-name="TextboxFieldName" entry="Model"></cms-entry-field>
+    </h1>
+</section>
+
+<div class="text-center mb-5">
+    <cms-entry-field field-name="image" entry="Model" partial-name="_banner"></cms-entry-field>
+</div>
+
+<section class="mb-5">
+    <h1 class="fs-1 fw-semibold mb-3">
+        @localizer["description"]
+    </h1>
+    <div class="rich-text">
+        <cms-entry-field field-name="Ckeditor" entry="Model"></cms-entry-field>
+    </div>
+</section>
+
+
+<section class="mb-5">
+    <h1 class="fs-1 fw-semibold mb-3">
+        @localizer["blog"]
+    </h1>
+    <cms-entry-list 
+                    section-name="blog-post"
+                    current-page="1"
+                    max-result-count="4"
+                    culture="@Model.Entry.Culture"
+                    querying-by-fields="queryParameters"
+                    partial-name="blog/_recommended-for-home">
+    </cms-entry-list>
+</section>
+
+<cms-entry 
+    section-name="contact" 
+    culture="@Model.Entry.Culture" 
+    slug="index" 
+    partial-name="_contact-section">
+</cms-entry>

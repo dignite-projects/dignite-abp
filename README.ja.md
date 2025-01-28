@@ -7,115 +7,123 @@
 
 # Dignite ABP
 
-ABP フレームワークのエコロジーに追加: 通知システム、動的フォームモジュール、ファイルマネージャー、Pureテーマなどの拡張機能を追加。
+[ABP フレームワーク](https://abp.io/) エコシステムを強化：通知システム、動的フォーム、ユーザーポイント、ファイル管理、CMS、マルチテナントテーマ、マルチテナントローカリゼーション、マルチテナントドメイン、マルチテナント地域化などの拡張機能を提供します。
 
 ## Dignite ABP モジュール
 
 ### 通知システム
 
-Asp.Net Boilerplate の通知システムを参照し、Abpフレームワークに移植。シンプルなコードで通知を送信し、システム内でリアルタイム通知と電子メール通知を実装。開発者は独自の通知メソッドを実装することもできます。
+Asp.Net Boilerplate の通知システムを参考に開発された ABP システムモジュールを通じて、システム内のリアルタイム通知、メール通知を実現できます。さらに、インターフェースを実装することで、開発者は独自の通知方法を追加できます。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Notifications)
 
 - [サンプル](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
-### 動的フォームモジュール
+### 動的フォーム
 
-動的フォームは、システム管理者がオンラインでビジネスオブジェクトエンティティのフィールドを動的にカスタマイズできるようにします。これは主にショッピングモールシステムの商品のSKU、投票およびリサーチシステム、CMSなどに適用されます。
+動的フォームを使用すると、管理者がオンラインでビジネスオブジェクトエンティティのフィールドを動的に定義できます。主にショッピングモールシステムの商品 SKU、投票および調査システム、CMS などに使用されます。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Dynamic-Forms)
 
 ### ポイントシステム
 
-ポイントはユーザーのエンゲージメントを向上させ、忠誠心を構築し、積極的な参加と貢献を奨励します。これは電子商取引、ソーシャルメディア、ゲーム、教育、健康などの幅広いシステムで使用できます。
+ポイントシステムは、ユーザーのエンゲージメントを高め、ロイヤリティを構築し、積極的な参加や貢献を促進します。電子商取引、ソーシャルメディア、ゲーム、教育、医療など、さまざまな分野で利用できます。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Points)
 
-### ファイルエクスプローラー
+### ファイル管理
 
-Dignite ABP Files は ABP BlobStoring を基に開発され、ファイルのアップロードプロセスに対してファイルタイプの検証とファイルサイズの検証を提供します。開発者はさらに追加の処理イベントを拡張することもできます。
+Dignite ABP Files は ABP BlobStoring に基づいて開発され、ファイルアップロードプロセスにおいてファイルタイプの検証やファイルサイズの検証を提供します。さらに、開発者は追加の処理イベントを拡張できます。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/File-Explorer)
 
 - [サンプル](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
 
-### Cms Kit
+### CMS
 
-[Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index) を基に開発され、[**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) 機能が追加されました。
+Dignite CMS は ABP フレームワークに基づいた CMS ソリューションです。複雑なフロントエンドコンテンツの表示要件を満たすために、オンラインでフィールドを定義できます。マルチサイトや多言語対応などの機能を備え、さまざまな顧客に柔軟で包括的な機能を提供します。
 
-- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Index)
+- [ドキュメント](https://dignite.com/docs/abp/latest/Cms/Index)
+
+### テナント固有機能のサポート
+
+#### マルチテナントテーマ
+
+開発者は各テナントに独自の Asp.net MVC ビュー UI をカスタマイズできます。
+
+- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Views-MultiTenancy)
+
+#### マルチテナントローカリゼーション
+
+各テナントに独自のローカリゼーションサポートを提供し、テナントのコンテンツを個別に表示できます。
+
+- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Localization-MultiTenancy)
+
+#### マルチテナント地域化
+
+各テナントのウェブサイトが異なる地域のユーザーを対象とする場合、地域化モジュールがデフォルト地域を提供し、複数のオプション地域をサポートします。
+
+#### マルチテナントドメイン
+
+SAAS 環境では、顧客が独自のドメインを使用したい場合があります。マルチテナントドメインモジュールは、独自ドメインを介して現在のテナントを解決できます。
 
 ### Pure テーマ
 
-Dignite ABP チームによって開発された Abp テーマパッケージで、Blazor および MVC バージョンが含まれます。Blazor バージョンは BlazoriseUI に基づいており、MVC バージョンは Bootstrap に基づいて構築されています。
+Dignite ABP チームによって開発された ABP テーマパッケージで、Blazor バージョンと MVC バージョンがあります。Blazor バージョンは BlazoriseUI に基づき、MVC バージョンは Bootstrap を使用しています。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Pure-Theme)
 
 - [サンプル](https://github.com/dignite-projects/dignite-abp/tree/main/modules/pure-theme)
 
-### マルチテナントビュー
-
-各テナントは独自のビュー UI を持つことができ、開発者はテナント UI を簡単にパーソナライズできます。
-
-- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Views-MultiTenancy)
-
-### マルチテナントローカリゼーション
-
-各テナントはパーソナライズされたテナントコンテンツのプレゼンテーションのた
-
-めに独自の言語パックを持つことができます。
-
-- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Localization-MultiTenancy)
-
 ### BlazoriseUI コンポーネント
 
-Blazorise に基づいて開発された一連の Blazor コンポーネントで、ドラッグアンドドロップサポートを備えたツリーコンポーネントや拡張機能 DataGrid などが含まれています。
+Blazorise に基づいて開発された一連の Blazor コンポーネントで、ドラッグ＆ドロップ対応のツリーコンポーネントや拡張機能を持つ DataGrid などを含みます。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/BlazoriseUI-Component)
 
-### Ckeditor コンポーネント
+### CKEditor コンポーネント
 
-Asp.net Blazor 用の Ckeditor コンポーネントで、Server モードと WebAssembly モードの両方をサポートしています。さらに、動的フォームモジュールと互換性があります。
+Asp.net Blazor 用の CKEditor コンポーネントで、サーバーモードと WebAssembly モードをサポートします。さらに、[動的フォーム](https://learn.dignite.com/ja/abp/latest/Dynamic-Forms) コンポーネントも提供します。
 
 - [ドキュメント](https://learn.dignite.com/ja/abp/latest/Blazor-Ckeditor-Component)
 
 ## 貢献したいですか？
 
-Dignite ABP は [Abp Framework](https://github.com/abpframework) をベースにしたオープンソースプロジェクトで、もともとは Dignite 内部で使用されていましたが、現在は公式に ABP フレームワークのエコロジー拡張として公開されています。
+Dignite ABP は [Abp Framework](https://github.com/abpframework) に基づいて構築されたオープンソースプロジェクトで、LGPL-3.0 ライセンスの下で提供されています。皆様の貢献をお待ちしております！
 
-このプロジェクトに参加したい場合は、[貢献ガイド](https://learn.dignite.com/ja/abp/latest/Contribution/Index)を参照してください。
+プロジェクトの一部になりたい場合は、[貢献ガイドライン](https://learn.dignite.com/ja/abp/latest/Contribution/Index) をご覧ください。
 
 ## 公式リンク
 
-- <a href="https://dignite.com/dignite-abp" target="_blank">公式ウェブサイト</a>
+- <a href="https://dignite.com/dignite-abp" target="_blank">公式サイト</a>
 
 - <a href="https://learn.dignite.com/ja/abp" target="_blank">ドキュメント</a>
 
 ## Dignite ABP をサポート
 
-ABP フレームワークが好きですか？ **このリポジトリにスターを付けてください** :star:
+ABP フレームワークが気に入りましたか？**このリポジトリにスターを付けてください** :star:
 
-## 追加のサービス
+## 追加サービス
 
 - 技術サポート
 
-  リモート技術ガイダンスを提供できます。メール、フォーラムなどを通じて必要な場合はお気軽にお問い合わせください。
+  必要に応じて、メール、フォーラム、その他のチャネルを通じてリモート技術サポートを提供します。
 
 - Abp トレーニング
 
-  開発チーム向けに Abp フレームワークおよび関連技術に関するトレーニングサービスを提供しています。
+  開発チーム向けに Abp フレームワークおよび関連技術に関するトレーニングを提供します。
 
-- 開発コンサルタント
+- 開発コンサルティング
 
-  Abp の専門知識を有しており、プロジェクト計画、要件分析、コードレビューなどをサポートできます。
+  Abp の専門知識を活かし、プロジェクト計画、要件分析、コードレビューなどを支援します！
 
 - Abp モジュール開発
 
-  お客様のニーズに合わせた Abp モジュールのカスタム開発 - それが私たちの得意分野です！
+  ニーズに応じてカスタマイズされた Abp モジュール開発を行います - これが私たちの得意分野です！
 
 - Abp プラットフォームへの移行
 
-  既存のプロジェクトを Abp プラットフォームに移行し、その強力な機能を活用してプロジェクトを競争力、保守性、拡張性を向上させます。
+  既存プロジェクトを Abp プラットフォームに移行し、その強力な機能を活用して、競争力、保守性、拡張性を向上させます。
 
 ## お問い合わせ
 
@@ -123,11 +131,10 @@ ABP フレームワークが好きですか？ **このリポジトリにスタ�
 
   株式会社ディグナイト
 
-- オフィス所在地
+- 住所
 
-  大阪市東成区今里 3-11-23，大阪
+  日本大阪府大阪市東成区今里 3-11-23
 
-- メール
+- 連絡先
 
   <hello@dignite.com>
-  

@@ -1,0 +1,37 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Abp.DynamicForms.Matrix;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Cms.Public.Web.Models;
+
+@model EntryViewModel
+@{
+    PageLayout.Content.Title = Model.Entry.Title;
+}
+@section content_toolbar {
+    <partial name="blog/_blog-toolbar" model="Model"></partial>
+}
+<div class="row">
+    <div class="offset-md-2 col-md-8">
+        <div class="d-flex mt-5 mb-3">
+            <div>
+                <img src="https://secure.gravatar.com/userimage/238890648/82cfcb7abe8f1ec5267b89c052f42161.jpeg?size=256" class="img-fluid rounded-circle me-3" style="max-width:60px;" />
+            </div>
+            <div class="mt-1">
+                <a href="#" class="underline-animate">
+                    <cms-entry-field field-name="TextboxFieldName" entry="Model"></cms-entry-field>
+                </a>
+                <ul class="list-inline text-muted mt-1">
+                    <li class="list-inline-item">@localizer["updated-on"] @Model.Entry.PublishTime</li>
+                </ul>
+            </div>
+        </div>
+        <h1 class="mb-5 ">
+            @Model.Entry.Title
+        </h1>
+            <cms-entry-field field-name="image" entry="Model" partial-name="blog/_post-content-image"></cms-entry-field>
+        
+        <section class="my-5 rich-text">
+            <cms-entry-field field-name="Ckeditor" entry="Model"></cms-entry-field>
+        </section>
+    </div>
+</div>

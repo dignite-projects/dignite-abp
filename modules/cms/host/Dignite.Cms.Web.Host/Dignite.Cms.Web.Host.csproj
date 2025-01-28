@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Dignite.Cms</RootNamespace>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <UserSecretsId>Dignite.Cms-c2d31439-b723-48e2-b061-5ebd7aeb6010</UserSecretsId>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Serilog.AspNetCore" />
+	<PackageReference Include="Serilog.Sinks.Async" />
+	<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Client" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" />
+    <PackageReference Include="Volo.Abp.Http.Client.Web" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" />
+    <PackageReference Include="Volo.Abp.Identity.Web" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Web" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Web" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Web" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Dignite.Cms.HttpApi.Client\Dignite.Cms.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\..\src\Dignite.Cms.HttpApi\Dignite.Cms.HttpApi.csproj" />
+    <ProjectReference Include="..\..\src\Dignite.Cms.Public.Web\Dignite.Cms.Public.Web.csproj" />
+    <ProjectReference Include="..\Dignite.Cms.Host.Shared\Dignite.Cms.Host.Shared.csproj" />
+	<ProjectReference Include="..\..\..\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\RazorPageTest.cshtml" />
+    <Content Remove="Views\Cms\Contact\Page.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\RazorPageTest.cshtml" />
+    <None Include="Views\Cms\Blog\Index.cshtml" />
+    <None Include="Views\Cms\Blog\Entry.cshtml" />
+    <None Include="Views\Cms\Blog\_blog-toolbar.cshtml" />
+    <None Include="Views\Cms\Contact\Page.cshtml" />
+    <None Include="Views\Cms\HomePage.cshtml" />
+    <None Include="Views\Cms\Service\Entry.cshtml" />
+    <None Include="Views\Cms\Fields\Matrix\service-item.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\RazorPageTest.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\RazorPageTest.cshtml" />
+  </ItemGroup>
+
+</Project>

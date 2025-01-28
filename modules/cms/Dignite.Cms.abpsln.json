@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Dignite.Cms": {
+      "path": "Dignite.Cms.abpmdl.json"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AutoMapper" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Components.Web.Theming" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dignite.Cms.Admin.Application.Contracts\Dignite.Cms.Admin.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj" />
+		<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms.Components.BlazoriseUI\Dignite.Abp.DynamicForms.Components.BlazoriseUI.csproj" />
+		<ProjectReference Include="..\..\..\ckeditor-component\src\Dignite.Abp.DynamicForms.Components.CkEditor\Dignite.Abp.DynamicForms.Components.CkEditor.csproj" />
+		<ProjectReference Include="..\..\..\file-explorer\src\Dignite.Abp.DynamicForms.Components.FileExplorer\Dignite.Abp.DynamicForms.Components.FileExplorer.csproj" />
+	</ItemGroup>
+</Project>

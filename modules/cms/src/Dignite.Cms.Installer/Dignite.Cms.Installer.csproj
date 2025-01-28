@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+    <PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+		<RootNamespace />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.VirtualFileSystem" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="..\..\Dignite.Cms.abpmdl.json" />
+      <EmbeddedResource Include="..\..\Dignite.Cms.abpmdl.json" />
+    </ItemGroup>
+
+</Project>

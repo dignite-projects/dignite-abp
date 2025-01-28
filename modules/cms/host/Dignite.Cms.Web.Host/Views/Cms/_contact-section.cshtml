@@ -1,0 +1,11 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+
+@model EntryViewModel
+
+<section class="container mb-5">
+    <h2 class="fs-1 fw-semibold lh-base mb-3">@Model.Entry.Title</h2>
+    <div class="lead mb-5">
+        <cms-entry-field field-name="TextboxFieldName" entry="Model"></cms-entry-field>
+    </div>
+    <a class="underline-animate ms-3 btn btn-outline-primary" section="@Model.Section" entry="Model.Entry">@localizer["contact-us"]</a>
+</section>

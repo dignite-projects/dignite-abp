@@ -1,0 +1,8 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+}
+
+@Html.Raw(Model.Entry.GetField(Model.Field.Name))

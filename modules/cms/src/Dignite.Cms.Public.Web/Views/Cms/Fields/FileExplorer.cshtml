@@ -1,0 +1,36 @@
+﻿@using Dignite.Abp.DynamicForms.FileExplorer.Localization;
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.Data;
+@using Dignite.FileExplorer.Files;
+@model EntryFieldViewModel
+@{
+    LocalizationResourceType = typeof(AbpDynamicFormsFileExplorerResource);
+    var files = Model.Entry.GetField<List<FileDescriptorDto>>(Model.Field.Name);
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="Column">#</th>
+            <th scope="Column">@L["FileName"]</th>
+            <th scope="Column">@L["FileSize"]</th>
+            <th scope="Column"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in files)
+        {
+            var index = files.IndexOf(item);
+            <tr>
+                <th scope="Row">@(index+1)</th>
+                <td>@item.Name</td>
+                <td>@FileSizeFormatter.FormatSize(item.Size)</td>
+                <td>
+                    <a href="@item.Url" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

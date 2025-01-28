@@ -1,0 +1,27 @@
+﻿@using Dignite.Cms.Admin.Entries
+
+@foreach(var item in Entries.Where(e=>e.ParentId==ParentId))
+{
+    <SelectItem Value="@item.Id">
+        @for(int i=0;i<Level*2;i++)
+        {
+            @("-")
+        }
+        @item.Title
+    </SelectItem>
+    if (Entries.Any(e => e.ParentId == item.Id))
+    {
+        <StructuredEntriesComponent Entries="Entries" Level="Level+1" ParentId="item.Id"></StructuredEntriesComponent>
+    }
+}
+@code {
+
+    [Parameter]
+    public Guid? ParentId { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<EntryDto> Entries { get; set; }
+
+    [Parameter]
+    public int Level { get; set; }
+}

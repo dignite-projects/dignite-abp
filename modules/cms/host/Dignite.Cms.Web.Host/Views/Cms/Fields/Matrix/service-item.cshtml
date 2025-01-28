@@ -1,0 +1,13 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@model MatrixBlockViewModel
+@{
+    var nameField = Model.Type.Fields.First(fd => fd.Name == "name");
+    var descriptionField = Model.Type.Fields.First(fd => fd.Name == "description");
+}
+
+<h2 class="fs-2 mb-3 fw-bold lh-base">
+    <cms-field field="nameField" entry="Model.Block"></cms-field>
+</h2>
+<div class="rich-text mb-5">
+    <cms-field field="descriptionField" entry="Model.Block"></cms-field>
+</div>

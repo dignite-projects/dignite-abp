@@ -1,0 +1,17 @@
+﻿@using Dignite.Abp.Data
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.FileExplorer.Files;
+
+@model EntryFieldViewModel
+@{
+    var files = Model.Entry.GetField<List<FileDescriptorDto>>(Model.Field.Name);
+    FileDescriptorDto coverImage = (files != null && files.Any()) ? files[0] : null;
+
+    var imgUrl = "";
+    if (coverImage != null)
+    {
+        imgUrl = $"/api/file-explorer/files/{coverImage.ContainerName}/{coverImage.BlobName}?width=300&height=200";
+    }
+}
+<img src="@imgUrl" class="img-fluid rounded" alt="@coverImage?.Name">

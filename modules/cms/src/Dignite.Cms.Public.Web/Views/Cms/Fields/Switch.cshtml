@@ -1,0 +1,13 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.DynamicForms.Switch;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var configuration = new SwitchConfiguration(Model.Field.FormConfiguration);
+    var isChecked = Model.Entry.GetField<bool>(Model.Field.Name);
+}
+
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" disabled @(isChecked?"checked":"")>
+</div>

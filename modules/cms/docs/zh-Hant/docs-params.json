@@ -1,0 +1,20 @@
+{
+  "parameters": [
+    {
+      "name": "UI",
+      "displayName": "UI",
+      "values": {
+        "Blazor": "Blazor WebAssembly",
+        "BlazorServer": "Blazor Server"
+      }
+    },
+    {
+      "name": "DB",
+      "displayName": "Database",
+      "values": {
+        "EF": "Entity Framework Core",
+        "Mongo": "MongoDB"
+      }
+    }
+  ]
+}

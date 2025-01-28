@@ -8,7 +8,7 @@ $rootFolder = (Get-Item -Path "./" -Verbose).FullName
 $solutionPaths = @(
 		"../framework",
 		"../modules/ckeditor-component",
-		"../modules/cms-kit",
+		"../modules/cms",
 		"../modules/file-explorer",
 		"../modules/files",
 		"../modules/notification-center",

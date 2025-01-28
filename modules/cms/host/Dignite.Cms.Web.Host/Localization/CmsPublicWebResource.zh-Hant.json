@@ -1,0 +1,19 @@
+{
+  "description": "描述",
+  "blog": "部落格",
+  "Menu:HomePage": "主頁",
+  "Menu:Contact": "聯繫",
+  "Menu:Services": "服務",
+  "Menu:WebDesign": "網頁設計",
+  "Menu:eCommerce": "電子商務",
+  "Menu:Learn": "學習",
+  "Menu:Blog": "部落格",
+  "Menu:Blog-All": "全部",
+  "Menu:Blog-company-news": "公司新聞",
+  "Menu:Blog-tutorials": "教學",
+  "Menu:Blog-essays": "文章",
+  "no-data-text": "找不到匹配的數據！",
+  "search-text-box-placeholder": "輸入搜索關鍵詞",
+  "updated-on": "更新於",
+  "contact-us": "联系我们"
+}

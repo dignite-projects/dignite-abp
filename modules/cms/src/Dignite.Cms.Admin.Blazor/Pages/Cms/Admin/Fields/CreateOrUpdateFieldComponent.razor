@@ -1,0 +1,77 @@
+﻿@using Dignite.Abp.DynamicForms
+@using Dignite.Abp.DynamicForms.Components;
+@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Fields
+@using Dignite.Cms.Localization
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@using Volo.Abp.Localization;
+@using Dignite.Cms.Admin.DynamicForms;
+@inject IFormAdminAppService FormService
+@inject IFieldAdminAppService FieldService
+@inject IFieldGroupAdminAppService FieldGroupService
+@inject IFormConfigurationComponentSelector ConfigurationComponentSelector
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inherits AbpComponentBase
+
+
+@if (AllGroups.Any())
+{
+    <Validation MessageLocalizer="@LH.Localize">
+        <Field>
+            <FieldLabel>@L["FieldGroup"]</FieldLabel>
+            <Select TValue="Guid?" @bind-SelectedValue="@Entity.GroupId">
+                <SelectItem Value="@(System.Guid.Empty)">@L["OptionalGrouping"]</SelectItem>
+                @foreach (var item in AllGroups)
+                {
+                    <SelectItem TValue="Guid" Value="@item.Id">@item.Name</SelectItem>
+                }
+            </Select>
+        </Field>
+    </Validation>
+}
+
+<Validation>
+    <Field>
+        <FieldLabel>@L["FieldDisplayName"]</FieldLabel>
+            <TextEdit MaxLength="FieldConsts.MaxDisplayNameLength" @bind-Text="@Entity.DisplayName" Blur="@DisplayNameTextEditBlur">
+                <Feedback>
+                    <Blazorise.ValidationError />
+                </Feedback>
+        </TextEdit>
+    </Field>
+</Validation>
+<Validation AsyncValidator="@NameExistsValidatorAsync">
+    <Field>
+        <FieldLabel>@L["FieldName"]</FieldLabel>
+        <TextEdit MaxLength="FieldConsts.MaxNameLength" @bind-Text="@Entity.Name">
+            <Feedback>
+                <Blazorise.ValidationError />
+            </Feedback>
+        </TextEdit>
+        <FieldHelp>@L["FieldNameHelpText"]</FieldHelp>
+    </Field>
+</Validation>
+<Validation>
+    <Field>
+        <FieldLabel>@L["Description"]</FieldLabel>
+            <TextEdit MaxLength="FieldConsts.MaxDescriptionLength" @bind-Text="@Entity.Description">
+        </TextEdit>
+    </Field>
+</Validation>
+
+<Validation MessageLocalizer="@LH.Localize" Validator="@ValidationRule.None">
+    <Field>
+        <FieldLabel>@L["FieldType"]</FieldLabel>
+        <Select TValue="string" SelectedValue="@Entity.FormControlName" SelectedValueChanged="OnFormChangedAsync">
+            @foreach (var item in AllFormControls)
+            {
+                <SelectItem TValue="string" Value="@item.Name">@item.DisplayName</SelectItem>
+            }
+        </Select>
+    </Field>
+</Validation>
+
+@if (FormConfigurationComponentType is not null)
+{
+    <DynamicComponent Type="@FormConfigurationComponentType" Parameters='@FormConfigurationComponentParameters' />
+}

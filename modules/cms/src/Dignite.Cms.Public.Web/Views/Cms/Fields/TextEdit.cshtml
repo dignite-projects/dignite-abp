@@ -1,0 +1,16 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.DynamicForms.TextEdit;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var configuration = new TextEditConfiguration(Model.Field.FormConfiguration);
+}
+@if (configuration.Mode == TextEditMode.MultipleLine)
+{
+    <p style="white-space: pre-wrap;">@Model.Entry.GetField(Model.Field.Name)</p>
+}
+else
+{
+    @Model.Entry.GetField(Model.Field.Name)    
+}

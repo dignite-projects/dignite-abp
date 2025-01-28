@@ -1,0 +1,41 @@
+﻿@using Dignite.Abp.DynamicForms.Components
+@using Dignite.Abp.DynamicForms.Matrix
+@using System.Text.Json
+@inject IFormViewComponentSelector formViewComponentSelector
+@inherits FormViewComponentBase<MatrixFormControl,MatrixConfiguration>
+
+<Field>
+    <FieldLabel>@Field.DisplayName</FieldLabel>
+    <FieldBody>
+        @foreach (var block in MatrixBlocks)
+        {
+            var blockType = FormConfiguration.MatrixBlockTypes.FirstOrDefault(t => t.Name == block.MatrixBlockTypeName);
+            if (blockType != null)
+            {
+                foreach (var field in blockType.Fields)
+                {
+                    field.Value = block;
+                    var component = formViewComponentSelector.Get(field.FormControlName);
+                    var parameters = new Dictionary<string, object>();
+                    parameters.Add(nameof(IFormViewComponent.Field), field);
+                    <DynamicComponent Type="@component.GetType()" Parameters="@parameters"></DynamicComponent>                                       
+                }
+            }
+        }
+    </FieldBody>
+</Field>
+@code {
+    protected List<MatrixBlock> MatrixBlocks = new List<MatrixBlock>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        MatrixBlocks = Field.Value == null ? 
+                                new List<MatrixBlock>() : 
+                                JsonSerializer.Deserialize<List<MatrixBlock>>(
+                                    Field.Value.ToString(), 
+                                    new JsonSerializerOptions(JsonSerializerDefaults.Web)
+                                );
+    }
+}

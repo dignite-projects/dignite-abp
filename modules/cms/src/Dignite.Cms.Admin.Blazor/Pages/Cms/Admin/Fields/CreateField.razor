@@ -1,0 +1,23 @@
+﻿@page "/cms/admin/fields/create"
+@using Dignite.Cms.Admin.Fields;
+@using Dignite.Cms.Localization;
+@using Dignite.Cms.Permissions;
+@using Microsoft.AspNetCore.Authorization;
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@attribute [Authorize(CmsAdminPermissions.Field.Create)]
+@inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
+@inject IFieldAdminAppService AppService
+@inject NavigationManager Navigation
+@inherits AbpComponentBase
+
+<PageTitle>@L["CreateField"]</PageTitle>
+<PageHeader Title="@L["CreateField"]" Toolbar="@Toolbar"></PageHeader>
+<Card>
+    <CardBody>
+        <Validations @ref="@CreateValidationsRef" Model="@NewEntity" ValidateOnLoad="false">
+            <CreateOrUpdateFieldComponent Entity="NewEntity"></CreateOrUpdateFieldComponent>
+        </Validations>
+    </CardBody>
+</Card>
+

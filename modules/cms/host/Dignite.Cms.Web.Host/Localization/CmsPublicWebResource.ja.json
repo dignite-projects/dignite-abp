@@ -1,0 +1,19 @@
+{
+  "description": "説明",
+  "blog": "ブログ",
+  "Menu:HomePage": "ホームページ",
+  "Menu:Contact": "ご連絡",
+  "Menu:Services": "サービス",
+  "Menu:WebDesign": "ウェブデザイン",
+  "Menu:eCommerce": "電子商取引",
+  "Menu:Learn": "学ぶ",
+  "Menu:Blog": "ブログ",
+  "Menu:Blog-All": "すべて",
+  "Menu:Blog-company-news": "企業ニュース",
+  "Menu:Blog-tutorials": "チュートリアル",
+  "Menu:Blog-essays": "エッセイ",
+  "no-data-text": "一致するデータが見つかりません！",
+  "search-text-box-placeholder": "検索キーワードを入力してください",
+  "updated-on": "更新日",
+  "contact-us": "お問い合わせ"
+}

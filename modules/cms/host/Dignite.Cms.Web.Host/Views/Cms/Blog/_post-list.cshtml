@@ -1,0 +1,42 @@
+﻿@using Dignite.Cms.Public.Web.Models;
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Pagination;
+
+@model EntryListViewModel
+@{
+    var pagerModel = new PagerModel(Model.TotalCount, 10, Model.PageIndex, Model.PageSize, Context.Request.Path);
+}
+
+
+@if (Model.TotalCount > 0)
+{
+    <div class="list-group mb-5">
+        @foreach (var entry in Model.Entries)
+        {
+            var model = new EntryViewModel(entry, Model.Section);
+            <a section="Model.Section" entry="entry" class="list-group-item list-group-item-action">
+                <small>
+                    <cms-entry-field field-name="BlogCategory" entry="model" partial-name="blog/_post-category"></cms-entry-field>
+                </small>
+                <div class="d-flex w-100 justify-content-between mt-2">
+                    <h5 class="mb-1">@entry.Title</h5>
+                    <span class="text-muted">@entry.PublishTime</span>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-light" role="alert">
+        @localizer["no-data-text"]
+    </div>
+}
+
+@if(Model.TotalCount>Model.PageSize)
+{
+    <nav aria-label="Pagination navigation" class=" mb-5">
+        <div class="flex-grow-1">
+            <abp-paginator model="pagerModel" show-info="false" />
+        </div>
+    </nav>
+}

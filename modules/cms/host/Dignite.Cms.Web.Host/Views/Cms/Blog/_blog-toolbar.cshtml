@@ -1,0 +1,22 @@
+﻿@using Dignite.Abp.DynamicForms.Select;
+@using Dignite.Cms.Public.Fields;
+@using Dignite.Cms.Public.Web.Models;
+
+@inject IFieldPublicAppService FieldPublicAppService
+@model EntryViewModel
+@{
+    var currentPath = Context.Request.Path.Value;
+    var blogCategoryField = await FieldPublicAppService.FindByNameAsync("BlogCategory");
+    var categoryConfiguration = new SelectConfiguration(blogCategoryField.FormConfiguration);
+}
+
+<nav class="nav">
+    @foreach (var item in categoryConfiguration.Options)
+    {
+        var url = $"~/blog?category={item.Value}";
+        <a class="nav-link underline-animate text-secondary px-0 mx-3" entry-path="@url">@localizer["Menu:Blog-" + item.Value]</a>
+    }
+    <button type="button" class="btn">
+        <i class="fa fa-search d-block"></i>
+    </button>
+</nav>

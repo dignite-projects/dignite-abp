@@ -5,126 +5,128 @@
 
 - [繁體中文](README.zh_Hant.md)
 
-# Dignite abp
+# Dignite ABP
 
-Adding to the ecology of the ABP framework: Adds notification system, dynamic forms module, file manager, Pure Theme, and other enhancements.
+Empowering the [ABP Framework](https://abp.io/) ecosystem with enhancements such as notification systems, dynamic forms, user points, file management, CMS, multi-tenant themes, multi-tenant localization, multi-tenant domain names, and multi-tenant regionalization.
 
-## Dignite Abp Modules
+## Dignite ABP Modules
 
 ### Notification System
 
-Referencing the notification system from Asp.Net Boilerplate, ported to the Abp Framework. Using simple code to send notifications and implementing real-time notifications within the system, as well as email notifications. Developers can also implement their own notification methods.
+Inspired by the Asp.Net Boilerplate notification system, Dignite ABP provides a module for real-time system notifications, email notifications, and extensibility for custom notification methods through interface implementation.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Notifications)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Notifications)
 
 - [Sample](https://github.com/dignite-projects/dignite-abp/tree/main/samples/NotificationCenterSample)
 
-### Dynamic Forms Module
+### Dynamic Forms
 
-Dynamic forms allow system administrators to dynamically customize the fields of business object entities online, mainly applied to SKUs of goods in shopping mall systems, polling and research systems, CMS and other systems.
+Dynamic forms allow administrators to define fields for business object entities dynamically online, widely applicable in e-commerce product SKUs, voting systems, CMS, and more.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Dynamic-Forms)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Dynamic-Forms)
 
 ### Points System
 
-Points enhance user engagement, build loyalty, and incentivize active participation and contribution, and can be used in a wide range of systems such as e-commerce, social media, gaming, education, and health.
+The points system enhances user engagement, builds loyalty, and motivates active participation and contribution. It can be applied across e-commerce, social media, gaming, education, healthcare, and more.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Points)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Points)
 
-### Files Explorer
+### File Management
 
-Dignite Abp Files is developed based on ABP BlobStoring and provides file type validation and file size validation for the file upload process. Developers can also extend additional processing events.
+Dignite ABP Files, based on ABP BlobStoring, offers file type and size validation for uploads. Developers can also extend additional processing events.
 
-- [Document](https://learn.dignite.com/en/abp/latest/File-Explorer)
+- [Documentation](https://learn.dignite.com/en/abp/latest/File-Explorer)
 
 - [Sample](https://github.com/dignite-projects/dignite-abp/tree/main/samples/FileExplorerSample)
 
-### Cms Kit
+### CMS
 
-Developed based on [Abp Cms Kit](https://docs.abp.io/zh-Hans/abp/latest/Modules/Cms-Kit/Index), added [**Visit**](https://learn.dignite.com/ja/abp/latest/Cms-Kit/Visit) feature.
+Dignite CMS is a CMS solution based on the ABP Framework. It enables developers to define fields online, addressing complex content display requirements for frontend pages. Dignite CMS supports multi-site, multilingual features, and provides highly flexible, comprehensive functionalities for diverse clients.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Cms-Kit/Index)
+- [Documentation](https://dignite.com/docs/abp/latest/Cms/Index)
+
+### Multi-Tenancy Features
+
+#### Multi-Tenant Themes
+
+Developers can customize unique ASP.NET MVC view UIs for each tenant.
+
+- [Documentation](https://learn.dignite.com/en/abp/latest/Views-MultiTenancy)
+
+#### Multi-Tenant Localization
+
+Provides independent localization support for each tenant, personalizing content presentation.
+
+- [Documentation](https://learn.dignite.com/en/abp/latest/Localization-MultiTenancy)
+
+#### Multi-Tenant Regionalization
+
+For tenant websites targeting different regional users, this module provides default regions and supports multiple optional regions.
+
+#### Multi-Tenant Domain Names
+
+In SaaS applications, tenants may need to bind their own unique domain names. The multi-tenant domain name module enables independent domain name resolution for tenants.
 
 ### Pure Theme
 
-Abp theme packages developed by Dignite Abp team, including both Blazor and MVC versions. The Blazor version is based on BlazoriseUI, while the MVC version is built on Bootstrap.
+A theme package developed by the Dignite ABP team for ABP, available in both Blazor and MVC versions. The Blazor version is based on BlazoriseUI, while the MVC version is built with Bootstrap.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Pure-Theme)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Pure-Theme)
 
 - [Sample](https://github.com/dignite-projects/dignite-abp/tree/main/modules/pure-theme)
 
-### Multi-Tenant Views
+### BlazoriseUI Components
 
-Each tenant can have a separate set of View UI, and developers can easily personalize the tenant UI.
+A series of Blazor components developed based on Blazorise, including drag-and-drop tree components and enhanced DataGrid features.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Views-MultiTenancy)
+- [Documentation](https://learn.dignite.com/en/abp/latest/BlazoriseUI-Component)
 
-### Multi-Tenant Localization
+### CKEditor Component
 
-Each tenant can have a separate set of language packs for personalized tenant content presentation.
+A CKEditor component for ASP.NET Blazor, supporting both server-side and WebAssembly modes. Additionally, it provides a [Dynamic Forms](https://learn.dignite.com/en/abp/latest/Dynamic-Forms) component.
 
-- [Document](https://learn.dignite.com/en/abp/latest/Localization-MultiTenancy)
-
-### BlazoriseUI Component
-
-A series of Blazor components developed based on Blazorise, including tree components with drag-and-drop support, and extended functionality DataGrid, and more.
-
-- [Document](https://learn.dignite.com/en/abp/latest/BlazoriseUI-Component)
-
-### Ckeditor Component
-
-A Ckeditor Component for Asp.net Blazor, supporting both Server mode and WebAssembly mode. Additionally, it is compatible with the dynamic forms module.
-
-- [Document](https://learn.dignite.com/en/abp/latest/Blazor-Ckeditor-Component)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Blazor-Ckeditor-Component)
 
 ## Want to Contribute?
 
-Dignite ABP is based on [Abp Framework](https://github.com/abpframework) build open source project , early for Dignite internal use , now officially open source for the ABP framework ecological additions .
+Dignite ABP is an open-source project built on [ABP Framework](https://github.com/abpframework) and licensed under LGPL-3.0. Contributions are welcome!
 
-See [the contribution guide](https://learn.dignite.com/en/abp/latest/Contribution/Index) if you want to be a part of this project.
+If you want to be part of this project, see our [Contribution Guide](https://learn.dignite.com/en/abp/latest/Contribution/Index).
 
 ## Official Links
 
 - <a href="https://dignite.com/dignite-abp" target="_blank">Official Website</a>
 
-- <a href="https://learn.dignite.com/en/abp" target="_blank">Documents</a>
+- <a href="https://learn.dignite.com/en/abp" target="_blank">Documentation</a>
 
-## Support the Dignite ABP
+## Support Dignite ABP
 
-Love ABP Framework? **Please give a star** to this repository :star:
+Love the ABP Framework? **Star this repository** :star:
 
 ## Additional Services
 
-- Technical Support
+- **Technical Support**  
+  We provide remote technical guidance through email, forums, and other channels.
 
-  We can provide you with remote technical guidance via email, forums and other channels if you need it.
+- **ABP Training**  
+  We offer training services on the ABP Framework and related technologies for your development team.
 
-- Abp training
+- **Development Consulting**  
+  Our expertise in ABP can assist with project planning, requirement analysis, code review, and more!
 
-  We offer training services on Abp Framework and related technologies for your development team.
+- **ABP Module Development**  
+  Custom module development tailored to your needs – our specialty!
 
-- Development Consultant
-
-  We possess Abp expertise and can assist you with project planning, requirements analysis, code reviews, and beyond!
-
-- Abp Module Development
-
-  Customised development of Abp modules to suit your needs - that's what we do best!
-
-- Migration to Abp platform
-
-  Migrate an existing project to the Abp platform, leverages its powerful capabilities, making the project more competitive, maintainable, and scalable.
+- **Migration to ABP Platform**  
+  Migrate existing projects to the ABP platform to leverage its powerful features for better competitiveness, maintainability, and scalability.
 
 ## Contact Us
 
-- Company Name
-
+- **Company Name**  
   株式会社ディグナイト
 
-- Office Location
+- **Office Address**  
+  3-11-23 Imazato, Higashinari-ku, Osaka, Japan
 
-  3-11-23 0IMAZATO HIGASHINARI WARD，OSAKA OSAKA JPN
-
-- Email Us
-  
+- **Contact**  
   <hello@dignite.com>

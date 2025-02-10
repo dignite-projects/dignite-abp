@@ -12,7 +12,8 @@ namespace Dignite.Abp.AspNetCore.Mvc.Razor;
 public class MultiTenancyViewLocationExpander : IViewLocationExpander
 {
     private const string _cultureKey = "___culture";
-    private const string _tenancyNameKEY = "___tenantName";
+    private const string _tenancyIdKey = "___tenantId";
+    private const string _themeNameKey = "___themeName";
     private const string _webComponentPathKey = "___webComponentPath";
 
     private readonly Lazy<ICurrentTenant> _currentTenantLazy;
@@ -29,14 +30,27 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     public void PopulateValues([NotNull] ViewLocationExpanderContext context)
     {
         // Using CurrentCulture so it loads the locale specific resources for the views.
-        if (!string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name))
-            context.Values[_cultureKey] = CultureInfo.CurrentCulture.Name;
+        if (context.Values.GetOrDefault(_cultureKey) == null)
+        {
+            if (!string.IsNullOrEmpty(CultureInfo.CurrentCulture.Name))
+                context.Values[_cultureKey] = CultureInfo.CurrentCulture.Name;
+        }
 
         // Using CurrentTenant so it loads the tenant specific resources for the views.
-        if (_currentTenantLazy.Value.Id.HasValue)
+        if (context.Values.GetOrDefault(_tenancyIdKey) == null)
         {
-            var tenantName = _currentTenantLazy.Value.Name;
-            context.Values[_tenancyNameKEY] = tenantName;
+            if (_currentTenantLazy.Value.IsAvailable)
+            {
+                var tenantId = _currentTenantLazy.Value.Id.Value;
+                context.Values[_tenancyIdKey] = tenantId.ToString("D");
+            }
+        }
+
+        // Using CurrentTheme so it loads the theme specific resources for the views.
+        if (context.Values.GetOrDefault(_themeNameKey) == null)
+        {
+            var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
+            context.Values[_themeNameKey] = currentThemeName;
         }
 
         // If viewname is a WebComponent then add the WebComponent path
@@ -66,15 +80,16 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     public IEnumerable<string> ExpandViewLocations([NotNull] ViewLocationExpanderContext context, [NotNull] IEnumerable<string> viewLocations)
     {
         var _viewLocations = GetViewLocations(context);
-        var tenantName = context.Values.GetOrDefault(_tenancyNameKEY);
-        var currentThemeName = _themeSelectorLazy.Value.GetCurrentThemeInfo().Name;
+        var tenantId = context.Values.GetOrDefault(_tenancyIdKey);
+        var currentThemeName = context.Values.GetOrDefault(_themeNameKey);
 
-        if (!string.IsNullOrEmpty(tenantName))
+        if (!string.IsNullOrEmpty(tenantId))
         {
             var tenantViewLocations = new List<string>();
             foreach (var viewLocation in _viewLocations)
             {
-                tenantViewLocations.Add("/Tenants/" + tenantName + "/Themes/" + currentThemeName + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantId + "/Themes/" + currentThemeName + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantId + viewLocation);
                 tenantViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
             }
 

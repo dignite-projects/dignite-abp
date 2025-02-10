@@ -1,4 +1,9 @@
-﻿
+﻿:root {
+    --bs-navbar-toggler-padding-x: 0.75rem;
+    --bs-navbar-toggler-padding-y: 0.375rem;
+    --bs-navbar-toggler-border-radius: 0.375rem;
+}
+
 .dropdown-toggle::after {
     line-height: 1rem;
     content: '›';

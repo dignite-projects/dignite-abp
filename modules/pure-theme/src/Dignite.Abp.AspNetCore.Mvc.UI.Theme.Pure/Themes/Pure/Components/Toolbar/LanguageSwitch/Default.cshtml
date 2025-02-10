@@ -6,7 +6,7 @@
 {
     <div class="dropdown">
         <a class="btn" href="#" id="Menu_LanguageSwitch" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="@Model.CurrentLanguage.DisplayName">
-            <i class="fa fa-language" aria-hidden="true"></i> <span class="d-none d-sm-none d-md-none d-lg-block">@Model.CurrentLanguage.CultureName</span>
+            <i class="fa fa-language" aria-hidden="true"></i> <small class="d-none d-sm-none d-md-none d-lg-inline">@Model.CurrentLanguage.DisplayName</small>
         </a>
         <div class="dropdown-menu dropdown-menu-lg-end border-0" aria-labelledby="Menu_LanguageSwitch">
             @foreach (var language in Model.OtherLanguages)

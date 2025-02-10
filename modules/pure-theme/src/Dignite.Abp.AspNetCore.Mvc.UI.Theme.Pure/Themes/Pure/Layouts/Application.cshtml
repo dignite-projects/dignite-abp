@@ -43,10 +43,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <title>@pageTitle</title>
+
+    <script src="~/themes/pure/color-mode-switch.js"></script>
+
     <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
-
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
-
     @await RenderSectionAsync("styles", false)
 
     <script type="text/javascript">
@@ -56,7 +57,6 @@
         dignite.brand.logoUrl='@BrandingProvider.LogoUrl';
         dignite.brand.logoReverseUrl='@BrandingProvider.LogoReverseUrl';
     </script>
-    <script src="~/themes/pure/color-mode-switch.js"></script>
 
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
 </head>
@@ -66,10 +66,12 @@
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
     <div class="@containerClass">
+        <!-- page content toolbar -->
         <div id="AbpContentToolbar" class="bg-body-tertiary d-flex align-items-center sticky-top px-2 content-toolbar">
             @(await Component.InvokeAsync<BreadCrumbsViewComponent>())
             @await RenderSectionAsync("content_toolbar", false)
         </div>
+
         @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
         @(await Component.InvokeAsync<PageAlertsViewComponent>())
         @RenderBody()

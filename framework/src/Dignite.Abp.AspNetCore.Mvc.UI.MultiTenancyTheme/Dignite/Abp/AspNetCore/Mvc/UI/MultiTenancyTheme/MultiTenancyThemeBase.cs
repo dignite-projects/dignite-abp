@@ -30,7 +30,7 @@ public abstract class MultiTenancyThemeBase : ITheme
 
         if (CurrentTenant.Id.HasValue)
         {
-            var tenantLayout = $"/Tenants/{CurrentTenant.Name}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
+            var tenantLayout = $"/Tenants/{CurrentTenant.Id}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
             var tenantLayoutPath = HostingEnvironment.ContentRootPath + tenantLayout;
             if (File.Exists(tenantLayoutPath))
             {

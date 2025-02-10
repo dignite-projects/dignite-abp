@@ -9,11 +9,12 @@ public static class AbpMultiTenancyOptionsExtensions
     /// 
     /// </summary>
     /// <param name="options"></param>
-    public static void AddMultiTenantDomainsTenantResolver(this AbpTenantResolveOptions options)
+    /// <param name="ignoreDomains"></param>
+    public static void AddMultiTenantDomainsTenantResolver(this AbpTenantResolveOptions options, string[]? ignoreDomains = null)
     {
         options.TenantResolvers.InsertAfter(
             r => r is CurrentUserTenantResolveContributor,
-            new MultiTenancyDomainsTenantResolveContributor()
+            new MultiTenancyDomainsTenantResolveContributor(ignoreDomains)
         );
     }
 }

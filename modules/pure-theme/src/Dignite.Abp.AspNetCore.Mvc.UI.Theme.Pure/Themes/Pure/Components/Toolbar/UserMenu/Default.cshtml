@@ -11,9 +11,9 @@
 <div class="dropdown">
     <a class="btn d-flex align-items-center" href="#" id="Toolbar_UserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-user me-1"></i>
-        <span class="d-none d-sm-none d-md-none d-lg-block" title="@(CurrentUser.TenantId.HasValue?CurrentTenant.Name+"\\":"") @CurrentUser.UserName">
+        <small class="d-none d-sm-none d-md-none d-lg-block" title="@(CurrentUser.TenantId.HasValue?CurrentTenant.Name+"\\":"") @CurrentUser.UserName">
             @CurrentUser.UserName
-        </span>
+        </small>
     </a>
 
     @if (Model.Items.Any())

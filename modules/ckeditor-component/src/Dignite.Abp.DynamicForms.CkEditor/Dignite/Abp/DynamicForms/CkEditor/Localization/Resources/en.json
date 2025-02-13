@@ -2,6 +2,9 @@
   "culture": "en",
   "texts": {
     "FormControl:CkEditor": "CKEditor",
+    "EditorMode": "Editor Mode",
+    "EditorMode.Simple": "Simple",
+    "EditorMode.Classic": "Classic",
     "ImagesContainerName": "Images Container Name",
     "InitialContent": "Initial Content"
   }

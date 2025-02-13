@@ -7,12 +7,16 @@ using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 using Dignite.FileExplorer;
+using Dignite.Abp.DynamicForms.CkEditor;
+using Dignite.Abp.DynamicForms.FileExplorer;
 
 namespace Dignite.Cms;
 [DependsOn(
     typeof(AbpDynamicFormsModule),
     typeof(CmsKitDomainSharedModule),
-    typeof(FileExplorerDomainSharedModule)
+    typeof(FileExplorerDomainSharedModule),
+    typeof(AbpDynamicFormsFileExplorerModule),
+    typeof(AbpDynamicFormsCkEditorModule)
 )]
 public class CmsDomainSharedModule : AbpModule
 {

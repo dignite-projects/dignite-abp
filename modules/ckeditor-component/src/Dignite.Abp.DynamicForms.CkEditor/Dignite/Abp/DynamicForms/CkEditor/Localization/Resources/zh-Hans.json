@@ -2,6 +2,9 @@
   "culture": "zh-Hans",
   "texts": {
     "FormControl:CkEditor": "CKEditor",
+    "EditorMode": "编辑器模式",
+    "EditorMode.Simple": "简单",
+    "EditorMode.Classic": "经典",
     "ImagesContainerName": "图片容器名称",
     "InitialContent": "初始内容"
   }

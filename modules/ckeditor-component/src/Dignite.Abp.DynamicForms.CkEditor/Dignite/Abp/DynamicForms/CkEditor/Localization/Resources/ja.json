@@ -2,6 +2,9 @@
   "culture": "ja",
   "texts": {
     "FormControl:CkEditor": "CKEditor",
+    "EditorMode": "編集モード",
+    "EditorMode.Simple": "シンプル",
+    "EditorMode.Classic": "クラシック",
     "ImagesContainerName": "画像コンテナ名",
     "InitialContent": "初期コンテンツ"
   }

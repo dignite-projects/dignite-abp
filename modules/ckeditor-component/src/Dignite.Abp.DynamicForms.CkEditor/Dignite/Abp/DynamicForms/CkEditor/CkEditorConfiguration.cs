@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Dignite.Abp.DynamicForms.CkEditor;
+﻿namespace Dignite.Abp.DynamicForms.CkEditor;
 
 public class CkEditorConfiguration : FormConfigurationBase
 {
-    [Required]
+    public CkEditorMode Mode {
+        get => ConfigurationDictionary.GetConfiguration<CkEditorMode>(CkEditorConfigurationNames.Mode, CkEditorMode.Classic);
+        set => ConfigurationDictionary.SetConfiguration(CkEditorConfigurationNames.Mode, value);
+    }
+
     public string ImagesContainerName {
         get => ConfigurationDictionary.GetConfiguration<string>(CkEditorConfigurationNames.ImagesContainerName, null);
         set => ConfigurationDictionary.SetConfiguration(CkEditorConfigurationNames.ImagesContainerName, value);

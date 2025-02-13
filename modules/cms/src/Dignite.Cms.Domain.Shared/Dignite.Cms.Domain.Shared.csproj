@@ -18,6 +18,8 @@
   <ItemGroup>
 	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.DynamicForms\Dignite.Abp.DynamicForms.csproj" />
 	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.FileExplorer.Domain.Shared\Dignite.FileExplorer.Domain.Shared.csproj" />
+	<ProjectReference Include="..\..\..\ckeditor-component\src\Dignite.Abp.DynamicForms.CkEditor\Dignite.Abp.DynamicForms.CkEditor.csproj" />
+	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.Abp.DynamicForms.FileExplorer\Dignite.Abp.DynamicForms.FileExplorer.csproj" />
 	<PackageReference Include="Volo.CmsKit.Domain.Shared" />
     <PackageReference Include="Slugify.Core" />
     <PackageReference Include="Unidecode.NET" />

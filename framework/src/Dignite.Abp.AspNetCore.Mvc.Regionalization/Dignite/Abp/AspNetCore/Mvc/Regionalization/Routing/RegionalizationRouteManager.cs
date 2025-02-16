@@ -96,16 +96,10 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
     protected virtual List<Endpoint> GetRegionalizationEndpoints()
     {
         var cacheKey = "AbpContainRegionalizationEndpoints";
-        if (!_EndpointCache.TryGetValue(cacheKey, out List<Endpoint>? cacheValue))
+        var cacheValue = _EndpointCache.GetOrCreate(cacheKey, factory =>
         {
-            cacheValue = CreateEndpointsList();
-
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromDays(100));
-
-            _EndpointCache.Set(cacheKey, cacheValue, cacheEntryOptions);
-        }
-
+            return CreateEndpointsList();
+        });
         #pragma warning disable CS8603 // 不可能返回 null 引用。
         return cacheValue;
         #pragma warning restore CS8603 // 不可能返回 null 引用。

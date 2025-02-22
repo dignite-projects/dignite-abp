@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\common.test.props" />
+
+  <PropertyGroup>
+	<TargetFramework>net8.0</TargetFramework>
+	<RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\..\src\Dignite.Abp.TenantDomain.OpenIddict\Dignite.Abp.TenantDomain.OpenIddict.csproj" />
+	<ProjectReference Include="..\AbpTestBase\AbpTestBase.csproj" />
+	<PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
+	<PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" />
+	<PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
+	<PackageReference Include="Volo.Abp.Authorization" />
+	<PackageReference Include="Volo.Abp.Autofac" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

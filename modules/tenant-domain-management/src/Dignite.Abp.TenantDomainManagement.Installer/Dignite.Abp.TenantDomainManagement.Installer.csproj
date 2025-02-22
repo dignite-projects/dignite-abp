@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.VirtualFileSystem" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\Dignite.Abp.TenantDomainManagement.abpmdl" />
+    <Content Include="..\..\Dignite.Abp.TenantDomainManagement.abpmdl">
+      <Pack>true</Pack>
+      <PackagePath>content\</PackagePath>
+    </Content>
+    <None Remove="..\..\**\*.abppkg*" />
+    <Content Include="..\..\**\*.abppkg*">
+      <Pack>true</Pack>
+      <PackagePath>content\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+</Project>

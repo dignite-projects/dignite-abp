@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+	<RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.TenantDomain.OpenIddict\Dignite.Abp.TenantDomain.OpenIddict.csproj" />
+    <ProjectReference Include="..\..\src\Dignite.Abp.TenantDomainManagement.Application\Dignite.Abp.TenantDomainManagement.Application.csproj" />
+    <ProjectReference Include="..\Dignite.Abp.TenantDomainManagement.TestBase\Dignite.Abp.TenantDomainManagement.TestBase.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+  </ItemGroup>
+
+</Project>

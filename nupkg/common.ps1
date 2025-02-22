@@ -77,7 +77,7 @@ $solutions = (
     "modules/user-points",
     "modules/cms",
     "modules/regionalization-management",
-    "modules/multi-tenancy-domains"
+    "modules/tenant-domain-management"
 )
 
 # List of projects
@@ -97,6 +97,10 @@ $projects = (
     "framework/src/Dignite.Abp.Points",
     "framework/src/Dignite.Abp.AspNetCore.Mvc.Regionalization",
     "framework/src/Dignite.Abp.Regionalization",
+    "framework/src/Dignite.Abp.TenantDomain",
+    "framework/src/Dignite.Abp.TenantDomain.AspNetCore",
+    "framework/src/Dignite.Abp.TenantDomain.Caddy",
+    "framework/src/Dignite.Abp.TenantDomain.OpenIddict",
 
     # modules/ckeditor-component
     "modules/ckeditor-component/src/Dignite.Abp.AspNetCore.Components.CkEditor",
@@ -190,15 +194,10 @@ $projects = (
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi.Client",      
     "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer",
     
-    # modules/multi-tenancy-domains
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Application",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Application.Contracts",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Domain",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Domain.Shared",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.EntityFrameworkCore",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.HttpApi",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.HttpApi.Client",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.Installer",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.MongoDB",
-    "modules/multi-tenancy-domains/src/Dignite.Abp.MultiTenancyDomains.AspNetCore"
+    # modules/tenant-domain-management
+    "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.Application",
+    "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.Application.Contracts",
+    "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.HttpApi",
+    "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.HttpApi.Client",
+    "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.Installer"
 )

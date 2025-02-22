@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+	<RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.extensibility.execution" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.Guids" />
+    <PackageReference Include="Volo.Abp.TestBase" />
+	<PackageReference Include="Volo.Abp.OpenIddict.Domain" />
+  </ItemGroup>
+
+</Project>

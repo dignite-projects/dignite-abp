@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "paths": {
+      "@dignite.Abp/tenant-domain-management": [
+        "projects/tenant-domain-management/src/public-api.ts"
+      ],
+      "@dignite.Abp/tenant-domain-management/config": [
+        "projects/tenant-domain-management/config/src/public-api.ts"
+      ],
+      "@proxy": ["projects/tenant-domain-management/src/lib/proxy/index.ts"],
+      "@proxy/*": ["projects/tenant-domain-management/src/lib/proxy/*"]
+    }
+  }
+}

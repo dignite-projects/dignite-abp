@@ -1,0 +1,160 @@
+{
+  "modules": {
+    "tenant-domain-management": {
+      "rootPath": "tenant-domain-management",
+      "remoteServiceName": "TenantDomainManagement",
+      "controllers": {
+        "Dignite.Abp.TenantDomainManagement.TenantDomainController": {
+          "controllerName": "TenantDomain",
+          "controllerGroupName": "TenantDomain",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dignite.Abp.TenantDomainManagement.TenantDomainController",
+          "interfaces": [
+            {
+              "type": "Dignite.Abp.TenantDomainManagement.ITenantDomainAppService",
+              "name": "ITenantDomainAppService",
+              "methods": [
+                {
+                  "name": "ConnectAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput, Dignite.Abp.TenantDomainManagement.Application.Contracts",
+                      "type": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                      "typeSimple": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Dignite.Abp.TenantDomainManagement.TenantDomainDto",
+                    "typeSimple": "Dignite.Abp.TenantDomainManagement.TenantDomainDto"
+                  }
+                },
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Dignite.Abp.TenantDomainManagement.TenantDomainDto",
+                    "typeSimple": "Dignite.Abp.TenantDomainManagement.TenantDomainDto"
+                  }
+                },
+                {
+                  "name": "CheckCnameRecordAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "domainName",
+                      "typeAsString": "System.String, System.Private.CoreLib",
+                      "type": "System.String",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Boolean",
+                    "typeSimple": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "ConnectAsyncByInput": {
+              "uniqueName": "ConnectAsyncByInput",
+              "name": "ConnectAsync",
+              "httpMethod": "POST",
+              "url": "api/tenant-domain-management/tenant-domain/connect",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput, Dignite.Abp.TenantDomainManagement.Application.Contracts",
+                  "type": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                  "typeSimple": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                  "typeSimple": "Dignite.Abp.TenantDomainManagement.ConnectTenantDomainInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dignite.Abp.TenantDomainManagement.TenantDomainDto",
+                "typeSimple": "Dignite.Abp.TenantDomainManagement.TenantDomainDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.TenantDomainManagement.ITenantDomainAppService"
+            },
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/tenant-domain-management/tenant-domain",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Dignite.Abp.TenantDomainManagement.TenantDomainDto",
+                "typeSimple": "Dignite.Abp.TenantDomainManagement.TenantDomainDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.TenantDomainManagement.ITenantDomainAppService"
+            },
+            "CheckCnameRecordAsyncByDomainName": {
+              "uniqueName": "CheckCnameRecordAsyncByDomainName",
+              "name": "CheckCnameRecordAsync",
+              "httpMethod": "GET",
+              "url": "api/tenant-domain-management/tenant-domain/check-cname-record",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "domainName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "domainName",
+                  "name": "domainName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.TenantDomainManagement.ITenantDomainAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

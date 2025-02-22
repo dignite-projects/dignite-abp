@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Dignite.Abp.TenantDomainManagement.Application.Contracts</AssemblyName>
+    <PackageId>Dignite.Abp.TenantDomainManagement.Application.Contracts</PackageId>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dignite\Abp\TenantDomainManagement\Localization\Resources\*.json" />
+    <Content Remove="Dignite\Abp\TenantDomainManagement\Localization\Resources\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+	<PackageReference Include="Volo.Abp.Validation" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+  </ItemGroup>
+
+</Project>

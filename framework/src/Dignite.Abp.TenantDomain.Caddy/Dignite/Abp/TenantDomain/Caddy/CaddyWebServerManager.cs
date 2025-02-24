@@ -13,12 +13,12 @@ namespace Dignite.Abp.TenantDomain.Caddy;
 public class CaddyWebServerManager : WebServerManagerBase, ITransientDependency
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly CaddyOptions _options;
+    private readonly AbpTenantDomainCaddyOptions _options;
 
     public CaddyWebServerManager(
         IHttpClientFactory httpClientFactory,
         ILogger<CaddyWebServerManager> logger,
-        IOptions<CaddyOptions> options) : base(logger)
+        IOptions<AbpTenantDomainCaddyOptions> options) : base(logger)
     {
         _httpClientFactory = httpClientFactory;
         _options = options.Value;

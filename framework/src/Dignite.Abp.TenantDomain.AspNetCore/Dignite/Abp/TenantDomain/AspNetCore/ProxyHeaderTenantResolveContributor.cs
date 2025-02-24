@@ -24,16 +24,6 @@ public class ProxyHeaderTenantResolveContributor : HttpTenantResolveContributorB
             return Task.FromResult<string?>(null);
         }
 
-        var tenantId = httpContext.Request.Headers[WebServerConsts.ProxyHeaderTenantId].FirstOrDefault();
-        context.Handled = true;
-
-        if (tenantId!=null)
-        {
-            return Task.FromResult<string?>(tenantId);
-        }
-        else
-        {
-            return Task.FromResult<string?>(null);
-        }
+        return Task.FromResult(httpContext.Request.Headers[WebServerConsts.ProxyHeaderTenantId].FirstOrDefault());
     }
 }

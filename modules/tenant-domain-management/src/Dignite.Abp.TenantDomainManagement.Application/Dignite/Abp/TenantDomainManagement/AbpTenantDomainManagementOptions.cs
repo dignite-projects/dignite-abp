@@ -2,21 +2,28 @@
 using JetBrains.Annotations;
 
 namespace Dignite.Abp.TenantDomainManagement;
-public class AbpMultiTenancyDomainOptions
+public class AbpTenantDomainManagementOptions
 {
 
     /// <summary>
     /// Tenant's second-level domain name format, e.g. “{0}.travely.dignite.com”
+    /// Used to verify that the tenant domain resolves cname to the tenant's second-level domain name
     /// </summary>
     public string TenantDomainFormat { get; set; }
 
+    /// <summary>
+    /// Specifies the webserver's site name, which is used to configure the site's tenant domain name
+    /// </summary>
     public string WebServerSiteName { get; set; } = "default";
 
     /// <summary>
-    /// 
+    /// Specify the proxy address of the reverse proxy for the tenant's domain name
     /// </summary>
-    public string UpstreamAddress { get; set; } = "https://localhost:5000";
+    public string ProxyAddress { get; set; } = "https://localhost:5000";
 
+    /// <summary>
+    /// Specify the client ID of the authorization service used to add the tenant domain to the list of redirect URLs
+    /// </summary>
     public string AuthServerClientId { get; set; }
 
     /// <summary>

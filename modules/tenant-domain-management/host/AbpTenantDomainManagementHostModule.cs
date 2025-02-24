@@ -148,7 +148,7 @@ public class AbpTenantDomainManagementHostModule : AbpModule
             });
         }
 
-        Configure<AbpMultiTenancyDomainOptions>(options =>
+        Configure<AbpTenantDomainManagementOptions>(options =>
         {
             options.TenantDomainFormat = "{0}.travely.dignite.com";
         });

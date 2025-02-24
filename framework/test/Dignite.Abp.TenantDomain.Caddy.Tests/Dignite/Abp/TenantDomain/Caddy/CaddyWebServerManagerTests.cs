@@ -16,15 +16,15 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
     private readonly IWebServerManager _caddyWebServerManager;
     private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
     private readonly Mock<ILogger<CaddyWebServerManager>> _loggerMock;
-    private readonly Mock<IOptions<CaddyOptions>> _optionsMock;
+    private readonly Mock<IOptions<AbpTenantDomainCaddyOptions>> _optionsMock;
 
     public CaddyWebServerManagerTests()
     {
         _httpClientFactoryMock = new Mock<IHttpClientFactory>();
         _loggerMock = new Mock<ILogger<CaddyWebServerManager>>();
-        _optionsMock = new Mock<IOptions<CaddyOptions>>();
+        _optionsMock = new Mock<IOptions<AbpTenantDomainCaddyOptions>>();
 
-        _optionsMock.Setup(o => o.Value).Returns(new CaddyOptions
+        _optionsMock.Setup(o => o.Value).Returns(new AbpTenantDomainCaddyOptions
         {
             ApiEndpoint = "http://localhost:2019"
         });

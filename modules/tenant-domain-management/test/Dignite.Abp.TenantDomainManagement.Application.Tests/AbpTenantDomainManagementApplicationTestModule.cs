@@ -15,7 +15,7 @@ public class AbpTenantDomainManagementApplicationTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpMultiTenancyDomainOptions>(options =>
+        Configure<AbpTenantDomainManagementOptions>(options =>
         {
             options.TenantDomainFormat = "{0}.travely.dignite.com";
             options.AuthServerClientId = "Client1";

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 
 namespace Dignite.Abp.TenantDomain.Caddy;
-public class CaddyOptions
+public class AbpTenantDomainCaddyOptions
 {
     public string ApiEndpoint { get; set; } = "http://localhost:2019";
 

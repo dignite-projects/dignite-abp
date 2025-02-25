@@ -1,8 +1,10 @@
-﻿using Dignite.Cms.Entries;
+﻿using Dignite.Abp.Data;
+using Dignite.Cms.Entries;
 using Dignite.Cms.Sections;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 
@@ -101,12 +103,15 @@ namespace Dignite.Cms.Admin.Entries
             if (input.SectionId == Guid.Empty)
                 return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
 
-            var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.Filter,input.StartPublishDate,input.ExpiryPublishDate, null);
+
+            List<QueryingByField> queryingByCustomFields = input.QueryingByFieldsJson.IsNullOrEmpty() ? null : JsonSerializer.Deserialize<List<QueryingByField>>(input.QueryingByFieldsJson);
+
+            var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.Filter,input.StartPublishDate,input.ExpiryPublishDate, queryingByCustomFields);
             if (count == 0)
                 return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
 
             //get entry list
-            var result = await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, input.Status, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, null, input.MaxResultCount, input.SkipCount, input.Sorting);
+            var result = await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, input.Status, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, input.MaxResultCount, input.SkipCount, input.Sorting);
             var dto = ObjectMapper.Map<List<Entry>, List<EntryDto>>(result);
 
 

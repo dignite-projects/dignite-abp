@@ -1,7 +1,6 @@
-﻿using Dignite.Cms.Admin;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 
@@ -21,7 +20,7 @@ namespace Dignite.Cms.Admin.DynamicForms
         }
 
         [HttpGet]
-        [Route("forms")]
+        [Route("controls")]
         public async Task<ListResultDto<FormControlDto>> GetFormControlsAsync()
         {
             return await _formAdminAppService.GetFormControlsAsync();

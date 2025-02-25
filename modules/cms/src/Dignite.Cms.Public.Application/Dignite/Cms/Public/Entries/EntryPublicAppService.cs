@@ -127,7 +127,7 @@ namespace Dignite.Cms.Public.Entries
             {
                 var onListFields = section.EntryTypes
                     .SingleOrDefault(et => et.Id == item.EntryTypeId)?.FieldTabs
-                    .SelectMany(ft => ft.Fields.Where(f => f.ShowOnList));
+                    .SelectMany(ft => ft.Fields.Where(f => f.ShowInList));
                 if (onListFields == null)
                 {
                     item.ExtraProperties.Clear();

@@ -55,14 +55,14 @@ public class EntryTypeAdminAppService_Tests : CmsApplicationTestBase
                     new EntryFieldInput
                     {
                         FieldId=testData.TextboxFieldId,
-                        ShowOnList = true,
+                        ShowInList = true,
                         DisplayName = "Textbox Field",
                         Required = true,
                     },
                     new EntryFieldInput
                     {
                         FieldId=testData.SelectFieldId,
-                        ShowOnList = true,
+                        ShowInList = true,
                         DisplayName = "Select Field",
                         Required = true,
                     }
@@ -91,14 +91,14 @@ public class EntryTypeAdminAppService_Tests : CmsApplicationTestBase
                     new EntryFieldInput
                     {
                         FieldId=testData.TextboxFieldId,
-                        ShowOnList = true,
+                        ShowInList = true,
                         DisplayName = "Textbox Field",
                         Required = true,
                     },
                     new EntryFieldInput
                     {
                         FieldId=testData.SelectFieldId,
-                        ShowOnList = true,
+                        ShowInList = true,
                         DisplayName = "Select Field",
                         Required = true,
                     }
@@ -129,7 +129,7 @@ public class EntryTypeAdminAppService_Tests : CmsApplicationTestBase
                                         new EntryFieldInput
                                         {
                                             FieldId=testData.TextboxFieldId,
-                                            ShowOnList = true,
+                                            ShowInList = true,
                                             DisplayName = "Textbox Field",
                                             Required = true,
                                         }

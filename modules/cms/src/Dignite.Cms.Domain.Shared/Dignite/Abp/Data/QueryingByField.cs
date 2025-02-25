@@ -12,7 +12,7 @@ public class QueryingByField
     }
 
     /// <summary>
-    /// <see cref="DynamicForms.FormField.Name"/>
+    /// The field name
     /// </summary>
     public string Name { get; set; }
 

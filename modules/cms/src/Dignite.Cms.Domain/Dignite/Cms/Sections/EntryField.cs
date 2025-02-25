@@ -4,12 +4,13 @@ namespace Dignite.Cms.Sections
 {
     public class EntryField
     {
-        public EntryField(Guid fieldId, string displayName, bool required,  bool showOnList)
+        public EntryField(Guid fieldId, string displayName, bool required,  bool showInList, bool enableSearch)
         {
             FieldId = fieldId;
             DisplayName = displayName;
             Required = required;
-            ShowOnList = showOnList;
+            ShowInList = showInList;
+            EnableSearch = enableSearch;
         }
 
         public Guid FieldId { get; protected set; }
@@ -28,6 +29,11 @@ namespace Dignite.Cms.Sections
         /// <summary>
         /// 
         /// </summary>
-        public virtual bool ShowOnList { get; protected set; }
+        public virtual bool ShowInList { get; protected set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual bool EnableSearch { get; protected set; }
     }
 }

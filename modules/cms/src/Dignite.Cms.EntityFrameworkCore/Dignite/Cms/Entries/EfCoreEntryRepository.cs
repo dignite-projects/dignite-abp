@@ -198,8 +198,8 @@ namespace Dignite.Cms.Entries
                     if (field == null)
                         continue;
 
-                    var form = _formControlSelector.Get(field.FormControlName);
-                    if (form.GetType() == querying.FormControlType)
+                    var control = _formControlSelector.Get(field.FormControlName);
+                    if (control.GetType() == querying.FormControlType)
                     {
                         source = querying.Query(source, param);
                         continue;

@@ -11,12 +11,13 @@ namespace Dignite.Cms.Admin.Sections
         {
         }
 
-        public EntryFieldInput(Guid fieldId, string displayName, bool required, bool showOnList)
+        public EntryFieldInput(Guid fieldId, string displayName, bool required, bool showInList, bool enableSearch)
         {
             FieldId = fieldId;
             DisplayName = displayName;
             Required = required;
-            ShowOnList = showOnList;
+            ShowInList = showInList;
+            EnableSearch = enableSearch;
         }
 
         [Required]
@@ -38,6 +39,11 @@ namespace Dignite.Cms.Admin.Sections
         /// <summary>
         /// 
         /// </summary>
-        public bool ShowOnList { get; set; }
+        public bool ShowInList { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool EnableSearch { get; set; }
     }
 }

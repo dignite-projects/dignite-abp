@@ -35,11 +35,13 @@ public class EntryTypeManager_Tests : CmsDomainTestBase
                                 testData.TextboxFieldId,
                                 "Textbox Field",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 testData.SelectFieldId,
                                 "Select Field",
+                                true,
                                 true,
                                 true
                                 )
@@ -74,11 +76,13 @@ public class EntryTypeManager_Tests : CmsDomainTestBase
                                 testData.TextboxFieldId,
                                 "Textbox Field",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 testData.SelectFieldId,
                                 "Select Field",
+                                true,
                                 true,
                                 true
                                 )

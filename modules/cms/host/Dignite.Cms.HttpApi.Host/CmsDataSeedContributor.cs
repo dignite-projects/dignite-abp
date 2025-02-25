@@ -256,11 +256,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.TextboxFieldId,
                                 "Home Page Slogan",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 _cmsData.ImageFieldId,
                                 "Banner",
+                                true,
                                 true,
                                 true
                                 ),
@@ -268,6 +270,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.CkeditorFieldId,
                                 "Home Page Description",
                                 true,
+                                false,
                                 false
                                 )
                         })
@@ -289,7 +292,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.TextboxFieldId,
                                 "Blog slogan",
                                 true,
-                                true
+                                true,true
                                 )
                         })
                     },
@@ -310,11 +313,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.TextboxFieldId,
                                 "Author",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 _cmsData.BlogCategoryFieldId,
                                 "Blog Category",
+                                true,
                                 true,
                                 true
                                 ),
@@ -322,18 +327,21 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.CkeditorFieldId,
                                 "Post Content",
                                 true,
+                                false,
                                 false
                                 ),
                             new EntryField(
                                 _cmsData.ImageFieldId,
                                 "Post cover image",
                                 false,
-                                true
+                                true,
+                                false
                                 ),
                             new EntryField(
                                 _cmsData.SwitchFieldId,
                                 "Recommend to home page",
                                 false,
+                                true,
                                 true
                                 ),
                         })
@@ -356,7 +364,8 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.ServiceMatrixFieldId,
                                 "Service Items",
                                 true,
-                                true
+                                true,
+                                false
                                 )
                         })
                     },
@@ -379,12 +388,14 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsData.TextboxFieldId,
                                 "Contact Slogan",
                                 true,
-                                true
+                                true,
+                                false
                                 ),
                             new EntryField(
                                 _cmsData.CkeditorFieldId,
                                 "Contact",
                                 true,
+                                false,
                                 false
                                 )
                         })

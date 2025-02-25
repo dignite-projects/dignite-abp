@@ -31,5 +31,10 @@ namespace Dignite.Cms.Admin.Entries
         public EntryStatus? Status { get; set; }
 
         public Guid? CreatorId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string QueryingByFieldsJson { get; set; }
     }
 }

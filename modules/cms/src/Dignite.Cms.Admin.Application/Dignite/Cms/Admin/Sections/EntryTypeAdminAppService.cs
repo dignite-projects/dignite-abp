@@ -35,7 +35,8 @@ namespace Dignite.Cms.Admin.Sections
                                 f.FieldId,
                                 f.DisplayName,
                                 f.Required,
-                                f.ShowOnList
+                                f.ShowInList,
+                                f.EnableSearch
                                 )
                             ).ToList()
                         )
@@ -93,7 +94,8 @@ namespace Dignite.Cms.Admin.Sections
                                 f.FieldId,
                                 f.DisplayName,
                                 f.Required,
-                                f.ShowOnList
+                                f.ShowInList,
+                                f.EnableSearch
                                 )
                             ).ToList()
                         )

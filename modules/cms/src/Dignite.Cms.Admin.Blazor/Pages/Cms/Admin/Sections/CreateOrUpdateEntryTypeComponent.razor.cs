@@ -296,7 +296,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Sections
             {
                 await EditFieldValidationsRef.ClearAll();
             }
-            EditingField = new EntryFieldInput(field.FieldId,field.DisplayName,field.Required,field.ShowOnList);
+            EditingField = new EntryFieldInput(field.FieldId, field.DisplayName, field.Required, field.ShowInList, field.EnableSearch);
             await InvokeAsync(async () =>
             {
                 StateHasChanged();
@@ -331,7 +331,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Sections
                 var field = Entity.FieldTabs.SelectMany(ft => ft.Fields).Single(f => f.FieldId == EditingField.FieldId);
                 field.DisplayName = EditingField.DisplayName;
                 field.Required = EditingField.Required;
-                field.ShowOnList = EditingField.ShowOnList;
+                field.ShowInList = EditingField.ShowInList;
                 await InvokeAsync(EditFieldModal!.Hide);
             }
         }

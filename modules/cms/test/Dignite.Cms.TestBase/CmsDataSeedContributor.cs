@@ -164,11 +164,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsTestData.TextboxFieldId,
                                 "Textbox Field",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 _cmsTestData.SelectFieldId,
                                 "Select Field",
+                                true,
                                 true,
                                 true
                                 )
@@ -191,11 +193,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsTestData.TextboxFieldId,
                                 "Author",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 _cmsTestData.SelectFieldId,
                                 "Select Field",
+                                true,
                                 true,
                                 true
                                 )
@@ -219,11 +223,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                                 _cmsTestData.TextboxFieldId,
                                 "Author",
                                 true,
+                                true,
                                 true
                                 ),
                             new EntryField(
                                 _cmsTestData.SelectFieldId,
                                 "Select Field",
+                                true,
                                 true,
                                 true
                                 )

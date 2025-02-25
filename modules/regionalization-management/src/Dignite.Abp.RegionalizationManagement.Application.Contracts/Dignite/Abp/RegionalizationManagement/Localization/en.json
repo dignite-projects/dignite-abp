@@ -68,6 +68,11 @@
     "AccessDenied": "Access denied!",
     "AccessDeniedMessage": "You do not have access to this resource.",
     "OrRegisterWith": "Or register with",
-    "RegisterUsingYourProviderAccount": "Register using your {0} account"
+    "RegisterUsingYourProviderAccount": "Register using your {0} account",
+    "Regionalization": "Regionalization",
+    "Default": "Default",
+    "SetDefault": "Set Default",
+    "DefaultCultureName": "Default Culture Name",
+    "availableCultureNames": "Available Culture Names"
   }
 }

@@ -1,6 +1,24 @@
 {
   "culture": "en",
   "texts": {
-    "Permission:ConnectDomain": "Connect a Domain"
+    "Permission:ConnectDomain": "Connect a Domain",
+    "DomainName": "Domain Name",
+    "NextStep": "Next Step",
+    "DomainSetup": "Domain Setup",
+    "FollowTheInstructionsBelow": "Follow the instructions below",
+    "LogInToYourProvider": "Log in to your provider",
+    "OpenDNSManagementFor{0}": "Open DNS management for {0}",
+    "Type": "Type",
+    "Name": "Name",
+    "NewValue": "New Value",
+    "ValidateDomainName": "Validate Domain Name",
+    "Edit": "Edit",
+    "Save": "Save",
+    "YourDomainNameMustContainAValidSuffix": "Your domain name must contain a valid suffix",
+    "ReplicationSuccessful": "Replication successful",
+    "YourDomainNameHasBeenVerifiedPleaseBind": "Your domain name has been verified, please bind",
+    "YourDomainNameIsNotVerifiedPleaseCheckTheDNSConfigurationOfTheDomainName": "Your domain name is not verified. Please check the DNS configuration of the domain name",
+    "SaveSuccessful": "Save successful",
+    "SaveFailure": "Save failure"
   }
 }

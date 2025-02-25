@@ -68,6 +68,14 @@
     "AccessDenied": "拒绝访问！",
     "AccessDeniedMessage": "您无法访问此资源。",
     "OrRegisterWith": "或注册",
-    "RegisterUsingYourProviderAccount": "使用您的 {0} 账户注册"
+    "RegisterUsingYourProviderAccount": "使用您的 {0} 账户注册",
+    "Regionalization": "本地化",
+    "Default": "默认",
+    "SetDefault": "设为默认",
+    "DefaultCultureName": "默认区域名称",
+    "availableCultureNames": "可用区域名称"
+
+
+    
   }
 }

@@ -49,9 +49,9 @@ public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
 
     protected override JsonStringLocalizer CreateJsonStringLocalizer(string resourcesPath, string resourceName)
     {
-        if (_currentTenant.Id.HasValue)
+        if (_currentTenant.IsAvailable)
         {
-            resourceName = _currentTenant.Name + "." + resourceName;
+            resourceName = _currentTenant.Id + "." + resourceName;
             return base.CreateJsonStringLocalizer(resourcesPath, resourceName);
         }
         else

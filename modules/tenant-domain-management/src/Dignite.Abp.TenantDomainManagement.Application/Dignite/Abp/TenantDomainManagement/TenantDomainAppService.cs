@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Dignite.Abp.TenantDomainManagement.Settings;
 using Dignite.Abp.TenantDomain;
+using Dignite.Abp.TenantDomainManagement.Settings;
 using DnsClient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Volo.Abp.Application.Services;
 using Volo.Abp.SettingManagement;
-using Microsoft.Extensions.DependencyInjection;
-using Polly;
 
 namespace Dignite.Abp.TenantDomainManagement;
 
@@ -61,10 +59,6 @@ public class TenantDomainAppService : ApplicationService, ITenantDomainAppServic
     [Authorize(Permissions.TenantDomainManagementPermissions.ManageDomain)]
     public async Task<bool> CheckCnameRecordAsync(string domainName)
     {
-        #if DEBUG
-                return true;
-        #endif
-
         string expectedCname = _options.GetTenantDomain(CurrentTenant.Name);
         var lookup = new LookupClient();
         var result = await lookup.QueryAsync(domainName, QueryType.CNAME);

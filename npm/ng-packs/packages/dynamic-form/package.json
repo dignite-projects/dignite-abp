@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.dynamic-form",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.6",
   "peerDependencies": {
     "@angular/common": "~18.1.0",
     "@angular/core": "~18.1.0"

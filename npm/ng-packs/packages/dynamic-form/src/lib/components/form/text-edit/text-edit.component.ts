@@ -64,7 +64,7 @@ export class TextEditComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray = []
+      let ValidatorsArray:any[] = []
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required)
       }
@@ -77,14 +77,14 @@ export class TextEditComponent {
       }
      
       let newControl = this.fb.control(this._selected, ValidatorsArray)
-      this.extraProperties.setControl(this._fields.field.name, newControl)
+      this.extraProperties?.setControl(this._fields.field.name, newControl)
       resolve(true)
     })
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.extraProperties.removeControl(this._fields.field.name)
+    this.extraProperties?.removeControl(this._fields.field.name)
   }
 
   isObjEmpty = (obj) => Object.keys(obj).length === 0

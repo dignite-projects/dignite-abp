@@ -36,6 +36,8 @@ import { CreateOrEditSectionsModalComponent } from './components/admin/sections/
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { EntryViewComponent } from './components/dynamic-form/entry/entry-view.component';
+import { MatrixViewComponent } from './components/dynamic-form/matrix/matrix-view.component';
+import { TableViewComponent } from './components/dynamic-form/table/table-view.component';
 // import { AdvancedEntityFiltersModule, CommercialUiModule } from '@volo/abp.commercial.ng.ui';
 
 @NgModule({
@@ -59,6 +61,8 @@ import { EntryViewComponent } from './components/dynamic-form/entry/entry-view.c
     EntryControlComponent,
     EntryViewComponent,
     CreateOrEditSectionsModalComponent,
+    MatrixViewComponent,
+    TableViewComponent,
     
   ],
   imports: [

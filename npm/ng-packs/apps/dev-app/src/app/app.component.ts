@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormConfigLoaderService } from './serves/form-config-loader.service';
+import { FormConfigLoaderService } from './services/form-config-loader.service';
 
 @Component({
   selector: 'app-root',

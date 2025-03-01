@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
-import { FormConfigLoaderService } from './serves/form-config-loader.service';
+import { FormConfigLoaderService } from './services/form-config-loader.service';
 
 @NgModule({
   imports: [

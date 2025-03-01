@@ -10,18 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isBase64UploadAdapter } from './ckEditorUpload';
 import { SetCkEditorConfigsService } from '../../services';
 import { CkEditorModeEnum } from '../../enums/ck-editor-mode.enum';
-import {
-  AutoLink,
-  Autosave,
-  Bold,
-  Essentials,
-  Heading,
-  Italic,
-  Link,
-  Paragraph,
-  Strikethrough,
-  Underline,
-} from 'ckeditor5';
+
 
 @Component({
   selector: 'ck-editor-control',
@@ -84,7 +73,7 @@ export class CkEditorControlComponent {
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
 
   get extraProperties() {
-    return this._entity.get('extraProperties') as FormGroup;
+    return this._entity?.get('extraProperties') as FormGroup;
   }
   get ckeditorInput() {
     return this.extraProperties.get(this._fields.field.name) as FormGroup;
@@ -156,7 +145,7 @@ export class CkEditorControlComponent {
   imagesContainerName: any = '';
   AfterInit() {
     return new Promise(resolve => {
-      let ValidatorsArray = [];
+      let ValidatorsArray:any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }

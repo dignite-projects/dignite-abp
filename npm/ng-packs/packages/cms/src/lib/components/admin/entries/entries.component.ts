@@ -27,7 +27,7 @@ import { SectionType } from '../../../proxy/dignite/cms/sections';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormAdminService } from '../../../proxy/dignite/cms/admin/dynamic-forms';
 import { FieldAdminService } from '../../../proxy/dignite/cms/admin/fields';
-declare var $: any;
+import { FormControlsService } from '../../../services/form-controls.service';
 
 @Component({
   selector: 'cms-entries',
@@ -55,7 +55,8 @@ export class EntriesComponent implements OnInit {
     private _LocalizationService: LocalizationService,
     private _FormAdminService: FormAdminService,
     private _FieldAdminService: FieldAdminService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private _FormControlsService: FormControlsService,
   ) {}
 
   private fb = inject(FormBuilder);
@@ -84,7 +85,9 @@ export class EntriesComponent implements OnInit {
 
   /**获取页面数据 */
   async getPageDate() {
-    await this.getDynamicFormType();
+    // await this.getDynamicFormType();
+   this.enableSearchTypeList=await this._FormControlsService.getEnableSearchTypeList();
+  //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
     await this.getSiteOfSectionList();
     await this.getSectionLanguagesList();
     this.hookToQuery();
@@ -94,20 +97,19 @@ export class EntriesComponent implements OnInit {
   /**需要查询的动态表单字段 */
   enableSearchFieldList: any[] = [];
   /**不需要展示的动态表单类型 */
-  disableshowinTypeList: any[] = ['Table', 'FileExplorer', 'Matrix'];
+  disableshowinTypeList: any[] = [];
   /**需要展示的动态列表字段 */
   showinFieldList: any[] = [];
   /**获取动态表单类型 */
-  getDynamicFormType() {
-    return new Promise((resolve, rejects) => {
-      this._FormAdminService.getFormControls().subscribe((res:any) => {
-        // this.dynamicFormTypeList = res.items;
-        this.enableSearchTypeList = res.items.filter(el => el.enableSearch).map(el => el.name);
-        console.log(this.enableSearchTypeList, 'enableSearchList');
-        resolve(res.items);
-      });
-    });
-  }
+  // getDynamicFormType() {
+  //   return new Promise((resolve, rejects) => {
+  //     this._FormAdminService.getFormControls().subscribe((res:any) => {
+  //       // this.dynamicFormTypeList = res.items;
+  //       this.enableSearchTypeList = res.items.filter(el => el.enableSearch).map(el => el.name);
+  //       resolve(res.items);
+  //     });
+  //   });
+  // }
 
   /**切换板块 */
   async sectionIdChange() {
@@ -178,7 +180,6 @@ export class EntriesComponent implements OnInit {
     let sectionId = this.filters.sectionId;
    let SectionInfo:any= await this.getSectionInfo(sectionId);
     let _entryTypeList = SectionInfo?.entryTypes || [];
-    console.log(_entryTypeList,'_entryTypeList');
     
     // let _entryTypeList = this.SiteOfSectionList.find(el => el.id == sectionId)?.entryTypes || [];
     this.entryTypeList = _entryTypeList;
@@ -189,7 +190,6 @@ export class EntriesComponent implements OnInit {
     } else {
       this.maxResultCount = 10;
     }
-    console.log(_entryTypeList, 'entryTypeList');
 
     if (_entryTypeList.length === 1) {
       this.filters.entryTypeId = this.entryTypeList[0].id;
@@ -217,7 +217,6 @@ export class EntriesComponent implements OnInit {
           }
         }
       }
-     
     }
   }
   async abpInitss(){
@@ -388,7 +387,6 @@ export class EntriesComponent implements OnInit {
   isexpanded: boolean = false;
   /**高级筛选切换 */
   expandedChange(event) {
-    console.log(event, 'event');
     this.isexpanded = event;
   }
 }

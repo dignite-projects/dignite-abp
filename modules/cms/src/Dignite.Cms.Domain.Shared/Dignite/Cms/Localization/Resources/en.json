@@ -74,6 +74,7 @@
     "Publish": "Publish",
     "Enum:EntryStatus:Draft": "Draft",
     "Enum:EntryStatus:Published": "Published",
-    "FormControlConfiguration": "Form Control Configuration"
+    "FormControlConfiguration": "Form Control Configuration",
+    "NotShowInList": "This format is not Show in list view"
   }
 }

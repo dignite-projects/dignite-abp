@@ -10,6 +10,7 @@ import { FileEditComponent, FilePickerComponent, FileModalComponent, FileModalTr
 import { FilePreviewComponent } from './previews/file-preview.component';
 import { FileExplorerConfigComponent } from './components/dynamic-form/file-explorer/file-explorer-config.component';
 import { FileExplorerControlComponent } from './components/dynamic-form/file-explorer/file-explorer-control.component';
+import { FileExplorerViewComponent } from './components/dynamic-form/file-explorer/file-explorer-view.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FileExplorerControlComponent } from './components/dynamic-form/file-exp
     FilePreviewComponent,
     FileExplorerConfigComponent,
     FileExplorerControlComponent,
+    FileExplorerViewComponent,
   ],
   imports: [
     FormsModule,

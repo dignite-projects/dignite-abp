@@ -1,6 +1,7 @@
 // import { TableConfigComponent, TableControlComponent, MatrixConfigComponent, MatrixControlComponent } from "@dignite-ng/expand.cms";
 import { Type } from "@angular/core";
 import { FileExplorerConfigComponent, FileExplorerControlComponent } from "./file-explorer";
+import { FileExplorerViewComponent } from "./file-explorer/file-explorer-view.component";
 
 export interface FieldControlGroupInterfaces {
     displayName: string
@@ -34,7 +35,7 @@ export const fielFieldControlGroup: FieldControlGroupInterfaces[] = [
         name: 'FileExplorer',
         fieldConfigComponent: FileExplorerConfigComponent,
         fieldComponent: FileExplorerControlComponent,
-        // fieldViewComponent:TextBoxViewComponent,
+        fieldViewComponent:FileExplorerViewComponent,
     }
 ];
 export function getExcludeAssignControl(typeName) {

@@ -48,7 +48,7 @@ export class MenuItemComponent implements OnInit {
   /**获取菜单 */
   getMenuList() {
     return new Promise((resolve, rejects) => {
-      this._MenuItemAdminService.getList().subscribe(async res => {
+      this._MenuItemAdminService.getList().subscribe(async (res:any) => {
         this.nodes = this.setListToNzNodes(res.items);
         resolve(res);
       });

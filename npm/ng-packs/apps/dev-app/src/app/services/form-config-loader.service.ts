@@ -25,7 +25,6 @@ export class FormConfigLoaderService {
       ...ckEditorFieldControlGroup,
       ...fielFieldControlGroup,
     );
-    console.log(this.configs, '1111111');
   }
 
   // 合并配置

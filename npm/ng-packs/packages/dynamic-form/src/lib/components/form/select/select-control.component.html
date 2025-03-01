@@ -3,11 +3,6 @@
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="formConfiguration['Select.Multiple']; else elseTemplate">
-                <!-- <select class="form-select" multiple formControlName="{{_fields.field.name}}">
-                    <ng-container *ngFor="let item of _fields.field.formConfiguration['Select.Options'];let i =index">
-                        <option [value]="item.Value">{{item.Text}}</option>
-                    </ng-container>
-                </select> -->
                 <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1"
                     nzShowSearch nzMode="multiple"
                     formControlName="{{_fields.field.name}}">

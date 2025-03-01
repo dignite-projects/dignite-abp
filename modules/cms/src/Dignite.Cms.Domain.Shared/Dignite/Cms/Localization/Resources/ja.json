@@ -74,6 +74,7 @@
     "Publish": "出版",
     "Enum:EntryStatus:Draft": "ドラフト",
     "Enum:EntryStatus:Published": "出版",
-    "FormControlConfiguration": "フォーム・コントロールの設定"
+    "FormControlConfiguration": "フォーム・コントロールの設定",
+    "NotShowInList": "この形式はリスト表示に対応していません"
   }
 }

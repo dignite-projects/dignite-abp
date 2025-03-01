@@ -1,0 +1,26 @@
+<form [formGroup]="_entity">
+    <div [formGroupName]="_parentFiledName">
+        <div class="mb-3">
+            <label class="form-label"  *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+
+            <ng-container *ngIf="_fields.field.formConfiguration['DateEdit.InputMode'] === _DateEditInterfaces.Date">
+                <input type="date" class="form-control" step="1" formControlName="{{_fields.field.name}}"
+                    [min]="_fields.field.formConfiguration['DateEdit.Min']"
+                    [max]="_fields.field.formConfiguration['DateEdit.Max']" />
+            </ng-container>
+            <ng-container
+                *ngIf="_fields.field.formConfiguration['DateEdit.InputMode'] === _DateEditInterfaces.DateTime">
+                <input type="datetime-local" class="form-control" step="1" formControlName="{{_fields.field.name}}"
+                    [min]="_fields.field.formConfiguration['DateEdit.Min']"
+                    [max]="_fields.field.formConfiguration['DateEdit.Max']" />
+            </ng-container>
+            <ng-container *ngIf="_fields.field.formConfiguration['DateEdit.InputMode'] === _DateEditInterfaces.Month">
+                <input type="month" class="form-control" step="1" formControlName="{{_fields.field.name}}"
+                    [min]="_fields.field.formConfiguration['DateEdit.Min']"
+                    [max]="_fields.field.formConfiguration['DateEdit.Max']" />
+            </ng-container>
+            <small class="form-text text-muted d-block" *ngIf="_fields.field.description">{{_fields.field.description}}</small>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

@@ -9,7 +9,7 @@ function replace(filePath) {
   if (!dependencies) return;
 
   Object.keys(dependencies).forEach((key) => {
-    if (key.includes("@dignite/")) {
+    if (key.includes("@dignite-ng/")) {
       dependencies[key] = dependencies[key].replace("^", "~");
     }
   });

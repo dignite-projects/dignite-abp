@@ -378,3 +378,14 @@ deploy/_run_all_log.txt
 # libs and upload files
 **/wwwroot/libs/**
 **/wwwroot/host/**
+
+#angular
+dist/
+projects/
+*.zip
+.angular/
+node_modules/
+.history/
+.nx/
+.vscode/
+

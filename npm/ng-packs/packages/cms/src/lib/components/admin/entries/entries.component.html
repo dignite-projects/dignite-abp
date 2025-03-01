@@ -1,0 +1,225 @@
+<abp-page [title]="'Cms::Entries' | abpLocalization" [toolbar]="true">
+    <abp-page-toolbar-container *ngIf="entryTypeList.length < 1" class="col "></abp-page-toolbar-container>
+    <abp-page-toolbar-container *ngIf="entryTypeList.length > 1" class="col ">
+        <div class="row justify-content-end mx-0 gap-2" *abpPermission="'CmsAdmin.Entry.Create'">
+            <div class="col-auto px-0 pt-0">
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-primary btn-sm ms-2" id="dropdownBasic1" ngbDropdownToggle>
+                        <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::New' | abpLocalization}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <ng-container *ngFor="let item of entryTypeList">
+                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}">{{item.displayName}}</button>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </abp-page-toolbar-container>
+    <div id="sites-page" class="sites-page">
+        <div class="card">
+            <div class="card-body ">
+                <div class="row align-items-end">
+                    <div class="mb-3 col-3">
+                        <label class="form-label">{{'Cms::Sections' | abpLocalization}}：</label>
+                        <select class="form-select col-auto" [(ngModel)]="filters.sectionId"
+                            (change)="sectionIdChange()">
+                            <ng-container *ngFor="let item of SiteOfSectionList">
+                                <option [value]="item.id">{{item.displayName}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label class="form-label">{{'AbpUi::Languages' | abpLocalization}}：</label>
+                        <select class="form-select col-auto" [(ngModel)]="filters.culture" (change)="cultureChange()">
+                            <ng-container *ngFor="let item of sectionLanguagesList">
+                                <option [value]="item.cultureName">{{item.displayName}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="filters.filter"
+                                [placeholder]="'Cms::PagerSearch'|abpLocalization" />
+                            <button type="button" class="btn btn-primary" (click)="listget()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @if(filters.culture&&enablegearchFormEntity&&enableSearchFieldList.length>0){
+                    
+
+                <div id="entries-advanced-form" class="entries-advanced-form " [hidden]="isexpanded"
+                    (abpInit)="abpInitss()">
+                    <form [formGroup]="enablegearchFormEntity">
+                        <div class="row align-items-end">
+                            <ng-container *ngFor="let el of enableSearchFieldList">
+                                <ng-container *ngIf="el.field&&enablegearchFormEntity&&el.enableSearch">
+                                    <div class="col-3">
+                                        <df-dynamic [fields]="el" [parentFiledName]="'extraProperties'"
+                                            [culture]="filters.culture" [entity]="enablegearchFormEntity"></df-dynamic>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                            <div class="col-6 mb-3 ">
+                                <button type="button" class="btn btn-primary" (click)="listget()">
+                                    <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                }
+            </div>
+        </div>
+
+
+
+        <div class="card mb-0">
+            <div class="card-body p-0">
+                @if(SiteOfSectionType!==SectionType.Structure){
+                <div class="table-responsive table-fixed-header">
+                    <ngx-datatable class="material " [rows]="data.items" [list]="list" [columnMode]="ColumnMode.force"
+                        [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [virtualization]="false"
+                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true">
+                        <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::EntryType' | abpLocalization" prop="entryTypeId"
+                            [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <ng-container *ngFor="let item of entryTypeList">
+                                    <ng-container *ngIf="item.id === value">{{item.displayName}}</ng-container>
+                                </ng-container>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status" [width]="80"
+                            [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <ng-container *ngFor="let item of _entryStatusOptions">
+                                    <ng-container *ngIf="item.value=== value">{{ 'Cms::Enum:EntryStatus:'+item.key |
+                                        abpLocalization }}</ng-container>
+                                </ng-container>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        @for (item of showinFieldList; track $index) {
+                        <ngx-datatable-column [name]="'Cms::'+item.displayName | abpLocalization"
+                            [prop]="item?.field?.name" [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row?.extraProperties[item.field.name]}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        }
+                        <ngx-datatable-column [name]="'Cms::PublishTime' | abpLocalization" prop="publishTime"
+                            [width]="190" [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value | shortDateTime }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [sortable]="false" [name]="'AbpUi::Actions' | abpLocalization"
+                            [frozenLeft]="true" [width]="110" [maxWidth]="110">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <div ngbDropdown container="body">
+                                    <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                        <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
+                                    </button>
+                                    <div ngbDropdownMenu>
+                                        <button ngbDropdownItem
+                                            routerLink="/cms/admin/entries/{{row.id}}/edit">{{'AbpUi::Edit' |
+                                            abpLocalization}}</button>
+                                        <button ngbDropdownItem (click)="deletefield(row)">{{'AbpUi::Delete' |
+                                            abpLocalization}}</button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                    </ngx-datatable>
+                </div>
+                }
+
+                @if(SiteOfSectionType===SectionType.Structure){
+                <div class="table-responsive table-fixed-header">
+                    <table class="table overflow-nowrap mb-0" cdkDropList (cdkDropListDropped)="drop($event)">
+                        <thead>
+                            <tr>
+                                <th class="sticky-left-card-bg">{{'AbpUi::Actions' | abpLocalization}}</th>
+                                <th>{{'Cms::Title' | abpLocalization}}</th>
+                                <th>{{'Cms::EntryType' | abpLocalization}}</th>
+                                <th>{{'Cms::Slug' | abpLocalization}}</th>
+                                <th>{{'Cms::Status' | abpLocalization}}</th>
+
+                                @for (item of showinFieldList; track $index) {
+                                <th>{{'Cms::'+item.displayName | abpLocalization}}</th>
+                                }
+                                <th>{{'Cms::PublishTime' | abpLocalization}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of data.items" cdkDrag>
+                                <td class="sticky-left-card-bg">
+                                    <div ngbDropdown container="body">
+                                        <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                            <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
+                                        </button>
+                                        <div ngbDropdownMenu>
+                                            <button ngbDropdownItem
+                                                routerLink="/cms/admin/entries/{{item.id}}/edit">{{'AbpUi::Edit' |
+                                                abpLocalization}}</button>
+                                            <button ngbDropdownItem (click)="deletefield(item)">{{'AbpUi::Delete' |
+                                                abpLocalization}}</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="white-space-normal">{{item.title}}</td>
+                                <td>
+                                    <ng-container *ngFor="let item1 of entryTypeList">
+                                        <ng-container
+                                            *ngIf="item1.id === item.entryTypeId">{{item1.displayName}}</ng-container>
+                                    </ng-container>
+                                </td>
+                                <td>{{item.slug}}</td>
+                                <td>
+                                    <ng-container *ngFor="let item2 of _entryStatusOptions">
+                                        <ng-container *ngIf="item.status=== item2.value">{{
+                                            'Cms::Enum:EntryStatus:'+item2.key |
+                                            abpLocalization }}</ng-container>
+                                    </ng-container>
+                                </td>
+                                @for (item1 of showinFieldList; track $index) {
+                                <td>{{item?.extraProperties[item1?.field?.name]}}</td>
+                                }
+                                <td>{{item.publishTime | shortDateTime }}</td>
+                            </tr>
+                        </tbody>
+                        @if(data.items.length === 0){
+                        <div class="text-muted p-2">
+                            {{ 'Cms::NoDataAvailableInDatatable' | abpLocalization}}
+                        </div>
+                        }
+                    </table>
+                </div>
+                <div class="card-footer py-2">
+                    <small class="text-muted"> {{data.totalCount}} {{ 'Cms::Total' | abpLocalization}}</small>
+                </div>
+                }
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</abp-page>

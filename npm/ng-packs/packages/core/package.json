@@ -1,16 +1,14 @@
 {
   "name": "@dignite-ng/expand.core",
-  "version": "0.0.2",
+  "version": "3.0.0-rc.2",
+  "schematics": "./collection.json",
   "peerDependencies": {
-    "@angular/common": "^16.2.0",
-    "@angular/core": "^16.2.0"
+    "@angular/common": "^18.1.0",
+    "@angular/core": "^18.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+  "sideEffects": false
 }
+

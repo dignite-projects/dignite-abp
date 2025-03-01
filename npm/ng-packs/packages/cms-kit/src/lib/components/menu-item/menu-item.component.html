@@ -1,0 +1,48 @@
+<abp-page [title]="eCmsKitRouteName.MenuItem| abpLocalization" [toolbar]="true">
+    <div class="card">
+        <div class="card-body">
+            <ng-container *ngIf="nodes.length>0; else elseTemplate">
+                <abp-tree [nodes]="nodes" (nzExpandChange)="nzExpandChange($event)" [draggable]="true"
+                    (dropOver)="dropOver($event)">
+                    <ng-template #menu let-node>
+                        <button ngbDropdownItem (click.stop)="editMenuItemBtn(node)"><i class=" me-1 fa fa-pencil"></i>{{'CmsKit::Edit' |
+                            abpLocalization}}</button>
+                        <button ngbDropdownItem (click.stop)="createChildMenuItemBtn(node)"><i class=" me-1 fa fa-plus"></i>{{'CmsKit::AddSubMenuItem' |
+                            abpLocalization}}</button>
+                        <button ngbDropdownItem (click.stop)="deleteMenuItemBtn(node)"><i class=" me-1 fa fa-remove"></i>{{'CmsKit::Delete' |
+                            abpLocalization}}</button>
+                    </ng-template>
+
+                    <ng-template abpTreeExpandedIconTemplate let-node let-origin="origin">
+                        <i aria-hidden="true" *ngIf="node.children.length>0">
+                            <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
+                    </ng-template>
+
+                    <ng-template #minusIcon>
+                        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            fill-rule="evenodd" clip-rule="evenodd">
+                            <path
+                                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
+                        </svg>
+                    </ng-template>
+
+                    <ng-template #plusIcon>
+                        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            fill-rule="evenodd" clip-rule="evenodd">
+                            <path
+                                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z" />
+                        </svg>
+                    </ng-template>
+                </abp-tree>
+            </ng-container>
+            <ng-template #elseTemplate>
+                {{"CmsKit::NoMenuItems"| abpLocalization}}
+            </ng-template>
+        </div>
+    </div>
+
+    <cms-create-or-editmenu-item-modal [visible]="isVisible"  (visibleChange)="visibleChange($event)" [form]="menuItemForm"></cms-create-or-editmenu-item-modal>
+
+
+
+</abp-page>

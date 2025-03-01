@@ -1,0 +1,81 @@
+<abp-modal [(visible)]="ModalOpen" [busy]="ModalBusy" (visibleChange)="ModalVisibleChange($event)">
+    <ng-template #abpHeader>
+        <h3>{{selected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="ModalForm; else loaderRef">
+            <form class="sites-modal-form" [formGroup]="ModalForm" (keydown.enter)="$event.preventDefault()"
+                [class]="{'was-validated':formValidation}" (submit)="save()">
+                <button type="submit" #ModalFormSubmit style="display: none"></button>
+                <div class="mb-3">
+                    <label class="form-label">{{'Cms::EntryType' | abpLocalization}}</label>
+                    <div>
+                        <ng-container *ngFor="let item of _sectionTypeOptions;let i =index">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" [value]="item.value"
+                                    (change)="radiochange()" formControlName="type" id="flexRadioDefault{{i}}">
+                                <label class="form-check-label" for="flexRadioDefault{{i}}">
+                                    {{ 'Cms::Enum:SectionType:'+item.key | abpLocalization }}
+                                </label>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="displayName"
+                        (blur)="disPlayNameInputBlur($event)" placeholder="" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{'Cms::Name' | abpLocalization}}</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="" />
+                    <div class="text-danger invalid-feedback" *ngIf="nameInput.errors?.repetition">
+                        {{nameInput.errors?.repetition}}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{'Cms::Route' | abpLocalization}} </label>
+                    <input type="text" class="form-control" formControlName="route" placeholder="" />
+                    <div class="text-danger invalid-feedback" *ngIf="routeInput.errors?.repetition">
+                        {{routeInput.errors?.repetition}}
+                    </div>
+                    <small class="form-text text-muted d-block">
+                        {{'Cms::RouteTips' | abpLocalization}}<br>
+                        &nbsp;&nbsp;blog<br>
+                        &nbsp;&nbsp;{{'blog/{slug}'}}<br>
+                        &nbsp;&nbsp;{{'blog/{publishTime:yyyy}/{publishTime:MM}/{slug}'}}
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{{'Cms::Template' | abpLocalization}} </label>
+                    <input type="text" class="form-control" formControlName="template" placeholder="" />
+                    <small class="form-text text-muted d-block">
+                        {{"Cms::TemplateTips" | abpLocalization}}
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="true" formControlName="isDefault"
+                            id="isDefault" />
+                        <label class="form-check-label" for="isDefault"> {{'Cms::Default' | abpLocalization}} </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="true" formControlName="isActive"
+                            id="isActive" />
+                        <label class="form-check-label" for="isActive"> {{'Cms::IsActive' | abpLocalization}}</label>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check" type="button" [loading]="ModalBusy" [disabled]="ModalBusy"
+            (click)="ModalFormSubmit?.nativeElement?.click()">{{'AbpUi::Save'|abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

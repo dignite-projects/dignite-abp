@@ -1,0 +1,23 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpDynamicFormsCkEditor::EditorMode' | abpLocalization}}</label>
+            <!-- <input type="text" class="form-control" formControlName="Ckeditor.Mode"> -->
+            <select class="form-select" formControlName="Ckeditor.Mode" >
+                <ng-container *ngFor="let item of CkEditorModeEnumOptions">
+                    <option [value]="item.value">{{'DigniteAbpDynamicFormsCkEditor::EditorMode.' + item.key|abpLocalization}}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpDynamicFormsCkEditor::ImagesContainerName' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="Ckeditor.ImagesContainerName">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpDynamicFormsCkEditor::InitialContent' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="Ckeditor.InitialContent">
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>

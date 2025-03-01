@@ -1,0 +1,19 @@
+{
+  "name": "@dignite-ng/expand.ck-editor",
+  "version": "3.0.0-rc.5",
+  "peerDependencies": {
+    "@angular/common": "18.1.0",
+    "@angular/core": "18.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@ckeditor/ckeditor5-angular": "^7.0.1",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^43.3.1",
+    "ckeditor5": "^43.3.1"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

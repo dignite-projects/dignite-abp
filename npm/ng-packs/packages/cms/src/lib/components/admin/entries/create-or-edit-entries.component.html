@@ -1,0 +1,137 @@
+<form [formGroup]="formEntity">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-label">{{'Cms::Title' | abpLocalization}}</div>
+                        <input type="text" class="form-control" formControlName="title"
+                            (blur)="setTitleToSlugBlur($event)">
+                    </div>
+                    <ng-container *ngIf="isLoad">
+                        <ng-container *ngFor="let item of showEntryType?.fieldTabs;let i =index">
+                            <ng-container *ngFor="let el of item.fields;let i1 =index">
+                                <ng-container *ngIf="el&&formEntity">
+                                    <df-dynamic [fields]="el"
+                                        [selected]="entryInfo ? entryInfo.extraProperties[el.field.name] : ''"
+                                        [parentFiledName]="'extraProperties'"
+                                        [culture]="cultureInput.value"  [entity]="formEntity"></df-dynamic>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="form-label">{{'Cms::Slug' | abpLocalization}}</div>
+                        <input type="text" class="form-control" formControlName="slug">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-label">{{'AbpUi::Languages' | abpLocalization}}</div>
+                        <select class="form-select form-select-multiple" formControlName="culture">
+                            <ng-container *ngFor="let item of languagesList;let i =index">
+                                <option [value]="item.cultureName">{{item.displayName}}</option>
+                            </ng-container>
+                        </select>
+                        <div class="text-danger" *ngIf="cultureInput.dirty">
+                            {{cultureInput?.errors?.repetition}}
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="sectionInfo.type===1">
+                        <label class="form-label" for="parentId">{{'Cms::ParentEntry' | abpLocalization}}</label>
+                        <select class="form-select " formControlName="parentId">
+                            <option value=""></option>
+                            <ng-container *ngFor="let item of entryList;let i =index">
+                                <option [value]="item.id">{{item.title}}</option>
+                                <ng-container *ngFor="let el of item.children">
+                                    <ng-container *ngTemplateOutlet="childTemplate; context: {
+                                        $implicit: {
+                                        value: el,
+                                        }
+                                    }"></ng-container>
+                                    <ng-template #childTemplate let-data>
+                                        <option [value]="data.value.id">
+                                            <ng-container *ngFor="let item of data.value.layer">--</ng-container>
+                                            {{data.value.title}}
+                                        </option>
+                                        <ng-container *ngFor="let el of data.value.children">
+                                            <ng-container *ngTemplateOutlet="childTemplate; context: {
+                                                $implicit: {
+                                                value: el,
+                                                }
+                                            }"></ng-container>
+                                        </ng-container>
+                                    </ng-template>
+                                </ng-container>
+                            </ng-container>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="publishTime">{{'Cms::PublishTime' | abpLocalization}}</label>
+                        <input type="datetime-local" class="form-control" step="1" formControlName="publishTime">
+                    </div>
+                    <div class="mb-3" *ngIf="isEdit">
+                        <label class="form-label" for="Version">{{'Cms::Version' | abpLocalization}}</label>
+                        <ul class="list-group">
+                            <ng-container *ngFor="let item of AllVersionsList">
+                                <li
+                                    class="list-group-item flex-between d-flex align-items-center justify-content-between">
+                                    <div>
+                                        {{item.initialVersionId?(item.creationTime| date: 'YYYY/MM/dd HH:mm:s'):('Cms::InitialVersion' | abpLocalization)}}
+                                        <span class="badge text-bg-success ms-1"
+                                            *ngIf="item.isActivatedVersion">{{'Cms::IsActive' | abpLocalization}}</span>
+                                        <span class="badge text-bg-primary ms-1"
+                                            *ngIf="item.id === entryVersionId">{{'Cms::Editing' |
+                                            abpLocalization}}</span>
+                                    </div>
+                                    <div>
+                                        <div ngbDropdown class="d-inline-block">
+                                            <button type="button" class="btn btn-link-primary p-2 "
+                                                style="line-height: 0;" id="dropdownBasic1" ngbDropdownToggle>
+                                            </button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                <button ngbDropdownItem type="button" *ngIf="!item.isActivatedVersion"
+                                                    (click)="ActivatedVersion(item.id)">
+                                                    <i class="fas fa-check me-1"></i>{{'Cms::IsActive' |
+                                                    abpLocalization}}
+                                                </button>
+                                                <button ngbDropdownItem type="button"
+                                                    routerLink="/cms/admin/entries/create"
+                                                    [queryParams]="{entryVersionId:item.id}">
+                                                    <i class="fas fa-plus me-1"></i>{{'Cms::NewVersion' |
+                                                    abpLocalization}}
+                                                </button>
+                                                <button ngbDropdownItem type="button" (click.stop)="toEditUrl(item.id)"
+                                                    *ngIf="item.id !== entryVersionId">
+                                                    <i class="fas fa-edit me-1"></i>{{'AbpUi::Edit' | abpLocalization}}
+                                                </button>
+                                                <button ngbDropdownItem type="button"
+                                                    (click.stop)="delectVersion(item.id)"
+                                                    *ngIf="item.initialVersionId&&!item.isActivatedVersion&&item.id !== entryVersionId">
+                                                    <i class="fas fa-trash me-1"></i>{{'AbpUi::Delete' |
+                                                    abpLocalization}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                    <div class="mb-3" *ngIf="entryInfo">
+                        <label class="form-label" for="versionNotes">{{'Cms::RevisionNotes' | abpLocalization}}</label>
+                        <textarea class="form-control" formControlName="versionNotes" rows="3"></textarea>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

@@ -1,0 +1,13 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties">
+        <div class="mb-3">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" formControlName="{{_fields.field.name}}">
+            </div>
+            <small class="form-text text-muted d-block" *ngIf="_fields.field.description">{{_fields.field.description}}</small>
+        </div>
+
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

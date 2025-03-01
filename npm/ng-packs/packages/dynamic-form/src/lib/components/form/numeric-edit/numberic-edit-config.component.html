@@ -1,0 +1,31 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::Placeholder' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="NumericEditField.Placeholder">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::Min' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="NumericEditField.Min">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::Max' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="NumericEditField.Max">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::NumericDecimals' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="NumericEditField.Decimals">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::NumericStep' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="NumericEditField.Step">
+            <small class="form-text text-muted d-block">{{'DigniteAbpForms::NumericStepHelp'|abpLocalization}}</small>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::FormatSpecifier' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="FormatSpecifier">
+            <small class="form-text text-muted d-block">See:<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings"  target="_blank">https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/standard-numeric-format-strings</a></small>
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;" #submitclick></button>
+    </div>
+</form>

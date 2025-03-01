@@ -13,7 +13,9 @@ export class HomeComponent {
 
   constructor(private authService: AuthService) {}
   login() {
-    this.loading = true;
+    // this.loading = true;
+    // this.loading = true;
+    console.log('login',this.authService);
     this.authService.navigateToLogin();
   }
 }

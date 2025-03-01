@@ -103,10 +103,13 @@ namespace Dignite.Cms.Admin.Entries
             if (input.SectionId == Guid.Empty)
                 return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
 
+            var jsonOptions = new JsonSerializerOptions();
+            jsonOptions.PropertyNameCaseInsensitive=true;
+            List<QueryingByField> queryingByCustomFields = input.QueryingByFieldsJson.IsNullOrEmpty() ? null : JsonSerializer.Deserialize<List<QueryingByField>>(input.QueryingByFieldsJson, jsonOptions);
 
-            List<QueryingByField> queryingByCustomFields = input.QueryingByFieldsJson.IsNullOrEmpty() ? null : JsonSerializer.Deserialize<List<QueryingByField>>(input.QueryingByFieldsJson);
+            
 
-            var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.Filter,input.StartPublishDate,input.ExpiryPublishDate, queryingByCustomFields);
+			var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.Filter,input.StartPublishDate,input.ExpiryPublishDate, queryingByCustomFields);
             if (count == 0)
                 return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
 

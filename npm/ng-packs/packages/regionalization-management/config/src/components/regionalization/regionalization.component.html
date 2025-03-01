@@ -1,0 +1,32 @@
+<form [formGroup]="formEntity" (keydown.enter)="$event.preventDefault()" 
+    (submit)="save()">
+    <div class="tenant-domain">
+        <div class="mb-3">
+            <label class="form-label" for="title">{{'RegionalizationManagementResource::Language' | abpLocalization}}</label>
+            <ul class="list-group" >
+                <ng-container *ngFor="let item of languagesSystem;let i=index">
+                    <li class="list-group-item d-flex align-items-center justify-content-between" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"  [value]="item.cultureName" (change)="setavailableCultureNames(item)"
+                                [checked]="item.ischecked"
+                                id="Languages{{i}}" />
+                            <label class="form-check-label" for="Languages{{i}}">
+                                {{item.displayName}}
+                            </label>
+                        </div>
+                        <ng-container *ngIf="item.ischecked">
+                            <div class="text-primary fs-5" type="button" *ngIf="defaultCultureNameInput.value===item.cultureName">
+                                {{'RegionalizationManagementResource::Default'|abpLocalization}}</div>
+                            <div class="text-muted fs-5" type="button" (click.stop)="setDefault(item)"
+                                *ngIf="!(defaultCultureNameInput.value===item.cultureName)">{{'RegionalizationManagementResource::SetDefault'|abpLocalization}}</div>
+                        </ng-container>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <hr class="my-3" />
+        <abp-button  iconClass="fa fa-save" buttonType="submit" [loading]="isSubmit"
+            [disabled]="isSubmit">{{'RegionalizationManagementResource::Save'|abpLocalization}}</abp-button>
+    </div>
+</form>
+

@@ -8,8 +8,8 @@ const defaultTemplatePath = '../../../templates';
 const packageMap = {
   // account: 'ng.account',
   // 'account-core': 'ng.account.core',
-  components: 'expand.components',
-  core: 'expand.core',
+  // components: 'expand.components',
+  // core: 'expand.core',
   // 'feature-management': 'ng.feature-management',
   // identity: 'ng.identity',
   // 'permission-management': 'ng.permission-management',
@@ -19,6 +19,7 @@ const packageMap = {
   // 'theme-shared': 'ng.theme.shared',
   schematics: 'expand.schematics',
   // oauth: 'ng.oauth',
+  core: 'expand.core',
 };
 program.option('-t, --templates  <templates>', 'template dirs', false);
 program.option('-p, --template-path <templatePath>', 'root template path', false);
@@ -80,7 +81,7 @@ async function installPackages() {
 async function removeAbpPackages() {
   await runEachTemplate(async (template, templatePath) => {
     Object.values(packageMap).forEach(value => {
-      const path = `${templatePath}/node_modules/@abp/${value}`;
+      const path = `${templatePath}/node_modules/@dignite-ng/${value}`;
       if (fs.existsSync(path)) {
         fse.removeSync(path);
       }
@@ -101,8 +102,8 @@ function createFolderIfNotExists(destination: string) {
 async function copyBuildedPackagesFromDistFolder() {
   await runEachTemplate(async (template, templatePath) => {
     Object.entries(packageMap).forEach(([key, value]) => {
-      createFolderIfNotExists(`${templatePath}/node_modules/@abp/${value}`);
-      fse.copySync(`../dist/packages/${key}/`, `${templatePath}/node_modules/@abp/${value}`);
+      createFolderIfNotExists(`${templatePath}/node_modules/@dignite-ng/${value}`);
+      fse.copySync(`../dist/packages/${key}/`, `${templatePath}/node_modules/@dignite-ng/${value}`);
     });
   });
 }

@@ -9,7 +9,7 @@ export default async function(version: string) {
       corePkgPath,
       {
         ...corePkg,
-        dependencies: { ...corePkg.dependencies, '@abp/utils': version },
+        dependencies: { ...corePkg.dependencies, '@dignite-ng/utils': version },
       },
       { spaces: 2 },
     );

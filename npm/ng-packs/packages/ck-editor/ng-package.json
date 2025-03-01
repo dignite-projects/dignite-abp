@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ck-editor",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+  "allowedNonPeerDependencies": [
+    "@ckeditor/ckeditor5-angular",
+    "@ckeditor/ckeditor5-build-decoupled-document",
+    "ckeditor5"
+  ]
+}

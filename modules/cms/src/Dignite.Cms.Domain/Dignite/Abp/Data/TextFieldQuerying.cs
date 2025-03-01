@@ -12,7 +12,7 @@ public class TextFieldQuerying : FieldQueryingBase<TextEditFormControl>
     }
     public override IEnumerable<Entry> Query([NotNull] IEnumerable<Entry> source, [NotNull] QueryingByField customField)
     {
-        return source.Where(e => e.ExtraProperties.ContainsKey(customField.Value) &&
+        return source.Where(e => e.ExtraProperties.ContainsKey(customField.Name) &&
             e.ExtraProperties[customField.Name].ToString().Contains(customField.Value)
         );
     }

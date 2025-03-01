@@ -1,0 +1,55 @@
+::ng-deep .file-modal {
+    .container-height {
+        height: calc(100vh - 240px - 44px);
+    }
+
+    .file-status-modal {
+        background: #fff;
+    }
+
+    .file-status-modal {
+        .card-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    }
+
+    .ngx-datatable.material.single-selection .datatable-body-row.active,
+    .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
+    .ngx-datatable.material.multi-selection .datatable-body-row.active,
+    .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group,
+    .ngx-datatable.material.multi-click-selection .datatable-body-row.active,
+    .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+        background-color: transparent !important;
+    }
+
+    .ant-tree {
+        .ant-tree-node-content-wrapper {
+            padding: 0;
+
+            .custom-node {
+                width: 100%;
+
+            }
+
+            .selected {
+                background-color: var(--lpx-brand) !important;
+
+                .btn {
+                    color: var(--lpx-navbar-color);
+                }
+            }
+        }
+
+        .ant-tree-node-content-wrapper.ant-tree-node-selected {
+            background-color: transparent;
+        }
+
+    }
+
+    .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell,
+    .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+        overflow: initial;
+        line-break: anywhere;
+    }
+}

@@ -1,0 +1,31 @@
+<div class="image_box"  [style]="{width:width,maxWidth:'100%'}">
+    <div class="img_box" *ngIf="isImage">
+        <img [src]="src"  />
+        <div class="option_box" *ngIf="preview">
+            <i class="fa fa-eye " (click.stop)="OpenPreviewImage(content)"></i>
+        </div>
+    </div>
+    <a [href]="src" [download]="name" target>
+        <i class="fa fa-file-audio-o fs-1" *ngIf="isAudio"></i>
+        <i class="fa fa-file-video-o fs-1" *ngIf="isVideo"></i>
+        <ng-container *ngIf="!(isImage||isAudio||isVideo)">
+            <ng-container *ngFor="let item of _ImageTypeOption; let i=index">
+                <i class="fs-1" [ngClass]="item.icon" *ngIf="item.type===type"></i>
+            </ng-container>
+        </ng-container>
+    </a>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <div class="d-flex justify-content-end w-100 fs-3">
+            <i class="mx-2 fa  fa fa-repeat" aria-hidden="true" title="右旋转" role="button" (click)="RotateRight()"></i>
+            <i class="mx-2 fa  fa-search-minus" aria-hidden="true" title="缩小" role="button" (click)="zoomOut()"></i>
+            <i class="mx-2 fa  fa-search-plus" aria-hidden="true" title="放大" role="button" (click)="zoomIn()"></i>
+            <i class="mx-2 fa  fa-times" aria-hidden="true" role="button" (click)="modal.dismiss('Cross click')"></i>
+        </div>
+    </div> 
+    <div class="modal-body d-flex justify-content-center align-items-center ">
+        <img width="400" class="modal-body-preview"  [src]="src" [style.transform]="'scale('+zoom/10+') rotate('+rotate+'deg)'"   >
+    </div>
+</ng-template>

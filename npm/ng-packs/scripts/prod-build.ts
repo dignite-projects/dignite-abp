@@ -12,8 +12,8 @@ import fse from 'fs-extra';
     cwd: '../../../templates/app/angular',
   });
 
-  await fse.remove('../../../templates/app/angular/node_modules/@abp');
-  await fse.copy('../node_modules/@abp', '../../../templates/app/angular/node_modules/@abp', {
+  await fse.remove('../../../templates/app/angular/node_modules/@dignite-ng');
+  await fse.copy('../node_modules/@dignite-ng', '../../../templates/app/angular/node_modules/@dignite-ng', {
     overwrite: true,
   });
 

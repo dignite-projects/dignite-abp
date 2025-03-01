@@ -1,0 +1,15 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties">
+        <div class="mb-3">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <ng-container *ngIf="ckOptions">
+                <ckeditor class="form-textarea" [editor]="Editor" *ngIf="Editor" [config]="ckOptions" (ready)="onReady($event)"
+                    [formControlName]="_fields.field.name">
+                </ckeditor>
+            </ng-container>
+            <small class="form-text text-muted d-block"
+                *ngIf="_fields.field.description">{{_fields.field.description}}</small>
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

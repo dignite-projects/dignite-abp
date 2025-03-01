@@ -1,0 +1,85 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::SelectListItem' | abpLocalization}}</label>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{'Cms::TableColumnDisplayName' | abpLocalization}}</th>
+                        <th scope="col">{{'Cms::TableColumnName' | abpLocalization}}</th>
+                        <th scope="col">{{'Cms::TableColumnForm' | abpLocalization}}</th>
+                        <th scope="col" class="flex-end">
+                            <button class="btn btn-light btn-sm" (click.stop)="addTableColumns()">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="TableColumns">
+                    <ng-container *ngFor="let item of TableColumns.controls;let i=index">
+                        <tr [formGroupName]="i">
+                            <td><input type="text" class="form-control" formControlName="displayName"  (blur)="disPlayNameInputBlur($event,item)" ></td>
+                            <td><input type="text" class="form-control" formControlName="name"></td>
+                            <td>
+                                <select class="form-select" formControlName="formControlName"
+                                    (change)="selectTableControl($event,i,item)">
+                                    <option value="">SelectFrom</option>
+                                    <ng-container *ngFor="let item_f of _fieldControlGroup;let i_f =index">
+                                        <option [value]="item_f.name">{{item_f.displayName}}</option>
+                                    </ng-container>
+                                </select>
+                            </td>
+                            <td scope="row">
+                                <div class="flex-start">
+                                    <button class="btn btn-light btn-sm " (click.stop)="EditSitesBtn(item,i)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm ms-1" (click.stop)="deleteTableColumns(i)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm ms-1" *ngIf="i!==0"
+                                        (click.stop)="TableArrowUpOrDown('up',i)">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button class="btn btn-light btn-sm ms-1" *ngIf="i!==TableColumns.controls.length-1"
+                                        (click.stop)="TableArrowUpOrDown('down',i)">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>
+
+
+<abp-modal [(visible)]="tableSelectOpen" [busy]="modalBusy" (visibleChange)="tableSelectVisibleChange($event)" [options]="{ size: CurrentSelectionTableControlName=='Matrix'?'xl':'' ,scrollable:false }">
+    <ng-template #abpHeader>
+        <h3>{{_tableSelected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="tableSelectForm; else loaderRef">
+            <form class="sites-modal-form" #myForm="ngForm" [formGroup]="tableSelectForm"
+                (keydown.enter)="$event.preventDefault()" (submit)="createOrEditSave()">
+                <button type="submit" #tableSelectModalSubmit style="display: none"></button>
+                <ng-container *ngIf="CurrentSelectionTableControlName&&tableSelectForm">
+                    <df-dynamic [type]="CurrentSelectionTableControlName" 
+                    [selected]="_tableSelected" [formGroup]="tableSelectForm" [entity]="tableSelectForm"></df-dynamic>
+                </ng-container>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check"
+            (click)="tableSelectModalSubmit.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

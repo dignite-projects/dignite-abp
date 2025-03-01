@@ -1,0 +1,109 @@
+::ng-deep.sites-page {
+    .dignite_page {
+        background: transparent
+    }
+
+    .list-group-flush>.list-group-item:first-child {
+        border-top-width: var(--bs-list-group-border-width)
+    }
+
+    .card-header {
+        input {
+            flex: 2 1 auto
+        }
+
+        .form-select {
+            padding: .475rem 3.75rem .475rem 1.25rem
+        }
+    }
+
+    .morentr {
+        border: 2px solid transparent
+    }
+
+    .borderdrag {
+        border: 2px solid var(--ck-color-selector-column-resizer-hover) !important
+    }
+
+    .borderdragtd {
+        background-color: var(--ck-color-selector-column-resizer-hover) !important
+    }
+
+    .testtr {
+        border-color: transparent;
+
+        td {
+            padding: 2px
+        }
+    }
+
+    .testtr:hover {
+        background-color: transparent
+    }
+}
+
+.cdk-drag-preview {
+    display: table;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12)
+}
+
+.cdk-drag-placeholder {
+    opacity: 0
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+}
+
+.example-box:last-child {
+    border: 0
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+}
+
+::ng-deep.sites-modal-form {
+    .form-control {
+        padding: .4rem 1.25rem
+    }
+}
+
+.white-space-normal {
+    white-space: normal;
+    min-width: 150px;
+}
+
+.overflow-nowrap {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+::ng-deep .sites-page {
+
+    .table {
+        th {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        td {
+            padding: 0.875rem 1rem !important;
+        }
+
+        .sticky-left-card-bg {
+            position: sticky;
+            left: 0;
+            background: var(--bs-card-bg);
+        }
+    }
+    .entries-advanced-form{
+        transition: all 0.3s linear;
+    }
+    // .entries-advanced-form.show{
+    //     display: block;
+    //     height: auto;
+    // }
+}

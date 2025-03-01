@@ -1,0 +1,39 @@
+<abp-page [title]="'CmsKit::Details' | abpLocalization">
+    <div class="card ">
+        <div class="card-body">
+            <div class="row">
+                <app-text-style-layout class="col-md-4" [key]="'CmsKit::Username'"
+                    [value]="dataInfo?.author?.userName"></app-text-style-layout>
+                <app-text-style-layout class="col-md-4" [key]="'CmsKit::EntityType'"
+                    [value]="dataInfo?.entityType"></app-text-style-layout>
+                <app-text-style-layout class="col-md-12" [key]="'CmsKit::Text'"
+                    [value]="dataInfo?.text"></app-text-style-layout>
+                    <ng-container *ngTemplateOutlet="ImagesLayout; context: {
+                        $implicit: {
+                        key: '',
+                        value:reviewImagesList,
+                        col: 12
+                        }
+                    }"></ng-container>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #ImagesLayout let-data>
+        <div [class]="'col' + (data.col ? '-' + data.col : '')">
+            <div class=" py-md-2">
+                <label class="form-label fs-5 " *ngIf="data?.key">
+                    {{data?.key | abpLocalization}}:
+                </label>
+                <div class="row">
+                    <ng-container *ngFor="let item of data.value; let i=index">
+                        <div class="col-4 col-md-2">
+                            <app-image-preview [src]="item.blobName|getTenantImg:item.containerName"></app-image-preview>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</abp-page>

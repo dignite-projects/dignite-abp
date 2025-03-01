@@ -1,0 +1,14 @@
+<form class="row g-3 needs-validation" [formGroup]="newEntity" (keydown.enter)="$event.preventDefault()" [class]="{'was-validated':formValidation}" (submit)="save()">
+    <abp-page [title]="'Cms::EditField' | abpLocalization" [toolbar]="true">
+        <div class="create-field-page">
+            <button type="submit" style="display: none;" #submitclick></button>
+            <div class="card">
+                <div class="card-body">
+                    <ng-container *ngIf="newEntity&&fieldDetails">
+                        <cms-create-or-edit-field  [selected]="fieldDetails"  [Entity]="newEntity"></cms-create-or-edit-field>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </abp-page>
+</form>

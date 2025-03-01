@@ -1,0 +1,25 @@
+<abp-page [title]="'Cms::Fields' | abpLocalization" [toolbar]="true">
+    <div class="fields-page">
+        <div class="row ">
+            <div class="col-3">
+                <div class="card mb-0" style="height: 100%;">
+                    <cms-field-group (OnGroupClickBack)="fieldGroupChange($event)"></cms-field-group>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card mb-0">
+                    <div class="card-header px-2 py-sm-2   border-bottom">
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="filters.filter"
+                                [placeholder]="'AbpUi::Search' | abpLocalization">
+                            <button class="btn btn-primary px-3" type="button" id="button-addon2"
+                                (click)="list.get()"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <abp-extensible-table [data]="data?.items" [recordsTotal]="data?.totalCount" [list]="list"></abp-extensible-table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</abp-page>

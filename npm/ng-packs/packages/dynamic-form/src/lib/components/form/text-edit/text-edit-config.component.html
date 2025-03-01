@@ -1,0 +1,32 @@
+<form [formGroup]="_Entity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::Placeholder' | abpLocalization}}</label>
+            <input type="text" class="form-control" formControlName="TextEdit.Placeholder">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::TextEditMode' | abpLocalization}}</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [value]="_TextEditMode.SingleLine" formControlName="TextEdit.Mode"
+                        id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        {{'DigniteAbpForms::SingleLine' | abpLocalization}}
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" [value]="_TextEditMode.MultipleLine" formControlName="TextEdit.Mode"
+                        id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        {{'DigniteAbpForms::MultipleLine' | abpLocalization}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">{{'DigniteAbpForms::CharLimit' | abpLocalization}}</label>
+            <input type="number" class="form-control" formControlName="TextEdit.CharLimit">
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;" #submitclick></button>
+    </div>
+</form>

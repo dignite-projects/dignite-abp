@@ -35,7 +35,7 @@ const updatePackages = (pkgJsonPath) => {
   try {
     const result = childProcess
       .execSync(
-        `ncu "/^@abp.*$/" --packageFile ${pkgJsonPath} -u${
+        `ncu "/^@dignite-ng.*$/" --packageFile ${pkgJsonPath} -u${
           program.prerelease ? ' --target newest' : ''
         } --registry ${program.registry}`
       )

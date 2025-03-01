@@ -63,10 +63,10 @@
       "@dignite-ng/expand.tenant-domain-management/config": [
         "packages/tenant-domain-management/config/src/public-api.ts"
       ],
-      "@dignite-ng/expand.cms-kit":["packages/cms-kit/src/public-api.ts"],
-      "@dignite-ng/expand.cms-kit/config": [
-        "packages/cms-kit/config/src/public-api.ts"
-      ],
+      // "@dignite-ng/expand.cms-kit":["packages/cms-kit/src/public-api.ts"],
+      // "@dignite-ng/expand.cms-kit/config": [
+      //   "packages/cms-kit/config/src/public-api.ts"
+      // ],
       "@dignite-ng/expand.core": [
         // "packages/core/src/public-api.ts"
         "packages/core/src/public-api.ts"

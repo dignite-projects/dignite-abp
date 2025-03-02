@@ -33,7 +33,7 @@ export class SelectConfigComponent {
     this.dataLoaded();
   }
   get formConfiguration() {
-    return this._Entity.get('formConfiguration') as FormGroup;
+    return this._Entity?.get('formConfiguration') as FormGroup;
   }
   get SelectOptions() {
     return this.formConfiguration.controls['Select.Options'] as FormArray;
@@ -64,11 +64,23 @@ export class SelectConfigComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity.setControl('formConfiguration', this.fb.group(new SelectConfig()));
+      this._Entity?.setControl('formConfiguration', this.fb.group(new SelectConfig()));
       if (this._selected && this._selected.formControlName == this._type) {
-        this._selected.formConfiguration['Select.Options']?.forEach(el => {
+        // this._selected.formConfiguration['Select.Options']?.forEach(el => {
+        //   console.log(this._selected.formConfiguration,'el',el);
+
+        //   this.addSelectOptions();
+        // });
+        for (const element of this._selected.formConfiguration['Select.Options']) {
+          for (const key in element) {
+            const item = element[key];
+            const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+            element[capitalizedKey] = item;
+          }
           this.addSelectOptions();
-        });
+        }
+        // console.log(this._selected.formConfiguration['Select.Options'],'111111')
+
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration,
         });
@@ -82,7 +94,7 @@ export class SelectConfigComponent {
   textChange(event, index) {
     let SelectOptionsItem = this.SelectOptions.at(index);
     let value = event.target.value;
-    if (SelectOptionsItem.get('Value').value) return;
+    if (SelectOptionsItem.get('Value')?.value) return;
     SelectOptionsItem.patchValue({
       Value: this._DfApiService.chineseToPinyin(value),
     });

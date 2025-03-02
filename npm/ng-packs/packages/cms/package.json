@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.cms",
-  "version": "2.0.0-rc.9",
+  "version": "2.0.0-rc.13",
   "peerDependencies": {
     "@angular/common": "~18.1.0",
     "@angular/core": "~18.1.0"

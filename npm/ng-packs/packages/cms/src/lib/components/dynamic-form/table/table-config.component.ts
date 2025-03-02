@@ -47,7 +47,7 @@ export class TableConfigComponent {
     this.dataLoaded()
   }
   get formConfiguration() {
-    return this._Entity.get('formConfiguration') as FormGroup
+    return this._Entity?.get('formConfiguration') as FormGroup
   }
   get TableColumns() {
     return this.formConfiguration.controls['TableColumns'] as FormArray
@@ -76,7 +76,7 @@ export class TableConfigComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity.setControl('formConfiguration', this.fb.group(new TableConfig()))
+      this._Entity?.setControl('formConfiguration', this.fb.group(new TableConfig()))
       this._fieldControlGroup = this._FieldAbstractsService.getExcludeAssignControl(this._type)
       if (this._selected && this._selected.formControlName == this._type) {
         this._selected.formConfiguration['TableColumns'].forEach(el => {
@@ -135,7 +135,7 @@ export class TableConfigComponent {
     let formConfigurationgroup = formGroup.get('formConfiguration') as FormGroup
 
     formConfigurationgroup.setValue({
-      ...this.tableSelectForm.value['formConfiguration'],
+      ...this.tableSelectForm?.value['formConfiguration'],
     });
     this.tableSelectOpen = false
   }
@@ -148,7 +148,7 @@ export class TableConfigComponent {
     this.tableSelectForm.patchValue({
       ...rows.value
     })
-    this.tableSelectForm.get('formConfiguration').patchValue({
+    this.tableSelectForm.get('formConfiguration')?.patchValue({
       ...rows.value['formConfiguration']
     })
     this._tableSelected = rows.value

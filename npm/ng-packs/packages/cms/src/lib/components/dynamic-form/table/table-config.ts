@@ -33,13 +33,5 @@ export class TableFormControl {
     description: any = [''];
 
 
-    constructor(data?: TableConfig) {
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                }
-            }
-        }
-    }
+    constructor() {}
 }

@@ -50,28 +50,28 @@ export class SelectControlComponent {
       this.submitclick?.nativeElement?.click();
     }
   }
- 
+
   formConfiguration: any = '';
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray:any[] = [];
+      let ValidatorsArray: any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
       this.formConfiguration = this._fields.field.formConfiguration;
-      if (!this._selected) {
-        const isMultiple = this.formConfiguration['Select.Multiple'];
-
-        let selectValue:any = isMultiple ? [] : '';
-        this.formConfiguration['Select.Options'].forEach(el => {
-          if (el.Selected) {
-            selectValue = isMultiple
-              ? [...selectValue, el.value || el.Value]
-              : [el.value || el.Value];
-          }
-        });
-
-        this._selected = selectValue;
+      const isMultiple = this.formConfiguration['Select.Multiple'];
+      let selectValue: any = isMultiple ? [] : '';
+      console.log(this._fields.field.name,'this.formConfigura', this.formConfiguration, this._selected);
+      for (const element of this.formConfiguration['Select.Options']) {
+        for (const key in element) {
+          const item = element[key];
+          const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+          element[capitalizedKey] = item;
+        }
+        if(Array.isArray(this._selected)&&element.Selected&&this._selected.length===0){
+            selectValue = isMultiple ? [...selectValue, element.Value] : [element.Value];
+            this._selected = selectValue;
+        }
       }
       let newControl = this.fb.control(this._selected, ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newControl);

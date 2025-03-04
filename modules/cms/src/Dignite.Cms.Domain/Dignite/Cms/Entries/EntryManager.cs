@@ -1,6 +1,7 @@
 ﻿using Dignite.Abp.Data;
 using Dignite.Cms.Fields;
 using Dignite.Cms.Sections;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -156,12 +157,7 @@ namespace Dignite.Cms.Entries
                 {
                     item.SetOrder(item.ParentId, item.Order + 1);
                 }
-            }
-            
-            var allVisions = await GetAllVisionsAsync(entry);
-            foreach (var item in allVisions)
-            {
-                item.SetOrder(parentId,order);
+                entry.SetOrder(parentId, order);
             }
         }
         protected virtual async Task CheckCultureExistenceAsync(string culture, EntryType entryType)

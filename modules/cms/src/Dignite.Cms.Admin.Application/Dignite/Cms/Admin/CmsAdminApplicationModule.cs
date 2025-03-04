@@ -64,7 +64,7 @@ public class CmsAdminApplicationModule : AbpModule
                         config.CreateFilePermissionName = CmsAdminPermissions.Entry.Create;
                         config.UpdateFilePermissionName = CmsAdminPermissions.Entry.Update;
                         config.DeleteFilePermissionName = CmsAdminPermissions.Entry.Delete;
-                        config.SetAuthorizationHandler<EntryResourceAuthorizationHandler>();
+                        //config.SetAuthorizationHandler<EntryResourceAuthorizationHandler>(); 
                     });
                 });
             _ = options.Containers
@@ -89,7 +89,7 @@ public class CmsAdminApplicationModule : AbpModule
                         config.CreateFilePermissionName = CmsAdminPermissions.Entry.Create;
                         config.UpdateFilePermissionName = CmsAdminPermissions.Entry.Update;
                         config.DeleteFilePermissionName = CmsAdminPermissions.Entry.Delete;
-                        config.SetAuthorizationHandler<EntryResourceAuthorizationHandler>();
+                        //config.SetAuthorizationHandler<EntryResourceAuthorizationHandler>();
                     });
                 });
         });

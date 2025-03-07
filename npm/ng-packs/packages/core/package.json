@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.core",
-  "version": "3.0.0-rc.19",
+  "version": "3.0.0-rc.20",
   "homepage": "https://abp.io",
   "dependencies": {
     "@abp/utils": "~9.1.0-rc.3",

@@ -145,15 +145,14 @@
     "zone.js": "~0.14.0",
     "@ckeditor/ckeditor5-angular": "^7.0.1",
     "@ckeditor/ckeditor5-build-decoupled-document": "^43.3.1",
-    "ckeditor5": "^43.3.1"
+    "ckeditor5": "^43.3.1",
+    "@ctrl/tinycolor": "^4.1.0",
+    "pinyin-pro": "^3.26.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,css,scss}": [
       "npx prettier --write --config .prettierrc "
     ]
   },
-  "dependencies": {
-    "@ctrl/tinycolor": "^4.1.0",
-    "pinyin-pro": "^3.26.0"
-  }
+  "dependencies": {}
 }

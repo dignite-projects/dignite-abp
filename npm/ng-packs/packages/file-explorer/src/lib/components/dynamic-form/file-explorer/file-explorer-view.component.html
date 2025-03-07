@@ -1,5 +1,13 @@
 @if(showInList){
-{{'Cms::NotShowInList'|abpLocalization}}
+@if(showValue.length>=1){
+<div class="d-flex align-items-center ">
+    <fe-file-preview [width]="'40px'" [className]="'rounded-5 overflow-hidden me-1'" [src]="showValue[0].url"
+        [name]="showValue[0].name" [type]="showValue[0].mimeType" [preview]="true"></fe-file-preview>
+    @if(showValue.length-1>0){
+    +{{showValue.length-1}}
+    }
+</div>
+}
 } @else{
 <div class="mb-3">
     <label class="form-label" *ngIf="fields.displayName">{{ fields.displayName }}</label>

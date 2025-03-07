@@ -6,11 +6,13 @@ import { DateEditViewComponent } from './date-edit/date-edit-view.component';
 import { NumbericEditConfigComponent } from './numeric-edit/numberic-edit-config.component';
 import { NumbericEditControlComponent } from './numeric-edit/numberic-edit-control.component';
 import { NumericEditViewComponent } from './numeric-edit/numeric-edit-view.component';
-import { SelectConfigComponent, SelectControlComponent } from './select';
+import { SelectConfigComponent, SelectControlComponent, SelectSearchComponent } from './select';
 import { SelectViewComponent } from './select/select-view.component';
 import { SwitchConfigComponent, SwitchControlComponent } from './switch';
+import { SwitchSearchComponent } from './switch/switch-search.component';
 import { SwitchViewComponent } from './switch/switch-view.component';
 import { TextEditComponent, TextEditConfigComponent } from './text-edit';
+import { TextEditSearchComponent } from './text-edit/text-edit-search.component';
 import { TextEditViewComponent } from './text-edit/text-edit-view.component';
 
 /**
@@ -23,6 +25,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
     fieldConfigComponent: TextEditConfigComponent,
     fieldComponent: TextEditComponent,
     fieldViewComponent:TextEditViewComponent,
+    fieldSearchComponent:TextEditSearchComponent,
   },
   {
     displayName: '开关',
@@ -30,6 +33,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
     fieldConfigComponent: SwitchConfigComponent,
     fieldComponent: SwitchControlComponent,
     fieldViewComponent:SwitchViewComponent,
+    fieldSearchComponent:SwitchSearchComponent,
   },
   {
     displayName: '选择',
@@ -37,6 +41,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
     fieldConfigComponent: SelectConfigComponent,
     fieldComponent: SelectControlComponent,
     fieldViewComponent:SelectViewComponent,
+    fieldSearchComponent:SelectSearchComponent,
   },
   {
     displayName: '数字',

@@ -88,7 +88,11 @@ async function resolvePackagesDirFromAngularJson(host: Tree) {
 
 function readFirstLibInAngularJson(workspace: WorkspaceDefinition): ProjectDefinition | undefined {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  return Array.from(workspace.projects.values()).find(value => isLibrary(value));
+  const library = <ProjectDefinition | undefined>(
+    Array.from(workspace.projects.values()).find((value: ProjectDefinition) => isLibrary(value))
+  );
+
+  return library;
 }
 
 async function createLibFromModuleTemplate(tree: Tree, options: GenerateLibSchema) {

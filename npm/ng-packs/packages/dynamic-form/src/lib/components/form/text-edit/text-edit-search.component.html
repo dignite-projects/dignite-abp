@@ -1,0 +1,10 @@
+<form [formGroup]="_entity">
+    <div [formGroupName]="_parentFiledName">
+        <div class="mb-3">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+                <input type="text" class="form-control" formControlName="{{_fields.field.name}}"
+                    [placeholder]="_fields.field.formConfiguration['TextEdit.Placeholder']" />
+        </div>
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

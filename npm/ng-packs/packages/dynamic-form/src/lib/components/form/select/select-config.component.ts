@@ -66,11 +66,6 @@ export class SelectConfigComponent {
     return new Promise((resolve, rejects) => {
       this._Entity?.setControl('formConfiguration', this.fb.group(new SelectConfig()));
       if (this._selected && this._selected.formControlName == this._type) {
-        // this._selected.formConfiguration['Select.Options']?.forEach(el => {
-        //   console.log(this._selected.formConfiguration,'el',el);
-
-        //   this.addSelectOptions();
-        // });
         for (const element of this._selected.formConfiguration['Select.Options']) {
           for (const key in element) {
             const item = element[key];
@@ -79,8 +74,6 @@ export class SelectConfigComponent {
           }
           this.addSelectOptions();
         }
-        // console.log(this._selected.formConfiguration['Select.Options'],'111111')
-
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration,
         });

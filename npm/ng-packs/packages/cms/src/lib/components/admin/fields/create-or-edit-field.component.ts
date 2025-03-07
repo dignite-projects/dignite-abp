@@ -52,11 +52,6 @@ export class CreateOrEditFieldComponent {
   @Input()
   public set selected(v: any) {
     if (v) {
-      
-      // let MatrixBlockTypes=v.formConfiguration?.MatrixBlockTypes
-      // if(MatrixBlockTypes){
-      //   v.formConfiguration.MatrixBlockTypes=this.convertKeysToCamelCase(MatrixBlockTypes);
-      // }
       this._selected = v || '';
       this._selected_copy = v;
     }
@@ -135,6 +130,5 @@ export class CreateOrEditFieldComponent {
   }
 
   formControlNameChange(event) {
-    console.log('event',event,this._Entity.value.formControlName,this._Entity)
   }
 }

@@ -11,6 +11,7 @@ export type StyleDefinition =
 export type ImportDefinition = {
   path: string;
   importName: string;
+  provider?: string;
 };
 
 export const styleMap = new Map<ThemeOptionsEnum, StyleDefinition[]>();
@@ -196,6 +197,11 @@ styleMap.set(ThemeOptionsEnum.LeptonX, [
     inject: true,
     bundleName: 'bootstrap-icons',
   },
+  {
+    input: 'node_modules/ng-zorro-antd/tree/style/index.min.css',
+    inject: false,
+    bundleName: 'ng-zorro-antd-tree',
+  },
 ]);
 styleMap.set(ThemeOptionsEnum.LeptonXLite, [
   {
@@ -262,14 +268,16 @@ export const importMap = new Map<ThemeOptionsEnum, ImportDefinition[]>();
 importMap.set(ThemeOptionsEnum.Basic, [
   {
     path: '@abp/ng.theme.basic',
-    importName: 'ThemeBasicModule.forRoot()',
+    importName: 'ThemeBasicModule',
+    provider: 'provideThemeBasicConfig',
   },
 ]);
 
 importMap.set(ThemeOptionsEnum.Lepton, [
   {
     path: '@volo/abp.ng.theme.lepton',
-    importName: 'ThemeLeptonModule.forRoot()',
+    importName: 'ThemeLeptonModule',
+    provider: 'provideThemeLepton',
   },
 ]);
 

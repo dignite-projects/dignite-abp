@@ -23,10 +23,10 @@ export class SelectControlComponent {
     this._parentFiledName = v;
   }
   /**父级字段名称，用于为表单设置控件赋值 */
-  _selected: any;
+  _selected: any=[];
   @Input()
   public set selected(v: any) {
-    this._selected = v;
+    this._selected = v||[];
   }
 
   /**表单实体 */
@@ -60,19 +60,21 @@ export class SelectControlComponent {
       }
       this.formConfiguration = this._fields.field.formConfiguration;
       const isMultiple = this.formConfiguration['Select.Multiple'];
-      let selectValue: any = isMultiple ? [] : '';
-      console.log(this._fields.field.name,'this.formConfigura', this.formConfiguration, this._selected);
+      let selectValue: any = isMultiple ? [] : [];
       for (const element of this.formConfiguration['Select.Options']) {
         for (const key in element) {
           const item = element[key];
           const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
           element[capitalizedKey] = item;
         }
-        if(Array.isArray(this._selected)&&element.Selected&&this._selected.length===0){
+        if (!this._selected) {
+          if (Array.isArray(this._selected) && element.Selected && this._selected.length === 0) {
             selectValue = isMultiple ? [...selectValue, element.Value] : [element.Value];
             this._selected = selectValue;
+          }
         }
       }
+      // this._selected = selectValue;
       let newControl = this.fb.control(this._selected, ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newControl);
       resolve(true);

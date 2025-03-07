@@ -8,7 +8,7 @@ program.option('-pr, --prerelease', 'whether version is prerelease');
 program.option('-rg, --registry <registry>', 'target npm server registry');
 program.parse(process.argv);
 
-const packages = (process.argv[3] || 'abp').split(',').join('|');
+const packages = (process.argv[3] || 'dignite-ng').split(',').join('|');
 
 const check = (pkgJsonPath) => {
   try {

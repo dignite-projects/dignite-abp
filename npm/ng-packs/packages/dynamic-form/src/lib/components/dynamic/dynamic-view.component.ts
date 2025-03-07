@@ -33,7 +33,7 @@ export class DynamicViewComponent {
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-    if (this.type && this._value) {
+    if (this.type && this._value!=='') {
       let _fieldControlGroup: any[] = this._FormControlService.AddFieldControlGroup();
       let fieldControlItem = _fieldControlGroup.find(el => el.name === this.type);
       this.loadViewComponent(fieldControlItem);

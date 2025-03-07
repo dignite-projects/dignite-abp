@@ -1,6 +1,5 @@
 import { ExtensionsService, getObjectExtensionEntitiesFromStore, mapEntitiesToContributors, mergeWithDefaultActions, mergeWithDefaultProps } from "@abp/ng.components/extensible";
-import { ConfigStateService } from "@abp/ng.core";
-import { inject, InjectionToken } from "@angular/core";
+import { inject, InjectionToken, Injector } from "@angular/core";
 import { ResolveFn } from "@angular/router";
 import { map, tap } from "rxjs";
 import { ECmsComponent } from "../enums";
@@ -102,7 +101,6 @@ export const Toolbar_Action_Contributors = new InjectionToken<any>(
  */
 
 export const Extensions_Props_Action_Token_Resolver: ResolveFn<any> = () => {
-  const configState = inject(ConfigStateService);
   const extensions = inject(ExtensionsService);
 
   const config = { optional: true };
@@ -111,12 +109,12 @@ export const Extensions_Props_Action_Token_Resolver: ResolveFn<any> = () => {
   const propContributors = inject(Entity_Props_Contributors, config) || {};
   const toolbarContributors = inject(Toolbar_Action_Contributors, config) || {};
 
-
-  return getObjectExtensionEntitiesFromStore(configState, 'TenantManagement').pipe(
+  const injector = inject(Injector);
+  return getObjectExtensionEntitiesFromStore(injector, 'TenantManagement').pipe(
     map(entities => ({
       // [ModuleComponent.AbpTable]: entities.Tenant,
     })),
-    mapEntitiesToContributors(configState, 'TenantManagement'),
+    mapEntitiesToContributors(injector, 'TenantManagement'),
     tap(objectExtensionContributors => {
       //actions
       mergeWithDefaultActions(

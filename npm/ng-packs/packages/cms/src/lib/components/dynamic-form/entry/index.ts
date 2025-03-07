@@ -1,3 +1,5 @@
 export * from './entry-config'
 export * from './entry-config.component'
 export * from './entry-control.component'
+export * from './entry-view.component'
+export * from './entry-search.component'

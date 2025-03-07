@@ -23,6 +23,7 @@ export class MatrixControlComponent {
           );
         }
       }
+      
       this._fields = v;
     }
   }

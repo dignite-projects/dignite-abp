@@ -56,7 +56,7 @@ export class EntriesComponent implements OnInit {
     private _FormAdminService: FormAdminService,
     private _FieldAdminService: FieldAdminService,
     private cdRef: ChangeDetectorRef,
-    private _FormControlsService: FormControlsService,
+    private _FormControlsService: FormControlsService
   ) {}
 
   private fb = inject(FormBuilder);
@@ -86,8 +86,8 @@ export class EntriesComponent implements OnInit {
   /**获取页面数据 */
   async getPageDate() {
     // await this.getDynamicFormType();
-   this.enableSearchTypeList=await this._FormControlsService.getEnableSearchTypeList();
-  //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
+    this.enableSearchTypeList = await this._FormControlsService.getEnableSearchTypeList();
+    //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
     await this.getSiteOfSectionList();
     await this.getSectionLanguagesList();
     this.hookToQuery();
@@ -129,7 +129,7 @@ export class EntriesComponent implements OnInit {
         .getList({
           maxResultCount: 1000,
         })
-        .subscribe(async (res:any) => {
+        .subscribe(async (res: any) => {
           this.SiteOfSectionList = res.items;
           this.filters.sectionId = res.items[0]?.id || '';
           await this.getSectionOfEntryType();
@@ -150,17 +150,23 @@ export class EntriesComponent implements OnInit {
   setfiltersValue() {
     return new Promise((resolve, rejects) => {
       let extraProperties = this.extraPropertiesInput.value;
-      let inputs:any[] = [];
+      let inputs: any[] = [];
       for (const key in extraProperties) {
         const element = extraProperties[key];
-        if ( Array.isArray(element)?element.length>0?element:null:element) {
+        if (Array.isArray(element) ? (element.length > 0 ? element : null) : element) {
           inputs.push({
-            name:key,
-            value: Array.isArray(element)?element.join(','):element
+            name: key,
+            value: element === true ? 'True' : Array.isArray(element) ? element.join(',') : element,
+          });
+        }
+        if (element === false) {
+          inputs.push({
+            name: key,
+            value: 'False',
           });
         }
       }
-      this.filters.queryingByFieldsJson =inputs.length>0? JSON.stringify(inputs):'';
+      this.filters.queryingByFieldsJson = inputs.length > 0 ? JSON.stringify(inputs) : '';
       resolve(true);
     });
   }
@@ -178,9 +184,9 @@ export class EntriesComponent implements OnInit {
   async getSectionOfEntryType() {
     // let sectionId = this.filtersForm.get('sectionId').value;
     let sectionId = this.filters.sectionId;
-   let SectionInfo:any= await this.getSectionInfo(sectionId);
+    let SectionInfo: any = await this.getSectionInfo(sectionId);
     let _entryTypeList = SectionInfo?.entryTypes || [];
-    
+
     // let _entryTypeList = this.SiteOfSectionList.find(el => el.id == sectionId)?.entryTypes || [];
     this.entryTypeList = _entryTypeList;
     //选择板块的类型SectionType
@@ -219,7 +225,7 @@ export class EntriesComponent implements OnInit {
       }
     }
   }
-  async abpInitss(){
+  async abpInitss() {
     await this.setfiltersValue();
   }
   /**获取板块详情 */
@@ -248,10 +254,12 @@ export class EntriesComponent implements OnInit {
       let languagesSystem = this.configState.getDeep('localization.languages');
       //获取系统默认语言 */
       let DefaultLanguage = this.config.getSetting('Abp.Regionalization.DefaultCultureName');
-
       const configCmsSiteLanguages = this.config.getSetting('Cms.Site.Languages');
       if (!configCmsSiteLanguages) {
         await this.getSiteSettingsLanguages();
+      }
+      if (this.defaultCultureName) {
+        DefaultLanguage = this.defaultCultureName;
       }
       const LanguagesSite =
         (configCmsSiteLanguages ? configCmsSiteLanguages.split(',') : '') ||
@@ -274,6 +282,8 @@ export class EntriesComponent implements OnInit {
 
   /**站点设置语言 */
   SiteSettingsAdminLanguages: any[] = [];
+  /**站点设置的默认语言 */
+  defaultCultureName: any = '';
   /**
    * 获取站点设置语言
    */
@@ -281,6 +291,7 @@ export class EntriesComponent implements OnInit {
     return new Promise((resolve, rejects) => {
       this._RegionalizationService.get().subscribe(res => {
         this.SiteSettingsAdminLanguages = res.availableCultureNames;
+        this.defaultCultureName = res.defaultCultureName;
         resolve(res);
       });
     });
@@ -320,7 +331,7 @@ export class EntriesComponent implements OnInit {
 
   /**列表相关 */
   ColumnMode = ColumnMode;
-  data: PagedResultDto<EntryDto>|any = {
+  data: PagedResultDto<EntryDto> | any = {
     items: [],
     totalCount: 0,
   };
@@ -336,7 +347,7 @@ export class EntriesComponent implements OnInit {
         ...this.filters,
         maxResultCount: this.maxResultCount,
       });
-    const setData = (list: PagedResultDto<EntryDto>|any) => {
+    const setData = (list: PagedResultDto<EntryDto> | any) => {
       if (this.SiteOfSectionType == SectionType.Structure) {
         list.items = list.items.sort((a, b) => {
           return a.order - b.order;
@@ -365,11 +376,18 @@ export class EntriesComponent implements OnInit {
   }
 
   drop(event: any) {
-    let previousId:any = this.data.items[event.previousIndex].id;
+    let previousId: any = this.data.items[event.previousIndex].id;
+    let previousIndexOrder = this.data.items[event.previousIndex].order;
+    let currentIndexOrder = this.data.items[event.currentIndex].order;
+    let moveorder=currentIndexOrder
+    if(previousIndexOrder<currentIndexOrder){
+      moveorder=currentIndexOrder+1
+    }
     moveItemInArray(this.data.items, event.previousIndex, event.currentIndex);
     this._EntryAdminService
       .move(previousId, {
-        order: event.currentIndex,
+        order: moveorder,
+        // order: event.currentIndex,
       })
       .pipe(
         finalize(() => {

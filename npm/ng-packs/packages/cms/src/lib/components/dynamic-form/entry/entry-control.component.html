@@ -9,13 +9,11 @@
                     </nz-select>
             </ng-container>
             <ng-template #elseTemplate>
-                <div class="form-select">
-                    <nz-select class="form-select  form-select-multiple " nzShowSearch [nzMaxTagCount]="1"
-                    (ngModelChange)="SelectChange($event)"
-                    [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']" [ngModel]="listOfSelectedValue" [ngModelOptions]="{standalone: true}"> 
-                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-                </nz-select>
-                </div>
+                    <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1" (nzOnSearch)="SelectChange($event)" nzShowSearch    [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                    [ngModel]="listOfSelectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="ModelChange($event)">
+                    <nz-option [nzLabel]="_fields.field.formConfiguration['Entry.Placeholder']" [nzValue]="''"></nz-option>
+                        <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    </nz-select>
             </ng-template>
             <small class="form-text text-muted d-block" *ngIf="_fields.field.description">{{_fields.field.description}}</small>
         </div>

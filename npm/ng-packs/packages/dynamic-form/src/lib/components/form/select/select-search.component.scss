@@ -1,0 +1,54 @@
+::ng-deep .selectcontrol {
+ 
+
+    nz-select {
+        width: 100%;
+
+        .ant-select-selector {
+            background: transparent !important;
+            border: none !important;
+            padding: .475rem 1.25rem !important;
+            box-shadow: none !important;
+            height: auto !important
+        }
+
+        .anticon-search,
+        .anticon-down {
+            display: none
+        }
+       
+    }
+    .ant-select{
+        color: inherit !important;
+      }
+      .ant-select-selection-placeholder{
+        color: inherit !important;
+    }
+    .ant-select-multiple .ant-select-selection-item{
+        max-width: 40% !important;
+    }
+}
+::ng-deep.cdk-overlay-container{
+    .ant-select-dropdown{
+      background: var(--lpx-content-bg) !important;
+    }
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled){
+      background-color: var(--bs-primary) !important;
+      color: var(--lpx-text-white) !important;
+    }
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+      background-color: var(--lpx-brand);
+      color: var(--lpx-text-white) !important;
+    }
+    .ant-select-item{
+      color: var(--bs-body-color);
+    }
+  } 
+::ng-deep .was-validated .form-select-multiple {
+    border-color: #4fbf67;
+    padding-right: calc(1.5em + 1.35rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234fbf67' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.3375rem) center;
+    background-size: calc(0.75em + 0.675rem) calc(0.75em + 0.675rem);
+}

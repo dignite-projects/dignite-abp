@@ -28,7 +28,7 @@ export class SwitchViewComponent {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     let valueOptions = this._value;
-    if (this.type && valueOptions) {
+    if (this.type ) {
       this.showValue = valueOptions;
     }
   }

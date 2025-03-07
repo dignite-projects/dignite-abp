@@ -29,6 +29,9 @@
                     <div class="mb-3">
                         <div class="form-label">{{'Cms::Slug' | abpLocalization}}</div>
                         <input type="text" class="form-control" formControlName="slug">
+                        <div class="text-danger" *ngIf="slugInput.dirty">
+                            {{slugInput?.errors?.repetition}}
+                        </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-label">{{'AbpUi::Languages' | abpLocalization}}</div>

@@ -1,8 +1,9 @@
 {
   "name": "scripts",
   "version": "1.0.0",
-  "description": "ABP helper scripts",
+  "description": "DigniteNg helper scripts",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "build": "ts-node -r tsconfig-paths/register build.ts",
     "build:prod": "ts-node -r tsconfig-paths/register prod-build.ts",

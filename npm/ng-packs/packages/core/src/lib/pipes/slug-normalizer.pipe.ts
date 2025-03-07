@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -15,7 +16,7 @@ export class SlugNormalizerPipe implements PipeTransform {
     value = value.toLowerCase();
     // Replace special characters with hyphen
     const invalidChars = ['\\', '/', '?', '&', '=', '+', '%', '#', '@', '!', '$', '\'', '"', ':', ';', '>', '<', '*', '(', ')', '[', '],', '{', '}', '|', '^', '`', '~'];
-    for (let c of invalidChars) {
+    for (const c of invalidChars) {
       value = value.replaceAll(c, '-');
     }
     // Convert spaces to hyphens

@@ -1,8 +1,8 @@
-import { eLayoutType, RoutesService } from '@abp/ng.core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { RoutesService } from '@abp/ng.core';
 import { APP_INITIALIZER } from '@angular/core';
-import { eRegionalizationManagementRouteNames } from '../enums/route-names';
 import { SettingTabsService } from '@abp/ng.setting-management/config';
-import { RegionalizationComponent } from '../components/regionalization/regionalization.component';
 
 
 

@@ -72,8 +72,7 @@ export class CmsApiService {
         return Object.keys(obj).reduce((acc, key) => {
           
           // 判断当前层级是否在 FormConfiguration 内部
-          const currentIsInsideFormConfig =  isInsideFormConfig|| key === 'MatrixBlockTypes';
-          
+          const currentIsInsideFormConfig =  isInsideFormConfig|| key === 'MatrixBlockTypes'||key.includes('.');
           // 如果在 FormConfiguration 内部，保留原字段名
           const newKey = currentIsInsideFormConfig ? key : key.charAt(0).toLowerCase() + key.slice(1);
           // 递归处理子属性，并传递是否在 FormConfiguration 内部的状态

@@ -1,0 +1,42 @@
+{
+  "name": "dynamic-form",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/dynamic-form/src",
+  "prefix": "lib",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/packages/dynamic-form"],
+      "options": {
+        "project": "packages/dynamic-form/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/dynamic-form/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/dynamic-form/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/dynamic-form"],
+      "options": {
+        "jestConfig": "packages/dynamic-form/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

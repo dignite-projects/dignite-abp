@@ -1,12 +1,13 @@
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
 import { CmsApiService } from '../../../services';
 import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cms-create-or-edit-entries',
@@ -23,6 +24,7 @@ export class CreateOrEditEntriesComponent {
   private _LocalizationService = inject(LocalizationService);
   private router = inject(Router);
   private _CmsApiService = inject(CmsApiService);
+  private cdRef = inject(ChangeDetectorRef);
 
   /**语言列表 */
   languagesList: any[] = [];
@@ -64,6 +66,9 @@ export class CreateOrEditEntriesComponent {
   get cultureInput(): FormControl {
     return this.formEntity?.get('culture') as FormControl;
   }
+  get slugInput(): FormControl {
+    return this.formEntity?.get('slug') as FormControl;
+  }
 
   /**获取提交按钮替身，用于真实触发表单提交 */
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
@@ -77,7 +82,12 @@ export class CreateOrEditEntriesComponent {
     this.cultureInput.disable();
     let repetition = await this.cultureAsyncValidator();
     if (repetition) this.cultureInput.setErrors(repetition);
+    this.slugInput.addAsyncValidators(this.SlugAsyncValidator());
+    
+
     if (this.entryInfo) {
+      // this.slugInput.reset(this.entryInfo.slug);
+      // this.slugInput.updateValueAndValidity();
       await this.getAllVersionsList();
       this.formEntity.patchValue({
         entryTypeId: this.entryInfo.entryTypeId,
@@ -88,16 +98,54 @@ export class CreateOrEditEntriesComponent {
         versionNotes: this.entryInfo.versionNotes,
         initialVersionId: this.entryInfo.id,
       });
+      this.slugInput.setErrors({})
+      this.slugInput.setErrors(null)
     } else {
       this.formEntity.patchValue({
         entryTypeId: this.entryTypeId,
         publishTime: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       });
     }
+    
+    this.cdRef.detectChanges();
     this.isLoad = true;
     setTimeout(() => {
       this.submitclick?.nativeElement.click();
     }, 0);
+  }
+  // /**别名查重 */
+  SlugAsyncValidator() {
+    return (
+      control: AbstractControl
+    ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+      return new Promise(async resolve => {
+        let touchedOrDirty = control.touched || control.dirty;
+        if ( control.value) {
+          if (control.value == this.entryInfo?.slug) {
+            resolve(null);
+            return;
+          }
+          this._EntryAdminService
+            .slugExists({
+              culture: this.cultureInput.value,
+              sectionId: this.sectionId,
+              slug: control.value,
+            })
+            .subscribe(res => {
+              if (res) {
+                resolve({
+                  repetition: this._LocalizationService.instant(
+                    `Cms::EntrySlug{0}AlreadyExist`,
+                    control.value
+                  ),
+                });
+              } else {
+                resolve(null);
+              }
+            });
+        }
+      });
+    };
   }
 
   /**定义自定义异步验证 */
@@ -176,9 +224,27 @@ export class CreateOrEditEntriesComponent {
     let pinyinstr = '';
     if (slug.value) return;
     pinyinstr = this._CmsApiService.chineseToPinyin(val);
-    this.formEntity.patchValue({
-      slug: pinyinstr || val,
-    });
+    this.slugInput.patchValue(pinyinstr || val);
+    this._EntryAdminService
+      .slugExists({
+        culture: this.cultureInput.value,
+        sectionId: this.sectionId,
+        slug: this.slugInput.value,
+      })
+      .subscribe(res => {
+        if (res) {
+          this.slugInput.setErrors(
+            {
+              repetition: this._LocalizationService.instant(
+                `Cms::EntrySlug{0}AlreadyExist`,
+                this.slugInput.value
+              ),
+            }
+          )
+        } else {
+          this.slugInput.setErrors(null)
+        }
+      });
   }
 
   /**获取条目版本列表 */

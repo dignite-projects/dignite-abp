@@ -1,10 +1,9 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/cms",
+  "dest": "../../dist/packages/cms",
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "./src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
-    "pinyin-pro"
   ]
 }

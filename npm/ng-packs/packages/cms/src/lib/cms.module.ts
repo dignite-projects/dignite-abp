@@ -38,6 +38,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { EntryViewComponent } from './components/dynamic-form/entry/entry-view.component';
 import { MatrixViewComponent } from './components/dynamic-form/matrix/matrix-view.component';
 import { TableViewComponent } from './components/dynamic-form/table/table-view.component';
+import { EntrySearchComponent } from './components/dynamic-form/entry/entry-search.component';
 // import { AdvancedEntityFiltersModule, CommercialUiModule } from '@volo/abp.commercial.ng.ui';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { TableViewComponent } from './components/dynamic-form/table/table-view.c
     CreateOrEditSectionsModalComponent,
     MatrixViewComponent,
     TableViewComponent,
+    EntrySearchComponent,
     
   ],
   imports: [
@@ -87,6 +89,10 @@ import { TableViewComponent } from './components/dynamic-form/table/table-view.c
     MatrixControlComponent,
     EntryConfigComponent,
     EntryControlComponent,
+    EntryViewComponent,
+    MatrixViewComponent,
+    TableViewComponent,
+    EntrySearchComponent,
   ],
   providers: [
     

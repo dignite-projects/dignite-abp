@@ -20,6 +20,7 @@ export class FilePreviewComponent implements AfterContentInit{
   @Input() type: any = ''
   /**文件名称 */
   @Input() name: any = ''
+  @Input() className: any = ''
 
   /**是否是文件 */
   isImage = true

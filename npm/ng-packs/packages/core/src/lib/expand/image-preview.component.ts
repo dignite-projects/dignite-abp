@@ -3,7 +3,7 @@ import { PageModule } from '@abp/ng.components/page';
 import { CoreModule } from '@abp/ng.core';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter,  Input, Output, TemplateRef } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -131,17 +131,14 @@ export class ImagePreviewComponent {
   modalRef!: NgbModalRef;
 
   /**放大倍数 */
-  zoom: number = 10;
+  zoom: number|any = 10;
 
   /**旋转 */
-  rotate: number = 0;
+  rotate: number|any = 0;
   constructor(
     private modalService:NgbModal
-  ){
+  ){}
 
-  }
-
-  // private modalService = inject(NgbModal);
 
   @Output() deleteChange = new EventEmitter();
   @Output() checkChange = new EventEmitter();
@@ -163,8 +160,10 @@ export class ImagePreviewComponent {
       modalDialogClass: 'dignite-preview',
     });
     this.modalRef.result.then(
-      result => {},
-      reason => {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {
+      },
+      () => {
         this.zoom = 10;
       }
     );

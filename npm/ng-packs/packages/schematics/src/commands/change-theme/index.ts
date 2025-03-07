@@ -15,6 +15,7 @@ import {
 import { ThemeOptionsEnum } from './theme-options.enum';
 import {
   addImportToModule,
+  addProviderToModule,
   findNodes,
   getDecoratorMetadata,
   getMetadataField,
@@ -49,8 +50,7 @@ function updateProjectStyle(
     throw new SchematicsException('The target project does not selected');
   }
 
-  const isProjectLibrary = isLibrary(project);
-  if (isProjectLibrary) {
+  if (isLibrary(project)) {
     throw new SchematicsException('The library project does not supported');
   }
 
@@ -73,7 +73,9 @@ function updateAppModule(selectedProject: string, targetThemeName: ThemeOptionsE
     return chain([
       removeImportPath(appModulePath, targetThemeName),
       removeImportFromNgModuleMetadata(appModulePath, targetThemeName),
+      removeProviderFromNgModuleMetadata(appModulePath, targetThemeName),
       insertImports(appModulePath, targetThemeName),
+      insertProviders(appModulePath, targetThemeName),
     ]);
   };
 }
@@ -151,6 +153,45 @@ export function removeImportFromNgModuleMetadata(
   };
 }
 
+export function removeProviderFromNgModuleMetadata(
+  appModulePath: string,
+  selectedTheme: ThemeOptionsEnum,
+): Rule {
+  return (host: Tree) => {
+    const recorder = host.beginUpdate(appModulePath);
+    const source = createSourceFile(host, appModulePath);
+    const impMap = getImportPaths(selectedTheme, true);
+
+    const node = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] || {};
+    if (!node) {
+      throw new SchematicsException('The app module does not found');
+    }
+
+    const matchingProperties = getMetadataField(node as ts.ObjectLiteralExpression, 'providers');
+    const assignment = matchingProperties[0] as ts.PropertyAssignment;
+    const assignmentInit = assignment.initializer as ts.ArrayLiteralExpression;
+
+    const elements = assignmentInit.elements;
+    if (!elements || elements.length < 1) {
+      throw new SchematicsException(`Elements could not found: ${elements}`);
+    }
+
+    const filteredElements = elements.filter(f =>
+      impMap.filter(f => !!f.provider).some(s => f.getText().match(s.provider!)),
+    );
+
+    if (!filteredElements || filteredElements.length < 1) {
+      return;
+    }
+
+    filteredElements.map(willRemoveModule => {
+      recorder.remove(willRemoveModule.getStart(), willRemoveModule.getWidth());
+    });
+    host.commitUpdate(recorder);
+    return host;
+  };
+}
+
 export function insertImports(appModulePath: string, selectedTheme: ThemeOptionsEnum): Rule {
   return (host: Tree) => {
     const recorder = host.beginUpdate(appModulePath);
@@ -170,10 +211,39 @@ export function insertImports(appModulePath: string, selectedTheme: ThemeOptions
     if (changes.length > 0) {
       for (const change of changes) {
         if (change instanceof InsertChange) {
-          recorder.insertLeft(change.pos, change.toAdd);
+          recorder.insertLeft(change.order, change.toAdd);
         }
       }
     }
+    host.commitUpdate(recorder);
+    return host;
+  };
+}
+
+export function insertProviders(appModulePath: string, selectedTheme: ThemeOptionsEnum): Rule {
+  return (host: Tree) => {
+    const recorder = host.beginUpdate(appModulePath);
+    const source = createSourceFile(host, appModulePath);
+    const selected = importMap.get(selectedTheme);
+
+    if (!selected) {
+      return host;
+    }
+
+    const changes: Change[] = [];
+
+    selected.map(({ path, provider }) => {
+      if (provider) {
+        changes.push(...addProviderToModule(source, appModulePath, provider + '()', path));
+      }
+    });
+
+    for (const change of changes) {
+      if (change instanceof InsertChange) {
+        recorder.insertLeft(change.order, change.toAdd);
+      }
+    }
+
     host.commitUpdate(recorder);
     return host;
   };

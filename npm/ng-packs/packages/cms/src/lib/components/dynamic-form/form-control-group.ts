@@ -1,4 +1,5 @@
 import { EntryConfigComponent, EntryControlComponent } from "./entry";
+import { EntrySearchComponent } from "./entry/entry-search.component";
 import { EntryViewComponent } from "./entry/entry-view.component";
 import { MatrixConfigComponent } from "./matrix/matrix-config.component";
 import { MatrixControlComponent } from "./matrix/matrix-control.component";
@@ -29,5 +30,6 @@ export const cmsFieldControlGroup: any[] = [
         fieldConfigComponent: EntryConfigComponent,
         fieldComponent: EntryControlComponent,
         fieldViewComponent: EntryViewComponent,
+        fieldSearchComponent: EntrySearchComponent,
     },
 ];

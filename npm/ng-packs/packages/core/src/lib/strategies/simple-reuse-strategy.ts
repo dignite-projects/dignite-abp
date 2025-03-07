@@ -27,7 +27,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
             const handle: any = SimpleReuseStrategy.cacheRouters.get(url);
             try {
                 handle.componentRef.destory();
-            } catch (e) { }
+            } catch (e) { /* empty */ }
             SimpleReuseStrategy.cacheRouters.delete(url);
         }
     }

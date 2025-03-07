@@ -1,16 +1,30 @@
 {
   "name": "@dignite-ng/expand.tenant-domain-management",
-  "version": "3.0.0-rc.3",
-  "peerDependencies": {
-    "@angular/common": "^18.1.0",
-    "@angular/core": "^18.1.0"
+  "version": "3.0.0-rc.19",
+  "homepage": "https://abp.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abpframework/abp.git"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "@dignite-ng/expand.core": "3.0.0-rc-8",
+    "tslib": "^2.0.0"
   },
-  "sideEffects": false,
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  }
+    "access": "public"
+  },
+  "license": "LGPL-3.0",
+  "keywords": [
+    "aspnetcore",
+    "boilerplate",
+    "framework",
+    "web",
+    "best-practices",
+    "angular",
+    "maui",
+    "blazor",
+    "mvc",
+    "csharp",
+    "webapp"
+  ]
 }

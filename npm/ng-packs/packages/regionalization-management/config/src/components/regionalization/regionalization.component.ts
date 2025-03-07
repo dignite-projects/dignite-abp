@@ -1,7 +1,8 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ConfigStateService, CoreModule, LocalizationService } from '@abp/ng.core';
 import { ThemeSharedModule, ToasterService } from '@abp/ng.theme.shared';
-import { Component, OnInit } from '@angular/core';
-import {  FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SimpleReuseStrategy, ValidatorsService } from '@dignite-ng/expand.core';
 import { eRegionalizationManagementRouteNames } from '../../enums';
 import { RegionalizationFormConfig } from './regionalization-form-config';
@@ -16,19 +17,19 @@ import { finalize } from 'rxjs';
   styleUrl: './regionalization.component.scss',
 })
 export class RegionalizationComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private _LocalizationService: LocalizationService,
+    private _RegionalizationService: RegionalizationService,
+    private toaster: ToasterService,
+    private configState: ConfigStateService,
+  ) {}
 
-    constructor(
-      private fb: FormBuilder,
-      private _LocalizationService: LocalizationService,
-      private _ValidatorsService: ValidatorsService,
-      private _RegionalizationService: RegionalizationService,
-      private toaster: ToasterService,
-      private configState: ConfigStateService
-    ){}
-
+  public _ValidatorsService = inject(ValidatorsService);
+  
   eRegionalizationManagementRouteNames = eRegionalizationManagementRouteNames;
   /**正在提交中 */
-  isSubmit: boolean = false;
+  isSubmit: boolean|any = false;
   /**表单验证状态
    * {
    *  title:true,
@@ -39,7 +40,7 @@ export class RegionalizationComponent implements OnInit {
   languagesSystem: any[] = [];
 
   /**表单实体 */
-  formEntity: FormGroup | undefined;
+  formEntity: FormGroup | any;
 
   get availableCultureNamesInput() {
     return this.formEntity?.get('availableCultureNames') as FormControl;
@@ -52,11 +53,11 @@ export class RegionalizationComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.formEntity = this.fb.group(new RegionalizationFormConfig());
-    let languagesSystem = this.configState.getDeep('localization.languages');
+    const languagesSystem = this.configState.getDeep('localization.languages');
 
     this.languagesSystem = languagesSystem;
     await this.getRegionalization();
-    let availableCultureNamesValue = this.availableCultureNamesInput?.value;
+    const availableCultureNamesValue = this.availableCultureNamesInput?.value;
     languagesSystem.map(el => {
       availableCultureNamesValue.includes(el.cultureName)
         ? (el.ischecked = true)
@@ -71,15 +72,15 @@ export class RegionalizationComponent implements OnInit {
   }
   /**获取区域配置 */
   getRegionalization() {
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve) => {
       this._RegionalizationService.get().subscribe(
         res => {
           this.formEntity.patchValue(res);
           resolve(true);
         },
-        err => {
+        () => {
           resolve(true);
-        }
+        },
       );
     });
   }
@@ -92,8 +93,8 @@ export class RegionalizationComponent implements OnInit {
         this.availableCultureNamesItem.push(item);
       }
     } else {
-      let index = this.availableCultureNamesItem.findIndex(
-        el => el.cultureName == item.cultureName
+      const index = this.availableCultureNamesItem.findIndex(
+        el => el.cultureName == item.cultureName,
       );
       this.availableCultureNamesItem.splice(index, 1);
     }
@@ -101,7 +102,7 @@ export class RegionalizationComponent implements OnInit {
   }
   setAvailableCultureNamesFormValue() {
     this.availableCultureNamesInput.patchValue(
-      this.availableCultureNamesItem.map(el => el.cultureName)
+      this.availableCultureNamesItem.map(el => el.cultureName),
     );
   }
   /**设置默认区域 */
@@ -111,7 +112,7 @@ export class RegionalizationComponent implements OnInit {
 
   /**保存 */
   save() {
-    let input = this.formEntity?.value;
+    const input = this.formEntity?.value;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     if (
       this._ValidatorsService.isCheckForm(this.formValidation, 'RegionalizationManagementResource')
@@ -124,12 +125,12 @@ export class RegionalizationComponent implements OnInit {
         finalize(() => {
           this.isSubmit = false;
           this.formValidation = '';
-        })
+        }),
       )
-      .subscribe(res => {
+      .subscribe(() => {
         SimpleReuseStrategy.deleteAllRouteCache();
         this.toaster.success(
-          this._LocalizationService.instant('RegionalizationManagementResource::SavedSuccessfully')
+          this._LocalizationService.instant('RegionalizationManagementResource::SavedSuccessfully'),
         );
       });
   }

@@ -7,7 +7,7 @@
         .ant-select-selector {
             background: transparent !important;
             border: none !important;
-            padding: .275rem 1.25rem !important;
+            padding: .475rem 1.25rem !important;
             box-shadow: none !important;
             height: auto !important
         }
@@ -17,11 +17,32 @@
             display: none
         }
     }
+    .ant-select{
+        color: inherit !important;
+      }
+      .ant-select-selection-placeholder{
+        color: inherit !important;
+    }
     .ant-select-multiple .ant-select-selection-item{
         max-width: 40% !important;
     }
 }
-
+::ng-deep.cdk-overlay-container{
+    .ant-select-dropdown{
+      background: var(--lpx-content-bg) !important;
+    }
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled){
+      background-color: var(--bs-primary) !important;
+      color: var(--lpx-text-white) !important;
+    }
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+      background-color: var(--lpx-brand);
+      color: var(--lpx-text-white) !important;
+    }
+    .ant-select-item{
+      color: var(--bs-body-color);
+    }
+  } 
 ::ng-deep .was-validated .form-select-multiple {
     border-color: #4fbf67;
     padding-right: calc(1.5em + 1.35rem);

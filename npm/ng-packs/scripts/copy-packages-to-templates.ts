@@ -8,8 +8,8 @@ const defaultTemplatePath = '../../../templates';
 const packageMap = {
   // account: 'ng.account',
   // 'account-core': 'ng.account.core',
-  // components: 'expand.components',
-  // core: 'expand.core',
+  // components: 'ng.components',
+  // core: 'ng.core',
   // 'feature-management': 'ng.feature-management',
   // identity: 'ng.identity',
   // 'permission-management': 'ng.permission-management',
@@ -17,9 +17,15 @@ const packageMap = {
   // 'tenant-management': 'ng.tenant-management',
   // 'theme-basic': 'ng.theme.basic',
   // 'theme-shared': 'ng.theme.shared',
-  schematics: 'expand.schematics',
   // oauth: 'ng.oauth',
-  core: 'expand.core',
+  'core': 'expand.core',
+  'tenant-domain-management': 'expand.tenant-domain-management',
+  'regionalization-management': 'expand.regionalization-management',
+  'file-explorer': 'expand.file-explorer',
+  'ck-editor': 'expand.ck-editor',
+  'dynamic-form': 'expand.dynamic-form',
+  'cms': 'expand.cms',
+  // schematics: 'expand.schematics',
 };
 program.option('-t, --templates  <templates>', 'template dirs', false);
 program.option('-p, --template-path <templatePath>', 'root template path', false);
@@ -45,7 +51,7 @@ const templateRootPath = program.templatePath ? program.templatePath : defaultTe
     await installPackages();
   }
 
-  await removeAbpPackages();
+  await removeDigniteNgPackages();
 
   await copyBuildedPackagesFromDistFolder();
 })();
@@ -78,14 +84,20 @@ async function installPackages() {
   });
 }
 
-async function removeAbpPackages() {
+async function removeDigniteNgPackages() {
+  // 异步函数，用于遍历所有模板并移除指定DigniteNg包
   await runEachTemplate(async (template, templatePath) => {
+    // 遍历packageMap的所有值（映射后的包名）
     Object.values(packageMap).forEach(value => {
+      // 构造目标路径：模板目录/node_modules/@dignite-ng/包名
       const path = `${templatePath}/node_modules/@dignite-ng/${value}`;
+      // 如果路径存在则同步删除
       if (fs.existsSync(path)) {
-        fse.removeSync(path);
+        fse.removeSync(path);  // 使用fs-extra的递归删除方法
       }
     });
+    
+    // 额外处理.angular目录（可能是Angular的缓存目录）
     if (fs.existsSync(`${templatePath}/.angular`)) {
       fse.removeSync(`${templatePath}/.angular`);
     }
@@ -100,9 +112,13 @@ function createFolderIfNotExists(destination: string) {
   });
 }
 async function copyBuildedPackagesFromDistFolder() {
+  // 异步函数，用于将构建好的包从dist目录复制到各个模板中
   await runEachTemplate(async (template, templatePath) => {
+    // 遍历packageMap的键值对
     Object.entries(packageMap).forEach(([key, value]) => {
+      // 确保目标目录存在，如果不存在则创建
       createFolderIfNotExists(`${templatePath}/node_modules/@dignite-ng/${value}`);
+      // 将构建好的包从dist目录复制到node_modules
       fse.copySync(`../dist/packages/${key}/`, `${templatePath}/node_modules/@dignite-ng/${value}`);
     });
   });

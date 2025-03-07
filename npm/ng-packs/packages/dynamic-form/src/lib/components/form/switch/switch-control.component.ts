@@ -10,7 +10,7 @@ export class SwitchControlComponent {
   constructor(private fb: FormBuilder) {}
 
   /**表单实体 */
-  _entity: FormGroup | undefined;
+  _entity: FormGroup | any;
   @Input()
   public set entity(v: any) {
     this._entity = v;
@@ -57,7 +57,7 @@ export class SwitchControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray = [];
+      let ValidatorsArray:any = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }

@@ -399,7 +399,12 @@ export function addSymbolToNgModuleMetadata(
     if (importPath !== null) {
       return [
         new InsertChange(ngModulePath, position, toInsert),
-        insertImport(source, ngModulePath, symbolName.replace(/\..*$/, ''), importPath),
+        insertImport(
+          source,
+          ngModulePath,
+          symbolName.replace(/\..*$/, '').replace(/\(\)/, ''),
+          importPath,
+        ),
       ];
     } else {
       return [new InsertChange(ngModulePath, position, toInsert)];
@@ -449,7 +454,12 @@ export function addSymbolToNgModuleMetadata(
   if (importPath !== null) {
     return [
       new InsertChange(ngModulePath, position, toInsert),
-      insertImport(source, ngModulePath, symbolName.replace(/\..*$/, ''), importPath),
+      insertImport(
+        source,
+        ngModulePath,
+        symbolName.replace(/\..*$/, '').replace(/\(\)/, ''),
+        importPath,
+      ),
     ];
   }
 

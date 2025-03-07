@@ -1,5 +1,5 @@
 <div class="image_box"  [style]="{width:width,maxWidth:'100%'}">
-    <div class="img_box" *ngIf="isImage">
+    <div class="img_box" [class]="className" *ngIf="isImage">
         <img [src]="src"  />
         <div class="option_box" *ngIf="preview">
             <i class="fa fa-eye " (click.stop)="OpenPreviewImage(content)"></i>

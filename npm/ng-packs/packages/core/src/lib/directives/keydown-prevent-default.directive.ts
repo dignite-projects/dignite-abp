@@ -6,7 +6,6 @@ import { Directive, HostListener } from '@angular/core';
   standalone: true,
 })
 export class KeydownPreventDefaultDirective {
-  constructor() {}
 
   @HostListener('keydown.enter', ['$event'])
   onKeyDown(event: KeyboardEvent) {

@@ -4,16 +4,16 @@
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="formConfiguration['Select.Multiple']; else elseTemplate">
                 <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1"
-                    nzShowSearch nzMode="multiple"
+                    nzShowSearch nzMode="multiple"  [nzPlaceHolder]="_fields.field.formConfiguration['Select.NullText']"
                     formControlName="{{_fields.field.name}}">
-                    <nz-option *ngFor="let item of _fields.field.formConfiguration['Select.Options']"
+                    <nz-option *ngFor="let item of _fields?.field?.formConfiguration['Select.Options']"
                         [nzLabel]="item.Text" [nzValue]="item.Value"></nz-option>
                 </nz-select>
             </ng-container>
             <ng-template #elseTemplate>
                 <select class="form-select" [multiple]="false" formControlName="{{_fields.field.name}}">
-                    <option [value]="">{{formConfiguration['Select.NullText']}}</option>
-                    <ng-container *ngFor="let item of _fields.field.formConfiguration['Select.Options'];let i =index">
+                    <option [value]="''">{{formConfiguration['Select.NullText']}}</option>
+                    <ng-container *ngFor="let item of _fields?.field?.formConfiguration['Select.Options'];let i =index">
                         <option [value]="item.Value">{{item.Text}}</option>
                     </ng-container>
                 </select>

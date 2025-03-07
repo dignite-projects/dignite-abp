@@ -8,9 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2018", "dom"],
     "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "paths": {
@@ -18,12 +18,12 @@
       // "@abp/ng.account.core": ["packages/account-core/src/public-api.ts"],
       // "@abp/ng.account.core/proxy": ["packages/account-core/proxy/src/public-api.ts"],
       // "@abp/ng.account/config": ["packages/account/config/src/public-api.ts"],
-      // "@dignite-ng/expand.components": ["packages/components/src/public-api.ts"],
+      // "@abp/ng.components": ["packages/components/src/public-api.ts"],
       // "@abp/ng.components/chart.js": ["packages/components/chart.js/src/public-api.ts"],
       // "@abp/ng.components/extensible": ["packages/components/extensible/src/public-api.ts"],
       // "@abp/ng.components/page": ["packages/components/page/src/public-api.ts"],
       // "@abp/ng.components/tree": ["packages/components/tree/src/public-api.ts"],
-      // "@dignite-ng/expand.core": ["packages/core/src/public-api.ts"],
+      // "@abp/ng.core": ["packages/core/src/public-api.ts"],
       // "@abp/ng.core/locale": ["packages/core/locale/src/public-api.ts"],
       // "@abp/ng.core/testing": ["packages/core/testing/src/public-api.ts"],
       // "@abp/ng.feature-management": ["packages/feature-management/src/public-api.ts"],
@@ -46,6 +46,7 @@
       // "@abp/ng.theme.basic/testing": ["packages/theme-basic/testing/src/public-api.ts"],
       // "@abp/ng.theme.shared": ["packages/theme-shared/src/public-api.ts"],
       // "@abp/ng.theme.shared/testing": ["packages/theme-shared/testing/src/public-api.ts"],
+      "@dignite-ng/expand.core": ["packages/core/src/public-api.ts"],
       "@dignite-ng/expand.generators": ["packages/generators/src/index.ts"],
 
       "@dignite-ng/expand.dynamic-form": ["packages/dynamic-form/src/public-api.ts"],
@@ -63,25 +64,17 @@
       "@dignite-ng/expand.tenant-domain-management/config": [
         "packages/tenant-domain-management/config/src/public-api.ts"
       ],
-      // "@dignite-ng/expand.cms-kit":["packages/cms-kit/src/public-api.ts"],
+      // "@dignite-ng/expand.cms-kit":["projects/cms-kit/src/public-api.ts"],
       // "@dignite-ng/expand.cms-kit/config": [
-      //   "packages/cms-kit/config/src/public-api.ts"
+      //   "projects/cms-kit/config/src/public-api.ts"
       // ],
-      "@dignite-ng/expand.core": [
-        // "packages/core/src/public-api.ts"
-        "packages/core/src/public-api.ts"
-      ],
-  
+
       "@dignite-ng/expand.file-explorer": ["packages/file-explorer/src/public-api.ts"],
       "@dignite-ng/expand.file-explorer/config": [
         "packages/file-explorer/config/src/public-api.ts"
       ],
-      "@dignite-ng/expand.ck-editor": [
-        "packages/ck-editor/src/public-api.ts"
-      ],
-      "@dignite-ng/expand.ck-editor/config": [
-        "packages/ck-editor/config/src/public-api.ts"
-      ],
+      "@dignite-ng/expand.ck-editor": ["packages/ck-editor/src/public-api.ts"],
+      "@dignite-ng/expand.ck-editor/config": ["packages/ck-editor/config/src/public-api.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

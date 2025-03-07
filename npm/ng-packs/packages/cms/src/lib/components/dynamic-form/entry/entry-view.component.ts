@@ -29,7 +29,9 @@ export class EntryViewComponent {
   async ngAfterContentInit(): Promise<void> {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
+   
     if (this.type && this._value) {
+     
       if (Array.isArray(this._value)) {
         this.showValue = await this.getListByIds(this._value);
       } else {

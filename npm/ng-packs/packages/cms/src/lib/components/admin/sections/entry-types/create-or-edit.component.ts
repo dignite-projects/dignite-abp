@@ -73,7 +73,6 @@ export class CreateOrEditComponent implements OnInit {
     this.entryTypesId = this.route.snapshot.params.entryTypesId || '';
     // this.enableSearchTypeList=await this._FormControlsService.getEnableSearchTypeList();
     // this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
-    console.log(this.enableSearchTypeList,'enableSearchTypeList',this.disableshowinTypeList);
     if (sectionId) {
       this.sectionId = sectionId;
       this.addControlToFieldTabs();
@@ -426,7 +425,6 @@ isSubmit:boolean = false;
     this.EditFieldIndex = elIndex;
     this.editFieldFrom = this.fb.group(new fieldsBase());
     let fieldsOptions=this.fieldTabs.value[this.navActive].fields[elIndex];
-    // console.log(fieldsOptions,'this.fieldTabs.value[this.navActive].fields[elIndex]')
     // this.isShowInList = !this.disableshowinTypeList.includes(fieldsOptions.field.formControlName);
     // this.isEnableSearch = this.enableSearchTypeList.includes(fieldsOptions.field.formControlName);
     this.editFieldFrom.patchValue(fieldsOptions);

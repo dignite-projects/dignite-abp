@@ -49,8 +49,6 @@
                     </div>
                 </div>
                 @if(filters.culture&&enablegearchFormEntity&&enableSearchFieldList.length>0){
-                    
-
                 <div id="entries-advanced-form" class="entries-advanced-form " [hidden]="isexpanded"
                     (abpInit)="abpInitss()">
                     <form [formGroup]="enablegearchFormEntity">
@@ -58,8 +56,9 @@
                             <ng-container *ngFor="let el of enableSearchFieldList">
                                 <ng-container *ngIf="el.field&&enablegearchFormEntity&&el.enableSearch">
                                     <div class="col-3">
-                                        <df-dynamic [fields]="el" [parentFiledName]="'extraProperties'"
-                                            [culture]="filters.culture" [entity]="enablegearchFormEntity"></df-dynamic>
+                                        <df-dynamic-search [fields]="el" [parentFiledName]="'extraProperties'"
+                                            [culture]="filters.culture"
+                                            [entity]="enablegearchFormEntity"></df-dynamic-search>
                                     </div>
                                 </ng-container>
                             </ng-container>
@@ -115,7 +114,8 @@
                         <ngx-datatable-column [name]="'Cms::'+item.displayName | abpLocalization"
                             [prop]="item?.field?.name" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                <df-dynamic-view  [type]="item.field.formControlName" [showInList]="true"  [fields]="item" [value]="row?.extraProperties[item.field.name]"></df-dynamic-view>
+                                <df-dynamic-view [type]="item.field.formControlName" [showInList]="true" [fields]="item"
+                                    [value]="row?.extraProperties[item.field.name]"></df-dynamic-view>
                             </ng-template>
                         </ngx-datatable-column>
                         }
@@ -157,7 +157,6 @@
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
                                 <th>{{'Cms::Slug' | abpLocalization}}</th>
                                 <th>{{'Cms::Status' | abpLocalization}}</th>
-
                                 @for (item of showinFieldList; track $index) {
                                 <th>{{'Cms::'+item.displayName | abpLocalization}}</th>
                                 }
@@ -196,7 +195,11 @@
                                     </ng-container>
                                 </td>
                                 @for (item1 of showinFieldList; track $index) {
-                                <td>{{item?.extraProperties[item1?.field?.name]}}</td>
+                                <td>
+                                    <df-dynamic-view [type]="item1.field.formControlName" [showInList]="true" [fields]="item1"
+                                    [value]="item?.extraProperties[item1.field.name]"></df-dynamic-view>
+
+                                </td>
                                 }
                                 <td>{{item.publishTime | shortDateTime }}</td>
                             </tr>

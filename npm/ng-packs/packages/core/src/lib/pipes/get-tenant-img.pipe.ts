@@ -12,9 +12,9 @@ export class GetTenantImgPipe implements PipeTransform {
   private configState = inject(ConfigStateService)
   private environment = inject(EnvironmentService)
   transform(value: unknown, ...args: unknown[]): unknown {
-    let tenantId = this.configState.getDeep('currentUser.tenantId')
+    const tenantId = this.configState.getDeep('currentUser.tenantId')||'';
     const environment = this.environment.getEnvironment();
-    let imgUrl =`${environment.apis.default.url}/api/file-explorer/files/${args}/${value}?__tenant=${tenantId}`
+    const imgUrl =`${environment.apis.default.url}/api/file-explorer/files/${args}/${value}?__tenant=${tenantId}`
     return value?imgUrl:'';
   }
 }

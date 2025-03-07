@@ -1,24 +1,128 @@
-# FileExplorer
+## ℹ️ Description
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+ABP Framework is a complete open-source infrastructure to create modern web applications by following the best practices and conventions of software development. This package is a part of the [ABP Framework](https://abp.io) and contains client-side files. 
+For more information, check out the below links: 
 
-## Code scaffolding
+🔗Official Website: https://abp.io
 
-Run `ng generate component component-name --project file-explorer` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project file-explorer`.
-> Note: Don't forget to add `--project file-explorer` or else it will be added to the default project in your `angular.json` file. 
+🔗Commercial Demo: https://abp.io/demo
 
-## Build
+🔗GitHub Repository: https://github.com/abpframework/abp
 
-Run `ng build file-explorer` to build the project. The build artifacts will be stored in the `dist/` directory.
+🔗Official Theme: https://www.LeptonTheme.com
 
-## Publishing
+🔗Documentation: https://abp.io/docs/latest/
 
-After building your library with `ng build file-explorer`, go to the dist folder `cd dist/file-explorer` and run `npm publish`.
+🔗Community: https://abp.io/community/
 
-## Running unit tests
+🔗Blog: https://abp.io/blog/
 
-Run `ng test file-explorer` to execute the unit tests via [Karma](https://karma-runner.github.io).
+🔗Books: https://abp.io/books
 
-## Further help
+🔗Twitter: https://twitter.com/abpframework
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+🔗Discord: https://abp.io/community/discord
+
+🔗Stackoverflow: https://stackoverflow.com/questions/tagged/abp
+
+🔗YouTube: https://www.youtube.com/@Volosoft
+
+
+## 🤔 Why ABP Platform?
+
+Why should you use the ABP.IO Platform instead of creating a new solution from scratch?
+
+You can find the answer here 👉🏻 [Why ABP Platform?](https://abp.io/docs/latest/others/why-abp-platform)
+
+
+## 🚀 Key Features of the ABP Framework
+
+🟡 Modularity
+
+🟡 Multi-Tenancy
+
+🟡 Bootstrap Tag Helpers
+
+🟡 Dynamic Forms
+
+🟡 Authentication
+
+🟡 Authorization
+
+🟡 Distributed Event Bus
+
+🟡 BLOB Storing
+
+🟡 Text Templating
+
+🟡 Tooling: ABP CLI
+
+🟡 Cross-Cutting Concerns
+
+🟡 Bundling & Minification
+
+🟡 Virtual File System
+
+🟡 Theming
+
+🟡 Background Jobs
+
+🟡 DDD Infrastructure
+
+🟡 Auto REST APIs
+
+🟡 Dynamic Client Proxies
+
+🟡 Multiple Database Providers
+
+🟡 Data filtering
+
+🟡 Test Infrastructure
+
+🟡 Audit Logging
+
+🟡 Object to Object Mapping
+
+🟡 Email & SMS Abstractions
+
+🟡 Localization
+
+🟡 Setting Management
+
+🟡 Extension Methods
+
+🟡 Aspect Oriented Programming
+
+🟡 Dependency Injection
+
+
+## 🧐 How It Works?
+
+The following page explains how you use the ABP.IO Platform as a .NET developer 👉 [How it works?](https://abp.io/how-it-works)
+
+
+### 📘 Supported Database Providers
+
+🔵 Entity Framework Core
+
+🔵 MongoDB
+
+🔵 Dapper
+
+
+### 🎴 Supported UI Frameworks
+
+🔵 Angular
+
+🔵 Razor Pages
+
+🔵 Blazor Web Assembly
+
+🔵 Blazor Server
+
+🔵 MAUI with Blazor Hybrid
+
+
+## 📫 Bug & Support
+
+Support for open-source ABP Framework client-side packages is available at [GitHub Issues](https://github.com/abpframework/abp/issues), and the commercial support is available at [abp.io/support](https://abp.io/support/questions).

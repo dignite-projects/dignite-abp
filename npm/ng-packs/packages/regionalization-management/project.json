@@ -1,0 +1,42 @@
+{
+  "name": "regionalization-management",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/regionalization-management/src",
+  "prefix": "lib",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/packages/regionalization-management"],
+      "options": {
+        "project": "packages/regionalization-management/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/regionalization-management/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/regionalization-management/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/regionalization-management"],
+      "options": {
+        "jestConfig": "packages/regionalization-management/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

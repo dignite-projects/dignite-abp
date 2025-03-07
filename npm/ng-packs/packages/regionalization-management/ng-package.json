@@ -1,7 +1,10 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/regionalization-management",
+  "dest": "../../dist/packages/regionalization-management",
   "lib": {
-    "entryFile": "src/public-api.ts"
-  }
+    "entryFile": "./src/public-api.ts"
+  },
+  "allowedNonPeerDependencies": [
+    "@dignite-ng/expand.core"
+  ]
 }

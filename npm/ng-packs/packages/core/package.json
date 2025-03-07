@@ -1,14 +1,26 @@
 {
   "name": "@dignite-ng/expand.core",
-  "version": "3.0.0-rc.2",
-  "schematics": "./collection.json",
-  "peerDependencies": {
-    "@angular/common": "^18.1.0",
-    "@angular/core": "^18.1.0"
-  },
+  "version": "3.0.0-rc.19",
+  "homepage": "https://abp.io",
   "dependencies": {
-    "tslib": "^2.3.0"
+    "@abp/utils": "~9.1.0-rc.3",
+    "tslib": "^2.0.0"
   },
-  "sideEffects": false
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "LGPL-3.0",
+  "keywords": [
+    "aspnetcore",
+    "boilerplate",
+    "framework",
+    "web",
+    "best-practices",
+    "angular",
+    "maui",
+    "blazor",
+    "mvc",
+    "csharp",
+    "webapp"
+  ]
 }
-

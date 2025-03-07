@@ -23,7 +23,6 @@ import { BehaviorSubject } from 'rxjs';
 export class UpdateListService {
   public updateListEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
 
   updateList() {
     this.updateListEvent.emit();

@@ -27,6 +27,10 @@ import { SwitchViewComponent } from './components/form/switch/switch-view.compon
 import { TextEditViewComponent } from './components/form/text-edit/text-edit-view.component';
 import { DateEditViewComponent } from './components/form/date-edit/date-edit-view.component';
 import { NumericEditViewComponent } from './components/form/numeric-edit/numeric-edit-view.component';
+import { DynamicSearchComponent } from './components/dynamic/dynamic-search.component';
+import { SelectSearchComponent } from './components/form/select/select-search.component';
+import { TextEditSearchComponent } from './components/form/text-edit/text-edit-search.component';
+import { SwitchSearchComponent } from './components/form/switch/switch-search.component';
 
 
 
@@ -51,6 +55,10 @@ import { NumericEditViewComponent } from './components/form/numeric-edit/numeric
     TextEditViewComponent,
     DateEditViewComponent,
     NumericEditViewComponent,
+    DynamicSearchComponent,
+    SelectSearchComponent,
+    TextEditSearchComponent,
+    SwitchSearchComponent,
 
   ],
   imports: [
@@ -65,18 +73,24 @@ import { NumericEditViewComponent } from './components/form/numeric-edit/numeric
   exports: [
     TextEditConfigComponent,
     TextEditComponent,
+    TextEditViewComponent,
     SwitchConfigComponent,
     SwitchControlComponent,
+    SwitchViewComponent,
     NumbericEditConfigComponent,
     NumbericEditControlComponent,
     DateEditConfigComponent,
     DateEditControlComponent,
+    DateEditViewComponent,
     SelectConfigComponent,
     SelectControlComponent,
+    SelectViewComponent,
+    SelectSearchComponent,
     DynamicComponent,
     DynamicConfigComponent,
     DynamicViewComponent,
     DynamicControlComponent,
+    DynamicSearchComponent
   ],
   providers: [
   ],

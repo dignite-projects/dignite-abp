@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @angular-eslint/component-selector */
 import { CoreModule, LocalizationService } from '@abp/ng.core';
 import { ThemeSharedModule, ToasterService } from '@abp/ng.theme.shared';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { eTenancyDomainsManagementRouteNames } from '../../enums';
 import {
   AbstractControl,
@@ -10,8 +12,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { TenantDomainFormConfig } from './tenant-domain-form-config';
-import { ValidatorsService } from '@dignite-ng/expand.core';
-import { finalize, Observable, pipe } from 'rxjs';
+import { finalize } from 'rxjs';
 import * as psl from 'psl';
 import { StepName } from '../../enums/step-name';
 import { TenantDomainService } from '../../proxy/dignite/abp/tenant-domain-management';
@@ -28,20 +29,18 @@ export class TenantDomainComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _LocalizationService: LocalizationService,
-    private _ValidatorsService: ValidatorsService,
     private _TenantDomainService: TenantDomainService,
     private toaster: ToasterService,
     private clipboard: Clipboard
   ) {
-    console.log(this.StepName);
   }
 
   eTenancyDomainsManagementRouteNames = eTenancyDomainsManagementRouteNames;
   StepName = StepName;
   /**步骤 */
-  stepIndex: number = 0;
+  stepIndex: number|any = 0;
   /**是否提交 */
-  isSubmit: boolean = false;
+  isSubmit: boolean|any = false;
   /**表单验证 */
   formValidation: any = '';
   /**表单 */
@@ -60,7 +59,7 @@ export class TenantDomainComponent implements OnInit {
     this.formEntity = this.fb.group(new TenantDomainFormConfig());
     await this.getTenantDomain();
     this.domainNameInput.addValidators(this.DomainValidator());
-    let domainName = this.TenantDomainInfo?.domainName;
+    const domainName = this.TenantDomainInfo?.domainName;
     if (domainName) {
       this.domainNameInput.patchValue(domainName);
       this.stepIndex = this.StepName.finish;
@@ -68,10 +67,12 @@ export class TenantDomainComponent implements OnInit {
   }
   /**获取域名 */
   getTenantDomain() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this._TenantDomainService.get().subscribe(res => {
         this.TenantDomainInfo = res;
         resolve(res);
+      },(err)=>{
+        resolve(err);
       });
     });
   }
@@ -100,7 +101,7 @@ export class TenantDomainComponent implements OnInit {
   }
   /**checkCnameRecord 检查CNAME记录 */
   checkCnameRecord() {
-    let that = this;
+    const that = this;
     return new Promise((resolve, reject) => {
       this._TenantDomainService.checkCnameRecord(that.domainNameInput?.value).subscribe(res => {
         if (res) {
@@ -137,12 +138,12 @@ export class TenantDomainComponent implements OnInit {
         })
       )
       .subscribe(
-        res => {
+        () => {
           this.toaster.success(
             this._LocalizationService.instant('TenantDomainManagement::SaveSuccessful')
           );
         },
-        err => {
+        () => {
           this.toaster.error(
             this._LocalizationService.instant('TenantDomainManagement::SaveFailure')
           );

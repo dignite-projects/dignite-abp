@@ -18,6 +18,7 @@ import {
   createTypeAdapter,
   createTypeParser,
   createTypesToImportsReducer,
+  getTypeForEnumList,
   removeTypeModifiers,
 } from './type';
 import { eBindingSourceId } from '../enums';
@@ -80,7 +81,19 @@ export function createActionToBodyMapper() {
   const adaptType = createTypeAdapter();
 
   return ({ httpMethod, parameters, returnValue, url }: Action) => {
-    const responseType = adaptType(returnValue.typeSimple);
+    let responseType = adaptType(returnValue.typeSimple);
+    if (responseType.includes('enum')) {
+      const type = returnValue.typeSimple.replace('enum', returnValue.type);
+
+      if (responseType === 'enum') {
+        responseType = adaptType(type);
+      }
+
+      if (responseType === 'enum[]') {
+        const normalizedType = getTypeForEnumList(type);
+        responseType = adaptType(normalizedType);
+      }
+    }
     const responseTypeWithNamespace = returnValue.typeSimple;
     const body = new Body({ method: httpMethod, responseType, url, responseTypeWithNamespace });
 
@@ -109,7 +122,12 @@ export function createActionToSignatureMapper() {
       if (isFormData || isFormArray) {
         return new Property({ name: p.name, type: 'FormData' });
       }
-      const type = adaptType(p.typeSimple);
+
+      let type = adaptType(p.typeSimple);
+      if (p.typeSimple === 'enum' || p.typeSimple === '[enum]') {
+        type = adaptType(p.type);
+      }
+
       const parameter = new Property({ name: p.name, type });
       parameter.setDefault(p.defaultValue);
       parameter.setOptional(p.isOptional);
@@ -183,7 +201,9 @@ function createActionToImportsReducer(
           parseGenerics(paramType)
             .toGenerics()
             .forEach(type => {
-              if (types[type]) acc.push({ type, isEnum: types[type].isEnum });
+              if (types[type]) {
+                acc.push({ type, isEnum: types[type].isEnum });
+              }
             }),
         );
 

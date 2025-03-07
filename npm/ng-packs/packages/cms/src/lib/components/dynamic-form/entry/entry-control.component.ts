@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries/entry-admin.service';
 import { EntryStatus } from '../../../proxy/dignite/cms/entries';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
@@ -17,7 +17,7 @@ export class EntryControlComponent {
   private _EntryAdminService = inject(EntryAdminService);
 
   /**表单实体 */
-  _entity: FormGroup | undefined;
+  _entity: FormGroup | any;
   @Input()
   public set entity(v: any) {
     this._entity = v;
@@ -77,14 +77,22 @@ export class EntryControlComponent {
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
-      
+      if(!this._fields.field.formConfiguration['Entry.Multiple']){
+        this.listOfSelectedValue = this._selected[0];
+      }
       let newControl = this.fb.control(this._selected, ValidatorsArray);
-      let extraProperties = this._entity?.get(this._parentFiledName) as FormGroup;
+      let extraProperties:any = this._entity.get(this._parentFiledName) as FormGroup;
       extraProperties.setControl(this._fields.field.name, newControl);
       resolve(true);
     });
   }
-
+  get selectInput(){
+    return this._entity?.get(this._parentFiledName)?.get(this._fields.field.name) as FormControl;
+  }
+  listOfSelectedValue:any='';
+  ModelChange(event){
+    this.selectInput.patchValue([event]);
+  }
   /**获取对应的条目 */
   getEntryAssignList(filter = '') {
     return new Promise((resolve, rejects) => {
@@ -93,7 +101,7 @@ export class EntryControlComponent {
           culture: this._culture,
           sectionId: this._fields.field.formConfiguration['Entry.SectionId'],
           skipCount: 0,
-          maxResultCount: 30,
+          maxResultCount: 1000,
           status: EntryStatus.Published,
           filter: filter,
         })

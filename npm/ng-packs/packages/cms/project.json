@@ -1,0 +1,42 @@
+{
+  "name": "cms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/cms/src",
+  "prefix": "lib",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/packages/cms"],
+      "options": {
+        "project": "packages/cms/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/cms/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/cms/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/packages/cms"],
+      "options": {
+        "jestConfig": "packages/cms/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

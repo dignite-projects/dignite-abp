@@ -5,7 +5,7 @@
     "schematicCollections": ["@angular-eslint/schematics"]
   },
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "packages",
   "projects": {
     "dev-app": {
       "projectType": "application",
@@ -27,7 +27,7 @@
             "polyfills": "apps/dev-app/src/polyfills.ts",
             "tsConfig": "apps/dev-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
+            "allowedCommonJsDependencies": ["chart.js", "js-sha256","jquery","color-convert"],
             "assets": ["apps/dev-app/src/favicon.ico", "apps/dev-app/src/assets"],
             "styles": [
               {
@@ -120,9 +120,24 @@
                 "inject": false,
                 "bundleName": "ckeditor5"
               },
+              {
+                "input": "node_modules/select2/dist/css/select2.min.css",
+                "inject": false,
+                "bundleName": "ng-select2.min"
+              },
               "apps/dev-app/src/styles.scss"
             ],
             "scripts": [
+              {
+                "input": "node_modules/jquery/dist/jquery.min.js",
+                "inject": false,
+                "bundleName": "ng-jQuery.min"
+              },
+              {
+                "input": "node_modules/select2/dist/js/select2.min.js",
+                "inject": false,
+                "bundleName": "ng-select2.min"
+              }
             ]
           },
           "configurations": {
@@ -162,10 +177,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dev-app:build:production"
+              "buildTarget": "dev-app:build:production"
             },
             "development": {
-              "browserTarget": "dev-app:build:development"
+              "buildTarget": "dev-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -173,7 +188,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dev-app:build"
+            "buildTarget": "dev-app:build"
           }
         },
         "test": {
@@ -364,5 +379,6 @@
         }
       }
     }
+   
   }
 }

@@ -82,7 +82,7 @@
                 <div class="table-responsive table-fixed-header">
                     <ngx-datatable class="material " [rows]="data.items" [list]="list" [columnMode]="ColumnMode.force"
                         [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [virtualization]="false"
-                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true">
+                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true" >
                         <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}

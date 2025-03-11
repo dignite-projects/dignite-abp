@@ -6,7 +6,7 @@ export function appentStyle() {
     if (isAppentStyle) return
     isAppentStyle = true
     const rendererFactory = inject(RendererFactory2);
-    let renderer: Renderer2=rendererFactory.createRenderer(null, null)
+    const renderer: Renderer2=rendererFactory.createRenderer(null, null)
     const style = renderer.createElement('style');
     renderer.setProperty(style, 'innerHTML', styles);
     renderer.appendChild(document.head, style);

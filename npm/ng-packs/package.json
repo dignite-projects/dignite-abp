@@ -72,6 +72,9 @@
     "@angular/platform-browser": "~18.1.0",
     "@angular/platform-browser-dynamic": "~18.1.0",
     "@angular/router": "~18.1.0",
+    "@ckeditor/ckeditor5-angular": "^7.0.1",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^43.3.1",
+    "@ctrl/tinycolor": "^4.1.0",
     "@fortawesome/fontawesome-free": "^6.0.0",
     "@ng-bootstrap/ng-bootstrap": "~16.0.0",
     "@ngneat/spectator": "^15.0.0",
@@ -100,6 +103,7 @@
     "bootstrap": "^5.0.0",
     "bootstrap-icons": "^1.0.0",
     "chart.js": "^3.0.0",
+    "ckeditor5": "^43.3.1",
     "cypress": "^7.0.0",
     "dotenv": "10.0.0",
     "eslint": "8.46.0",
@@ -126,6 +130,7 @@
     "ng-zorro-antd": "^17.0.0",
     "nx": "~18.1.0",
     "perfect-scrollbar": "^1.0.0",
+    "pinyin-pro": "^3.26.0",
     "postcss": "^8.0.0",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "7.5.0",
@@ -142,17 +147,14 @@
     "tslint": "~6.1.0",
     "typescript": "~5.5.0",
     "webpack-bundle-analyzer": "^4.10.2",
-    "zone.js": "~0.14.0",
-    "@ckeditor/ckeditor5-angular": "^7.0.1",
-    "@ckeditor/ckeditor5-build-decoupled-document": "^43.3.1",
-    "ckeditor5": "^43.3.1",
-    "@ctrl/tinycolor": "^4.1.0",
-    "pinyin-pro": "^3.26.0"
+    "zone.js": "~0.14.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,css,scss}": [
       "npx prettier --write --config .prettierrc "
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@angular-eslint/schematics": "^19.2.0"
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 
 import { EXTENSIONS_IDENTIFIER } from "@abp/ng.components/extensible";
 import { ListService, LIST_QUERY_DEBOUNCE_TIME, LocalizationService, PagedResultDto, ABP } from "@abp/ng.core";
@@ -78,8 +79,15 @@ export class FieldsComponent implements OnInit {
       ...query,
       ...this.filters,
     });
-    const setData = (list: PagedResultDto<FieldDto>) => (this.data = list);
+    const setData = (list: PagedResultDto<FieldDto>) => {
+      this.data = list;
+      this.scrollToTop();
+    };
     this.list.hookToQuery(getData).subscribe(setData);
+  }
+  scrollToTop() {
+    const scrollContainer = document.getElementsByClassName('lpx-scroll-container')[0];
+    (scrollContainer || window).scrollTo(0, 0);
   }
 
   /**新建字段按钮 */

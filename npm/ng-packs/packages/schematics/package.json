@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.schematics",
-  "version": "3.0.0-rc.6",
+  "version": "3.0.0-rc.24",
   "author": "",
   "schematics": "./collection.json",
   "dependencies": {

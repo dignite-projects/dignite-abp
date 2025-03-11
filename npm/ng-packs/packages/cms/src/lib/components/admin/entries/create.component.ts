@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
@@ -45,13 +46,13 @@ export class CreateComponent implements OnInit {
   /**表单实体 */
   formEntity: FormGroup | undefined;
   /**语言 */
-  cultureName: string = '';
+  cultureName: string|any = '';
   /**条目类型id */
-  entryTypeId: string = '';
+  entryTypeId: string|any = '';
   /**版块id */
-  sectionId: string = '';
+  sectionId: string|any = '';
   /**条目版本id */
-  entryVersionId: string = '';
+  entryVersionId: string|any = '';
   /**条目信息 */
   entryInfo: any = '';
 
@@ -65,7 +66,7 @@ export class CreateComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    let queryParams = this.route.snapshot.queryParams;
+    const queryParams = this.route.snapshot.queryParams;
 
     this.cultureName = queryParams.cultureName;
     this.entryTypeId = queryParams.entryTypeId;
@@ -91,12 +92,12 @@ export class CreateComponent implements OnInit {
   /**提交 */
   save() {
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
-    
+    console.log(this.formValidation,'提交',this.formEntity);
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')){
       this.isSubmit = false;
       return this.cultureInput.disable();
     }
-    let input = this.formEntity?.value;
+    const input = this.formEntity?.value;
     input.culture = this.cultureName;
     input.publishTime = new Date(
       new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000
@@ -113,7 +114,7 @@ export class CreateComponent implements OnInit {
         this._updateListService.updateList();
       });
   }
-  isSubmit: boolean = false;
+  isSubmit: boolean|any = false;
   /**点击提交 */
   clickSubmit(type) {
     if (this.isSubmit) return;

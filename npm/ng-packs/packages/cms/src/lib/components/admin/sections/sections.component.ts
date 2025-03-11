@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import {
   ABP,
@@ -17,9 +18,8 @@ import { CmsApiService } from '../../../services';
 import { UpdateListService } from '@dignite-ng/expand.core';
 
 import { ColumnMode } from '@swimlane/ngx-datatable';
-import { finalize, Observable } from 'rxjs';
+import { finalize } from 'rxjs';
 import { CreateOrUpdateSectionsInputBase } from './create-or-update-sections-input-base';
-import { ValidatorsService } from '@dignite-ng/expand.core';
 import { EntryTypeAdminService, GetSectionsInput, SectionAdminService, SectionDto } from '../../../proxy/dignite/cms/admin/sections';
 import { SectionType, sectionTypeOptions } from '../../../proxy/dignite/cms/sections';
 
@@ -61,8 +61,15 @@ export class SectionsComponent implements OnInit {
   hookToQuery() {
     const getData = (query: ABP.PageQueryParams) =>
       this._SectionAdminService.getList({ ...query, ...this.filters });
-    const setData = (list: PagedResultDto<SectionDto>) => (this.data = list);
+    const setData = (list: PagedResultDto<SectionDto>) => {
+      this.data = list;
+      this.scrollToTop();
+    };
     this.list.hookToQuery(getData).subscribe(setData);
+  }
+  scrollToTop() {
+    const scrollContainer = document.getElementsByClassName('lpx-scroll-container')[0];
+    (scrollContainer || window).scrollTo(0, 0);
   }
   async ngOnInit(): Promise<void> {
     this.hookToQuery();
@@ -78,7 +85,7 @@ export class SectionsComponent implements OnInit {
   /**表单 */
   formEntity: FormGroup | undefined;
   /**弹窗状态 */
-  isVisibleOpen: boolean = false;
+  isVisibleOpen: boolean|any = false;
   /**弹窗回调 */
   visibleChange(event) {
     this.isVisibleOpen = event;

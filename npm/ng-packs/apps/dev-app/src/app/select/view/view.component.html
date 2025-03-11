@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="formentry" (submit)="save()" *ngIf="scriptsLoaded$ | async">
+            <div class="mb-3">
+                <label>单选</label>
+                <select class="form-select" formControlName="select1" id="mySelect1" #mySelect1>
+                    <option [value]=""></option>
+                    @for (item of _select1Data1; track $index) {
+                    <option [value]="item.id">{{item.text}}</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>多选</label>
+                <select class="form-select" #mySelect2 multiple="multiple">
+                    @for (item of _select1Data2; track $index) {
+                    <option [value]="item.id">{{item.text}}</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">提交</button>
+        </form>
+    </div>
+</div>

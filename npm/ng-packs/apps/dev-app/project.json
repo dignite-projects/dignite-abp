@@ -15,7 +15,7 @@
 				"polyfills": "apps/dev-app/src/polyfills.ts",
 				"tsConfig": "apps/dev-app/tsconfig.app.json",
 				"inlineStyleLanguage": "scss",
-				"allowedCommonJsDependencies": ["chart.js", "js-sha256"],
+				"allowedCommonJsDependencies": ["chart.js", "js-sha256","jquery"],
 				"assets": ["apps/dev-app/src/favicon.ico", "apps/dev-app/src/assets"],
 				"styles": [{
 						"input": "node_modules/bootstrap/dist/css/bootstrap.rtl.min.css",
@@ -122,9 +122,26 @@
 						"inject": false,
 						"bundleName": "ckeditor5"
 					},
+					{
+						"input": "node_modules/select2/dist/css/select2.min.css",
+						"inject": false,
+						"bundleName": "ng-select2.min"
+					  },
+					"node_modules/select2/dist/css/select2.min.css",
 					"apps/dev-app/src/styles.scss"
 				],
-				"scripts": []
+				"scripts": [
+				  {
+					"input": "node_modules/jquery/dist/jquery.min.js",
+					"inject": false,
+					"bundleName": "ng-jQuery.min"
+				  },
+				  {
+					"input": "node_modules/select2/dist/js/select2.min.js",
+					"inject": false,
+					"bundleName": "ng-select2.min"
+				  }
+				]
 			},
 			"configurations": {
 				"production": {

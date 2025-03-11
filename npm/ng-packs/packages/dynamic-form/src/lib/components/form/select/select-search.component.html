@@ -3,9 +3,9 @@
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="formConfiguration['Select.Multiple']; else elseTemplate">
-                <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1"
+                <nz-select class="form-select dignite-form-select" [nzMaxTagCount]="1"
                     nzShowSearch nzMode="multiple" [nzPlaceHolder]="_fields.field.formConfiguration['Select.NullText']"
-                    formControlName="{{_fields.field.name}}">
+                    formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true" [nzDropdownClassName]="'dignite-form-select-dropdown'">
                     <nz-option *ngFor="let item of _fields?.field?.formConfiguration['Select.Options']"
                         [nzLabel]="item.Text" [nzValue]="item.Value"></nz-option>
                 </nz-select>

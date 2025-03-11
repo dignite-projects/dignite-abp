@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.cms",
-  "version": "3.0.0-rc.20",
+  "version": "3.0.0-rc.24",
   "homepage": "https://abp.io",
   "repository": {
     "type": "git",
@@ -8,6 +8,11 @@
   },
   "dependencies": {
     "pinyin-pro": "^3.26.0",
+    "@dignite-ng/expand.core": "~3.0.0-rc.24",
+    "@dignite-ng/expand.dynamic-form": "~3.0.0-rc.24",
+    "@dignite-ng/expand.regionalization-management": "~3.0.0-rc.24",
+    "@dignite-ng/expand.ck-editor": "~3.0.0-rc.24",
+    "@dignite-ng/expand.file-explorer": "~3.0.0-rc.24",
     "tslib": "^2.0.0"
   },
   "publishConfig": {

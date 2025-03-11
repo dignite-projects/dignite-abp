@@ -29,6 +29,10 @@ const routes: Routes = [
 		path: 'cms',
 		loadChildren: () => import('@dignite-ng/expand.cms').then(m => m.CmsModule.forLazy()),
 	},
+	{
+		path: '',
+		loadChildren: () => import('./select/select.module').then(m => m.SelectModule),
+	}
 ];
 
 @NgModule({

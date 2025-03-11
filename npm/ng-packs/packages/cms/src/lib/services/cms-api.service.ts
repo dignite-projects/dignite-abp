@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { Injectable } from '@angular/core';
 import { pinyin } from 'pinyin-pro';
 
@@ -15,13 +16,13 @@ export class CmsApiService {
    *  */
   chineseToPinyin(value: any) {
     //去除字符串中所有的空格
-    let val = value.replaceAll(' ', '-');
-    let array = val.split('');
-    let newArray = [];
+    const val = value.replaceAll(' ', '-');
+    const array = val.split('');
+    const newArray = [];
     array.forEach((el: any, index: any) => {
       //转化为小写
       let elChange = el.toLowerCase();
-      let isChinese = str => {
+      const isChinese = str => {
         return /^[\u4e00-\u9fa5]+$/.test(str);
       };
       if (isChinese(elChange)) {
@@ -31,7 +32,7 @@ export class CmsApiService {
       }
       newArray.push(elChange);
     });
-    let pinyinstr = newArray.join('');
+    const pinyinstr = newArray.join('');
     return pinyinstr || val;
   }
 
@@ -40,7 +41,7 @@ export class CmsApiService {
   deepClone(obj) {
     if (typeof obj !== 'object' || obj === null) return obj;
     const result = Array.isArray(obj) ? [] : {};
-    for (let key in obj) {
+    for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         if (typeof obj[key] === 'object' && obj[key] !== null) {
           if (obj[key] instanceof Date) {

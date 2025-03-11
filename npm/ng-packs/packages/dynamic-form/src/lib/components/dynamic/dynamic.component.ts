@@ -1,3 +1,5 @@
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, Inject, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldControlGroupInterfaces } from '../../interfaces';
@@ -67,17 +69,17 @@ export class DynamicComponent {
 
   /**数据加载完成 */
   async dataLoaded(val) {
-    let _fieldControlGroup: any[] = AddFieldControlGroup(this.mergedConfig);
+    const _fieldControlGroup: any[] = AddFieldControlGroup(this.mergedConfig);
     if (this._entity) {
       //加载所有的动态表单组件
       if (this._type) {
-        let fieldControlItem = _fieldControlGroup.find(el => el.name === this._type);
+        const fieldControlItem = _fieldControlGroup.find(el => el.name === this._type);
         this.loadfieldConfigComponent(fieldControlItem);
       }
       if (this._fields && this._parentFiledName && this._culture) {
       
         /**表单控件组中的项 */
-        let fieldControlItem = _fieldControlGroup.find(
+        const fieldControlItem = _fieldControlGroup.find(
           el => el.name === this._fields?.field?.formControlName
         );
         this.loadfieldComponent(fieldControlItem);

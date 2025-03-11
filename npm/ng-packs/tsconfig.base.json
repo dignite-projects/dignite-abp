@@ -74,7 +74,8 @@
         "packages/file-explorer/config/src/public-api.ts"
       ],
       "@dignite-ng/expand.ck-editor": ["packages/ck-editor/src/public-api.ts"],
-      "@dignite-ng/expand.ck-editor/config": ["packages/ck-editor/config/src/public-api.ts"]
+      "@dignite-ng/expand.ck-editor/config": ["packages/ck-editor/config/src/public-api.ts"],
+      "select2-ng": ["packages/select2-ng/src/public-api.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

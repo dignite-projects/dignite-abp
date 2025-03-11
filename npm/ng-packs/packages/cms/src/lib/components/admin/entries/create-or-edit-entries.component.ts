@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
@@ -41,10 +42,10 @@ export class CreateOrEditEntriesComponent {
   /**版本列表 */
   AllVersionsList: any[] = [];
 
-  @Input() isEdit: boolean = false;
+  @Input() isEdit: boolean|any = false;
 
-  @Input() sectionId: string = '';
-  @Input() entryTypeId: string = '';
+  @Input() sectionId: string|any = '';
+  @Input() entryTypeId: string|any = '';
   @Input() public set select(v: any) {
     this.entryVersionId = v.id;
     this.entryInfo = v;
@@ -54,13 +55,13 @@ export class CreateOrEditEntriesComponent {
   @Input() set entity(value: FormGroup | undefined) {
     this.formEntity = value;
     if (value) {
-      let languages = this.configState.getDeep('localization.languages');
+      const languages = this.configState.getDeep('localization.languages');
       this.languagesList = languages;
       this.loadData();
     }
   }
   /**是否加载完成 */
-  isLoad: boolean = false;
+  isLoad: boolean|any = false;
 
   /**语言控件 */
   get cultureInput(): FormControl {
@@ -80,7 +81,7 @@ export class CreateOrEditEntriesComponent {
       await this.getEntryList();
     }
     this.cultureInput.disable();
-    let repetition = await this.cultureAsyncValidator();
+    const repetition = await this.cultureAsyncValidator();
     if (repetition) this.cultureInput.setErrors(repetition);
     this.slugInput.addAsyncValidators(this.SlugAsyncValidator());
     
@@ -118,8 +119,7 @@ export class CreateOrEditEntriesComponent {
     return (
       control: AbstractControl
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return new Promise(async resolve => {
-        let touchedOrDirty = control.touched || control.dirty;
+      return new Promise( resolve => {
         if ( control.value) {
           if (control.value == this.entryInfo?.slug) {
             resolve(null);
@@ -151,7 +151,7 @@ export class CreateOrEditEntriesComponent {
   /**定义自定义异步验证 */
   cultureAsyncValidator() {
     return new Promise(resolve => {
-      let culture = this.cultureInput.value;
+      const culture = this.cultureInput.value;
       if (culture == this.entryInfo?.culture || this.sectionInfo.type !== 0) return resolve(null);
       this._EntryAdminService
         .cultureExistWithSingleSection({
@@ -195,10 +195,10 @@ export class CreateOrEditEntriesComponent {
           culture: this.cultureInput.value,
         })
         .subscribe((res: any) => {
-          let entryList = res.items.filter(el => el.id !== this.entryInfo?.id);
-          let parentList = entryList.filter(el => !el.parentId);
+          const entryList = res.items.filter(el => el.id !== this.entryInfo?.id);
+          const parentList = entryList.filter(el => !el.parentId);
           parentList.forEach(el => {
-            let layer: number = 0;
+            const layer: number|any = 0;
             el.layer = new Array(layer);
             el.children = this.groupByParentId(entryList, el.id, layer + 1);
           });
@@ -219,8 +219,8 @@ export class CreateOrEditEntriesComponent {
   }
   /**标题转化别名 */
   setTitleToSlugBlur(event) {
-    let val = event.target.value;
-    let slug = this.formEntity.get('slug');
+    const val = event.target.value;
+    const slug = this.formEntity.get('slug');
     let pinyinstr = '';
     if (slug.value) return;
     pinyinstr = this._CmsApiService.chineseToPinyin(val);

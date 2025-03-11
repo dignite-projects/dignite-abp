@@ -5,6 +5,11 @@
     "entryFile": "./src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
-    "pinyin-pro"
+    "pinyin-pro",
+    "@dignite-ng/expand.core",
+    "@dignite-ng/expand.regionalization-management",
+    "@dignite-ng/expand.dynamic-form",
+    "@dignite-ng/expand.ck-editor",
+    "@dignite-ng/expand.file-explorer"
   ]
 }

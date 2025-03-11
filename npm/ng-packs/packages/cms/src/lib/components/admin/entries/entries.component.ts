@@ -1,3 +1,5 @@
+/* eslint-disable no-async-promise-executor */
+/* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import {
   ListService,
@@ -90,7 +92,7 @@ export class EntriesComponent implements OnInit {
     //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
     await this.getSiteOfSectionList();
     await this.getSectionLanguagesList();
-    this.hookToQuery();
+    this.hookToQuery(); 
   }
   /**需要查询的动态表单类型 */
   enableSearchTypeList: any[] = [];
@@ -113,6 +115,7 @@ export class EntriesComponent implements OnInit {
 
   /**切换板块 */
   async sectionIdChange() {
+    
     this.getSectionOfEntryType();
     await this.getSectionLanguagesList();
     this.resetData();
@@ -149,8 +152,8 @@ export class EntriesComponent implements OnInit {
   /**设置筛选条件 */
   setfiltersValue() {
     return new Promise((resolve, rejects) => {
-      let extraProperties = this.extraPropertiesInput.value;
-      let inputs: any[] = [];
+      const extraProperties = this.extraPropertiesInput.value;
+      const inputs: any[] = [];
       for (const key in extraProperties) {
         const element = extraProperties[key];
         if (Array.isArray(element) ? (element.length > 0 ? element : null) : element) {
@@ -183,9 +186,9 @@ export class EntriesComponent implements OnInit {
   /**获取版块下的条目类型 */
   async getSectionOfEntryType() {
     // let sectionId = this.filtersForm.get('sectionId').value;
-    let sectionId = this.filters.sectionId;
-    let SectionInfo: any = await this.getSectionInfo(sectionId);
-    let _entryTypeList = SectionInfo?.entryTypes || [];
+    const sectionId = this.filters.sectionId;
+    const SectionInfo: any = await this.getSectionInfo(sectionId);
+    const _entryTypeList = SectionInfo?.entryTypes || [];
 
     // let _entryTypeList = this.SiteOfSectionList.find(el => el.id == sectionId)?.entryTypes || [];
     this.entryTypeList = _entryTypeList;
@@ -251,7 +254,7 @@ export class EntriesComponent implements OnInit {
   getSectionLanguagesList() {
     return new Promise(async (resolve, rejects) => {
       //获取所有语言 */
-      let languagesSystem = this.configState.getDeep('localization.languages');
+      const languagesSystem = this.configState.getDeep('localization.languages');
       //获取系统默认语言 */
       let DefaultLanguage = this.config.getSetting('Abp.Regionalization.DefaultCultureName');
       const configCmsSiteLanguages = this.config.getSetting('Cms.Site.Languages');
@@ -264,12 +267,12 @@ export class EntriesComponent implements OnInit {
       const LanguagesSite =
         (configCmsSiteLanguages ? configCmsSiteLanguages.split(',') : '') ||
         this.SiteSettingsAdminLanguages;
-      let LanguagesArray = languagesSystem.filter(el => LanguagesSite.includes(el.cultureName));
+      const LanguagesArray = languagesSystem.filter(el => LanguagesSite.includes(el.cultureName));
       //获取当前选择的语言
-      let nowculture = this.filters.culture;
+      const nowculture = this.filters.culture;
       // let nowculture = this.filtersForm.get('culture').value;
       //当前选择的语言，是否在版块的的语言列表中
-      let isexist = LanguagesArray.find(el => el.cultureName == nowculture);
+      const isexist = LanguagesArray.find(el => el.cultureName == nowculture);
       this.filters.culture = nowculture
         ? isexist
           ? nowculture
@@ -354,8 +357,13 @@ export class EntriesComponent implements OnInit {
         });
       }
       this.data = list;
+      this.scrollToTop()
     };
     this.list.hookToQuery(getData).subscribe(setData);
+  }
+  scrollToTop() {
+    const scrollContainer = document.getElementsByClassName('lpx-scroll-container')[0];
+    (scrollContainer || window).scrollTo(0, 0);
   }
 
   /**删除条目 */
@@ -376,9 +384,9 @@ export class EntriesComponent implements OnInit {
   }
 
   drop(event: any) {
-    let previousId: any = this.data.items[event.previousIndex].id;
-    let previousIndexOrder = this.data.items[event.previousIndex].order;
-    let currentIndexOrder = this.data.items[event.currentIndex].order;
+    const previousId: any = this.data.items[event.previousIndex].id;
+    const previousIndexOrder = this.data.items[event.previousIndex].order;
+    const currentIndexOrder = this.data.items[event.currentIndex].order;
     let moveorder=currentIndexOrder
     if(previousIndexOrder<currentIndexOrder){
       moveorder=currentIndexOrder+1
@@ -402,7 +410,7 @@ export class EntriesComponent implements OnInit {
     // this.rows = [...this.rows];
   }
 
-  isexpanded: boolean = false;
+  isexpanded: boolean|any = false;
   /**高级筛选切换 */
   expandedChange(event) {
     this.isexpanded = event;

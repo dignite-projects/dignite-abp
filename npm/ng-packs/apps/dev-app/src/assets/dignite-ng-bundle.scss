@@ -1,0 +1,382 @@
+//包含ckeditor,select,cms等样式
+// /* 引入组件样式 */
+@import "~ng-zorro-antd/select/style/index.min.css";
+/***select 选择器start */
+
+:root select {
+    cursor: pointer;
+    /* this will show the pointer when hovering */
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%
+}
+
+.cdk-overlay-container {
+    position: fixed;
+    z-index: 1000
+}
+
+.cdk-overlay-container:empty {
+    display: none
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-connected-position-bounding-box,
+.cdk-overlay-pane {
+    position: absolute;
+    z-index: 1000;
+    display: flex
+}
+
+.cdk-overlay-pane {
+    pointer-events: auto;
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 100%
+}
+
+.cdk-overlay-backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+    transition: opacity .4s cubic-bezier(.25, .8, .25, 1);
+    opacity: 0
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 1
+}
+
+.cdk-high-contrast-active .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: .6
+}
+
+.cdk-overlay-dark-backdrop {
+    background: rgba(0, 0, 0, .32)
+}
+
+.cdk-overlay-transparent-backdrop {
+    transition: visibility 1ms linear, opacity 1ms linear;
+    visibility: hidden;
+    opacity: 1
+}
+
+.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0;
+    visibility: visible
+}
+
+.cdk-overlay-backdrop-noop-animation {
+    transition: none
+}
+
+.cdk-overlay-connected-position-bounding-box {
+    flex-direction: column;
+    min-width: 1px;
+    min-height: 1px
+}
+
+.cdk-global-scrollblock {
+    position: fixed;
+    width: 100%;
+    overflow-y: scroll
+}
+
+.cdk-visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    outline: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none
+}
+
+.nz-overlay-transparent-backdrop,
+.nz-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0
+}
+
+.ant-select,
+.ant-select-dropdown {
+    margin: 0;
+    line-height: 1.5715;
+    box-sizing: border-box;
+    font-feature-settings: 'tnum';
+    list-style: none
+}
+
+.ant-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-dropdown-placement-bottom,
+.ant-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-dropdown-placement-bottomLeft,
+.ant-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-dropdown-placement-bottomRight,
+.ant-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-dropdown-placement-bottom,
+.ant-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-dropdown-placement-bottomLeft,
+.ant-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-dropdown-placement-bottomRight,
+.ant-select-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-select-dropdown-placement-bottomLeft,
+.ant-select-dropdown.ant-slide-up-enter.ant-slide-up-enter-active.ant-select-dropdown-placement-bottomLeft {
+    animation-name: antSlideUpIn
+}
+
+.ant-select-dropdown.ant-select-tree-dropdown {
+    top: 100%;
+    left: 0;
+    position: relative;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    overflow: auto
+}
+
+.ant-select-dropdown-hidden,
+.ant-upload-list-picture-card .ant-upload-list-item-uploading .ant-upload-list-item-info .anticon-delete,
+.ant-upload-list-picture-card .ant-upload-list-item-uploading .ant-upload-list-item-info .anticon-eye,
+.ant-upload-list-picture-card .ant-upload-list-item-uploading .ant-upload-list-item-info::before {
+    display: none
+}
+
+.ant-select-dropdown {
+    top: 100%;
+    left: 0;
+    position: relative;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    display: block
+}
+
+.ant-select-dropdown .cdk-virtual-scroll-content-wrapper {
+    right: 0
+}
+
+.ant-select-dropdown .full-width {
+    contain: initial
+}
+
+.ant-select-dropdown .full-width .cdk-virtual-scroll-content-wrapper {
+    position: static
+}
+
+.ant-select-dropdown .full-width .cdk-virtual-scroll-spacer {
+    position: absolute;
+    top: 0;
+    width: 1px
+}
+
+.ant-select-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-select-dropdown-placement-topLeft,
+.ant-select-dropdown.ant-slide-up-enter.ant-slide-up-enter-active.ant-select-dropdown-placement-topLeft {
+    animation-name: antSlideDownIn
+}
+
+.ant-select-dropdown.ant-slide-up-leave.ant-slide-up-leave-active.ant-select-dropdown-placement-bottomLeft {
+    animation-name: antSlideUpOut
+}
+
+.ant-select-dropdown.ant-slide-up-leave.ant-slide-up-leave-active.ant-select-dropdown-placement-topLeft {
+    animation-name: antSlideDownOut
+}
+
+//自定义
+nz-select.form-select {
+    padding: 0
+}
+
+.dignite-form-select {
+    width: 100%;
+
+    .ant-select-selector {
+        background: transparent !important;
+        border: none !important;
+        padding: .475rem 1.25rem !important;
+        box-shadow: none !important;
+        height: auto !important
+    }
+
+    .anticon-search,
+    .anticon-down {
+        display: none
+    }
+
+    .ant-select-arrow,
+    .ant-select-clear {
+        right: 36px !important;
+    }
+
+    .ant-select {
+        color: inherit !important;
+    }
+
+    .ant-select-selection-placeholder {
+        color: inherit !important;
+    }
+
+   
+}
+.dignite-form-select.ant-select-multiple .ant-select-selection-item {
+    max-width: 60% !important;
+}
+
+.dignite-form-select-dropdown {
+    .ant-select-dropdown {
+        background: var(--bs-light) !important;
+    }
+
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+        background-color: var(--bs-primary) !important;
+        color: var(--bs-white) !important;
+    }
+
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+        background-color: var(--lpx-brand);
+        color: var(--bs-white) !important;
+    }
+
+    .ant-select-item {
+        color: var(--bs-body-color);
+    }
+}
+
+/***select 选择器end */
+
+/*** 表单验证样式 start */
+.was-validated .dignite-form-select {
+    border-color: #4fbf67;
+    padding-right: calc(1.5em + 1.35rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234fbf67' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.3375rem) center;
+    background-size: calc(0.75em + 0.675rem) calc(0.75em + 0.675rem);
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+    border-color: #c00d49 !important;
+}
+
+/*** 表单验证样式 end */
+
+/**超链接动画效果 start */
+a.underline-animate {
+    background: linear-gradient(90deg, var(--bs-link-color), var(--bs-link-color));
+    background-size: 0 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: 0.5s all;
+    text-decoration: none;
+}
+
+a.underline-animate:hover {
+    background-size: 100% 1px;
+}
+
+/**超链接动画效果 end*/
+
+/**富文本暗色样式适配 start  */
+:root .ck.ck-editor__editable_inline {
+    min-height: 160px !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+    background: var(--bs-light) !important;
+}
+
+// .ck.ck-toolbar {
+//     background: var(--bs-light) !important;
+// }
+
+.ck.ck-button.ck-list-item-button,
+.ck.ck-button.ck-list-item-button.ck-on {
+    background: var(--bs-light) !important;
+}
+
+.ck.ck-dropdown__panel {
+    background: var(--bs-light) !important;
+}
+
+.ck.ck-editor__editable_inline {
+    border-color: var(--ck-color-base-border) !important;
+}
+
+:root .was-validated .form-select-multiple {
+    border-color: #4fbf67;
+    padding-right: calc(1.5em + 1.35rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234fbf67' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.3375rem) center;
+    background-size: calc(0.75em + 0.675rem) calc(0.75em + 0.675rem);
+}
+
+/**富文本暗色样式适配 end  */
+
+/**图片显示中间区域  start */
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.object-fit-contain {
+    object-fit: contain;
+}
+
+/**图片显示中间区域  end */
+
+/**滚动条隐藏 start */
+.lpx-scroll-container {
+    overflow: auto !important;
+}
+
+.lpx-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/**滚动条隐藏 end */
+
+.text-bg-gray {
+    background-color: var(--bs-gray-400);
+}
+
+.text-bg-orange {
+    background-color: var(--bs-orange);
+}
+
+.text-orange {
+    color: var(--bs-orange);
+}
+
+.text-Waiting {
+    color: var(--bs-orange);
+}
+
+.text-Completed {
+    color: var(--bs-teal);
+}
+
+.text-Failed {
+    color: var(--bs-pink);
+}
+
+.text-Refunded {
+    color: var(--bs-yellow);
+}
+
+.text-bg-cyan {
+    background-color: var(--bs-cyan);
+}
+
+/* ckeck样式调整 */
+:root .form-check * {
+    cursor: pointer;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, Input } from '@angular/core';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 
@@ -12,7 +13,7 @@ export class EntryViewComponent {
   showValue: any = '';
 
   /**是否显示再列表 */
-  @Input() showInList: boolean = false;
+  @Input() showInList: boolean|any = false;
   /**表单字段数据 */
   @Input() fields: any;
 
@@ -46,7 +47,7 @@ export class EntryViewComponent {
       this._EntryAdminService
         .getListByIds(this.fields.field.formConfiguration['Entry.SectionId'], ids)
         .subscribe((res: any) => {
-          let result = res.items
+          const result = res.items
             .map((item: any) => {
               return item.title;
             })

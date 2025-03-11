@@ -3,14 +3,14 @@
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="_fields.field.formConfiguration['Entry.Multiple']; else elseTemplate">
-                    <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1" (nzOnSearch)="SelectChange($event)" nzShowSearch  nzMode="multiple"  [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
-                    formControlName="{{_fields.field.name}}">
+                    <nz-select class="form-select dignite-form-select " [nzMaxTagCount]="1" (nzOnSearch)="SelectChange($event)" nzShowSearch  nzMode="multiple"  [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                    formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true" [nzDropdownClassName]="'dignite-form-select-dropdown'">
                         <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
                     </nz-select>
             </ng-container>
             <ng-template #elseTemplate>
-                    <nz-select class="form-select form-select-multiple" [nzMaxTagCount]="1" (nzOnSearch)="SelectChange($event)" nzShowSearch    [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
-                    [ngModel]="listOfSelectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="ModelChange($event)">
+                    <nz-select class="form-select dignite-form-select " [nzMaxTagCount]="1" (nzOnSearch)="SelectChange($event)" nzShowSearch    [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                    [ngModel]="listOfSelectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="ModelChange($event)" [nzDropdownMatchSelectWidth]="true" [nzDropdownClassName]="'dignite-form-select-dropdown'"> 
                         <nz-option [nzLabel]="_fields.field.formConfiguration['Entry.Placeholder']" [nzValue]="''"></nz-option>
                         <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
                     </nz-select>

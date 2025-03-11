@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } fr
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries/entry-admin.service';
 import { EntryStatus } from '../../../proxy/dignite/cms/entries';
+import { LocalizationService } from '@abp/ng.core';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 // import { EntryStatus } from '../../../proxy/entries/entry-status.enum';
 
@@ -12,9 +13,9 @@ import { EntryStatus } from '../../../proxy/dignite/cms/entries';
   styleUrls: ['./entry-control.component.scss'],
 })
 export class EntryControlComponent {
-  constructor() {}
   private fb = inject(FormBuilder);
   private _EntryAdminService = inject(EntryAdminService);
+  private _LocalizationService = inject(LocalizationService);
 
   /**表单实体 */
   _entity: FormGroup | any;
@@ -41,7 +42,7 @@ export class EntryControlComponent {
   /**父级字段名称，用于为表单设置控件赋值 */
   _selected: any;
   @Input()
-  public set selected(v: any) {
+  public set selected(v: any[]) {
     this._selected = v || [];
   }
   /**语言 */
@@ -73,25 +74,28 @@ export class EntryControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray:any[] = [];
+      const ValidatorsArray:any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
       if(!this._fields.field.formConfiguration['Entry.Multiple']){
         this.listOfSelectedValue = this._selected[0];
       }
-      let newControl = this.fb.control(this._selected, ValidatorsArray);
-      let extraProperties:any = this._entity.get(this._parentFiledName) as FormGroup;
+      const newControl = this.fb.control(this._selected, ValidatorsArray);
+      // newControl.addValidators(this.arrpanduan())
+      const extraProperties:any = this._entity.get(this._parentFiledName) as FormGroup;
       extraProperties.setControl(this._fields.field.name, newControl);
       resolve(true);
     });
   }
+
+
   get selectInput(){
     return this._entity?.get(this._parentFiledName)?.get(this._fields.field.name) as FormControl;
   }
   listOfSelectedValue:any='';
   ModelChange(event){
-    this.selectInput.patchValue([event]);
+    this.selectInput.patchValue(event?[event]:[]);
   }
   /**获取对应的条目 */
   getEntryAssignList(filter = '') {

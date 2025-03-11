@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule, provideAbpCore, withOptions } from '@abp/ng.core';
+import { CoreModule, provideAbpCore, SubscriptionService, withOptions } from '@abp/ng.core';
 import { registerLocale } from '@abp/ng.core/locale';
 import {
 	InternetConnectionStatusComponent,
@@ -24,6 +24,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
 import { FormConfigLoaderService } from './services/form-config-loader.service';
+import { Select_ROUTE_PROVIDER } from './select/route.provider';
 
 @NgModule({
 	imports: [
@@ -40,6 +41,8 @@ import { FormConfigLoaderService } from './services/form-config-loader.service';
 	],
 	providers: [
 		APP_ROUTE_PROVIDER,
+		Select_ROUTE_PROVIDER,
+		SubscriptionService,
 		OAuthService,
 		provideAbpCore(
 			withOptions({

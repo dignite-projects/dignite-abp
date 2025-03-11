@@ -154,6 +154,7 @@ export class EntriesComponent implements OnInit {
     return new Promise((resolve, rejects) => {
       const extraProperties = this.extraPropertiesInput.value;
       const inputs: any[] = [];
+      console.log(extraProperties,'查询条件');
       for (const key in extraProperties) {
         const element = extraProperties[key];
         if (Array.isArray(element) ? (element.length > 0 ? element : null) : element) {

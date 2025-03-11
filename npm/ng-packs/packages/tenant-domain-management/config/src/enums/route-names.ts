@@ -5,5 +5,5 @@ export  enum eTenancyDomainsManagementRouteNames {
   // Fields = "Cms::Fields",
   // Sections = "Cms::Sections",
   // SiteLanguage="Cms::DisplayName:Cms.Site.Languages",
-  Domain="TenantDomainManagement::Domains"
+  Domain="TenantDomainManagement::DomainName"
 }

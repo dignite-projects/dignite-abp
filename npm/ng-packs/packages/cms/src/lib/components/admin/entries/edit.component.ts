@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
 
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
@@ -49,15 +50,15 @@ export class EditComponent implements OnInit {
   /**表单实体 */
   formEntity: FormGroup | undefined;
   /**语言 */
-  cultureName: string = '';
+  cultureName: string|any = '';
   /**条目类型id */
-  entryTypeId: string = '';
+  entryTypeId: string|any = '';
   /**版块id */
-  sectionId: string = '';
+  sectionId: string|any = '';
   /**条目版本id */
-  entryVersionId: string = '';
+  entryVersionId: string|any = '';
   /**条目id */
-  entrieId: string = '';
+  entrieId: string|any = '';
   /**条目信息 */
   entryInfo: any = '';
 
@@ -71,7 +72,7 @@ export class EditComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    let params = this.route.snapshot.params;
+    const params = this.route.snapshot.params;
     this.entrieId = params.entrieId;
     this.formEntity = this.fb.group(new CreateOrUpdateEntryInputBase());
     await this.getEntryInfo();
@@ -93,7 +94,7 @@ export class EditComponent implements OnInit {
 
   /**提交 */
   save() {
-    let input = this.formEntity?.value;
+    const input = this.formEntity?.value;
     input.culture = this.cultureName;
     input.publishTime = new Date(
       new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000
@@ -117,7 +118,7 @@ export class EditComponent implements OnInit {
         this._updateListService.updateList();
       });
   }
-  isSubmit: boolean = false;
+  isSubmit: boolean|any = false;
   /**点击提交 */
   clickSubmit(type) {
     if (this.isSubmit) return;

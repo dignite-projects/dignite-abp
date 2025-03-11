@@ -3,7 +3,7 @@
         <div class="card " >
             <div class="card-body px-2 py-sm-2 border-bottom">
                 <div class="row align-items-end">
-                    <div class="mb-3 col-3">
+                    <div class="mb-3 col-md-3">
                         <label class="form-label">{{'Cms::IsActive' | abpLocalization}}：</label>
                         <select class="form-select col-auto" [(ngModel)]="filters.isActive" (change)="siteIdChange()">
                             <option [value]=""></option>
@@ -11,12 +11,12 @@
                             <option [value]="false">{{'AbpUi::No'|abpLocalization}}</option>
                         </select>
                     </div>
-                    <div class="mb-3 col-3">
+                    <div class="mb-3 col-md-3">
                         <label class="form-label">{{'AbpUi::Search' | abpLocalization}}：</label>
                         <input type="text" class="form-control" [(ngModel)]="filters.filter"
                         [placeholder]="'AbpUi::Search' | abpLocalization" />
                     </div>
-                    <div class="mb-3 col-4">
+                    <div class="mb-3 col-md-4">
                         <button class="btn btn-primary px-3" type="button" id="button-addon2" (click)="list.get()">
                             <i class="fa fa-search"></i>
                         </button>

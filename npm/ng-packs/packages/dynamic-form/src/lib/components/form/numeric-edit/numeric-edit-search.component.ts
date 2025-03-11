@@ -1,13 +1,13 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'df-select-search',
-  templateUrl: './select-search.component.html',
-  styleUrl: './select-search.component.scss',
+  selector: 'df-numeric-edit-search',
+  templateUrl: './numeric-edit-search.component.html',
+  styleUrl: './numeric-edit-search.component.scss',
 })
-export class SelectSearchComponent {
+export class NumericEditSearchComponent {
   constructor(private fb: FormBuilder) {}
 
   /**字段配置列表 */
@@ -51,38 +51,53 @@ export class SelectSearchComponent {
       this.submitclick?.nativeElement?.click();
     }
   }
+  /**定义动态字符 */
+  get numberInput() {
+    return this.extraProperties.get(this._fields.field.name) as FormControl;
+  }
+  /**定义number表单用于获取最小值最大值 */
+  numberForm: FormGroup = new FormGroup({
+    min: new FormControl(''),
+    max: new FormControl(''),
+  });
+  get minInput() {
+    return this.numberForm.get('min') as FormControl;
+  }
+  get maxInput() {
+    return this.numberForm.get('max') as FormControl;
+  }
 
   formConfiguration: any = '';
   AfterInit() {
-    return new Promise((resolve, rejects) => {
+    return new Promise(resolve => {
       const ValidatorsArray: any[] = [];
       this.formConfiguration = this._fields.field.formConfiguration;
-      const isMultiple = this.formConfiguration['Select.Multiple'];
-      const selectValue: any = isMultiple ? [] : [];
-      for (const element of this.formConfiguration['Select.Options']) {
-        for (const key in element) {
-          const item = element[key];
-          const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
-          element[capitalizedKey] = item;
-        }
-        // if (this._selected) {
-        //   if (Array.isArray(this._selected) && element.Selected && this._selected.length === 0) {
-        //     selectValue = isMultiple ? [...selectValue, element.Value] : [element.Value];
-        //   }
-        // }
-      }
-      this._selected = selectValue;
+
       const newControl = this.fb.control(this._selected, ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newControl);
+      this.numberForm.valueChanges.subscribe(res => {
+        if (res.min<Number(this.formConfiguration['NumericEditField.Min'])) {
+          this.minInput.patchValue(this.formConfiguration['NumericEditField.Min']);
+        }
+        if (res.min>Number(this.formConfiguration['NumericEditField.Max'])) {
+          this.minInput.patchValue(this.formConfiguration['NumericEditField.Max']);
+        }
+        if ((res.min>res.max)&&res.max) {
+          this.minInput.patchValue(res.max);
+        }
+        if (res.max>Number(this.formConfiguration['NumericEditField.Max'])) {
+          this.maxInput.patchValue(this.formConfiguration['NumericEditField.Max']);
+        }
+        if (this.numberForm.valid && res.min && res.max) {
+          this.numberInput.patchValue(`${res.min}-${res.max}`);
+        } else {
+          this.numberInput.patchValue('');
+        }
+      });
       resolve(true);
     });
   }
-  changeValue(event) {
-    const selectvalue = this.extraProperties.get(this._fields.field.name).value;
-    if (selectvalue[0] === '') {
-      this.extraProperties.get(this._fields.field.name).setValue([]);
-    }
-  }
+
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

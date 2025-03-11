@@ -5,6 +5,7 @@ import { DateEditControlComponent } from './date-edit/date-edit-control.componen
 import { DateEditViewComponent } from './date-edit/date-edit-view.component';
 import { NumbericEditConfigComponent } from './numeric-edit/numberic-edit-config.component';
 import { NumbericEditControlComponent } from './numeric-edit/numberic-edit-control.component';
+import { NumericEditSearchComponent } from './numeric-edit/numeric-edit-search.component';
 import { NumericEditViewComponent } from './numeric-edit/numeric-edit-view.component';
 import { SelectConfigComponent, SelectControlComponent, SelectSearchComponent } from './select';
 import { SelectViewComponent } from './select/select-view.component';
@@ -49,6 +50,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
     fieldConfigComponent: NumbericEditConfigComponent,
     fieldComponent: NumbericEditControlComponent,
     fieldViewComponent:NumericEditViewComponent,
+    fieldSearchComponent:NumericEditSearchComponent,
   },
   {
     displayName: '日期',
@@ -63,7 +65,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
 export function AddFieldControlGroup(array:any[] = []) {
 
   for (const element of array) {
-    let find = FieldControlGroup.find((control) => {
+    const find = FieldControlGroup.find((control) => {
       return control.name === element.name;
     });
     if(!find){

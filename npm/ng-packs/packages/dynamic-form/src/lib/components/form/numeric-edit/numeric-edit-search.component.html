@@ -1,0 +1,14 @@
+<form [formGroup]="numberForm">
+    <div class="selectcontrol">
+        <div class="mb-3">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <div class="input-group" >
+                <input class="form-control" type="number" formControlName="min">
+                <span class="input-group-text px-1">-</span>
+                <input class="form-control" type="number"  formControlName="max">
+            </div>
+        </div>
+
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

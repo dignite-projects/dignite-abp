@@ -31,6 +31,7 @@ import { DynamicSearchComponent } from './components/dynamic/dynamic-search.comp
 import { SelectSearchComponent } from './components/form/select/select-search.component';
 import { TextEditSearchComponent } from './components/form/text-edit/text-edit-search.component';
 import { SwitchSearchComponent } from './components/form/switch/switch-search.component';
+import { NumericEditSearchComponent } from './components/form/numeric-edit/numeric-edit-search.component';
 
 
 
@@ -59,6 +60,7 @@ import { SwitchSearchComponent } from './components/form/switch/switch-search.co
     SelectSearchComponent,
     TextEditSearchComponent,
     SwitchSearchComponent,
+    NumericEditSearchComponent,
 
   ],
   imports: [

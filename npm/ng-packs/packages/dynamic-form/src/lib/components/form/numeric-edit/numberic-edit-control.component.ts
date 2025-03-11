@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/component-selector */
+/* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 import { Component, ElementRef, Input, ViewChild, ChangeDetectionStrategy ,ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';  
@@ -25,9 +27,7 @@ export class NumbericEditControlComponent {
   constructor(
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef 
-  ) {
-
-  }
+  ) {}
 
 
   public get entity(): any {
@@ -57,7 +57,8 @@ export class NumbericEditControlComponent {
   }
 
     /**表单实体 */
-    _entity: FormGroup | undefined
+    _entity: FormGroup | any;
+    
     @Input()
     public set entity(v: any) {
       this._entity = v;
@@ -82,8 +83,8 @@ export class NumbericEditControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray:any[] = []
-      let formConfiguration=this._fields.field.formConfiguration
+      const ValidatorsArray:any[] = []
+      const formConfiguration=this._fields.field.formConfiguration
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required)
       }
@@ -93,7 +94,7 @@ export class NumbericEditControlComponent {
       if (formConfiguration['NumericEditField.Max']) {
         ValidatorsArray.push(Validators.max(formConfiguration['NumericEditField.Max']))
       }
-      let newControl = this.fb.control(this._selected, ValidatorsArray)
+      const newControl = this.fb.control(this._selected, ValidatorsArray)
       this.extraProperties.setControl(this._fields.field.name, newControl)
 
       resolve(true)
@@ -107,11 +108,11 @@ export class NumbericEditControlComponent {
 
   /**数字框输入 */
   inputchange(event){
-    let val=event.target.value;
+    const val=event.target.value;
 
     const decimalPart = val.toString().split('.')[1]||'';
-    let formConfiguration=this._fields.field.formConfiguration;
-    let Decimals=formConfiguration['NumericEditField.Decimals'];
+    const formConfiguration=this._fields.field.formConfiguration;
+    const Decimals=formConfiguration['NumericEditField.Decimals'];
     if(decimalPart.length>Decimals){
       this.fieldInput?.patchValue(val.slice(0,val.length-(decimalPart.length-2)));
     }

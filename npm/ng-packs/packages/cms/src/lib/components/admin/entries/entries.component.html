@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body ">
                 <div class="row align-items-end">
-                    <div class="mb-3 col-3">
+                    <div class="mb-3  col-md-3">
                         <label class="form-label">{{'Cms::Sections' | abpLocalization}}：</label>
                         <select class="form-select col-auto" [(ngModel)]="filters.sectionId"
                             (change)="sectionIdChange()">
@@ -30,7 +30,7 @@
                             </ng-container>
                         </select>
                     </div>
-                    <div class="mb-3 col-3">
+                    <div class="mb-3 col-md-3">
                         <label class="form-label">{{'AbpUi::Languages' | abpLocalization}}：</label>
                         <select class="form-select col-auto" [(ngModel)]="filters.culture" (change)="cultureChange()">
                             <ng-container *ngFor="let item of sectionLanguagesList">
@@ -38,7 +38,7 @@
                             </ng-container>
                         </select>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3  col-md-6">
                         <div class="input-group">
                             <input type="text" class="form-control" [(ngModel)]="filters.filter"
                                 [placeholder]="'Cms::PagerSearch'|abpLocalization" />
@@ -55,15 +55,15 @@
                         <div class="row align-items-end">
                             <ng-container *ngFor="let el of enableSearchFieldList">
                                 <ng-container *ngIf="el.field&&enablegearchFormEntity&&el.enableSearch">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <df-dynamic-search [fields]="el" [parentFiledName]="'extraProperties'"
                                             [culture]="filters.culture"
                                             [entity]="enablegearchFormEntity"></df-dynamic-search>
                                     </div>
                                 </ng-container>
                             </ng-container>
-                            <div class="col-6 mb-3 ">
-                                <button type="button" class="btn btn-primary" (click)="listget()">
+                            <div class="col-md-6 mb-3 ">
+                                <button type="button" class="btn btn-primary " (click)="listget()">
                                     <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
                                 </button>
                             </div>

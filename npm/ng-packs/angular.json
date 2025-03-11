@@ -220,6 +220,168 @@
         }
       }
     },
+    "dynamic-form": {
+      "projectType": "library",
+      "root": "packages/dynamic-form",
+      "sourceRoot": "packages/dynamic-form/src",
+      "prefix": "df",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/dynamic-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/dynamic-form/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/dynamic-form/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "packages/dynamic-form/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "file-explorer": {
+      "projectType": "library",
+      "root": "packages/file-explorer",
+      "sourceRoot": "packages/file-explorer/src",
+      "prefix": "fe",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/file-explorer/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/file-explorer/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/file-explorer/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "packages/file-explorer/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "ck-editor": {
+      "projectType": "library",
+      "root": "packages/ck-editor",
+      "sourceRoot": "packages/ck-editor/src",
+      "prefix": "ck",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/ck-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/ck-editor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/ck-editor/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "packages/ck-editor/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "cms": {
+      "projectType": "library",
+      "root": "packages/cms",
+      "sourceRoot": "packages/cms/src",
+      "prefix": "cms",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "packages/cms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "packages/cms/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "packages/cms/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "packages/cms/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/cms/**/*.ts",
+              "packages/cms/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+
     "core": {
       "projectType": "library",
       "root": "packages/core",
@@ -245,13 +407,19 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "packages/core/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["packages/core/**/*.ts", "packages/core/**/*.html"]
+            "lintFilePatterns": [
+              "packages/core/**/*.ts",
+              "packages/core/**/*.html"
+            ]
           }
         }
       }
@@ -286,7 +454,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "packages/regionalization-management/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         },
         "lint": {
@@ -330,7 +501,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "packages/tenant-domain-management/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         },
         "lint": {
@@ -340,41 +514,6 @@
               "packages/tenant-domain-management/**/*.ts",
               "packages/tenant-domain-management/**/*.html"
             ]
-          }
-        }
-      }
-    },
-    "ck-editor": {
-      "projectType": "library",
-      "root": "packages/ck-editor",
-      "sourceRoot": "packages/ck-editor/src",
-      "prefix": "ck",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "packages/ck-editor/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "packages/ck-editor/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "packages/ck-editor/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "packages/ck-editor/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }

@@ -105,7 +105,7 @@ namespace Dignite.Cms.Public.Sections
         protected async Task<SectionDto> MatchingSectionByEntityPath(List<Section> sections, string entryPath)
         {
             entryPath = entryPath.EnsureStartsWith('/').EnsureEndsWith('/');
-            foreach (var section in sections.OrderByDescending(s => s.Route))
+            foreach (var section in sections.OrderBy(s => s.Route))
             {
                 var sectionRoute = section.Route.EnsureStartsWith('/').EnsureEndsWith('/');
                 var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);

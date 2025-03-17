@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Dignite.Abp.Regionalization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Localization;
 using Volo.Abp.Threading;
 
 namespace Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
@@ -35,10 +35,10 @@ public class RegionalizationRouteConstraint : IRouteConstraint
         }
         else
         {
-            var regionalizationProvider = httpContext.RequestServices.GetRequiredService<IRegionalizationProvider>();
-            var regionalization = AsyncHelper.RunSync(() => regionalizationProvider.GetRegionalizationAsync());
+            var languageProvider = httpContext.RequestServices.GetRequiredService<ILanguageProvider>();
+            var languages = AsyncHelper.RunSync(() => languageProvider.GetLanguagesAsync());
 
-            Regex rgx = new Regex(@"^(" + regionalization.AvailableCultures.Select(l => l.Name).JoinAsString("|") + ")$", RegexOptions.IgnoreCase);
+            Regex rgx = new Regex(@"^(" + languages.Select(l => l.CultureName).JoinAsString("|") + ")$", RegexOptions.IgnoreCase);
 #pragma warning disable CS8604 // 引用类型参数可能为 null。
             if (rgx.IsMatch(culture.ToString()))
             {

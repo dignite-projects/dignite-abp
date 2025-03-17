@@ -141,10 +141,7 @@ namespace Dignite.Cms.Public.Web.Controllers
             var slug = ExtractSlug(section.Route, entityPath);
             if (slug.IsNullOrEmpty())
             {
-                if (section.Type == Cms.Sections.SectionType.Single)
-                    slug = EntryConsts.DefaultSlug;
-                else
-                    throw new Volo.Abp.AbpException($"The structure type section and channel type section route of the entry must contain {{slug}}");
+                slug = EntryConsts.DefaultSlug;
             }
 
             EntryDto entry = await _entryPublicAppService.FindBySlugAsync(

@@ -1,29 +1,35 @@
 <form [formGroup]="_Entity">
     <div formGroupName="formConfiguration">
         <div class="mb-3">
-            <label class="form-label">{{'DigniteAbpForms::SelectListItem' | abpLocalization}}</label>
-            <table class="table">
+            <label class="form-label">{{'AbpDynamicForm::SelectListItem' | abpLocalization}}</label>
+            <table class="table drag-table" cdkDropList (cdkDropListDropped)="drop($event)">
                 <thead>
                     <tr>
+                        <th scope="col"></th>
                         <th scope="col">{{'Cms::TableColumnDisplayName' | abpLocalization}}</th>
                         <th scope="col">{{'Cms::TableColumnName' | abpLocalization}}</th>
                         <th scope="col">{{'Cms::TableColumnForm' | abpLocalization}}</th>
                         <th scope="col" class="flex-end">
-                            <button class="btn btn-light btn-sm" (click.stop)="addTableColumns()">
+                            <button class="btn btn-light btn-sm" type="button" (click.stop)="addTableColumns()">
                                 <i class="fas fa-plus-circle"></i>
-                            </button>
+                            </button>   
                         </th>
                     </tr>
                 </thead>
                 <tbody formArrayName="TableColumns">
                     <ng-container *ngFor="let item of TableColumns.controls;let i=index">
-                        <tr [formGroupName]="i">
+                        <tr [formGroupName]="i"  cdkDrag cdkDragLockAxis="y" [cdkDragData]="item">
+                            <td>
+                                <div class="drag-handle" cdkDragHandle>
+                                    <span class="bi bi-arrows-move fs-5"></span>
+                                </div>
+                            </td>
                             <td><input type="text" class="form-control" formControlName="displayName"  (blur)="disPlayNameInputBlur($event,item)" ></td>
                             <td><input type="text" class="form-control" formControlName="name"></td>
                             <td>
                                 <select class="form-select" formControlName="formControlName"
                                     (change)="selectTableControl($event,i,item)">
-                                    <option value="">SelectFrom</option>
+                                    <option value="">{{'Cms::SelectFormControl' | abpLocalization}}</option>
                                     <ng-container *ngFor="let item_f of _fieldControlGroup;let i_f =index">
                                         <option [value]="item_f.name">{{item_f.displayName}}</option>
                                     </ng-container>
@@ -31,19 +37,11 @@
                             </td>
                             <td scope="row">
                                 <div class="flex-start">
-                                    <button class="btn btn-light btn-sm " (click.stop)="EditSitesBtn(item,i)">
+                                    <button class="btn btn-light btn-sm " type="button" (click.stop)="EditSitesBtn(item,i)">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button class="btn btn-light btn-sm ms-1" (click.stop)="deleteTableColumns(i)">
+                                    <button class="btn btn-light btn-sm ms-1" type="button" (click.stop)="deleteTableColumns(i)">
                                         <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button class="btn btn-light btn-sm ms-1" *ngIf="i!==0"
-                                        (click.stop)="TableArrowUpOrDown('up',i)">
-                                        <i class="fas fa-arrow-up"></i>
-                                    </button>
-                                    <button class="btn btn-light btn-sm ms-1" *ngIf="i!==TableColumns.controls.length-1"
-                                        (click.stop)="TableArrowUpOrDown('down',i)">
-                                        <i class="fas fa-arrow-down"></i>
                                     </button>
                                 </div>
                             </td>
@@ -52,13 +50,14 @@
                 </tbody>
             </table>
         </div>
-        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+        <!-- (abpInit)="submitclick?.nativeElement?.click()" -->
+        <button type="submit"  style="display: none;"
             #submitclick></button>
     </div>
 </form>
 
 
-<abp-modal [(visible)]="tableSelectOpen" [busy]="modalBusy" (visibleChange)="tableSelectVisibleChange($event)" [options]="{ size: CurrentSelectionTableControlName=='Matrix'?'xl':'' ,scrollable:false }">
+<abp-modal [(visible)]="tableSelectOpen" [busy]="modalBusy" (visibleChange)="tableSelectVisibleChange($event)" [options]="{ size: CurrentSelectionTableControlName==='Matrix'?'xl':'' ,scrollable:false }">
     <ng-template #abpHeader>
         <h3>{{_tableSelected?('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
     </ng-template>
@@ -68,7 +67,7 @@
         </ng-template>
         <ng-container *ngIf="tableSelectForm; else loaderRef">
             <form class="sites-modal-form" #myForm="ngForm" [formGroup]="tableSelectForm"
-                (keydown.enter)="$event.preventDefault()" (submit)="createOrEditSave()">
+                 (submit)="createOrEditSave()">
                 <button type="submit" #tableSelectModalSubmit style="display: none"></button>
                 <ng-container *ngIf="CurrentSelectionTableControlName&&tableSelectForm">
                     <df-dynamic [type]="CurrentSelectionTableControlName" 

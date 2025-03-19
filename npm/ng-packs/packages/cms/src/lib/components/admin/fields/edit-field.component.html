@@ -1,4 +1,4 @@
-<form class="row g-3 needs-validation" [formGroup]="newEntity" (keydown.enter)="$event.preventDefault()" [class]="{'was-validated':formValidation}" (submit)="save()">
+<form class="row g-3 needs-validation" [formGroup]="newEntity"  [class]="{'was-validated':formValidation}" (ngSubmit)="save()">
     <abp-page [title]="'Cms::EditField' | abpLocalization" [toolbar]="true">
         <div class="create-field-page">
             <button type="submit" style="display: none;" #submitclick></button>

@@ -2,20 +2,8 @@ import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 
 export class TableConfig {
 
-
-
     // 选项
     TableColumns: any = new FormArray([])
-
-    constructor(data?: TableConfig) {
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                }
-            }
-        }
-    }
 }
 export class TableFormControl {
     /**列标题 */
@@ -33,5 +21,4 @@ export class TableFormControl {
     description: any = [''];
 
 
-    constructor() {}
 }

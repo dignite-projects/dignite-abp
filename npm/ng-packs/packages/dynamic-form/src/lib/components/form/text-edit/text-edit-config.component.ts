@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TextEditConfig } from './text-edit-config';
@@ -41,7 +42,7 @@ export class TextEditConfigComponent {
     if (this._Entity && this._type) {
       await this.AfterInit();
       this.cdr.detectChanges(); // 手动触发变更检测
-      this.submitclick?.nativeElement?.click();
+      // this.submitclick?.nativeElement?.click();
     }
   }
 

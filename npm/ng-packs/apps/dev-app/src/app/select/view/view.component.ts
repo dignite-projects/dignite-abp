@@ -1,7 +1,9 @@
 import { LazyLoadService, SubscriptionService, LOADING_STRATEGY } from '@abp/ng.core';
 import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Bold, ClassicEditor, Essentials, Italic, Paragraph } from 'ckeditor5';
 import { concat } from 'rxjs';
+
 declare let $: any;
 
 const selectData1 = [
@@ -30,31 +32,26 @@ const selectData2 = [
   styleUrl: './view.component.scss',
 })
 export class ViewComponent {
- 
   private lazyLoadService = inject(LazyLoadService);
   private cdr = inject(ChangeDetectorRef);
   /**需要加载的 */
-  scriptsLoaded$:any='';
+  scriptsLoaded$: any = '';
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
- 
-    this.scriptsLoaded$= concat(
-      this.lazyLoadService.load(
-        LOADING_STRATEGY.AppendAnonymousScriptToHead('ng-jQuery.min.js'),
-      ),
+
+    this.scriptsLoaded$ = concat(
+      this.lazyLoadService.load(LOADING_STRATEGY.AppendAnonymousScriptToHead('ng-jQuery.min.js')),
       this.lazyLoadService.load(
         // LOADING_STRATEGY.PrependAnonymousStyleToHead('ng-select2.min.css'),
         LOADING_STRATEGY.AppendAnonymousStyleToHead('ng-select2.min.css'),
       ),
-      this.lazyLoadService.load(
-        LOADING_STRATEGY.AppendAnonymousScriptToHead('ng-select2.min.js'),
-      ),
-    )
-    this.scriptsLoaded$.subscribe((res) => {
+      this.lazyLoadService.load(LOADING_STRATEGY.AppendAnonymousScriptToHead('ng-select2.min.js')),
+    );
+    this.scriptsLoaded$.subscribe(res => {
       this.cdr.detectChanges();
       this.loadselect2();
-    })
+    });
   }
   /**表单 */
   formentry: FormGroup | any = new FormGroup({
@@ -75,13 +72,13 @@ export class ViewComponent {
   _select1Data1 = selectData1;
   _select1Data2 = selectData2;
 
-  @ViewChild('mySelect1',{static:false}) mySelect1: ElementRef;
+  @ViewChild('mySelect1', { static: false }) mySelect1: ElementRef;
   @ViewChild('mySelect2') mySelect2: ElementRef;
 
   loadselect2(): void {
     const $mySelect1 = $(this.mySelect1?.nativeElement);
     const $mySelect2 = $(this.mySelect2?.nativeElement);
-    if($mySelect1?.select2){
+    if ($mySelect1?.select2) {
       $mySelect1.select2({
         placeholder: '--选择单选--',
         allowClear: true,
@@ -92,7 +89,7 @@ export class ViewComponent {
         this.select1Input.setValue([$mySelect1.val()]);
       });
     }
-    if($mySelect2?.select2){
+    if ($mySelect2?.select2) {
       $mySelect2.select2({
         placeholder: '--选择多选--',
         allowClear: true,
@@ -103,7 +100,6 @@ export class ViewComponent {
       });
     }
     this.setValues();
-  
   }
 
   save() {
@@ -125,6 +121,16 @@ export class ViewComponent {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.scriptsLoaded$=null;
+    this.scriptsLoaded$ = null;
+  }
+
+  newckeditorForm: FormGroup | any = new FormGroup({
+    ckeditor: new FormControl('1111111111'),
+  });
+
+ 
+  save111(){
+    console.log('event',this.newckeditorForm.value);
+    
   }
 }

@@ -30,7 +30,7 @@
         <ng-template #loaderRef>
             <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
         </ng-template>
-        <form *ngIf="createForm; else loaderRef" [formGroup]="createForm" (keydown.enter)="$event.preventDefault()" [class]="{'was-validated':formValidation}" (submit)="createSave()">
+        <form *ngIf="createForm; else loaderRef" [formGroup]="createForm" [class]="{'was-validated':formValidation}" (submit)="createSave()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">{{'Cms::Name' | abpLocalization}}</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name"
@@ -41,7 +41,7 @@
 
     <ng-template #abpFooter>
         <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
-        <abp-button iconClass="fa fa-check" [disabled]="createForm?.invalid" (click)="createSave()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
+        <abp-button iconClass="fa fa-check" [disabled]="createForm?.invalid" [loading]="modalBusy" (click)="createSave()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
     </ng-template>
 </abp-modal>
 
@@ -53,7 +53,7 @@
         <ng-template #loaderRef>
             <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
         </ng-template>
-        <form *ngIf="editGroupForm; else loaderRef" [formGroup]="editGroupForm" (keydown.enter)="$event.preventDefault()" [class]="{'was-validated':formValidation}" (submit)="editSave()">
+        <form *ngIf="editGroupForm; else loaderRef" [formGroup]="editGroupForm"  [class]="{'was-validated':formValidation}" (submit)="editSave()">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">{{'Cms::Name' | abpLocalization}}</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name"

@@ -1,9 +1,10 @@
 <abp-page [title]="'Cms::Edit'| abpLocalization" [toolbar]="true">
-    <form class="row g-3 needs-validation" [formGroup]="formEntity" (keydown.enter)="$event.preventDefault()"
-        [class]="{'was-validated':formValidation}" (submit)="save()">
+    <form class="row g-3 needs-validation"
+        [class]="{'was-validated':formValidation}"  [formGroup]="formEntity"  (submit)="save()" >
         <button type="submit" style="display: none;" #submitclick></button>
         <ng-container *ngIf="formEntity&&entryInfo">
                 <cms-create-or-edit-entries  [sectionId]="sectionId" [entryTypeId]="entryTypeId" [isEdit]="true" [select]="entryInfo"  [entity]="formEntity"></cms-create-or-edit-entries>
         </ng-container>
+        
     </form>
 </abp-page>

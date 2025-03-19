@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CkEditorConfig } from './ck-editor-config';

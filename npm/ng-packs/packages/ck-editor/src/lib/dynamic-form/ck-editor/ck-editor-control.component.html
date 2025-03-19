@@ -1,10 +1,10 @@
-<form [formGroup]="_entity">
+<div [formGroup]="_entity" (keydown.enter)="$event.stopPropagation()">
     <div formGroupName="extraProperties">
-        <div class="mb-3">
+        <div class="mb-3" (keydown.enter)="$event.stopPropagation()">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="ckOptions">
-                <ckeditor class="form-textarea" [editor]="Editor" *ngIf="Editor" [config]="ckOptions" (ready)="onReady($event)"
-                    [formControlName]="_fields.field.name">
+                <ckeditor class="form-textarea" #editor [editor]="Editor" *ngIf="Editor" [config]="ckOptions" (ready)="onReady($event)"
+                    [formControlName]="_fields.field.name" >
                 </ckeditor>
             </ng-container>
             <small class="form-text text-muted d-block"
@@ -12,4 +12,4 @@
         </div>
     </div>
     <button type="submit" style="display: none;" #submitclick></button>
-</form>
+</div>

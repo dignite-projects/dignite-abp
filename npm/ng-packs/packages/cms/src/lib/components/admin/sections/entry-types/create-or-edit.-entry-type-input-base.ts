@@ -9,29 +9,12 @@ export class CreateOrEditEntryTypeInputBase {
     /**条目路由 */
     fieldTabs: any = new FormArray([])
     
-    constructor(data?: CreateOrEditEntryTypeInputBase) {
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                }
-            }
-        }
-    }
+    
 }
 export class fieldTabsBase {
     /**名称 Unique Name*/
     name: any = ['', [Validators.required]];
     fields?: any = [[], []]
-    constructor(data?: fieldTabsBase) {
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                }
-            }
-        }
-    }
 }
 export class fieldsBase {
     /**字段id Unique Name*/
@@ -44,9 +27,6 @@ export class fieldsBase {
     showInList: any = [false, []];
     /**是否启用搜索 */
     enableSearch: any = [false, []];
-
-    constructor() {
-    }
 }
 
 

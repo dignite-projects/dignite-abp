@@ -1,12 +1,12 @@
-<form  [formGroup]="newEntity" (keydown.enter)="$event.preventDefault()" [class]="{'was-validated':formValidation}" (submit)="save()">
-    <abp-page [title]="'Cms::CreateField' | abpLocalization" [toolbar]="true">
+<abp-page [title]="'Cms::CreateField' | abpLocalization" [toolbar]="true">
+        <form  [formGroup]="newEntity"  [class]="{'was-validated':formValidation}" (ngSubmit)="save()">
         <div class="create-field-page">
             <button form-type="submit" style="display: none;" #submitclick></button>
             <div class="card">
                 <div class="card-body">
-                    <cms-create-or-edit-field [Entity]="newEntity"></cms-create-or-edit-field>
+                    <cms-create-or-edit-field  [formGroup]="newEntity" [Entity]="newEntity"></cms-create-or-edit-field>
                 </div>
             </div>
         </div>
+    </form>
     </abp-page>
-</form>

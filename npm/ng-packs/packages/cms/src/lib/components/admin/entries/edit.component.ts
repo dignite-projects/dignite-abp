@@ -15,6 +15,7 @@ import { CreateOrUpdateEntryInputBase } from './create-or-update-entry-input-bas
 import { ValidatorsService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
+import { ClassicEditor, Essentials, Paragraph, Bold, Italic } from 'ckeditor5';
 
 @Component({
   selector: 'cms-edit',
@@ -28,6 +29,10 @@ import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
   ],
 })
 export class EditComponent implements OnInit {
+
+   
+
+
   private fb = inject(FormBuilder);
   private _updateListService = inject(UpdateListService);
   private toaster = inject(ToasterService);
@@ -94,6 +99,8 @@ export class EditComponent implements OnInit {
 
   /**提交 */
   save() {
+    this.cultureInput.enable();
+    this.draftInput.patchValue(this.draftValue||false);
     const input = this.formEntity?.value;
     input.culture = this.cultureName;
     input.publishTime = new Date(
@@ -119,11 +126,12 @@ export class EditComponent implements OnInit {
       });
   }
   isSubmit: boolean|any = false;
+  draftValue: string|any = '';
   /**点击提交 */
   clickSubmit(type) {
     if (this.isSubmit) return;
     this.isSubmit = true;
-    this.draftInput.patchValue(type);
+    this.draftValue= type;
     this.cultureInput.enable();
     this.submitclick?.nativeElement?.click();
   }

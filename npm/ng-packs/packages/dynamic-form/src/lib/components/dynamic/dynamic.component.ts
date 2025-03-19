@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { FieldControlGroupInterfaces } from '../../interfaces';
 import { AddFieldControlGroup, } from '../form';
 
+
 @Component({
   selector: 'df-dynamic',
   templateUrl: './dynamic.component.html',
@@ -77,7 +78,6 @@ export class DynamicComponent {
         this.loadfieldConfigComponent(fieldControlItem);
       }
       if (this._fields && this._parentFiledName && this._culture) {
-      
         /**表单控件组中的项 */
         const fieldControlItem = _fieldControlGroup.find(
           el => el.name === this._fields?.field?.formControlName
@@ -120,4 +120,5 @@ export class DynamicComponent {
     instance.entity = this._entity;
     
   }
+
 }

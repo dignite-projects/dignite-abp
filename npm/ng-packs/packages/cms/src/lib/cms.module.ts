@@ -38,6 +38,8 @@ import { EntryViewComponent } from './components/dynamic-form/entry/entry-view.c
 import { MatrixViewComponent } from './components/dynamic-form/matrix/matrix-view.component';
 import { TableViewComponent } from './components/dynamic-form/table/table-view.component';
 import { EntrySearchComponent } from './components/dynamic-form/entry/entry-search.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { EntrySearchComponent } from './components/dynamic-form/entry/entry-sear
     ExtensibleModule,
     DragDropModule,
     NgxDatatableModule,
+    CKEditorModule,
+    FormsModule,
     // CommercialUiModule,
   ],
   exports: [

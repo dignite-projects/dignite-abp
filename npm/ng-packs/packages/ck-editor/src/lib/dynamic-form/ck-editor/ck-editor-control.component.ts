@@ -1,3 +1,6 @@
+/* eslint-disable no-async-promise-executor */
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @angular-eslint/component-selector */
 import {
   ConfigStateService,
   LazyLoadService,
@@ -11,13 +14,13 @@ import { isBase64UploadAdapter } from './ckEditorUpload';
 import { SetCkEditorConfigsService } from '../../services';
 import { CkEditorModeEnum } from '../../enums/ck-editor-mode.enum';
 
-
 @Component({
   selector: 'ck-editor-control',
   templateUrl: './ck-editor-control.component.html',
   styleUrls: ['./ck-editor-control.component.scss'],
 })
 export class CkEditorControlComponent {
+
   private config: ConfigStateService = inject(ConfigStateService);
   private _restService: RestService = inject(RestService);
   /**ck-Editor的值 */
@@ -29,7 +32,7 @@ export class CkEditorControlComponent {
 
   constructor() {}
   public onReady(editor) {
-    let _this = this;
+    const _this = this;
     editor.plugins.get('FileRepository').createUploadAdapter = function (loader: any) {
       return new isBase64UploadAdapter(loader, _this.imagesContainerName, _this._restService);
     };
@@ -86,20 +89,20 @@ export class CkEditorControlComponent {
       this.ckEditorValue =
         this._selected || this._fields.field.formConfiguration['Ckeditor.InitialContent'];
       this.setckeditorInput(this.ckEditorValue);
-      this.cdr.detectChanges(); // 手动触发变更检测
-      await this.loadckeditor();
-      this.submitclick?.nativeElement?.click();
+      // this.cdr.detectChanges(); // 手动触发变更检测
+        await this.loadckeditor();
+      // this.submitclick?.nativeElement?.click();
     }
   }
-
   private _SetCkEditorConfigsService = inject(SetCkEditorConfigsService);
   public Editor: any;
   loadckeditor() {
-    let _that = this;
-    let formConfiguration=this._fields.field.formConfiguration;
+    const _that = this;
+    const formConfiguration=this._fields.field.formConfiguration;
     return new Promise(async resolve => {
       await import('ckeditor5').then(async res => {
         this.loadStyle();
+        console.log('ckeditor5', res);
         if(formConfiguration['Ckeditor.Mode']==CkEditorModeEnum.Simple){
           _that.Editor = res.InlineEditor;
         } else if(formConfiguration['Ckeditor.Mode']==CkEditorModeEnum.Classic){
@@ -108,7 +111,7 @@ export class CkEditorControlComponent {
           formConfiguration['Ckeditor.Mode']=CkEditorModeEnum.Simple;
           _that.Editor = res.InlineEditor;
         }
-        let configs:any = await _that._SetCkEditorConfigsService.get({
+        const configs:any = await _that._SetCkEditorConfigsService.get({
           language: _that.currentCulture,
           type:formConfiguration['Ckeditor.Mode']
         });
@@ -145,11 +148,11 @@ export class CkEditorControlComponent {
   imagesContainerName: any = '';
   AfterInit() {
     return new Promise(resolve => {
-      let ValidatorsArray:any[] = [];
+      const ValidatorsArray:any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
-      let newControl = this.fb.control(
+      const newControl = this.fb.control(
         this._selected
           ? this._selected
           : this._fields.field.formConfiguration['Ckeditor.InitialContent'],

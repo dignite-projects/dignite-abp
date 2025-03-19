@@ -1,8 +1,11 @@
+/* eslint-disable no-async-promise-executor */
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatrixConfig, MatrixItemConfig } from './matrix-config';
 import { CmsApiService, FieldAbstractsService } from '../../../services';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { ValidatorsService } from '@dignite-ng/expand.core';
 
 @Component({
   selector: 'df-matrix-config',
@@ -31,8 +34,10 @@ export class MatrixConfigComponent {
   public set selected(v: any) {
     if (v) {
       for (const key in v.formConfiguration) {
-        if(Array.isArray(v.formConfiguration[key])){
-          v.formConfiguration[key]=this._CmsApiService.convertKeysToCamelCase(v.formConfiguration[key])
+        if (Array.isArray(v.formConfiguration[key])) {
+          v.formConfiguration[key] = this._CmsApiService.convertKeysToCamelCase(
+            v.formConfiguration[key]
+          );
         }
       }
       this._selected = v;
@@ -53,7 +58,7 @@ export class MatrixConfigComponent {
     if (this._Entity && this._type) {
       await this.AfterInit();
       this.cdr.detectChanges(); // 手动触发变更检测
-      this.submitclick?.nativeElement?.click();
+      // this.submitclick?.nativeElement?.click();
     }
   }
 
@@ -66,8 +71,6 @@ export class MatrixConfigComponent {
       resolve(true);
     });
   }
-
-  
 
   setSelectValue() {
     return new Promise((resolve, rejects) => {
@@ -94,12 +97,12 @@ export class MatrixConfigComponent {
   }
 
   /**模态框-状态 */
-  matrixModalOpen: boolean = false;
+  matrixModalOpen: boolean|any = false;
   /**模态框-是否正在编辑 */
   isMatrixModalEdit: any = false;
 
   /**模态框-用于确定模态的繁忙状态是否为真 */
-  modalBusy: boolean = false;
+  modalBusy: boolean|any = false;
 
   /**模态框-表单 */
   matrixModalForm: FormGroup | undefined;
@@ -127,13 +130,16 @@ export class MatrixConfigComponent {
     this.matrixModalForm = this.fb.group(new MatrixItemConfig());
     this.matrixModalOpen = true;
   }
-
+  formValidation: any;
+  private _ValidatorsService=inject(ValidatorsService)
   /**模态框--矩阵表单保存提交 */
   createOrEditSave() {
-    let input = this.matrixModalForm.value;
+    const input = this.matrixModalForm.value;
+    this.formValidation = this._ValidatorsService.getFormValidationStatus(this.matrixModalForm);
+    if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) return;
     if (!this.matrixModalForm.valid) return;
     if (this.isMatrixModalEdit) {
-      let MatrixBlockTypesItem = this.MatrixBlockTypes.at(this.selectMatrixBlockIndex) as FormGroup;
+      const MatrixBlockTypesItem = this.MatrixBlockTypes.at(this.selectMatrixBlockIndex) as FormGroup;
       MatrixBlockTypesItem.patchValue({
         ...input,
       });
@@ -141,6 +147,7 @@ export class MatrixConfigComponent {
       this.addMatrixBlockTypeItem(input);
     }
     this.matrixModalOpen = false;
+
   }
   /**新增矩阵块-向数组表单中增加项 */
   addMatrixBlockTypeItem(input) {
@@ -175,17 +182,17 @@ export class MatrixConfigComponent {
   /**矩阵字段-新增 */
   addMatrixField() {
     this.addMatrixFieldItem('', this.selectMatrixBlockIndex);
-    let MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(
+    const MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(
       this.selectMatrixBlockIndex
     ) as FormGroup;
-    let MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
+    const MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
     this.selectMatrixFieldChange(0, MatrixFieldItemForm.length - 1);
   }
   /**矩阵字段-新增矩阵字段项 */
   addMatrixFieldItem(input: any = '', selectMatrixBlockIndex) {
     /**矩阵下标的矩阵项Form */
-    let MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(selectMatrixBlockIndex) as FormGroup;
-    let MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
+    const MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(selectMatrixBlockIndex) as FormGroup;
+    const MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
     MatrixFieldItemForm.push(
       this.fb.group({
         /**字段名称 Display name of this field */
@@ -218,27 +225,39 @@ export class MatrixConfigComponent {
     return this.matrixModalForm?.get('name');
   }
   get FieldnameInput() {
-    let MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(
+    const MatrixBlockTypesItemForm = this.MatrixBlockTypes.at(
       this.selectMatrixBlockIndex
     ) as FormGroup;
-    let MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
+    const MatrixFieldItemForm = MatrixBlockTypesItemForm.get('fields') as FormArray;
     return MatrixFieldItemForm.at(this.selectMatrixFieldIndex).get('name');
   }
 
   /**矩阵displayNameInput字段失去焦点 */
   displayNameInputBlur(event) {
-    let value = event.target.value;
-    let pinyin = this._CmsApiService.chineseToPinyin(value);
-    let nameInput = this.nameInput;
+    const value = event.target.value;
+    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const nameInput = this.nameInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);
   }
   /**矩阵displayNameInput字段失去焦点 */
   MatrixFieldDisplayNameInputBlur(event) {
-    let value = event.target.value;
-    let pinyin = this._CmsApiService.chineseToPinyin(value);
-    let FieldnameInput = this.FieldnameInput;
+    const value = event.target.value;
+    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const FieldnameInput = this.FieldnameInput;
     if (FieldnameInput.value) return;
     FieldnameInput.patchValue(pinyin);
+  }
+
+  drop(event) {
+    moveItemInArray(this.MatrixBlockTypes.controls, event.previousIndex, event.currentIndex);
+    this.MatrixBlockTypes.updateValueAndValidity();
+    this.selectMatrixBlockIndex= event.currentIndex;
+  }
+  drop1(event) {
+    const object1=this.MatrixBlockTypes.controls[this.selectMatrixBlockIndex].get('fields') as FormArray;
+    moveItemInArray(object1.controls, event.previousIndex, event.currentIndex);
+    this.MatrixBlockTypes.updateValueAndValidity();
+    this.selectMatrixFieldIndex=event.currentIndex;
   }
 }

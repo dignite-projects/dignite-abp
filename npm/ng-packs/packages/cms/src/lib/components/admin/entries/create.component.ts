@@ -92,7 +92,6 @@ export class CreateComponent implements OnInit {
   /**提交 */
   save() {
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
-    console.log(this.formValidation,'提交',this.formEntity);
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')){
       this.isSubmit = false;
       return this.cultureInput.disable();

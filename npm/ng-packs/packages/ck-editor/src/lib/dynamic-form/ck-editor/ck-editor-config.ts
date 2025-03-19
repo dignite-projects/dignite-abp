@@ -1,9 +1,10 @@
 import { FormControl, Validators } from "@angular/forms";
+import { CkEditorModeEnum } from "../../enums/ck-editor-mode.enum";
 
 export class CkEditorConfig {
 
     /**类型 */
-    'Ckeditor.Mode': any = ['', []];
+    'Ckeditor.Mode': any = [CkEditorModeEnum.Simple, []];
     /**文件容器名称 */
     // placeholder: any = new FormControl('', Validators.required);
     'Ckeditor.ImagesContainerName': any = ['', []];

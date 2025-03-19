@@ -1,5 +1,6 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'df-switch-search',
@@ -57,13 +58,13 @@ export class SwitchSearchComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray:any = [];
-      let newControl = this.fb.control(
+      const ValidatorsArray:any = [];
+      const newControl = this.fb.control(
         this._selected
           ? this._selected
           : this._selected === false
           ? this._selected
-          : this._fields.field.formConfiguration['Switch.Default'],
+          : '',
         ValidatorsArray
       );
       this.extraProperties.setControl(this._fields.field.name, newControl);

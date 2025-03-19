@@ -1,15 +1,16 @@
 <form [formGroup]="_Entity">
     <div formGroupName="formConfiguration">
         <div class="mb-3">
-            <label class="form-label">{{'DigniteAbpForms::SelectListItem' | abpLocalization}}</label>
-            <table class="table">
+            <label class="form-label">{{'AbpDynamicForm::SelectListItem' | abpLocalization}}</label>
+            <table class="table drag-table" cdkDropList (cdkDropListDropped)="drop($event)">
                 <thead>
                     <tr>
-                        <th scope="col">{{'DigniteAbpForms::SelectListItemText' | abpLocalization}}</th>
-                        <th scope="col">{{'DigniteAbpForms::SelectListItemValue' | abpLocalization}}</th>
-                        <th scope="col">{{'DigniteAbpForms::Selected' | abpLocalization}}</th>
+                        <th scope="col"></th>
+                        <th scope="col">{{'AbpDynamicForm::SelectListItemText' | abpLocalization}}</th>
+                        <th scope="col">{{'AbpDynamicForm::SelectListItemValue' | abpLocalization}}</th>
+                        <th scope="col">{{'AbpDynamicForm::Selected' | abpLocalization}}</th>
                         <th scope="col" style="width: 1%;">
-                            <button class="btn btn-light btn-sm" (click.stop)="addSelectOptions()">
+                            <button class="btn btn-light btn-sm" type="button" (click.stop)="addSelectOptions()">
                                 <i class="fas fa-plus-circle"></i>
                             </button>
                         </th>
@@ -17,39 +18,40 @@
                 </thead>
                 <tbody formArrayName="Select.Options">
                     <ng-container *ngFor="let item of SelectOptions.controls;let i=index">
-                        <tr [formGroupName]="i">
-                            <td><input type="text" class="form-control" formControlName="Text" (change)="textChange($event,i)"></td>
+                        <tr [formGroupName]="i" cdkDrag cdkDragLockAxis="y" [cdkDragData]="item">
+                            <td>
+                                <div class="drag-handle" cdkDragHandle>
+                                    <span class="bi bi-arrows-move fs-5"></span>
+                                </div>
+                            </td>
+                            <td><input type="text" class="form-control" formControlName="Text"
+                                    (change)="textChange($event,i)"></td>
                             <td><input type="text" class="form-control" formControlName="Value"></td>
                             <td>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox"  formControlName="Selected" id="selected">
+                                    <input class="form-check-input" type="checkbox" formControlName="Selected"
+                                        id="selected">
                                 </div>
                             </td>
                             <td scope="row" style="width: 1%;">
-                                <button class="btn btn-light btn-sm" (click.stop)="deleteSelectOptions(i)">
+                                <button class="btn btn-light btn-sm" type="button"  (click.stop)="deleteSelectOptions(i)">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </td>
-                        </tr> 
+                        </tr>
                     </ng-container>
-                    
-                    
                 </tbody>
             </table>
         </div>
-
-
-
         <div class="mb-3">
-            <label class="form-label">{{'DigniteAbpForms::NullText' | abpLocalization}}</label>
+            <label class="form-label">{{'AbpDynamicForm::NullText' | abpLocalization}}</label>
             <input type="text" class="form-control" formControlName="Select.NullText">
         </div>
         <div class="mb-3">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" formControlName="Select.Multiple"
-                    id="Multiple">
+                <input class="form-check-input" type="checkbox" formControlName="Select.Multiple" id="Multiple">
                 <label class="form-check-label" for="Multiple">
-                    {{'DigniteAbpForms::Multiple' | abpLocalization}}
+                    {{'AbpDynamicForm::Multiple' | abpLocalization}}
                 </label>
             </div>
         </div>

@@ -21,6 +21,5 @@ export class CreateOrUpdateEntryInputBase {
     /**版本 */
     initialVersionId: any = [null]
     extraProperties: FormGroup | undefined = new FormGroup({})
-    constructor() { }
 }
 

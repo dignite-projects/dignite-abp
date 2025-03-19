@@ -1,4 +1,4 @@
-<form [formGroup]="formEntity">
+<div [formGroup]="formEntity">
     <div class="row">
         <div class="col-md-8">
             <div class="card">
@@ -14,8 +14,8 @@
                                 <ng-container *ngIf="el&&formEntity">
                                     <df-dynamic [fields]="el"
                                         [selected]="entryInfo ? entryInfo.extraProperties[el.field.name] : ''"
-                                        [parentFiledName]="'extraProperties'"
-                                        [culture]="cultureInput.value"  [entity]="formEntity"></df-dynamic>
+                                        [parentFiledName]="'extraProperties'" [culture]="cultureInput.value"
+                                        [entity]="formEntity"></df-dynamic>
                                 </ng-container>
                             </ng-container>
                         </ng-container>
@@ -137,4 +137,4 @@
         </div>
     </div>
     <button type="submit" style="display: none;" #submitclick></button>
-</form>
+</div>

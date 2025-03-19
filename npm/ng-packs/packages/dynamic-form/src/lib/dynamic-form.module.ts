@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '@abp/ng.core';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
@@ -15,7 +15,6 @@ import {
   DateEditControlComponent,
   SelectConfigComponent,
   SelectControlComponent,
-  AddFieldControlGroup,
   DynamicComponent,
 } from './components';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -32,7 +31,7 @@ import { SelectSearchComponent } from './components/form/select/select-search.co
 import { TextEditSearchComponent } from './components/form/text-edit/text-edit-search.component';
 import { SwitchSearchComponent } from './components/form/switch/switch-search.component';
 import { NumericEditSearchComponent } from './components/form/numeric-edit/numeric-edit-search.component';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -70,6 +69,7 @@ import { NumericEditSearchComponent } from './components/form/numeric-edit/numer
     ReactiveFormsModule,
     NgbDropdownModule,
       NzSelectModule,
+      DragDropModule,
     // NzTreeModule,
   ],
   exports: [

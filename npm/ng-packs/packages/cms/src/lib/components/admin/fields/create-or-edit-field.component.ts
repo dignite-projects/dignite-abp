@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FieldAbstractsService } from '../../../services/field-abstracts.service';
 import {
@@ -57,9 +58,6 @@ export class CreateOrEditFieldComponent {
     }
   }
 
-
-
-
   async dataLoaded() {
     if (this._FieldAbstractsService.fromControlList.length == 0) {
       await this._FieldAbstractsService.getFromControlList();
@@ -80,7 +78,7 @@ export class CreateOrEditFieldComponent {
         })
       );
       setTimeout(() => {
-        this.submitclick.nativeElement.click();
+        // this.submitclick.nativeElement.click();
       }, 0);
     }
   }
@@ -91,15 +89,15 @@ export class CreateOrEditFieldComponent {
   }
 
   nameInputBlur(event) {
-    let value = event.target.value;
+    const value = event.target.value;
     this.nameInput.patchValue(value);
   }
 
   /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event) {
-    let value = event.target.value;
-    let pinyin = this._CmsApiService.chineseToPinyin(value);
-    let nameInput = this.nameInput;
+    const value = event.target.value;
+    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const nameInput = this.nameInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);
   }

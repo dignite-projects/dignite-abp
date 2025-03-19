@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } fr
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { TableConfig, TableFormControl } from './table-config';
 import { CmsApiService, FieldAbstractsService } from '../../../services';
-
+import {  moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'df-table-config',
   templateUrl: './table-config.component.html',
@@ -68,6 +68,7 @@ export class TableConfigComponent {
       ...new TableFormControl(),
       formConfiguration: [{}]
     }))
+    this.cdr.detectChanges(); // 手动触发变更检测
   }
   /**删除某个选项 */
   deleteTableColumns(index) {
@@ -86,12 +87,14 @@ export class TableConfigComponent {
       } else {
         this.addTableColumns()
       }
+    
       resolve(true)
     })
   }
   itemForm: any
   /**选择表格的表单控件 */
   selectTableControl(event, i, item) {
+    if(event.target.value==='') return;
     this.CurrentSelectionTableControlName = event.target.value
     this.tableSelectOpen = true
     this.tableSelectForm = this.fb.group(new TableFormControl())
@@ -104,10 +107,10 @@ export class TableConfigComponent {
   /**正在创建或编辑的表格项下标 */
   TableColumnsIndex: any
   /**创建站点模态框状态 */
-  tableSelectOpen: boolean = false
+  tableSelectOpen: boolean|any = false
 
   /**用于确定模态的繁忙状态是否为真 */
-  modalBusy: boolean = false
+  modalBusy: boolean|any = false
   /**创建站点表单 */
   tableSelectForm: FormGroup | undefined;
 
@@ -132,7 +135,7 @@ export class TableConfigComponent {
   /**表单保存提交 */
   createOrEditSave() {
     const formGroup = this.TableColumns.at(this.TableColumnsIndex) as FormGroup;
-    let formConfigurationgroup = formGroup.get('formConfiguration') as FormGroup
+    const formConfigurationgroup = formGroup.get('formConfiguration') as FormGroup
 
     formConfigurationgroup.setValue({
       ...this.tableSelectForm?.value['formConfiguration'],
@@ -157,21 +160,30 @@ export class TableConfigComponent {
   }
 
 
-  /**调整表格位置 */
-  TableArrowUpOrDown(type, index) {
-    let controlAt = this.TableColumns.at(index)
-    this.TableColumns.removeAt(index)
-    let lastindex = type == 'up' ? index - 1 : index + 1
-    this.TableColumns.insert(lastindex, controlAt)
-  }
+  // /**调整表格位置 */
+  // TableArrowUpOrDown(type, index) {
+  //   const controlAt = this.TableColumns.at(index)
+  //   this.TableColumns.removeAt(index)
+  //   const lastindex = type == 'up' ? index - 1 : index + 1
+  //   this.TableColumns.insert(lastindex, controlAt)
+  // }
 
 
   /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event, item) {
-    let value = event.target.value
-    let pinyin = this._CmsApiService.chineseToPinyin(value)
-    let nameInput = item.get('name')
+    const value = event.target.value
+    const pinyin = this._CmsApiService.chineseToPinyin(value)
+    const nameInput = item.get('name')
     if (nameInput.value) return
     nameInput.patchValue(pinyin)
   }
+    /**调整表格位置 */
+    drop(event: any) {
+      moveItemInArray(
+        this.TableColumns.controls,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.TableColumns.updateValueAndValidity()
+    }
 }

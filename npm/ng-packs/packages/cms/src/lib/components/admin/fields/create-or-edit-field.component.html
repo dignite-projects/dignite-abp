@@ -1,4 +1,4 @@
-<form [formGroup]="_Entity">
+<div [formGroup]="_Entity" >
     <button type="submit" style="display: none;" #submitclick></button>
     <div class="mb-3">
         <label class="form-label" for="groupId">{{'Cms::FieldGroup' | abpLocalization}}</label>
@@ -10,16 +10,16 @@
         </select>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="displayName">{{'DigniteAbpForms::FieldDisplayName' | abpLocalization}}</label>
+        <label class="form-label" for="displayName">{{'AbpDynamicForm::FieldDisplayName' | abpLocalization}}</label>
         <input type="text" class="form-control" formControlName="displayName" required (blur)="disPlayNameInputBlur($event)">
     </div>
     <div class="mb-3">
-        <label class="form-label" for="name">{{'DigniteAbpForms::FieldName' | abpLocalization}}</label>
+        <label class="form-label" for="name">{{'AbpDynamicForm::FieldName' | abpLocalization}}</label>
         <input type="text" class="form-control" formControlName="name" (input)="nameInputBlur($event)">
         <div class="text-danger invalid-feedback" *ngIf="nameInput.errors?.repetition">
             {{nameInput.errors?.repetition}}
         </div>
-        <small class="form-text text-muted d-block ">{{'DigniteAbpForms::FieldNameHelpText' | abpLocalization}}</small>
+        <small class="form-text text-muted d-block ">{{'AbpDynamicForm::FieldNameHelpText' | abpLocalization}}</small>
     </div>
     <div class="mb-3">
         <label class="form-label" for="description">{{'Cms::Description' | abpLocalization}}</label>
@@ -36,4 +36,4 @@
     <ng-container *ngIf="_Entity.value.formControlName&&_Entity"> 
         <df-dynamic [type]="_Entity.value.formControlName" [selected]="_selected" [entity]="_Entity" ></df-dynamic>
     </ng-container>
-</form>
+</div>

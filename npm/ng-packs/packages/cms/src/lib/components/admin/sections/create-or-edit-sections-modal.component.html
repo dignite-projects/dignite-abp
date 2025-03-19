@@ -7,7 +7,7 @@
             <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
         </ng-template>
         <ng-container *ngIf="ModalForm; else loaderRef">
-            <form class="sites-modal-form" [formGroup]="ModalForm" (keydown.enter)="$event.preventDefault()"
+            <form class="sites-modal-form" [formGroup]="ModalForm" 
                 [class]="{'was-validated':formValidation}" (submit)="save()">
                 <button type="submit" #ModalFormSubmit style="display: none"></button>
                 <div class="mb-3">

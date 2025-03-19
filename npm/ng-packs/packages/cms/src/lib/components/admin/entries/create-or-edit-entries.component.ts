@@ -10,12 +10,15 @@ import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 import { Observable } from 'rxjs';
 
+
+
 @Component({
   selector: 'cms-create-or-edit-entries',
   templateUrl: './create-or-edit-entries.component.html',
   styleUrls: ['./create-or-edit-entries.component.scss'],
 })
 export class CreateOrEditEntriesComponent {
+
   private toaster = inject(ToasterService);
   public _location = inject(Location);
   private configState = inject(ConfigStateService);
@@ -111,7 +114,7 @@ export class CreateOrEditEntriesComponent {
     this.cdRef.detectChanges();
     this.isLoad = true;
     setTimeout(() => {
-      this.submitclick?.nativeElement.click();
+      // this.submitclick?.nativeElement.click();
     }, 0);
   }
   // /**别名查重 */

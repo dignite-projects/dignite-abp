@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { LocalizationService } from '@abp/ng.core';
 import {
   Component,
@@ -41,14 +42,14 @@ export class CreateOrEditSectionsModalComponent {
   formValidation: any = '';
  
   /**模态框-状态-是否打开 */
-  ModalOpen: boolean = false;
+  ModalOpen: boolean|any = false;
   @Input()
   public set visible(v: boolean) {
     this.ModalOpen = v;
   }
 
   /**模态框-繁忙状态-用于确定模态的繁忙状态是否为真 */
-  ModalBusy: boolean = false;
+  ModalBusy: boolean|any = false;
   /**初始值 */
   selected: any = '';
   /**模态框-表单 */
@@ -89,6 +90,8 @@ export class CreateOrEditSectionsModalComponent {
   /**模态框-状态改变回调 */
   ModalVisibleChange(event) {
     this.ModalOpen = event;
+    this.formValidation='';
+    this.ModalForm=undefined;
     this.visibleChange.emit(event);
     if (!event) {
       return;
@@ -102,7 +105,7 @@ export class CreateOrEditSectionsModalComponent {
     if (this.ModalBusy) return;
     this.ModalBusy = true;
     if (!this.ModalForm.valid) return;
-    let input = this.ModalForm.value;
+    const input = this.ModalForm.value;
     if (this.idInput.value) {
       this._SectionAdminService
         .update(this.idInput.value, input)
@@ -137,11 +140,11 @@ export class CreateOrEditSectionsModalComponent {
   }
 
     disPlayNameInputBlur(event) {
-    let value = event.target.value;
-    let pinyin = this._CmsApiService.chineseToPinyin(value);
-    let nameInput = this.nameInput;
-    let routeInput = this.routeInput;
-    let templateInput = this.templateInput;
+    const value = event.target.value;
+    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const nameInput = this.nameInput;
+    const routeInput = this.routeInput;
+    const templateInput = this.templateInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);
     if (routeInput.value) return;
@@ -169,8 +172,8 @@ export class CreateOrEditSectionsModalComponent {
   }
   forbiddenNameValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      let inputValue = control.value.toLocaleLowerCase();
-      let forbidden =
+      const inputValue = control.value.toLocaleLowerCase();
+      const forbidden =
         this.typeInput.value == 0 ? false : inputValue.includes('{slug}') ? false : true;
       return forbidden
         ? {
@@ -190,7 +193,7 @@ export class CreateOrEditSectionsModalComponent {
       ctrl: AbstractControl
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return new Promise(resolve => {
-        let subslug = this.ModalForm?.get('name');
+        const subslug = this.ModalForm?.get('name');
 
         if (subslug.value == this.selected?.name) {
           resolve(null);
@@ -216,7 +219,7 @@ export class CreateOrEditSectionsModalComponent {
       ctrl: AbstractControl
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
       return new Promise(resolve => {
-        let subslug = this.ModalForm?.get('route').value;
+        const subslug = this.ModalForm?.get('route').value;
         if (subslug == this.selected?.route) {
           resolve(null);
           return;

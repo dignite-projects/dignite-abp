@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
@@ -39,10 +40,10 @@ export class FieldGroupComponent implements OnInit {
   createGroupOpen = false
 
   /**用于确定模态的繁忙状态是否为真 */
-  modalBusy: boolean = false
+  modalBusy: boolean|any = false
 
   /**编辑分组模态框状态 */
-  editGroupOpen: boolean = false
+  editGroupOpen: boolean|any = false
 
   /**点击分组回调 */
   @Output() OnGroupClickBack = new EventEmitter();
@@ -93,10 +94,11 @@ export class FieldGroupComponent implements OnInit {
 
   /**创建字段分组保存 */
   createSave() {
-    let input = this.createForm.value;
-    this.modalBusy = true;
+    const input = this.createForm.value;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.createForm);
     if (this._ValidatorsService.isCheckForm(this.formValidation,'Cms')) return;
+    if(!this.editGroupForm.valid) return;
+    this.modalBusy = true;
     this._FieldGroupAdminService.create(input).pipe(finalize(() => {
       this.modalBusy = false;
       this.createGroupOpen = false;
@@ -109,10 +111,12 @@ export class FieldGroupComponent implements OnInit {
 
   /**编辑字段分组保存 */
   editSave() {
-    let input = this.editGroupForm.value;
-    this.modalBusy = true;
+    const input = this.editGroupForm.value;
+  
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.createForm);
     if (this._ValidatorsService.isCheckForm(this.formValidation,'Cms')) return;
+    if(!this.editGroupForm.valid) return;
+    this.modalBusy = true;
     this._FieldGroupAdminService.update(this.fieldGroupId, input).pipe(finalize(() => {
       this.modalBusy = false;
       this.editGroupOpen = false;

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
@@ -50,7 +51,7 @@ export class CreateFieldComponent {
   submitclickBtn() {
     this.submitclick.nativeElement.click();
   }
-  isSubmit: boolean = false;
+  isSubmit: boolean|any = false;
 
   private _ValidatorsService = inject(ValidatorsService);
   /**表单验证状态
@@ -64,7 +65,8 @@ export class CreateFieldComponent {
   save() {
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.newEntity);
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) return;
-    let input = this.newEntity.value;
+    const input = this.newEntity.value;
+    
     if (this.isSubmit) return;
     this.isSubmit = true;
     if (!this.newEntity.valid) return;

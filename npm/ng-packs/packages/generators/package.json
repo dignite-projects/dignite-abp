@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.generators",
-  "version": "3.0.0-rc.28",
+  "version": "3.0.0-rc.34",
   "homepage": "https://abp.io",
   "generators": "./generators.json",
   "type": "commonjs",

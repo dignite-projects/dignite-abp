@@ -1,7 +1,9 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SelectConfig } from './select-config';
 import { DfApiService } from '../../../services';
+import {  moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'df-select-config',
@@ -85,11 +87,21 @@ export class SelectConfigComponent {
   }
 
   textChange(event, index) {
-    let SelectOptionsItem = this.SelectOptions.at(index);
-    let value = event.target.value;
+    const SelectOptionsItem = this.SelectOptions.at(index);
+    const value = event.target.value;
     if (SelectOptionsItem.get('Value')?.value) return;
     SelectOptionsItem.patchValue({
       Value: this._DfApiService.chineseToPinyin(value),
     });
+  }
+
+  /**调整表格位置 */
+  drop(event: any) {
+    moveItemInArray(
+      this.SelectOptions.controls,
+      event.previousIndex,
+      event.currentIndex
+    );
+    this.SelectOptions.updateValueAndValidity()
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
@@ -58,7 +59,7 @@ export class EntriesComponent implements OnInit {
     private _FormAdminService: FormAdminService,
     private _FieldAdminService: FieldAdminService,
     private cdRef: ChangeDetectorRef,
-    private _FormControlsService: FormControlsService
+    private _FormControlsService: FormControlsService,
   ) {}
 
   private fb = inject(FormBuilder);
@@ -92,7 +93,7 @@ export class EntriesComponent implements OnInit {
     //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
     await this.getSiteOfSectionList();
     await this.getSectionLanguagesList();
-    this.hookToQuery(); 
+    this.hookToQuery();
   }
   /**需要查询的动态表单类型 */
   enableSearchTypeList: any[] = [];
@@ -115,7 +116,6 @@ export class EntriesComponent implements OnInit {
 
   /**切换板块 */
   async sectionIdChange() {
-    
     this.getSectionOfEntryType();
     await this.getSectionLanguagesList();
     this.resetData();
@@ -154,7 +154,6 @@ export class EntriesComponent implements OnInit {
     return new Promise((resolve, rejects) => {
       const extraProperties = this.extraPropertiesInput.value;
       const inputs: any[] = [];
-      console.log(extraProperties,'查询条件');
       for (const key in extraProperties) {
         const element = extraProperties[key];
         if (Array.isArray(element) ? (element.length > 0 ? element : null) : element) {
@@ -200,12 +199,13 @@ export class EntriesComponent implements OnInit {
     } else {
       this.maxResultCount = 10;
     }
+    // 初始化数组
+    this.enableSearchFieldList = [];
+    this.showinFieldList = [];
+    // _entryTypeList.length === 1
+    if (true) {
+      // this.filters.entryTypeId = this.entryTypeList[0].id;
 
-    if (_entryTypeList.length === 1) {
-      this.filters.entryTypeId = this.entryTypeList[0].id;
-      // 初始化数组
-      this.enableSearchFieldList = [];
-      this.showinFieldList = [];
       // 使用for...of替代forEach来处理异步
       for (const el of _entryTypeList) {
         for (const el1 of el.fieldTabs) {
@@ -358,7 +358,7 @@ export class EntriesComponent implements OnInit {
         });
       }
       this.data = list;
-      this.scrollToTop()
+      this.scrollToTop();
     };
     this.list.hookToQuery(getData).subscribe(setData);
   }
@@ -388,9 +388,9 @@ export class EntriesComponent implements OnInit {
     const previousId: any = this.data.items[event.previousIndex].id;
     const previousIndexOrder = this.data.items[event.previousIndex].order;
     const currentIndexOrder = this.data.items[event.currentIndex].order;
-    let moveorder=currentIndexOrder
-    if(previousIndexOrder<currentIndexOrder){
-      moveorder=currentIndexOrder+1
+    let moveorder = currentIndexOrder;
+    if (previousIndexOrder < currentIndexOrder) {
+      moveorder = currentIndexOrder + 1;
     }
     moveItemInArray(this.data.items, event.previousIndex, event.currentIndex);
     this._EntryAdminService
@@ -401,17 +401,17 @@ export class EntriesComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.list.get();
-        })
+        }),
       )
       .subscribe(
         res => {},
-        err => {}
+        err => {},
       );
     // moveItemInArray(this.rows, event.previousIndex, event.currentIndex);
     // this.rows = [...this.rows];
   }
 
-  isexpanded: boolean|any = false;
+  isexpanded: boolean | any = false;
   /**高级筛选切换 */
   expandedChange(event) {
     this.isexpanded = event;

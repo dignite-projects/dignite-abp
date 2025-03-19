@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable @angular-eslint/component-selector */
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
@@ -46,9 +48,9 @@ export class CreateOrEditComponent implements OnInit {
   /**表单实体 */
   newEntity: FormGroup  = this.fb.group(new CreateOrEditEntryTypeInputBase());
   /**版块id */
-  sectionId: string = '';
+  sectionId: string|any = '';
   /**条目类型id */
-  entryTypesId: string = '';
+  entryTypesId: string|any = '';
   /**条目类型详情 */
   entryTypesSelect: any;
 
@@ -69,7 +71,7 @@ export class CreateOrEditComponent implements OnInit {
     /**不需要展示的动态表单类型 */
     disableshowinTypeList: any[] = [];
   async ngOnInit() {
-    let sectionId = this.route.snapshot.params.sectionsId;
+    const sectionId = this.route.snapshot.params.sectionsId;
     this.entryTypesId = this.route.snapshot.params.entryTypesId || '';
     // this.enableSearchTypeList=await this._FormControlsService.getEnableSearchTypeList();
     // this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
@@ -82,13 +84,11 @@ export class CreateOrEditComponent implements OnInit {
 
   /**给fieldTabs添加新控件 */
   addControlToFieldTabs(nameValue = '') {
-    const newFormGroup = this.fb.group(
-      new fieldTabsBase({
-        name:
-          this.fieldTabs.length === 0
-            ? this._LocalizationService.instant(`Cms::FieldTab`)
-            : nameValue,
-      })
+    const newFormGroup = this.fb.group(new fieldTabsBase())
+    newFormGroup.get('name')?.patchValue(
+      this.fieldTabs.length === 0
+        ? this._LocalizationService.instant(`Cms::FieldTab`)
+        : nameValue
     );
     this.fieldTabs.push(newFormGroup);
     this.resultSource.push(newFormGroup.value);
@@ -98,8 +98,8 @@ export class CreateOrEditComponent implements OnInit {
   /**获取字段分组 */
   getFieldGroup() {
     this._FieldGroupAdminService.getList({}).subscribe(async res => {
-      let fieldList: any = await this.getFieldList();
-      let fieldGroupList:any = res.items;
+      const fieldList: any = await this.getFieldList();
+      const fieldGroupList:any = res.items;
       fieldGroupList.unshift({
         id: null,
         name: 'UngroupedFields',
@@ -109,7 +109,7 @@ export class CreateOrEditComponent implements OnInit {
       });
       this.fieldGroupList = fieldGroupList;
       this.fieldList = this.deepClone(fieldList);
-      let entryTypesId = this.entryTypesId;
+      const entryTypesId = this.entryTypesId;
       if (entryTypesId) {
         this.entryTypesId = entryTypesId;
         this.getEntryTypes();
@@ -118,14 +118,14 @@ export class CreateOrEditComponent implements OnInit {
   }
   /**获取条目类型详情 */
   getEntryTypes() {
-    let fieldList: any = this.deepClone(this.fieldList);
+    const fieldList: any = this.deepClone(this.fieldList);
     this._EntryTypeAdminService.get(this.entryTypesId).subscribe(res => {
       res.fieldTabs.forEach(el => {
         el.fields.forEach((eld: any) => {
           eld.id = eld.fieldId;
           eld.groupId = fieldList.find(elfd => elfd.id == eld.fieldId).groupId;
           this.formRightGroup.push(eld);
-          let fieldindex = fieldList.findIndex(elfl => elfl.id == eld.fieldId);
+          const fieldindex = fieldList.findIndex(elfl => elfl.id == eld.fieldId);
           fieldList.splice(fieldindex, 1);
         });
       });
@@ -143,7 +143,7 @@ export class CreateOrEditComponent implements OnInit {
   deepClone(obj: any) {
     if (typeof obj !== 'object' || obj === null) return obj;
     const result = Array.isArray(obj) ? [] : {};
-    for (let key in obj) {
+    for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         if (typeof obj[key] === 'object' && obj[key] !== null) {
           if (obj[key] instanceof Date) {
@@ -219,17 +219,16 @@ export class CreateOrEditComponent implements OnInit {
   /**拖拽到数据源时触发 */
   dragToDataSourceDropped() {
     //从数据源拖拽到数据源-排序
-    if (this.fromDataSourceDragEl) {
-    }
-    let _fromResultSourceDragEl = this.fromResultSourceDragEl;
-    let formRightGroup = this.deepClone(this.formRightGroup);
-    let fieldList = this.deepClone(this.fieldList);
+    if (this.fromDataSourceDragEl) { /* empty */ }
+    const _fromResultSourceDragEl = this.fromResultSourceDragEl;
+    const formRightGroup = this.deepClone(this.formRightGroup);
+    const fieldList = this.deepClone(this.fieldList);
 
     if (_fromResultSourceDragEl) {
       //移动
       //从目标源拖拽到数据源
       // 拖拽目标源的下标
-      let dragResultSourceIndex = this.resultSource[this.navActive].fields.findIndex(
+      const dragResultSourceIndex = this.resultSource[this.navActive].fields.findIndex(
         el => el.id == _fromResultSourceDragEl.id
       );
       //删除目标源中的数据
@@ -270,7 +269,7 @@ export class CreateOrEditComponent implements OnInit {
     const _fromResultSourceDragEl = this.fromResultSourceDragEl;
     if (_fromResultSourceDragEl) {
       // 拖拽目标源的下标
-      let dragResultSourceIndex = this.resultSource[this.navActive].fields.findIndex(
+      const dragResultSourceIndex = this.resultSource[this.navActive].fields.findIndex(
         el => el.id == _fromResultSourceDragEl.id
       );
       //删除目标源中的数据
@@ -281,9 +280,9 @@ export class CreateOrEditComponent implements OnInit {
   }
   /**设置formA表单 */
   setfieldTabsFrom() {
-    let setArray:any[] = [];
+    const setArray:any[] = [];
     this.resultSource.forEach(el => {
-      let fieldsArray:any[] = [];
+      const fieldsArray:any[] = [];
       el.fields.forEach(item => {
         fieldsArray.push({
           fieldId: item.id || item.fieldId,
@@ -309,13 +308,13 @@ export class CreateOrEditComponent implements OnInit {
    * }
    */
   formValidation: any = '';
-isSubmit:boolean = false;
+isSubmit:boolean|any = false;
   /**保存表单 */
   save() {
     
     if(this.isSubmit) return;
     this.isSubmit = true;
-    let input = this.newEntity?.value;
+    const input = this.newEntity?.value;
 
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.newEntity);
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) return   this.isSubmit = false;
@@ -342,9 +341,9 @@ isSubmit:boolean = false;
   /**编辑Tabs表单 */
   editFieldTabsFrom: FormGroup ;
   /**模态框状态 */
-  visibleTabsOpen: boolean = false;
+  visibleTabsOpen: boolean|any = false;
   /**是否是忙碌状态 */
-  modalBusy: boolean = false;
+  modalBusy: boolean|any = false;
   /**正在编辑的tabs */
   editFieldTabsSelect: any;
   /**正在选中的nav */
@@ -403,7 +402,7 @@ isSubmit:boolean = false;
   }
 
   /**编辑字段模态框状态 */
-  visibleEditFieldOpen: boolean = false;
+  visibleEditFieldOpen: boolean|any = false;
   /**编辑字段模态框表单 */
   editFieldFrom: FormGroup ;
   /**表单控件模板-动态赋值表单控件-编辑字段 */
@@ -417,14 +416,14 @@ isSubmit:boolean = false;
       return;
     }
   }
-  isShowInList: boolean = true;
-  isEnableSearch: boolean = true;
+  isShowInList: boolean|any = true;
+  isEnableSearch: boolean|any = true;
   /**打开编辑字段模态框 */
   EditFieldModalOpen(items, elIndex) {
     this.visibleEditFieldOpen = true;
     this.EditFieldIndex = elIndex;
     this.editFieldFrom = this.fb.group(new fieldsBase());
-    let fieldsOptions=this.fieldTabs.value[this.navActive].fields[elIndex];
+    const fieldsOptions=this.fieldTabs.value[this.navActive].fields[elIndex];
     // this.isShowInList = !this.disableshowinTypeList.includes(fieldsOptions.field.formControlName);
     // this.isEnableSearch = this.enableSearchTypeList.includes(fieldsOptions.field.formControlName);
     this.editFieldFrom.patchValue(fieldsOptions);
@@ -433,7 +432,7 @@ isSubmit:boolean = false;
   }
   /**保存编辑字段 */
   editFieldSave() {
-    let input = this.editFieldFrom.value;
+    const input = this.editFieldFrom.value;
     this.resultSource[this.navActive].fields[this.EditFieldIndex].displayName = input.displayName;
     this.resultSource[this.navActive].fields[this.EditFieldIndex].required = input.required;
     this.resultSource[this.navActive].fields[this.EditFieldIndex].showInList = input.showInList;
@@ -448,9 +447,9 @@ isSubmit:boolean = false;
   }
   /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event) {
-    let value = event.target.value;
-    let pinyin = this._CmsApiService.chineseToPinyin(value);
-    let nameInput:any = this.nameInput;
+    const value = event.target.value;
+    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const nameInput:any = this.nameInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);
   }

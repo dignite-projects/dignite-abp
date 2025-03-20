@@ -7,7 +7,7 @@ using Volo.Abp.SettingManagement;
 
 namespace Dignite.Abp.RegionalizationManagement;
 
-[Authorize(RegionalizationManagementPermissions.ManageRegions)]
+[Authorize]
 public class RegionalizationAppService : RegionalizationManagementAppService, IRegionalizationAppService
 {
     private readonly ISettingManager _settingManager;
@@ -26,6 +26,7 @@ public class RegionalizationAppService : RegionalizationManagementAppService, IR
         return regionalization;
     }
 
+    [Authorize(RegionalizationManagementPermissions.ManageRegions)]
     public async Task<RegionalizationDto> UpdateAsync(UpdateRegionalizationInput input)
     {
         await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, RegionalizationSettingNames.DefaultCultureName, input.DefaultCultureName);

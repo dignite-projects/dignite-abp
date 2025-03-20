@@ -25,11 +25,6 @@ namespace Dignite.Cms.Public.Web.TagHelpers
         /// </summary>
         public string Culture { get; set; }
 
-        /// <summary>
-        /// The site's host url
-        /// </summary>
-        public string Host { get; set; }
-
 
         [ViewContext, HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
@@ -46,11 +41,6 @@ namespace Dignite.Cms.Public.Web.TagHelpers
                 }
 
                 EntryPath = ("~/" + Culture).EnsureEndsWith('/') + EntryPath.RemovePreFix("~").RemovePreFix("/");
-
-                if (!Host.IsNullOrEmpty())
-                {
-                    EntryPath = Host + urlHelper.Content(EntryPath);
-                }
             }
 
             output.Attributes.SetAttribute("href", urlHelper.Content(EntryPath));

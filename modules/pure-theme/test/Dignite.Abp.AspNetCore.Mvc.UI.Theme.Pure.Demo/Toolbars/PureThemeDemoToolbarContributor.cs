@@ -11,8 +11,8 @@ public class PureThemeDemoToolbarContributor : IToolbarContributor
     {
         if (context.Toolbar.Name == StandardToolbars.Main)
         {
-            context.Toolbar.Items.Add(new ToolbarItem(typeof(NotificationsViewComponent)));
-            context.Toolbar.Items.Add(new ToolbarItem(typeof(SearchViewComponent)));
+            context.Toolbar.Items.Add(new ToolbarItem(typeof(NotificationsViewComponent),10));
+            context.Toolbar.Items.Add(new ToolbarItem(typeof(SearchViewComponent),11));
             return Task.CompletedTask;
         }
 

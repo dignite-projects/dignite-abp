@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.ColorModeSwitch;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.HomeLink;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LoginLink;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.More;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.NavbarToggler;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.UserMenu;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
@@ -24,9 +23,6 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
             return;
         }
 
-        //Home link component
-        context.Toolbar.Items.Add(new ToolbarItem(typeof(HomeLinkViewComponent)));
-
         //Current User component
         if (context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
         {
@@ -44,6 +40,6 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
         context.Toolbar.Items.Add(new ToolbarItem(typeof(ColorModeSwitchViewComponent)));
 
         //Navbar Toggler Component
-        context.Toolbar.Items.Add(new ToolbarItem(typeof(NavbarTogglerViewComponent)));
+        context.Toolbar.Items.Add(new ToolbarItem(typeof(NavbarTogglerViewComponent),100));
     }
 }

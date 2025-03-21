@@ -24,25 +24,9 @@
 .main-navbar-toolbar > li:empty {
     display: none;
 }
-@media screen and (min-width: 992px) {
-    .main-navbar-toolbar {
-        position: absolute;
-        right: calc(var(--bs-gutter-x)* 0.5);
-    }
-}
 @media screen and (max-width: 991.98px) {
     body.abp-application-layout {
         padding-bottom: 65px;
-    }
-    .main-navbar {
-        position: fixed !important;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1030;
-    }
-    .main-navbar-toolbar {
-        width: 100%;
     }
     .content-toolbar {
         margin-left: -.75rem;
@@ -84,6 +68,16 @@
     right: 100%;
 }
 
+/* Mobile Navbar */
+.mobile-navbar {
+    z-index: 1030;
+    position: fixed;
+    bottom: .5rem;
+    left: 0rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    width: calc(100% - 1rem);
+}
 /** Animation of underline **/
 .underline-animate {
     background: linear-gradient(90deg, var(--bs-link-color), var(--bs-link-color));

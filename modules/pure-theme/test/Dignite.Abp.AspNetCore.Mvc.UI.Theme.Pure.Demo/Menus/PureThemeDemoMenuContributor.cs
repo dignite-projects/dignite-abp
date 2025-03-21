@@ -30,7 +30,7 @@ public class PureThemeDemoMenuContributor : IMenuContributor
     {
         context.Menu.AddItem(new ApplicationMenuItem(PureThemeDemoMenus.Home, "Home", "/", "fa fa-home"));
 
-        var menuItem = new ApplicationMenuItem(PureThemeDemoMenus.Components.Root, "Components");
+        var menuItem = new ApplicationMenuItem(PureThemeDemoMenus.Components.Root, "Components","#", "fab fa-buromobelexperte");
 
         var items = new List<ApplicationMenuItem>()
             {
@@ -88,6 +88,7 @@ public class PureThemeDemoMenuContributor : IMenuContributor
         servicesMenuItem1.AddItem(new ApplicationMenuItem("DigniteSupport","Dignite Support", url: "#"));
         context.Menu.AddItem(servicesMenuItem1);
     }
+
     private Task ConfigureShortcutMenuAsync(MenuConfigurationContext context)
     {
         var learn = "Learn";

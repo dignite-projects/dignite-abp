@@ -1,8 +1,13 @@
 ﻿using System.IO;
+using System.Linq;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Bundling;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Toolbars;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LoginLink;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.NavbarToggler;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Demo.Components.Toolbar.Notifications;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -63,6 +68,12 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
         Configure<AbpToolbarOptions>(options =>
         {
             options.Contributors.Add(new PureThemeDemoToolbarContributor());
+        });
+
+        Configure<PureThemeMvcOptions>(options =>
+        {
+            options.MobileMenuSelector = items => items.Where(x => x.Name == PureThemeDemoMenus.Home || x.Name == PureThemeDemoMenus.Components.Root);
+            options.MobileToolbarSelector = items => items.Where(x=> x.ComponentType == typeof(LoginLinkViewComponent) || x.ComponentType == typeof(NavbarTogglerViewComponent) || x.ComponentType == typeof(NotificationsViewComponent));
         });
     }
 

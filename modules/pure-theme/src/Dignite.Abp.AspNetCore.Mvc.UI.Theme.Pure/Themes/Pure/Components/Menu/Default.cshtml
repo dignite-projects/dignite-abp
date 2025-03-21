@@ -14,7 +14,9 @@
     {
         if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
         {
-            @(await Component.InvokeAsync(customComponentType))
+            <li class="nav-item @cssClass" @elementId>
+                @(await Component.InvokeAsync(customComponentType))
+            </li>
         }
         else if (menuItem.Url != null)
         {

@@ -14,13 +14,13 @@
     {
         if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
         {
-            <li class="nav-item @cssClass" @elementId>
+            <li class="nav-item @cssClass" @Html.Raw(elementId)>
                 @(await Component.InvokeAsync(customComponentType))
             </li>
         }
         else if (menuItem.Url != null)
         {
-            <li class="nav-item @cssClass" @elementId>
+            <li class="nav-item @cssClass" @Html.Raw(elementId)>
                 <a class="nav-link underline-animate fw-medium px-0 mx-3 @disabled @isActive" href="@url" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {

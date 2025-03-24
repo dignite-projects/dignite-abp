@@ -152,7 +152,7 @@
                     <table class="table overflow-nowrap mb-0" cdkDropList (cdkDropListDropped)="drop($event)">
                         <thead>
                             <tr>
-                                <th class="sticky-left-card-bg">{{'AbpUi::Actions' | abpLocalization}}</th>
+                                <th class="sticky-left-card-bg"> <span class="bi bi-arrows-move fs-5 drag-handle me-2 opacity-0" ></span>{{'AbpUi::Actions' | abpLocalization}}</th>
                                 <th>{{'Cms::Title' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
                                 <th>{{'Cms::Slug' | abpLocalization}}</th>
@@ -167,6 +167,7 @@
                             <tr *ngFor="let item of data.items" cdkDrag>
                                 <td class="sticky-left-card-bg">
                                     <div ngbDropdown container="body">
+                                        <span class="bi bi-arrows-move fs-5 drag-handle me-2" cdkDragHandle></span>
                                         <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
                                             <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                         </button>

@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '@abp/ng.core';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NzTreeModule } from 'ng-zorro-antd/tree';
 import {
   TextEditConfigComponent,
@@ -32,6 +32,7 @@ import { TextEditSearchComponent } from './components/form/text-edit/text-edit-s
 import { SwitchSearchComponent } from './components/form/switch/switch-search.component';
 import { NumericEditSearchComponent } from './components/form/numeric-edit/numeric-edit-search.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ExtensibleModule } from '@abp/ng.components/extensible';
 
 
 @NgModule({
@@ -70,6 +71,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     NgbDropdownModule,
       NzSelectModule,
       DragDropModule,
+      NgbDatepickerModule,
+      ExtensibleModule
     // NzTreeModule,
   ],
   exports: [

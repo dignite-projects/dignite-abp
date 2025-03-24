@@ -97,7 +97,8 @@ export class FieldGroupComponent implements OnInit {
     const input = this.createForm.value;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.createForm);
     if (this._ValidatorsService.isCheckForm(this.formValidation,'Cms')) return;
-    if(!this.editGroupForm.valid) return;
+    if(!this.createForm?.valid) return;
+    if(this.modalBusy)return;
     this.modalBusy = true;
     this._FieldGroupAdminService.create(input).pipe(finalize(() => {
       this.modalBusy = false;
@@ -112,10 +113,10 @@ export class FieldGroupComponent implements OnInit {
   /**编辑字段分组保存 */
   editSave() {
     const input = this.editGroupForm.value;
-  
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.createForm);
     if (this._ValidatorsService.isCheckForm(this.formValidation,'Cms')) return;
     if(!this.editGroupForm.valid) return;
+    if(this.modalBusy)return;
     this.modalBusy = true;
     this._FieldGroupAdminService.update(this.fieldGroupId, input).pipe(finalize(() => {
       this.modalBusy = false;

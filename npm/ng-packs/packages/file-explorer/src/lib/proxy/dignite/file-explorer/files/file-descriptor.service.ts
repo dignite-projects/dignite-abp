@@ -1,6 +1,6 @@
 import type { CreateFileInput, FileContainerConfigurationDto, FileDescriptorDto, GetFilesInput, ImageResizeInput, UpdateFileInput } from './models';
 import { RestService, Rest } from '@abp/ng.core';
-import type { PagedResultDto } from '@abp/ng.core';
+import type { ListResultDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { FileResult } from '../../../microsoft/asp-net-core/mvc/models';
 
@@ -29,6 +29,14 @@ export class FileDescriptorService {
     { apiName: this.apiName,...config });
   
 
+  deleteByEntityId = (containerName: string, entityId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: `/api/file-explorer/files/${containerName}/${entityId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   download = (containerName: string, blobName: string, fileName: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, FileResult>({
       method: 'GET',
@@ -49,8 +57,7 @@ export class FileDescriptorService {
   getFileContainerConfiguration = (containerName: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, FileContainerConfigurationDto>({
       method: 'GET',
-      url: '/api/file-explorer/files/configuration',
-      params: { containerName },
+      url: `/api/file-explorer/files/${containerName}/configuration`,
     },
     { apiName: this.apiName,...config });
   
@@ -60,6 +67,14 @@ export class FileDescriptorService {
       method: 'GET',
       url: '/api/file-explorer/files',
       params: { containerName: input.containerName, directoryId: input.directoryId, creatorId: input.creatorId, filter: input.filter, entityId: input.entityId, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListByEntityId = (containerName: string, entityId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ListResultDto<FileDescriptorDto>>({
+      method: 'GET',
+      url: `/api/file-explorer/files/${containerName}/${entityId}/all`,
     },
     { apiName: this.apiName,...config });
   

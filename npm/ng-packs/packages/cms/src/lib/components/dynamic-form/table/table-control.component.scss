@@ -1,1 +1,24 @@
 .flex-end{display:flex;align-items:center;justify-content:flex-end}.flex-start{display:flex;align-items:center;justify-content:flex-start}
+
+.table-control{
+    .sticky-right-card-bg {
+        position: sticky;
+        right: 0;
+        background: var(--bs-card-bg);
+    }
+    .table{
+        th{
+            white-space: nowrap;
+        }
+        th[field-type="TextEdit"], th[field-type="Select"], th[field-type="Select"], th[field-type="DateEdit"], th[field-type="NumericEdit"], th[field-type="Entry"]{
+            min-width: 200px;
+        }
+        th[field-type="FileExplorer"], th[field-type="CkEditor"]{
+            min-width: 300px;
+        }
+        th[field-type="Matrix"]{
+            min-width:400px;
+        }
+        
+    }
+}

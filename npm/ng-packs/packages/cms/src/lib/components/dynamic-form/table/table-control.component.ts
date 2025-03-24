@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CmsApiService } from '../../../services';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -89,7 +90,7 @@ export class TableControlComponent {
       }
       let formConfiguration = this._fields.field.formConfiguration;
       this.formConfiguration = formConfiguration;
-      
+
       let newArrayGroup = this.fb.array([]);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
@@ -123,5 +124,10 @@ export class TableControlComponent {
     let lastindex = type == 'up' ? index - 1 : index + 1;
     this.fieldNameControl.insert(lastindex, controlAt);
     this._selected = this.fieldNameControl.value;
+  }
+  /**调整表格位置 */
+  drop(event: any) {
+    moveItemInArray(this.fieldNameControl.controls, event.previousIndex, event.currentIndex);
+    this.fieldNameControl.updateValueAndValidity();
   }
 }

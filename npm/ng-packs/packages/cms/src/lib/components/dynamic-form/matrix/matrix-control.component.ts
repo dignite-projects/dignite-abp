@@ -2,6 +2,7 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CmsApiService } from '../../../services';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'df-matrix-control',
@@ -116,4 +117,13 @@ export class MatrixControlComponent {
   deleteMatrixControl(index, item) {
     this.fieldNameControl.removeAt(index);
   }
+    /**调整表格位置 */
+      drop(event: any) {
+        moveItemInArray(
+          this.fieldNameControl.controls,
+          event.previousIndex,
+          event.currentIndex
+        );
+        this.fieldNameControl.updateValueAndValidity()
+      }
 }

@@ -1,10 +1,18 @@
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable @angular-eslint/component-selector */
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  viewChild,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatrixConfig, MatrixItemConfig } from './matrix-config';
 import { CmsApiService, FieldAbstractsService } from '../../../services';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ValidatorsService } from '@dignite-ng/expand.core';
 
 @Component({
@@ -97,12 +105,12 @@ export class MatrixConfigComponent {
   }
 
   /**模态框-状态 */
-  matrixModalOpen: boolean|any = false;
+  matrixModalOpen: boolean | any = false;
   /**模态框-是否正在编辑 */
   isMatrixModalEdit: any = false;
 
   /**模态框-用于确定模态的繁忙状态是否为真 */
-  modalBusy: boolean|any = false;
+  modalBusy: boolean | any = false;
 
   /**模态框-表单 */
   matrixModalForm: FormGroup | undefined;
@@ -131,7 +139,7 @@ export class MatrixConfigComponent {
     this.matrixModalOpen = true;
   }
   formValidation: any;
-  private _ValidatorsService=inject(ValidatorsService)
+  private _ValidatorsService = inject(ValidatorsService);
   /**模态框--矩阵表单保存提交 */
   createOrEditSave() {
     const input = this.matrixModalForm.value;
@@ -139,7 +147,9 @@ export class MatrixConfigComponent {
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) return;
     if (!this.matrixModalForm.valid) return;
     if (this.isMatrixModalEdit) {
-      const MatrixBlockTypesItem = this.MatrixBlockTypes.at(this.selectMatrixBlockIndex) as FormGroup;
+      const MatrixBlockTypesItem = this.MatrixBlockTypes.at(
+        this.selectMatrixBlockIndex
+      ) as FormGroup;
       MatrixBlockTypesItem.patchValue({
         ...input,
       });
@@ -147,7 +157,7 @@ export class MatrixConfigComponent {
       this.addMatrixBlockTypeItem(input);
     }
     this.matrixModalOpen = false;
-
+    this.matrixModalVisibleChange(false);
   }
   /**新增矩阵块-向数组表单中增加项 */
   addMatrixBlockTypeItem(input) {
@@ -167,6 +177,7 @@ export class MatrixConfigComponent {
     });
     this.matrixModalOpen = true;
     this.isMatrixModalEdit = true;
+   
   }
 
   /**删除矩阵块 */
@@ -249,15 +260,42 @@ export class MatrixConfigComponent {
     FieldnameInput.patchValue(pinyin);
   }
 
-  drop(event) {
-    moveItemInArray(this.MatrixBlockTypes.controls, event.previousIndex, event.currentIndex);
-    this.MatrixBlockTypes.updateValueAndValidity();
-    this.selectMatrixBlockIndex= event.currentIndex;
+  dropMatrix(event) {
+    console.log(event.container.data === event.previousContainer.data, 'dropMatrix');
+
+    if (event.container.data === event.previousContainer.data) {
+      moveItemInArray(this.MatrixBlockTypes.controls, event.previousIndex, event.currentIndex);
+      this.MatrixBlockTypes.updateValueAndValidity();
+      this.selectMatrixBlockIndex = event.currentIndex;
+    } else {
+      const object1 = this.MatrixBlockTypes.controls[this.selectMatrixBlockIndex].get(
+        'fields'
+      ) as FormArray;
+      let controlsItem = object1.at(event.previousIndex);
+      object1.removeAt(event.previousIndex);
+      event.container.data[event.currentIndex-1].controls['fields'].push(controlsItem);
+      console.log(object1.controls[event.previousIndex],'object1.controls[event.previousIndex]')
+    }
+    this.fieldStartDrag=false;
   }
-  drop1(event) {
-    const object1=this.MatrixBlockTypes.controls[this.selectMatrixBlockIndex].get('fields') as FormArray;
+  dropFields(event) {
+    const object1 = this.MatrixBlockTypes.controls[this.selectMatrixBlockIndex].get(
+      'fields'
+    ) as FormArray;
     moveItemInArray(object1.controls, event.previousIndex, event.currentIndex);
     this.MatrixBlockTypes.updateValueAndValidity();
-    this.selectMatrixFieldIndex=event.currentIndex;
+    this.selectMatrixFieldIndex = event.currentIndex;
+    this.fieldStartDrag=false;
+  }
+  sortPredicate(index: number, item: CdkDrag<number>) {
+    return index!==0;
+  }
+  sortPredicateTrue(){
+    return true;
+  }
+  /**字段开始拖拽 */
+  fieldStartDrag:any=false;
+  CdkDragStart(event) {
+    this.fieldStartDrag=true;
   }
 }

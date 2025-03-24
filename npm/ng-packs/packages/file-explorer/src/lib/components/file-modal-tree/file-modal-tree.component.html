@@ -1,44 +1,49 @@
 <div class="card-header  p-0 mb-1 d-flex justify-content-between align-items-center">
-    <h6 class="h6 mb-0">{{'FileExplorer::MyDirectories' | abpLocalization}}</h6>
+    <h6 class="h6 mb-0 btn-link" role="button" (click.stop)="onLookAllBtn()">{{'FileExplorer::MyDirectories' | abpLocalization}}</h6>
     <button type="button" class="btn btn-light btn-sm ms-2" (click.stop)="addDescriptorBtn()"><i
             class="fas fa-plus-circle" aria-hidden="true"></i></button>
 </div>
-<nz-tree [nzData]="fileGroupList" class="ng-zorro-antd-tree" nzDraggable nzBlockNode nzShowIcon
-    [nzExpandedIcon]="multiExpandedIconTpl" (nzOnDrop)="nzEvent($event)" [nzBeforeDrop]="beforeDrop"
-    (nzClick)="activeNode($event)" (nzExpandChange)="nzExpandChange($event)" [nzTreeTemplate]="nzTreeTemplate">
-    <ng-template #nzTreeTemplate let-node let-origin="origin">
-        <div class="custom-node d-inline-block   ng-star-inserted dropdown" [title]="node.title">
-            <div #dropdown="ngbDropdown" class="d-inline-block" ngbDropdown placement="bottom" container="body">
-                <div class="btn-group" [class.selected]="isNodeSelected(node)">
-                    <button class="btn btn-sm  p-0 px-1">{{ node.title }}</button>
-                    <button class="btn btn-sm  p-0" (click)="handleClick($event)" ngbDropdownToggle
-                        [class.dropdown-toggle]="false" aria-hidden="true">
-                        <i class="fas fa-caret-down text-muted p-1"></i>
-                    </button>
-                </div>
-                <div ngbDropdownMenu>
-                    <button ngbDropdownItem
-                        (click.stop)="addDescriptorBtn(node)">{{'FileExplorer::NewDirectory' | abpLocalization}}</button>
-                    <button ngbDropdownItem
-                        (click.stop)="addDescriptorBtn(node,true)">{{'AbpUi::Edit' | abpLocalization}}</button>
-                    <button ngbDropdownItem
-                        (click.stop)="deleteDescriptorBtn(node)">{{'AbpUi::Delete' | abpLocalization}}</button>
-                </div>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template #multiExpandedIconTpl let-node let-origin="origin">
-        <ng-container *ngIf="node.children.length > 0">
-            <i [class]="node.isExpanded ? 'fas fa-caret-down' : 'fas fa-caret-right'"></i>
-        </ng-container>
-    </ng-template>
-</nz-tree>
+@if(fileGroupList.length>0){
+<abp-tree [nodes]="fileGroupList" (nzExpandChange)="nzExpandChange($event)" [draggable]="true"
+    (dropOver)="nzEvent($event)" [beforeDrop]="beforeDrop" (selectedNodeChange)="activeNode($event)" [changeCheckboxWithNode]="true"  [isNodeSelected]="isNodeSelected">
 
+    <ng-template #menu let-node>
+        <button ngbDropdownItem (click.stop)="addDescriptorBtn(node)"><i
+                class=" me-1 fa fa-pencil"></i>{{'FileExplorer::NewDirectory' | abpLocalization}}</button>
+        <button ngbDropdownItem (click.stop)="addDescriptorBtn(node,true)"><i
+                class=" me-1 fa fa-plus"></i>{{'AbpUi::Edit' | abpLocalization}}</button>
+        <button ngbDropdownItem (click.stop)="deleteDescriptorBtn(node)"><i
+                class=" me-1 fa fa-remove"></i>{{'AbpUi::Delete' | abpLocalization}}</button>
+    </ng-template>
 
+    <ng-template abpTreeExpandedIconTemplate let-node let-origin="origin">
+        <i aria-hidden="true" *ngIf="node.children.length>0">
+            <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
+    </ng-template>
+
+    <ng-template #minusIcon>
+        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+            clip-rule="evenodd">
+            <path
+                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
+        </svg>
+    </ng-template>
+
+    <ng-template #plusIcon>
+        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+            clip-rule="evenodd">
+            <path
+                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z" />
+        </svg>
+    </ng-template>
+</abp-tree>
+
+}
 <abp-modal [(visible)]="ModalDescriptorOpen" [busy]="ModalDescriptorBusy"
     (visibleChange)="ModalDescriptorVisibleChange($event)">
     <ng-template #abpHeader>
-        <h3>{{theNodeBeingEdited?('AbpUi::Edit' | abpLocalization):('FileExplorer::NewDirectory' | abpLocalization)}}</h3>
+        <h3>{{theNodeBeingEdited?('AbpUi::Edit' | abpLocalization):('FileExplorer::NewDirectory' | abpLocalization)}}
+        </h3>
     </ng-template>
     <ng-template #abpBody>
         <ng-template #loaderRef>
@@ -57,7 +62,7 @@
     </ng-template>
     <ng-template #abpFooter>
         <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
-        <abp-button iconClass="fa fa-check"
+        <abp-button iconClass="fa fa-check" [loading]="ModalDescriptorBusy"
             (click)="ModalFormDescriptorSubmit.nativeElement.click()">{{'AbpUi::Save' | abpLocalization}}</abp-button>
     </ng-template>
 </abp-modal>

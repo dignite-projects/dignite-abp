@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FileApiService } from '../../services/file-api.service';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'fe-file-picker',
@@ -64,5 +65,15 @@ export class FilePickerComponent implements OnChanges {
     this.selectedFileChange.emit([])
     this.selectedFileChange.emit(this.selectFormFile)
   }
-
+  /**调整表格位置 */
+    drop(event: any) {
+      moveItemInArray(
+        this._fileShowTable,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.selectFormFile = this._fileShowTable
+      this.selectedFileChange.emit(this.selectFormFile)
+      // this._fileShowTable.updateValueAndValidity()
+    }
 }

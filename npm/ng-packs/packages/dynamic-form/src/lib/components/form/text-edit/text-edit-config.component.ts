@@ -45,6 +45,8 @@ export class TextEditConfigComponent {
       // this.submitclick?.nativeElement?.click();
     }
   }
+  RadioIndex1: any=Math.floor(Math.random() * 1001);
+  RadioIndex2: any=Math.floor(Math.random() * 1001);
 
   AfterInit() {
     return new Promise((resolve, rejects) => {

@@ -2,7 +2,7 @@
 import { getProjects, readJson, readProjectConfiguration, Tree } from '@nx/devkit';
 
 // 定义需要忽略的项目名称常量数组
-export const IGNORED_PROJECT_NAMES = ['apex-chart-components', 'bs-components', 'workspace-plugin'];
+export const IGNORED_PROJECT_NAMES = ['apex-chart-components', 'bs-components', 'workspace-plugin','schematics'];
 
 // 获取package.json文件路径列表的函数
 export function getPackageJsonList(tree: Tree, packages: string[]): string[] {

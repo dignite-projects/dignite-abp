@@ -11,6 +11,9 @@ import { FilePreviewComponent } from './previews/file-preview.component';
 import { FileExplorerConfigComponent } from './components/dynamic-form/file-explorer/file-explorer-config.component';
 import { FileExplorerControlComponent } from './components/dynamic-form/file-explorer/file-explorer-control.component';
 import { FileExplorerViewComponent } from './components/dynamic-form/file-explorer/file-explorer-view.component';
+import { TreeModule } from '@abp/ng.components/tree';
+import { GetDirectoryNamePipe } from './pipe/get-directory-name.pipe';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { FileExplorerViewComponent } from './components/dynamic-form/file-explor
     NzTreeModule,
     NgxValidateCoreModule,
     FileExplorerRoutingModule,
+    TreeModule,
+    GetDirectoryNamePipe,
+    DragDropModule,
   ],
   exports: [
     FileEditComponent,

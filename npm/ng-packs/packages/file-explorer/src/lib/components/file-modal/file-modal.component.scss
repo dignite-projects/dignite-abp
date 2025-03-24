@@ -26,18 +26,17 @@
     .ant-tree {
         .ant-tree-node-content-wrapper {
             padding: 0;
+            .ng-star-inserted[title]{
+                padding: 0 10px;
+            }
 
             .custom-node {
                 width: 100%;
-
             }
 
             .selected {
                 background-color: var(--lpx-brand) !important;
-
-                .btn {
-                    color: var(--lpx-navbar-color);
-                }
+                color: var(--lpx-brand-text);
             }
         }
 
@@ -51,5 +50,17 @@
     .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
         overflow: initial;
         line-break: anywhere;
+    }
+    input[type="checkbox"]{
+        cursor: pointer;
+    }
+    .titlehover i{
+        display: none;
+    }
+    .titlehover:hover {
+
+       i{
+           display: block;
+       }
     }
 }

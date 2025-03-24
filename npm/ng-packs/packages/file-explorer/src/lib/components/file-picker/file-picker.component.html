@@ -1,8 +1,12 @@
-<button class="btn btn-sm btn-primary ms-2 float-end" type="button" (click.stop)="ModalOpen = true">{{'FileExplorer::SelectFile' | abpLocalization}}</button>
-<fe-file-modal [(visible)]="ModalOpen" [selectPickerFile]="selectFormFile" [multiple]="_multiple"  (selectFilefn)="_selectFilefn($event)" [fileContainerName]="_fileContainerName"></fe-file-modal>
-<table class="table" *ngIf="_fileShowTable.length>0">
+<button class="btn btn-sm btn-dark soft ms-2 float-end" type="button"
+    (click.stop)="ModalOpen = true">{{'FileExplorer::SelectFile' | abpLocalization}}</button>
+
+<fe-file-modal [(visible)]="ModalOpen" [selectPickerFile]="selectFormFile" [multiple]="_multiple"
+    (selectFilefn)="_selectFilefn($event)" [fileContainerName]="_fileContainerName"></fe-file-modal>
+<table class="table" *ngIf="_fileShowTable.length>0" cdkDropList (cdkDropListDropped)="drop($event)">
     <thead>
         <tr>
+            <th scope="col" style="width: 30px;"></th>
             <th scope="col"></th>
             <th scope="col">{{'FileExplorer::FileName' | abpLocalization}}</th>
             <th scope="col">{{'FileExplorer::FileSize' | abpLocalization}}</th>
@@ -11,14 +15,20 @@
     </thead>
     <tbody>
         <ng-container *ngFor="let item of _fileShowTable;let i =index">
-            <tr>
+            <tr cdkDrag cdkDragLockAxis="y" [cdkDragData]="item">
                 <td>
-                    <fe-file-preview [width]="'80px'" [src]="item.url||item.Url" [name]="item.name||item.Name" [type]="item.mimeType||item.MimeType" [preview]="true"></fe-file-preview>
+                    <div class="drag-handle" cdkDragHandle>
+                        <span class="bi bi-arrows-move fs-5"></span>
+                    </div>
+                </td>
+                <td>
+                    <fe-file-preview [width]="'80px'" [src]="item.url||item.Url" [name]="item.name||item.Name"
+                        [type]="item.mimeType||item.MimeType" [preview]="true"></fe-file-preview>
                 </td>
                 <th scope="row">
                     <div>{{item.name||item.Name}}</div>
                 </th>
-                <td >{{_FileApiService.formatFileSize(item.Size||item.size)}}</td>
+                <td>{{_FileApiService.formatFileSize(item.Size||item.size)}}</td>
                 <td>
                     <button class="btn btn-sm p-0 btn-light " (click.stop)="deleteFileTableItem(i,item)">
                         <i class="fas fa-trash p-2"></i>
@@ -28,5 +38,3 @@
         </ng-container>
     </tbody>
 </table>
-
-

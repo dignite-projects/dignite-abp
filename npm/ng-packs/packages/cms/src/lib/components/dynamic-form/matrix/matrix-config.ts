@@ -28,3 +28,4 @@ export class matrixFieldInputBase {
     formConfiguration: FormGroup | undefined = new FormGroup({})
 
 }
+

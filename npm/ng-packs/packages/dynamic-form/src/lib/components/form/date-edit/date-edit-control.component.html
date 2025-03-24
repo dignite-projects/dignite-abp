@@ -10,12 +10,12 @@
             </ng-container>
             <ng-container
                 *ngIf="_fields.field.formConfiguration['DateEdit.InputMode'] === _DateEditInterfaces.DateTime">
-                <input type="datetime-local" class="form-control" step="1" formControlName="{{_fields.field.name}}"
+                <input type="datetime-local" #dateTime (focus)="dateTime.focus()" class="form-control" step="1" formControlName="{{_fields.field.name}}"
                     [min]="_fields.field.formConfiguration['DateEdit.Min']"
                     [max]="_fields.field.formConfiguration['DateEdit.Max']" />
             </ng-container>
             <ng-container *ngIf="_fields.field.formConfiguration['DateEdit.InputMode'] === _DateEditInterfaces.Month">
-                <input type="month" class="form-control" step="1" formControlName="{{_fields.field.name}}"
+                <input type="month" class="form-control"  step="1" formControlName="{{_fields.field.name}}"
                     [min]="_fields.field.formConfiguration['DateEdit.Min']"
                     [max]="_fields.field.formConfiguration['DateEdit.Max']" />
             </ng-container>

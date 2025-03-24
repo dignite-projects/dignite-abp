@@ -3,11 +3,13 @@
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <div [class]="fieldNameControl?.controls?.length>0?'border p-2 rounded-2':''">
-                <div [formArrayName]="_fields.field.name">
+                <div [formArrayName]="_fields.field.name" cdkDropList (cdkDropListDropped)="drop($event)">
                     <ng-container *ngFor="let item of fieldNameControl.controls;let i=index">
-                        <div class="card mb-3 border " [formGroupName]="i">
+                        <div class="card mb-3 border " [formGroupName]="i"  cdkDrag cdkDragLockAxis="y" [cdkDragData]="item">
                             <div class="card-header d-flex align-items-center justify-content-between border-bottom pt-1">
-                                <div>{{item.value.displayName}}</div>
+                                <div class="d-flex"> <div class="drag-handle me-2" cdkDragHandle> 
+                                    <span class="bi bi-arrows-move fs-5"></span>
+                                </div>{{item.value.displayName}}</div>
                                 <button class="btn btn-sm btn-light p-0" (click.stop)="deleteMatrixControl(i,item)"><i
                                         class="fas fa-trash p-2"></i></button>
                             </div>
@@ -30,7 +32,7 @@
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <ng-container *ngFor="let item of MatrixBlockTypesList;let i =index">
-                        <button type="button" class="btn btn-primary btn-sm" (click.stop)="addMatrixControl(item)"><i
+                        <button type="button" class="btn btn-dark soft btn-sm" (click.stop)="addMatrixControl(item)"><i
                                 class="fas fa-plus me-1"></i>{{item.displayName}}</button>
                     </ng-container>
                 </div>

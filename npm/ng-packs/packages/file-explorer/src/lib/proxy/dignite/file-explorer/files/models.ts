@@ -6,7 +6,6 @@ export interface CreateFileInput {
   cellName?: string;
   directoryId?: string;
   entityId?: string;
-  // file: any;
   file: IRemoteStreamContent;
 }
 
@@ -26,7 +25,12 @@ export interface FileContainerConfigurationDto {
   getFilePermissionName?: string;
 }
 
-export interface FileDescriptorDto extends CreationAuditedEntityDto<string> {
+export interface FileDescriptorDto extends FileDescriptorListDto {
+  url?: string;
+  tenantId?: string;
+}
+
+export interface FileDescriptorListDto extends CreationAuditedEntityDto<string> {
   entityId?: string;
   containerName?: string;
   blobName?: string;
@@ -35,7 +39,6 @@ export interface FileDescriptorDto extends CreationAuditedEntityDto<string> {
   size: number;
   name?: string;
   mimeType?: string;
-  url?: string;
 }
 
 export interface GetFilesInput extends PagedAndSortedResultRequestDto {

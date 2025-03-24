@@ -2,9 +2,10 @@
     <div formGroupName="formConfiguration">
         <div class="mb-3">
             <label class="form-label">{{'Cms::::FormControl:Matrix' | abpLocalization}}</label>
-            <div class="row">
+            <div class="row" >
                 <div class="col-md-3">
-                    <div class="list-group" cdkDropList (cdkDropListDropped)="drop($event)">
+                    <div class="list-group" [class.fieldStartDragClass]="fieldStartDrag" cdkDropList (cdkDropListDropped)="dropMatrix($event)"     #todoList="cdkDropList"
+                    [cdkDropListData]="MatrixBlockTypes.controls" [cdkDropListSortPredicate]="fieldStartDrag?sortPredicate:sortPredicateTrue"> 
                         <li class="list-group-item d-flex align-items-center justify-content-between"
                             aria-current="true">
                             {{'Cms::MatrixBlockType' | abpLocalization}}
@@ -25,15 +26,15 @@
                                         <button type="button" class="btn btn-light btn-sm me-2" id="dropdownBasic1"
                                             style="z-index: 8;" ngbDropdownToggle></button>
                                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="z-index: 9;">
-                                            <button ngbDropdownItem  type="button"
+                                            <button ngbDropdownItem type="button"
                                                 (click.stop)="EditMatrixBlock(item.value)">{{'AbpUi::Edit' |
                                                 abpLocalization}}</button>
-                                            <button ngbDropdownItem  type="button"
+                                            <button ngbDropdownItem type="button"
                                                 (click.stop)="DeleteMatrixBlock(i)">{{'AbpUi::Delete' |
                                                 abpLocalization}}</button>
                                         </div>
                                     </div>
-                                    <span class="bi bi-arrows-move fs-5 drag-handle"></span>
+                                    <span class="bi bi-arrows-move fs-5 drag-handle" cdkDragHandle></span>
                                 </div>
                             </button>
                         </ng-container>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="list-group" *ngIf="MatrixBlockTypes?.controls.length>0" cdkDropList
-                        (cdkDropListDropped)="drop1($event)">
+                        (cdkDropListDropped)="dropFields($event)"  [cdkDropListData]="MatrixBlockTypes.controls[selectMatrixBlockIndex].get('fields').controls" [cdkDropListConnectedTo]="[todoList]">
                         <li class="list-group-item d-flex align-items-center justify-content-between"
                             aria-current="true">
                             {{'Cms::Fields' | abpLocalization}}
@@ -54,8 +55,7 @@
                                 <ng-container *ngFor="let el of item.controls['fields'].controls;let fi =index">
                                     <button type="button" (click.stop)="selectMatrixFieldChange(i,fi)"
                                         class="list-group-item d-flex align-items-center justify-content-between list-group-item-action pe-2"
-                                        [class.active]="fi===selectMatrixFieldIndex" cdkDrag>
-
+                                        [class.active]="fi===selectMatrixFieldIndex" cdkDrag (cdkDragStarted)="CdkDragStart($event)">
                                         <div style="line-break: anywhere;">
                                             <div>{{el.value.displayName}}</div>
                                             <div>{{el.value.name}}</div>
@@ -64,7 +64,7 @@
                                             <button type="button"
                                                 (click.stop)="deleteMatrixField(item.controls['fields'],fi)"
                                                 class="btn btn-sm btn-li">{{'AbpUi::Delete' | abpLocalization}}</button>
-                                            <span class="bi bi-arrows-move fs-5 drag-handle"></span>
+                                            <span class="bi bi-arrows-move fs-5 drag-handle" cdkDragHandle></span>
                                         </div>
                                     </button>
                                 </ng-container>
@@ -99,8 +99,7 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="formControlName">{{'Cms::FieldType' |
                                                 abpLocalization}}</label>
-                                            <select class="form-select" formControlName="formControlName"
-                                                (change)="setConfigComponent()">
+                                            <select class="form-select" formControlName="formControlName">
                                                 <ng-container *ngFor="let itemC of _FieldControlGroup;let i =index">
                                                     <option [value]="itemC.name">{{itemC.displayName}}</option>
                                                 </ng-container>
@@ -157,3 +156,4 @@
             abpLocalization}}</abp-button>
     </ng-template>
 </abp-modal>
+

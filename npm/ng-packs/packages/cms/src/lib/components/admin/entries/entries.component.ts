@@ -133,7 +133,8 @@ export class EntriesComponent implements OnInit {
           maxResultCount: 1000,
         })
         .subscribe(async (res: any) => {
-          this.SiteOfSectionList = res.items;
+
+          this.SiteOfSectionList = res.items.filter(el => el.isActive );
           this.filters.sectionId = res.items[0]?.id || '';
           await this.getSectionOfEntryType();
           resolve(res.items);
@@ -389,6 +390,7 @@ export class EntriesComponent implements OnInit {
     const previousIndexOrder = this.data.items[event.previousIndex].order;
     const currentIndexOrder = this.data.items[event.currentIndex].order;
     let moveorder = currentIndexOrder;
+    if (event.previousIndex == event.currentIndex) return
     if (previousIndexOrder < currentIndexOrder) {
       moveorder = currentIndexOrder + 1;
     }

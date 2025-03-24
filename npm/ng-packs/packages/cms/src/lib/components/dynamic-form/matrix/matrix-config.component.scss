@@ -1,0 +1,12 @@
+::ng-deep.fieldStartDragClass .cdk-drag-placeholder{
+    opacity: 0.5;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 2px solid var(--bs-list-group-active-color) !important;
+    border-radius: 10px;
+}
+::ng-deep .cdk-drag-placeholder{
+    opacity: 0.5;
+        background-color: var(--bs-list-group-active-bg);
+    }

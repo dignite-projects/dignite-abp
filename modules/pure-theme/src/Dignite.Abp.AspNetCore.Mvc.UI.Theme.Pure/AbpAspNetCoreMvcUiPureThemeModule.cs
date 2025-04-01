@@ -2,6 +2,7 @@
 using Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
+using Dignite.Abp.Seo;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -17,7 +18,8 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 [DependsOn(
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyThemeModule)
+    typeof(AbpAspNetCoreMvcUiMultiTenancyThemeModule),
+    typeof(AbpSeoModule)
     )]
 public class AbpAspNetCoreMvcUiPureThemeModule : AbpModule
 {

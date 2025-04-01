@@ -15,7 +15,11 @@
     -webkit-transform: rotate(90deg);
 }
 
-
+.backdrop-blur {
+    background-color: rgba(var(--bs-body-bg-rgb),.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
 
 /* main navbar */
 .main-navbar .dropdown-menu {

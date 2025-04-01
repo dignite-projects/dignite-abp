@@ -1,5 +1,7 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.PageAlerts
+@using Microsoft.Extensions.DependencyInjection
+@using SeoTags
 @using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
@@ -14,18 +16,10 @@
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
 
-    var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
+    //
+    var seoInfo = Context.RequestServices.GetRequiredService<SeoInfo>();
 
-    if (PageLayout.Content.Title != null)
-    {
-        if (!string.IsNullOrWhiteSpace(pageTitle))
-        {
-            pageTitle = " | " + pageTitle;
-        }
-
-        pageTitle = PageLayout.Content.Title + pageTitle;
-    }
-
+    //
     var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
 }
 
@@ -35,14 +29,17 @@
 <head>
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Empty)
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>@pageTitle</title>
-    @if (ViewBag.Description != null)
+    @if (!seoInfo.MetaLink.PageTitle.IsNullOrWhiteSpace())
     {
-        <meta name="description" content="@ViewBag.Description" />
+        @Html.SeoTags()
+    }
+    else
+    {
+        var pageTitle = ViewBag.Title == null ? PageLayout.Content.Title : ViewBag.Title;
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>@(string.Format(seoInfo.MetaLink.TitleFormat, pageTitle, BrandingProvider.AppName))</title>
     }
     <abp-style-bundle name="@PureThemeBundles.Styles.Global" />
 

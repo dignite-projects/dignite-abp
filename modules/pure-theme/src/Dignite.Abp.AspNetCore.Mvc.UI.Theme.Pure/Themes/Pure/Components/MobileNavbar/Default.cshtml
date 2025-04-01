@@ -4,7 +4,7 @@
 @inject IPageLayout PageLayout
 
 @model MobileNavbarViewModel
-<nav class="mobile-navbar rounded-pill bg-body-secondary bg-gradient d-block d-sm-block d-md-block d-lg-none">
+<nav class="mobile-navbar backdrop-blur rounded-pill d-block d-sm-block d-md-block d-lg-none">
     <ul class="nav justify-content-around align-items-center">
         @foreach (var menuItem in Model.MenuItems)
         {

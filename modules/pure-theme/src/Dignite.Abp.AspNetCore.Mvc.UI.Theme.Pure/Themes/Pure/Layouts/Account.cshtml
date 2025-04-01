@@ -1,10 +1,13 @@
 ﻿@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.MainNavbar
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.PageAlerts
+@using Microsoft.Extensions.DependencyInjection
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
+@using SeoTags
 @using Volo.Abp.AspNetCore.MultiTenancy
 @using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
@@ -18,10 +21,15 @@
 @inject ICurrentTenant CurrentTenant
 @inject IStringLocalizer<AbpUiMultiTenancyResource> MultiTenancyStringLocalizer
 @inject ITenantResolveResultAccessor TenantResolveResultAccessor
+@inject IPageLayout PageLayout
 
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+    //
+    var seoInfo = Context.RequestServices.GetRequiredService<SeoInfo>();
+
+    //
     var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
 }
 
@@ -31,11 +39,18 @@
 <head>
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Account)
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>@(ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title)</title>
+    @if (!seoInfo.MetaLink.PageTitle.IsNullOrWhiteSpace())
+    {
+        @Html.SeoTags()
+    }
+    else
+    {
+        var pageTitle = ViewBag.Title == null ? PageLayout.Content.Title : ViewBag.Title;
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>@(string.Format(seoInfo.MetaLink.TitleFormat, pageTitle, BrandingProvider.AppName))</title>
+    }
 
     @if (ViewBag.Description != null)
     {

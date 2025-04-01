@@ -140,6 +140,7 @@
     <PackageVersion Include="Rebus" Version="8.4.2" />
     <PackageVersion Include="Rebus.ServiceProvider" Version="10.1.2" />
     <PackageVersion Include="Scriban" Version="5.9.0" />
+    <PackageVersion Include="SeoTags" Version="2.0.3" />
     <PackageVersion Include="Serilog" Version="3.1.1" />
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageVersion Include="Serilog.Extensions.Hosting" Version="8.0.0" />

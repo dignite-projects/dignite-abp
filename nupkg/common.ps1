@@ -97,6 +97,7 @@ $projects = (
     "framework/src/Dignite.Abp.Points",
     "framework/src/Dignite.Abp.AspNetCore.Mvc.Regionalization",
     "framework/src/Dignite.Abp.Regionalization",
+    "framework/src/Dignite.Abp.Seo",
     "framework/src/Dignite.Abp.TenantDomain",
     "framework/src/Dignite.Abp.TenantDomain.AspNetCore",
     "framework/src/Dignite.Abp.TenantDomain.Caddy",

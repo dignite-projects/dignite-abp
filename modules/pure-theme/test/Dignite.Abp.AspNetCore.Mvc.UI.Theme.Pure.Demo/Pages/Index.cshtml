@@ -1,11 +1,23 @@
 ﻿@page
 @using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Menus
+@using Microsoft.AspNetCore.Http.Extensions
 @model Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.Pages.IndexModel
 @{
     PageLayout.Content.Title = "Home Page";
     PageLayout.Content.MenuItemName = PureThemeDemoMenus.Home;
     PageLayout.Content.BreadCrumb.ShowHome = false;
     PageLayout.Content.BreadCrumb.ShowCurrent = false;
+
+    //SET SEO INFO
+    Html.SetSeoInfo(seoInfo =>
+    {
+        seoInfo.SetCommonInfo(
+            PageLayout.Content.Title, 
+            "Home page description",
+            HttpContext.Request.GetDisplayUrl(),
+            new string[] { "Dignite", "PureTheme" }
+        );
+    });
 }
 
 @section content_toolbar {

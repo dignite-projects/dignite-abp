@@ -96,11 +96,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             DisplayName = "Test Application",
             RedirectUris =
             {
-                new Uri("https://abp.io/signin-oidc")
+                new Uri("https://dignite.com/signin-oidc")
             },
             PostLogoutRedirectUris =
             {
-                new Uri("https://abp.io/signout-callback-oidc")
+                new Uri("https://dignite.com/signout-callback-oidc")
             },
             Permissions =
             {
@@ -135,8 +135,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
                 OpenIddictConstants.Permissions.Prefixes.Scope + _testData.Scope1Name
             },
-            ClientUri = "https://abp.io/TestApplication",
-            LogoUri = "https://abp.io/TestApplication.png"
+            ClientUri = "https://dignite.com/TestApplication",
+            LogoUri = "https://dignite.com/TestApplication.png"
         }));
 
         await _applicationManager.CreateAsync(await GetOpenIddictApplicationModelAsync(_testData.App2Id, new AbpApplicationDescriptor
@@ -146,11 +146,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             DisplayName = "Test Application",
             RedirectUris =
             {
-                new Uri("https://abp.io/signin-oidc")
+                new Uri("https://dignite.com/signin-oidc")
             },
             PostLogoutRedirectUris =
             {
-                new Uri("https://abp.io/signout-callback-oidc")
+                new Uri("https://dignite.com/signout-callback-oidc")
             },
             Permissions =
             {
@@ -186,8 +186,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 OpenIddictConstants.Permissions.Prefixes.Scope + _testData.Scope1Name,
                 OpenIddictConstants.Permissions.Prefixes.Scope + _testData.Scope2Name,
             },
-            ClientUri = "https://abp.io/TestApplication2",
-            LogoUri = "https://abp.io/TestApplication2.png"
+            ClientUri = "https://dignite.com/TestApplication2",
+            LogoUri = "https://dignite.com/TestApplication2.png"
         }));
     }
 

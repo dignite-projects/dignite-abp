@@ -35,7 +35,7 @@ public class OpenIddictAuthServerRedirectUriManagerTests : OpenIddictTestBase<Ab
     [Fact]
     public async Task RemoveRedirectDomainAsync_Should_Remove_Domain_When_Exists()
     {
-        await _authServerRedirectUriManager.RemoveRedirectDomainAsync(_testData.App1ClientId, "abp.io");
+        await _authServerRedirectUriManager.RemoveRedirectDomainAsync(_testData.App1ClientId, "dignite.com");
 
         var app1 = (await _applicationManager.FindByClientIdAsync(_testData.App1ClientId)).As<OpenIddictApplicationModel>();
 

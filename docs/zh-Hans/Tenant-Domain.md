@@ -44,7 +44,7 @@ NullWebServerManager 是一个内置类，它实现了 IWebServerManager，但�
 
 用于管理 Caddy Web Server 的站点域名
 
-## 安装
+### 安装
 
 1. 在您的 Application 项目中安装 `Dignite.Abp.TenantDomain.Caddy` NuGet 包。
 2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `AbpTenantDomainCaddyModule`。
@@ -80,7 +80,8 @@ NullWebServerManager 是一个内置类，它实现了 IWebServerManager，但�
 
 用于管理 OpenIddict 的客户端授权域名
 
-## 安装
+### 安装
 
 1. 在您的 Application 项目中安装 `Dignite.Abp.TenantDomain.OpenIddict` NuGet 包。
 2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `AbpTenantDomainOpenIddictModule`。
+

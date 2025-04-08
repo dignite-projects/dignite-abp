@@ -151,6 +151,7 @@ public class AbpTenantDomainManagementHostModule : AbpModule
         Configure<AbpTenantDomainManagementOptions>(options =>
         {
             options.TenantDomainFormat = "{0}.travely.dignite.com";
+            options.AuthServerClientId = "TenantDomainManagement_App";
         });
 
         #if DEBUG

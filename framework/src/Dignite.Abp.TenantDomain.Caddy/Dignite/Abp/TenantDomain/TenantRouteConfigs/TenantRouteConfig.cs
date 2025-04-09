@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+
+namespace Dignite.Abp.TenantDomain.TenantRouteConfigs;
+
+public class TenantRouteConfig
+{
+    public TenantRouteConfig()
+    {
+
+    }
+
+    public TenantRouteConfig(Guid tenantId, string[] hosts, string upstreamAddress)
+    {
+        Id = $"tenantId_{tenantId}";
+        SetMatches(hosts);
+        Handles = [new ReverseProxyRouteHandle(tenantId, upstreamAddress)];
+    }
+
+    [JsonProperty("@id")]
+    public string Id { get; private set; }
+
+    [JsonProperty("terminal")]
+    public bool Terminal { get; private set; } = true;
+
+    [JsonProperty("handle")]
+    public List<ReverseProxyRouteHandle> Handles { get; private set; }
+
+    [JsonProperty("match")]
+    public List<RouteMatch> Matches { get; private set; }
+
+    public void SetMatches(params string[] hosts)
+    {
+        Matches = hosts.Select(host => new RouteMatch { Hosts = { host } }).ToList();
+    }
+
+    public Guid GetTenantId()
+    {
+        return Guid.Parse(Id.Substring(9));
+    }
+}

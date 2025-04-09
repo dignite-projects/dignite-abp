@@ -83,7 +83,7 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
     [Fact]
     public async Task RemoveDomainFromSite_Should_Remove_Domain_When_Exists()
     {
-        var domain = "example.com";
+        var tenantId = Guid.NewGuid();
         var fakeHandler = new FakeHttpMessageHandler(
             new HttpResponseMessage
             {
@@ -98,7 +98,7 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
         var httpClient = new HttpClient(fakeHandler);
         _httpClientFactoryMock.Setup(x => x.CreateClient(It.IsAny<string>())).Returns(httpClient);
 
-        await _caddyWebServerManager.RemoveDomainAsync(domain);
+        await _caddyWebServerManager.RemoveDomainAsync(tenantId);
 
         Assert.Equal(2, fakeHandler.NumberOfCalls);
     }

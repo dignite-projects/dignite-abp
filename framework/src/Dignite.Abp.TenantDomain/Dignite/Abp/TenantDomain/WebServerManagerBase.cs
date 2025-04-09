@@ -14,5 +14,5 @@ public abstract class WebServerManagerBase : IWebServerManager
 
     public abstract Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId, string site = null);
     public abstract Task<bool> CheckCertificateValidityAsync(string domain);
-    public abstract Task RemoveDomainAsync(string domain, string site = null);
+    public abstract Task RemoveDomainAsync(Guid tenantId, string site = null);
 }

@@ -3,7 +3,7 @@ using Volo.Abp.Modularity;
 
 namespace Dignite.Abp.TenantDomain.Caddy;
 
-[DependsOn(typeof(AbpTenantDomainModule))]
+[DependsOn(typeof(AbpTenantDomainModule), typeof(DigniteCaddyModule))]
 public class AbpTenantDomainCaddyModule : AbpModule
 {
 }

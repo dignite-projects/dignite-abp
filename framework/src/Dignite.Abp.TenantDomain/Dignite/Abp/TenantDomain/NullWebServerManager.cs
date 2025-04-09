@@ -27,11 +27,11 @@ public class NullWebServerManager : WebServerManagerBase
         return Task.FromResult(false);
     }
 
-    public override Task RemoveDomainAsync(string domain, string site = null)
+    public override Task RemoveDomainAsync(Guid tenantId, string site = null)
     {
         Logger.LogWarning("USING NullWebServerManager!");
         Logger.LogDebug("RemoveDomainAsync");
-        Logger.LogDebug(domain);
+        Logger.LogDebug(tenantId.ToString());
         Logger.LogDebug(site);
         return Task.FromResult(0);
     }

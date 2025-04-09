@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Dignite.Abp.TenantDomain.TenantRouteConfigs;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.TenantDomain.Caddy;

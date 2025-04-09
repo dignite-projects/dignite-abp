@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.Testing;
 using Xunit;
 
@@ -17,12 +18,14 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
     private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
     private readonly Mock<ILogger<CaddyWebServerManager>> _loggerMock;
     private readonly Mock<IOptions<AbpTenantDomainCaddyOptions>> _optionsMock;
+    private readonly Mock<IOptions<AbpAspNetCoreMultiTenancyOptions>> _multiTenancyOptionsMock;
 
     public CaddyWebServerManagerTests()
     {
         _httpClientFactoryMock = new Mock<IHttpClientFactory>();
         _loggerMock = new Mock<ILogger<CaddyWebServerManager>>();
         _optionsMock = new Mock<IOptions<AbpTenantDomainCaddyOptions>>();
+        _multiTenancyOptionsMock = new Mock<IOptions<AbpAspNetCoreMultiTenancyOptions>>();
 
         _optionsMock.Setup(o => o.Value).Returns(new AbpTenantDomainCaddyOptions
         {
@@ -32,7 +35,8 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
         _caddyWebServerManager = new CaddyWebServerManager(
             _httpClientFactoryMock.Object,
             _loggerMock.Object,
-            _optionsMock.Object
+            _optionsMock.Object,
+            _multiTenancyOptionsMock.Object
         );
     }
 

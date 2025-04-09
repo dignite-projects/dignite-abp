@@ -14,14 +14,17 @@ public class CaddyWebServerManager : WebServerManagerBase, ITransientDependency
     protected readonly CaddyTenantConfigManager _caddyTenantConfigManager;
 
     private readonly AbpTenantDomainCaddyOptions _options;
+    private readonly AbpAspNetCoreMultiTenancyOptions _multiTenancyOptions;
 
     public CaddyWebServerManager(
         IHttpClientFactory httpClientFactory,
         ILogger<CaddyWebServerManager> logger,
-        IOptions<AbpTenantDomainCaddyOptions> options) : base(logger)
+        IOptions<AbpTenantDomainCaddyOptions> options,
+        IOptions<AbpAspNetCoreMultiTenancyOptions> multiTenancyOptions) : base(logger)
     {
         _httpClientFactory = httpClientFactory;
         _options = options.Value;
+        _multiTenancyOptions = multiTenancyOptions.Value;
     }
 
     public override Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId, string? site = null)

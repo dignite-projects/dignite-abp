@@ -21,5 +21,9 @@
 	  <ProjectReference Include="..\Dignite.Abp.Caddy\Dignite.Abp.Caddy.csproj" />
 	  <ProjectReference Include="..\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" />
+	</ItemGroup>
 
 </Project>

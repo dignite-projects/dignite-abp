@@ -78,7 +78,7 @@ namespace Dignite.Cms.Public.Entries
                 }
                 else if (section.Type == Cms.Sections.SectionType.Structure)
                 {
-                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, null, null, null, queryingByCustomFields, 1000, 0))
+                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, 1000, 0))
                         .OrderBy(e=>e.Order)
                         .ToList();
                     count = result.Count;

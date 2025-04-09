@@ -1,8 +1,8 @@
-﻿using Dignite.Abp.TenantDomainManagement.Host.Data;
-using Dignite.Abp.TenantDomainManagement.Host.Localization;
-using Dignite.Abp.TenantDomain;
+﻿using Dignite.Abp.TenantDomain;
 using Dignite.Abp.TenantDomain.Caddy;
 using Dignite.Abp.TenantDomain.OpenIddict;
+using Dignite.Abp.TenantDomainManagement.Host.Data;
+using Dignite.Abp.TenantDomainManagement.Host.Localization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -50,7 +50,6 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
-using Dignite.Abp.TenantDomainManagement.AspNetCore;
 
 namespace Dignite.Abp.TenantDomainManagement.Host;
 
@@ -104,7 +103,6 @@ namespace Dignite.Abp.TenantDomainManagement.Host;
     // Tenant Domains module packages
     typeof(AbpTenantDomainManagementApplicationModule),
     typeof(AbpTenantDomainManagementHttpApiModule),
-    typeof(AbpTenantDomainAspNetCoreModule),
     typeof(AbpTenantDomainOpenIddictModule),
     typeof(AbpTenantDomainCaddyModule)
 )]

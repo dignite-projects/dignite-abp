@@ -4,7 +4,7 @@
 
 `IWebServerManager` 接口提供了一系列方法来管理 Web Server 的操作，包括：
 
-- 添加过更新域名：
+- 添加或更新域名：
 
   ```csharp
   Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId, string site = null);
@@ -114,6 +114,7 @@ NullWebServerManager 是一个内置类，它实现了 IWebServerManager，但�
 Configure<AbpTenantDomainManagementOptions>(options =>
 {
     options.TenantDomainFormat = "{0}.travely.dignite.com";
+    options.AuthServerClientId = "TenantDomainManagement_App";
 });
 ````
 

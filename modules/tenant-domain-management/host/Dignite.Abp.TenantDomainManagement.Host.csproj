@@ -103,7 +103,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\framework\src\Dignite.Abp.TenantDomain.AspNetCore\Dignite.Abp.TenantDomain.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\framework\src\Dignite.Abp.TenantDomain.Caddy\Dignite.Abp.TenantDomain.Caddy.csproj" />
     <ProjectReference Include="..\..\..\framework\src\Dignite.Abp.TenantDomain.OpenIddict\Dignite.Abp.TenantDomain.OpenIddict.csproj" />
     <ProjectReference Include="..\src\Dignite.Abp.TenantDomainManagement.Application\Dignite.Abp.TenantDomainManagement.Application.csproj" />

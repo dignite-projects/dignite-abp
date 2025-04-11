@@ -45,7 +45,7 @@
 
     var setBrandLogo = (theme) => {
         if (dignite.brand.logoReverseUrl != '' || dignite.brand.logoUrl != '') {
-            const brandImgElement = document.querySelectorAll('.navbar-brand img');
+            const brandImgElement = document.querySelectorAll('.brand-logo');
             for (let item of brandImgElement) {
                 if (theme === 'auto') {
                     theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

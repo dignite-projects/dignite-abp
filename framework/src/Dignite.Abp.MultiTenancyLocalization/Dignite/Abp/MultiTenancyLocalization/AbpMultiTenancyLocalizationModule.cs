@@ -12,7 +12,7 @@ public class AbpMultiTenancyLocalizationModule : AbpModule
     {
         context.Services.AddMultiTenancyLocalization(options =>
         {
-            options.ResourcesPath = "tenants";
+            options.ResourcesPath = "Tenants";
         });
     }
 }

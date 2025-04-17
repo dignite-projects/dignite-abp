@@ -34,8 +34,8 @@ namespace Dignite.Cms.Entries
         public static int MaxRevisionNotesLength { get; set; } = 512;
 
         /// <summary>
-        /// Default value: index
+        /// Default value: default
         /// </summary>
-        public static string DefaultSlug { get; set; } = "index";
+        public static string DefaultSlug { get; set; } = "default";
     }
 }

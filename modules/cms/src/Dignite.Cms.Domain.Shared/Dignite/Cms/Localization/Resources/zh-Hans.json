@@ -76,6 +76,7 @@
     "Enum:EntryStatus:Draft": "草稿",
     "Enum:EntryStatus:Published": "发布",
     "FormControlConfiguration": "表单控件配置",
+    "CreateOtherLanguages": "创建其他语言",
     "NotShowInList": "此格式不支持在列表中展示"
   }
 }

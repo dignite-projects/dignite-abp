@@ -37,12 +37,16 @@
                         <div class="form-label">{{'AbpUi::Languages' | abpLocalization}}</div>
                         <select class="form-select form-select-multiple" formControlName="culture">
                             <ng-container *ngFor="let item of languagesList;let i =index">
-                                <option [value]="item.cultureName">{{item.displayName}}</option>
+                                <option [value]="item.cultureName" >{{item.displayName}}</option>
                             </ng-container>
                         </select>
                         <div class="text-danger" *ngIf="cultureInput.dirty">
                             {{cultureInput?.errors?.repetition}}
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-label">{{'Cms::EntryType' | abpLocalization}}</div>
+                        <input type="text" disabled [value]="showEntryType?.displayName||''" class="form-select" />
                     </div>
                     <div class="mb-3" *ngIf="sectionInfo.type===1">
                         <label class="form-label" for="parentId">{{'Cms::ParentEntry' | abpLocalization}}</label>

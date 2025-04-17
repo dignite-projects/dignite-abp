@@ -1,6 +1,6 @@
 import { NgModule, NgModuleFactory, ModuleWithProviders } from '@angular/core';
 import { CoreModule, LazyModuleFactory } from '@abp/ng.core';
-import { ThemeSharedModule } from '@abp/ng.theme.shared';
+import { HTTP_ERROR_HANDLER, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { CmsRoutingModule } from './cms-routing.module';
 import {
   CreateComponent,
@@ -119,6 +119,7 @@ export class CmsModule {
           provide: Entity_Props_Contributors,
           useValue: options.entityPropContributors,
         },
+       
       ],
     };
   }

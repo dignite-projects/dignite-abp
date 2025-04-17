@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, inject, OnChanges } from '@angular/core';
 import * as FileService from '../../proxy/dignite/file-explorer/files';
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
 import {
@@ -19,7 +19,6 @@ import { FileApiService } from '../../services/file-api.service';
 import { SelectionType } from '@swimlane/ngx-datatable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-var that;
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'fe-file-modal',
@@ -34,7 +33,7 @@ var that;
     { provide: LIST_QUERY_DEBOUNCE_TIME, useValue: 500 },
   ],
 })
-export class FileModalComponent {
+export class FileModalComponent implements OnChanges {
   constructor(
     private _FileService: FileService.FileDescriptorService,
     private toaster: ToasterService,
@@ -44,7 +43,6 @@ export class FileModalComponent {
     private confirmation: ConfirmationService,
     private _LocalizationService: LocalizationService
   ) {
-    that = this;
   }
 
   private _FileDescriptorService = inject(FileDescriptorService);
@@ -73,18 +71,16 @@ export class FileModalComponent {
   }
 
   /**是否多选 */
-  _multiple: boolean = false;
+  _multiple = false;
   @Input()
   public set multiple(v: boolean) {
     this._multiple = v;
-    if (v) {
-    }
   }
 
   /**文件大小限制
    * @param 1mb
    */
-  sizeLimit: number = 1048576;
+  sizeLimit = 1048576;
   @Input()
   public set limit(v: number) {
     this.sizeLimit = v;
@@ -102,10 +98,10 @@ export class FileModalComponent {
   @Output() visibleChange = new EventEmitter();
 
   /**模态框-状态-是否打开 */
-  ModalOpen: boolean = false;
+  ModalOpen = false;
 
   /**模态框-繁忙状态-用于确定模态的繁忙状态是否为真 */
-  ModalBusy: boolean = false;
+  ModalBusy = false;
 
   /**模态框-状态改变回调 */
   ModalVisibleChange(event) {
@@ -123,14 +119,14 @@ export class FileModalComponent {
 
   /**模态框保存 */
   modalSave() {
-    let selectedTablearr = this._FileApiService.deepClone(this.selectedTable);
+    const selectedTablearr = this._FileApiService.deepClone(this.selectedTable);
     this.selectFilefn.emit(selectedTablearr);
     this.ModalVisibleChange(false);
   }
   /**dignite-file-modal-tree */
   /**选择的tree节点 */
   _theSelectedTreeNode: any = '';
-  isCreateList: boolean = false;
+  isCreateList = false;
   /**初始化数据 */
   loadData() {
     if (this.ModalOpen && this._fileContainerName) {
@@ -157,7 +153,7 @@ export class FileModalComponent {
    * @returns {Array} - 扁平化后的数组
    */
   flattenNestedArray(nestedArray) {
-    let result = [];
+    const result = [];
 
     function flatten(items) {
       if (!items) return;
@@ -189,7 +185,7 @@ export class FileModalComponent {
 
   /**图片上传-获取文件信息改变 */
   async getFileChange(event) {
-    let files = new Array(...event.target.files);
+    const files = new Array(...event.target.files);
     this.uploadPictureStatusList = files;
     for (const file of files) {
       if (file.size > this.sizeLimit) {
@@ -207,7 +203,7 @@ export class FileModalComponent {
         }); // 等待每个文件上传完成
     }
     this.list.get();
-    let isSubmit = !this.uploadPictureStatusList.some(el => el.status == 2);
+    const isSubmit = !this.uploadPictureStatusList.some(el => el.status == 2);
     if (isSubmit) {
       // this.toaster.success("上传完成");
       setTimeout(() => {
@@ -226,7 +222,7 @@ export class FileModalComponent {
   /**图片上传-递归按顺序上传 */
   uploadingFile(file) {
     return new Promise((resolve, rejects) => {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('file', file, file.name);
       this.createFile({
         file: formData,
@@ -299,7 +295,7 @@ export class FileModalComponent {
       })
       .subscribe(async (status: Confirmation.Status) => {
         if (status == 'confirm') {
-          let selectedTable = this.selectedTable;
+          const selectedTable = this.selectedTable;
           try {
             const result = await this.batchDeleteItems(selectedTable);
             if (result.success) {
@@ -309,7 +305,6 @@ export class FileModalComponent {
             } else {
               //删除失败的项
               this.list.get();
-              // console.warn(result.message);
               // 可以选择展示失败项或重试
             }
           } catch (error) {
@@ -341,7 +336,6 @@ export class FileModalComponent {
 
     // 等待所有请求完成
     const results = await Promise.allSettled(deletePromises);
-    console.log(results, 'resultsresultsresults');
     // 收集失败的项
     const failedItems: any[] = [];
     results.forEach(result => {
@@ -458,10 +452,10 @@ export class FileModalComponent {
   /**当前编辑的row */
   newEditRow: any = '';
   /**是否正在加载 */
-  isloading: boolean = false;
+  isloading = false;
   /**提交FileName编辑 */
   onSubmitFileName(event) {
-    let input = this.FileNameForm.value;
+    const input = this.FileNameForm.value;
     if (!this.FileNameForm.valid) return;
     if (this.isloading) return;
     this.isloading = true;

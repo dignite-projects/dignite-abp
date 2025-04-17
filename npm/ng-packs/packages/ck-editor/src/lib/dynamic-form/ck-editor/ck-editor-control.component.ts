@@ -102,7 +102,6 @@ export class CkEditorControlComponent {
     return new Promise(async resolve => {
       await import('ckeditor5').then(async res => {
         this.loadStyle();
-        console.log('ckeditor5', res);
         if(formConfiguration['Ckeditor.Mode']==CkEditorModeEnum.Simple){
           _that.Editor = res.InlineEditor;
         } else if(formConfiguration['Ckeditor.Mode']==CkEditorModeEnum.Classic){

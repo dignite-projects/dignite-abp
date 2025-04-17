@@ -80,7 +80,6 @@ export class TableConfigComponent {
       this._Entity?.setControl('formConfiguration', this.fb.group(new TableConfig()))
       this._fieldControlGroup = this._FieldAbstractsService.getExcludeAssignControl(this._type)
       if (this._selected && this._selected.formControlName == this._type) {
-        console.log(this._selected,'表格AfterInit',)
         this._selected.formConfiguration['TableColumns'].forEach(el => {
           this.addTableColumns()
         });

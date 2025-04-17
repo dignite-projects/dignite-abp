@@ -193,6 +193,7 @@ export class EntriesComponent implements OnInit {
 
     // let _entryTypeList = this.SiteOfSectionList.find(el => el.id == sectionId)?.entryTypes || [];
     this.entryTypeList = _entryTypeList;
+    console.log(this.entryTypeList,'entryTypeList');
     //选择板块的类型SectionType
     this.SiteOfSectionType = this.SiteOfSectionList.find(el => el.id == sectionId)?.type;
     if (this.SiteOfSectionType == SectionType.Structure) {

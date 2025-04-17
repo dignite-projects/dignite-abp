@@ -261,8 +261,6 @@ export class MatrixConfigComponent {
   }
 
   dropMatrix(event) {
-    console.log(event.container.data === event.previousContainer.data, 'dropMatrix');
-
     if (event.container.data === event.previousContainer.data) {
       moveItemInArray(this.MatrixBlockTypes.controls, event.previousIndex, event.currentIndex);
       this.MatrixBlockTypes.updateValueAndValidity();
@@ -271,10 +269,9 @@ export class MatrixConfigComponent {
       const object1 = this.MatrixBlockTypes.controls[this.selectMatrixBlockIndex].get(
         'fields'
       ) as FormArray;
-      let controlsItem = object1.at(event.previousIndex);
+      const controlsItem = object1.at(event.previousIndex);
       object1.removeAt(event.previousIndex);
       event.container.data[event.currentIndex-1].controls['fields'].push(controlsItem);
-      console.log(object1.controls[event.previousIndex],'object1.controls[event.previousIndex]')
     }
     this.fieldStartDrag=false;
   }

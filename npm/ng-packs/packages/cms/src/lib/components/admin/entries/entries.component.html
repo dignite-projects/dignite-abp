@@ -1,5 +1,19 @@
 <abp-page [title]="'Cms::Entries' | abpLocalization" [toolbar]="true">
-    <abp-page-toolbar-container *ngIf="entryTypeList.length < 1" class="col "></abp-page-toolbar-container>
+    <abp-page-toolbar-container *ngIf="entryTypeList.length < 1" class="col ">
+    </abp-page-toolbar-container>
+    <abp-page-toolbar-container *ngIf="entryTypeList.length === 1" class="col ">
+        <div class="row justify-content-end mx-0 gap-2" *abpPermission="'CmsAdmin.Entry.Create'">
+            <div class="col-auto px-0 pt-0">
+                <ng-container *ngFor="let item of entryTypeList">
+                    <button class="btn btn-sm btn-primary"
+                        [disabled]="data.totalCount===1&&SiteOfSectionType===SectionType.Single"
+                        [routerLink]="['/cms/admin/entries/create']"
+                        [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}"><i
+                            class="fa fa-plus me-2"></i>{{item.displayName}}</button>
+                </ng-container>
+            </div>
+        </div>
+    </abp-page-toolbar-container>
     <abp-page-toolbar-container *ngIf="entryTypeList.length > 1" class="col ">
         <div class="row justify-content-end mx-0 gap-2" *abpPermission="'CmsAdmin.Entry.Create'">
             <div class="col-auto px-0 pt-0">
@@ -10,6 +24,7 @@
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <ng-container *ngFor="let item of entryTypeList">
                             <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                [disabled]="data.totalCount===1&&SiteOfSectionType===SectionType.Single"
                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}">{{item.displayName}}</button>
                         </ng-container>
                     </div>
@@ -82,7 +97,7 @@
                 <div class="table-responsive table-fixed-header">
                     <ngx-datatable class="material " [rows]="data.items" [list]="list" [columnMode]="ColumnMode.force"
                         [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [virtualization]="false"
-                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true" >
+                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true">
                         <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}
@@ -134,9 +149,14 @@
                                     </button>
                                     <div ngbDropdownMenu>
                                         <button ngbDropdownItem
-                                            routerLink="/cms/admin/entries/{{row.id}}/edit">{{'AbpUi::Edit' |
+                                            routerLink="/cms/admin/entries/{{row.id}}/edit">{{'Cms::Edit' |
                                             abpLocalization}}</button>
-                                        <button ngbDropdownItem (click)="deletefield(row)">{{'AbpUi::Delete' |
+                                        <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                            [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
+                                            |
+                                            abpLocalization}} </button>
+                                        <!-- -->
+                                        <button ngbDropdownItem (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
                                     </div>
                                 </div>
@@ -152,7 +172,9 @@
                     <table class="table overflow-nowrap mb-0" cdkDropList (cdkDropListDropped)="drop($event)">
                         <thead>
                             <tr>
-                                <th class="sticky-left-card-bg"> <span class="bi bi-arrows-move fs-5 drag-handle me-2 opacity-0" ></span>{{'AbpUi::Actions' | abpLocalization}}</th>
+                                <th class="sticky-left-card-bg"> <span
+                                        class="bi bi-arrows-move fs-5 drag-handle me-2 opacity-0"></span>{{'AbpUi::Actions'
+                                    | abpLocalization}}</th>
                                 <th>{{'Cms::Title' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
                                 <th>{{'Cms::Slug' | abpLocalization}}</th>
@@ -175,6 +197,14 @@
                                             <button ngbDropdownItem
                                                 routerLink="/cms/admin/entries/{{item.id}}/edit">{{'AbpUi::Edit' |
                                                 abpLocalization}}</button>
+                                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                            [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.entryTypeId,entryVersionId:item.id,isOther:1}">{{'Cms::CreateOtherLanguages' |
+                                                abpLocalization}}</button>
+                                                <!-- <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                                [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
+                                                |
+                                                abpLocalization}} </button> -->
+                                                
                                             <button ngbDropdownItem (click)="deletefield(item)">{{'AbpUi::Delete' |
                                                 abpLocalization}}</button>
                                         </div>
@@ -197,8 +227,9 @@
                                 </td>
                                 @for (item1 of showinFieldList; track $index) {
                                 <td>
-                                    <df-dynamic-view [type]="item1.field.formControlName" [showInList]="true" [fields]="item1"
-                                    [value]="item?.extraProperties[item1.field.name]"></df-dynamic-view>
+                                    <df-dynamic-view [type]="item1.field.formControlName" [showInList]="true"
+                                        [fields]="item1"
+                                        [value]="item?.extraProperties[item1.field.name]"></df-dynamic-view>
 
                                 </td>
                                 }

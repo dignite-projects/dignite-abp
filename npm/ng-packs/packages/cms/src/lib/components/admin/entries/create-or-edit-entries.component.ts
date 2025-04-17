@@ -9,8 +9,7 @@ import { CmsApiService } from '../../../services';
 import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 import { Observable } from 'rxjs';
-
-
+import { RegionalizationService } from '../../../proxy/dignite/abp/regionalization-management';
 
 @Component({
   selector: 'cms-create-or-edit-entries',
@@ -18,7 +17,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./create-or-edit-entries.component.scss'],
 })
 export class CreateOrEditEntriesComponent {
-
   private toaster = inject(ToasterService);
   public _location = inject(Location);
   private configState = inject(ConfigStateService);
@@ -29,6 +27,7 @@ export class CreateOrEditEntriesComponent {
   private router = inject(Router);
   private _CmsApiService = inject(CmsApiService);
   private cdRef = inject(ChangeDetectorRef);
+  private _RegionalizationService = inject(RegionalizationService);
 
   /**语言列表 */
   languagesList: any[] = [];
@@ -45,10 +44,12 @@ export class CreateOrEditEntriesComponent {
   /**版本列表 */
   AllVersionsList: any[] = [];
 
-  @Input() isEdit: boolean|any = false;
+  @Input() isEdit: boolean | any = false;
+  //是否正在创建版本
+  @Input() isCreateVersion: boolean | any = false;
 
-  @Input() sectionId: string|any = '';
-  @Input() entryTypeId: string|any = '';
+  @Input() sectionId: string | any = '';
+  @Input() entryTypeId: string | any = '';
   @Input() public set select(v: any) {
     this.entryVersionId = v.id;
     this.entryInfo = v;
@@ -58,13 +59,16 @@ export class CreateOrEditEntriesComponent {
   @Input() set entity(value: FormGroup | undefined) {
     this.formEntity = value;
     if (value) {
-      const languages = this.configState.getDeep('localization.languages');
-      this.languagesList = languages;
       this.loadData();
     }
   }
   /**是否加载完成 */
-  isLoad: boolean|any = false;
+  isLoad: boolean | any = false;
+  /**是否创建其他语言本 */
+  @Input() isOther: any = 0;
+
+  /**系统默认语言 */
+  DefaultLanguage: string | any = '';
 
   /**语言控件 */
   get cultureInput(): FormControl {
@@ -73,25 +77,51 @@ export class CreateOrEditEntriesComponent {
   get slugInput(): FormControl {
     return this.formEntity?.get('slug') as FormControl;
   }
+  get initialVersionIdInput(): FormControl {
+    return this.formEntity?.get('initialVersionId') as FormControl;
+  }
 
   /**获取提交按钮替身，用于真实触发表单提交 */
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
+  /**站点设置语言 */
+  SiteSettingsAdminLanguages: any[] = [];
+  /**站点设置的默认语言 */
+  defaultCultureName: any = '';
+  /**
+   * 获取站点设置语言
+   */
+  getSiteSettingsLanguages() {
+    return new Promise((resolve, rejects) => {
+      this._RegionalizationService.get().subscribe(res => {
+        this.SiteSettingsAdminLanguages = res.availableCultureNames;
+        this.defaultCultureName = res.defaultCultureName;
+        resolve(res);
+      });
+    });
+  }
 
   /**加载数据 */
   async loadData() {
+    await this.getSiteSettingsLanguages();
+    //获取语言列表
+    const languagesSystem = this.configState.getDeep('localization.languages');
+    //获取系统默认语言 */
+    this.DefaultLanguage = this.defaultCultureName;
+    // this.DefaultLanguage = this.configState.getSetting('Abp.Regionalization.DefaultCultureName');
+    //选中languagesSystem中的cultureName在 languagesSystem中存在的数组项
+    this.languagesList = languagesSystem.filter(el=>this.SiteSettingsAdminLanguages.includes(el.cultureName))
+    this.cdRef.detectChanges();
     if (this.sectionId) {
       await this.getSectionInfo();
       await this.getEntryList();
     }
-    this.cultureInput.disable();
+    if (!(this.isOther == 1)) {
+      this.cultureInput.disable();
+    } 
     const repetition = await this.cultureAsyncValidator();
     if (repetition) this.cultureInput.setErrors(repetition);
     this.slugInput.addAsyncValidators(this.SlugAsyncValidator());
-    
-
     if (this.entryInfo) {
-      // this.slugInput.reset(this.entryInfo.slug);
-      // this.slugInput.updateValueAndValidity();
       await this.getAllVersionsList();
       this.formEntity.patchValue({
         entryTypeId: this.entryInfo.entryTypeId,
@@ -102,17 +132,20 @@ export class CreateOrEditEntriesComponent {
         versionNotes: this.entryInfo.versionNotes,
         initialVersionId: this.entryInfo.id,
       });
-      this.slugInput.setErrors({})
-      this.slugInput.setErrors(null)
+      this.slugInput.setErrors({});
+      this.slugInput.setErrors(null);
     } else {
       this.formEntity.patchValue({
         entryTypeId: this.entryTypeId,
         publishTime: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       });
     }
-    
+
     this.cdRef.detectChanges();
     this.isLoad = true;
+    if(this.isOther==1){
+      this.initialVersionIdInput.patchValue('')
+    }
     setTimeout(() => {
       // this.submitclick?.nativeElement.click();
     }, 0);
@@ -120,10 +153,10 @@ export class CreateOrEditEntriesComponent {
   // /**别名查重 */
   SlugAsyncValidator() {
     return (
-      control: AbstractControl
+      control: AbstractControl,
     ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
-      return new Promise( resolve => {
-        if ( control.value) {
+      return new Promise(resolve => {
+        if (control.value) {
           if (control.value == this.entryInfo?.slug) {
             resolve(null);
             return;
@@ -139,7 +172,7 @@ export class CreateOrEditEntriesComponent {
                 resolve({
                   repetition: this._LocalizationService.instant(
                     `Cms::EntrySlug{0}AlreadyExist`,
-                    control.value
+                    control.value,
                   ),
                 });
               } else {
@@ -168,7 +201,7 @@ export class CreateOrEditEntriesComponent {
               repetition: this._LocalizationService.instant(
                 `Cms::EntriesAlreadyExistEntryType`,
                 '',
-                this.languagesList.find(el => el.cultureName == culture).displayName
+                this.languagesList.find(el => el.cultureName == culture).displayName,
               ),
             });
           } else {
@@ -201,7 +234,7 @@ export class CreateOrEditEntriesComponent {
           const entryList = res.items.filter(el => el.id !== this.entryInfo?.id);
           const parentList = entryList.filter(el => !el.parentId);
           parentList.forEach(el => {
-            const layer: number|any = 0;
+            const layer: number | any = 0;
             el.layer = new Array(layer);
             el.children = this.groupByParentId(entryList, el.id, layer + 1);
           });
@@ -236,16 +269,14 @@ export class CreateOrEditEntriesComponent {
       })
       .subscribe(res => {
         if (res) {
-          this.slugInput.setErrors(
-            {
-              repetition: this._LocalizationService.instant(
-                `Cms::EntrySlug{0}AlreadyExist`,
-                this.slugInput.value
-              ),
-            }
-          )
+          this.slugInput.setErrors({
+            repetition: this._LocalizationService.instant(
+              `Cms::EntrySlug{0}AlreadyExist`,
+              this.slugInput.value,
+            ),
+          });
         } else {
-          this.slugInput.setErrors(null)
+          this.slugInput.setErrors(null);
         }
       });
   }

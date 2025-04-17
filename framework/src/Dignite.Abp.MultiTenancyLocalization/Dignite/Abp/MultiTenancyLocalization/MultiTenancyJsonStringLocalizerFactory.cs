@@ -10,6 +10,7 @@ using My.Extensions.Localization.Json.Internal;
 using Volo.Abp.MultiTenancy;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Dignite.Abp.MultiTenancyLocalization;
 
@@ -56,7 +57,7 @@ public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
         }
         else
         {
-            resourcesPath = resourcesPath.RemovePostFix($"\\{_localizationOptions.ResourcesPath}"); //Host language packs are placed in the root directory
+            resourcesPath = PathHelpers.GetApplicationRoot();
             return base.CreateJsonStringLocalizer(resourcesPath, resourceName);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Dignite.Abp;
+﻿namespace Caddy;
 public class CaddyOptions
 {
     public string Endpoint { get; set; } = "http://localhost:2019";

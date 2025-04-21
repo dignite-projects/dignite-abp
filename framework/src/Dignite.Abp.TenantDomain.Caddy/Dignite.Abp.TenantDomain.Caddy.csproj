@@ -18,7 +18,6 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\Dignite.Abp.Caddy\Dignite.Abp.Caddy.csproj" />
 	  <ProjectReference Include="..\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
 	</ItemGroup>
 	

@@ -25,6 +25,13 @@ public class ReverseProxyHandle : HandleBase
             return;
         }
 
+        if (upstreamAddress.StartsWith("http://"))
+        {
+            var uri = new Uri(upstreamAddress);
+            Upstreams.Add(new Upstream { Dial = $"{uri.Host}:{uri.Port}" });
+            return;
+        }
+
         Upstreams.Add(new Upstream { Dial = upstreamAddress });
     }
 

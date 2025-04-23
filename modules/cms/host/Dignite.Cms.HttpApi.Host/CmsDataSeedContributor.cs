@@ -7,6 +7,7 @@ using Dignite.Abp.DynamicForms.Matrix;
 using Dignite.Abp.DynamicForms.Select;
 using Dignite.Abp.DynamicForms.Switch;
 using Dignite.Abp.DynamicForms.TextEdit;
+using Dignite.Abp.Regionalization;
 using Dignite.Cms.Entries;
 using Dignite.Cms.Fields;
 using Dignite.Cms.Sections;
@@ -20,6 +21,7 @@ using Volo.Abp.Content;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.Timing;
 
 namespace Dignite.Cms;
@@ -34,10 +36,11 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
     private readonly IFieldRepository _fieldRepository;
     private readonly IEntryRepository _entryRepository;
     private readonly FileDescriptorManager _fileManager;
+    private readonly ISettingManager _settingManager;
 
     public CmsDataSeedContributor(IClock clock, ICurrentTenant currentTenant, CmsDataSeedData cmsData, 
         ISectionRepository sectionRepository, IEntryTypeRepository entryTypeRepository, 
-        IFieldRepository fieldRepository, IEntryRepository entryRepository, FileDescriptorManager fileManager)
+        IFieldRepository fieldRepository, IEntryRepository entryRepository, FileDescriptorManager fileManager, ISettingManager settingManager)
     {
         _clock = clock;
         _currentTenant = currentTenant;
@@ -47,6 +50,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
         _fieldRepository = fieldRepository;
         _entryRepository = entryRepository;
         _fileManager = fileManager;
+        _settingManager = settingManager;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -59,6 +63,9 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
             {
                 return;
             }
+
+            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, RegionalizationSettingNames.DefaultCultureName, _cmsData.EntryDefaultCulture);
+            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, RegionalizationSettingNames.AvailableCultureNames, "ja,en,zh-Hant");
 
             await SeedFieldsAsync();
             await SeedSectionsAsync();

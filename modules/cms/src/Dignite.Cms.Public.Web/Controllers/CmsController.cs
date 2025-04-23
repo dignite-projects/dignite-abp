@@ -9,6 +9,7 @@ using Dignite.Cms.Public.Sections;
 using Dignite.Cms.Public.Web.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -76,6 +77,7 @@ namespace Dignite.Cms.Public.Web.Controllers
             var section = await GetSectionByEntityPath(path);
             if (section == null)
             {
+                Logger.LogError("Section not found for path: {Path}", path);  
                 return NotFound();
             }
 
@@ -119,6 +121,7 @@ namespace Dignite.Cms.Public.Web.Controllers
                 }
                 else
                 {
+                    Logger.LogError("Entry not found for path: {Path}, culture: {Culture}", path, culture);
                     return NotFound();
                 }
             }

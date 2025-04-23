@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Dignite.Abp.TenantDomain.TenantRouteConfigs;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
@@ -32,11 +33,15 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
             ApiEndpoint = "http://localhost:2019"
         });
 
+
+        var caddyTenantConfigManager = GetRequiredService<CaddyTenantConfigManager>();
+
         _caddyWebServerManager = new CaddyWebServerManager(
             _httpClientFactoryMock.Object,
             _loggerMock.Object,
             _optionsMock.Object,
-            _multiTenancyOptionsMock.Object
+            _multiTenancyOptionsMock.Object,
+            caddyTenantConfigManager
         );
     }
 

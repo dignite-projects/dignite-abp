@@ -16,7 +16,7 @@
     <PackageReference Include="Volo.Abp.AutoMapper" />
     <PackageReference Include="Volo.Abp.Ddd.Application" />
 	<PackageReference Include="Volo.Abp.SettingManagement.Domain" />
-    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
+	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
     <ProjectReference Include="..\Dignite.Abp.TenantDomainManagement.Application.Contracts\Dignite.Abp.TenantDomainManagement.Application.Contracts.csproj" />
   </ItemGroup>
 

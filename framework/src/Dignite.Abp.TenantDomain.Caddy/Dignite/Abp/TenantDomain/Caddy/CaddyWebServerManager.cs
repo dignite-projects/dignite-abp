@@ -3,45 +3,29 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Dignite.Abp.TenantDomain.TenantRouteConfigs;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.TenantDomain.Caddy;
-public class CaddyWebServerManager : WebServerManagerBase, ITransientDependency
+
+public class CaddyWebServerManager(
+    IHttpClientFactory httpClientFactory,
+    ILogger<CaddyWebServerManager> logger,
+    CaddyTenantConfigManager caddyTenantConfigManager)
+    : WebServerManagerBase(logger), ITransientDependency
 {
-    private readonly IHttpClientFactory _httpClientFactory;
-
-    protected readonly CaddyTenantConfigManager _caddyTenantConfigManager;
-
-    private readonly AbpTenantDomainCaddyOptions _options;
-    private readonly AbpAspNetCoreMultiTenancyOptions _multiTenancyOptions;
-
-    public CaddyWebServerManager(
-        IHttpClientFactory httpClientFactory,
-        ILogger<CaddyWebServerManager> logger,
-        IOptions<AbpTenantDomainCaddyOptions> options,
-        IOptions<AbpAspNetCoreMultiTenancyOptions> multiTenancyOptions, CaddyTenantConfigManager caddyTenantConfigManager) : base(logger)
+    public override Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId)
     {
-        _httpClientFactory = httpClientFactory;
-        _options = options.Value;
-        _multiTenancyOptions = multiTenancyOptions.Value;
-        _caddyTenantConfigManager = caddyTenantConfigManager;
+        return caddyTenantConfigManager.AddOrUpdateAsync(new TenantRouteConfig(tenantId, [domain], upstreamAddress));
     }
 
-    public override Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId, string? site = null)
+    public override Task RemoveDomainAsync(Guid tenantId)
     {
-        return _caddyTenantConfigManager.AddOrUpdateAsync(new TenantRouteConfig(tenantId, [domain], upstreamAddress));
-    }
-
-    public override Task RemoveDomainAsync(Guid tenantId, string? site = null)
-    {
-        return _caddyTenantConfigManager.DeleteAsync(tenantId);
+        return caddyTenantConfigManager.DeleteAsync(tenantId);
     }
 
     public async override Task<bool> CheckCertificateValidityAsync(string domain)
     {
-        var client = _httpClientFactory.CreateClient();
+        var client = httpClientFactory.CreateClient();
         var request = new HttpRequestMessage(HttpMethod.Head, $"https://{domain}");
 
         try

@@ -2,14 +2,10 @@
 using Microsoft.Extensions.Logging;
 
 namespace Dignite.Abp.TenantDomain;
-public abstract class AuthServerRedirectUriManagerBase : IAuthServerRedirectUriManager
+public abstract class AuthServerRedirectUriManagerBase(ILogger<AuthServerRedirectUriManagerBase> logger)
+    : IAuthServerRedirectUriManager
 {
-    protected AuthServerRedirectUriManagerBase(ILogger<AuthServerRedirectUriManagerBase> logger)
-    {
-        Logger = logger;
-    }
-
-    protected ILogger<AuthServerRedirectUriManagerBase> Logger { get; set; }
+    protected ILogger<AuthServerRedirectUriManagerBase> Logger { get; set; } = logger;
 
     public abstract Task AddRedirectDomainAsync(string clientId, string domainName);
     public abstract Task RemoveRedirectDomainAsync(string clientId, string domainName);

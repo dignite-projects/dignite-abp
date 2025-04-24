@@ -4,17 +4,11 @@ using JetBrains.Annotations;
 namespace Dignite.Abp.TenantDomainManagement;
 public class AbpTenantDomainManagementOptions
 {
-
     /// <summary>
     /// Tenant's second-level domain name format, e.g. “{0}.travely.dignite.com”
     /// Used to verify that the tenant domain resolves cname to the tenant's second-level domain name
     /// </summary>
     public string TenantDomainFormat { get; set; }
-
-    /// <summary>
-    /// Specifies the webserver's site name, which is used to configure the site's tenant domain name
-    /// </summary>
-    public string WebServerSiteName { get; set; } = "default";
 
     /// <summary>
     /// Specify the proxy address of the reverse proxy for the tenant's domain name

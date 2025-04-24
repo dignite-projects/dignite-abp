@@ -27,6 +27,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{6D9F1A60-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantDomainManagement.Host", "host\Dignite.Abp.TenantDomainManagement.Host.csproj", "{112932FA-5E37-4D81-95BF-92DFE5347595}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantDomain", "..\..\framework\src\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj", "{EAB4A884-668C-1D8E-F6CB-AE26524EDF43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantDomain.Caddy", "..\..\framework\src\Dignite.Abp.TenantDomain.Caddy\Dignite.Abp.TenantDomain.Caddy.csproj", "{96A1C847-63A7-A661-9D79-5E8E60415BA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantDomain.OpenIddict", "..\..\framework\src\Dignite.Abp.TenantDomain.OpenIddict\Dignite.Abp.TenantDomain.OpenIddict.csproj", "{EE82205E-EF41-B65B-89F9-5846F580B884}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +75,18 @@ Global
 		{112932FA-5E37-4D81-95BF-92DFE5347595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112932FA-5E37-4D81-95BF-92DFE5347595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{112932FA-5E37-4D81-95BF-92DFE5347595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB4A884-668C-1D8E-F6CB-AE26524EDF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB4A884-668C-1D8E-F6CB-AE26524EDF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB4A884-668C-1D8E-F6CB-AE26524EDF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB4A884-668C-1D8E-F6CB-AE26524EDF43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A1C847-63A7-A661-9D79-5E8E60415BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A1C847-63A7-A661-9D79-5E8E60415BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A1C847-63A7-A661-9D79-5E8E60415BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A1C847-63A7-A661-9D79-5E8E60415BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE82205E-EF41-B65B-89F9-5846F580B884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE82205E-EF41-B65B-89F9-5846F580B884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE82205E-EF41-B65B-89F9-5846F580B884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE82205E-EF41-B65B-89F9-5846F580B884}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +101,9 @@ Global
 		{90CB5DC4-C040-45C7-8900-9688B26405BC} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
 		{BE39FD00-745B-4049-8161-FC129817CBE4} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
 		{112932FA-5E37-4D81-95BF-92DFE5347595} = {6D9F1A60-FE49-4C3E-8300-959C9E019AEF}
+		{EAB4A884-668C-1D8E-F6CB-AE26524EDF43} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{96A1C847-63A7-A661-9D79-5E8E60415BA4} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
+		{EE82205E-EF41-B65B-89F9-5846F580B884} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

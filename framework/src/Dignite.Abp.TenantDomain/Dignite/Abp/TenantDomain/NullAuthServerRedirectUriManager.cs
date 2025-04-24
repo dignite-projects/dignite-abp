@@ -2,12 +2,8 @@
 using Microsoft.Extensions.Logging;
 
 namespace Dignite.Abp.TenantDomain;
-public class NullAuthServerRedirectUriManager : AuthServerRedirectUriManagerBase
+public class NullAuthServerRedirectUriManager(ILogger<AuthServerRedirectUriManagerBase> logger) : AuthServerRedirectUriManagerBase(logger)
 {
-    public NullAuthServerRedirectUriManager(ILogger<AuthServerRedirectUriManagerBase> logger) : base(logger)
-    {
-    }
-
     public override Task AddRedirectDomainAsync(string clientId, string domainName)
     {
         Logger.LogWarning("USING NullAuthServerRedirectUriManager!");

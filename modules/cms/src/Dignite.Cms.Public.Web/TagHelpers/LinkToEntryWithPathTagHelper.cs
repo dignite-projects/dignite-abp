@@ -11,6 +11,7 @@ namespace Dignite.Cms.Public.Web.TagHelpers
     /// <summary>
     /// Link to entry
     /// </summary>
+    [Obsolete("Use dignite-abp\\framework\\src\\Dignite.Abp.AspNetCore.Mvc.Regionalization\\Dignite\\Abp\\AspNetCore\\Razor\\TagHelpers\\CultureAnchorTagHelper.cs instead.")]
     [HtmlTargetElement("a", Attributes = "[entry-path]")]
     public class LinkToEntryWithPathTagHelper : TagHelper
     {

@@ -4,7 +4,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <AssemblyName>Dignite.Abp.AspNetCore.Mvc.Regionalization</AssemblyName>
     <PackageId>Dignite.Abp.AspNetCore.Mvc.Regionalization</PackageId>

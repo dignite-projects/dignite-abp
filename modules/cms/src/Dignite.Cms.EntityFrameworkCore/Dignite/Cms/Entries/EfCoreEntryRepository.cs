@@ -128,7 +128,7 @@ namespace Dignite.Cms.Entries
         public async Task<Entry> FindBySlugAsync(string culture,Guid sectionId,  string slug, bool includeDetails = true, CancellationToken cancellationToken = default)
         {
             return await (await GetDbSetAsync())
-                .FirstOrDefaultAsync(e => e.SectionId == sectionId && e.Culture==culture && e.Status== EntryStatus.Published && e.Slug == slug && e.IsActivatedVersion, GetCancellationToken(cancellationToken));
+                .FirstOrDefaultAsync(e => e.SectionId == sectionId && e.Culture==culture && e.Slug == slug && e.IsActivatedVersion, GetCancellationToken(cancellationToken));
         }
 
         public async Task<Entry> FindPrevAsync(Guid id, bool includeDetails = false, CancellationToken cancellationToken = default)

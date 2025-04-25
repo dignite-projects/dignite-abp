@@ -34,7 +34,7 @@ public static class HasCustomFieldsExtensions
         catch (Exception exc)
         {
             var value = source.GetProperty(name);
-            if (value == null)
+            if (value == null || value.ToString().IsNullOrWhiteSpace())
             {
                 return defaultValue;
             }

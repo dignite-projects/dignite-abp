@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
@@ -43,6 +43,8 @@ export class CreateOrEditEntriesComponent {
   entryVersionId: any = '';
   /**版本列表 */
   AllVersionsList: any[] = [];
+  //tab切换下标
+  tabActive = 0;
 
   @Input() isEdit: boolean | any = false;
   //是否正在创建版本
@@ -54,6 +56,8 @@ export class CreateOrEditEntriesComponent {
     this.entryVersionId = v.id;
     this.entryInfo = v;
   }
+  /**向父级反馈信息 */
+  @Output() feedbackChildInfo=new EventEmitter();
 
   formEntity: FormGroup | undefined;
   @Input() set entity(value: FormGroup | undefined) {
@@ -109,7 +113,9 @@ export class CreateOrEditEntriesComponent {
     this.DefaultLanguage = this.defaultCultureName;
     // this.DefaultLanguage = this.configState.getSetting('Abp.Regionalization.DefaultCultureName');
     //选中languagesSystem中的cultureName在 languagesSystem中存在的数组项
-    this.languagesList = languagesSystem.filter(el=>this.SiteSettingsAdminLanguages.includes(el.cultureName))
+    this.languagesList = languagesSystem.filter(el =>
+      this.SiteSettingsAdminLanguages.includes(el.cultureName),
+    );
     this.cdRef.detectChanges();
     if (this.sectionId) {
       await this.getSectionInfo();
@@ -117,7 +123,7 @@ export class CreateOrEditEntriesComponent {
     }
     if (!(this.isOther == 1)) {
       this.cultureInput.disable();
-    } 
+    }
     const repetition = await this.cultureAsyncValidator();
     if (repetition) this.cultureInput.setErrors(repetition);
     this.slugInput.addAsyncValidators(this.SlugAsyncValidator());
@@ -142,9 +148,12 @@ export class CreateOrEditEntriesComponent {
     }
 
     this.cdRef.detectChanges();
+    this.feedbackChildInfo.emit({
+      showEntryType: this.showEntryType,
+    })
     this.isLoad = true;
-    if(this.isOther==1){
-      this.initialVersionIdInput.patchValue('')
+    if (this.isOther == 1) {
+      this.initialVersionIdInput.patchValue('');
     }
     setTimeout(() => {
       // this.submitclick?.nativeElement.click();

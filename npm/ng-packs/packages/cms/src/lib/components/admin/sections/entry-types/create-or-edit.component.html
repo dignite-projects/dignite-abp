@@ -1,5 +1,5 @@
-<form class="row g-3 needs-validation" [formGroup]="newEntity" 
-    [class]="{'was-validated':formValidation}" (submit)="save()">
+<form class="row g-3 needs-validation" [formGroup]="newEntity" [class]="{'was-validated':formValidation}"
+    (submit)="save()">
     <abp-page [title]="entryTypesId ? ('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)"
         [toolbar]="true">
         <div class="create-or-edit-entry-type-page">
@@ -21,27 +21,27 @@
                                 <label class="form-label">{{'Cms::FieldLayout' | abpLocalization}}</label>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-8 border rounded">
                                             <ul ngbNav #nav="ngbNav" [(activeId)]="navActive" class="nav nav-tabs">
                                                 <ng-container *ngFor="let item of resultSource; let i = index">
-                                                    <li [ngbNavItem]="i">
-                                                        <button type="button" ngbDropdown ngbNavLink>
+                                                    <li [ngbNavItem]="i" ngbDropdown class="nav-item" role="presentation"> 
+                                                        <button type="button" ngbNavLink class="nav-link">
                                                             {{ item.name }}
                                                             <span class="ms-1" (click.stop)="$event.stopPropagation()"
                                                                 ngbDropdownToggle></span>
-                                                            <div ngbDropdownMenu style="z-index: 999;">
-                                                                <span ngbDropdownItem type="button"
-                                                                    (click.stop)="editFieldTabs(item,i)">
-                                                                    <i class="fas fa-edit"></i>
-                                                                    {{'AbpUi::Edit' | abpLocalization}}
-                                                                </span>
-                                                                <span ngbDropdownItem *ngIf="resultSource.length !== 1"
-                                                                    type="button" (click.stop)="deleteFieldTabs(i)">
-                                                                    <i class="fas fa-trash"></i>
-                                                                    {{'AbpUi::Delete' | abpLocalization}}
-                                                                </span>
-                                                            </div>
                                                         </button>
+                                                        <div ngbDropdownMenu style="z-index: 999;">
+                                                            <span ngbDropdownItem type="button"
+                                                                (click.stop)="editFieldTabs(item,i)">
+                                                                <i class="fas fa-edit"></i>
+                                                                {{'AbpUi::Edit' | abpLocalization}}
+                                                            </span>
+                                                            <span ngbDropdownItem *ngIf="resultSource.length !== 1"
+                                                                type="button" (click.stop)="deleteFieldTabs(i)">
+                                                                <i class="fas fa-trash"></i>
+                                                                {{'AbpUi::Delete' | abpLocalization}}
+                                                            </span>
+                                                        </div>
                                                         <ng-template ngbNavContent>
                                                             <div class="p-2" ondragover="event.preventDefault();"
                                                                 (drop)="dragToResultSourceDropped(item,i)"
@@ -138,8 +138,8 @@
             <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
         </ng-template>
         <ng-container *ngIf="editFieldTabsFrom; else loaderRef">
-            <form class="sites-modal-form" [formGroup]="editFieldTabsFrom" 
-                [class]="{'was-validated':formValidation}" (submit)="editFieldTabsSave()">
+            <form class="sites-modal-form" [formGroup]="editFieldTabsFrom" [class]="{'was-validated':formValidation}"
+                (submit)="editFieldTabsSave()">
                 <button type="submit" #editFieldTabsModalSubmitBtn style="display: none"></button>
                 <div class="mb-3">
                     <label class="form-label">{{'Cms::Name' | abpLocalization}}</label>
@@ -165,8 +165,7 @@
             <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
         </ng-template>
         <ng-container *ngIf="editFieldFrom; else loaderRef">
-            <form class="sites-modal-form" [formGroup]="editFieldFrom" 
-                (submit)="editFieldSave()">
+            <form class="sites-modal-form" [formGroup]="editFieldFrom" (submit)="editFieldSave()">
                 <button type="submit" #editFieldModalSubmitBtn style="display: none"></button>
                 <div class="mb-3">
                     <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>

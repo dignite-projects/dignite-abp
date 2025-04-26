@@ -1,8 +1,9 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CmsApiService } from '../../../services';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { AbpValidators } from '@abp/ng.core';
 
 @Component({
   selector: 'df-matrix-control',
@@ -20,11 +21,11 @@ export class MatrixControlComponent {
       for (const key in v.field?.formConfiguration) {
         if (Array.isArray(v.field?.formConfiguration[key])) {
           v.field.formConfiguration[key] = this._CmsApiService.convertKeysToCamelCase(
-            v.field?.formConfiguration[key]
+            v.field?.formConfiguration[key],
           );
         }
       }
-      
+
       this._fields = v;
     }
   }
@@ -73,7 +74,13 @@ export class MatrixControlComponent {
       await this.AfterInit();
       this.cdr.detectChanges(); // 手动触发变更检测
       this.submitclick?.nativeElement?.click();
-      if (this._selected) this.fieldNameControl.patchValue(this._selected);
+      if (this._selected) {
+        this.fieldNameControl.patchValue(this._selected);
+        for (const index of Object.keys(this.fieldNameControl.controls)) {
+         const item=  this.fieldNameControl.at(Number(index)) as FormGroup;
+         item.get('isOpen').patchValue(false)
+        }
+      }
       this._selected = '';
     }
   }
@@ -84,17 +91,23 @@ export class MatrixControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let formConfiguration = this._fields.field.formConfiguration;
-      let newArrayGroup = this.fb.array([]);
+      const formConfiguration = this._fields.field.formConfiguration;
+      const newArrayGroup = this.fb.array([]);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
       if (this._selected) {
         this._selected.forEach(el => {
           this.addMatrixControl(
-            formConfiguration.MatrixBlockTypes.find(item => item.name == el.matrixBlockTypeName)
+            formConfiguration.MatrixBlockTypes.find(item => item.name == el.matrixBlockTypeName),
           );
         });
       }
+      if(this._fields.required){
+        for (const element of formConfiguration.MatrixBlockTypes) {
+          element.required = true;
+        }
+      }
+
       this.MatrixBlockTypesList = formConfiguration.MatrixBlockTypes;
       resolve(true);
     });
@@ -110,20 +123,23 @@ export class MatrixControlComponent {
         extraProperties: new FormGroup({}),
         matrixBlockTypeName: new FormControl(item.name),
         displayName: new FormControl(item.displayName),
-      })
+        isOpen: new FormControl(true),
+      }),
     );
+  }
+
+  /**展开，收缩矩阵 */
+  ExpandChange(index) {
+    const fieldNameControlItem = this.fieldNameControl.controls[index] as FormGroup;
+    fieldNameControlItem.get('isOpen').patchValue(!fieldNameControlItem.get('isOpen').value);
   }
   /**删除矩阵控件 */
   deleteMatrixControl(index, item) {
     this.fieldNameControl.removeAt(index);
   }
-    /**调整表格位置 */
-      drop(event: any) {
-        moveItemInArray(
-          this.fieldNameControl.controls,
-          event.previousIndex,
-          event.currentIndex
-        );
-        this.fieldNameControl.updateValueAndValidity()
-      }
+  /**调整表格位置 */
+  drop(event: any) {
+    moveItemInArray(this.fieldNameControl.controls, event.previousIndex, event.currentIndex);
+    this.fieldNameControl.updateValueAndValidity();
+  }
 }

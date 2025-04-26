@@ -4,10 +4,9 @@
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <input type="number" class="form-control" formControlName="{{_fields.field.name}}"
                 [placeholder]="_fields.field.formConfiguration['NumericEditField.Placeholder']||''"
-                [step]="_fields.field.formConfiguration['NumericEditField.Step']" (input)="inputchange($event)" />
+                [step]="_fields.field.formConfiguration['NumericEditField.Step']" [min]="formConfiguration['NumericEditField.Min']" [max]="formConfiguration['NumericEditField.Max']" (input)="inputchange($event)" />
             <small class="form-text text-muted d-block" *ngIf="_fields.field.description">{{_fields.field.description}}</small>
         </div>
-
     </div>
     <button type="submit" style="display: none;" #submitclick></button>
 </form>

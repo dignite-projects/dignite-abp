@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
@@ -64,7 +65,7 @@ export class TextEditComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray:any[] = []
+      const ValidatorsArray:any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required)
       }
@@ -76,7 +77,7 @@ export class TextEditComponent {
         ValidatorsArray.push(Validators.maxLength(this._fields.field.formConfiguration['TextEdit.CharLimit']))
       }
      
-      let newControl = this.fb.control(this._selected, ValidatorsArray)
+      const newControl = this.fb.control(this._selected, ValidatorsArray)
       this.extraProperties?.setControl(this._fields.field.name, newControl)
       resolve(true)
     })

@@ -6,7 +6,7 @@
                     <div class="mb-3 col-md-3">
                         <label class="form-label">{{'Cms::IsActive' | abpLocalization}}：</label>
                         <select class="form-select col-auto" [(ngModel)]="filters.isActive" (change)="siteIdChange()">
-                            <option [value]=""></option>
+                            <option [value]="''" >--</option>
                             <option [value]="true">{{'AbpUi::Yes'|abpLocalization}}</option>
                             <option [value]="false">{{'AbpUi::No'|abpLocalization}}</option>
                         </select>
@@ -82,7 +82,7 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column [name]="'Cms::CreationTime' | abpLocalization" prop="creationTime" [minWidth]="190">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                {{ value | date : 'yyyy/MM/dd hh:mm:ss' }}
+                                {{ value | shortDateTime }}
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column [sortable]="false"  [name]="'AbpUi::Actions' | abpLocalization"   [frozenLeft]="true" [width]="110" [maxWidth]="110">

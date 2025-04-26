@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './select-control.component.html',
   styleUrls: ['./select-control.component.scss'],
 })
-export class SelectControlComponent {
+export class SelectControlComponent implements OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   /**字段配置列表 */
@@ -54,7 +55,7 @@ export class SelectControlComponent {
   formConfiguration: any = '';
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray: any[] = [];
+      const ValidatorsArray: any[] = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
@@ -75,7 +76,7 @@ export class SelectControlComponent {
         }
       }
       // this._selected = selectValue;
-      let newControl = this.fb.control(this._selected, ValidatorsArray);
+      const newControl = this.fb.control(this._selected, ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newControl);
       resolve(true);
     });

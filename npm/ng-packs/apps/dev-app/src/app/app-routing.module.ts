@@ -32,11 +32,11 @@ const routes: Routes = [
 	{
 		path: '',
 		loadChildren: () => import('./select/select.module').then(m => m.SelectModule),
-	}
+	},
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes, {})],
 	exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

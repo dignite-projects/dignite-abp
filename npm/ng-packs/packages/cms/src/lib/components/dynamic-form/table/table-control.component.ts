@@ -84,14 +84,18 @@ export class TableControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray = [];
+      const ValidatorsArray = [];
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
-      let formConfiguration = this._fields.field.formConfiguration;
+      const formConfiguration = this._fields.field.formConfiguration;
+      if(this._fields.required){
+        for (const element of formConfiguration.TableColumns) {
+          element.required = true;
+        }
+      }
       this.formConfiguration = formConfiguration;
-
-      let newArrayGroup = this.fb.array([]);
+      const newArrayGroup = this.fb.array([]);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
       if (this._selected) {
@@ -119,9 +123,9 @@ export class TableControlComponent {
   }
   /**调整表格位置 */
   TableArrowUpOrDown(type, index) {
-    let controlAt = this.fieldNameControl.at(index);
+    const controlAt = this.fieldNameControl.at(index);
     this.fieldNameControl.removeAt(index);
-    let lastindex = type == 'up' ? index - 1 : index + 1;
+    const lastindex = type == 'up' ? index - 1 : index + 1;
     this.fieldNameControl.insert(lastindex, controlAt);
     this._selected = this.fieldNameControl.value;
   }

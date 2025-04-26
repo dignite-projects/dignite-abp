@@ -5,11 +5,12 @@
         <ng-container *ngIf="formEntity&&sectionId">
             <ng-container *ngIf="entryVersionId; else elseTemplate">
                 <cms-create-or-edit-entries [sectionId]="sectionId" [entryTypeId]="entryTypeId" [isEdit]="false"
-                    [select]="entryInfo" [isCreateVersion]="true" [isOther]="isOther" [entity]="formEntity"></cms-create-or-edit-entries>
+                    [select]="entryInfo" [isCreateVersion]="true" [isOther]="isOther"  (feedbackChildInfo)="_feedbackChildInfo($event)" [entity]="formEntity"></cms-create-or-edit-entries>
             </ng-container>
             <ng-template #elseTemplate>
-                <cms-create-or-edit-entries [sectionId]="sectionId" [entryTypeId]="entryTypeId"
-                    [entity]="formEntity"></cms-create-or-edit-entries>
+                <cms-create-or-edit-entries [sectionId]="sectionId" [entryTypeId]="entryTypeId" (feedbackChildInfo)="_feedbackChildInfo($event)"
+                    [isEdit]="false" [select]="entryInfo" [isOther]="isOther"
+                    [entity]="formEntity" ></cms-create-or-edit-entries>
             </ng-template>
         </ng-container>
     </form>

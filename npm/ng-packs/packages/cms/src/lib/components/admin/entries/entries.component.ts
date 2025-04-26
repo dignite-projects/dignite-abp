@@ -193,7 +193,6 @@ export class EntriesComponent implements OnInit {
 
     // let _entryTypeList = this.SiteOfSectionList.find(el => el.id == sectionId)?.entryTypes || [];
     this.entryTypeList = _entryTypeList;
-    console.log(this.entryTypeList,'entryTypeList');
     //选择板块的类型SectionType
     this.SiteOfSectionType = this.SiteOfSectionList.find(el => el.id == sectionId)?.type;
     if (this.SiteOfSectionType == SectionType.Structure) {
@@ -358,6 +357,10 @@ export class EntriesComponent implements OnInit {
         list.items = list.items.sort((a, b) => {
           return a.order - b.order;
         });
+      }
+      for (const element of list.items) {
+        const sectionItem=this.SiteOfSectionList.find(el=>el.id==element.sectionId);
+        element.sectionType=sectionItem.type;
       }
       this.data = list;
       this.scrollToTop();

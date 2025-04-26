@@ -31,7 +31,7 @@
                                 <ng-container *ngFor="let el of formConfiguration.TableColumns">
                                     <td>
                                         <ng-container *ngIf="item&&el">
-                                            <df-dynamic [fields]="{ field: el }"
+                                            <df-dynamic [fields]="{ field: el,required:el?.required||false }"
                                                 [selected]="_selected?_selected[i]?.extraProperties[''+el.name+'']:''"
                                                 [parentFiledName]="'extraProperties'" [culture]="_culture"
                                                 [entity]="item"></df-dynamic>

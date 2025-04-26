@@ -3,8 +3,8 @@ import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { Location } from '@angular/common';
-import { Component, inject, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CmsApiService } from '../../../services';
 import { ECmsComponent } from '../../../enums';
 import { UpdateListService } from '@dignite-ng/expand.core';
@@ -12,6 +12,7 @@ import { CreateOrUpdateFieldInputBase } from './create-or-update-field-input-bas
 import { ValidatorsService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { FieldAdminService } from '../../../proxy/dignite/cms/admin/fields';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cms-create-field',
@@ -24,13 +25,15 @@ import { FieldAdminService } from '../../../proxy/dignite/cms/admin/fields';
     },
   ],
 })
-export class CreateFieldComponent {
+export class CreateFieldComponent implements OnInit{
+  private route = inject(ActivatedRoute);
   constructor(
     private fb: FormBuilder,
     public _FieldAdminService: FieldAdminService,
     private toaster: ToasterService,
     public _location: Location,
     public _LocalizationService: LocalizationService,
+    
     public _CmsApiService: CmsApiService
   ) {}
   private _UpdateListService = inject(UpdateListService);
@@ -38,13 +41,22 @@ export class CreateFieldComponent {
   /**表单实体 */
   newEntity: FormGroup | undefined;
 
+  get groupIdInput(){
+    return this.newEntity?.get('groupId') as FormControl;
+  }
+
   /**获取提交按钮替身，用于真实触发表单提交 */
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    const {groupId} = this.route.snapshot.queryParams;
     this.newEntity = this.fb.group(new CreateOrUpdateFieldInputBase());
+    if(groupId){
+      this.groupIdInput.patchValue(groupId)
+    }
+   
   }
 
   /**触发提交按钮 */

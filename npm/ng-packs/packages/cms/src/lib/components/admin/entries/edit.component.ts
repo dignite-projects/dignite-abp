@@ -6,7 +6,7 @@ import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
@@ -29,10 +29,6 @@ import { ClassicEditor, Essentials, Paragraph, Bold, Italic } from 'ckeditor5';
   ],
 })
 export class EditComponent implements OnInit {
-
-   
-
-
   private fb = inject(FormBuilder);
   private _updateListService = inject(UpdateListService);
   private toaster = inject(ToasterService);
@@ -55,15 +51,15 @@ export class EditComponent implements OnInit {
   /**表单实体 */
   formEntity: FormGroup | undefined;
   /**语言 */
-  cultureName: string|any = '';
+  cultureName: string | any = '';
   /**条目类型id */
-  entryTypeId: string|any = '';
+  entryTypeId: string | any = '';
   /**版块id */
-  sectionId: string|any = '';
+  sectionId: string | any = '';
   /**条目版本id */
-  entryVersionId: string|any = '';
+  entryVersionId: string | any = '';
   /**条目id */
-  entrieId: string|any = '';
+  entrieId: string | any = '';
   /**条目信息 */
   entryInfo: any = '';
 
@@ -82,7 +78,6 @@ export class EditComponent implements OnInit {
     this.formEntity = this.fb.group(new CreateOrUpdateEntryInputBase());
     await this.getEntryInfo();
     this.cultureInput.patchValue(this.cultureName);
-
   }
   /**获取条目信息 */
   getEntryInfo() {
@@ -97,41 +92,159 @@ export class EditComponent implements OnInit {
     });
   }
 
+  /**显示条目类型信息 */
+  showEntryTypeInfo: any = '';
+  /**反馈子级页面信息 */
+  _feedbackChildInfo(event) {
+    this.showEntryTypeInfo = event?.showEntryType || '';
+  }
+  // /**当返回结果为true时表示未通过验证 */
+  isCheckFormCms(input, module) {
+    for (const key in input) {
+      if (input[key] === false) {
+        let info = ``;
+        //检查key中是否含有ExtraProperties.
+        if (key.includes('extraProperties.')) {
+          const arr = key.split('.');
+          const keyName = arr[1];
+          // if (keyName.includes('[')) {
+          //   //使用正则提取keyName中[]中的数字下标,并且转化为数字类型，并且去掉keyName中的[*]
+          //   const keyNameArr = keyName.match(/\d+/g);
+          //   const keyNameArrNum = keyNameArr.map(item => Number(item));
+          //   const keyNameArrNumStr = keyNameArrNum.join('.');
+
+          // } else {
+            //将keyName的首字母转为小写
+            const keyNameLower = keyName;
+            // const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
+            if (this.showEntryTypeInfo && this.showEntryTypeInfo.fieldTabs.length > 0) {
+              for (const item of this.showEntryTypeInfo.fieldTabs) {
+                for (const el of item.fields) {
+                  if (el.field.name == keyNameLower) {
+                    // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
+                    info = `${this._LocalizationService.instant(
+                      `${module}::The{1}FieldUnderThe{0}TAB`,
+                      item.name,
+                      el.field.displayName,
+                    )}`;
+                  }
+                }
+              }
+            }
+          // }
+        } else {
+          const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+          info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
+        }
+        info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
+        //使用abp多语言提示
+        this.toaster.warn(info);
+        return true;
+      }
+    }
+
+    return false;
+  }
+  // /**获取表单所有字段是否通过验证 */
+  // getFormValidationStatus(formEntity: FormGroup | FormArray): { [key: string]: any } {
+  //   const validationStatus: { [key: string]: any } = {};
+
+  //   // 递归遍历表单组和表单控件集合
+  //   const traverseForm = (form: FormGroup | FormArray, prefix = '') => {
+  //     if (form instanceof FormGroup) {
+  //       Object.keys(form.controls).forEach(key => {
+  //         const control = form.controls[key];
+  //         // const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+  //         const displayName = key;
+  //         const fullKey = prefix ? `${prefix}.${displayName}` : displayName;
+  //         if (control instanceof FormControl) {
+  //           validationStatus[fullKey] = control.valid;
+  //         } else if (control instanceof FormArray) {
+  //           traverseForm(control, fullKey);
+  //         } else if (control instanceof FormGroup) {
+  //           traverseForm(control, fullKey);
+  //         }
+  //       });
+  //     } else if (form instanceof FormArray) {
+  //       form.controls.forEach((control, index) => {
+  //         const fullKey = prefix ? `${prefix}[${index}]` : `[${index}]`;
+  //         if (control instanceof FormControl) {
+  //           validationStatus[fullKey] = control.valid;
+  //         } else if (control instanceof FormArray) {
+  //           traverseForm(control, fullKey);
+  //         } else if (control instanceof FormGroup) {
+  //           traverseForm(control, fullKey);
+  //         }
+  //       });
+  //     }
+  //   };
+
+  //   traverseForm(formEntity);
+
+  //   return validationStatus;
+  // }
+
+  /**获取表单验证状态 */
+  // getFormValidationStatus(formEntity: FormGroup | FormArray): { [key: string]: any } {
+  //   const validationStatus: { [key: string]: any } = {};
+
+  //   const traverseForm = (form: FormGroup | FormArray, prefix = '') => {
+  //     //检查form是否为FormGroup还是formArray,如果是FormGroup则继续遍历,如果是FormArray则遍历FormArray
+  //     if (form instanceof FormGroup) {
+        
+  //     } else if (form instanceof FormArray) {
+        
+  //     } 
+
+  //   }
+  //   traverseForm(formEntity);
+  //   return validationStatus
+  // }
+
   /**提交 */
   save() {
     this.cultureInput.enable();
-    this.draftInput.patchValue(this.draftValue||false);
+    this.draftInput.patchValue(this.draftValue || false);
     const input = this.formEntity?.value;
     input.culture = this.cultureName;
     input.publishTime = new Date(
-      new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000
+      new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000,
     ).toISOString();
     input.concurrencyStamp = this.entryInfo.concurrencyStamp;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
-    if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')){
+    // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')){
+    //   this.isSubmit = false;
+    //   return this.cultureInput.disable();
+    // }
+
+    // this.formValidation = this.getFormValidationStatus(this.formEntity);
+    if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
       return this.cultureInput.disable();
     }
-    
+    // this.formValidation = this.getFormValidationStatus(this.formEntity);
+    // return this.isSubmit=false;
     if (!this.formEntity.valid) return;
     this._EntryAdminService
       .update(this.entryInfo.id, input)
-      .pipe(finalize(() => {
-        this.isSubmit = false;
-      }))
+      .pipe(
+        finalize(() => {
+          this.isSubmit = false;
+        }),
+      )
       .subscribe(res => {
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
         this.backTo();
         this._updateListService.updateList();
       });
   }
-  isSubmit: boolean|any = false;
-  draftValue: string|any = '';
+  isSubmit: boolean | any = false;
+  draftValue: string | any = '';
   /**点击提交 */
   clickSubmit(type) {
     if (this.isSubmit) return;
     this.isSubmit = true;
-    this.draftValue= type;
+    this.draftValue = type;
     this.cultureInput.enable();
     this.submitclick?.nativeElement?.click();
   }

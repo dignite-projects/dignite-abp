@@ -75,6 +75,8 @@
     "Enum:EntryStatus:Draft": "ドラフト",
     "Enum:EntryStatus:Published": "出版",
     "FormControlConfiguration": "フォーム・コントロールの設定",
-    "NotShowInList": "この形式はリスト表示に対応していません"
+    "NotShowInList": "この形式はリスト表示に対応していません",
+    "CreateOtherLanguages": "他の言語を作成",
+    "The{1}FieldUnderThe{0}TAB": "タブ「{0}」の「{1}」フィールド"
   }
 }

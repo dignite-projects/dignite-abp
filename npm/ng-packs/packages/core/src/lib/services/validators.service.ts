@@ -47,7 +47,8 @@ export class ValidatorsService {
       if (form instanceof FormGroup) {
         Object.keys(form.controls).forEach(key => {
           const control = form.controls[key];
-          const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+          // const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+          const displayName = key;
           const fullKey = prefix ? `${prefix}.${displayName}` : displayName;
           if (control instanceof FormControl) {
             validationStatus[fullKey] = control.valid;

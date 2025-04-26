@@ -1,5 +1,5 @@
 <div [formGroup]="formEntity">
-    <div class="row">
+    <div class="row create-or-edit-entries-page">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -8,7 +8,35 @@
                         <input type="text" class="form-control" formControlName="title"
                             (blur)="setTitleToSlugBlur($event)">
                     </div>
+
                     <ng-container *ngIf="isLoad">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="tabActive" [destroyOnHide]="false" class="nav-tabs mb-0">
+                            <ng-container *ngFor="let item of showEntryType?.fieldTabs;let i =index">
+                                <li [ngbNavItem]="i" [destroyOnHide]="false">
+                                    <button ngbNavLink *ngIf="showEntryType?.fieldTabs.length>1">{{item.name}}</button>
+                                    <ng-template ngbNavContent>
+                                        <ng-container *ngFor="let el of item.fields;let i1 =index">
+                                            <ng-container *ngIf="el&&formEntity">
+                                                <df-dynamic [fields]="el"
+                                                    [selected]="entryInfo ? entryInfo.extraProperties[el.field.name] : ''"
+                                                    [parentFiledName]="'extraProperties'" [culture]="cultureInput.value"
+                                                    [entity]="formEntity"></df-dynamic>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-template>
+                                </li>
+                            </ng-container>
+                        </ul>
+
+                        <div [ngbNavOutlet]="nav" class=""></div>
+                    </ng-container>
+
+
+
+
+
+
+                    <!-- <ng-container *ngIf="isLoad">
                         <ng-container *ngFor="let item of showEntryType?.fieldTabs;let i =index">
                             <ng-container *ngFor="let el of item.fields;let i1 =index">
                                 <ng-container *ngIf="el&&formEntity">
@@ -19,7 +47,7 @@
                                 </ng-container>
                             </ng-container>
                         </ng-container>
-                    </ng-container>
+                    </ng-container> -->
                 </div>
             </div>
         </div>
@@ -37,7 +65,7 @@
                         <div class="form-label">{{'AbpUi::Languages' | abpLocalization}}</div>
                         <select class="form-select form-select-multiple" formControlName="culture">
                             <ng-container *ngFor="let item of languagesList;let i =index">
-                                <option [value]="item.cultureName" >{{item.displayName}}</option>
+                                <option [value]="item.cultureName">{{item.displayName}}</option>
                             </ng-container>
                         </select>
                         <div class="text-danger" *ngIf="cultureInput.dirty">
@@ -88,7 +116,8 @@
                                 <li
                                     class="list-group-item flex-between d-flex align-items-center justify-content-between">
                                     <div>
-                                        {{item.initialVersionId?(item.creationTime| date: 'YYYY/MM/dd HH:mm:s'):('Cms::InitialVersion' | abpLocalization)}}
+                                        {{item.initialVersionId?(item.creationTime| date: 'YYYY/MM/dd
+                                        HH:mm:s'):('Cms::InitialVersion' | abpLocalization)}}
                                         <span class="badge text-bg-success ms-1"
                                             *ngIf="item.isActivatedVersion">{{'Cms::IsActive' | abpLocalization}}</span>
                                         <span class="badge text-bg-primary ms-1"

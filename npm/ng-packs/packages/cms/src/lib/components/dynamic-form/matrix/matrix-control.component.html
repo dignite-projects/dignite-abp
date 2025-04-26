@@ -1,33 +1,91 @@
 <form [formGroup]="_entity">
-    <div formGroupName="extraProperties">   
+    <div formGroupName="extraProperties">
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <div [class]="fieldNameControl?.controls?.length>0?'border p-2 rounded-2':''">
                 <div [formArrayName]="_fields.field.name" cdkDropList (cdkDropListDropped)="drop($event)">
                     <ng-container *ngFor="let item of fieldNameControl.controls;let i=index">
-                        <div class="card mb-3 border " [formGroupName]="i"  cdkDrag cdkDragLockAxis="y" [cdkDragData]="item">
-                            <div class="card-header d-flex align-items-center justify-content-between border-bottom pt-1">
-                                <div class="d-flex"> <div class="drag-handle me-2" cdkDragHandle> 
-                                    <span class="bi bi-arrows-move fs-5"></span>
-                                </div>{{item.value.displayName}}</div>
-                                <button class="btn btn-sm btn-light p-0" (click.stop)="deleteMatrixControl(i,item)"><i
-                                        class="fas fa-trash p-2"></i></button>
+                        <div class="card mb-3 border " [formGroupName]="i" cdkDrag cdkDragLockAxis="y"
+                            [cdkDragData]="item">
+                            <div type="button"
+                                class="card-header d-flex align-items-center justify-content-between border-bottom pt-1" (click.stop)="ExpandChange(i)">
+                                <div class="d-flex">
+                                    <div class="drag-handle me-2" cdkDragHandle>
+                                        <span class="bi bi-arrows-move fs-5"></span>
+                                    </div>{{item.value.displayName}}
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-sm btn-light p-0"
+                                        (click.stop)="deleteMatrixControl(i,item)"><i
+                                            class="fas fa-trash p-2"></i></button>
+                                        <i class="bi bi-chevron-down ms-2 " [style]="{display: 'inline-block', transform: item.value.isOpen?'rotate(180deg)':'rotate(0deg)'}" ></i>
+                                </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="overflow:hidden;transition: all 0.2s;" [style]="item.value.isOpen?'height:auto;':'height:0px;padding-top:0px;padding-bottom:0px;'">
                                 <ng-container *ngFor="let el of MatrixBlockTypesList;let il =index">
                                     <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
                                         <ng-container *ngFor="let elf of el.fields; let fi=index">
                                             <ng-container *ngIf="item&&elf&&_culture">
-                                                <df-dynamic 
-                                                    [fields]="{ field: elf,displayName:elf.displayName }"
+                                                <df-dynamic [fields]="{ field: elf,displayName:elf.displayName,required:el?.required||false }"
                                                     [selected]="_selected ? _selected[i]?_selected[i][_parentFiledName][elf.name]:'': ''"
-                                                    [parentFiledName]="'extraProperties'" [culture]="_culture" [entity]="item"></df-dynamic>
+                                                    [parentFiledName]="'extraProperties'" [culture]="_culture"
+                                                    [entity]="item"></df-dynamic>
                                             </ng-container>
                                         </ng-container>
                                     </ng-container>
                                 </ng-container>
                             </div>
                         </div>
+                        <!-- <div class="card mb-3 border " [formGroupName]="i" cdkDrag cdkDragLockAxis="y"
+                            [cdkDragData]="item">
+                            <div ngbAccordion #accordion="ngbAccordion">
+                                <div ngbAccordionItem="first">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton>
+                                            <div type="button"
+                                                class="card-header d-flex align-items-center justify-content-between border-bottom pt-1">
+                                                <div class="d-flex">
+                                                    <div class="drag-handle me-2" cdkDragHandle>
+                                                        <span class="bi bi-arrows-move fs-5"></span>
+                                                    </div>{{item.value.displayName}}
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-light p-0"
+                                                        (click.stop)="deleteMatrixControl(i,item)"><i
+                                                            class="fas fa-trash p-2"></i></button>
+                                                    <i class="bi bi-chevron-down ms-2"></i>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <div class="card-body">
+                                                    <ng-container *ngFor="let el of MatrixBlockTypesList;let il =index">
+                                                        <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
+                                                            <ng-container *ngFor="let elf of el.fields; let fi=index">
+                                                                <ng-container *ngIf="item&&elf&&_culture">
+                                                                    <df-dynamic
+                                                                        [fields]="{ field: elf,displayName:elf.displayName }"
+                                                                        [selected]="_selected ? _selected[i]?_selected[i][_parentFiledName][elf.name]:'': ''"
+                                                                        [parentFiledName]="'extraProperties'"
+                                                                        [culture]="_culture"
+                                                                        [entity]="item"></df-dynamic>
+                                                                </ng-container>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <!--  -->
                     </ng-container>
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -36,7 +94,8 @@
                                 class="fas fa-plus me-1"></i>{{item.displayName}}</button>
                     </ng-container>
                 </div>
-                <small class="form-text text-muted d-block" *ngIf="_fields.field.description">{{_fields.field.description}}</small>
+                <small class="form-text text-muted d-block"
+                    *ngIf="_fields.field.description">{{_fields.field.description}}</small>
             </div>
         </div>
     </div>

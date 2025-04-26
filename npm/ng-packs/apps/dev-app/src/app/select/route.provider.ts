@@ -8,13 +8,13 @@ export const Select_ROUTE_PROVIDER = [
 function configureRoutes(routesService: RoutesService) {
   return () => {
     routesService.add([
-      {
-        path: '/select',
-        name: '选择',
-        iconClass: 'bi bi-check2-circle',
-        order: 1,
-        layout: eLayoutType.application,
-      },
+      // {
+      //   path: '/select',
+      //   name: '选择',
+      //   iconClass: 'bi bi-check2-circle',
+      //   order: 1,
+      //   layout: eLayoutType.application,
+      // },
     ]);
   };
 }

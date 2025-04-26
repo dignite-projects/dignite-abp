@@ -16,7 +16,9 @@
                                 (click)="list.get()"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                    <abp-extensible-table [data]="data?.items" [recordsTotal]="data?.totalCount" [list]="list"></abp-extensible-table>
+                    <ng-container *ngIf="isInit">
+                        <abp-extensible-table [data]="data?.items" [recordsTotal]="data?.totalCount" [list]="list"></abp-extensible-table>
+                    </ng-container>
                 </div>
             </div>
         </div>

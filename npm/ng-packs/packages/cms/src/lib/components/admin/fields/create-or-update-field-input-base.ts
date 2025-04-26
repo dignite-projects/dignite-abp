@@ -1,4 +1,4 @@
-import { FormGroup, Validators } from "@angular/forms";
+import { FormGroup, Validators } from '@angular/forms';
 
 export class CreateOrUpdateFieldInputBase {
     /**分组id */
@@ -17,17 +17,6 @@ export class CreateOrUpdateFieldInputBase {
     formControlName: any = [undefined, [Validators.required]];
 
     /**动态表单配置 */
-    formConfiguration: FormGroup | undefined = new FormGroup({})
+    formConfiguration: FormGroup | undefined = new FormGroup({});
 
-
-    constructor(data?: CreateOrUpdateFieldInputBase) {
-        if (data) {
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this[key] = data[key];
-                }
-            }
-        }
-
-    }
 }

@@ -25,6 +25,8 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
 import { FormConfigLoaderService } from './services/form-config-loader.service';
 import { Select_ROUTE_PROVIDER } from './select/route.provider';
+import { RouteReuseStrategy } from '@angular/router';
+import { SimpleReuseStrategy } from '@dignite-ng/expand.core';
 
 @NgModule({
 	imports: [
@@ -64,6 +66,8 @@ import { Select_ROUTE_PROVIDER } from './select/route.provider';
 			useFactory: (configLoader: FormConfigLoaderService) => configLoader.getMergedConfig(),
 			deps: [FormConfigLoaderService],
 		},
+		/**路由服用策略 */
+		{ provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
 	],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent],

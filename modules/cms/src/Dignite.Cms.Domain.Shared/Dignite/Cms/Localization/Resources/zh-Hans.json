@@ -77,6 +77,7 @@
     "Enum:EntryStatus:Published": "发布",
     "FormControlConfiguration": "表单控件配置",
     "CreateOtherLanguages": "创建其他语言",
+    "The{1}FieldUnderThe{0}TAB": "标签页 “{0}” 下的 “{1}” 字段`",
     "NotShowInList": "此格式不支持在列表中展示"
   }
 }

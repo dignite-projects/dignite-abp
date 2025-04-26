@@ -3,7 +3,7 @@
         [class]="{'was-validated':formValidation}"  [formGroup]="formEntity"  (submit)="save()" >
         <button type="submit" style="display: none;" #submitclick></button>
         <ng-container *ngIf="formEntity&&entryInfo">
-                <cms-create-or-edit-entries  [sectionId]="sectionId" [entryTypeId]="entryTypeId" [isEdit]="true" [select]="entryInfo"  [entity]="formEntity"></cms-create-or-edit-entries>
+                <cms-create-or-edit-entries  [sectionId]="sectionId" [entryTypeId]="entryTypeId" [isEdit]="true" [select]="entryInfo"  (feedbackChildInfo)="_feedbackChildInfo($event)"  [entity]="formEntity"></cms-create-or-edit-entries>
         </ng-container>
         
     </form>

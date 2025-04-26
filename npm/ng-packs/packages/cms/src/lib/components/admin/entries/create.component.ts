@@ -78,7 +78,6 @@ export class CreateComponent implements OnInit {
     this.formEntity = this.fb.group(new CreateOrUpdateEntryInputBase());
     this.cultureInput.patchValue(this.cultureName);
     if (this.entryVersionId) await this.getEntryInfo();
-    
   }
   /**获取条目信息 */
   getEntryInfo() {
@@ -93,14 +92,58 @@ export class CreateComponent implements OnInit {
       });
     });
   }
+  /**显示条目类型信息 */
+  showEntryTypeInfo:any='';
+  /**反馈子级页面信息 */
+  _feedbackChildInfo(event){
+    this.showEntryTypeInfo=event?.showEntryType||'';
+  }
+  /**当返回结果为true时表示未通过验证 */
+  isCheckFormCms(input, module) {
+    for (const key in input) {
+      if (input[key] === false) {
+        let info = `"${this._LocalizationService.instant(`${module}::${key}`)}" `;
+        //检查key中是否含有ExtraProperties.
+        if (key.includes('ExtraProperties.')) {
+          const arr = key.split('.');
+          const keyName = arr[1];
+          //将keyName的首字母转为小写
+          const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
+          if(this.showEntryTypeInfo&&this.showEntryTypeInfo.fieldTabs.length>0){
+            for (const item of this.showEntryTypeInfo.fieldTabs) {
+              for (const el of item.fields) {
+                if(el.field.name==keyNameLower){
+                  // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
+                  info = `${this._LocalizationService.instant(`${module}::The{1}FieldUnderThe{0}TAB`,item.name,el.field.displayName)}`;
+                }
+              }
+            }
+          }
+        }
+        info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
+        //使用abp多语言提示
+        this.toaster.warn(info);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   /**提交 */
   save() {
+    const input = this.formEntity?.value;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
-    if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) {
+    if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
       return this.cultureInput.disable();
     }
-    const input = this.formEntity?.value;
+    // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) {
+    //   //   this.isSubmit = false;
+    //   //   return this.cultureInput.disable();
+    // }
+    // return;
+  
     // input.culture = this.cultureName;
     input.publishTime = new Date(
       new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000,

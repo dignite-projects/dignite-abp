@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, inject, OnChanges } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-this-alias */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+  inject,
+  OnChanges,
+} from '@angular/core';
 import * as FileService from '../../proxy/dignite/file-explorer/files';
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
 import {
@@ -41,9 +51,8 @@ export class FileModalComponent implements OnChanges {
     public _FileApiService: FileApiService,
     private restService: RestService,
     private confirmation: ConfirmationService,
-    private _LocalizationService: LocalizationService
-  ) {
-  }
+    private _LocalizationService: LocalizationService,
+  ) {}
 
   private _FileDescriptorService = inject(FileDescriptorService);
   /**获取目录配置 */
@@ -185,31 +194,36 @@ export class FileModalComponent implements OnChanges {
 
   /**图片上传-获取文件信息改变 */
   async getFileChange(event) {
+    const _that=this;
     const files = new Array(...event.target.files);
     this.uploadPictureStatusList = files;
+    const uploadPromises = [];
     for (const file of files) {
       if (file.size > this.sizeLimit) {
         this.setuploadPictureStatus(file, 2);
         continue;
       }
-      await this.uploadingFile(file)
-        .then(res => {
-          this.selectedTable.push(res);
-          this.setuploadPictureStatus(file, 1);
-          // this.list.get()
-        })
-        .catch(() => {
-          this.setuploadPictureStatus(file, 2);
-        }); // 等待每个文件上传完成
+      uploadPromises.push(
+        this.uploadingFile(file)
+          .then(res => {
+            this.setuploadPictureStatus(file, 1);
+          })
+          .catch(function (err) {
+            this.setuploadPictureStatus(file, 2);
+            return err;
+          }), // 保证所有Promise都resolve
+      );
     }
-    this.list.get();
-    const isSubmit = !this.uploadPictureStatusList.some(el => el.status == 2);
-    if (isSubmit) {
-      // this.toaster.success("上传完成");
-      setTimeout(() => {
-        this.uploadPictureStatusList = [];
-      }, 4000);
-    }
+    Promise.all(uploadPromises).then( (results)=> {
+      _that.list.get();
+      const isSubmit = !_that.uploadPictureStatusList.some(el => el.status == 2);
+      if (isSubmit) {
+        setTimeout(() => {
+          _that.uploadPictureStatusList = [];
+        }, 4000);
+      }
+    });
+
   }
 
   /**图片上传-设置uploadPictureStatusList的状态 */
@@ -231,11 +245,11 @@ export class FileModalComponent implements OnChanges {
         entityId: '',
       }).subscribe(
         res => {
-          resolve(res);
+          resolve({ file: file.name, status: 'success', response: res });
         },
         err => {
-          rejects(false);
-        }
+          rejects({ file: file.name, status: 'fail', error: err });
+        },
       );
     });
   }
@@ -283,6 +297,8 @@ export class FileModalComponent implements OnChanges {
     this._FileService.delete(file.id).subscribe(res => {
       this.toaster.success(this._LocalizationService.instant(`FileExplorer::DeletedSuccessfully`));
       this.list.get();
+      const selectedTables=this.selectedTable;
+      this.selectedTable=selectedTables.filter(el => el.id != file.id);
     });
   }
 
@@ -298,14 +314,18 @@ export class FileModalComponent implements OnChanges {
           const selectedTable = this.selectedTable;
           try {
             const result = await this.batchDeleteItems(selectedTable);
+            console.log(result,'resultresultresult')
             if (result.success) {
               this.toaster.success(result.message);
               this.list.get();
+              this.selectedTable=[];
               // 可能需要刷新表格或更新UI
             } else {
               //删除失败的项
               this.list.get();
               // 可以选择展示失败项或重试
+              this.selectedTable= result.failedItems;
+
             }
           } catch (error) {
             //批量删除过程中发生错误
@@ -329,7 +349,7 @@ export class FileModalComponent implements OnChanges {
           },
           () => {
             reject(item);
-          }
+          },
         );
       });
     });
@@ -376,7 +396,7 @@ export class FileModalComponent implements OnChanges {
         },
         body: input.file,
       },
-      { apiName: 'FileExplorer', ...config }
+      { apiName: 'FileExplorer', ...config },
     );
 
   /**文件表格-选择的表格数据项 */
@@ -417,7 +437,7 @@ export class FileModalComponent implements OnChanges {
   }
   /**如果selectedTableArray不含array中的所有项，则将isAllSelected设为true,否则设为false */
   isAllSelectedFn(tolalArray: any[], selectedArray: any[] = []) {
-    if(tolalArray.length == 0) return false;
+    if (tolalArray.length == 0) return false;
     return tolalArray.every(item => selectedArray.some(el => el.id === item.id));
   }
   /**选择当前页全部 */
@@ -461,12 +481,12 @@ export class FileModalComponent implements OnChanges {
     this.isloading = true;
     this._FileService
       .update(input.id, {
-        name:input.fileName
+        name: input.fileName,
       })
       .pipe(
         finalize(() => {
           this.isloading = false;
-        })
+        }),
       )
       .subscribe(res => {
         //通过当前newEditRow的id,修改data.items中对应项的name

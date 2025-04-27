@@ -34,9 +34,17 @@ public static class HasCustomFieldsExtensions
         catch (Exception exc)
         {
             var value = source.GetProperty(name);
-            if (value == null || value.ToString().IsNullOrWhiteSpace())
+            if (value == null)
             {
                 return defaultValue;
+            }
+
+            if (value is JsonElement element)
+            {
+                if (element.ValueKind == JsonValueKind.String && element.GetString() == "")
+                {
+                    return defaultValue;
+                }
             }
 
             if (TypeHelper.IsPrimitiveExtended(typeof(TField)))

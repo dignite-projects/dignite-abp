@@ -19,7 +19,8 @@
     "YourDomainNameHasBeenVerifiedPleaseBind": "您的域名已通过验证，请进行绑定",
     "YourDomainNameIsNotVerifiedPleaseCheckTheDNSConfigurationOfTheDomainName": "您的域名暂未通过验证请检查域名的DNS配置",
     "SaveSuccessful": "保存成功",
-    "SaveFailure": "保存失败"
+    "SaveFailure": "保存失败",
+    "AddANewDNSRecordByCopyingAndPastingTheNameAndNewValue": "通过复制粘贴名称和新值的方式添加新的DNS记录"
 
 
 

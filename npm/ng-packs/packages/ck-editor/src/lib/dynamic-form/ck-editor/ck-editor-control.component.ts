@@ -114,6 +114,8 @@ export class CkEditorControlComponent {
           language: _that.currentCulture,
           type:formConfiguration['Ckeditor.Mode']
         });
+
+        
         if (!this.imagesContainerName) {
           if(configs?.toolbar?.items?.indexOf('insertImage')!=-1){
             configs?.toolbar?.items?.splice(

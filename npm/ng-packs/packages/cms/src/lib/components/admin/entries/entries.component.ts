@@ -72,6 +72,8 @@ export class EntriesComponent implements OnInit {
   ngOnInit(): void {
     this.getPageDate();
     this._UpdateListService.updateListEvent.subscribe(() => {
+      this.data.items = [];
+      this.data.totalCount = 0;
       this.list.get();
     });
   }
@@ -353,6 +355,8 @@ export class EntriesComponent implements OnInit {
         maxResultCount: this.maxResultCount,
       });
     const setData = (list: PagedResultDto<EntryDto> | any) => {
+      this.data.items = [];
+      this.data.totalCount = 0;
       if (this.SiteOfSectionType == SectionType.Structure) {
         list.items = list.items.sort((a, b) => {
           return a.order - b.order;

@@ -12,7 +12,7 @@ namespace Dignite.Cms.Public.Web.Builder
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseCmsControllerRoute(this IApplicationBuilder app)
+        public static IApplicationBuilder UseCmsEndpoints(this IApplicationBuilder app)
         {
             app.UseEndpoints(endpoints =>
             {

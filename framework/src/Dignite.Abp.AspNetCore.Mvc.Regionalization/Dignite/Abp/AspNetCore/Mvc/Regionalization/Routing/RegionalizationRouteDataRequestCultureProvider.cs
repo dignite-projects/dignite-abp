@@ -65,11 +65,15 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
 
         ArgumentNullException.ThrowIfNull(culture);
         ArgumentNullException.ThrowIfNull(uiCulture);
+
+        /* 当基于 URL 的区域化时，以下代码会影响基于 Cookie 区域化的行为。
+         * 因此，注释掉。
         //
         AbpRequestCultureCookieHelper.SetCultureCookie(
             httpContext,
             new RequestCulture(culture, uiCulture)
         );
+        */
 
         return new ProviderCultureResult(culture, uiCulture);
     }

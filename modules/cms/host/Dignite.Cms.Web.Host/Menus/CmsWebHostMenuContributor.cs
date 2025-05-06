@@ -46,6 +46,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 icon: "fa fa-home",
                 order: 1
             )
+            .SetSupportsLocalePrefix(true)
         );
 
         // service items
@@ -53,17 +54,17 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 CmsWebHostMenus.Services,
                 l["Menu:Services"]
             );
-        servicesMenuItem.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Services_WebDesign, l["Menu:WebDesign"], url: "~/service/web-design"));
-        servicesMenuItem.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Services_Ecommerce, l["Menu:eCommerce"], url: "~/service/ecommerce"));
+        servicesMenuItem.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Services_WebDesign, l["Menu:WebDesign"], url: "~/service/web-design").SetSupportsLocalePrefix(true));
+        servicesMenuItem.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Services_Ecommerce, l["Menu:eCommerce"], url: "~/service/ecommerce").SetSupportsLocalePrefix(true));
         context.Menu.AddItem(servicesMenuItem);
 
 
         // blog
-        context.Menu.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Blog, l["Menu:Blog"], "~/blog"));
+        context.Menu.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Blog, l["Menu:Blog"], "~/blog").SetSupportsLocalePrefix(true));
 
 
         // contact
-        context.Menu.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Contact, l["Menu:Contact"], "~/contact"));
+        context.Menu.AddItem(new ApplicationMenuItem(CmsWebHostMenus.Contact, l["Menu:Contact"], "~/contact").SetSupportsLocalePrefix(true));
 
         // Razor page
         context.Menu.AddItem(new ApplicationMenuItem(CmsWebHostMenus.RazorPageTest, "Razor Page", "~/razor-page-test"));
@@ -91,7 +92,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:HomePage"],
                 "~/",
                 groupName: learn
-            )
+            ).SetSupportsLocalePrefix(true)
         );
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -99,7 +100,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:Contact"],
                 "~/contact",
                 groupName: learn
-            )
+            ).SetSupportsLocalePrefix(true)
         );
 
         // services
@@ -109,7 +110,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:WebDesign"],
                 "~/service/web-design",
                 groupName: serviceGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -117,7 +118,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:eCommerce"],
                 "~/service/ecommerce",
                 groupName: serviceGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
 
 
@@ -128,7 +129,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:Blog-All"],
                 "~/blog",
                 groupName: blogGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -136,7 +137,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:Blog-company-news"],
                 "~/blog?category=company-news",
                 groupName: blogGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -144,7 +145,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:Blog-tutorials"],
                 "~/blog?category=tutorials",
                 groupName: blogGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -152,7 +153,7 @@ public class CmsWebHostMenuContributor : IMenuContributor
                 l["Menu:Blog-essays"],
                 "~/blog?category=essays",
                 groupName: blogGroupName
-            )
+            ).SetSupportsLocalePrefix(true)
         );
 
         return Task.CompletedTask;

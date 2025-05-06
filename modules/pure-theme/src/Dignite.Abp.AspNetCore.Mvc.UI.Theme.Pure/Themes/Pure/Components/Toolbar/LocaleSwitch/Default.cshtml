@@ -1,8 +1,8 @@
 ﻿@using System.Linq
 @using Microsoft.AspNetCore.Http.Extensions;
-@using Dignite.Cms.Public.Web.Components.CultureSwitch;
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LocaleSwitch;
 @using System.Globalization
-@model CultureSwitchViewComponentModel
+@model LocaleSwitchViewComponentModel
 @if (Model.AvailableCultures.Any()&&Model.AvailableCultures.Count>1)
 {
     var currentCulture = Model.AvailableCultures.FirstOrDefault(l => l.Name.Equals(Model.CurrentCultureName, System.StringComparison.OrdinalIgnoreCase))??
@@ -25,17 +25,19 @@
                 }
                 else
                 {
-                    string url;
+                    var uiCultureName = culture.CultureTypes.HasFlag(CultureTypes.NeutralCultures) ? culture.Name : culture.Parent.Name;
+                    string url=$"Abp/Languages/Switch?culture={culture.Name}&uiCulture={uiCultureName}";
+					string returnUrl = string.Empty;
                     if (Model.IsMatchingRoute)
                     {
-                        url = Model.InsertOrReplaceCultureParameter(Context, culture.Name);
-                        url = url.Trim('/') + Context.Request.QueryString.Value;
+                        returnUrl = Model.InsertOrReplaceCultureParameter(Context, culture.Name);
+                        returnUrl = returnUrl + Context.Request.QueryString.Value;
                     }
                     else
                     {
-                        var uiCultureName = culture.CultureTypes.HasFlag(CultureTypes.NeutralCultures) ? culture.Name : culture.Parent.Name;
-                        url = $"Abp/Languages/Switch?culture={culture.Name}&uiCulture={uiCultureName}&returnUrl={System.Net.WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery())}";
+                        returnUrl = System.Net.WebUtility.UrlEncode(Context.Request.GetEncodedPathAndQuery());
                     }
+                    url += $"&returnUrl={returnUrl}";
                     <a class="dropdown-item" href="~/@url">
                         @culture.NativeName
                     </a>

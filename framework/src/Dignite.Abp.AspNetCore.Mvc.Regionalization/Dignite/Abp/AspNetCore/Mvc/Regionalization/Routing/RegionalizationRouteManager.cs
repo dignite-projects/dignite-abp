@@ -41,9 +41,6 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
             var routePatternRawText = routeEndpoint.RoutePattern.RawText;
             var requestPath = httpContext.Request.Path.Value;
 
-            ArgumentNullException.ThrowIfNull(routePatternRawText);
-            ArgumentNullException.ThrowIfNull(requestPath);
-
             //如果当前请求的页面路径(requestPath)中不包含 region 路由参数
             //则根据本次循环的routePattern格式，向当前请求的页面路径(requestPath)中添加一个默认的region路由参数
             if (regionCultureName.IsNullOrEmpty())
@@ -99,9 +96,7 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
         {
             return CreateEndpointsList();
         });
-        #pragma warning disable CS8603 // 不可能返回 null 引用。
         return cacheValue;
-        #pragma warning restore CS8603 // 不可能返回 null 引用。
     }
 
     private List<Endpoint> CreateEndpointsList()

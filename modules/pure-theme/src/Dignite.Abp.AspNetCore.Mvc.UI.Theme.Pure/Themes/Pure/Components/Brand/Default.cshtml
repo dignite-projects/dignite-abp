@@ -1,6 +1,6 @@
 ﻿@using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
-<a href="~/" class="navbar-brand d-flex align-items-center fs-4">
+<a href="~/" class="navbar-brand d-flex align-items-center fs-4" use-locale-prefix="true">
     @if (!BrandingProvider.LogoUrl.IsNullOrWhiteSpace() || !BrandingProvider.LogoReverseUrl.IsNullOrWhiteSpace())
     {
         <img alt="@BrandingProvider.AppName" class="brand-logo d-inline-block align-text-top d-none">

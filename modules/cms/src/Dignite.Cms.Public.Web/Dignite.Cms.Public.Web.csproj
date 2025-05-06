@@ -25,13 +25,4 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Components\**\*.js" />
-    <EmbeddedResource Include="Components\**\*.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
-
 </Project>

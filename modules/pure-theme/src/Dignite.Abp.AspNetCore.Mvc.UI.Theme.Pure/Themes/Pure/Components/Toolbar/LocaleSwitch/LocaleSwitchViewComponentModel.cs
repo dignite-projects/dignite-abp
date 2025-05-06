@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Dignite.Cms.Public.Web.Components.CultureSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LocaleSwitch;
 
-public class CultureSwitchViewComponentModel
+public class LocaleSwitchViewComponentModel
 {
-    public CultureSwitchViewComponentModel(string defaultCultureName, string currentCultureName, IReadOnlyList<CultureInfo> availableCultures, bool isMatchingRoute,string routePattern)
+    public LocaleSwitchViewComponentModel(string defaultCultureName, string currentCultureName, IReadOnlyList<CultureInfo> availableCultures, bool isMatchingRoute,string routePattern)
     {
         DefaultCultureName = defaultCultureName;
         CurrentCultureName = currentCultureName;

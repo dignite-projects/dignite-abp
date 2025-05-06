@@ -39,12 +39,10 @@ public class RegionalizationRouteConstraint : IRouteConstraint
             var languages = AsyncHelper.RunSync(() => languageProvider.GetLanguagesAsync());
 
             Regex rgx = new Regex(@"^(" + languages.Select(l => l.CultureName).JoinAsString("|") + ")$", RegexOptions.IgnoreCase);
-#pragma warning disable CS8604 // 引用类型参数可能为 null。
             if (rgx.IsMatch(culture.ToString()))
             {
                 return true;
             }
-#pragma warning restore CS8604 // 引用类型参数可能为 null。
 
             return false;
         }

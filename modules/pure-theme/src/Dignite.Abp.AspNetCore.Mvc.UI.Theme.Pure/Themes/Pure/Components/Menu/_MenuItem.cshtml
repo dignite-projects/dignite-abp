@@ -3,7 +3,6 @@
 @inject IPageLayout PageLayout
 @model ApplicationMenuItem
 @{
-    var elementId = string.IsNullOrEmpty(Model.ElementId) ? string.Empty : $"id=\"{Model.ElementId}\"";
     var cssClass = string.IsNullOrEmpty(Model.CssClass) ? string.Empty : Model.CssClass;
     var disabled = Model.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.IsLocalUrl(Model.Url) ? Url.Content(Model.Url.EnsureStartsWith('~')) : Model.Url;
@@ -18,7 +17,8 @@
     }
     else if (Model.Url != null)
     {
-        <a class="dropdown-item @cssClass @disabled @isActive" href="@url" target="@Model.Target" @Html.Raw(elementId)>
+        var useLocalePrefix = Model.IsSupportsLocalePrefix();
+        <a class="dropdown-item @cssClass @disabled @isActive" href="@url" use-locale-prefix="@useLocalePrefix" target="@Model.Target" id="Model.ElementId">
             @if (Model.Icon != null)
             {
                 <i class="@Model.Icon"></i>

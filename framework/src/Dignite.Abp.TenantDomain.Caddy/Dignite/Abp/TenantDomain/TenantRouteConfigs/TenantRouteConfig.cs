@@ -33,7 +33,18 @@ public class TenantRouteConfig
 
     public void SetMatches(params string[] hosts)
     {
-        Matches = hosts.Select(host => new RouteMatch { Hosts = { host } }).ToList();
+        if (Matches.IsNullOrEmpty())
+        {
+            Matches = hosts.Select(host => new RouteMatch { Hosts = { host } }).ToList();
+        }
+
+        foreach (var host in hosts)
+        {
+            if (!Matches.Any(m => m.Hosts.Contains(host)))
+            {
+                Matches.Add(new RouteMatch { Hosts = { host } });
+            }
+        }
     }
 
     public Guid GetTenantId()

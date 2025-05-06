@@ -18,6 +18,11 @@ public class CaddyTenantConfigManager(CaddyClient client) : ITransientDependency
             await UpdateAsync(config);
         }
 
+        await CreateAsync(config);
+    }
+
+    public async Task CreateAsync(TenantRouteConfig config)
+    {
         var result = await client.CreateConfig<string>(Path + "/routes", config);
         if (!result.IsSuccess)
         {

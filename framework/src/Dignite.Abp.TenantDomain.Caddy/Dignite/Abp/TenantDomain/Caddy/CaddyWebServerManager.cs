@@ -13,9 +13,19 @@ public class CaddyWebServerManager(
     CaddyTenantConfigManager caddyTenantConfigManager)
     : WebServerManagerBase(logger), ITransientDependency
 {
-    public override Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId)
+    public async override Task AddOrUpdateDomainAsync(string domain, string upstreamAddress, Guid tenantId)
     {
-        return caddyTenantConfigManager.AddOrUpdateAsync(new TenantRouteConfig(tenantId, [domain], upstreamAddress));
+        var routeConfig = await caddyTenantConfigManager.FindAsync(tenantId);
+
+        if (routeConfig == null)
+        {
+            await caddyTenantConfigManager.CreateAsync(new TenantRouteConfig(tenantId, [domain], upstreamAddress));
+            return;
+        }
+
+        routeConfig.SetMatches(domain);
+        // TODO 是否修改下游地址？
+        await caddyTenantConfigManager.UpdateAsync(routeConfig);
     }
 
     public override Task RemoveDomainAsync(Guid tenantId)

@@ -26,7 +26,7 @@ namespace Dignite.Cms.Public.Web.Builder
                     defaults: new { controller = CmsController.ControllerName, action = nameof(CmsController.CultureEntry) });
                 endpoints.MapControllerRoute(
                     name: CmsEndpointNames.EntryEndpointName,
-                    pattern: "{*path:regex(^(?!swagger/|abp/|account/|libs/|.well-known/).*)}", //TODO: Use an options to configure the regular expression for the route
+                    pattern: "{*path:regex(^(?!swagger/|abp/|account/|libs/|.well-known/|Error/).*)}", //TODO: Use an options to configure the regular expression for the route
                     defaults: new { controller = CmsController.ControllerName, action = nameof(CmsController.Entry) });
             });
 

@@ -15,7 +15,8 @@ export class ValidatorsService {
     for (let i = 0; i < keys.length; i++) {
       const element = keys[i];
       if (input[element] === false) {
-        let info = `"${this._LocalizationService.instant(`${module}::${element}`)}" `;
+        const displayName = element.charAt(0).toUpperCase() + element.slice(1);
+        let info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
         if (element.includes('.') && !element.includes('].')) {
           const arr = element.split('.');
           info = `"${this._LocalizationService.instant(

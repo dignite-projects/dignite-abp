@@ -16,6 +16,7 @@ export class ValidatorsService {
       const element = keys[i];
       if (input[element] === false) {
         const displayName = element.charAt(0).toUpperCase() + element.slice(1);
+        console.log(element,'element',displayName);
         let info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
         if (element.includes('.') && !element.includes('].')) {
           const arr = element.split('.');
@@ -31,6 +32,7 @@ export class ValidatorsService {
           }].${this._LocalizationService.instant(`${module}::${arr[1]}`)}"`;
         }
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
+
         //使用abp多语言提示
         this.toaster.warn(info);
         return true;

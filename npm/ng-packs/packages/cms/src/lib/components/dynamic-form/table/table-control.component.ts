@@ -89,15 +89,17 @@ export class TableControlComponent {
         ValidatorsArray.push(Validators.required);
       }
       const formConfiguration = this._fields.field.formConfiguration;
-      if(this._fields.required){
-        for (const element of formConfiguration.TableColumns) {
-          element.required = true;
-        }
-      }
+     
       this.formConfiguration = formConfiguration;
-      const newArrayGroup = this.fb.array([]);
+      const newArrayGroup = this.fb.array([],ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
+      if(this._fields.required){
+        this.fieldNameControl.addValidators(this.hasValueValidator);
+        // for (const element of formConfiguration.TableColumns) {
+        //   element.required = true;
+        // }
+      }
       if (this._selected) {
         this._selected.forEach(el => {
           this.addTableControlItem();
@@ -109,6 +111,41 @@ export class TableControlComponent {
       resolve(true);
     });
   }
+ /**是否带有值验证器 */
+ hasValueValidator(g: FormArray) {
+  // 检查是否有任何控件包含有效值
+  const hasValue = g.controls.some(element => {
+    const extraProperties = element.get('extraProperties');
+    return Object.keys(extraProperties.value).some(key => {
+      const value = extraProperties.value[key];
+      // 检查数组类型值
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      // 检查非空值
+      return value !== null && value !== undefined && value !== '';
+    });
+  });
+
+  // 根据验证结果设置表单状态
+  g.controls.forEach(element => {
+    const extraProperties = element.get('extraProperties');
+    Object.keys(extraProperties.value).forEach(key => {
+      if (!hasValue) {
+        // 如果没有值，设置所有字段为必填
+        extraProperties.get(key).setValidators(Validators.required);
+        extraProperties.get(key).setErrors({ required: true });
+      } else {
+        // 如果有值，清除错误
+        extraProperties.get(key).setErrors(null);
+      }
+    });
+  });
+
+  // 返回验证结果
+  return hasValue&&g.controls.length>0 ? null : { required: true };
+}
+
   /**增加表格项 */
   addTableControlItem() {
     this.fieldNameControl.push(

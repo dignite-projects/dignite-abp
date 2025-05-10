@@ -135,7 +135,9 @@ export class EditComponent implements OnInit {
         } else {
           const displayName = key.charAt(0).toUpperCase() + key.slice(1);
           info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
+        
         }
+        console.log('info', info,input[key]);
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);

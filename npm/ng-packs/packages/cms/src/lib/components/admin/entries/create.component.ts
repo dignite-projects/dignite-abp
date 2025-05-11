@@ -102,24 +102,41 @@ export class CreateComponent implements OnInit {
   isCheckFormCms(input, module) {
     for (const key in input) {
       if (input[key] === false) {
-        let info = `"${this._LocalizationService.instant(`${module}::${key}`)}" `;
+        let info = ``;
         //检查key中是否含有ExtraProperties.
-        if (key.includes('ExtraProperties.')) {
+        if (key.includes('extraProperties.')) {
           const arr = key.split('.');
           const keyName = arr[1];
-          //将keyName的首字母转为小写
-          const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
-          if(this.showEntryTypeInfo&&this.showEntryTypeInfo.fieldTabs.length>0){
-            for (const item of this.showEntryTypeInfo.fieldTabs) {
-              for (const el of item.fields) {
-                if(el.field.name==keyNameLower){
-                  // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
-                  info = `${this._LocalizationService.instant(`${module}::The{1}FieldUnderThe{0}TAB`,item.name,el.field.displayName)}`;
+          // if (keyName.includes('[')) {
+          //   //使用正则提取keyName中[]中的数字下标,并且转化为数字类型，并且去掉keyName中的[*]
+          //   const keyNameArr = keyName.match(/\d+/g);
+          //   const keyNameArrNum = keyNameArr.map(item => Number(item));
+          //   const keyNameArrNumStr = keyNameArrNum.join('.');
+
+          // } else {
+            //将keyName的首字母转为小写
+            const keyNameLower = keyName;
+            // const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
+            if (this.showEntryTypeInfo && this.showEntryTypeInfo.fieldTabs.length > 0) {
+              for (const item of this.showEntryTypeInfo.fieldTabs) {
+                for (const el of item.fields) {
+                  if (el.field.name == keyNameLower) {
+                    // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
+                    info = `${this._LocalizationService.instant(
+                      `${module}::The{1}FieldUnderThe{0}TAB`,
+                      item.name,
+                      el.field.displayName,
+                    )}`;
+                  }
                 }
               }
             }
-          }
+          // }
+        } else {
+          const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+          info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
         }
+       
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);
@@ -133,11 +150,15 @@ export class CreateComponent implements OnInit {
   /**提交 */
   save() {
     const input = this.formEntity?.value;
+   
+   
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
       return this.cultureInput.disable();
     }
+    console.log(input,'input',this.formEntity,this.formValidation);
+    return;
     // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) {
     //   //   this.isSubmit = false;
     //   //   return this.cultureInput.disable();

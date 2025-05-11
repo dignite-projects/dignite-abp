@@ -196,5 +196,13 @@ namespace Dignite.Cms.Admin.Entries
                 ObjectMapper.Map<List<Entry>, List<EntryDto>>(result)
                 );
         }
+
+        public async Task<ListResultDto<EntryDto>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug)
+        {
+            var result = await _entryRepository.GetLocalizedEntriesBySlugAsync(sectionId, slug);
+            return new ListResultDto<EntryDto>(
+                ObjectMapper.Map<List<Entry>, List<EntryDto>>(result)
+                );
+        }
     }
 }

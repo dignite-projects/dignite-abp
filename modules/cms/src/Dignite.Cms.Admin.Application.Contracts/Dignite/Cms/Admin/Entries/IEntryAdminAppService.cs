@@ -36,6 +36,8 @@ namespace Dignite.Cms.Admin.Entries
         /// <returns></returns>
         Task MoveAsync(Guid id, MoveEntryInput input);
 
+        Task<ListResultDto<EntryDto>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug);
+
         Task<bool> SlugExistsAsync(SlugExistsInput input);
 
         /// <summary>

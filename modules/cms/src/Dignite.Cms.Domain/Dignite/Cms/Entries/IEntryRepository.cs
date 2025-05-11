@@ -9,6 +9,8 @@ namespace Dignite.Cms.Entries
 {
     public interface IEntryRepository : IBasicRepository<Entry, Guid>
     {
+        Task<List<Entry>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug, CancellationToken cancellationToken = default);
+
         Task<bool> SlugExistsAsync(string culture, Guid sectionId, string slug, CancellationToken cancellationToken = default);
 
         /// <summary>

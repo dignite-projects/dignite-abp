@@ -29,6 +29,12 @@ namespace Dignite.Cms.Entries
             _fieldQueryings = fieldQueryings;
         }
 
+        public async Task<List<Entry>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug, CancellationToken cancellationToken = default)
+        { 
+            return await (await GetDbSetAsync())
+                .Where(e=>e.SectionId==sectionId && e.Slug==slug)
+                .ToListAsync(GetCancellationToken(cancellationToken));
+        }
 
         public async Task<bool> SlugExistsAsync(string culture,Guid sectionId,  string slug, CancellationToken cancellationToken = default)
         {

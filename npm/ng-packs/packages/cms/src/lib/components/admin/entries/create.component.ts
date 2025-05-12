@@ -155,6 +155,9 @@ export class CreateComponent implements OnInit {
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
+      if(this.isOther===1){
+        this.slugInput.disable();
+      }
       return this.cultureInput.disable();
     }
     console.log(input,'input',this.formEntity,this.formValidation);
@@ -189,7 +192,15 @@ export class CreateComponent implements OnInit {
     // this.isSubmit = true;
     this.draftInput.patchValue(type);
     this.cultureInput.enable();
-    this.submitclick?.nativeElement?.click();
+    this.slugInput.enable();
+    this.formEntity.updateValueAndValidity();
+    console.log(this.formEntity,'formEntity');
+    setTimeout(() => {
+      this.submitclick.nativeElement.click();
+    }, 0);
+  }
+  get slugInput(): FormControl {
+    return this.formEntity?.get('slug') as FormControl;
   }
 
   /**返回上一页 */

@@ -115,7 +115,7 @@ export const Entries_Create_Defaults_Toolbar_Action = ToolbarAction.createMany<a
     icon: '',
   },
   {
-    text: 'AbpUi::Save',
+    text: 'Cms::SaveDraft',
     action: data => {
       const component = data.getInjected(CreateComponent);
       component.clickSubmit(true);
@@ -148,7 +148,7 @@ export const Entries_Edit_Defaults_Toolbar_Action = ToolbarAction.createMany<any
     icon: '',
   },
   {
-    text: 'AbpUi::Save',
+    text: 'Cms::SaveDraft',
     action: data => {
       const component = data.getInjected(EditComponent);
       component.clickSubmit(true);

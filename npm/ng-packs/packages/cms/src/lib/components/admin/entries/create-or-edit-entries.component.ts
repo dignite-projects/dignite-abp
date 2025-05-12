@@ -2,7 +2,7 @@
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
 import { CmsApiService } from '../../../services';
@@ -126,6 +126,7 @@ export class CreateOrEditEntriesComponent {
     }
     const repetition = await this.cultureAsyncValidator();
     if (repetition) this.cultureInput.setErrors(repetition);
+    this.slugInput.addValidators(this.SlugRegExValidator());
     this.slugInput.addAsyncValidators(this.SlugAsyncValidator());
     if (this.entryInfo) {
       await this.getAllVersionsList();
@@ -158,6 +159,7 @@ export class CreateOrEditEntriesComponent {
     this.isLoad = true;
     if (this.isOther == 1) {
       this.initialVersionIdInput.patchValue('');
+      this.slugInput.disable();
       await this.getLocalizedEntriesBySlug();
     }
    
@@ -172,7 +174,7 @@ getLocalizedEntriesBySlug(){
     this._EntryAdminService
      .getLocalizedEntriesBySlug(this.sectionId,this.slugInput.value)
      .subscribe(res => {
-       console.log(res,'获取别名下其他的语言版本',this.slugInput.value);
+      //  console.log(res,'获取别名下其他的语言版本',this.slugInput.value);
       this.languagesList=this.languagesList.filter(el=>!res.items.find(el2=>el2.culture===el.cultureName));
       this.cultureInput.patchValue(this.languagesList[0].cultureName);
        resolve(res);
@@ -181,7 +183,18 @@ getLocalizedEntriesBySlug(){
      })
   })
 }
-
+SlugRegExValidator() {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const regex = /^[a-zA-Z0-9_-]+$/;
+    if (control.value && !regex.test(control.value)) {
+      return { repetition: this._LocalizationService.instant(
+        `Cms::SlugValidatorsText`,
+      ) };
+    }
+    
+    return null;
+  };  
+}
 
   // /**别名查重 */
   SlugAsyncValidator() {
@@ -293,7 +306,10 @@ getLocalizedEntriesBySlug(){
     let pinyinstr = '';
     if (slug.value) return;
     pinyinstr = this._CmsApiService.chineseToPinyin(val);
-    this.slugInput.patchValue(pinyinstr || val);
+    pinyinstr=pinyinstr||val;
+    //去除特殊字符
+    pinyinstr = pinyinstr.replace(/[^a-zA-Z0-9-]/g, '');
+    this.slugInput.patchValue(pinyinstr);
     this._EntryAdminService
       .slugExists({
         culture: this.cultureInput.value,

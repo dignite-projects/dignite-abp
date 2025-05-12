@@ -24,7 +24,8 @@
                                         <div class="col-sm-8 border rounded">
                                             <ul ngbNav #nav="ngbNav" [(activeId)]="navActive" class="nav nav-tabs">
                                                 <ng-container *ngFor="let item of resultSource; let i = index">
-                                                    <li [ngbNavItem]="i" ngbDropdown class="nav-item" role="presentation"> 
+                                                    <li [ngbNavItem]="i" ngbDropdown class="nav-item"
+                                                        role="presentation">
                                                         <button type="button" ngbNavLink class="nav-link">
                                                             {{ item.name }}
                                                             <span class="ms-1" (click.stop)="$event.stopPropagation()"
@@ -50,7 +51,56 @@
                                                                     *ngIf="item.fields.length === 0">
                                                                     {{'Cms::DragAndDropFieldTips' | abpLocalization}}
                                                                 </p>
-                                                                <ul class="list-group" style="height: 100%;">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <th></th>
+                                                                        <th>{{'Cms::DisplayName' | abpLocalization}}
+                                                                        </th>
+                                                                        <th>{{'Cms::Required' | abpLocalization}}</th>
+                                                                        <th>{{'Cms::ShowInList' | abpLocalization}}</th>
+                                                                        <th>{{'Cms::EnableSearch' | abpLocalization}}
+                                                                        </th>
+                                                                        <th></th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <ng-container
+                                                                            *ngFor="let el of item.fields; let iel = index">
+                                                                            <tr draggable="true"
+                                                                                (dragstart)="fromResultSourceDragStart(el)"
+                                                                                (drop)="dragToResultSourceItemDropped(iel)">
+                                                                                <td >
+                                                                                    <div class="drag-handle d-inline" 
+                                                                                        cdkDragHandle>
+                                                                                        <span
+                                                                                            class="bi bi-arrows-move fs-5"></span>
+                                                                                    </div>
+                                                                                </td>
+                                                                                
+                                                                                <td>{{ el.displayName }}</td>
+                                                                                <td>
+                                                                                    <input type="checkbox" role="button" class="form-check-input" [checked]="el.required"  name="required" (change)="checkboxChange($event,{row:el,index:iel})"  />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="checkbox"  role="button" class="form-check-input" [checked]="el.showInList"  name="showInList" (change)="checkboxChange($event,{row:el,index:iel})"  />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <input type="checkbox"  role="button" class="form-check-input" [checked]="el.enableSearch"    name="enableSearch" (change)="checkboxChange($event,{row:el,index:iel})"   />
+                                                                                </td>
+                                                                                <td style="width: 1%;"> 
+                                                                                    <button
+                                                                                        class="p-0 btn btn-sm btn-light"
+                                                                                        (click.stop)="EditFieldModalOpen(el,iel)"
+                                                                                        type="button"><i
+                                                                                            class="fas fa-wrench p-sm-1"
+                                                                                            role="button"></i></button>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </ng-container>
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                                <!-- <ul class="list-group" style="height: 100%;">
                                                                     <ng-container
                                                                         *ngFor="let el of item.fields; let iel = index">
                                                                         <li draggable="true"
@@ -66,7 +116,7 @@
                                                                                     role="button"></i></button>
                                                                         </li>
                                                                     </ng-container>
-                                                                </ul>
+                                                                </ul> -->
 
                                                             </div>
                                                         </ng-template>
@@ -128,7 +178,7 @@
     </abp-page>
 
 </form>
-
+<!-- 用于创建编辑tab的模态框 -->
 <abp-modal [(visible)]="visibleTabsOpen" [busy]="modalBusy" (visibleChange)="VisibleTabsChange($event)">
     <ng-template #abpHeader>
         <h3>{{ editFieldTabsSelect ? ('AbpUi::Edit' | abpLocalization):('Cms::New' | abpLocalization)}}</h3>
@@ -155,7 +205,7 @@
     </ng-template>
 </abp-modal>
 
-
+<!-- 用于修改字段配置的模态框 -->
 <abp-modal [(visible)]="visibleEditFieldOpen" [busy]="modalBusy" (visibleChange)="VisibleEditFieldChange($event)">
     <ng-template #abpHeader>
         <h3>{{'AbpUi::Edit' | abpLocalization}}</h3>
@@ -171,14 +221,14 @@
                     <label class="form-label">{{'Cms::DisplayName' | abpLocalization}}</label>
                     <input type="text" class="form-control" formControlName="displayName" placeholder="" />
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="true" formControlName="required"
                             id="required" />
                         <label class="form-check-label" for="required"> {{'Cms::Required' | abpLocalization}} </label>
                     </div>
-                </div>
-                @if(isShowInList){
+                </div> -->
+                <!-- @if(isShowInList){
                 <div class="mb-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="true" formControlName="showInList"
@@ -197,7 +247,7 @@
                         </label>
                     </div>
                 </div>
-                }
+                } -->
             </form>
         </ng-container>
     </ng-template>

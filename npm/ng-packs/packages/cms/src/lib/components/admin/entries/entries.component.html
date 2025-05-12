@@ -127,11 +127,11 @@
                                 </ng-container>
                             </ng-template>
                         </ngx-datatable-column> -->
-                        <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
+                        <!-- <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}
                             </ng-template>
-                        </ngx-datatable-column>
+                        </ngx-datatable-column> -->
                         <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status" [width]="80"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
@@ -200,7 +200,7 @@
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
 
 
-                                <th>{{'Cms::Slug' | abpLocalization}}</th>
+                                <!-- <th>{{'Cms::Slug' | abpLocalization}}</th> -->
                                 <th>{{'Cms::Status' | abpLocalization}}</th>
                                 @for (item of showinFieldList; track $index) {
                                 <th>{{'Cms::'+item.displayName | abpLocalization}}</th>
@@ -249,7 +249,7 @@
                                             *ngIf="item1.id === item.entryTypeId">{{item1.displayName}}</ng-container>
                                     </ng-container>
                                 </td>
-                                <td>{{item.slug}}</td>
+                                <!-- <td>{{item.slug}}</td> -->
                                 <td>
                                     <ng-container *ngFor="let item2 of _entryStatusOptions">
                                         <ng-container *ngIf="item.status=== item2.value">{{

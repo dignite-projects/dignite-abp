@@ -151,14 +151,13 @@ export class CreateComponent implements OnInit {
   save() {
     const input = this.formEntity?.value;
    
-   
+   this.formEntity.markAllAsTouched();
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
       return this.cultureInput.disable();
     }
     console.log(input,'input',this.formEntity,this.formValidation);
-    return;
     // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) {
     //   //   this.isSubmit = false;
     //   //   return this.cultureInput.disable();

@@ -153,6 +153,7 @@ export class TableControlComponent {
         extraProperties: this.fb.group({}),
       })
     );
+    // this.fieldNameControl.updateValueAndValidity();
   }
   /**删除表格项 */
   minusTableControlItem(index) {

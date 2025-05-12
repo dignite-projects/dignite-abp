@@ -1,7 +1,7 @@
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { Injectable } from '@angular/core';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +44,7 @@ export class ValidatorsService {
   /**获取表单所有字段是否通过验证 */
   getFormValidationStatus(formEntity: FormGroup | FormArray): { [key: string]: any } {
     const validationStatus: { [key: string]: any } = {};
-
+    
     // 递归遍历表单组和表单控件集合
     const traverseForm = (form: FormGroup | FormArray, prefix = '') => {
       if (form instanceof FormGroup) {

@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } fr
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CmsApiService } from '../../../services';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { AbpValidators } from '@abp/ng.core';
 
 @Component({
   selector: 'df-matrix-control',
@@ -93,7 +92,11 @@ export class MatrixControlComponent {
   AfterInit() {
     return new Promise((resolve, rejects) => {
       const formConfiguration = this._fields.field.formConfiguration;
-      const newArrayGroup = this.fb.array([], Validators.required);
+      const ValidatorsArray = [];
+      if (this._fields.required) {
+        ValidatorsArray.push(Validators.required);
+      }
+      const newArrayGroup = this.fb.array([], ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
       if (this._fields.required) {
@@ -148,7 +151,8 @@ export class MatrixControlComponent {
     });
 
     // 返回验证结果
-    return hasValue ? null : { required: true };
+    return hasValue? null : { required: true };
+    // return hasValue? null : null;
   }
 
   /**矩阵列表 */

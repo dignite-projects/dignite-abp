@@ -1,6 +1,6 @@
 import type { EntityDto } from '@abp/ng.core';
 
-export interface FieldDto extends EntityDto<string> {
+export interface FieldDto1 extends EntityDto<string> {
   name?: string;
   displayName?: string;
   description?: string;

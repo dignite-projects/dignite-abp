@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class FormAdminService {
   apiName = 'CmsAdmin';
+  
 
   getFormControls = (config?: Partial<Rest.Config>) =>
     this.restService.request<any, ListResultDto<FormControlDto>>({

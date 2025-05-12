@@ -1,8 +1,8 @@
-import type { FieldDto } from '../fields/models';
+import type { FieldDto1 } from '../fields/models';
 
 export interface EntryFieldDto {
   fieldId?: string;
-  field: FieldDto;
+  field: FieldDto1;
   displayName?: string;
   required: boolean;
   showInList: boolean;

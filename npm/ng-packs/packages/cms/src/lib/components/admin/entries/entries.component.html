@@ -10,7 +10,7 @@
                         [routerLink]="['/cms/admin/entries/create']"
                         [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}"><i
                             class="fa fa-plus me-2"></i> {{'Cms::NewEntry'|abpLocalization}}</button>
-                            <!-- {{item.displayName}} -->
+                    <!-- {{item.displayName}} -->
                 </ng-container>
             </div>
         </div>
@@ -167,10 +167,14 @@
                                         <button ngbDropdownItem
                                             routerLink="/cms/admin/entries/{{row.id}}/edit">{{'Cms::Edit' |
                                             abpLocalization}}</button>
+                                        @if
+                                        (((row|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
+                                        {
                                         <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
                                             [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                             |
                                             abpLocalization}} </button>
+                                        }
                                         <!-- -->
                                         <button ngbDropdownItem (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
@@ -195,7 +199,7 @@
                                 <th>{{'Cms::SectionType' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
 
-                             
+
                                 <th>{{'Cms::Slug' | abpLocalization}}</th>
                                 <th>{{'Cms::Status' | abpLocalization}}</th>
                                 @for (item of showinFieldList; track $index) {
@@ -216,10 +220,14 @@
                                             <button ngbDropdownItem
                                                 routerLink="/cms/admin/entries/{{item.id}}/edit">{{'AbpUi::Edit' |
                                                 abpLocalization}}</button>
+                                            @if
+                                            (((item|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
+                                            {
                                             <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.entryTypeId,entryVersionId:item.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
                                                 abpLocalization}}</button>
+                                            }
                                             <!-- <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
@@ -233,7 +241,7 @@
                                 <td class="white-space-normal">{{item.title}}</td>
                                 <td>
                                     {{ 'Cms::Enum:SectionType:'+SectionType[item.sectionType] |
-                                abpLocalization }}
+                                    abpLocalization }}
                                 </td>
                                 <td>
                                     <ng-container *ngFor="let item1 of entryTypeList">

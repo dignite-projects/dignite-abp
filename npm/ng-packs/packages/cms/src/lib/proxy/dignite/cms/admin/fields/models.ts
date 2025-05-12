@@ -1,4 +1,4 @@
-import type * as FieldDtoall  from '../../fields/models';
+import type { FieldDto1 } from '../../fields/models';
 import type { EntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 
 export interface CreateFieldInput extends CreateOrUpdateFieldInputBase {
@@ -17,7 +17,7 @@ export interface CreateOrUpdateFieldInputBase {
   formConfiguration: Record<string, object>;
 }
 
-export interface FieldDto extends FieldDtoall.FieldDto {
+export interface FieldDto extends FieldDto1 {
   groupId?: string;
   groupName?: string;
   creationTime?: string;

@@ -113,10 +113,10 @@ export class CreateOrEditEntriesComponent {
     this.DefaultLanguage = this.defaultCultureName;
     // this.DefaultLanguage = this.configState.getSetting('Abp.Regionalization.DefaultCultureName');
     //选中languagesSystem中的cultureName在 languagesSystem中存在的数组项
+    
     this.languagesList = languagesSystem.filter(el =>
       this.SiteSettingsAdminLanguages.includes(el.cultureName),
     );
-    this.cdRef.detectChanges();
     if (this.sectionId) {
       await this.getSectionInfo();
       await this.getEntryList();
@@ -140,12 +140,16 @@ export class CreateOrEditEntriesComponent {
       });
       this.slugInput.setErrors({});
       this.slugInput.setErrors(null);
+
+     
     } else {
       this.formEntity.patchValue({
         entryTypeId: this.entryTypeId,
         publishTime: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       });
     }
+  
+    this.cdRef.detectChanges();
 
     this.cdRef.detectChanges();
     this.feedbackChildInfo.emit({
@@ -154,11 +158,31 @@ export class CreateOrEditEntriesComponent {
     this.isLoad = true;
     if (this.isOther == 1) {
       this.initialVersionIdInput.patchValue('');
+      await this.getLocalizedEntriesBySlug();
     }
+   
     setTimeout(() => {
       // this.submitclick?.nativeElement.click();
     }, 0);
   }
+
+/**获取别名下其他的语言版本 */
+getLocalizedEntriesBySlug(){
+  return new Promise((resolve, rejects) => {
+    this._EntryAdminService
+     .getLocalizedEntriesBySlug(this.sectionId,this.slugInput.value)
+     .subscribe(res => {
+       console.log(res,'获取别名下其他的语言版本',this.slugInput.value);
+      this.languagesList=this.languagesList.filter(el=>!res.items.find(el2=>el2.culture===el.cultureName));
+      this.cultureInput.patchValue(this.languagesList[0].cultureName);
+       resolve(res);
+     },err=>{
+      resolve(null);
+     })
+  })
+}
+
+
   // /**别名查重 */
   SlugAsyncValidator() {
     return (

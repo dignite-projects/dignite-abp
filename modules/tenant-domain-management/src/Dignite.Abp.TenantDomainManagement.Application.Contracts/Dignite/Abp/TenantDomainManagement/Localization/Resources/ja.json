@@ -1,0 +1,26 @@
+{
+  "culture": "ja",
+  "texts": {
+      "Permission:ConnectDomain": "ドメインを接続",
+      "DomainName": "ドメイン名",
+      "EnterDomaiName": "ドメイン名を入力してください",
+      "NextStep": "次のステップ",
+      "DomainSetup": "ドメイン設定",
+      "FollowTheInstructionsBelow": "以下の指示に従ってください",
+      "LogInToYourProvider": "ドメインプロバイダーにログインしてください",
+      "OpenDNSManagementFor{0}": "{0}のDNS管理を開く",
+      "Type": "タイプ",
+      "Name": "名前",
+      "NewValue": "新しい値",
+      "ValidateDomainName": "ドメイン名を検証",
+      "Edit": "編集",
+      "Save": "保存",
+      "DomainNameValiderror": "有効な形式のドメイン名を入力してください",
+      "ReplicationSuccessful": "コピー成功",
+      "DomainNameValidSuccessful": "ドメイン名が検証されました。バインドを続行してください",
+      "DomainNameValidFail": "ドメイン名が検証されていません。DNS設定を確認してください",
+      "SaveSuccessful": "保存に成功しました",
+      "SaveFailure": "保存に失敗しました",
+      "AddDNSDescriptions": "名前と新しい値をコピーして貼り付けることで、新しいDNSレコードを追加します"
+  }
+}

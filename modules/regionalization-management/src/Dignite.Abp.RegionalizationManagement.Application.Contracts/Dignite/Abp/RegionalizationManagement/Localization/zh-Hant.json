@@ -1,0 +1,10 @@
+{
+  "culture": "zh-Hant",
+  "texts": {
+    "Regionalization": "本地化",
+    "Default": "預設",
+    "SetDefault": "設為預設",
+    "DefaultCultureName": "預設區域名稱",
+    "AvailableCultureNames": "可用區域名稱"
+  }
+}

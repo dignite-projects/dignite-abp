@@ -1,0 +1,10 @@
+{
+  "culture": "ja",
+  "texts": {
+    "Regionalization": "ローカリゼーション",
+    "Default": "デフォルト",
+    "SetDefault": "デフォルトに設定",
+    "DefaultCultureName": "デフォルト地域名",
+    "AvailableCultureNames": "利用可能な地域名"
+  }
+}

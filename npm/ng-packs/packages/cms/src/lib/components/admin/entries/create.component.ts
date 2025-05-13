@@ -5,11 +5,11 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
 import { CreateOrUpdateEntryInputBase } from './create-or-update-entry-input-base';
-import { ValidatorsService, UpdateListService } from '@dignite-ng/expand.core';
+import { ValidatorsService, UpdateListService, LocationBackService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 
@@ -30,6 +30,7 @@ export class CreateComponent implements OnInit {
   private toaster = inject(ToasterService);
   public _location = inject(Location);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private _EntryAdminService = inject(EntryAdminService);
   private _LocalizationService = inject(LocalizationService);
   private _ValidatorsService = inject(ValidatorsService);
@@ -147,8 +148,12 @@ export class CreateComponent implements OnInit {
     return false;
   }
 
+  private _LocationBackService=inject(LocationBackService);
+
   /**提交 */
   save() {
+   
+  
     const input = this.formEntity?.value;
    
    this.formEntity.markAllAsTouched();
@@ -181,7 +186,13 @@ export class CreateComponent implements OnInit {
       )
       .subscribe(res => {
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
-        this._location.back();
+
+        //检测该页面上一级是否是系统页面，如果是返回上一页，如果不是，则使用页面跳转到上一级页面。
+        this._LocationBackService.backTo({
+          url: `/cms/admin/entries`,
+          replenish: '/create' 
+        })
+
         this._updateListService.updateList();
       });
   }

@@ -1,9 +1,9 @@
 {
   "culture": "zh-Hant",
   "texts": {
-    "MyAccount": "我的賬戶",
-    "SamplePageMessage": "TenantDomainManagement 模塊的示例頁面",
+    "Permission:ConnectDomain": "連接域名",
     "DomainName": "域名",
+    "EnterDomaiName": "請輸入域名",
     "NextStep": "下一步",
     "DomainSetup": "域名設置",
     "FollowTheInstructionsBelow": "按照下面的說明操作",
@@ -15,11 +15,12 @@
     "ValidateDomainName": "驗證域名",
     "Edit": "編輯",
     "Save": "保存",
-    "YourDomainNameMustContainAValidSuffix": "您的域名必須包含有效的後綴",
+    "DomainNameValiderror": "請輸入有效格式域名",
     "ReplicationSuccessful": "複製成功",
-    "YourDomainNameHasBeenVerifiedPleaseBind": "您的域名已通過驗證，請進行綁定",
-    "YourDomainNameIsNotVerifiedPleaseCheckTheDNSConfigurationOfTheDomainName": "您的域名暫未通過驗證請檢查域名的DNS配置",
+    "DomainNameValidSuccessful": "您的域名已通過驗證，請進行綁定",
+    "DomainNameValidFail": "您的域名暫未通過驗證請檢查域名的DNS配置",
     "SaveSuccessful": "保存成功",
-    "SaveFailure": "保存失敗"
+    "SaveFailure": "保存失敗",
+    "AddDNSDescriptions": "通過複製粘貼名稱和新值的方式添加新的DNS記錄"
   }
 }

@@ -85,7 +85,7 @@ export class TenantDomainComponent implements OnInit {
       if (!psl.isValid(control.value)) {
         return {
           repetition: this._LocalizationService.instant(
-            'TenantDomainManagement::YourDomainNameMustContainAValidSuffix'
+            'TenantDomainManagement::DomainNameValiderror'
           ),
         };
       }
@@ -108,14 +108,14 @@ export class TenantDomainComponent implements OnInit {
           that.stepIndex = that.StepName.finish;
           that.toaster.success(
             that._LocalizationService.instant(
-              'TenantDomainManagement::YourDomainNameHasBeenVerifiedPleaseBind'
+              'TenantDomainManagement::DomainNameValidSuccessful'
             )
           );
           resolve(res);
         } else {
           that.toaster.error(
             that._LocalizationService.instant(
-              'TenantDomainManagement::YourDomainNameIsNotVerifiedPleaseCheckTheDNSConfigurationOfTheDomainName'
+              'TenantDomainManagement::DomainNameValidFail'
             )
           );
           reject(res);

@@ -1,7 +1,7 @@
 {
   "culture": "en",
   "texts": {
-    "FormControl:FileExplorer": "File Explorer",
+    "FormControl:FileExplorer": "File",
     "PleaseSelectFiles": "Please Select Files",
     "FileContainerName": "File Container Name",
     "UploadFileMultiple": "Upload File Multiple",

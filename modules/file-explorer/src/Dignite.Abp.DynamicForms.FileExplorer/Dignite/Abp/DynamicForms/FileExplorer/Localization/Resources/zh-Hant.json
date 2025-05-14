@@ -1,7 +1,7 @@
 ﻿{
   "culture": "zh-Hant",
   "texts": {
-    "FormControl:FileExplorer": "文件管理",
+    "FormControl:FileExplorer": "文件",
     "PleaseSelectFiles": "请选择文件",
     "FileContainerName": "文件容器名稱",
     "UploadFileMultiple": "多選文件",

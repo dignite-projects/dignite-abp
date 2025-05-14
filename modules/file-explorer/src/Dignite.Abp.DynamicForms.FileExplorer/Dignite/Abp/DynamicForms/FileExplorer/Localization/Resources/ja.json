@@ -1,0 +1,11 @@
+{
+    "culture": "zh-Hans",
+    "texts": {
+        "FormControl:FileExplorer": "ファイル",
+        "PleaseSelectFiles": "ファイルを選択してください",
+        "FileContainerName": "ファイルコンテナ名",
+        "UploadFileMultiple": "複数ファイルをアップロード",
+        "FileName": "ファイル名",
+        "FileSize": "ファイルサイズ"
+    }
+}

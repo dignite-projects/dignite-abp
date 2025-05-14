@@ -1,14 +1,12 @@
 ﻿using Dignite.Abp.AspNetCore.Mvc.Regionalization;
 using Dignite.Abp.MultiTenancyLocalization;
 using Dignite.Cms.Localization;
-using Dignite.Cms.Public.Web.Toolbars;
-using Volo.CmsKit.Public.Web;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.Localization;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
+using Volo.CmsKit.Public.Web;
 
 namespace Dignite.Cms.Public.Web;
 
@@ -35,7 +33,6 @@ public class CmsPublicWebModule : AbpModule
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
             options.FileSets.AddEmbedded<CmsPublicWebModule>();
@@ -45,12 +42,6 @@ public class CmsPublicWebModule : AbpModule
         Configure<AbpAutoMapperOptions>(options =>
         {
             options.AddMaps<CmsPublicWebModule>(validate: true);
-        });
-
-
-        Configure<AbpToolbarOptions>(options =>
-        {
-            options.Contributors.Add(new CmsToolbarContributor());
         });
     }
 }

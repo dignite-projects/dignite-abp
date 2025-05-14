@@ -30,6 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj" />
 	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme\Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme.csproj" />
 	  <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.Seo\Dignite.Abp.Seo.csproj" />
 	</ItemGroup>

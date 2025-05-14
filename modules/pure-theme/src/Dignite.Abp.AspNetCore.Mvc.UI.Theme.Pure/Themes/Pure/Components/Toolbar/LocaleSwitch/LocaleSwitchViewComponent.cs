@@ -8,14 +8,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Dignite.Cms.Public.Web.Components.CultureSwitch;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LocaleSwitch;
 
-public class CultureSwitchViewComponent : AbpViewComponent
+[ViewComponent(Name = "Toolbar/LocaleSwitch")]
+public class LocaleSwitchViewComponent : AbpViewComponent
 {
     protected IRegionalizationRouteManager _regionalizationRouteManager { get; }
     protected IRegionalizationProvider _regionalizationProvider { get; }
 
-    public CultureSwitchViewComponent(
+    public LocaleSwitchViewComponent(
         IRegionalizationRouteManager regionalizationRouteManager,
         IRegionalizationProvider regionalizationProvider)
     {
@@ -34,7 +35,7 @@ public class CultureSwitchViewComponent : AbpViewComponent
             (isMatchingRegionalizationRoute ? defaultRegionCultureName : CultureInfo.CurrentCulture.Name) :
             availableCultures.FirstOrDefault(r => r.Name.Equals(retionCultureNameInRoute, System.StringComparison.OrdinalIgnoreCase))?.Name;
 
-        var model = new CultureSwitchViewComponentModel
+        var model = new LocaleSwitchViewComponentModel
         (
             defaultRegionCultureName,
             currentRegionCultureName,

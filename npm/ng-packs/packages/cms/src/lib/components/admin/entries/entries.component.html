@@ -9,7 +9,8 @@
                         [disabled]="data.totalCount===1&&SiteOfSectionType===SectionType.Single"
                         [routerLink]="['/cms/admin/entries/create']"
                         [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}"><i
-                            class="fa fa-plus me-2"></i>{{item.displayName}}</button>
+                            class="fa fa-plus me-2"></i> {{'Cms::NewEntry'|abpLocalization}}</button>
+                    <!-- {{item.displayName}} -->
                 </ng-container>
             </div>
         </div>
@@ -19,7 +20,7 @@
             <div class="col-auto px-0 pt-0">
                 <div ngbDropdown class="d-inline-block">
                     <button type="button" class="btn btn-primary btn-sm ms-2" id="dropdownBasic1" ngbDropdownToggle>
-                        <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::New' | abpLocalization}}
+                        <i class="fa fa-plus pe-1" aria-hidden="true"></i>{{'Cms::NewEntry' | abpLocalization}}
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <ng-container *ngFor="let item of entryTypeList">
@@ -111,26 +112,26 @@
                                 </ng-container>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column [name]="'Cms::SectionType' | abpLocalization" prop="sectionType"
+                        <!-- <ngx-datatable-column [name]="'Cms::SectionType' | abpLocalization" prop="sectionType"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ 'Cms::Enum:SectionType:'+SectionType[value] |
                                         abpLocalization }}
                             </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column [name]="'Cms::EntryType' | abpLocalization" prop="entryTypeId"
+                        </ngx-datatable-column> -->
+                        <!-- <ngx-datatable-column [name]="'Cms::EntryType' | abpLocalization" prop="entryTypeId"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <ng-container *ngFor="let item of entryTypeList">
                                     <ng-container *ngIf="item.id === value">{{item.displayName}}</ng-container>
                                 </ng-container>
                             </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
+                        </ngx-datatable-column> -->
+                        <!-- <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}
                             </ng-template>
-                        </ngx-datatable-column>
+                        </ngx-datatable-column> -->
                         <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status" [width]="80"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
@@ -166,11 +167,14 @@
                                         <button ngbDropdownItem
                                             routerLink="/cms/admin/entries/{{row.id}}/edit">{{'Cms::Edit' |
                                             abpLocalization}}</button>
+                                        @if
+                                        (((row|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
+                                        {
                                         <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
-                                            *ngIf="row.culture===defaultCultureName"
                                             [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                             |
                                             abpLocalization}} </button>
+                                        }
                                         <!-- -->
                                         <button ngbDropdownItem (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
@@ -195,8 +199,8 @@
                                 <th>{{'Cms::SectionType' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
 
-                             
-                                <th>{{'Cms::Slug' | abpLocalization}}</th>
+
+                                <!-- <th>{{'Cms::Slug' | abpLocalization}}</th> -->
                                 <th>{{'Cms::Status' | abpLocalization}}</th>
                                 @for (item of showinFieldList; track $index) {
                                 <th>{{'Cms::'+item.displayName | abpLocalization}}</th>
@@ -216,11 +220,14 @@
                                             <button ngbDropdownItem
                                                 routerLink="/cms/admin/entries/{{item.id}}/edit">{{'AbpUi::Edit' |
                                                 abpLocalization}}</button>
+                                            @if
+                                            (((item|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
+                                            {
                                             <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
-                                                *ngIf="item.culture===defaultCultureName"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.entryTypeId,entryVersionId:item.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
                                                 abpLocalization}}</button>
+                                            }
                                             <!-- <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
@@ -234,7 +241,7 @@
                                 <td class="white-space-normal">{{item.title}}</td>
                                 <td>
                                     {{ 'Cms::Enum:SectionType:'+SectionType[item.sectionType] |
-                                abpLocalization }}
+                                    abpLocalization }}
                                 </td>
                                 <td>
                                     <ng-container *ngFor="let item1 of entryTypeList">
@@ -242,7 +249,7 @@
                                             *ngIf="item1.id === item.entryTypeId">{{item1.displayName}}</ng-container>
                                     </ng-container>
                                 </td>
-                                <td>{{item.slug}}</td>
+                                <!-- <td>{{item.slug}}</td> -->
                                 <td>
                                     <ng-container *ngFor="let item2 of _entryStatusOptions">
                                         <ng-container *ngIf="item.status=== item2.value">{{

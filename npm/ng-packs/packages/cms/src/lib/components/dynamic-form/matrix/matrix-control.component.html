@@ -26,7 +26,7 @@
                                     <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
                                         <ng-container *ngFor="let elf of el.fields; let fi=index">
                                             <ng-container *ngIf="item&&elf&&_culture">
-                                                <df-dynamic [fields]="{ field: elf,displayName:elf.displayName,required:el?.required||false }"
+                                                <df-dynamic [fields]="{ field: elf,displayName:elf.displayName }"
                                                     [selected]="_selected ? _selected[i]?_selected[i][_parentFiledName][elf.name]:'': ''"
                                                     [parentFiledName]="'extraProperties'" [culture]="_culture"
                                                     [entity]="item"></df-dynamic>
@@ -94,6 +94,10 @@
                                 class="fas fa-plus me-1"></i>{{item.displayName}}</button>
                     </ng-container>
                 </div>
+                @if(fieldNameControl?.errors?.required && fieldNameControl.touched){
+                    <span class="form-text invalid-feedback d-block">{{"AbpValidation::ThisFieldIsRequired."|abpLocalization}}</span>
+                }
+                
                 <small class="form-text text-muted d-block"
                     *ngIf="_fields.field.description">{{_fields.field.description}}</small>
             </div>

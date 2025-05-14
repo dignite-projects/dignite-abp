@@ -5,11 +5,11 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
 import { CreateOrUpdateEntryInputBase } from './create-or-update-entry-input-base';
-import { ValidatorsService, UpdateListService } from '@dignite-ng/expand.core';
+import { ValidatorsService, UpdateListService, LocationBackService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 
@@ -30,6 +30,7 @@ export class CreateComponent implements OnInit {
   private toaster = inject(ToasterService);
   public _location = inject(Location);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private _EntryAdminService = inject(EntryAdminService);
   private _LocalizationService = inject(LocalizationService);
   private _ValidatorsService = inject(ValidatorsService);
@@ -102,24 +103,41 @@ export class CreateComponent implements OnInit {
   isCheckFormCms(input, module) {
     for (const key in input) {
       if (input[key] === false) {
-        let info = `"${this._LocalizationService.instant(`${module}::${key}`)}" `;
+        let info = ``;
         //检查key中是否含有ExtraProperties.
-        if (key.includes('ExtraProperties.')) {
+        if (key.includes('extraProperties.')) {
           const arr = key.split('.');
           const keyName = arr[1];
-          //将keyName的首字母转为小写
-          const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
-          if(this.showEntryTypeInfo&&this.showEntryTypeInfo.fieldTabs.length>0){
-            for (const item of this.showEntryTypeInfo.fieldTabs) {
-              for (const el of item.fields) {
-                if(el.field.name==keyNameLower){
-                  // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
-                  info = `${this._LocalizationService.instant(`${module}::The{1}FieldUnderThe{0}TAB`,item.name,el.field.displayName)}`;
+          // if (keyName.includes('[')) {
+          //   //使用正则提取keyName中[]中的数字下标,并且转化为数字类型，并且去掉keyName中的[*]
+          //   const keyNameArr = keyName.match(/\d+/g);
+          //   const keyNameArrNum = keyNameArr.map(item => Number(item));
+          //   const keyNameArrNumStr = keyNameArrNum.join('.');
+
+          // } else {
+            //将keyName的首字母转为小写
+            const keyNameLower = keyName;
+            // const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
+            if (this.showEntryTypeInfo && this.showEntryTypeInfo.fieldTabs.length > 0) {
+              for (const item of this.showEntryTypeInfo.fieldTabs) {
+                for (const el of item.fields) {
+                  if (el.field.name == keyNameLower) {
+                    // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
+                    info = `${this._LocalizationService.instant(
+                      `${module}::The{1}FieldUnderThe{0}TAB`,
+                      item.name,
+                      el.field.displayName,
+                    )}`;
+                  }
                 }
               }
             }
-          }
+          // }
+        } else {
+          const displayName = key.charAt(0).toUpperCase() + key.slice(1);
+          info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
         }
+       
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);
@@ -130,14 +148,24 @@ export class CreateComponent implements OnInit {
     return false;
   }
 
+  private _LocationBackService=inject(LocationBackService);
+
   /**提交 */
   save() {
+   
+  
     const input = this.formEntity?.value;
+   
+   this.formEntity.markAllAsTouched();
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     if (this.isCheckFormCms(this.formValidation, 'Cms')) {
       this.isSubmit = false;
+      if(this.isOther===1){
+        this.slugInput.disable();
+      }
       return this.cultureInput.disable();
     }
+    console.log(input,'input',this.formEntity,this.formValidation);
     // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')) {
     //   //   this.isSubmit = false;
     //   //   return this.cultureInput.disable();
@@ -158,7 +186,13 @@ export class CreateComponent implements OnInit {
       )
       .subscribe(res => {
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
-        this._location.back();
+
+        //检测该页面上一级是否是系统页面，如果是返回上一页，如果不是，则使用页面跳转到上一级页面。
+        this._LocationBackService.backTo({
+          url: `/cms/admin/entries`,
+          replenish: '/create' 
+        })
+
         this._updateListService.updateList();
       });
   }
@@ -169,7 +203,15 @@ export class CreateComponent implements OnInit {
     // this.isSubmit = true;
     this.draftInput.patchValue(type);
     this.cultureInput.enable();
-    this.submitclick?.nativeElement?.click();
+    this.slugInput.enable();
+    this.formEntity.updateValueAndValidity();
+    console.log(this.formEntity,'formEntity');
+    setTimeout(() => {
+      this.submitclick.nativeElement.click();
+    }, 0);
+  }
+  get slugInput(): FormControl {
+    return this.formEntity?.get('slug') as FormControl;
   }
 
   /**返回上一页 */

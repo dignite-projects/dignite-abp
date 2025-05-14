@@ -107,4 +107,13 @@ public partial class EntryAdminClientProxy : ClientProxyBase<IEntryAdminAppServi
             { typeof(IEnumerable<Guid>), ids }
         });
     }
+
+    public virtual async Task<ListResultDto<EntryDto>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug)
+    {
+        return await RequestAsync<ListResultDto<EntryDto>>(nameof(GetLocalizedEntriesBySlugAsync), new ClientProxyRequestTypeValue
+        {
+            { typeof(Guid), sectionId },
+            { typeof(string), slug }
+        });
+    }
 }

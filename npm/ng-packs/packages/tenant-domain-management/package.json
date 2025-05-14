@@ -1,6 +1,6 @@
 {
   "name": "@dignite-ng/expand.tenant-domain-management",
-  "version": "3.0.0-rc.43",
+  "version": "3.0.0-rc.48",
   "homepage": "https://abp.io",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
-"publishConfig": {
+  "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },

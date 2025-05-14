@@ -16,6 +16,8 @@ export var Simple: any = {
       '|',
       'bulletedList',
       'numberedList',
+      '|',
+      'removeFormat',
     ],
     shouldNotGroupWhenFull: false,
   },
@@ -85,39 +87,28 @@ export var Classic: any = {
   toolbar: {
     items: [
       'undo',
-      'redo',
+			'redo',
+			'|',
+			'heading',
+			'|',
+			'bold',
+			'italic',
+			'underline',
+			'|',
+			'link',
+			'uploadImage',
+			// 'ckbox',
+			'insertTable',
+			'blockQuote',
+			'mediaEmbed',
+			'|',
+			'bulletedList',
+			'numberedList',
+			'|',
+			'outdent',
+			'indent',
       '|',
-      'heading',
-      '|',
-      'fontSize',
-      'fontFamily',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
-      'subscript',
-      'link',
-      '|',
-      'highlight',
-      'blockQuote',
-      '|',
-      'superscript',
-      'code',
       'removeFormat',
-      '|',
-      'insertImage',
-      'mediaEmbed',
-      'insertTable',
-      '|',
-      'alignment',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
     ],
     shouldNotGroupWhenFull: false,
   },
@@ -299,6 +290,41 @@ export var Classic: any = {
       'tableCellProperties',
     ],
   },
+   // 配置粘贴行为，移除所有样式
+   clipboard: {
+    // 配置粘贴过滤器
+    copyFormatting: true,
+     // 启用纯文本粘贴模式，这将忽略HTML格式和样式
+     pastePlainText: true,
+     filter: {
+       // 只允许特定的标签，例如 p, ul, ol, li, br, strong, em 等基本标签
+       allowedContent: 'p ul ol li br  em div;'
+     }
+  },
+  // // 配置粘贴时的内容处理
+  // htmlSupport: {
+  //   allow: [
+  //     {
+  //       name: /^(p|h[1-6]|li|ul|ol)$/,
+  //       attributes: true,
+  //       classes: false,
+  //       styles: false
+  //     },
+  //     {
+  //       name: /^(strong|em|u|a|span)$/,
+  //       attributes: {
+  //         'href': true
+  //       },
+  //       classes: false,
+  //       styles: false
+  //     }
+  //   ]
+  // },
+  // // 配置粘贴插件
+  // pasteFromOffice: {
+  //   // 启用从Office粘贴的功能，但会清理样式
+  //   keepZeroMargins: false
+  // }
 };
 export var CkEditorTypesObject = {
   // default: defaults,

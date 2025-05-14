@@ -31,7 +31,7 @@
                                 <ng-container *ngFor="let el of formConfiguration.TableColumns">
                                     <td>
                                         <ng-container *ngIf="item&&el">
-                                            <df-dynamic [fields]="{ field: el,required:el?.required||false }"
+                                            <df-dynamic [fields]="{ field: el }"
                                                 [selected]="_selected?_selected[i]?.extraProperties[''+el.name+'']:''"
                                                 [parentFiledName]="'extraProperties'" [culture]="_culture"
                                                 [entity]="item"></df-dynamic>
@@ -60,6 +60,9 @@
                     </tbody>
                 </table>
             </div>
+            @if(fieldNameControl?.errors?.required && fieldNameControl.touched){
+                <span class="form-text invalid-feedback d-block">{{"AbpValidation::ThisFieldIsRequired."|abpLocalization}}</span>
+            }
             <small class="form-text text-muted d-block"
                 *ngIf="_fields.field.description">{{_fields.field.description}}</small>
         </div>

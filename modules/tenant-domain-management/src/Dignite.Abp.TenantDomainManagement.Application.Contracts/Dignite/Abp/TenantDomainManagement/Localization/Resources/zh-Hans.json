@@ -3,6 +3,7 @@
   "texts": {
     "Permission:ConnectDomain": "连接域名",
     "DomainName": "域名",
+    "EnterDomaiName": "请输入域名",
     "NextStep": "下一步",
     "DomainSetup": "域名设置",
     "FollowTheInstructionsBelow": "按照下面的说明操作",
@@ -14,21 +15,13 @@
     "ValidateDomainName": "验证域名",
     "Edit": "编辑",
     "Save": "保存",
-    "YourDomainNameMustContainAValidSuffix": "您的域名必须包含有效的后缀",
+    "DomainNameValiderror": "请输入有效格式域名",
     "ReplicationSuccessful": "复制成功",
-    "YourDomainNameHasBeenVerifiedPleaseBind": "您的域名已通过验证，请进行绑定",
-    "YourDomainNameIsNotVerifiedPleaseCheckTheDNSConfigurationOfTheDomainName": "您的域名暂未通过验证请检查域名的DNS配置",
+    "DomainNameValidSuccessful": "您的域名已通过验证，请进行绑定",
+    "DomainNameValidFail": "您的域名暂未通过验证请检查域名的DNS配置",
     "SaveSuccessful": "保存成功",
     "SaveFailure": "保存失败",
-    "AddANewDNSRecordByCopyingAndPastingTheNameAndNewValue": "通过复制粘贴名称和新值的方式添加新的DNS记录"
-
-
-
-
-
-
-
-
+    "AddDNSDescriptions": "通过复制粘贴名称和新值的方式添加新的DNS记录"
 
   }
 }

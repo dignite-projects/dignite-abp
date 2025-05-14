@@ -65,7 +65,7 @@
     "FieldTabName{0}AlreadyExist": "字段标签页名称 \"{0}\" 已存在.",
     "Required": "必填",
     "ShowInList": "在列表中展示",
-    "EnableSearch": "Enable Search",
+    "EnableSearch": "启用搜索",
     "Version": "版本",
     "NewVersion": "新版本",
     "InitialVersion": "初始版本",
@@ -78,6 +78,8 @@
     "FormControlConfiguration": "表单控件配置",
     "CreateOtherLanguages": "创建其他语言",
     "The{1}FieldUnderThe{0}TAB": "标签页 “{0}” 下的 “{1}” 字段`",
-    "NotShowInList": "此格式不支持在列表中展示"
+    "NotShowInList": "此格式不支持在列表中展示",
+    "NewEntry": "新建条目",
+    "SaveDraft": "保存草稿"
   }
 }

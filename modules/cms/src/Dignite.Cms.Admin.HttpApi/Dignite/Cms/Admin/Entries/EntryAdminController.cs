@@ -144,5 +144,12 @@ namespace Dignite.Cms.Admin.Entries
         {
             return _entryAppService.GetListByIdsAsync(sectionId, ids);
         }
+
+        [HttpGet]
+        [Route("localized-entries-by-slug")]
+        public Task<ListResultDto<EntryDto>> GetLocalizedEntriesBySlugAsync(Guid sectionId, string slug)
+        {
+            return _entryAppService.GetLocalizedEntriesBySlugAsync(sectionId,slug);
+        }
     }
 }

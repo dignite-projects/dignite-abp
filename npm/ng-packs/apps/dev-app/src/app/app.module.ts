@@ -27,6 +27,7 @@ import { FormConfigLoaderService } from './services/form-config-loader.service';
 import { Select_ROUTE_PROVIDER } from './select/route.provider';
 import { RouteReuseStrategy } from '@angular/router';
 import { SimpleReuseStrategy } from '@dignite-ng/expand.core';
+import { TenancyDomainsManagementConfigModule } from '@dignite-ng/expand.tenant-domain-management/config';
 
 @NgModule({
 	imports: [
@@ -40,6 +41,7 @@ import { SimpleReuseStrategy } from '@dignite-ng/expand.core';
 		AccountLayoutModule.forRoot(),
 		InternetConnectionStatusComponent,
 		CmsConfigModule.forRoot(),
+		TenancyDomainsManagementConfigModule.forRoot(),
 	],
 	providers: [
 		APP_ROUTE_PROVIDER,

@@ -77,6 +77,8 @@
     "FormControlConfiguration": "Form Control Configuration",
     "NotShowInList": "This format is not Show in list view",
     "CreateOtherLanguages": "Create Other Languages",
-    "The{1}FieldUnderThe{0}TAB": "The \"{1}\" field under the \"{0}\" tab"
+    "The{1}FieldUnderThe{0}TAB": "The \"{1}\" field under the \"{0}\" tab",
+    "NewEntry": "New Entry",
+    "SaveDraft": "Save Draft"
   }
 }

@@ -78,6 +78,15 @@ export class EntryAdminService {
     { apiName: this.apiName,...config });
   
 
+  getLocalizedEntriesBySlug = (sectionId: string, slug: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ListResultDto<EntryDto>>({
+      method: 'GET',
+      url: '/api/cms-admin/entries/localized-entries-by-slug',
+      params: { sectionId, slug },
+    },
+    { apiName: this.apiName,...config });
+  
+
   move = (id: string, input: MoveEntryInput, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'POST',

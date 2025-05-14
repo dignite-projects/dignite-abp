@@ -469,6 +469,8 @@ export class CreateOrEditComponent implements OnInit {
   }
   /**删除某个tabs表单 */
   deleteFieldTabs(index) {
+    this.deleteTabFieldGroupList(this.resultSource[index].fields);
+    // return
     this.fieldTabs.removeAt(index);
     this.resultSource.splice(index, 1);
     if(this.navActive===index){
@@ -477,6 +479,37 @@ export class CreateOrEditComponent implements OnInit {
     if(this.navActive>index){
       this.navActive = this.navActive-1;
     }
+  }
+
+  /**删除tab标签后还原 fieldGroupList */
+  deleteTabFieldGroupList(deleteFields) {
+    //原数据
+    const fieldList=this.deepClone(this.fieldList);
+    //右侧手风琴数据
+    const formRightGroup=this.deepClone(this.formRightGroup);
+
+    // 获取要删除的原数据
+    const deleteFieldList = fieldList.filter(el=>deleteFields.map(item => item.id).includes(el.id)) ;
+    deleteFieldList.forEach(item=>{
+      const index=formRightGroup.findIndex(el=>el.id===item.id);
+      formRightGroup.splice(
+        index,
+        1,
+      );
+    })
+    
+    const deleteFieldListGroupIds=deleteFieldList.map(item=>item.groupId);
+    this.fieldGroupList.forEach(el => {
+      if ( deleteFieldListGroupIds.includes(el.id)) {
+        const elFieldsAll = fieldList.filter(els => els.groupId === el.id);
+        el.fields = elFieldsAll.filter(
+          item => !formRightGroup.some(itemB => item.id === itemB.id),
+        );
+      }
+    });
+    this.formRightGroup=formRightGroup;
+
+    this.setfieldTabsFrom();
   }
 
   /**编辑字段模态框状态 */
@@ -511,12 +544,25 @@ export class CreateOrEditComponent implements OnInit {
   editFieldSave() {
     const input = this.editFieldFrom.value;
     this.resultSource[this.navActive].fields[this.EditFieldIndex].displayName = input.displayName;
-    this.resultSource[this.navActive].fields[this.EditFieldIndex].required = input.required;
-    this.resultSource[this.navActive].fields[this.EditFieldIndex].showInList = input.showInList;
-    this.resultSource[this.navActive].fields[this.EditFieldIndex].enableSearch = input.enableSearch;
+    // this.resultSource[this.navActive].fields[this.EditFieldIndex].required = input.required;
+    // this.resultSource[this.navActive].fields[this.EditFieldIndex].showInList = input.showInList;
+    // this.resultSource[this.navActive].fields[this.EditFieldIndex].enableSearch = input.enableSearch;
     this.visibleEditFieldOpen = false;
     this.setfieldTabsFrom();
   }
+
+  /**点击“字段布局”复选框事件 */
+  checkboxChange(event,input) {
+    const {checked,name}=event.target;
+    const {row,index}=input;
+    this.resultSource[this.navActive].fields[index][name]=checked;
+    this.setfieldTabsFrom();
+    console.log(event.target,'点击“字段布局”复选框事件 ',event,input,'resultSource',this.resultSource,'newEntity',this.newEntity);
+  }
+
+
+
+
 
   /**name表单控件 */
   get nameInput() {

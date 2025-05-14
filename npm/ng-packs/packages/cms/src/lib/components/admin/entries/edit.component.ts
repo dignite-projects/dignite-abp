@@ -10,7 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
-import { UpdateListService } from '@dignite-ng/expand.core';
+import { LocationBackService, UpdateListService } from '@dignite-ng/expand.core';
 import { CreateOrUpdateEntryInputBase } from './create-or-update-entry-input-base';
 import { ValidatorsService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
@@ -135,7 +135,9 @@ export class EditComponent implements OnInit {
         } else {
           const displayName = key.charAt(0).toUpperCase() + key.slice(1);
           info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
+        
         }
+        console.log('info', info,input[key]);
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);
@@ -200,7 +202,7 @@ export class EditComponent implements OnInit {
   //   traverseForm(formEntity);
   //   return validationStatus
   // }
-
+private _LocationBackService=inject(LocationBackService);
   /**提交 */
   save() {
     this.cultureInput.enable();
@@ -234,7 +236,10 @@ export class EditComponent implements OnInit {
       )
       .subscribe(res => {
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
-        this.backTo();
+        this._LocationBackService.backTo({
+          url: `/cms/admin/entries`,
+          replenish: '/create' 
+        })
         this._updateListService.updateList();
       });
   }

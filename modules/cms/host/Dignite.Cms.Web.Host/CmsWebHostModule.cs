@@ -263,7 +263,7 @@ public class CmsWebHostModule : AbpModule
         
 
         //Configuring CMS Routing
-        app.UseCmsControllerRoute();
+        app.UseCmsEndpoints();
 
         app.UseAuthorization();
 

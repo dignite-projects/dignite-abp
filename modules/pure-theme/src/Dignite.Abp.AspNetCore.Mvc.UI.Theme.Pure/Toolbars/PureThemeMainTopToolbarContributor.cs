@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.ColorModeSwitch;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch;
+using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LocaleSwitch;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LoginLink;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.NavbarToggler;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.UserMenu;
@@ -35,6 +36,9 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
 
         //Language Switch Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(LanguageSwitchViewComponent)));
+
+        //Locale Switch Component
+        context.Toolbar.Items.Add(new ToolbarItem(typeof(LocaleSwitchViewComponent)));
 
         //Color Mode Switch Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(ColorModeSwitchViewComponent)));

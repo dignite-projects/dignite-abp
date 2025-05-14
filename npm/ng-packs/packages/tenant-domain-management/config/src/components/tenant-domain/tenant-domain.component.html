@@ -4,7 +4,7 @@
     <div class="tenant-domain">
         <ng-container *ngIf="stepIndex===StepName.fillIn">
             <div class="mb-3">
-                <label class="form-label">{{'TenantDomainManagement::DomainName'|abpLocalization}}</label>
+                <label class="form-label">{{'TenantDomainManagement::EnterDomaiName'|abpLocalization}}</label>
                 <input type="text" class="form-control" formControlName="domainName">
                 <div class="text-danger ">
                     {{domainNameInput?.errors?.repetition}}
@@ -22,7 +22,7 @@
             <ol>
                 <li class="mb-2"> {{'TenantDomainManagement::LogInToYourProvider'|abpLocalization}}</li>
                 <li class="mb-2"> {{'TenantDomainManagement::OpenDNSManagementFor{0}'|abpLocalization:domainNameInput?.value}}</li>
-                <li class="mb-2"> {{'TenantDomainManagement::AddANewDNSRecordByCopyingAndPastingTheNameAndNewValue'|abpLocalization}}</li>
+                <li class="mb-2"> {{'TenantDomainManagement::AddDNSDescriptions'|abpLocalization}}</li>
             </ol>
             <table class="table ms-2">
                 <thead>

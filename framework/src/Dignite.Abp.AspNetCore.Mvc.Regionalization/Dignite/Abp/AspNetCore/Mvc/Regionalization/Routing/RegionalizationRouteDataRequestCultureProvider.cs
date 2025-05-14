@@ -30,6 +30,11 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
         {
             if (ShouldProcessCulture(httpContext))
             {
+                /*
+                 如果在切换语言后, 发现.AspNetCore.Culture这个cookie的值会在切换后语言和默认语言之间来回切换,
+                这可能是因为CmsApplicationBuilderExtensions.UseCmsEndpoints方法中{*path:regex(^(?!swagger/|abp/|account/|libs/|.well-known/).*)}还缺少一些未知的前缀,
+                因此,请通过断点调式来查看请求的路径, 以确定是否需要添加到正则表达式中.
+                 */
                 var regionalizationRouteManager = httpContext.RequestServices.GetRequiredService<IRegionalizationRouteManager>();
                 if (regionalizationRouteManager.TryMatchUrl(httpContext, out string? routePattern))
                 {
@@ -54,26 +59,17 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
         }
         else
         {
-            ArgumentNullException.ThrowIfNull(providerResultCulture);
             var firstStringSegmentCulture = providerResultCulture.Cultures.First().Value;
             var firstStringSegmentUiCulture = providerResultCulture.UICultures.First().Value;
-            ArgumentNullException.ThrowIfNull(firstStringSegmentCulture);
-            ArgumentNullException.ThrowIfNull(firstStringSegmentUiCulture);
             culture = firstStringSegmentCulture;
             uiCulture = firstStringSegmentUiCulture;
         }
 
-        ArgumentNullException.ThrowIfNull(culture);
-        ArgumentNullException.ThrowIfNull(uiCulture);
 
-        /* 当基于 URL 的区域化时，以下代码会影响基于 Cookie 区域化的行为。
-         * 因此，注释掉。
-        //
         AbpRequestCultureCookieHelper.SetCultureCookie(
             httpContext,
             new RequestCulture(culture, uiCulture)
         );
-        */
 
         return new ProviderCultureResult(culture, uiCulture);
     }

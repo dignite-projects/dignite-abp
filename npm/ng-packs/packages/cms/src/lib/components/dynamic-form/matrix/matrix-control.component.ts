@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } fr
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CmsApiService } from '../../../services';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { AbpValidators } from '@abp/ng.core';
 
 @Component({
   selector: 'df-matrix-control',
@@ -77,11 +76,12 @@ export class MatrixControlComponent {
       if (this._selected) {
         this.fieldNameControl.patchValue(this._selected);
         for (const index of Object.keys(this.fieldNameControl.controls)) {
-         const item=  this.fieldNameControl.at(Number(index)) as FormGroup;
-         item.get('isOpen').patchValue(false)
+          const item = this.fieldNameControl.at(Number(index)) as FormGroup;
+          item.get('isOpen').patchValue(false);
         }
       }
       this._selected = '';
+      console.log(this.fieldNameControl, 'fieldNameControl', this._fields.field.name);
     }
   }
 
@@ -92,9 +92,20 @@ export class MatrixControlComponent {
   AfterInit() {
     return new Promise((resolve, rejects) => {
       const formConfiguration = this._fields.field.formConfiguration;
-      const newArrayGroup = this.fb.array([]);
+      const ValidatorsArray = [];
+      if (this._fields.required) {
+        ValidatorsArray.push(Validators.required);
+      }
+      const newArrayGroup = this.fb.array([], ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newArrayGroup);
       this.fieldNameControl = this.extraProperties.get(this._fields.field.name) as FormArray;
+      if (this._fields.required) {
+        this.fieldNameControl.addValidators(this.hasValueValidator);
+        // for (const element of formConfiguration.MatrixBlockTypes) {
+        //   element.required = true;
+        // }
+      }
+
       if (this._selected) {
         this._selected.forEach(el => {
           this.addMatrixControl(
@@ -102,15 +113,46 @@ export class MatrixControlComponent {
           );
         });
       }
-      if(this._fields.required){
-        for (const element of formConfiguration.MatrixBlockTypes) {
-          element.required = true;
-        }
-      }
 
       this.MatrixBlockTypesList = formConfiguration.MatrixBlockTypes;
       resolve(true);
     });
+  }
+
+  /**是否带有值验证器 */
+  hasValueValidator(g: FormArray) {
+    // 检查是否有任何控件包含有效值
+    const hasValue = g.controls.some(element => {
+      const extraProperties = element.get('extraProperties');
+      return Object.keys(extraProperties.value).some(key => {
+        const value = extraProperties.value[key];
+        // 检查数组类型值
+        if (Array.isArray(value)) {
+          return value.length > 0;
+        }
+        // 检查非空值
+        return value !== null && value !== undefined && value !== '';
+      });
+    });
+
+    // 根据验证结果设置表单状态
+    g.controls.forEach(element => {
+      const extraProperties = element.get('extraProperties');
+      Object.keys(extraProperties.value).forEach(key => {
+        if (!hasValue) {
+          // 如果没有值，设置所有字段为必填
+          extraProperties.get(key).setValidators(Validators.required);
+          extraProperties.get(key).setErrors({ required: true });
+        } else {
+          // 如果有值，清除错误
+          extraProperties.get(key).setErrors(null);
+        }
+      });
+    });
+
+    // 返回验证结果
+    return hasValue? null : { required: true };
+    // return hasValue? null : null;
   }
 
   /**矩阵列表 */

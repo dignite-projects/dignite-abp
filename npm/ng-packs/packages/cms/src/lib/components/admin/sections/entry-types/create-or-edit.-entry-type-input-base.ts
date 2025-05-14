@@ -21,12 +21,12 @@ export class fieldsBase {
     fieldId: any = ['', [Validators.required]];
     /**显示名称 Unique Name*/
     displayName: any = ['', [Validators.required]];
-    /**必填 Unique Name*/
-    required: any = [false, []];
-    /**是否在列表中显示 Unique Name*/
-    showInList: any = [false, []];
-    /**是否启用搜索 */
-    enableSearch: any = [false, []];
+    // /**必填 Unique Name*/
+    // required: any = [false, []];
+    // /**是否在列表中显示 Unique Name*/
+    // showInList: any = [false, []];
+    // /**是否启用搜索 */
+    // enableSearch: any = [false, []];
 }
 
 

@@ -40,6 +40,7 @@ import { TableViewComponent } from './components/dynamic-form/table/table-view.c
 import { EntrySearchComponent } from './components/dynamic-form/entry/entry-search.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
+import { GetLocalizedEntriesBySlugPipe } from './pipes/get-localized-entries-by-slug.pipe';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { FormsModule } from '@angular/forms';
     CKEditorModule,
     FormsModule,
     // CommercialUiModule,
+    GetLocalizedEntriesBySlugPipe,
   ],
   exports: [
     TableConfigComponent,

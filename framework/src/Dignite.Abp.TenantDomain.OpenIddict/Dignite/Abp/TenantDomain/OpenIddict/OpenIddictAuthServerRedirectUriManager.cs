@@ -23,15 +23,15 @@ public class OpenIddictAuthServerRedirectUriManager : AuthServerRedirectUriManag
         var application = await ApplicationManager.FindByClientIdAsync(clientId);
         var descriptor = new AbpApplicationDescriptor();
         await ApplicationManager.PopulateAsync(descriptor, application);
-        var redirectUrl = $"https://{domainName}/";
-        if (!descriptor.RedirectUris.Any(u => u.Authority.Equals(redirectUrl, StringComparison.OrdinalIgnoreCase)))
+        var url = $"https://{domainName}/";
+        if (!descriptor.RedirectUris.Any(u => u.Authority.Equals(url, StringComparison.OrdinalIgnoreCase)))
         {
-            redirectUrl += "signin-oidc";
+            var redirectUrl = url + "signin-oidc";
             descriptor.RedirectUris.Add(new Uri(redirectUrl, UriKind.Absolute));
         }
-        if (!descriptor.PostLogoutRedirectUris.Any(u => u.Authority.Equals(redirectUrl, StringComparison.OrdinalIgnoreCase)))
+        if (!descriptor.PostLogoutRedirectUris.Any(u => u.Authority.Equals(url, StringComparison.OrdinalIgnoreCase)))
         {
-            redirectUrl += "signout-callback-oidc";
+            var redirectUrl = url + "signout-callback-oidc";
             descriptor.PostLogoutRedirectUris.Add(new Uri(redirectUrl, UriKind.Absolute));
         }
 

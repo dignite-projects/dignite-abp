@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Dignite.Abp.TenantDomainManagement.Domain</AssemblyName>
+		<PackageId>Dignite.Abp.TenantDomainManagement.Domain</PackageId>
+		<RootNamespace>Dignite.Abp.TenantDomainManagement</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="新文件夹\**" />
+	  <Content Remove="新文件夹\**" />
+	  <EmbeddedResource Remove="新文件夹\**" />
+	  <None Remove="新文件夹\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.SettingManagement.Domain" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dignite.Abp.TenantDomainManagement.Domain.Shared\Dignite.Abp.TenantDomainManagement.Domain.Shared.csproj" />
+	</ItemGroup>
+</Project>

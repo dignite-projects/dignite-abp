@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\configureawait.props" />
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net8.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Dignite.Abp.TenantDomainManagement.Domain.Shared</AssemblyName>
+		<PackageId>Dignite.Abp.TenantDomainManagement.Domain.Shared</PackageId>
+		<RootNamespace>Dignite.Abp.TenantDomainManagement</RootNamespace>
+	</PropertyGroup>
+
+</Project>

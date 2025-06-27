@@ -17,10 +17,10 @@
                                     <ng-template ngbNavContent>
                                         <ng-container *ngFor="let el of item.fields;let i1 =index">
                                             <ng-container *ngIf="el&&formEntity">
-                                                <df-dynamic [fields]="el"
+                                                <df-dynamic-control [fields]="el"
                                                     [selected]="entryInfo ? entryInfo.extraProperties[el.field.name] : ''"
                                                     [parentFiledName]="'extraProperties'" [culture]="cultureInput.value"
-                                                    [entity]="formEntity"></df-dynamic>
+                                                    [entity]="formEntity"></df-dynamic-control>
                                             </ng-container>
                                         </ng-container>
                                     </ng-template>
@@ -32,22 +32,6 @@
                     </ng-container>
 
 
-
-
-
-
-                    <!-- <ng-container *ngIf="isLoad">
-                        <ng-container *ngFor="let item of showEntryType?.fieldTabs;let i =index">
-                            <ng-container *ngFor="let el of item.fields;let i1 =index">
-                                <ng-container *ngIf="el&&formEntity">
-                                    <df-dynamic [fields]="el"
-                                        [selected]="entryInfo ? entryInfo.extraProperties[el.field.name] : ''"
-                                        [parentFiledName]="'extraProperties'" [culture]="cultureInput.value"
-                                        [entity]="formEntity"></df-dynamic>
-                                </ng-container>
-                            </ng-container>
-                        </ng-container>
-                    </ng-container> -->
                 </div>
             </div>
         </div>

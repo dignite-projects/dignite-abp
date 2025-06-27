@@ -4,6 +4,7 @@
 import { ConfigStateService, EnvironmentService } from '@abp/ng.core';
 import { inject, Pipe, PipeTransform } from '@angular/core';
 
+/**获取租户图片 */
 @Pipe({
   name: 'getTenantImg',
   standalone:true,

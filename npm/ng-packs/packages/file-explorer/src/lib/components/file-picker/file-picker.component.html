@@ -28,7 +28,7 @@
                 <th scope="row">
                     <div>{{item.name||item.Name}}</div>
                 </th>
-                <td>{{_FileApiService.formatFileSize(item.Size||item.size)}}</td>
+                <td>{{(item.Size||item.size)|formatFileSize}}</td>
                 <td>
                     <button class="btn btn-sm p-0 btn-light " (click.stop)="deleteFileTableItem(i,item)">
                         <i class="fas fa-trash p-2"></i>

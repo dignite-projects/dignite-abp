@@ -25,9 +25,9 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { CmsConfigModule } from '@dignite-ng/expand.cms/config';
 import { FormConfigLoaderService } from './services/form-config-loader.service';
 import { Select_ROUTE_PROVIDER } from './select/route.provider';
-import { RouteReuseStrategy } from '@angular/router';
-import { SimpleReuseStrategy } from '@dignite-ng/expand.core';
+import { CoreModule as digniteCoreModule } from '@dignite-ng/expand.core';
 import { TenancyDomainsManagementConfigModule } from '@dignite-ng/expand.tenant-domain-management/config';
+import { form_ROUTE_PROVIDER } from './form/route.provider';
 
 @NgModule({
 	imports: [
@@ -42,10 +42,12 @@ import { TenancyDomainsManagementConfigModule } from '@dignite-ng/expand.tenant-
 		InternetConnectionStatusComponent,
 		CmsConfigModule.forRoot(),
 		TenancyDomainsManagementConfigModule.forRoot(),
+		digniteCoreModule.forRoot()
 	],
 	providers: [
 		APP_ROUTE_PROVIDER,
-		Select_ROUTE_PROVIDER,
+		// Select_ROUTE_PROVIDER,
+		// form_ROUTE_PROVIDER,
 		SubscriptionService,
 		OAuthService,
 		provideAbpCore(
@@ -63,13 +65,14 @@ import { TenancyDomainsManagementConfigModule } from '@dignite-ng/expand.tenant-
 		provideIdentityConfig(),
 		provideTenantManagementConfig(),
 		provideFeatureManagementConfig(),
+		/**整合动态表单配置 */
 		{
 			provide: 'MERGED_FORM_CONFIG',
 			useFactory: (configLoader: FormConfigLoaderService) => configLoader.getMergedConfig(),
 			deps: [FormConfigLoaderService],
 		},
-		/**路由服用策略 */
-		{ provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
+		// /**路由复用策略 */
+		// { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
 	],
 	declarations: [AppComponent],
 	bootstrap: [AppComponent],

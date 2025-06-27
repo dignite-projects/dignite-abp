@@ -6,10 +6,12 @@ describe('CreateFieldComponent', () => {
   let component: CreateFieldComponent;
   let fixture: ComponentFixture<CreateFieldComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [CreateFieldComponent]
-    });
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(CreateFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -10,7 +10,6 @@
                         [routerLink]="['/cms/admin/entries/create']"
                         [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}"><i
                             class="fa fa-plus me-2"></i> {{'Cms::NewEntry'|abpLocalization}}</button>
-                    <!-- {{item.displayName}} -->
                 </ng-container>
             </div>
         </div>
@@ -25,7 +24,7 @@
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <ng-container *ngFor="let item of entryTypeList">
                             <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
-                                [disabled]="data.totalCount===1&&SiteOfSectionType===SectionType.Single"
+                                [disabled]="data.totalCount===1&&SiteOfSectionType===SectionType.Single&&isEntryTypeExist(item.id)"
                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.id}">{{item.displayName}}</button>
                         </ng-container>
                     </div>
@@ -175,7 +174,6 @@
                                             |
                                             abpLocalization}} </button>
                                         }
-                                        <!-- -->
                                         <button ngbDropdownItem (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
                                     </div>

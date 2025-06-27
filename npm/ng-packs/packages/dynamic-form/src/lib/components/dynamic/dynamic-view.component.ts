@@ -1,4 +1,6 @@
-import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable @angular-eslint/component-selector */
+import { Component, Input, ViewChild, ViewContainerRef, AfterContentInit } from '@angular/core';
 import { FormControlService } from '../../services/form-control.service';
 import { FieldControlGroupInterfaces } from '../../interfaces';
 
@@ -7,11 +9,11 @@ import { FieldControlGroupInterfaces } from '../../interfaces';
   templateUrl: './dynamic-view.component.html',
   styleUrl: './dynamic-view.component.scss',
 })
-export class DynamicViewComponent {
+export class DynamicViewComponent implements AfterContentInit {
   constructor(private _FormControlService: FormControlService) {}
 
   /**是否显示再列表 */
-  @Input() showInList: boolean = false;
+  @Input() showInList = false;
   /**表单字段数据 */
   @Input() fields: any;
 
@@ -34,8 +36,8 @@ export class DynamicViewComponent {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     if (this.type && this._value!=='') {
-      let _fieldControlGroup: any[] = this._FormControlService.AddFieldControlGroup();
-      let fieldControlItem = _fieldControlGroup.find(el => el.name === this.type);
+      const _fieldControlGroup: any[] = this._FormControlService.addFieldControlGroup();
+      const fieldControlItem = _fieldControlGroup.find(el => el.name === this.type);
       this.loadViewComponent(fieldControlItem);
     }
   }

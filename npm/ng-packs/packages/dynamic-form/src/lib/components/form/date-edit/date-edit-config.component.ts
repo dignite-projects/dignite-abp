@@ -1,5 +1,6 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder,FormGroup } from '@angular/forms';
 import { DateEditConfig } from './date-edit-config';
 import { DateEditInterfaces } from '../../../enums/date-edit-interfaces';
 import { DatePipe } from '@angular/common';
@@ -27,31 +28,32 @@ export class DateEditConfigComponent {
     this._selected = v;
   }
   /**表单实体 */
-  _Entity: FormGroup | undefined;
+  formEntity: FormGroup | undefined;
   @Input()
   public set Entity(v: FormGroup) {
-    this._Entity = v;
+    this.formEntity = v;
     this.dataLoaded();
   }
 
   dateTimeType: any = 'date';
   get formConfiguration() {
-    return this._Entity.get('formConfiguration') as FormGroup;
+    return this.formEntity.get('formConfiguration') as FormGroup;
   }
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
 
   private cdr = inject(ChangeDetectorRef);
   async dataLoaded() {
-    if (this._Entity && this._type) {
+    if (this.formEntity && this._type) {
       await this.AfterInit();
-      this.cdr.detectChanges(); // 手动触发变更检测
-      this.submitclick?.nativeElement?.click();
+      
     }
   }
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity.setControl('formConfiguration', this.fb.group(new DateEditConfig()));
+      this.formEntity.setControl('formConfiguration', this.fb.group(new DateEditConfig()));
+      this.cdr.detectChanges(); // 手动触发变更检测
+      this.submitclick?.nativeElement?.click();
       if (this._selected && this._selected.formControlName == this._type) {
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration,
@@ -63,7 +65,7 @@ export class DateEditConfigComponent {
   }
   /**切换时间类型 */
   timeTypeChange() {
-    let type = this.formConfiguration.value['DateEdit.InputMode'];
+    const type = this.formConfiguration.value['DateEdit.InputMode'];
     let Min = this.formConfiguration.value['DateEdit.Min'];
     let Max = this.formConfiguration.value['DateEdit.Max'];
     if (type == DateEditInterfaces.Date) {

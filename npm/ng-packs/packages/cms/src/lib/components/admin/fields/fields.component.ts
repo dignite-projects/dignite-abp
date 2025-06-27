@@ -1,6 +1,8 @@
 /* eslint-disable @angular-eslint/component-selector */
-
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
+import { Component, OnInit} from '@angular/core';
+import { ECmsComponent } from '../../../enums';
+import { FieldsDataService } from '../../../services/fields-data.service';
 import {
   ListService,
   LIST_QUERY_DEBOUNCE_TIME,
@@ -9,49 +11,49 @@ import {
   ABP,
 } from '@abp/ng.core';
 import { ToasterService, ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
-import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ColumnMode } from '@swimlane/ngx-datatable';
-import { finalize } from 'rxjs';
-import { ECmsComponent } from '../../../enums';
 import { UpdateListService } from '@dignite-ng/expand.core';
-import {
-  FieldAdminService,
-  FieldDto,
-  GetFieldsInput,
-} from '../../../proxy/dignite/cms/admin/fields';
-import { FieldAbstractsService } from '../../../services';
+import { FieldDto, GetFieldsInput } from '../../../proxy/dignite/cms/admin/fields';
 
 @Component({
   selector: 'cms-fields',
   templateUrl: './fields.component.html',
-  styleUrls: ['./fields.component.scss'],
+  styleUrl: './fields.component.scss',
   providers: [
+    {
+      provide: EXTENSIONS_IDENTIFIER,
+      useValue: ECmsComponent.Fields,
+    },
     // [Required]
     ListService,
     // [Optional]
     // Provide this token if you want a different debounce time.
     // Default is 300. Cannot be 0. Any value below 100 is not recommended.
-    { provide: LIST_QUERY_DEBOUNCE_TIME, useValue: 500 },
-    {
-      provide: EXTENSIONS_IDENTIFIER,
-      useValue: ECmsComponent.Fields,
-    },
+    { provide: LIST_QUERY_DEBOUNCE_TIME, useValue: 50 },
   ],
 })
 export class FieldsComponent implements OnInit {
   constructor(
     public readonly list: ListService,
-    private _FieldAdminService: FieldAdminService,
+    private _service: FieldsDataService,
     private toaster: ToasterService,
     private confirmation: ConfirmationService,
     private _LocalizationService: LocalizationService,
     private router: Router,
+    private _UpdateListService: UpdateListService,
   ) {}
-  private _UpdateListService = inject(UpdateListService);
-  private _FieldAbstractsService = inject(FieldAbstractsService);
-  /**表格单元格布局类型 */
-  ColumnMode = ColumnMode;
+  async ngOnInit(): Promise<void> {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    await Promise.all([this._service.getfieldGroups(), this._service.getControlsfieldTypes()]);
+    this.hookToQuery();
+   console.log(this.list,'1111');
+
+    this._UpdateListService.updateListEvent.subscribe(() => {
+      this.getData();
+    });
+  }
+
 
   /**表格数据 */
   data: PagedResultDto<FieldDto> = {
@@ -62,32 +64,10 @@ export class FieldsComponent implements OnInit {
   /**过滤器 */
   filters = {} as GetFieldsInput;
 
-  /**是否初始化完成 */
-  isInit=true;
-
-  async ngOnInit(): Promise<void> {
-    await this._FieldAbstractsService.getFromControlList();
-    this.isInit=true;
-    this.hookToQuery();
-    this._UpdateListService.updateListEvent.subscribe(() => {
-      this.list.get();
-    });
-  }
-  getData() {
-    this.list.get();
-  }
-
-  /**字段分组选择回调 */
-  fieldGroupChange(event) {
-    this.filters.groupId = event;
-    this.list.page = 0;
-    this.list.get();
-  }
-
   /**使用abp的list获取表格的字段数据列表 */
   hookToQuery() {
     const getData = (query: ABP.PageQueryParams) =>
-      this._FieldAdminService.getList({
+      this._service.getFieldsList({
         ...query,
         ...this.filters,
       });
@@ -97,9 +77,44 @@ export class FieldsComponent implements OnInit {
     };
     this.list.hookToQuery(getData).subscribe(setData);
   }
+  /**获取表格数据 */
+  getData() {
+    this.data.items = [];
+    this.data.totalCount = 0;
+    // this.list.page=0;
+    this.list.get();
+  }
+  /**重置 */
+  reset() {
+    this.filters = {} as GetFieldsInput;
+    this.getData();
+  }
+ 
+
+  /**回到页面顶部 */
   scrollToTop() {
     const scrollContainer = document.getElementsByClassName('lpx-scroll-container')[0];
     (scrollContainer || window).scrollTo(0, 0);
+  }
+
+  /**点击字段分组回调 */
+  onGroupClickBack(groupId: string) {
+    this.filters.groupId = groupId;
+    this.getData();
+  }
+
+  /**删除字段 */
+  deletefield(row: any) {
+    this.confirmation
+      .warn(row.displayName, this._LocalizationService.instant(`AbpUi::ItemWillBeDeletedMessage`))
+      .subscribe((status: Confirmation.Status) => {
+        if (status == 'confirm') {
+          this._service.deleteField(row.id).subscribe(() => {
+            this.toaster.success(this._LocalizationService.instant(`AbpUi::DeletedSuccessfully`));
+            this.getData();
+          });
+        }
+      });
   }
 
   /**新建字段按钮 */
@@ -110,21 +125,8 @@ export class FieldsComponent implements OnInit {
       },
     });
   }
-
-  /**删除字段 */
-  deletefield(row: any) {
-    this.confirmation
-      .warn(row.displayName, this._LocalizationService.instant(`AbpUi::ItemWillBeDeletedMessage`))
-      .subscribe((status: Confirmation.Status) => {
-        if (status == 'confirm') {
-          this._FieldAdminService
-            .delete(row.id)
-            .pipe(finalize(() => {}))
-            .subscribe(res => {
-              this.toaster.success(this._LocalizationService.instant(`AbpUi::DeletedSuccessfully`));
-              this.list.get();
-            });
-        }
-      });
+  /**编辑字段按钮 */
+  editfieldBtn(row: any) {
+    this.router.navigate(['/cms/admin/fields/' + row.id + '/edit'], {});
   }
 }

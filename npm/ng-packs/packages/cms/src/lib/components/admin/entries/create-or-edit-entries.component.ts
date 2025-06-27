@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/component-selector */
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
-import { CmsApiService } from '../../../services';
 import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
 import { Observable } from 'rxjs';
 import { RegionalizationService } from '../../../proxy/dignite/abp/regionalization-management';
+import { ToPinyinService } from '@dignite-ng/expand.core';
 
 @Component({
   selector: 'cms-create-or-edit-entries',
@@ -25,9 +26,11 @@ export class CreateOrEditEntriesComponent {
   private datePipe = inject(DatePipe);
   private _LocalizationService = inject(LocalizationService);
   private router = inject(Router);
-  private _CmsApiService = inject(CmsApiService);
   private cdRef = inject(ChangeDetectorRef);
   private _RegionalizationService = inject(RegionalizationService);
+  constructor(
+    private toPinyinService:ToPinyinService
+  ) {}
 
   /**语言列表 */
   languagesList: any[] = [];
@@ -305,7 +308,7 @@ SlugRegExValidator() {
     const slug = this.formEntity.get('slug');
     let pinyinstr = '';
     if (slug.value) return;
-    pinyinstr = this._CmsApiService.chineseToPinyin(val);
+    pinyinstr = this.toPinyinService.get(val);
     pinyinstr=pinyinstr||val;
     //去除特殊字符
     pinyinstr = pinyinstr.replace(/[^a-zA-Z0-9-]/g, '');

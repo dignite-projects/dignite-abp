@@ -3,6 +3,10 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
+
+/**
+ * @deprecated 请使用 {@link DigniteValidatorsService} 服务。
+ */
 @Injectable({
   providedIn: 'root',
 })

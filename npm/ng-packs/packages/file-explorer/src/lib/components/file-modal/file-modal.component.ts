@@ -25,7 +25,6 @@ import {
   FileDescriptorService,
   GetFilesInput,
 } from '../../proxy/dignite/file-explorer/files';
-import { FileApiService } from '../../services/file-api.service';
 import { SelectionType } from '@swimlane/ngx-datatable';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
@@ -48,7 +47,6 @@ export class FileModalComponent implements OnChanges {
     private _FileService: FileService.FileDescriptorService,
     private toaster: ToasterService,
     public readonly list: ListService,
-    public _FileApiService: FileApiService,
     private restService: RestService,
     private confirmation: ConfirmationService,
     private _LocalizationService: LocalizationService,
@@ -128,7 +126,7 @@ export class FileModalComponent implements OnChanges {
 
   /**模态框保存 */
   modalSave() {
-    const selectedTablearr = this._FileApiService.deepClone(this.selectedTable);
+    const selectedTablearr = structuredClone(this.selectedTable);
     this.selectFilefn.emit(selectedTablearr);
     this.ModalVisibleChange(false);
   }
@@ -374,8 +372,6 @@ export class FileModalComponent implements OnChanges {
     };
   }
 
-  // 使用示例
-  async handleBatchDelete() {}
 
   /**关闭文件状态弹窗 */
   closeFileStatusModal() {
@@ -412,7 +408,7 @@ export class FileModalComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    this.selectedTable = this._FileApiService.deepClone(this.selectPickerFile);
+    this.selectedTable = structuredClone(this.selectPickerFile);
   }
   /**表格分页切换 */
   onPageChange(newArray) {

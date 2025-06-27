@@ -23,3 +23,13 @@ export class CreateOrUpdateEntryInputBase {
     extraProperties: FormGroup | undefined = new FormGroup({})
 }
 
+
+export const EntriesToFormLabelMap={
+    "title":"Cms::Title",
+    "slug":"Cms::Slug",
+    "culture":"Cms::Languages",
+    "draft":"Cms::EntryType",
+    "publishTime":"Cms::publishTime",
+    "parentId":"Cms::ParentEntry",
+}
+

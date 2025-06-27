@@ -14,7 +14,6 @@ import {
   FormBuilder,
   FormGroup,
 } from '@angular/forms';
-import { CmsApiService } from '../../../services';
 import { UpdateListService } from '@dignite-ng/expand.core';
 
 import { ColumnMode } from '@swimlane/ngx-datatable';
@@ -49,7 +48,6 @@ export class SectionsComponent implements OnInit {
     private fb: FormBuilder,
     public _EntryTypeAdminService: EntryTypeAdminService,
     public _LocalizationService: LocalizationService,
-    public _CmsApiService: CmsApiService
   ) {}
   private _UpdateListService = inject(UpdateListService);
   siteList: any[] = [];

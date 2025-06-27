@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CmsApiService } from '../../../services';
+import { KeysConvertToLowercaseService } from '../../../services';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -10,7 +10,7 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./matrix-control.component.scss'],
 })
 export class MatrixControlComponent {
-  constructor(private fb: FormBuilder, private _CmsApiService: CmsApiService) {}
+  constructor(private fb: FormBuilder, private _KeysConvertToLowercaseService: KeysConvertToLowercaseService) {}
 
   /**字段配置列表 */
   _fields: any = '';
@@ -19,7 +19,7 @@ export class MatrixControlComponent {
     if (v) {
       for (const key in v.field?.formConfiguration) {
         if (Array.isArray(v.field?.formConfiguration[key])) {
-          v.field.formConfiguration[key] = this._CmsApiService.convertKeysToCamelCase(
+          v.field.formConfiguration[key] = this._KeysConvertToLowercaseService.get(
             v.field?.formConfiguration[key],
           );
         }
@@ -40,7 +40,7 @@ export class MatrixControlComponent {
   @Input()
   public set selected(v: any) {
     if (v) {
-      v = this._CmsApiService.convertKeysToCamelCase(v);
+      v = this._KeysConvertToLowercaseService.get(v);
       this._selected = v;
     }
   }
@@ -81,7 +81,7 @@ export class MatrixControlComponent {
         }
       }
       this._selected = '';
-      console.log(this.fieldNameControl, 'fieldNameControl', this._fields.field.name);
+      // console.log(this.fieldNameControl, 'fieldNameControl', this._fields.field.name);
     }
   }
 
@@ -112,7 +112,11 @@ export class MatrixControlComponent {
             formConfiguration.MatrixBlockTypes.find(item => item.name == el.matrixBlockTypeName),
           );
         });
+        // this.isAllExpanded=false;
+      }else{
+        this.isAllExpanded=true;
       }
+
 
       this.MatrixBlockTypesList = formConfiguration.MatrixBlockTypes;
       resolve(true);
@@ -183,5 +187,18 @@ export class MatrixControlComponent {
   drop(event: any) {
     moveItemInArray(this.fieldNameControl.controls, event.previousIndex, event.currentIndex);
     this.fieldNameControl.updateValueAndValidity();
+  }
+
+  /**是否全部展开 */
+  isAllExpanded = false;
+
+  /**切换全部展开/折叠状态 */
+  toggleAll() {
+    this.isAllExpanded = !this.isAllExpanded;
+    if (this.fieldNameControl) {
+      this.fieldNameControl.controls.forEach((control: FormGroup) => {
+        control.get('isOpen').patchValue(this.isAllExpanded);
+      });
+    }
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SwitchConfig } from './switch-config';
@@ -16,10 +17,10 @@ export class SwitchConfigComponent {
     this.dataLoaded();
   }
   /**表单实体 */
-  _Entity: FormGroup | undefined;
+  formEntity: FormGroup | undefined;
   @Input()
-  public set Entity(v: FormGroup) {
-    this._Entity = v;
+  public set Entity(v: FormGroup | undefined) {
+    this.formEntity = v;
     this.dataLoaded();
   }
   /**选择的表单信息 */
@@ -27,26 +28,30 @@ export class SwitchConfigComponent {
   @Input()
   public set selected(v: any) {
     this._selected = v;
-
     this.dataLoaded();
   }
   get formConfiguration() {
-    return this._Entity.get('formConfiguration') as FormGroup;
+    return this.formEntity.get('formConfiguration') as FormGroup;
   }
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
 
   private cdr = inject(ChangeDetectorRef);
   async dataLoaded() {
-    if (this._Entity && this._type) {
+    if (this.formEntity && this._type) {
       await this.AfterInit();
-      this.cdr.detectChanges(); // 手动触发变更检测
-      this.submitclick?.nativeElement?.click();
+      // this.cdr.detectChanges();
+    
     }
   }
 
+
+
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity.setControl('formConfiguration', this.fb.group(new SwitchConfig()));
+      this.formEntity.setControl('formConfiguration', this.fb.group(new SwitchConfig()));
+       setTimeout(()=>{
+      this.submitclick?.nativeElement?.click();
+     },0)
       if (this._selected && this._selected.formControlName == this._type) {
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration,

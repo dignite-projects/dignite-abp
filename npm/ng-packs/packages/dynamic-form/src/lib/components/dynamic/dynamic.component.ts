@@ -3,9 +3,13 @@
 import { Component, Inject, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldControlGroupInterfaces } from '../../interfaces';
-import { AddFieldControlGroup, } from '../form';
+import { addFieldControlGroup, } from '../form';
 
 
+/**
+ * 丢弃
+ * @deprecated
+ */
 @Component({
   selector: 'df-dynamic',
   templateUrl: './dynamic.component.html',
@@ -70,7 +74,7 @@ export class DynamicComponent {
 
   /**数据加载完成 */
   async dataLoaded(val) {
-    const _fieldControlGroup: any[] = AddFieldControlGroup(this.mergedConfig);
+    const _fieldControlGroup: any[] = addFieldControlGroup(this.mergedConfig);
     if (this._entity) {
       //加载所有的动态表单组件
       if (this._type) {

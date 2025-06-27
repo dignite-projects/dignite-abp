@@ -1,0 +1,47 @@
+<form [formGroup]="nestedForm">
+      <!-- 嵌套表单结构 -->
+      <div formGroupName="group1">
+        <input formControlName="control1" placeholder="Control 1" />
+        <input formControlName="control2" placeholder="Control 2" />
+
+        <div formGroupName="subGroup1">
+          <input formControlName="subControl1" placeholder="Sub Control 1" />
+          <div formArrayName="array1">
+            <div *ngFor="let item of nestedForm.get('group1.subGroup1.array1')?.controls; let i = index" [formGroupName]="i">
+              <input formControlName="itemControl1" placeholder="Item Control 1" />
+              <div formGroupName="subSubGroup1">
+                <input formControlName="subSubControl1" placeholder="Sub Sub Control 1" />
+                <div formArrayName="subArray1">
+                  <div *ngFor="let subItem of item.get('subSubGroup1.subArray1').controls; let j = index" [formGroupName]="j">
+                    <input formControlName="subControlItem1" placeholder="Sub Item Control 1" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div formArrayName="array2">
+          <div *ngFor="let item of nestedForm.get('group1.array2')?.controls; let k = index" [formGroupName]="k">
+            <input formControlName="itemControl2" placeholder="Item Control 2" />
+            <div formGroupName="subGroup2">
+              <input formControlName="subControl2" placeholder="Sub Control 2" />
+            </div>
+            <div formArrayName="subArray2">
+              <div *ngFor="let subItem of item.get('subArray2').controls; let l = index" [formGroupName]="l">
+                <input formControlName="subControlItem2" placeholder="Sub Item Control 2" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" (click)="validateForm()">Validate</button>
+    </form>
+
+    <div *ngIf="errors.length > 0">
+      <h3>Validation Errors:</h3>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+    </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 /* eslint-disable @angular-eslint/component-selector */
 import {
   AfterContentInit,
@@ -15,10 +16,9 @@ import * as DescriptorService from '../../proxy/dignite/file-explorer/directorie
 import { Confirmation, ConfirmationService, ToasterService } from '@abp/ng.theme.shared';
 import { NzFormatBeforeDropEvent } from 'ng-zorro-antd/tree';
 import { finalize, map, of, tap } from 'rxjs';
-import { FileApiService } from '../../services/file-api.service';
 import { LocalizationService } from '@abp/ng.core';
 import { ValidatorsService } from '@dignite-ng/expand.core';
-var that;
+let that;
 @Component({
   selector: 'fe-file-modal-tree',
   templateUrl: './file-modal-tree.component.html',
@@ -29,7 +29,6 @@ export class FileModalTreeComponent implements AfterContentInit {
     private _DescriptorService: DescriptorService.FileDescriptorService,
     private fb: FormBuilder,
     private toaster: ToasterService,
-    public _FileApiService: FileApiService,
     public _LocalizationService: LocalizationService,
     private confirmation: ConfirmationService,
   ) {
@@ -108,8 +107,8 @@ export class FileModalTreeComponent implements AfterContentInit {
 
   /**递归-将列表转化为父子级结构 */
   setTheValueOfTheNodeRecursively(array: any[], parentId: any = null, root?: any[]): any {
-    let rootList = root || array;
-    let result = array.filter(item => item.parentId === parentId);
+    const rootList = root || array;
+    const result = array.filter(item => item.parentId === parentId);
     result.sort((a, b) => a.order - b.order);
     result.map((el: any) => {
       el.title = el.name;
@@ -217,10 +216,10 @@ export class FileModalTreeComponent implements AfterContentInit {
 
   /**分组 */
   /**模态框-状态-是否打开 */
-  ModalDescriptorOpen: boolean = false;
+  ModalDescriptorOpen = false;
 
   /**模态框-descriptor-繁忙状态-用于确定模态的繁忙状态是否为真 */
-  ModalDescriptorBusy: boolean = false;
+  ModalDescriptorBusy = false;
 
   /**模态框-descriptor-表单 */
   ModalDescriptorForm: FormGroup | undefined;
@@ -240,7 +239,7 @@ export class FileModalTreeComponent implements AfterContentInit {
   private _ValidatorsService = inject(ValidatorsService);
   /**f分组模态框保存 */
   createOrEditSave() {
-    let input = this.ModalDescriptorForm.value;
+    const input = this.ModalDescriptorForm.value;
     this.formValidation = this._ValidatorsService.getFormValidationStatus(this.ModalDescriptorForm);
     if (this._ValidatorsService.isCheckForm(this.formValidation, 'FileExplorer')) return;
     if (!this.ModalDescriptorForm.valid) return;

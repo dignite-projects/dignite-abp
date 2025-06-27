@@ -2,8 +2,8 @@
     <div formGroupName="formConfiguration">
         <div class="mb-3">
             <label class="form-label">{{'Cms::::FormControl:Matrix' | abpLocalization}}</label>
-            <div class="row" >
-                <div class="col-md-3">
+            <div class="row" *ngIf="MatrixBlockTypes">
+                <div class="col-md-3" >
                     <div class="list-group" [class.fieldStartDragClass]="fieldStartDrag" cdkDropList (cdkDropListDropped)="dropMatrix($event)"     #todoList="cdkDropList"
                     [cdkDropListData]="MatrixBlockTypes.controls" [cdkDropListSortPredicate]="fieldStartDrag?sortPredicate:sortPredicateTrue"> 
                         <li class="list-group-item d-flex align-items-center justify-content-between"
@@ -106,10 +106,9 @@
                                             </select>
                                         </div>
                                         <ng-container *ngIf="itemf.value.formControlName&&itemf">
-                                            <df-dynamic [type]="itemf.value.formControlName"
+                                            <df-dynamic-config [type]="itemf.value.formControlName"
                                                 [selected]="_selected?_selected.formConfiguration?.MatrixBlockTypes[i]?.fields[fi]:''"
-                                                [entity]="itemf"></df-dynamic>
-
+                                                [form]="itemf"></df-dynamic-config>
                                         </ng-container>
                                     </div>
                                 </ng-container>
@@ -117,7 +116,6 @@
                         </div>
                     </ng-container>
                 </div>
-
             </div>
         </div>
         <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"

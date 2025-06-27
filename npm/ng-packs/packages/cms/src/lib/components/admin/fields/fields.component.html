@@ -1,27 +1,24 @@
 <abp-page [title]="'Cms::Fields' | abpLocalization" [toolbar]="true">
-    <div class="fields-page">
-        <div class="row ">
-            <div class="col-md-3 mb-2">
-                <div class="card mb-0" style="height: 100%;">
-                    <cms-field-group (OnGroupClickBack)="fieldGroupChange($event)"></cms-field-group>
-                </div>
-            </div>
-            <div class="col-md-9 mb-2">
-                <div class="card mb-0">
-                    <div class="card-header px-2 py-sm-2   border-bottom">
-                        <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="filters.filter"
-                                [placeholder]="'AbpUi::Search' | abpLocalization">
-                            <button class="btn btn-primary px-3" type="button" id="button-addon2"
-                                (click)="list.get()"><i class="fa fa-search"></i></button>
-                        </div>
+    <div class="row" style="min-height: calc(100vh - 42px - 54px - 1.25em - 1.25em);">
+        <div class="col-md-3 mb-2">
+            <cms-fields-group (OnGroupClickBack)="onGroupClickBack($event)"></cms-fields-group>
+        </div>
+        <div class="col-md-9 mb-2">
+            <div class="card mb-0">
+                <div class="card-header px-2 py-sm-2   border-bottom">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="filters.filter"
+                            [placeholder]="'AbpUi::Search' | abpLocalization" >
+                        <button class="btn btn-primary px-3" type="button" id="button-addon2"
+                            (click)="list.get()"><i class="fa fa-search"></i></button>
                     </div>
-                    <ng-container *ngIf="isInit">
-                        <abp-extensible-table [data]="data?.items" [recordsTotal]="data?.totalCount" [list]="list"></abp-extensible-table>
-                    </ng-container>
+                </div>
+                <div class="card-body p-0">
+                    <abp-extensible-table [data]="data?.items" [recordsTotal]="data?.totalCount"
+                            [list]="list">
+                        </abp-extensible-table>
                 </div>
             </div>
         </div>
     </div>
-
 </abp-page>

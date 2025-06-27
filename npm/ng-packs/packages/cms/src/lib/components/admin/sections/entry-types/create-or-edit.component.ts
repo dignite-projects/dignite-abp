@@ -6,16 +6,13 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { CmsApiService } from '../../../../services';
 import {
   CreateOrEditEntryTypeInputBase,
   fieldTabsBase,
   fieldsBase,
 } from './create-or-edit.-entry-type-input-base';
-import { Location } from '@angular/common';
 import { ECmsComponent } from '../../../../enums';
 import { ValidatorsService } from '@dignite-ng/expand.core';
-import { UpdateListService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import {
   FieldAdminService,
@@ -23,6 +20,9 @@ import {
 } from '../../../../proxy/dignite/cms/admin/fields';
 import { EntryTypeAdminService } from '../../../../proxy/dignite/cms/admin/sections';
 import { FormControlsService } from '../../../../services/form-controls.service';
+
+import { ToPinyinService, LocationBackService, UpdateListService } from '@dignite-ng/expand.core';
+
 @Component({
   selector: 'cms-create-or-edit',
   templateUrl: './create-or-edit.component.html',
@@ -37,14 +37,14 @@ import { FormControlsService } from '../../../../services/form-controls.service'
 export class CreateOrEditComponent implements OnInit {
   constructor(
     private toaster: ToasterService,
-    public _location: Location,
+    public _LocationBackService: LocationBackService,
     private route: ActivatedRoute,
     public _FieldGroupAdminService: FieldGroupAdminService,
     public _FieldAdminService: FieldAdminService,
     public _EntryTypeAdminService: EntryTypeAdminService,
     public _LocalizationService: LocalizationService,
-    public _CmsApiService: CmsApiService,
     public _FormControlsService: FormControlsService,
+     private toPinyinService:ToPinyinService
   ) {}
   private fb = inject(FormBuilder);
   private _UpdateListService = inject(UpdateListService);
@@ -56,6 +56,13 @@ export class CreateOrEditComponent implements OnInit {
   entryTypesId: string | any = '';
   /**条目类型详情 */
   entryTypesSelect: any;
+
+  /**是否全选 */
+  isAllSelect={
+    isRequired:false,
+    isShowInList:false,
+    isEnableSearch:false
+  };
 
   get fieldTabs() {
     return this.newEntity?.get('fieldTabs') as FormArray;
@@ -80,14 +87,7 @@ export class CreateOrEditComponent implements OnInit {
     //板块id
     this.sectionId = sectionId;
     this.newEntity = this.fb.group(new CreateOrEditEntryTypeInputBase());
-    //
-    // this.enableSearchTypeList=await this._FormControlsService.getEnableSearchTypeList();
-    // this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
-    // if (sectionId) {
-    //   this.sectionId = sectionId;
-    //   this.addControlToFieldTabs();
-    //   this.getFieldGroup();
-    // }
+   
     //获取条目类型详情
     if(this.entryTypesId){
       await this.getEntryTypes();
@@ -100,7 +100,7 @@ export class CreateOrEditComponent implements OnInit {
   /**处理数据 */
   processData() {
     return new Promise((resolve, rejects) => {
-      const fieldList: any = this.deepClone(this.fieldList);
+      const fieldList: any = structuredClone(this.fieldList);
       const res = this.entryTypesSelect;
       if (!res) {
         this.addControlToFieldTabs();
@@ -115,15 +115,26 @@ export class CreateOrEditComponent implements OnInit {
             fieldList.splice(fieldindex, 1);
           });
         });
+       
         this.fieldGroupList.forEach((el: any, index) => {
           el.fields = fieldList.filter(els => els.groupId === el.id);
         });
         this.newEntity?.patchValue(res);
         this.navActive = 0;
         this.resultSource = res.fieldTabs;
+
+       this.setAllSelectStauts();
+
+        console.log(this.isAllSelect,'this.isAllSelect',res.fieldTabs,this.navActive);
       }
       resolve(true);
     });
+  }
+  /**设置全选状态 */
+  setAllSelectStauts(){
+    this.isAllSelect.isRequired= this.resultSource[this.navActive].fields.every(eld=>eld.required);
+        this.isAllSelect.isShowInList= this.resultSource[this.navActive].fields.every(eld=>eld.showInList);
+        this.isAllSelect.isEnableSearch= this.resultSource[this.navActive].fields.every(eld=>eld.enableSearch);
   }
 
   /**给fieldTabs添加新控件 */
@@ -155,12 +166,7 @@ export class CreateOrEditComponent implements OnInit {
           el.fields = fieldList.filter(els => els.groupId === el.id);
         });
         this.fieldGroupList = fieldGroupList;
-        this.fieldList = this.deepClone(fieldList);
-        // const entryTypesId = this.entryTypesId;
-        // if (entryTypesId) {
-        //   this.entryTypesId = entryTypesId;
-        //   this.getEntryTypes();
-        // }
+        this.fieldList = structuredClone(fieldList);
         resolve(res);
       });
     });
@@ -173,48 +179,8 @@ export class CreateOrEditComponent implements OnInit {
         resolve(res);
       });
     });
-    // // const fieldList: any = this.deepClone(this.fieldList);
-    // this._EntryTypeAdminService.get(this.entryTypesId).subscribe(res => {
-    //   // res.fieldTabs.forEach(el => {
-    //   //   el.fields.forEach((eld: any) => {
-    //   //     eld.id = eld.fieldId;
-    //   //     eld.groupId = fieldList.find(elfd => elfd.id == eld.fieldId).groupId;
-    //   //     this.formRightGroup.push(eld);
-    //   //     const fieldindex = fieldList.findIndex(elfl => elfl.id == eld.fieldId);
-    //   //     fieldList.splice(fieldindex, 1);
-    //   //   });
-    //   // });
-    //   // this.fieldGroupList.forEach((el: any, index) => {
-    //   //   el.fields = fieldList.filter(els => els.groupId === el.id);
-    //   // });
-    //   // this.newEntity?.patchValue(res);
-    //   this.entryTypesSelect = res;
-    //   // this.resultSource = res.fieldTabs;
-    // });
   }
-  /**
-   * 深拷贝--方法
-   * $api.deepClone()  */
-  deepClone(obj: any) {
-    if (typeof obj !== 'object' || obj === null) return obj;
-    const result = Array.isArray(obj) ? [] : {};
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-          if (obj[key] instanceof Date) {
-            result[key] = new Date(obj[key].getTime());
-          } else if (obj[key] instanceof RegExp) {
-            result[key] = new RegExp(obj[key]);
-          } else {
-            result[key] = this.deepClone(obj[key]);
-          }
-        } else {
-          result[key] = obj[key];
-        }
-      }
-    }
-    return result;
-  }
+ 
   /**
    *
    * @param nameValue 获取所有字段
@@ -278,8 +244,8 @@ export class CreateOrEditComponent implements OnInit {
       /* empty */
     }
     const _fromResultSourceDragEl = this.fromResultSourceDragEl;
-    const formRightGroup = this.deepClone(this.formRightGroup);
-    const fieldList = this.deepClone(this.fieldList);
+    const formRightGroup = structuredClone(this.formRightGroup);
+    const fieldList = structuredClone(this.fieldList);
 
     if (_fromResultSourceDragEl) {
       //移动
@@ -306,6 +272,7 @@ export class CreateOrEditComponent implements OnInit {
     }
 
     this.setfieldTabsFrom();
+    this.setAllSelectStauts();
   }
   /**拖拽到目标源时触发
    *
@@ -323,6 +290,7 @@ export class CreateOrEditComponent implements OnInit {
     }
 
     this.setfieldTabsFrom();
+    this.setAllSelectStauts();
   }
   /** 从目标源拖拽到目标源*/
   dragToResultSourceItemDropped(fieldsIndex) {
@@ -337,6 +305,7 @@ export class CreateOrEditComponent implements OnInit {
       this.resultSource[this.navActive].fields.splice(fieldsIndex, 0, _fromResultSourceDragEl);
     }
     this.setfieldTabsFrom();
+    this.setAllSelectStauts();
   }
   /**设置formA表单 */
   setfieldTabsFrom() {
@@ -389,7 +358,12 @@ export class CreateOrEditComponent implements OnInit {
         )
         .subscribe(res => {
           this.toaster.success(this._LocalizationService.instant(`Cms::SavedSuccessfully`));
-          this._location.back();
+          // this._location.back();
+             this._LocationBackService.backTo({
+          url: `/cms/admin/fields`,
+          replenish: '/edit' 
+        })
+          
           this._UpdateListService.updateList();
         });
       return;
@@ -404,7 +378,11 @@ export class CreateOrEditComponent implements OnInit {
       )
       .subscribe(res => {
         this.toaster.success(this._LocalizationService.instant(`Cms::SavedSuccessfully`));
-        this._location.back();
+        // this._location.back();
+           this._LocationBackService.backTo({
+          url: `/cms/admin/sections`,
+          replenish: '/create' 
+        })
         this._UpdateListService.updateList();
       });
   }
@@ -484,9 +462,9 @@ export class CreateOrEditComponent implements OnInit {
   /**删除tab标签后还原 fieldGroupList */
   deleteTabFieldGroupList(deleteFields) {
     //原数据
-    const fieldList=this.deepClone(this.fieldList);
+    const fieldList=structuredClone(this.fieldList);
     //右侧手风琴数据
-    const formRightGroup=this.deepClone(this.formRightGroup);
+    const formRightGroup=structuredClone(this.formRightGroup);
 
     // 获取要删除的原数据
     const deleteFieldList = fieldList.filter(el=>deleteFields.map(item => item.id).includes(el.id)) ;
@@ -544,9 +522,6 @@ export class CreateOrEditComponent implements OnInit {
   editFieldSave() {
     const input = this.editFieldFrom.value;
     this.resultSource[this.navActive].fields[this.EditFieldIndex].displayName = input.displayName;
-    // this.resultSource[this.navActive].fields[this.EditFieldIndex].required = input.required;
-    // this.resultSource[this.navActive].fields[this.EditFieldIndex].showInList = input.showInList;
-    // this.resultSource[this.navActive].fields[this.EditFieldIndex].enableSearch = input.enableSearch;
     this.visibleEditFieldOpen = false;
     this.setfieldTabsFrom();
   }
@@ -554,12 +529,23 @@ export class CreateOrEditComponent implements OnInit {
   /**点击“字段布局”复选框事件 */
   checkboxChange(event,input) {
     const {checked,name}=event.target;
-    const {row,index}=input;
+    const {index}=input;
     this.resultSource[this.navActive].fields[index][name]=checked;
     this.setfieldTabsFrom();
-    console.log(event.target,'点击“字段布局”复选框事件 ',event,input,'resultSource',this.resultSource,'newEntity',this.newEntity);
+    this.setAllSelectStauts();
+    // console.log(event.target,'点击“字段布局”复选框事件 ',event,input,'resultSource',this.resultSource,'newEntity',this.newEntity);
   }
 
+  /**全选状态改变 */
+  allSelectChange(event,name){
+    const {checked}=event.target;
+    this.resultSource[this.navActive].fields.forEach(el=>{
+      el[name]=checked;
+    })
+    console.log(this.resultSource[this.navActive].fields,'this.resultSource[this.navActive].fields',name,checked);
+    this.setfieldTabsFrom();
+    this.setAllSelectStauts();
+  }
 
 
 
@@ -571,7 +557,7 @@ export class CreateOrEditComponent implements OnInit {
   /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event) {
     const value = event.target.value;
-    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const pinyin = this.toPinyinService.get(value);
     const nameInput: any = this.nameInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);

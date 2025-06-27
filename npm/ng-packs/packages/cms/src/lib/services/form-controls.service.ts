@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormAdminService } from '../proxy/dignite/cms/admin/dynamic-forms/form-admin.service';
+import { FieldsDataService } from './fields-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormControlsService {
-  constructor(private _FormAdminService: FormAdminService) {}
+  constructor(private _FormAdminService: FormAdminService,private _service:FieldsDataService) {}
   /**需要查询的动态表单类型 */
   enableSearchTypeList: any[] = [];
   /**不需要展示的动态表单类型 */
@@ -13,12 +14,11 @@ export class FormControlsService {
 
   /**获取动态表单类型 */
   getDynamicFormType() {
-    return new Promise((resolve, rejects) => {
-      this._FormAdminService.getFormControls().subscribe((res: any) => {
-        // this.dynamicFormTypeList = res.items;
-        this.enableSearchTypeList = res.items.filter(el => el.enableSearch).map(el => el.name);
-        resolve(res.items);
-      });
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, rejects) => {
+     const items:any= await this._service.getControlsfieldTypes()
+      this.enableSearchTypeList = items.filter(el => el.enableSearch).map(el => el.name);
+     resolve(items);
     });
   }
 

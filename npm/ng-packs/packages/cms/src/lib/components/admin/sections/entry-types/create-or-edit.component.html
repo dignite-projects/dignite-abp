@@ -26,7 +26,7 @@
                                                 <ng-container *ngFor="let item of resultSource; let i = index">
                                                     <li [ngbNavItem]="i" ngbDropdown class="nav-item"
                                                         role="presentation">
-                                                        <button type="button" ngbNavLink class="nav-link">
+                                                        <button type="button" ngbNavLink class="nav-link" (click.stop)="setAllSelectStauts()">
                                                             {{ item.name }}
                                                             <span class="ms-1" (click.stop)="$event.stopPropagation()"
                                                                 ngbDropdownToggle></span>
@@ -51,14 +51,26 @@
                                                                     *ngIf="item.fields.length === 0">
                                                                     {{'Cms::DragAndDropFieldTips' | abpLocalization}}
                                                                 </p>
-                                                                <table class="table">
+                                                                <table class="table" *ngIf="item.fields.length>0">
                                                                     <thead>
                                                                         <th></th>
                                                                         <th>{{'Cms::DisplayName' | abpLocalization}}
                                                                         </th>
-                                                                        <th>{{'Cms::Required' | abpLocalization}}</th>
-                                                                        <th>{{'Cms::ShowInList' | abpLocalization}}</th>
-                                                                        <th>{{'Cms::EnableSearch' | abpLocalization}}
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center p-0">
+                                                                                <input type="checkbox" role="button" class="form-check-input me-1" [checked]="isAllSelect.isRequired" (change)="allSelectChange($event,'required')" />{{'Cms::Required' | abpLocalization}}
+                                                                            </div>
+                                                                         
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center p-0">
+                                                                                <input type="checkbox" role="button" class="form-check-input me-1" [checked]="isAllSelect.isShowInList" (change)="allSelectChange($event,'showInList')" />{{'Cms::ShowInList' | abpLocalization}}
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div class="d-flex align-items-center p-0">
+                                                                                <input type="checkbox" role="button" class="form-check-input me-1" [checked]="isAllSelect.isEnableSearch" (change)="allSelectChange($event,'enableSearch')" />{{'Cms::EnableSearch' | abpLocalization}}
+                                                                            </div>
                                                                         </th>
                                                                         <th></th>
                                                                     </thead>

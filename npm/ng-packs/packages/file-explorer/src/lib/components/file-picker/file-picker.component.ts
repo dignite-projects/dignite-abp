@@ -1,6 +1,5 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FileApiService } from '../../services/file-api.service';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -10,24 +9,15 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class FilePickerComponent implements OnChanges {
 
-
-
-  constructor(
-    private _FileApiService: FileApiService,
-  ) {
-
-  }
-
-
   /**是否多选 */
-  _multiple: boolean = false
+  _multiple = false
   @Input()
   public set multiple(v: boolean) {
     this._multiple = v;
   }
 
   /**图片容器 */
-  _fileContainerName: string = 'Images'
+  _fileContainerName = 'Images'
   @Input()
   public set fileContainerName(v: string) {
     this._fileContainerName = v;
@@ -37,7 +27,7 @@ export class FilePickerComponent implements OnChanges {
   @Input() selectFormFile: any[]
 
   ngOnChanges(changes: SimpleChanges): void {
-    let selectFormFilengOnChanges = changes.selectFormFile['currentValue']
+    const selectFormFilengOnChanges = changes.selectFormFile['currentValue']
     if (selectFormFilengOnChanges.length > 0) {
       this._fileShowTable = selectFormFilengOnChanges
     }
@@ -49,14 +39,14 @@ export class FilePickerComponent implements OnChanges {
 
   /**表格选择的文件回调 */
   _selectFilefn(event: any[]) {
-    let _fileShowTable = this._FileApiService.deepClone(event)
+    const _fileShowTable = structuredClone(event)
     this._fileShowTable = _fileShowTable
     this.selectFormFile = _fileShowTable
     this.selectedFileChange.emit(_fileShowTable)
   }
 
   /**模态框-状态-是否打开 */
-  ModalOpen: boolean = false
+  ModalOpen= false
 
   /**删除文件表格项 */
   deleteFileTableItem(i, file) {

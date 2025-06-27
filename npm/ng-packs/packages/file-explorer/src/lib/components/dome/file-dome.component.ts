@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { FileApiService } from '../../services/file-api.service';
+import { Component } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -19,7 +18,6 @@ export class FileDomeComponent {
    */
   fileDataToBeSubmitted: any
 
-private FileApiService=inject(FileApiService)
   /**跟随表单提交--数据发生改变回调 */
   fileDataChange(event) {
     this.fileDataToBeSubmitted = event

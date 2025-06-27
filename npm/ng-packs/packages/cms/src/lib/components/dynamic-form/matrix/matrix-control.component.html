@@ -1,7 +1,15 @@
 <form [formGroup]="_entity">
     <div formGroupName="extraProperties">
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
+           <div class="d-flex align-items-center justify-content-between position-sticky  bg-white py-1" style="top: 42px;z-index: 10;">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            @if(fieldNameControl?.controls?.length>0){
+                <button  type="button" class="btn btn-sm btn-light" (click)="toggleAll()">
+                    <i class="bi" [class.bi-arrows-expand]="!isAllExpanded" [class.bi-arrows-collapse]="isAllExpanded"></i>
+                    <!-- {{ isAllExpanded ? '折叠全部' : '展开全部' }} -->
+                </button>
+            }
+           </div>
             <div [class]="fieldNameControl?.controls?.length>0?'border p-2 rounded-2':''">
                 <div [formArrayName]="_fields.field.name" cdkDropList (cdkDropListDropped)="drop($event)">
                     <ng-container *ngFor="let item of fieldNameControl.controls;let i=index">
@@ -26,66 +34,18 @@
                                     <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
                                         <ng-container *ngFor="let elf of el.fields; let fi=index">
                                             <ng-container *ngIf="item&&elf&&_culture">
-                                                <df-dynamic [fields]="{ field: elf,displayName:elf.displayName }"
+                                                <df-dynamic-control [fields]="{ field: elf,displayName:elf.displayName }"
                                                     [selected]="_selected ? _selected[i]?_selected[i][_parentFiledName][elf.name]:'': ''"
                                                     [parentFiledName]="'extraProperties'" [culture]="_culture"
-                                                    [entity]="item"></df-dynamic>
+                                                    [entity]="item"></df-dynamic-control>
+                                                    
                                             </ng-container>
                                         </ng-container>
                                     </ng-container>
                                 </ng-container>
                             </div>
                         </div>
-                        <!-- <div class="card mb-3 border " [formGroupName]="i" cdkDrag cdkDragLockAxis="y"
-                            [cdkDragData]="item">
-                            <div ngbAccordion #accordion="ngbAccordion">
-                                <div ngbAccordionItem="first">
-                                    <h2 ngbAccordionHeader>
-                                        <button ngbAccordionButton>
-                                            <div type="button"
-                                                class="card-header d-flex align-items-center justify-content-between border-bottom pt-1">
-                                                <div class="d-flex">
-                                                    <div class="drag-handle me-2" cdkDragHandle>
-                                                        <span class="bi bi-arrows-move fs-5"></span>
-                                                    </div>{{item.value.displayName}}
-                                                </div>
-                                                <div>
-                                                    <button class="btn btn-sm btn-light p-0"
-                                                        (click.stop)="deleteMatrixControl(i,item)"><i
-                                                            class="fas fa-trash p-2"></i></button>
-                                                    <i class="bi bi-chevron-down ms-2"></i>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </h2>
-                                    <div ngbAccordionCollapse>
-                                        <div ngbAccordionBody>
-                                            <ng-template>
-                                                <div class="card-body">
-                                                    <ng-container *ngFor="let el of MatrixBlockTypesList;let il =index">
-                                                        <ng-container *ngIf="el.name===item.value.matrixBlockTypeName">
-                                                            <ng-container *ngFor="let elf of el.fields; let fi=index">
-                                                                <ng-container *ngIf="item&&elf&&_culture">
-                                                                    <df-dynamic
-                                                                        [fields]="{ field: elf,displayName:elf.displayName }"
-                                                                        [selected]="_selected ? _selected[i]?_selected[i][_parentFiledName][elf.name]:'': ''"
-                                                                        [parentFiledName]="'extraProperties'"
-                                                                        [culture]="_culture"
-                                                                        [entity]="item"></df-dynamic>
-                                                                </ng-container>
-                                                            </ng-container>
-                                                        </ng-container>
-                                                    </ng-container>
-                                                </div>
-                                            </ng-template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-                        <!--  -->
+                        
                     </ng-container>
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">

@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControlService } from '../../services/form-control.service';
 import { FieldControlGroupInterfaces } from '../../interfaces';
@@ -52,7 +53,7 @@ export class DynamicSearchComponent {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     if (this._fields && this._entity&&this._culture) {
-      let _fieldControlGroup: any[] = this._FormControlService.AddFieldControlGroup();
+      let _fieldControlGroup: any[] = this._FormControlService.addFieldControlGroup();
       let fieldControlItem = _fieldControlGroup.find(el => el.name === this._fields?.field?.formControlName);
       this.loadComponent(fieldControlItem);
     }

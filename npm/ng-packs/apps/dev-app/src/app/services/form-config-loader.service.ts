@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 export class FormConfigLoaderService {
   private configs: any[] = [];
 
-  constructor() {}
-
   // 动态加载配置
   async loadConfig(): Promise<void> {
     const ckEditorFieldControlGroup = await import('@dignite-ng/expand.ck-editor').then(
@@ -26,7 +24,7 @@ export class FormConfigLoaderService {
     );
   }
 
-  // 合并配置
+  // 获取合并后的配置
   getMergedConfig() {
     return this.configs;
   }

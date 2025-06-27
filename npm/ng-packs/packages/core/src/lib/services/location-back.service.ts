@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { backBase } from './models';
 
-export interface backBase {
-  //检查的链接，如果链接中包含该字符串，则返回上一页，否则跳转到Url页
-  url?: string;
-  //链接补充，用于在url后面补充其余链接
-  replenish?: string;
-}
 
+/**
+ * 用于返回上一页的服务
+ */
 @Injectable({
   providedIn: 'root',
 })

@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'df-numeric-edit-search',

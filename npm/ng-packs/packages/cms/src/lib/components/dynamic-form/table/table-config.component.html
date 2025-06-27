@@ -24,10 +24,10 @@
                                     <span class="bi bi-arrows-move fs-5"></span>
                                 </div>
                             </td>
-                            <td><input type="text" class="form-control" formControlName="displayName"  (blur)="disPlayNameInputBlur($event,item)" ></td>
-                            <td><input type="text" class="form-control" formControlName="name"></td>
+                            <td><input type="text" class="form-control" formControlName="displayName" required (blur)="disPlayNameInputBlur($event,item)" ></td>
+                            <td><input type="text" class="form-control" formControlName="name" required></td>
                             <td>
-                                <select class="form-select" formControlName="formControlName"
+                                <select class="form-select" formControlName="formControlName" required
                                     (change)="selectTableControl($event,i,item)">
                                     <option value="">{{'Cms::SelectFormControl' | abpLocalization}}</option>
                                     <ng-container *ngFor="let item_f of _fieldControlGroup;let i_f =index">
@@ -50,7 +50,6 @@
                 </tbody>
             </table>
         </div>
-        <!-- (abpInit)="submitclick?.nativeElement?.click()" -->
         <button type="submit"  style="display: none;"
             #submitclick></button>
     </div>
@@ -70,8 +69,8 @@
                  (submit)="createOrEditSave()">
                 <button type="submit" #tableSelectModalSubmit style="display: none"></button>
                 <ng-container *ngIf="CurrentSelectionTableControlName&&tableSelectForm">
-                    <df-dynamic [type]="CurrentSelectionTableControlName" 
-                    [selected]="_tableSelected" [formGroup]="tableSelectForm" [entity]="tableSelectForm"></df-dynamic>
+                    <df-dynamic-config [type]="CurrentSelectionTableControlName" 
+                    [selected]="_tableSelected" [formGroup]="tableSelectForm" [form]="tableSelectForm"></df-dynamic-config>
                 </ng-container>
             </form>
         </ng-container>

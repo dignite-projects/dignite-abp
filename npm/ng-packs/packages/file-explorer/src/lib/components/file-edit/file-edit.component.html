@@ -21,7 +21,7 @@
                     <div>{{item.name}}</div>
                     <div class="form-text text-danger" *ngIf="item.size > sizeLimit">
                         {{'FileExplorer::ExceedsMaximumSize' |
-                        abpLocalization:_FileApiService.formatFileSize(sizeLimit)}}</div>
+                        abpLocalization:(sizeLimit|formatFileSize)}}</div>
                 </th>
                 <td>{{item.fileSize}}</td>
                 <td>

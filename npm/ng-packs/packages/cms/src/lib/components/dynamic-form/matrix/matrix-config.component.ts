@@ -6,15 +6,14 @@ import {
   ElementRef,
   inject,
   Input,
-  viewChild,
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatrixConfig, MatrixItemConfig } from './matrix-config';
-import { CmsApiService, FieldAbstractsService } from '../../../services';
-import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { KeysConvertToLowercaseService, FieldsDataService } from '../../../services';
+import { CdkDrag,  moveItemInArray } from '@angular/cdk/drag-drop';
 import { ValidatorsService } from '@dignite-ng/expand.core';
-
+import { ToPinyinService } from '@dignite-ng/expand.core'
 @Component({
   selector: 'df-matrix-config',
   templateUrl: './matrix-config.component.html',
@@ -23,12 +22,13 @@ import { ValidatorsService } from '@dignite-ng/expand.core';
 export class MatrixConfigComponent {
   constructor(
     private fb: FormBuilder,
-    private _CmsApiService: CmsApiService,
-    private _FieldAbstractsService: FieldAbstractsService
+    private _KeysConvertToLowercaseService: KeysConvertToLowercaseService,
+    private _FieldsDataService: FieldsDataService,
+    private toPinyinService:ToPinyinService
   ) {}
 
   /**表单控件组 */
-  _FieldControlGroup: any[];
+  _FieldControlGroup: any[]=[];
   /**表单控件类型 */
   _type: any;
   @Input()
@@ -43,9 +43,7 @@ export class MatrixConfigComponent {
     if (v) {
       for (const key in v.formConfiguration) {
         if (Array.isArray(v.formConfiguration[key])) {
-          v.formConfiguration[key] = this._CmsApiService.convertKeysToCamelCase(
-            v.formConfiguration[key]
-          );
+          v.formConfiguration[key] = this._KeysConvertToLowercaseService.get(v.formConfiguration[key]);
         }
       }
       this._selected = v;
@@ -71,21 +69,25 @@ export class MatrixConfigComponent {
   }
 
   AfterInit() {
-    return new Promise(async (resolve, rejects) => {
-      this._FieldControlGroup = this._FieldAbstractsService.getExcludeAssignControl(this._type);
+    return new Promise(async (resolve) => {
+      this._FieldControlGroup = await this._FieldsDataService.getControlsfieldTypes();
       this._Entity.setControl('formConfiguration', this.fb.group(new MatrixConfig()));
       await this.setSelectValue();
       this.formConfiguration.patchValue(this._selected.formConfiguration);
+      
       resolve(true);
     });
   }
-
+  /**
+   * 设置选择值
+   * @returns void
+   */
   setSelectValue() {
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve) => {
       if (this._selected && this._selected.formControlName == this._type) {
         this._selected.formConfiguration['MatrixBlockTypes'].forEach((el, index) => {
           this.addMatrixBlockTypeItem(el);
-          el.fields.forEach((elf, indexf) => {
+          el.fields.forEach((elf) => {
             this.addMatrixFieldItem(elf, index);
           });
         });
@@ -246,7 +248,7 @@ export class MatrixConfigComponent {
   /**矩阵displayNameInput字段失去焦点 */
   displayNameInputBlur(event) {
     const value = event.target.value;
-    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const pinyin = this.toPinyinService.get(value);
     const nameInput = this.nameInput;
     if (nameInput.value) return;
     nameInput.patchValue(pinyin);
@@ -254,7 +256,7 @@ export class MatrixConfigComponent {
   /**矩阵displayNameInput字段失去焦点 */
   MatrixFieldDisplayNameInputBlur(event) {
     const value = event.target.value;
-    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const pinyin = this.toPinyinService.get(value);
     const FieldnameInput = this.FieldnameInput;
     if (FieldnameInput.value) return;
     FieldnameInput.patchValue(pinyin);

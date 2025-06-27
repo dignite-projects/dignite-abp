@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, ViewChild, ChangeDetectorRef, inject } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+import { Component, ElementRef, Input, ViewChild, ChangeDetectorRef, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateEditInterfaces } from '../../../enums/date-edit-interfaces';
 import { DatePipe } from '@angular/common';
@@ -8,7 +9,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './date-edit-control.component.html',
   styleUrls: ['./date-edit-control.component.scss'],
 })
-export class DateEditControlComponent {
+export class DateEditControlComponent implements OnDestroy {
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
   private _dataPipe = inject(DatePipe);
   _DateEditInterfaces = DateEditInterfaces;
@@ -64,8 +65,8 @@ export class DateEditControlComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray = [];
-      let formConfiguration = this._fields.field.formConfiguration;
+      const ValidatorsArray = [];
+      const formConfiguration = this._fields.field.formConfiguration;
       if (this._fields.required) {
         ValidatorsArray.push(Validators.required);
       }
@@ -87,7 +88,7 @@ export class DateEditControlComponent {
       if (this._fields.field.formConfiguration['DateEdit.InputMode'] === DateEditInterfaces.Month) {
         controlName = this._dataPipe.transform(this._selected, 'yyyy-MM');
       }
-      let newControl = this.fb.control(controlName, ValidatorsArray);
+      const newControl = this.fb.control(controlName, ValidatorsArray);
       this.extraProperties.setControl(this._fields.field.name, newControl);
 
       resolve(true);

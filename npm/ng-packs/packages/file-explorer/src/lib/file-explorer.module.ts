@@ -6,7 +6,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { FileExplorerRoutingModule } from './file-explorer-routing.module';
-import { FileEditComponent, FilePickerComponent, FileModalComponent, FileModalTreeComponent, FileDomeComponent, fielFieldControlGroup } from './components';
+import { FileEditComponent, FilePickerComponent, FileModalComponent, FileModalTreeComponent, FileDomeComponent } from './components';
 import { FilePreviewComponent } from './previews/file-preview.component';
 import { FileExplorerConfigComponent } from './components/dynamic-form/file-explorer/file-explorer-config.component';
 import { FileExplorerControlComponent } from './components/dynamic-form/file-explorer/file-explorer-control.component';
@@ -14,6 +14,7 @@ import { FileExplorerViewComponent } from './components/dynamic-form/file-explor
 import { TreeModule } from '@abp/ng.components/tree';
 import { GetDirectoryNamePipe } from './pipe/get-directory-name.pipe';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormatFileSizePipe } from './pipe/format-file-size.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TreeModule,
     GetDirectoryNamePipe,
     DragDropModule,
+    FormatFileSizePipe,
   ],
   exports: [
     FileEditComponent,
@@ -47,10 +49,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     FileModalTreeComponent,
     FileDomeComponent,
     FilePreviewComponent,
+    // FormatFileSizePipe
     // FileExplorerConfigComponent,
     // FileExplorerControlComponent,
   ],
   providers: [
+    FormatFileSizePipe,
     // GetImageUrlPipe
     // // [Required]
     // ListService,

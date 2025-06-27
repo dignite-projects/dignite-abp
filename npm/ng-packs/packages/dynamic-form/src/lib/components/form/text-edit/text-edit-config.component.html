@@ -1,8 +1,8 @@
-<div [formGroup]="_Entity">
+<form [formGroup]="formEntity">
     <div formGroupName="formConfiguration">
         <div class="mb-3">
             <label class="form-label">{{'AbpDynamicForm::Placeholder' | abpLocalization}}</label>
-            <input type="text" class="form-control" formControlName="TextEdit.Placeholder">
+            <input type="text" class="form-control"   formControlName="TextEdit.Placeholder" >
         </div>
         <div class="mb-3">
             <label class="form-label">{{'AbpDynamicForm::TextEditMode' | abpLocalization}}</label>
@@ -27,6 +27,6 @@
             <label class="form-label">{{'AbpDynamicForm::CharLimit' | abpLocalization}}</label>
             <input type="number" class="form-control" formControlName="TextEdit.CharLimit">
         </div>
-        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;" #submitclick></button>
+        <button type="submit"  style="display: none;" #submitclick></button>
     </div>
-</div>
+</form>

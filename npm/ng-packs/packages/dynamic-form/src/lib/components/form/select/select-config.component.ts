@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild } fr
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SelectConfig } from './select-config';
 import { DfApiService } from '../../../services';
-import {  moveItemInArray } from '@angular/cdk/drag-drop';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'df-select-config',
@@ -28,14 +28,14 @@ export class SelectConfigComponent {
   }
 
   /**表单实体 */
-  _Entity: FormGroup | undefined;
+  formEntity: FormGroup | undefined;
   @Input()
   public set Entity(v: FormGroup) {
-    this._Entity = v;
+    this.formEntity = v;
     this.dataLoaded();
   }
   get formConfiguration() {
-    return this._Entity?.get('formConfiguration') as FormGroup;
+    return this.formEntity?.get('formConfiguration') as FormGroup;
   }
   get SelectOptions() {
     return this.formConfiguration.controls['Select.Options'] as FormArray;
@@ -43,10 +43,8 @@ export class SelectConfigComponent {
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
   private cdr = inject(ChangeDetectorRef);
   async dataLoaded() {
-    if (this._Entity && this._type) {
+    if (this.formEntity && this._type) {
       await this.AfterInit();
-      this.cdr.detectChanges(); // 手动触发变更检测
-      this.submitclick?.nativeElement?.click();
     }
   }
   /**增加选项 */
@@ -56,7 +54,7 @@ export class SelectConfigComponent {
         Text: new FormControl('', Validators.required),
         Value: new FormControl('', Validators.required),
         Selected: new FormControl(false),
-      })
+      }),
     );
   }
   /**删除某个选项 */
@@ -66,7 +64,9 @@ export class SelectConfigComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity?.setControl('formConfiguration', this.fb.group(new SelectConfig()));
+      this.formEntity?.setControl('formConfiguration', this.fb.group(new SelectConfig()));
+      this.cdr.detectChanges(); // 手动触发变更检测
+      this.submitclick?.nativeElement?.click();
       if (this._selected && this._selected.formControlName == this._type) {
         for (const element of this._selected.formConfiguration['Select.Options']) {
           for (const key in element) {
@@ -86,22 +86,24 @@ export class SelectConfigComponent {
     });
   }
 
+  /**
+   * 当选择项的文本发生变化时，更新对应的值
+   * @param event 输入事件对象
+   * @param index 选择项的索引位置
+   * @description 如果选择项已有Value值则不处理，否则将中文文本转换为拼音作为Value值
+   */
   textChange(event, index) {
     const SelectOptionsItem = this.SelectOptions.at(index);
     const value = event.target.value;
     if (SelectOptionsItem.get('Value')?.value) return;
     SelectOptionsItem.patchValue({
-      Value: this._DfApiService.chineseToPinyin(value),
+      Value: structuredClone(value),
     });
   }
 
   /**调整表格位置 */
   drop(event: any) {
-    moveItemInArray(
-      this.SelectOptions.controls,
-      event.previousIndex,
-      event.currentIndex
-    );
-    this.SelectOptions.updateValueAndValidity()
+    moveItemInArray(this.SelectOptions.controls, event.previousIndex, event.currentIndex);
+    this.SelectOptions.updateValueAndValidity();
   }
 }

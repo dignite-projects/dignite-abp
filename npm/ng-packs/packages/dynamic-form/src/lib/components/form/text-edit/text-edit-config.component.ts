@@ -12,18 +12,21 @@ import { TextEditMode } from '../../../enums/text-edit-mode';
 export class TextEditConfigComponent {
   constructor(private fb: FormBuilder) {}
   _TextEditMode = TextEditMode;
+  RadioIndex1: any = Math.floor(Math.random() * 1001);
+  RadioIndex2: any = Math.floor(Math.random() * 1001);
+
   /**表单控件类型 */
-  _type: any;
+  formControlName: any;
   @Input()
   public set type(v: any) {
-    this._type = v;
+    this.formControlName = v;
     this.dataLoaded();
   }
   /**表单实体 */
-  _Entity: FormGroup | undefined;
+  formEntity: FormGroup | undefined;
   @Input()
   public set Entity(v: FormGroup) {
-    this._Entity = v;
+    this.formEntity = v;
     this.dataLoaded();
   }
   /**选择的表单信息 */
@@ -34,24 +37,22 @@ export class TextEditConfigComponent {
     this.dataLoaded();
   }
   get formConfiguration() {
-    return this._Entity.get('formConfiguration') as FormGroup;
+    return this.formEntity.get('formConfiguration') as FormGroup;
   }
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
   private cdr = inject(ChangeDetectorRef);
   async dataLoaded() {
-    if (this._Entity && this._type) {
+    if (this.formEntity && this.formControlName) {
       await this.AfterInit();
-      this.cdr.detectChanges(); // 手动触发变更检测
-      // this.submitclick?.nativeElement?.click();
     }
   }
-  RadioIndex1: any=Math.floor(Math.random() * 1001);
-  RadioIndex2: any=Math.floor(Math.random() * 1001);
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      this._Entity.setControl('formConfiguration', this.fb.group(new TextEditConfig()));
-      if (this._selected && this._selected.formControlName == this._type) {
+      this.formEntity.setControl('formConfiguration', this.fb.group(new TextEditConfig()));
+      this.cdr.detectChanges(); // 手动触发变更检测
+      this.submitclick?.nativeElement?.click();
+      if (this._selected && this._selected.formControlName == this.formControlName) {
         this.formConfiguration.patchValue({
           ...this._selected.formConfiguration,
         });

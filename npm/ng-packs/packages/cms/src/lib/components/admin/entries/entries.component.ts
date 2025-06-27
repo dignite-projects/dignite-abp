@@ -90,12 +90,12 @@ export class EntriesComponent implements OnInit {
 
   /**获取页面数据 */
   async getPageDate() {
-    // await this.getDynamicFormType();
     this.enableSearchTypeList = await this._FormControlsService.getEnableSearchTypeList();
-    //  this.disableshowinTypeList= this._FormControlsService.getdisableshowinTypeList();
     await this.getSiteOfSectionList();
     await this.getSectionLanguagesList();
+    this.filters.sorting = 'creationTime desc';
     this.hookToQuery();
+    console.log(this.entryTypeList,'entryTypeList',this.data.items);
   }
   /**需要查询的动态表单类型 */
   enableSearchTypeList: any[] = [];
@@ -105,16 +105,7 @@ export class EntriesComponent implements OnInit {
   disableshowinTypeList: any[] = [];
   /**需要展示的动态列表字段 */
   showinFieldList: any[] = [];
-  /**获取动态表单类型 */
-  // getDynamicFormType() {
-  //   return new Promise((resolve, rejects) => {
-  //     this._FormAdminService.getFormControls().subscribe((res:any) => {
-  //       // this.dynamicFormTypeList = res.items;
-  //       this.enableSearchTypeList = res.items.filter(el => el.enableSearch).map(el => el.name);
-  //       resolve(res.items);
-  //     });
-  //   });
-  // }
+
 
   /**切换板块 */
   async sectionIdChange() {
@@ -135,7 +126,6 @@ export class EntriesComponent implements OnInit {
           maxResultCount: 1000,
         })
         .subscribe(async (res: any) => {
-
           this.SiteOfSectionList = res.items.filter(el => el.isActive );
           this.filters.sectionId = res.items[0]?.id || '';
           await this.getSectionOfEntryType();
@@ -231,6 +221,7 @@ export class EntriesComponent implements OnInit {
         }
       }
     }
+    
   }
   async abpInitss() {
     await this.setfiltersValue();
@@ -308,6 +299,7 @@ export class EntriesComponent implements OnInit {
     this.filters = {
       sectionId: this.filters.sectionId,
       culture: this.filters.culture,
+     sorting : 'creationTime desc',
     } as GetEntriesInput;
     this.list.filter = '';
     this.list.maxResultCount = this.maxResultCount;
@@ -359,7 +351,7 @@ export class EntriesComponent implements OnInit {
       this.data.totalCount = 0;
       if (this.SiteOfSectionType == SectionType.Structure) {
         list.items = list.items.sort((a, b) => {
-          return a.order - b.order;
+          return new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime();
         });
       }
       for (const element of list.items) {
@@ -374,6 +366,11 @@ export class EntriesComponent implements OnInit {
   scrollToTop() {
     const scrollContainer = document.getElementsByClassName('lpx-scroll-container')[0];
     (scrollContainer || window).scrollTo(0, 0);
+  }
+
+  /**判断某个类型的条目是否存在 */
+  isEntryTypeExist(entryTypeId: string) {
+    return this.data?.items?.some(el => el.entryTypeId == entryTypeId);
   }
 
   /**删除条目 */

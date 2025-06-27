@@ -4,18 +4,18 @@
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { DatePipe, Location } from '@angular/common';
+import {  Location } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
-import { LocationBackService, UpdateListService } from '@dignite-ng/expand.core';
-import { CreateOrUpdateEntryInputBase } from './create-or-update-entry-input-base';
-import { ValidatorsService } from '@dignite-ng/expand.core';
+import { DigniteValidatorsService, LocationBackService, UpdateListService } from '@dignite-ng/expand.core';
+import { CreateOrUpdateEntryInputBase, EntriesToFormLabelMap } from './create-or-update-entry-input-base';
+// import { ValidatorsService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
-import { ClassicEditor, Essentials, Paragraph, Bold, Italic } from 'ckeditor5';
+// import { ClassicEditor, Essentials, Paragraph, Bold, Italic } from 'ckeditor5';
 
 @Component({
   selector: 'cms-edit',
@@ -36,8 +36,8 @@ export class EditComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private _EntryAdminService = inject(EntryAdminService);
   private _LocalizationService = inject(LocalizationService);
-  private _ValidatorsService = inject(ValidatorsService);
-  private datePipe = inject(DatePipe);
+  // private _ValidatorsService = inject(ValidatorsService);
+  // private datePipe = inject(DatePipe);
 
   /**获取提交按钮替身，用于真实触发表单提交 */
   @ViewChild('submitclick', { static: true }) submitclick: ElementRef;
@@ -203,6 +203,7 @@ export class EditComponent implements OnInit {
   //   return validationStatus
   // }
 private _LocationBackService=inject(LocationBackService);
+private _DigniteValidatorsService=inject(DigniteValidatorsService);
   /**提交 */
   save() {
     this.cultureInput.enable();
@@ -213,20 +214,41 @@ private _LocationBackService=inject(LocationBackService);
       new Date(input.publishTime).getTime() + 8 * 60 * 60 * 1000,
     ).toISOString();
     input.concurrencyStamp = this.entryInfo.concurrencyStamp;
-    this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
+    // this.formValidation = this._ValidatorsService.getFormValidationStatus(this.formEntity);
     // if (this._ValidatorsService.isCheckForm(this.formValidation, 'Cms')){
     //   this.isSubmit = false;
     //   return this.cultureInput.disable();
     // }
 
     // this.formValidation = this.getFormValidationStatus(this.formEntity);
-    if (this.isCheckFormCms(this.formValidation, 'Cms')) {
-      this.isSubmit = false;
-      return this.cultureInput.disable();
-    }
+    // if (this.isCheckFormCms(this.formValidation, 'Cms')) {
+    //   this.isSubmit = false;
+    //   return this.cultureInput.disable();
+    // }
     // this.formValidation = this.getFormValidationStatus(this.formEntity);
     // return this.isSubmit=false;
-    if (!this.formEntity.valid) return;
+    this.formValidation=true;
+    if (!this.formEntity.valid) {
+      for (const item of this.showEntryTypeInfo.fieldTabs) {
+        for (const el of item.fields) {
+            const info = `${this._LocalizationService.instant(
+              `Cms::The{1}FieldUnderThe{0}TAB`,
+              item.name,
+              el.field.displayName,
+            )}`;
+          EntriesToFormLabelMap[el.field.name]=info
+        }
+      }
+
+      this._DigniteValidatorsService.getErrorMessage({
+        form:this.formEntity,
+        map:EntriesToFormLabelMap,
+      });
+
+         this.isSubmit = false;
+       this.cultureInput.disable();
+      return;
+    }
     this._EntryAdminService
       .update(this.entryInfo.id, input)
       .pipe(
@@ -238,7 +260,7 @@ private _LocationBackService=inject(LocationBackService);
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
         this._LocationBackService.backTo({
           url: `/cms/admin/entries`,
-          replenish: '/create' 
+          replenish: '/edit' 
         })
         this._updateListService.updateList();
       });

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-
-import {  NgModule } from '@angular/core';
+import {  ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { provideCoreConfig } from './providers';
 
 const standaloneDirectives = [
   
@@ -34,4 +34,11 @@ const standaloneDirectives = [
   providers: [
   ],
 })
-export class CoreModule {}
+export class CoreModule {
+  static forRoot(): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [provideCoreConfig()],
+    };
+  }
+}

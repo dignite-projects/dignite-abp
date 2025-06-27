@@ -1,23 +1,17 @@
 import { eLayoutType, RoutesService } from '@abp/ng.core';
 import { APP_INITIALIZER } from '@angular/core';
 import { eCmsRouteNames } from '../enums/route-names';
-import { SettingTabsService } from '@abp/ng.setting-management/config';
-
-
-
-
 
 export const CMS_ROUTE_PROVIDERS = [
   {
     provide: APP_INITIALIZER,
     useFactory: configureRoutes,
-    deps: [RoutesService, SettingTabsService],
+    deps: [RoutesService],
     multi: true,
   },
 ];
 
-
-export function configureRoutes(routesService: RoutesService, settingTabs: SettingTabsService) {
+export function configureRoutes(routesService: RoutesService) {
   return () => {
     routesService.add([
       {
@@ -61,8 +55,6 @@ export function configureRoutes(routesService: RoutesService, settingTabs: Setti
         order: 3,
         requiredPolicy: 'CmsAdmin.Section',
       },
-      
-
     ]);
   };
 }

@@ -1,27 +1,27 @@
-
 /**富文本暗色样式适配 start  */
-:root .ck.ck-editor__editable_inline {
-    min-height: 160px !important;
-  }
-  .ck.ck-editor__main > .ck-editor__editable {
+::ng-deep .ck.ck-editor__editable_inline {
+  min-height: 160px !important;
+   border-color: var(--ck-color-base-border) !important;
+}
+.ck.ck-editor__main > .ck-editor__editable {
   background: var(--bs-body-bg) !important;
-  }
-  .ck.ck-toolbar{
+}
+.ck.ck-toolbar {
   background: var(--bs-body-bg) !important;
-  }
-  // .ck.ck-reset_all, .ck-reset_all *:not(.ck-reset_all-excluded *){
-  // // color:var(--bs-card-color) !important;  
-  // }
-  .ck.ck-button.ck-list-item-button, .ck.ck-button.ck-list-item-button.ck-on {
-  background:var(--bs-body-bg) !important;  
-  }
-  .ck.ck-dropdown__panel{
-  background:var(--bs-body-bg) !important;
-  } 
-  
-  .ck.ck-editor__editable_inline{
-    border-color: var(--ck-color-base-border) !important;
-  }
-  
-  
-  /**富文本暗色样式适配 end  */
+}
+// .ck.ck-reset_all, .ck-reset_all *:not(.ck-reset_all-excluded *){
+// // color:var(--bs-card-color) !important;
+// }
+.ck.ck-button.ck-list-item-button,
+.ck.ck-button.ck-list-item-button.ck-on {
+  background: var(--bs-body-bg) !important;
+}
+.ck.ck-dropdown__panel {
+  background: var(--bs-body-bg) !important;
+}
+
+// .ck.ck-editor__editable_inline {
+//   border-color: var(--ck-color-base-border) !important;
+// }
+
+/**富文本暗色样式适配 end  */

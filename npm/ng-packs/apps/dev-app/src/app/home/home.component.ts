@@ -16,6 +16,8 @@ export class HomeComponent {
 
   login() {
     this.loading = true;
-    this.authService.navigateToLogin();
+    this.authService.navigateToLogin({
+      __tenant:"22d6e516-ee6d-e699-465f-3a1321d1a780"
+    });
   }
 }

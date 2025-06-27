@@ -6,10 +6,12 @@ describe('CreateOrEditFieldComponent', () => {
   let component: CreateOrEditFieldComponent;
   let fixture: ComponentFixture<CreateOrEditFieldComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [CreateOrEditFieldComponent]
-    });
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(CreateOrEditFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

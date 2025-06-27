@@ -20,9 +20,9 @@ import {
 import { ValidatorsService, UpdateListService } from '@dignite-ng/expand.core';
 import { finalize, Observable } from 'rxjs';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { CmsApiService } from '../../../services';
 import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
 import { SectionType, sectionTypeOptions } from '../../../proxy/dignite/cms/sections';
+import { ToPinyinService } from '@dignite-ng/expand.core';
 
 @Component({
   selector: 'cms-create-or-edit-sections-modal',
@@ -35,7 +35,13 @@ export class CreateOrEditSectionsModalComponent {
   private _ValidatorsService = inject(ValidatorsService);
   private _UpdateListService = inject(UpdateListService);
   private _SectionAdminService = inject(SectionAdminService);
-  private _CmsApiService = inject(CmsApiService);
+
+  constructor(
+     private toPinyinService:ToPinyinService
+  ) {}
+
+  /**重置表单 */
+
   _SectionType = SectionType;
   _sectionTypeOptions = sectionTypeOptions;
   /**表单验证状态 */
@@ -114,7 +120,7 @@ export class CreateOrEditSectionsModalComponent {
             this.reset();
           })
         )
-        .subscribe(res => {
+        .subscribe(() => {
           this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
           this.visibleChange.emit(false);
           this.formValidation='';
@@ -128,7 +134,7 @@ export class CreateOrEditSectionsModalComponent {
           this.reset();
         })
       )
-      .subscribe(res => {
+      .subscribe(() => {
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
         this.visibleChange.emit(false);
         this.formValidation='';
@@ -141,7 +147,7 @@ export class CreateOrEditSectionsModalComponent {
 
     disPlayNameInputBlur(event) {
     const value = event.target.value;
-    const pinyin = this._CmsApiService.chineseToPinyin(value);
+    const pinyin = this.toPinyinService.get(value);
     const nameInput = this.nameInput;
     const routeInput = this.routeInput;
     const templateInput = this.templateInput;

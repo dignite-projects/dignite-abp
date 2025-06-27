@@ -14,18 +14,17 @@ import {
   AuthGuard,
   PermissionGuard,
 } from '@abp/ng.core';
-import { appentStyle } from './services/appent-content';
+// import { appentStyle } from './services/appent-content';
 import { Extensions_Props_Action_Token_Resolver } from './resolvers/extensions-props-action-token.resolver';
 
 const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard, PermissionGuard],
-    resolve: [Extensions_Props_Action_Token_Resolver, appentStyle],
+    resolve: [Extensions_Props_Action_Token_Resolver],
     children: [
       { 
         path: 'entries',
-
         children: [
           {
             path: '',

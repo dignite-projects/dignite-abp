@@ -68,7 +68,7 @@
             </ngx-datatable-column>
             <ngx-datatable-column [name]="'FileExplorer::FileSize' | abpLocalization" prop="size" [flexGrow]="1.5">
               <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                {{ _FileApiService.formatFileSize(value) }}
+                {{(value|formatFileSize) }}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [name]="'FileExplorer::Directory' | abpLocalization" prop="directoryId"
@@ -115,10 +115,10 @@
                         <div>{{ item.name }}</div>
                         <div class="form-text text-danger" *ngIf="item.size > sizeLimit">
                           {{'FileExplorer::ExceedsMaximumSize' |
-                          abpLocalization:_FileApiService.formatFileSize(sizeLimit)}}
+                          abpLocalization:(sizeLimit|formatFileSize)}}
                         </div>
                       </th>
-                      <td>{{ item.fileSize }}</td>
+                      <td>{{ item.size | formatFileSize }}</td>
                       <td>
                         <i *ngIf="item.status === 1" class="fas fa-check text-primary"></i>
                         <i *ngIf="item.status === 2" class="fas fa-times-circle text-danger"></i>

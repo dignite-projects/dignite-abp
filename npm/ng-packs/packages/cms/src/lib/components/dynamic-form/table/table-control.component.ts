@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CmsApiService } from '../../../services';
+import { KeysConvertToLowercaseService } from '../../../services';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -11,7 +11,7 @@ import { moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class TableControlComponent {
   constructor(
-    private _CmsApiService: CmsApiService // private fb: FormBuilder,
+    private _KeysConvertToLowercaseService: KeysConvertToLowercaseService // private fb: FormBuilder,
   ) {}
   private fb = inject(FormBuilder);
 
@@ -30,7 +30,7 @@ export class TableControlComponent {
     if (v) {
       for (const key in v.field?.formConfiguration) {
         if (Array.isArray(v.field?.formConfiguration[key])) {
-          v.field.formConfiguration[key] = this._CmsApiService.convertKeysToCamelCase(
+          v.field.formConfiguration[key] = this._KeysConvertToLowercaseService.get(
             v.field?.formConfiguration[key]
           );
         }
@@ -52,7 +52,7 @@ export class TableControlComponent {
   @Input()
   public set selected(v: any) {
     if (v) {
-      v = this._CmsApiService.convertKeysToCamelCase(v);
+      v = this._KeysConvertToLowercaseService.get(v);
       this._selected = v;
       this.dataLoaded();
     }

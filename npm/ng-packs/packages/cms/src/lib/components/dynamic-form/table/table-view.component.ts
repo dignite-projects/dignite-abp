@@ -1,16 +1,17 @@
-import { Component, Input } from '@angular/core';
+/* eslint-disable @angular-eslint/component-selector */
+import { Component, Input, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'cms-table-view',
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss',
 })
-export class TableViewComponent {
+export class TableViewComponent implements AfterContentInit {
   /**展示则内容 */
   showValue: any = '';
 
   /**是否显示再列表 */
-  @Input() showInList: boolean = false;
+  @Input() showInList = false;
   /**表单字段数据 */
   @Input() fields: any;
 
@@ -27,7 +28,7 @@ export class TableViewComponent {
   async ngAfterContentInit(): Promise<void> {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-    let valueOptions = this._value;
+    const valueOptions = this._value;
     if (this.type && valueOptions) {
       this.showValue = valueOptions;
     }

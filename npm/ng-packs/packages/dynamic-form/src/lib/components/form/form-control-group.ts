@@ -62,7 +62,7 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
 ];
 
 
-export function AddFieldControlGroup(array:any[] = []) {
+export function addFieldControlGroup(array:any[] = []) {
 
   for (const element of array) {
     const find = FieldControlGroup.find((control) => {

@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.Regionalization", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj", "{E0C2FB57-0CF9-5014-A6FC-40719257C961}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantLocalization", "..\..\framework\src\Dignite.Abp.TenantLocalization\Dignite.Abp.TenantLocalization.csproj", "{072AEF61-90A1-16E9-8592-FF879054297D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,10 @@ Global
 		{E0C2FB57-0CF9-5014-A6FC-40719257C961}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0C2FB57-0CF9-5014-A6FC-40719257C961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0C2FB57-0CF9-5014-A6FC-40719257C961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072AEF61-90A1-16E9-8592-FF879054297D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072AEF61-90A1-16E9-8592-FF879054297D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072AEF61-90A1-16E9-8592-FF879054297D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072AEF61-90A1-16E9-8592-FF879054297D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,6 +278,7 @@ Global
 		{1EB6E0F9-C35A-4795-BC90-ABD1772390EF} = {5D704FEA-4818-4F15-940A-9B6D9C367A93}
 		{1E8B587B-B19D-6D5E-440A-81288AE81A1A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{E0C2FB57-0CF9-5014-A6FC-40719257C961} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{072AEF61-90A1-16E9-8592-FF879054297D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

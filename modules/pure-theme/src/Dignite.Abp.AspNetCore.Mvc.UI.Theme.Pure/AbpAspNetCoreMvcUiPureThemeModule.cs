@@ -1,6 +1,6 @@
 ﻿using System.Text.Unicode;
 using Dignite.Abp.AspNetCore.Mvc.Regionalization;
-using Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme;
+using Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Bundling;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Toolbars;
 using Dignite.Abp.Seo;
@@ -19,7 +19,7 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 [DependsOn(
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyThemeModule),
+    typeof(AbpAspNetCoreMvcUiTenantThemeModule),
     typeof(AbpAspNetCoreMvcRegionalizationModule),
     typeof(AbpSeoModule)
     )]

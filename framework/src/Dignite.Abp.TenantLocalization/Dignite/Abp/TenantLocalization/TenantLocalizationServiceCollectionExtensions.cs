@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Localization;
-using Volo.Abp.Localization;
 
-namespace Dignite.Abp.MultiTenancyLocalization;
+namespace Dignite.Abp.TenantLocalization;
 
-public static class MultiTenancyLocalizationServiceCollectionExtensions
+public static class TenantLocalizationServiceCollectionExtensions
 {
-    public static IServiceCollection AddMultiTenancyLocalization(this IServiceCollection services)
+    public static IServiceCollection AddTenantLocalization(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 
@@ -20,7 +18,7 @@ public static class MultiTenancyLocalizationServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddMultiTenancyLocalization(
+    public static IServiceCollection AddTenantLocalization(
        this IServiceCollection services,
        Action<My.Extensions.Localization.Json.JsonLocalizationOptions> setupAction)
     {
@@ -34,8 +32,8 @@ public static class MultiTenancyLocalizationServiceCollectionExtensions
 
     internal static void AddJsonLocalizationServices(IServiceCollection services)
     {
-        services.TryAddSingleton(typeof(MultiTenancyJsonStringLocalizerFactory), typeof(MultiTenancyJsonStringLocalizerFactory));
-        services.Replace(ServiceDescriptor.Singleton<IStringLocalizerFactory, MultiTenancyStringLocalizerFactory>());
+        services.TryAddSingleton(typeof(TenantJsonStringLocalizerFactory), typeof(TenantJsonStringLocalizerFactory));
+        services.Replace(ServiceDescriptor.Singleton<IStringLocalizerFactory, TenantStringLocalizerFactory>());
     }
 
     internal static void AddJsonLocalizationServices(

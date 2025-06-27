@@ -1,25 +1,23 @@
 ﻿using System;
-using Microsoft.Extensions.Localization;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using My.Extensions.Localization.Json;
 using My.Extensions.Localization.Json.Internal;
 using Volo.Abp.MultiTenancy;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration.UserSecrets;
 
-namespace Dignite.Abp.MultiTenancyLocalization;
+namespace Dignite.Abp.TenantLocalization;
 
-public class MultiTenancyJsonStringLocalizerFactory : JsonStringLocalizerFactory
+public class TenantJsonStringLocalizerFactory : JsonStringLocalizerFactory
 {
     private readonly ConcurrentDictionary<string, JsonStringLocalizer> _localizerCache = new ConcurrentDictionary<string, JsonStringLocalizer>();
     private readonly ICurrentTenant _currentTenant;
     private readonly JsonLocalizationOptions _localizationOptions;
-    public MultiTenancyJsonStringLocalizerFactory(
+    public TenantJsonStringLocalizerFactory(
         ICurrentTenant currentTenant,
         IOptions<JsonLocalizationOptions> localizationOptions,
         ILoggerFactory loggerFactory) : base(localizationOptions, loggerFactory)

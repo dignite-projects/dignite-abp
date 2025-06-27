@@ -17,7 +17,7 @@
 
   <ItemGroup>			
     <ProjectReference Include="..\Dignite.Cms.Public.Application.Contracts\Dignite.Cms.Public.Application.Contracts.csproj" />
-	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.MultiTenancyLocalization\Dignite.Abp.MultiTenancyLocalization.csproj" />
+	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.TenantLocalization\Dignite.Abp.TenantLocalization.csproj" />
 	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj" />
   </ItemGroup>
 

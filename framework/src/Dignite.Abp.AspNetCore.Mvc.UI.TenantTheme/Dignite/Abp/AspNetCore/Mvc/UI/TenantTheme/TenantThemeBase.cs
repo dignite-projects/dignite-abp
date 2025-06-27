@@ -4,12 +4,12 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 
 /// <summary>
 /// 
 /// </summary>
-public abstract class MultiTenancyThemeBase : ITheme
+public abstract class TenantThemeBase : ITheme
 {
     public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
     protected IWebHostEnvironment HostingEnvironment => LazyServiceProvider.LazyGetRequiredService<IWebHostEnvironment>();
@@ -28,9 +28,9 @@ public abstract class MultiTenancyThemeBase : ITheme
         var currentThemeName = ThemeSelector.GetCurrentThemeInfo().Name;
         var layout = $"~/Themes/{currentThemeName}/Layouts/{name}.cshtml";
 
-        if (CurrentTenant.Id.HasValue)
+        if (CurrentTenant.IsAvailable)
         {
-            var tenantLayout = $"/Tenants/{CurrentTenant.Id}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
+            var tenantLayout = $"/Tenants/{CurrentTenant.Name}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
             var tenantLayoutPath = HostingEnvironment.ContentRootPath + tenantLayout;
             if (File.Exists(tenantLayoutPath))
             {

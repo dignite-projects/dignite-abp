@@ -1,11 +1,11 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme;
+﻿using Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 
 [ThemeName(Name)]
-public class PureTheme : MultiTenancyThemeBase, ITheme, ITransientDependency
+public class PureTheme : TenantThemeBase, ITheme, ITransientDependency
 {
     public const string Name = "Pure";
 

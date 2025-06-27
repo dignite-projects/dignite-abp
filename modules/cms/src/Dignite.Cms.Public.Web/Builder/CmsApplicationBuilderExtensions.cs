@@ -9,9 +9,10 @@ namespace Dignite.Cms.Public.Web.Builder
     public static class CmsApplicationBuilderExtensions
     {
         /// <summary>
-        /// 
+        /// UseCmsEndpoints is used to register CMS endpoints in the application pipeline.
         /// </summary>
         /// <param name="app"></param>
+        /// <param name="ignoredEndpoints"></param>
         /// <returns></returns>
         public static IApplicationBuilder UseCmsEndpoints(this IApplicationBuilder app, string[] ignoredEndpoints=null)
         {

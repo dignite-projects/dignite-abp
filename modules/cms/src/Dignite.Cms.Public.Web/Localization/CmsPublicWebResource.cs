@@ -1,8 +1,8 @@
-﻿using Dignite.Abp.MultiTenancyLocalization;
+﻿using Dignite.Abp.TenantLocalization;
 
 namespace Dignite.Cms.Public.Web.Localization
 {
-    [MultiTenancyLocalizationResourceName]
+    [TenantLocalizationResourceName]
     public class CmsPublicWebResource
     {
     }

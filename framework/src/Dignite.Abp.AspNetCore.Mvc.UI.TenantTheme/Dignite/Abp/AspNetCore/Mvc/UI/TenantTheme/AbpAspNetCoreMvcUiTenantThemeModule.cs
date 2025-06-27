@@ -5,10 +5,10 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme;
+namespace Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 
 [DependsOn(typeof(Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule))]
-public class AbpAspNetCoreMvcUiMultiTenancyThemeModule : AbpModule
+public class AbpAspNetCoreMvcUiTenantThemeModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -16,7 +16,7 @@ public class AbpAspNetCoreMvcUiMultiTenancyThemeModule : AbpModule
         {
             var currentTenantLazy = context.Services.GetServiceLazy<ICurrentTenant>();
             var themeSelectorLazy = context.Services.GetServiceLazy<IThemeSelector>();
-            options.ViewLocationExpanders.Add(new MultiTenancyViewLocationExpander(currentTenantLazy, themeSelectorLazy));
+            options.ViewLocationExpanders.Add(new TenantViewLocationExpander(currentTenantLazy, themeSelectorLazy));
         });
     }
 }

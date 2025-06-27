@@ -1,5 +1,5 @@
 ﻿using Dignite.Abp.AspNetCore.Mvc.Regionalization;
-using Dignite.Abp.MultiTenancyLocalization;
+using Dignite.Abp.TenantLocalization;
 using Dignite.Cms.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.Localization;
@@ -13,7 +13,7 @@ namespace Dignite.Cms.Public.Web;
 [DependsOn(
     typeof(CmsPublicApplicationContractsModule),
     typeof(CmsKitPublicWebModule),
-    typeof(AbpMultiTenancyLocalizationModule),
+    typeof(AbpTenantLocalizationModule),
     typeof(AbpAspNetCoreMvcRegionalizationModule)
     )]
 public class CmsPublicWebModule : AbpModule

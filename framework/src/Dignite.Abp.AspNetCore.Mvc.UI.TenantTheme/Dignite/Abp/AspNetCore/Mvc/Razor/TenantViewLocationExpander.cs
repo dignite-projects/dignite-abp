@@ -9,17 +9,17 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.AspNetCore.Mvc.Razor;
-public class MultiTenancyViewLocationExpander : IViewLocationExpander
+public class TenantViewLocationExpander : IViewLocationExpander
 {
     private const string _cultureKey = "___culture";
-    private const string _tenancyIdKey = "___tenantId";
+    private const string _tenancyNameKey = "___tenantName";
     private const string _themeNameKey = "___themeName";
     private const string _webComponentPathKey = "___webComponentPath";
 
     private readonly Lazy<ICurrentTenant> _currentTenantLazy;
     private readonly Lazy<IThemeSelector> _themeSelectorLazy;
 
-    public MultiTenancyViewLocationExpander(
+    public TenantViewLocationExpander(
         Lazy<ICurrentTenant> currentTenantLazy,
         Lazy<IThemeSelector> themeSelectorLazy)
     {
@@ -37,12 +37,12 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
         }
 
         // Using CurrentTenant so it loads the tenant specific resources for the views.
-        if (context.Values.GetOrDefault(_tenancyIdKey) == null)
+        if (context.Values.GetOrDefault(_tenancyNameKey) == null)
         {
             if (_currentTenantLazy.Value.IsAvailable)
             {
-                var tenantId = _currentTenantLazy.Value.Id.Value;
-                context.Values[_tenancyIdKey] = tenantId.ToString("D");
+                var tenantName = _currentTenantLazy.Value.Name;
+                context.Values[_tenancyNameKey] = tenantName;
             }
         }
 
@@ -80,16 +80,16 @@ public class MultiTenancyViewLocationExpander : IViewLocationExpander
     public IEnumerable<string> ExpandViewLocations([NotNull] ViewLocationExpanderContext context, [NotNull] IEnumerable<string> viewLocations)
     {
         var _viewLocations = GetViewLocations(context);
-        var tenantId = context.Values.GetOrDefault(_tenancyIdKey);
+        var tenantName = context.Values.GetOrDefault(_tenancyNameKey);
         var currentThemeName = context.Values.GetOrDefault(_themeNameKey);
 
-        if (!string.IsNullOrEmpty(tenantId))
+        if (!string.IsNullOrEmpty(tenantName))
         {
             var tenantViewLocations = new List<string>();
             foreach (var viewLocation in _viewLocations)
             {
-                tenantViewLocations.Add("/Tenants/" + tenantId + "/Themes/" + currentThemeName + viewLocation);
-                tenantViewLocations.Add("/Tenants/" + tenantId + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantName + "/Themes/" + currentThemeName + viewLocation);
+                tenantViewLocations.Add("/Tenants/" + tenantName + viewLocation);
                 tenantViewLocations.Add("/Themes/" + currentThemeName + viewLocation);
             }
 

@@ -5,8 +5,8 @@
 
   <PropertyGroup>
 	<TargetFrameworks>net8.0</TargetFrameworks>
-    <AssemblyName>Dignite.Abp.MultiTenancyLocalization</AssemblyName>
-    <PackageId>Dignite.Abp.MultiTenancyLocalization</PackageId>
+    <AssemblyName>Dignite.Abp.TenantLocalization</AssemblyName>
+    <PackageId>Dignite.Abp.TenantLocalization</PackageId>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>

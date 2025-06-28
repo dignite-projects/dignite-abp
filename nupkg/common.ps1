@@ -84,12 +84,12 @@ $solutions = (
 $projects = (
 
     # framework
-    "framework/src/Dignite.Abp.AspNetCore.Mvc.UI.MultiTenancyTheme",
+    "framework/src/Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme",
     "framework/src/Dignite.Abp.BlazoriseUI",
     "framework/src/Dignite.Abp.DynamicForms",
     "framework/src/Dignite.Abp.DynamicForms.Components",
     "framework/src/Dignite.Abp.DynamicForms.Components.BlazoriseUI",
-    "framework/src/Dignite.Abp.MultiTenancyLocalization",
+    "framework/src/Dignite.Abp.TenantLocalization",
     "framework/src/Dignite.Abp.Notifications",
     "framework/src/Dignite.Abp.Notifications.Components",
     "framework/src/Dignite.Abp.Notifications.Shared",

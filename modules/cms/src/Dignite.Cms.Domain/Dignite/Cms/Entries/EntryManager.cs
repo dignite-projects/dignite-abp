@@ -1,11 +1,10 @@
-﻿using Dignite.Abp.Data;
-using Dignite.Cms.Fields;
-using Dignite.Cms.Sections;
-using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Abp.Data;
+using Dignite.Cms.Fields;
+using Dignite.Cms.Sections;
 using Volo.Abp.Data;
 using Volo.Abp.Domain.Services;
 
@@ -26,7 +25,7 @@ namespace Dignite.Cms.Entries
             _fieldRepository = fieldRepository;
         }
 
-        public virtual async Task<Entry> CreateAsync(Guid entryTypeId, string culture, string title, string slug,
+        public virtual async Task<Entry> CreateAsync(Guid entryTypeId, string culture, string slug,
             DateTime publishTime, EntryStatus status, Guid? parentId, ExtraPropertyDictionary extraProperties,
             Guid? initialVersionId, string versionNotes,Guid? tenantId)
         {
@@ -56,7 +55,6 @@ namespace Dignite.Cms.Entries
                 entryType.SectionId,
                 entryTypeId,
                 culture,
-                title,
                 slug,
                 publishTime,
                 status,
@@ -85,7 +83,7 @@ namespace Dignite.Cms.Entries
         }
 
         public virtual async Task<Entry> UpdateAsync(
-            Guid id, string title, string slug,Guid? parentId,
+            Guid id, string slug,Guid? parentId,
             DateTime publishTime, EntryStatus status, ExtraPropertyDictionary extraProperties,
             string versionNotes,
             string concurrencyStamp)
@@ -97,7 +95,6 @@ namespace Dignite.Cms.Entries
             entry.SetConcurrencyStampIfNotNull(concurrencyStamp);
 
             //
-            entry.Title = title;
             entry.Slug = slug;
             entry.PublishTime = publishTime;
             entry.SetStatus(status);

@@ -2,12 +2,12 @@
 @using Dignite.Cms.Public.Web.Models;
 @model EntryViewModel
 @{
-    PageLayout.Content.Title = Model.Entry.Title;
+    PageLayout.Content.Title = Model.Entry.GetField<string>("title");
 }
 
 <section class="container my-5">
     <h1>
-        @Model.Entry.Title
+        <cms-entry-field field-name="title" entry="Model"></cms-entry-field>
     </h1>
 </section>
 

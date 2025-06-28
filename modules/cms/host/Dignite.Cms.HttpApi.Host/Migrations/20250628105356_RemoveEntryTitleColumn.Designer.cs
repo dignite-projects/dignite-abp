@@ -4,6 +4,7 @@ using Dignite.Cms.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Dignite.Cms.Migrations
 {
     [DbContext(typeof(CmsHttpApiHostMigrationsDbContext))]
-    partial class CmsHttpApiHostMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250628105356_RemoveEntryTitleColumn")]
+    partial class RemoveEntryTitleColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

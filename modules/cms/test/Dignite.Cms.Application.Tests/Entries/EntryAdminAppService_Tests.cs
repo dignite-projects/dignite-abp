@@ -1,4 +1,5 @@
-﻿using Dignite.Cms.Admin.Entries;
+﻿using Dignite.Abp.Data;
+using Dignite.Cms.Admin.Entries;
 using Shouldly;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -105,7 +106,6 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
                 EntryTypeId = testData.ChannelSectionEntryTypeId,
                 Culture = testData.EntryDefaultCulture,
                 Slug = newEntrySlug,
-                Title = "New Entry",
                 PublishTime = _clock.Now,
                 ExtraProperties = extraProperties
             });
@@ -138,7 +138,6 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
                     EntryTypeId = testData.ChannelSectionEntryTypeId,
                     Culture = testData.EntryDefaultCulture,
                     Slug = testData.ChannelSection_Entry1Slug,
-                    Title = "New Entry",
                     PublishTime = _clock.Now,
                     ExtraProperties = extraProperties
                 }
@@ -169,7 +168,6 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
                     EntryTypeId = testData.SingleSectionEntryTypeId,
                     Culture = testData.EntryDefaultCulture,
                     Slug = testData.SingleSection_EntrySlug,
-                    Title = "New Entry",
                     PublishTime = _clock.Now,
                     ExtraProperties = extraProperties
                 }
@@ -201,7 +199,6 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
                     EntryTypeId = testData.ChannelSectionEntryTypeId,
                     Culture = "ja",
                     Slug = testData.ChannelSection_Entry1Slug,
-                    Title = "New Entry",
                     PublishTime = _clock.Now,
                     InitialVersionId = testData.ChannelSection_Entry1Id,
                     ExtraProperties = extraProperties
@@ -213,9 +210,10 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
     [Fact]
     public async Task UpdateAsync_ShouldWork()
     {
+        var newTitle = "Updated Title";
         var extraProperties = new ExtraPropertyDictionary
         {
-            { testData.TextboxFieldName, "Tanaka" },
+            { testData.TextboxFieldName, newTitle },
             {
                 testData.SelectFieldName,
                 new List<string>
@@ -226,21 +224,19 @@ public class EntryAdminAppService_Tests : CmsApplicationTestBase
                 }
             }
         };
-        var newTitle = "New Entry Title";
         var entry = await entryAdminAppService.UpdateAsync(testData.ChannelSection_Entry2Id, 
             new UpdateEntryInput
             {
                 EntryTypeId = testData.ChannelSectionEntryTypeId,
                 Culture = testData.EntryDefaultCulture,
                 Slug = testData.ChannelSection_Entry2Slug,
-                Title = newTitle,
                 PublishTime = _clock.Now,
                 ExtraProperties = extraProperties,
             });
 
         var updatedentry = await entryAdminAppService.GetAsync(testData.ChannelSection_Entry2Id);
 
-        updatedentry.Title.ShouldBe(newTitle);
+        updatedentry.GetField<string>(testData.TextboxFieldName).ShouldBe(newTitle);
     }
 
     [Fact]

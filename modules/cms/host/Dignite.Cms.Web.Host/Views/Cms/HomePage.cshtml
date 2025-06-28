@@ -3,7 +3,7 @@
 @using Volo.Abp.Settings
 @model EntryViewModel
 @{
-    PageLayout.Content.Title = Model.Entry.Title;
+    PageLayout.Content.Title = Model.Entry.GetField<string>("title");
 
     //
     IList<QueryingByField> queryParameters = new List<QueryingByField>
@@ -48,7 +48,7 @@
                     max-result-count="4"
                     culture="@Model.Entry.Culture"
                     querying-by-fields="queryParameters"
-                    partial-name="blog/_recommended-for-home">
+                    partial-name="Blog/_recommended-for-home">
     </cms-entry-list>
 </section>
 

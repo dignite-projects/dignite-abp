@@ -4,22 +4,16 @@ namespace Dignite.Cms.Entries
     public static class EntryConsts
     {
         /// <summary>
-        /// Maximum length of the section Culture property.
+        /// Maximum length of the Entry Culture property.
         /// Default value: 16
         /// </summary>
-        public static int MaxLanguageCultureNameLength { get; set; } = 16;
-
-        /// <summary>
-        /// Maximum length of the section title property.
-        /// Default value: 256
-        /// </summary>
-        public static int MaxTitleLength { get; set; } = 256;
+        public static int MaxCultureLength { get; set; } = 16;
 
         /// <summary>
         /// Maximum length of the entry name property.
-        /// Default value: 256
+        /// Default value: 128
         /// </summary>
-        public static int MaxSlugLength { get; set; } = 256;
+        public static int MaxSlugLength { get; set; } = 128;
 
 
         /// <summary>

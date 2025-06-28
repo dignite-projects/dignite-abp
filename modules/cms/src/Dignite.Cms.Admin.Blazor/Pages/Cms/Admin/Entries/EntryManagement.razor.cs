@@ -111,12 +111,6 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
                     },
                     new TableColumn
                     {
-                        Title = L["Title"],
-                        Sortable = true,
-                        Data = nameof(EntryDto.Title)
-                    },
-                    new TableColumn
-                    {
                         Title = L["Slug"],
                         Sortable = true,
                         Data = nameof(EntryDto.Slug)
@@ -218,7 +212,6 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
         protected async Task OnCultureChangedAsync(string value)
         {
             CultureName = value;
-            GetListInput.Filter = null; 
             await SetToolbarItemsAsync();
             await SearchEntitiesAsync();
         }

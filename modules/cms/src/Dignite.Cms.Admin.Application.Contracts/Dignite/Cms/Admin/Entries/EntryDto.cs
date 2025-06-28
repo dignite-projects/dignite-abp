@@ -33,8 +33,6 @@ namespace Dignite.Cms.Admin.Entries
         /// </summary>
         public string Culture { get; set; }
 
-        public string Title { get; set; }
-
         /// <summary>
         /// 
         /// </summary>

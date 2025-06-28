@@ -28,16 +28,9 @@ namespace Dignite.Cms.Admin.Entries
         /// The culture corresponding to the entry
         /// </summary>
         [Required]
-        [DynamicMaxLength(typeof(EntryConsts), nameof(EntryConsts.MaxLanguageCultureNameLength))]
+        [DynamicMaxLength(typeof(EntryConsts), nameof(EntryConsts.MaxCultureLength))]
         public string Culture { get; set; }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Required]
-        [DynamicMaxLength(typeof(EntryConsts), nameof(EntryConsts.MaxTitleLength))]
-        public string Title { get; set; }
 
         /// <summary>
         /// 

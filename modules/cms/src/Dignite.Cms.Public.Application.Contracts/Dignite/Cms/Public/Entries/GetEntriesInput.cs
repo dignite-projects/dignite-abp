@@ -24,11 +24,6 @@ namespace Dignite.Cms.Public.Entries
 
         public Guid? EntryTypeId { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Filter { get; set; }
-
         public Guid? CreatorId { get; set; }
 
         public DateTime? StartPublishDate { get; set; }

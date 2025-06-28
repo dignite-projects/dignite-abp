@@ -44,7 +44,6 @@ public class EntryManager_Tests : CmsDomainTestBase
         var entry = await entryManager.CreateAsync(
             testData.ChannelSectionEntryTypeId,
             testData.EntryDefaultCulture,
-            "The third blog post draft",
             "the-third-blog-post-draft",
             _clock.Now,
             EntryStatus.Draft,
@@ -84,7 +83,6 @@ public class EntryManager_Tests : CmsDomainTestBase
         var entry = await entryManager.CreateAsync(
             testData.ChannelSectionEntryTypeId,
             testData.EntryDefaultCulture,
-            "The third blog post published",
             "the-third-blog-post-published",
             _clock.Now,
             EntryStatus.Published,
@@ -125,7 +123,6 @@ public class EntryManager_Tests : CmsDomainTestBase
             async () => await entryManager.CreateAsync(
                 testData.ChannelSectionEntryTypeId,
                 testData.EntryDefaultCulture,
-                "New blog post",
                 testData.ChannelSection_Entry1Slug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -161,7 +158,6 @@ public class EntryManager_Tests : CmsDomainTestBase
             async () => await entryManager.CreateAsync(
                 testData.SingleSectionEntryTypeId,
                 testData.EntryDefaultCulture,
-                "New blog post",
                 "mew-blog-post-en",
                 _clock.Now,
                 EntryStatus.Published,
@@ -197,7 +193,6 @@ public class EntryManager_Tests : CmsDomainTestBase
             async () => await entryManager.CreateAsync(
                 testData.ChannelSectionEntryTypeId,
                 "ja",   //The initial version of culture is en
-                "New blog post",
                 "new-blog-post-ja",
                 _clock.Now,
                 EntryStatus.Published,

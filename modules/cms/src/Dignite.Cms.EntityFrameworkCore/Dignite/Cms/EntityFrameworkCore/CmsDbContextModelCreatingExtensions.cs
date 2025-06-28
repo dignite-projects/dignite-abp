@@ -96,8 +96,7 @@ public static class CmsDbContextModelCreatingExtensions
 
             entry.ConfigureByConvention();
 
-            entry.Property(e => e.Culture).IsRequired().HasMaxLength(EntryConsts.MaxLanguageCultureNameLength);
-            entry.Property(e => e.Title).IsRequired().HasMaxLength(EntryConsts.MaxTitleLength);
+            entry.Property(e => e.Culture).IsRequired().HasMaxLength(EntryConsts.MaxCultureLength);
             entry.Property(e => e.Slug).IsRequired().HasMaxLength(EntryConsts.MaxSlugLength);
             entry.Property(e => e.VersionNotes).HasMaxLength(EntryConsts.MaxRevisionNotesLength);
 

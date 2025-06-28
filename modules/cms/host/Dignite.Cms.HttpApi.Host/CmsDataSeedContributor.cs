@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Volo.Abp.Content;
 using Volo.Abp.Data;
@@ -77,6 +78,21 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
 
     private async Task SeedFieldsAsync()
     {
+        //Title Edit Field
+        var titleControlConfiguration = new TextEditConfiguration();
+        titleControlConfiguration.CharLimit = 256;
+        titleControlConfiguration.Mode = TextEditMode.SingleLine;
+        await _fieldRepository.InsertAsync(
+            new Field(
+                _cmsData.TitleFieldId,
+                null,
+                _cmsData.TitleFieldName,
+                "Title Field", "",
+                TextEditFormControl.ControlName,
+                titleControlConfiguration.ConfigurationDictionary,
+                null),
+            autoSave: true);
+
         //Text Edit Field
         var textboxFormConfiguration = new TextEditConfiguration();
         textboxFormConfiguration.CharLimit = 256;
@@ -258,7 +274,14 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 new List<EntryFieldTab> { 
                     new EntryFieldTab(
                         "Entry Field Tab", 
-                        new List<EntryField>{ 
+                        new List<EntryField>{
+                            new EntryField(
+                                _cmsData.TitleFieldId,
+                                "Title",
+                                true,
+                                true,
+                                true
+                                ),
                             new EntryField(
                                 _cmsData.TextboxFieldId,
                                 "Home Page Slogan",
@@ -296,6 +319,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                         "Entry Field Tab",
                         new List<EntryField>{
                             new EntryField(
+                                _cmsData.TitleFieldId,
+                                "Title",
+                                true,
+                                true,
+                                true
+                                ),
+                            new EntryField(
                                 _cmsData.TextboxFieldId,
                                 "Blog slogan",
                                 true,
@@ -316,6 +346,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                     new EntryFieldTab(
                         "Entry Field Tab",
                         new List<EntryField>{
+                            new EntryField(
+                                _cmsData.TitleFieldId,
+                                "Title",
+                                true,
+                                true,
+                                true
+                                ),
                             new EntryField(
                                 _cmsData.TextboxFieldId,
                                 "Author",
@@ -368,6 +405,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                         "Entry Field Tab",
                         new List<EntryField>{
                             new EntryField(
+                                _cmsData.TitleFieldId,
+                                "Title",
+                                true,
+                                true,
+                                true
+                                ),
+                            new EntryField(
                                 _cmsData.ServiceMatrixFieldId,
                                 "Service Items",
                                 true,
@@ -391,6 +435,13 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                     new EntryFieldTab(
                         "Entry Field Tab",
                         new List<EntryField>{
+                            new EntryField(
+                                _cmsData.TitleFieldId,
+                                "Title",
+                                true,
+                                true,
+                                true
+                                ),
                             new EntryField(
                                 _cmsData.TextboxFieldId,
                                 "Contact Slogan",
@@ -420,7 +471,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.HomeSectionId,
                 _cmsData.HomeSectionEntryTypeId,
                 _cmsData.EntryDefaultCulture,
-                "Home Page",
                 EntryConsts.DefaultSlug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -430,6 +480,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        homeEntry.SetField(_cmsData.TitleFieldName, "Home Page");
         homeEntry.SetField(_cmsData.TextboxFieldName, "A Software & Service Agency in Osaka Japan");
         homeEntry.SetField(
             _cmsData.CkeditorFieldName,
@@ -445,7 +496,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.HomeSectionId,
                 _cmsData.HomeSectionEntryTypeId,
                 "ja",
-                "ホームページ",
                 EntryConsts.DefaultSlug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -455,6 +505,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        jaHomeEntry.SetField(_cmsData.TitleFieldName, "ホームページ");
         jaHomeEntry.SetField(_cmsData.TextboxFieldName, "日本大阪のソフトウェア＆サービスエージェンシー");
         jaHomeEntry.SetField(
             _cmsData.CkeditorFieldName,
@@ -471,7 +522,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.HomeSectionId,
                 _cmsData.HomeSectionEntryTypeId,
                 "zh-Hant",
-                "首頁",
                 EntryConsts.DefaultSlug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -481,6 +531,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        zhHomeEntry.SetField(_cmsData.TitleFieldName, "首頁");
         zhHomeEntry.SetField(_cmsData.TextboxFieldName, "日本大阪的軟件與服務機構");
         zhHomeEntry.SetField(
             _cmsData.CkeditorFieldName,
@@ -560,7 +611,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.BlogSectionId,
                 _cmsData.BlogSectionEntryTypeId,
                 language,
-                title,
                 EntryConsts.DefaultSlug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -570,6 +620,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        blogEntry.SetField(_cmsData.TitleFieldName, title);
         blogEntry.SetField(_cmsData.TextboxFieldName, slogan);
         await _entryRepository.InsertAsync(
             blogEntry,
@@ -584,7 +635,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.BlogPostSectionId,
                 _cmsData.BlogPostSectionEntryTypeId,
                 language,
-                title,
                 slug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -594,6 +644,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        postEntry.SetField(_cmsData.TitleFieldName, title);
         postEntry.SetField(_cmsData.TextboxFieldName, "Guankui Du"); //Author
         postEntry.SetField(
             _cmsData.BlogCategoryFieldName,
@@ -635,7 +686,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.ServiceSectionId,
                 _cmsData.ServiceSectionEntryTypeId,
                 language,
-                title,
                 slug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -645,6 +695,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        serviceEntry.SetField(_cmsData.TitleFieldName, title);
         serviceEntry.SetField(_cmsData.ServiceMatrixFieldName, matrixBlocks); 
 
         await _entryRepository.InsertAsync(
@@ -661,7 +712,6 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 _cmsData.ContactSectionId,
                 _cmsData.ContactSectionEntryTypeId,
                 language,
-                title,
                 EntryConsts.DefaultSlug,
                 _clock.Now,
                 EntryStatus.Published,
@@ -671,6 +721,7 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 "",
                 null
                 );
+        contactEntry.SetField(_cmsData.TitleFieldName, title);
         contactEntry.SetField(_cmsData.TextboxFieldName, slogan);
         contactEntry.SetField(_cmsData.CkeditorFieldName, contact);
         await _entryRepository.InsertAsync(

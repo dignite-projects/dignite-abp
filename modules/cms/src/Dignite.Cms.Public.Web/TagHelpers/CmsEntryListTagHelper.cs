@@ -30,11 +30,6 @@ namespace Dignite.Cms.Public.Web.TagHelpers
 
         public Guid? EntryTypeId { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Filter { get; set; }
-
         public Guid? CreatorId { get; set; }
 
         public DateTime? StartPublishDate { get; set; }
@@ -108,7 +103,6 @@ namespace Dignite.Cms.Public.Web.TagHelpers
             {
                 SectionId = Section.Id,
                 Culture = Culture,
-                Filter = Filter,
                 EntryTypeId = EntryTypeId,
                 CreatorId = CreatorId,
                 StartPublishDate = StartPublishDate,

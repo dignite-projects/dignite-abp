@@ -53,7 +53,6 @@ namespace Dignite.Cms.Entries
             Guid? entryTypeId = null,
             Guid? creatorId = null, 
             EntryStatus? status = null,
-            string filter = null,
             DateTime? start = null,
             DateTime? end = null,
             IList<QueryingByField> queryingByCustomFields = null,
@@ -64,14 +63,14 @@ namespace Dignite.Cms.Entries
         {
             if (queryingByCustomFields == null || !queryingByCustomFields.Any())
             {
-                return await (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, filter, start, end))
+                return await (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, start, end))
                     .OrderBy(sorting.IsNullOrEmpty() ? $"{nameof(Entry.PublishTime)} desc" : sorting)
                     .PageBy(skipCount, maxResultCount)
                     .ToListAsync(GetCancellationToken(cancellationToken));
             }
             else
             {                
-                var enumerable = (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, filter, start, end))
+                var enumerable = (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, start, end))
                     .OrderByDescending(e => e.PublishTime).AsEnumerable<Entry>();
                 enumerable = await QueryingByFields(enumerable, queryingByCustomFields);
 
@@ -86,7 +85,6 @@ namespace Dignite.Cms.Entries
             Guid? entryTypeId = null,
             Guid? creatorId = null,
             EntryStatus? status = null,
-            string filter = null,
             DateTime? start = null,
             DateTime? end = null,
             IList<QueryingByField> queryingByCustomFields = null,
@@ -95,12 +93,12 @@ namespace Dignite.Cms.Entries
         {
             if (queryingByCustomFields == null || !queryingByCustomFields.Any())
             {
-                return await (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, filter, start, end))
+                return await (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, start, end))
                 .CountAsync(GetCancellationToken(cancellationToken));
             }
             else
             {
-                var enumerable = (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, filter, start, end))
+                var enumerable = (await GetQueryableAsync(culture, sectionId, entryTypeId, creatorId, status, start, end))
                     .AsEnumerable<Entry>();
                 enumerable = await QueryingByFields(enumerable, queryingByCustomFields);
 
@@ -176,7 +174,6 @@ namespace Dignite.Cms.Entries
             Guid? entryTypeId = null,
             Guid? creatorId = null,
             EntryStatus? status = null,
-            string filter = null,
             DateTime? start = null,
             DateTime? end = null)
         {
@@ -184,7 +181,6 @@ namespace Dignite.Cms.Entries
                 .WhereIf(entryTypeId.HasValue, e => e.EntryTypeId == entryTypeId.Value)
                 .WhereIf(creatorId.HasValue, e => e.CreatorId == creatorId.Value)
                 .WhereIf(status.HasValue, e => e.Status == status.Value)
-                .WhereIf(!filter.IsNullOrEmpty(), e => e.Title.Contains(filter))
                 .WhereIf(start.HasValue, e => e.PublishTime>=start.Value)
                 .WhereIf(end.HasValue, e => e.PublishTime<end.Value);
         }

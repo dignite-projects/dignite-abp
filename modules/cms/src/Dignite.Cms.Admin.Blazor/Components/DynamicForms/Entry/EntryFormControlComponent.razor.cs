@@ -47,14 +47,14 @@ namespace Dignite.Cms.Admin.Blazor.Components.DynamicForms.Entry
                 //
                 if (FormConfiguration.Multiple)
                 {
-                    MultipleSelectionTexts = EntryDataSource.Select(e => e.Title).ToList();
+                    MultipleSelectionTexts = EntryDataSource.Select(e => e.Slug).ToList();
                 }
                 else
                 {
                     if (MultipleSelectionEntries.Any())
                     {
                         SelectionEntryId = MultipleSelectionEntries[0].Id;
-                        SelectionText = MultipleSelectionEntries[0].Title;
+                        SelectionText = MultipleSelectionEntries[0].Slug;
                         MultipleSelectionEntryIds.RemoveAll(x => x != SelectionEntryId);
                     }
                 }
@@ -64,7 +64,7 @@ namespace Dignite.Cms.Admin.Blazor.Components.DynamicForms.Entry
         }
         private async Task OnHandleReadData(AutocompleteReadDataEventArgs autocompleteReadDataEventArgs)
         {
-            if (!EntryDataSource.Any(e => e.Title.Contains(autocompleteReadDataEventArgs.SearchValue, StringComparison.InvariantCultureIgnoreCase)))
+            if (!EntryDataSource.Any(e => e.Slug.Contains(autocompleteReadDataEventArgs.SearchValue, StringComparison.InvariantCultureIgnoreCase)))
             {
                 if (!autocompleteReadDataEventArgs.CancellationToken.IsCancellationRequested)
                 {
@@ -78,8 +78,7 @@ namespace Dignite.Cms.Admin.Blazor.Components.DynamicForms.Entry
                             Culture = EntryInput.Culture,
                             MaxResultCount = 100,
                             SkipCount = 0,
-                            Status = Cms.Entries.EntryStatus.Published,
-                            Filter = autocompleteReadDataEventArgs.SearchValue
+                            Status = Cms.Entries.EntryStatus.Published
                         })).Items.ToList();
 
                         //

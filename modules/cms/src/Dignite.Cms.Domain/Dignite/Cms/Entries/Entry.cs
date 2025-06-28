@@ -14,7 +14,7 @@ namespace Dignite.Cms.Entries
         {
         }
 
-        public Entry(Guid id, Guid sectionId, Guid entryTypeId, string culture, string title, string slug, 
+        public Entry(Guid id, Guid sectionId, Guid entryTypeId, string culture, string slug, 
             DateTime publishTime, EntryStatus status, Guid? parentId, int order, 
             Guid? initialVersionId, string versionNotes, Guid? tenantId)
             :base(id)
@@ -22,7 +22,6 @@ namespace Dignite.Cms.Entries
             SectionId = sectionId;
             EntryTypeId = entryTypeId;
             Culture = culture;
-            Title = title;
             Slug = slug;
             PublishTime = publishTime;
             Status = status;
@@ -49,8 +48,6 @@ namespace Dignite.Cms.Entries
         /// The Culture name corresponding to the entry
         /// </summary>
         public virtual string Culture { get; set; }
-
-        public virtual string Title { get; set; }
 
         /// <summary>
         /// 

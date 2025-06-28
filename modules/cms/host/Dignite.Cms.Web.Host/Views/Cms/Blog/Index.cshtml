@@ -3,7 +3,7 @@
 
 @model EntryViewModel
 @{
-    PageLayout.Content.Title = Model.Entry.Title;
+    PageLayout.Content.Title = Model.Entry.GetField<string>("title");
 
     //current category
     var category = Context.Request.Query["category"].ToString();
@@ -30,7 +30,7 @@
     <partial name="blog/_blog-toolbar" model="Model"></partial>
 }
 <h1 class="fs-1 text-primary fw-semibold my-5">
-    @Model.Entry.Title
+    <cms-entry-field field-name="title" entry="Model"></cms-entry-field>
 </h1>
 <cms-entry-list 
                 section-name="blog-post"

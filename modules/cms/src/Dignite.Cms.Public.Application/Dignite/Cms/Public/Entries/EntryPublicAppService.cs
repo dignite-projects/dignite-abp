@@ -71,21 +71,21 @@ namespace Dignite.Cms.Public.Entries
                 List<QueryingByField> queryingByCustomFields = input.QueryingByFieldsJson.IsNullOrEmpty() ? null : JsonSerializer.Deserialize<List<QueryingByField>>(input.QueryingByFieldsJson);
                 if (section.Type == Cms.Sections.SectionType.Single)
                 {
-                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, null, null, null, queryingByCustomFields, 100, 0))
+                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, null, null, queryingByCustomFields, 100, 0))
                         .OrderBy(e => e.Order)
                         .ToList();
                     count = result.Count;
                 }
                 else if (section.Type == Cms.Sections.SectionType.Structure)
                 {
-                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, 1000, 0))
+                    result = (await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, null, EntryStatus.Published, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, 1000, 0))
                         .OrderBy(e=>e.Order)
                         .ToList();
                     count = result.Count;
                 }
                 else
                 {
-                    count = await _entryRepository.GetCountAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, EntryStatus.Published, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields);
+                    count = await _entryRepository.GetCountAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, EntryStatus.Published, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields);
                     if (count == 0)
                     {
                         return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
@@ -96,7 +96,6 @@ namespace Dignite.Cms.Public.Entries
                             input.EntryTypeId,
                             input.CreatorId,
                             EntryStatus.Published,
-                            input.Filter,
                             input.StartPublishDate,
                             input.ExpiryPublishDate,
                             queryingByCustomFields,

@@ -19,16 +19,6 @@
     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
         <Card>
             <CardBody>
-                <Validation MessageLocalizer="@LH.Localize">
-                    <Field>
-                        <FieldLabel>@L["Title"]</FieldLabel>
-                            <TextEdit @bind-Text="@Entry.Title" Blur="TitleTextEditBlur">
-                            <Feedback>
-                                <Blazorise.ValidationError/>
-                            </Feedback>
-                        </TextEdit>
-                    </Field>
-                </Validation>
                 <CascadingValue Value="@Entry">
                 @if (CurrentEntryType != null)
                 {

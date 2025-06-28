@@ -3,7 +3,7 @@
 @model EntryViewModel
 
 <section class="container mb-5">
-    <h2 class="fs-1 fw-semibold lh-base mb-3">@Model.Entry.Title</h2>
+    <h2 class="fs-1 fw-semibold lh-base mb-3"><cms-entry-field field-name="title" entry="Model"></cms-entry-field></h2>
     <div class="lead mb-5">
         <cms-entry-field field-name="TextboxFieldName" entry="Model"></cms-entry-field>
     </div>

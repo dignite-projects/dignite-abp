@@ -45,7 +45,6 @@ namespace Dignite.Cms.Admin.Entries
             var entry = await _entryManager.CreateAsync(
                 input.EntryTypeId,
                 input.Culture,
-                input.Title,
                 input.Slug,
                 input.PublishTime,
                 input.Draft ? EntryStatus.Draft : EntryStatus.Published,
@@ -69,7 +68,7 @@ namespace Dignite.Cms.Admin.Entries
         public async Task<EntryDto> UpdateAsync(Guid id, UpdateEntryInput input)
         {
             var entry = await _entryManager.UpdateAsync(
-                id, input.Title, input.Slug, input.ParentId, input.PublishTime,
+                id, input.Slug, input.ParentId, input.PublishTime,
                 input.Draft ? EntryStatus.Draft : EntryStatus.Published,
                 input.ExtraProperties, input.VersionNotes,input.ConcurrencyStamp
                 );
@@ -109,12 +108,12 @@ namespace Dignite.Cms.Admin.Entries
 
             
 
-			var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.Filter,input.StartPublishDate,input.ExpiryPublishDate, queryingByCustomFields);
+			var count = await _entryRepository.GetCountAsync(input.Culture,input.SectionId,input.EntryTypeId,  input.CreatorId, input.Status, input.StartPublishDate,input.ExpiryPublishDate, queryingByCustomFields);
             if (count == 0)
                 return new PagedResultDto<EntryDto>(0, new List<EntryDto>());
 
             //get entry list
-            var result = await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, input.Status, input.Filter, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, input.MaxResultCount, input.SkipCount, input.Sorting);
+            var result = await _entryRepository.GetListAsync(input.Culture, input.SectionId, input.EntryTypeId, input.CreatorId, input.Status, input.StartPublishDate, input.ExpiryPublishDate, queryingByCustomFields, input.MaxResultCount, input.SkipCount, input.Sorting);
             var dto = ObjectMapper.Map<List<Entry>, List<EntryDto>>(result);
 
 

@@ -32,7 +32,7 @@
             @foreach (var item in entries)
             {
                 <li class="list-inline-item">
-                    <a entry="@item" section="section">@item.Title</a>
+                    <a entry="@item" section="section">@item.Slug</a>
                 </li>
             }
         </ul>
@@ -40,7 +40,7 @@
     else
     {
         <a entry="@entries[0]" section="section">
-            @entries[0].Title
+            @entries[0].Slug
         </a>
     }
 }

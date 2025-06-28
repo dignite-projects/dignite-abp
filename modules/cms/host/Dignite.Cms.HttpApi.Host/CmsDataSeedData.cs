@@ -5,6 +5,8 @@ namespace Dignite.Cms;
 
 public class CmsDataSeedData : ISingletonDependency
 {
+    public Guid TitleFieldId { get; } = Guid.NewGuid();
+    public string TitleFieldName = "title";
     public Guid TextboxFieldId { get; } = Guid.NewGuid();
     public string TextboxFieldName = "TextboxFieldName";
     public Guid SwitchFieldId { get; } = Guid.NewGuid();

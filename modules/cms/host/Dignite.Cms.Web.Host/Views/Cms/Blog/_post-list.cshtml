@@ -18,7 +18,7 @@
                     <cms-entry-field field-name="BlogCategory" entry="model" partial-name="blog/_post-category"></cms-entry-field>
                 </small>
                 <div class="d-flex w-100 justify-content-between mt-2">
-                    <h5 class="mb-1">@entry.Title</h5>
+                    <h5 class="mb-1"><cms-entry-field field-name="title" entry="model"></cms-entry-field></h5>
                     <span class="text-muted">@entry.PublishTime</span>
                 </div>
             </a>

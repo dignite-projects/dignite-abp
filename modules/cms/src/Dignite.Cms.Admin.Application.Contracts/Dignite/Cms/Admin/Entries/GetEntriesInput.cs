@@ -26,8 +26,6 @@ namespace Dignite.Cms.Admin.Entries
 
         public DateTime? ExpiryPublishDate { get; set; }
 
-        public string Filter { get; set; }
-
         public EntryStatus? Status { get; set; }
 
         public Guid? CreatorId { get; set; }

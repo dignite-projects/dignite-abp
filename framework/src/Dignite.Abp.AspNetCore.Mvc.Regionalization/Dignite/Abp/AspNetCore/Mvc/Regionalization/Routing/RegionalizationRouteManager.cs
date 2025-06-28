@@ -106,20 +106,22 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
         // 添加常规路由端点
         foreach (var endpoint in _endpointDataSource.Endpoints)
         {
-            var routeEndpoint = (RouteEndpoint)endpoint;
-            var routePattern = routeEndpoint.RoutePattern;
-
-            // 检查是否包含文化约束
-            var hasCultureConstraint = routePattern.Parameters
-                .Any(p => p.Name == RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey &&
-                         p.ParameterPolicies.Any(policy => policy.Content == RegionalizationRouteConstraint.ConstraintName)
-                    );
-
-            if (hasCultureConstraint)
+            if (endpoint is RouteEndpoint routeEndpoint)
             {
-                if (!endpoints.Any(ep => ((RouteEndpoint)ep).RoutePattern.RawText == routeEndpoint.RoutePattern.RawText))
+                var routePattern = routeEndpoint.RoutePattern;
+
+                // 检查是否包含文化约束
+                var hasCultureConstraint = routePattern.Parameters
+                    .Any(p => p.Name == RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey &&
+                             p.ParameterPolicies.Any(policy => policy.Content == RegionalizationRouteConstraint.ConstraintName)
+                        );
+
+                if (hasCultureConstraint)
                 {
-                    endpoints.Add(endpoint);
+                    if (!endpoints.Any(ep => ((RouteEndpoint)ep).RoutePattern.RawText == routeEndpoint.RoutePattern.RawText))
+                    {
+                        endpoints.Add(endpoint);
+                    }
                 }
             }
         }

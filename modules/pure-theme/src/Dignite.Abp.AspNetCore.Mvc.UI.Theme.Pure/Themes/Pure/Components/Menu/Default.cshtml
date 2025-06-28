@@ -22,7 +22,7 @@
         {
             var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
             <li class="nav-item @cssClass" @Html.Raw(elementId)>
-                <a class="nav-link underline-animate fw-medium px-0 mx-3 @disabled @isActive" href="@url" use-locale-prefix="useLocalePrefix" target="@menuItem.Target">
+                <a class="nav-link underline-animate fw-medium px-0 mx-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {
                         <i class="@menuItem.Icon"></i>

@@ -12,7 +12,7 @@
             @if (Model.BreadCrumb.ShowHome)
             {
                 <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-                    <a class="text-decoration-none text-secondary" href="~/" use-locale-prefix="true" property="item" typeof="WebPage">
+                    <a class="text-decoration-none text-secondary" href="~/" add-culture="true" property="item" typeof="WebPage">
                         <span property="name">
                             @L["Home"]
                         </span>
@@ -23,7 +23,7 @@
             @foreach (var item in Model.BreadCrumb.Items)
             {
                 <li class="breadcrumb-item" property="itemListElement" typeof="ListItem">
-                    <a class="text-decoration-none text-secondary" href="@item.Url" use-locale-prefix="true" property="item" typeof="WebPage"><span property="name">@item.Text</span></a>
+                    <a class="text-decoration-none text-secondary" href="@item.Url" add-culture="true" property="item" typeof="WebPage"><span property="name">@item.Text</span></a>
                     <meta property="position" content="@(Model.BreadCrumb.Items.IndexOf(item)+2)">
                 </li>
             }
@@ -42,13 +42,13 @@
     {
         var item = Model.BreadCrumb.Items.Last();
         <nav role="navigation" class="py-2 flex-grow-1 d-block d-sm-block d-md-block d-lg-none">
-            <a href="@item.Url" use-locale-prefix="true" class="text-decoration-none text-secondary"><i class="fas fa-chevron-left"></i> @item.Text</a>
+            <a href="@item.Url" add-culture="true" class="text-decoration-none text-secondary"><i class="fas fa-chevron-left"></i> @item.Text</a>
         </nav>
     }
     else if (Model.BreadCrumb.ShowHome)
     {
         <nav role="navigation" class="py-2 flex-grow-1 d-block d-sm-block d-md-block d-lg-none">
-            <a href="~/" use-locale-prefix="true" class="text-decoration-none text-secondary"><i class="fas fa-chevron-left"></i> @L["Home"]</a>
+            <a href="~/" add-culture="true" class="text-decoration-none text-secondary"><i class="fas fa-chevron-left"></i> @L["Home"]</a>
         </nav>
     }
     @*

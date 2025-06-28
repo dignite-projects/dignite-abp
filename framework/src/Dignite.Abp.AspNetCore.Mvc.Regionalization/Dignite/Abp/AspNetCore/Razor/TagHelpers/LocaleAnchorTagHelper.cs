@@ -1,40 +1,41 @@
 ﻿using System;
-using System.Globalization;
-using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
 using Dignite.Abp.Regionalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Localization;
 using Volo.Abp.Threading;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.TagHelpers;
 
 
-[HtmlTargetElement("a", Attributes = "[use-locale-prefix]")]
+[HtmlTargetElement("a", Attributes = "[add-culture]")]
 public class LocaleAnchorTagHelper : TagHelper
 {
     /// <summary>
-    /// if or not the link address is prefixed with a localized prefix, 
-    /// if true, a localized prefix will be added to the link address
+    /// if or not the link address is prefixed with a Culture, 
+    /// if true, a Culture will be added to the link address
     /// </summary>
     /// <remarks>
-    /// The value of UseLocalePrefix is only valid if the link address is an absolute path.
+    /// The value of AddCulture is only valid if the link address is an absolute path.
     /// </remarks>
-    public bool UseLocalePrefix { get; set; } = false;
+    public bool AddCulture { get; set; } = false;
 
 
     [ViewContext, HtmlAttributeNotBound]
     public ViewContext ViewContext { get; set; }
 
-    public override int Order => -2000; // 设置较低的 Order，确保优先于 UrlResolutionTagHelper 执行
+    /// <summary>
+    /// The order of execution for this TagHelper.
+    /// Ensure priority over <see cref="UrlResolutionTagHelper"/> execution
+    /// </summary>
+    public override int Order => -2000; 
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        if (!UseLocalePrefix)
+        if (!AddCulture)
         {
             return;
         }
@@ -52,7 +53,6 @@ public class LocaleAnchorTagHelper : TagHelper
                 return;
             }
 
-            // 获取当前请求的 Culture
             var cultureFeature = ViewContext.HttpContext?.Features.Get<IRequestCultureFeature>();
             var cultureName = cultureFeature?.RequestCulture.Culture.Name;
 
@@ -72,7 +72,7 @@ public class LocaleAnchorTagHelper : TagHelper
                         url = cultureName.EnsureStartsWith('/') + url.RemovePostFix("/");
                     }
                 }
-                output.Attributes.SetAttribute("href", url); //以上代码对href值处理完成后,交给其他的 TagHelper 处理,例如 asp.net 内置的 UrlResolutionTagHelper
+                output.Attributes.SetAttribute("href", url); //以上代码对href值处理完成后,其他的 TagHelper 将继续处理,例如 asp.net 内置的 UrlResolutionTagHelper
             }
         }
     }

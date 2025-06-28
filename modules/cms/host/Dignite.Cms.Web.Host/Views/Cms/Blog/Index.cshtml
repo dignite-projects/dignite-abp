@@ -23,8 +23,6 @@
         currentPage = 1;
     }
 
-    //
-    var filter = Context.Request.Query["filter"].ToString();
 }
 @section content_toolbar {
     <partial name="blog/_blog-toolbar" model="Model"></partial>
@@ -38,6 +36,5 @@
                 max-result-count="20" 
                 culture="@Model.Entry.Culture" 
                 querying-by-fields="parameters"
-                filter="@filter"
                 partial-name="blog/_post-list">
 </cms-entry-list>

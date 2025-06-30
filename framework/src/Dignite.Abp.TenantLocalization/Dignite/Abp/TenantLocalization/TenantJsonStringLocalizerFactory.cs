@@ -50,7 +50,7 @@ public class TenantJsonStringLocalizerFactory : JsonStringLocalizerFactory
     {
         if (_currentTenant.IsAvailable)
         {
-            resourceName = _currentTenant.Id + "." + resourceName;
+            resourceName = _currentTenant.Name + "." + resourceName;
             return base.CreateJsonStringLocalizer(resourcesPath, resourceName);
         }
         else
@@ -100,9 +100,9 @@ public class TenantJsonStringLocalizerFactory : JsonStringLocalizerFactory
     private string GetLocalizerCacheKey(string typeName)
     {
         string key = $"culture={CultureInfo.CurrentUICulture.Name}, typeName={typeName}";
-        if (_currentTenant.Id.HasValue)
+        if (_currentTenant.IsAvailable)
         {
-            key += $", tenant={_currentTenant.Id.Value}";
+            key += $", tenant={_currentTenant.Name}";
         }
         return key;
     }

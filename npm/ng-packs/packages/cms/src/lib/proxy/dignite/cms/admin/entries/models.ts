@@ -10,7 +10,6 @@ export interface CreateEntryInput extends CreateOrUpdateEntryInputBase {
 export interface CreateOrUpdateEntryInputBase extends CustomizableObject {
   entryTypeId: string;
   culture: string;
-  title: string;
   slug: string;
   parentId?: string;
   draft: boolean;
@@ -28,7 +27,6 @@ export interface EntryDto extends ExtensibleAuditedEntityDto<string> {
   sectionId?: string;
   entryTypeId?: string;
   culture?: string;
-  title?: string;
   slug?: string;
   publishTime?: string;
   status: EntryStatus;
@@ -47,7 +45,6 @@ export interface GetEntriesInput extends PagedAndSortedResultRequestDto {
   entryTypeId?: string;
   startPublishDate?: string;
   expiryPublishDate?: string;
-  filter?: string;
   status?: EntryStatus;
   creatorId?: string;
   queryingByFieldsJson?: string;

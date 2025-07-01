@@ -5,7 +5,7 @@ export class CreateOrUpdateEntryInputBase {
     /**条目id */
     entryTypeId: any = ['']
     /**标题 */
-    title: any = ['', [Validators.required]]
+    // title: any = ['', [Validators.required]]
     /**别名 */
     slug: any = ['', [Validators.required]]
     /**语言 */

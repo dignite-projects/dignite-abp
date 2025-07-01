@@ -2,7 +2,16 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ConfigStateService, LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe, Location } from '@angular/common';
@@ -28,9 +37,7 @@ export class CreateOrEditEntriesComponent {
   private router = inject(Router);
   private cdRef = inject(ChangeDetectorRef);
   private _RegionalizationService = inject(RegionalizationService);
-  constructor(
-    private toPinyinService:ToPinyinService
-  ) {}
+  constructor(private toPinyinService: ToPinyinService) {}
 
   /**语言列表 */
   languagesList: any[] = [];
@@ -60,7 +67,7 @@ export class CreateOrEditEntriesComponent {
     this.entryInfo = v;
   }
   /**向父级反馈信息 */
-  @Output() feedbackChildInfo=new EventEmitter();
+  @Output() feedbackChildInfo = new EventEmitter();
 
   formEntity: FormGroup | undefined;
   @Input() set entity(value: FormGroup | undefined) {
@@ -116,7 +123,7 @@ export class CreateOrEditEntriesComponent {
     this.DefaultLanguage = this.defaultCultureName;
     // this.DefaultLanguage = this.configState.getSetting('Abp.Regionalization.DefaultCultureName');
     //选中languagesSystem中的cultureName在 languagesSystem中存在的数组项
-    
+
     this.languagesList = languagesSystem.filter(el =>
       this.SiteSettingsAdminLanguages.includes(el.cultureName),
     );
@@ -136,7 +143,7 @@ export class CreateOrEditEntriesComponent {
       this.formEntity.patchValue({
         entryTypeId: this.entryInfo.entryTypeId,
         publishTime: this.datePipe.transform(this.entryInfo.publishTime, 'yyyy-MM-dd HH:mm:ss'),
-        title: this.entryInfo.title,
+        // title: this.entryInfo.title,
         slug: this.entryInfo.slug,
         parentId: this.entryInfo.parentId,
         versionNotes: this.entryInfo.versionNotes,
@@ -144,60 +151,61 @@ export class CreateOrEditEntriesComponent {
       });
       this.slugInput.setErrors({});
       this.slugInput.setErrors(null);
-
-     
     } else {
       this.formEntity.patchValue({
         entryTypeId: this.entryTypeId,
         publishTime: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       });
     }
-  
+
     this.cdRef.detectChanges();
 
     this.cdRef.detectChanges();
     this.feedbackChildInfo.emit({
       showEntryType: this.showEntryType,
-    })
+    });
     this.isLoad = true;
     if (this.isOther == 1) {
       this.initialVersionIdInput.patchValue('');
       this.slugInput.disable();
       await this.getLocalizedEntriesBySlug();
     }
-   
+
     setTimeout(() => {
       // this.submitclick?.nativeElement.click();
     }, 0);
   }
 
-/**获取别名下其他的语言版本 */
-getLocalizedEntriesBySlug(){
-  return new Promise((resolve, rejects) => {
-    this._EntryAdminService
-     .getLocalizedEntriesBySlug(this.sectionId,this.slugInput.value)
-     .subscribe(res => {
-      //  console.log(res,'获取别名下其他的语言版本',this.slugInput.value);
-      this.languagesList=this.languagesList.filter(el=>!res.items.find(el2=>el2.culture===el.cultureName));
-      this.cultureInput.patchValue(this.languagesList[0].cultureName);
-       resolve(res);
-     },err=>{
-      resolve(null);
-     })
-  })
-}
-SlugRegExValidator() {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const regex = /^[a-zA-Z0-9_-]+$/;
-    if (control.value && !regex.test(control.value)) {
-      return { repetition: this._LocalizationService.instant(
-        `Cms::SlugValidatorsText`,
-      ) };
-    }
-    
-    return null;
-  };  
-}
+  /**获取别名下其他的语言版本 */
+  getLocalizedEntriesBySlug() {
+    return new Promise((resolve, rejects) => {
+      this._EntryAdminService
+        .getLocalizedEntriesBySlug(this.sectionId, this.slugInput.value)
+        .subscribe(
+          res => {
+            //  console.log(res,'获取别名下其他的语言版本',this.slugInput.value);
+            this.languagesList = this.languagesList.filter(
+              el => !res.items.find(el2 => el2.culture === el.cultureName),
+            );
+            this.cultureInput.patchValue(this.languagesList[0].cultureName);
+            resolve(res);
+          },
+          err => {
+            resolve(null);
+          },
+        );
+    });
+  }
+  SlugRegExValidator() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const regex = /^[a-zA-Z0-9_-]+$/;
+      if (control.value && !regex.test(control.value)) {
+        return { repetition: this._LocalizationService.instant(`Cms::SlugValidatorsText`) };
+      }
+
+      return null;
+    };
+  }
 
   // /**别名查重 */
   SlugAsyncValidator() {
@@ -302,36 +310,24 @@ SlugRegExValidator() {
     });
     return result;
   }
-  /**标题转化别名 */
-  setTitleToSlugBlur(event) {
+  /**别名转化 */
+  slugChange(event: any) {
+    console.log(event, '别名转化');
     const val = event.target.value;
-    const slug = this.formEntity.get('slug');
-    let pinyinstr = '';
-    if (slug.value) return;
-    pinyinstr = this.toPinyinService.get(val);
-    pinyinstr=pinyinstr||val;
-    //去除特殊字符
-    pinyinstr = pinyinstr.replace(/[^a-zA-Z0-9-]/g, '');
-    this.slugInput.patchValue(pinyinstr);
-    this._EntryAdminService
-      .slugExists({
-        culture: this.cultureInput.value,
-        sectionId: this.sectionId,
-        slug: this.slugInput.value,
-      })
-      .subscribe(res => {
-        if (res) {
-          this.slugInput.setErrors({
-            repetition: this._LocalizationService.instant(
-              `Cms::EntrySlug{0}AlreadyExist`,
-              this.slugInput.value,
-            ),
-          });
-        } else {
-          this.slugInput.setErrors(null);
-        }
-      });
+    //将val字段中的特殊字符替换为-，允许输入字母，数字，下划线，中划线，小数点
+    const newVal = val.replace(/[^\-.\w\s]/g, '-');
+    
+    //将newVal字段中的空格替换为-
+    const newVal2 = newVal.replace(/\s+/g, '-');
+    //将newVal2字段中的多个-替换为单个-
+    const newVal3 = newVal2.replace(/-+/g, '-');
+    //如果-在开头或者结尾，则删除
+    const newVal4 = newVal3.replace(/^-|-$/g, '');
+
+    this.slugInput.patchValue(newVal4);
   }
+
+  
 
   /**获取条目版本列表 */
   getAllVersionsList() {

@@ -1,4 +1,4 @@
-import type { FieldDto1 } from '../../fields/models';
+import type { FieldDto as FieldDto1 } from '../../fields/models';
 import type { EntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 
 export interface CreateFieldInput extends CreateOrUpdateFieldInputBase {

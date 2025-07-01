@@ -64,7 +64,7 @@ export class EntryAdminService {
     this.restService.request<any, PagedResultDto<EntryDto>>({
       method: 'GET',
       url: '/api/cms-admin/entries',
-      params: { culture: input.culture, sectionId: input.sectionId, entryTypeId: input.entryTypeId, startPublishDate: input.startPublishDate, expiryPublishDate: input.expiryPublishDate, filter: input.filter, status: input.status, creatorId: input.creatorId, queryingByFieldsJson: input.queryingByFieldsJson, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { culture: input.culture, sectionId: input.sectionId, entryTypeId: input.entryTypeId, startPublishDate: input.startPublishDate, expiryPublishDate: input.expiryPublishDate, status: input.status, creatorId: input.creatorId, queryingByFieldsJson: input.queryingByFieldsJson, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

@@ -107,7 +107,7 @@ export class EntryControlComponent {
           skipCount: 0,
           maxResultCount: 1000,
           status: EntryStatus.Published,
-          filter: filter,
+          // filter: filter,
         })
         .subscribe((res:any) => {
           this.listOfOption = res.items;

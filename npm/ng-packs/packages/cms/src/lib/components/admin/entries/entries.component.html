@@ -54,13 +54,13 @@
                         </select>
                     </div>
                     <div class="mb-3  col-md-6">
-                        <div class="input-group">
+                        <!-- <div class="input-group">
                             <input type="text" class="form-control" [(ngModel)]="filters.filter"
                                 [placeholder]="'Cms::PagerSearch'|abpLocalization" />
                             <button type="button" class="btn btn-primary" (click)="listget()">
                                 <i class="bi bi-search"></i>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 @if(filters.culture&&enablegearchFormEntity&&enableSearchFieldList.length>0){
@@ -98,7 +98,12 @@
                     <ngx-datatable class="material " [rows]="data.items" [list]="list" [columnMode]="ColumnMode.force"
                         [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [virtualization]="false"
                         [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true">
-                        <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
+                        <!-- <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{ value }}
+                            </ng-template>
+                        </ngx-datatable-column> -->
+                        <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}
                             </ng-template>
@@ -126,11 +131,7 @@
                                 </ng-container>
                             </ng-template>
                         </ngx-datatable-column> -->
-                        <!-- <ngx-datatable-column [name]="'Cms::Slug' | abpLocalization" prop="slug" [sortable]="false">
-                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                {{ value }}
-                            </ng-template>
-                        </ngx-datatable-column> -->
+                        
                         <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status" [width]="80"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
@@ -193,12 +194,10 @@
                                 <th class="sticky-left-card-bg"> <span
                                         class="bi bi-arrows-move fs-5 drag-handle me-2 opacity-0"></span>{{'AbpUi::Actions'
                                     | abpLocalization}}</th>
-                                <th>{{'Cms::Title' | abpLocalization}}</th>
+                                      <th>{{'Cms::Slug' | abpLocalization}}</th>
+                                <!-- <th>{{'Cms::Title' | abpLocalization}}</th> -->
                                 <th>{{'Cms::SectionType' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
-
-
-                                <!-- <th>{{'Cms::Slug' | abpLocalization}}</th> -->
                                 <th>{{'Cms::Status' | abpLocalization}}</th>
                                 @for (item of showinFieldList; track $index) {
                                 <th>{{'Cms::'+item.displayName | abpLocalization}}</th>
@@ -236,7 +235,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="white-space-normal">{{item.title}}</td>
+                                <!-- <td class="white-space-normal">{{item.title}}</td> -->
+                                <td class="white-space-normal">{{item.slug}}</td>
                                 <td>
                                     {{ 'Cms::Enum:SectionType:'+SectionType[item.sectionType] |
                                     abpLocalization }}
@@ -247,7 +247,7 @@
                                             *ngIf="item1.id === item.entryTypeId">{{item1.displayName}}</ng-container>
                                     </ng-container>
                                 </td>
-                                <!-- <td>{{item.slug}}</td> -->
+                                
                                 <td>
                                     <ng-container *ngFor="let item2 of _entryStatusOptions">
                                         <ng-container *ngIf="item.status=== item2.value">{{

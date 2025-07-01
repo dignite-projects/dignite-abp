@@ -79,6 +79,7 @@
     "CreateOtherLanguages": "Create Other Languages",
     "The{1}FieldUnderThe{0}TAB": "The \"{1}\" field under the \"{0}\" tab",
     "NewEntry": "New Entry",
-    "SaveDraft": "Save Draft"
+    "SaveDraft": "Save Draft",
+    "SlugValidatorsText": "Please enter English-_. and numeric characters"
   }
 }

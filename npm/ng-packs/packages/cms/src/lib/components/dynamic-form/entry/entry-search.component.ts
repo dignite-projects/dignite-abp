@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries/entry-admin.service';
@@ -68,15 +69,15 @@ export class EntrySearchComponent {
 
   AfterInit() {
     return new Promise((resolve, rejects) => {
-      let ValidatorsArray: any[] = [];
+      const ValidatorsArray: any[] = [];
       // if (this._fields.required) {
       //   ValidatorsArray.push(Validators.required);
       // }
       // if (!this._fields.field.formConfiguration['Entry.Multiple']) {
       //   this.listOfSelectedValue = this._selected[0];
       // }
-      let newControl = this.fb.control([], ValidatorsArray);
-      let extraProperties: any = this._entity.get(this._parentFiledName) as FormGroup;
+      const newControl = this.fb.control([], ValidatorsArray);
+      const extraProperties: any = this._entity.get(this._parentFiledName) as FormGroup;
       extraProperties.setControl(this._fields.field.name, newControl);
 
       resolve(true);
@@ -100,7 +101,7 @@ export class EntrySearchComponent {
           skipCount: 0,
           maxResultCount: 1000,
           status: EntryStatus.Published,
-          filter: filter,
+          // filter: filter,
         })
         .subscribe((res: any) => {
           this.listOfOption = res.items;

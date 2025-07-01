@@ -2,12 +2,12 @@
     <div class="row create-or-edit-entries-page">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-body">
-                    <div class="mb-3">
+                <div class="card-body py-0">
+                    <!-- <div class="mb-3">
                         <div class="form-label">{{'Cms::Title' | abpLocalization}}</div>
                         <input type="text" class="form-control" formControlName="title"
                             (blur)="setTitleToSlugBlur($event)">
-                    </div>
+                    </div> -->
 
                     <ng-container *ngIf="isLoad">
                         <ul ngbNav #nav="ngbNav" [(activeId)]="tabActive" [destroyOnHide]="false" class="nav-tabs mb-0">
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-label">{{'Cms::Slug' | abpLocalization}}</div>
-                        <input type="text" class="form-control" formControlName="slug">
+                        <input type="text" class="form-control" formControlName="slug"  (change)="slugChange($event)">
                         <div class="text-danger" *ngIf="slugInput.dirty">
                             {{slugInput?.errors?.repetition}}
                         </div>

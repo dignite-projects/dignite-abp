@@ -80,6 +80,7 @@
     "NotShowInList": "此格式不支援在列表中展示",
     "NewEntry": "新建條目",
     "SaveDraft": "保存草稿",
-    "SlugValidatorsText": "请输入英文-_和数字字符"
+    "SlugValidatorsText": "請輸入英文-_.和數字字符"
+
   }
 }

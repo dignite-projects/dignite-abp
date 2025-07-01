@@ -4,20 +4,19 @@
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             <ng-container *ngIf="_fields.field.formConfiguration['Entry.Multiple']; else elseTemplate">
                 <nz-select class="form-select dignite-form-select form-select-multiple" [nzMaxTagCount]="1"
-                    (nzOnSearch)="SelectChange($event)" nzShowSearch nzMode="multiple"
+                     nzMode="multiple"
                     [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
                     formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true"
                     [nzDropdownClassName]="'dignite-form-select-dropdown'">
-                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
                 </nz-select>
             </ng-container>
             <ng-template #elseTemplate>
-                <nz-select class="form-select dignite-form-select form-select-multiple" [nzMaxMultipleCount]="1"
-                    (nzOnSearch)="SelectChange($event)" nzShowSearch nzMode="tags"
+                <nz-select class="form-select dignite-form-select form-select-multiple" 
                     [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
                     formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true"
                     [nzDropdownClassName]="'dignite-form-select-dropdown'">
-                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
                 </nz-select>
             </ng-template>
             <small class="form-text text-muted d-block"

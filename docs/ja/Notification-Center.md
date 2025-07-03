@@ -13,15 +13,15 @@
 
 1. `Dignite.Abp.NotificationCenter.Domain.Shared` NuGetパッケージを`Domain.Shared`プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに`DigniteAbpNotificationCenterDomainSharedModule`を追加して、 [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) にも追加します。
+   `[DependsOn(...)]`属性リストに`AbpNotificationCenterDomainSharedModule`を追加して、 [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) にも追加します。
 
 2. `Dignite.Abp.NotificationCenter.Domain` NuGet パッケージを Domain プロジェクトにインストールします。
 
-   同様に、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に `DigniteAbpNotificationCenterDomainModule` を追加します。
+   同様に、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に `AbpNotificationCenterDomainModule` を追加します。
 
 3. Entity Framework Core（EF）を使用している場合、`Dignite.Abp.NotificationCenter.EntityFrameworkCore` NuGet パッケージを Entity Framework Core プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに `DigniteAbpNotificationCenterEntityFrameworkCoreModule` を追加します。
+   `[DependsOn(...)]`属性リストに `AbpNotificationCenterEntityFrameworkCoreModule` を追加します。
 
    `OnModelCreating()` メソッドに以下の設定を追加します：
 
@@ -54,7 +54,7 @@
 
 4. MongoDBを使用している場合、`Dignite.Abp.NotificationCenter.MongoDB` NuGet パッケージを MongoDB プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに `DigniteAbpNotificationCenterMongoDbModule` を追加します。
+   `[DependsOn(...)]`属性リストに `AbpNotificationCenterMongoDbModule` を追加します。
 
    同様に、`OnModelCreating()` メソッドに以下の設定を追加します：
 
@@ -75,16 +75,16 @@
 
 5. `Dignite.Abp.Notifications.Identity` NuGet パッケージを Domain プロジェクトにインストールします。
 
-   同様に、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に `DigniteAbpNotificationsIdentityModule` を追加します。
+   同様に、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に `AbpNotificationsIdentityModule` を追加します。
 
 6. `Dignite.Abp.NotificationCenter.Application.Contracts` NuGet パッケージを Application.Contracts プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに `DigniteAbpNotificationCenterApplicationContractsModule` を追加します。
+   `[DependsOn(...)]`属性リストに `AbpNotificationCenterApplicationContractsModule` を追加します。
 
 7. `Dignite.Abp.NotificationCenter.Application` NuGet パッケージを Application プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに `DigniteAbpNotificationCenterApplicationModule` を追加します。
+   `[DependsOn(...)]`属性リストに `AbpNotificationCenterApplicationModule` を追加します。
 
 8. `Dignite.Abp.NotificationCenter.HttpApi` NuGet パッケージを HttpApi プロジェクトにインストールします。
 
-   `[DependsOn(...)]`属性リストに `DigniteAbpNotificationCenterHttpApiModule` を追加します。
+   `[DependsOn(...)]`属性リストに `AbpNotificationCenterHttpApiModule` を追加します。

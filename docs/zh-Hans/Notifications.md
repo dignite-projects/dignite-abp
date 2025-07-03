@@ -7,7 +7,7 @@ Dignite Abp 通知系统是基于[Asp.Net Boilerplate 通知系统](https://aspn
 要开始使用Dignite Abp 通知系统，首先需要执行以下步骤：
 
 1. 在您的 Domain 项目中安装 `Dignite.Abp.Notifications` NuGet 包。
-2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpNotificationsModule`。
+2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `AbpNotificationsModule`。
 
 如果您已经安装了[通知中心模块](Notification-Center.md)，则无需单独安装 `Dignite.Abp.Notifications` 模块。
 
@@ -194,7 +194,7 @@ public class SubscribeService : MyModuleAppService, ISubscribeService
 要使用 SignalR 实现实时通知功能，请执行以下步骤：
 
 1. 在服务端项目中安装 `Dignite.Abp.Notifications.SignalRNotifier` NuGet 包。
-2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpNotificationsSignalRNotifierModule`。
+2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `AbpNotificationsSignalRNotifierModule`。
 
 详细信息可以参考[Blazor 版通知系统](Blazor-Notification-Center.md)。
 

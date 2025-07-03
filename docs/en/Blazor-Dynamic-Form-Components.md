@@ -8,7 +8,7 @@ Dynamic form components are divided into three categories: form configuration co
 
 * Install the `Dignite.Abp.DynamicForms.Components` NuGet package into the project where you are developing the Blazor dynamic form components.
 
-* Add `DigniteAbpDynamicFormsComponentsModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `AbpDynamicFormsComponentsModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 ## Form Configuration Components
 

@@ -11,17 +11,17 @@
 
 - Install the `Dignite.Abp.NotificationCenter.Blazor` NuGet package into your Blazor project.
 
-  Add `DigniteAbpNotificationCenterBlazorModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+  Add `AbpNotificationCenterBlazorModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 {{if UI == "Blazor"}}
 
 - Install the `Dignite.Abp.NotificationCenter.HttpApi.Client` NuGet package into your HttpApi.Client project.
 
-  Add `DigniteAbpNotificationCenterHttpApiClientModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+  Add `AbpNotificationCenterHttpApiClientModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 - Install the `Dignite.Abp.NotificationCenter.Blazor.WebAssembly` NuGet package into your Blazor.WebAssembly project.
 
-  Add `DigniteAbpNotificationCenterBlazorWebAssemblyModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+  Add `AbpNotificationCenterBlazorWebAssemblyModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 - Run [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle) in your Blazor project.
 
@@ -31,7 +31,7 @@
 
 - Install the `Dignite.Abp.NotificationCenter.Blazor.Server` NuGet package into your Blazor.Server project.
 
-  Add `DigniteAbpNotificationCenterBlazorServerModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+  Add `AbpNotificationCenterBlazorServerModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 {{end}}
 

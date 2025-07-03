@@ -74,17 +74,8 @@
       ]
     },
     {
-      "text": "CMS Kit",
-      "items": [
-        {
-          "text": "CMS Kit 模块",
-          "path": "Cms-Kit/Index.md"
-        },
-        {
-          "text": "访问",
-          "path": "Cms-Kit/Visit.md"
-        }
-      ]
+      "text": "区域化",
+      "path": "Regionalization.md"
     },
     {
       "text": "Pure Theme",
@@ -100,12 +91,58 @@
       ]
     },
     {
-      "text": "多租户视图",
-      "path": "Views-MultiTenancy.md"
+      "text": "租户主题",
+      "path": "Tenant-Theme.md"
     },
     {
-      "text": "多租户本地化",
-      "path": "Localization-MultiTenancy.md"
+      "text": "租户本地化",
+      "path": "Tenant-Localization.md"
+    },
+    {
+      "text": "租户域名",
+      "path": "Tenant-Domain.md"
+    },
+    {
+      "text": "SEO",
+      "path": "SEO.md"
+    },
+    {
+      "text": "CMS",
+      "items": [
+        {
+          "text": "概述",
+          "path": "cms/index.md"
+        },  
+        {
+          "text": "快速入门",
+          "path": "cms/quick-start.md"
+        },   
+        {
+          "text": "基本概念",
+          "path": "cms/basic-concept.md"
+        },  
+        {
+          "text": "Mvc网站开发",
+          "items": [
+            {
+              "text": "基础知识",
+              "path": "cms/fundamentals.md"
+            },
+            {
+              "text": "Tag Helpers",
+              "path": "cms/tag-helpers.md"
+            }
+          ]
+        },    
+        {
+          "text": "进阶开发",
+          "path": "cms/advanced-development.md"
+        },  
+        {
+          "text": "如何安装",
+          "path": "cms/how-to-install.md"
+        }
+      ]
     },
     {
       "text": "BlazoriseUI 组件",

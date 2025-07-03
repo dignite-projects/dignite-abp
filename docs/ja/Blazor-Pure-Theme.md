@@ -18,7 +18,7 @@ Pure Theme は [Blazorise](https://blazorise.com/) の上に構築された Abp 
 > プロジェクトが初期状態で [Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme](https://www.nuget.org/packages/Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme) NuGet パッケージをインストールしている場合、まずそれを削除してください。
 
 * `Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme` NuGet パッケージを Blazor WebAssembly Web プロジェクトにインストールします。
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpAspNetCoreComponentsWebAssemblyPureThemeModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpAspNetCoreComponentsWebAssemblyPureThemeModule` を追加します。
 * `ConfigureServices` メソッド内で、`BlazorWebAssemblyHostBuilder` に `Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure.App` アプリケーションのルートコンポーネントを追加します：
 
     ```csharp
@@ -40,7 +40,7 @@ Pure Theme は [Blazorise](https://blazorise.com/) の上に構築された Abp 
 
 * `Dignite.Abp.AspNetCore.Components.Server.PureTheme` NuGet パッケージを Blazor Server Web プロジェクトにインストールします。
 
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpAspNetCoreComponentsServerPureThemeModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpAspNetCoreComponentsServerPureThemeModule` を追加します。
 
 * `Pages/_Host.cshtml` ファイルで以下の変更を行います：
   * ページのトップに、次の名前空間をインクルードします：

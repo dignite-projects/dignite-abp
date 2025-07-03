@@ -9,7 +9,7 @@ Dignite Abp Pointsは、ポイントをカスタムルールに基づいて定�
 Dignite Abp Pointsを使用し始めるには、次の手順に従ってください：
 
 1. ドメインプロジェクトに`Dignite.Abp.Points` NuGetパッケージをインストールします。
-2. モジュールクラスの`[DependsOn(...)]`属性リストに`DigniteAbpPointsModule`を追加します。
+2. モジュールクラスの`[DependsOn(...)]`属性リストに`AbpPointsModule`を追加します。
 
 すでに[ユーザーポイントモジュール](User-Points.md)をインストールしている場合、`Dignite.Abp.Points`モジュールを個別にインストールする必要はありません。
 

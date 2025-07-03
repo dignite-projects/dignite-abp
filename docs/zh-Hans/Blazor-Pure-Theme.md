@@ -18,7 +18,7 @@ Pure Theme 是基于 [Blazorise](https://blazorise.com/) 构建的一套 Abp Bla
 > 如果你的项目初始安装了 [Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme](https://www.nuget.org/packages/Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme) Nuget 包，请先移除。
 
 * 将 `Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme` NuGet 包安装到 Blazor WebAssembly Web 项目中。
-* 添加 `DigniteAbpAspNetCoreComponentsWebAssemblyPureThemeModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+* 添加 `AbpAspNetCoreComponentsWebAssemblyPureThemeModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 * 在 `ConfigureServices` 方法中，将 `Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure.App` 应用程序的根组件添加到如下位置：
 
     ```csharp
@@ -39,7 +39,7 @@ Pure Theme 是基于 [Blazorise](https://blazorise.com/) 构建的一套 Abp Bla
 * 请确保已安装 [AspNetCore Pure Theme](../AspNetCore-Pure-Theme.md)。
 
 * 将 `Dignite.Abp.AspNetCore.Components.Server.PureTheme` NuGet 包安装到 Blazor Server Web 项目中。
-* 添加 `DigniteAbpAspNetCoreComponentsServerPureThemeModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+* 添加 `AbpAspNetCoreComponentsWebPureThemeModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 * 在 `Pages/_Host.cshtml` 文件中执行以下更改：
   * 在页面顶部引入如下命名空间：
 

@@ -7,7 +7,7 @@ Dignite Abp 通知システムは、[Asp.Net Boilerplate通知システム](http
 Dignite Abp通知システムを使用するには、まず以下の手順を実行する必要があります：
 
 1. `Dignite.Abp.Notifications` NuGet パッケージをドメインプロジェクトにインストールします。
-2. モジュールクラスの`[DependsOn(...)]`属性リストに`DigniteAbpNotificationsModule`を追加します。
+2. モジュールクラスの`[DependsOn(...)]`属性リストに`AbpNotificationsModule`を追加します。
 
 すでに[通知センターモジュール](Notification-Center.md)をインストールしている場合、`Dignite.Abp.Notifications`モジュールを別途インストールする必要はありません。
 
@@ -191,7 +191,7 @@ public class SubscribeService : MyModuleAppService, ISubscribeService
 リアルタイム通知機能を使用するには、以下の手順を実行して SignalRNotifier をインストールします：
 
 1. サーバープロジェクトに `Dignite.Abp.Notifications.SignalRNotifier` NuGet パッケージをインストールします。
-2. モジュールクラスの `[DependsOn(...)]` 属性リストに `DigniteAbpNotificationsSignalRNotifierModule` を追加します。
+2. モジュールクラスの `[DependsOn(...)]` 属性リストに `AbpNotificationsSignalRNotifierModule` を追加します。
 
 詳細については、[Blazor 版通知システム](Blazor-Notification-Center.md)を参照してください。
 

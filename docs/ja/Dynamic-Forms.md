@@ -13,7 +13,7 @@
 
 - `Dignite.Abp.DynamicForms` NuGet パッケージを Abp プロジェクトの `Domain.Shared` プロジェクトにインストールします。
 
-- [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics)の `[DependsOn(...)]` プロパティリストに `DigniteAbpDynamicFormsModule` を追加します。
+- [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics)の `[DependsOn(...)]` プロパティリストに `AbpDynamicFormsModule` を追加します。
 
 ## 特定の名前のダイナミックフォームを取得する
 

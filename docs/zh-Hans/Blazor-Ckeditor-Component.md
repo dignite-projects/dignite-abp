@@ -19,7 +19,7 @@ Ckeditor 的 Blazor 版本，适用于 Blazor Server 和 Blazor WebAssembly。
 
 * 在 Blazor WebAssembly Web 项目中安装 `Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly` NuGet 包。
 
-* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpAspNetCoreComponentsCkEditorWebAssemblyModule`。
+* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpAspNetCoreComponentsCkEditorWebAssemblyModule`。
 
 * 在 Blazor 项目中执行一次 [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)。
 
@@ -37,7 +37,7 @@ Ckeditor 的 Blazor 版本，适用于 Blazor Server 和 Blazor WebAssembly。
 
 * 在 Blazor Server Web 项目中安装 `Dignite.Abp.AspNetCore.Components.CkEditor.Server` NuGet 包。
 
-* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpAspNetCoreComponentsCkEditorServerModule`。
+* 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpAspNetCoreComponentsCkEditorServerModule`。
 
 {{end}}
 

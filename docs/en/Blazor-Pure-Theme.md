@@ -18,7 +18,7 @@ Pure Theme is an Abp Blazor theme built on top of [Blazorise](https://blazorise.
 > If your project initially installed the [Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme](https://www.nuget.org/packages/Volo.Abp.AspNetCore.Components.WebAssembly.BasicTheme) NuGet package, please remove it first.
 
 * Install the `Dignite.Abp.AspNetCore.Components.WebAssembly.PureTheme` NuGet package into your Blazor WebAssembly Web project.
-* Add `DigniteAbpAspNetCoreComponentsWebAssemblyPureThemeModule` to the `[DependsOn(...)]` property list in the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `AbpAspNetCoreComponentsWebAssemblyPureThemeModule` to the `[DependsOn(...)]` property list in the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 * In the `ConfigureServices` method, add the root component of the `Dignite.Abp.AspNetCore.Components.Web.PureTheme.Themes.Pure.App` application in your `BlazorWebAssemblyHostBuilder`:
 
     ```csharp
@@ -40,7 +40,7 @@ Pure Theme is an Abp Blazor theme built on top of [Blazorise](https://blazorise.
 
 * Install the `Dignite.Abp.AspNetCore.Components.Server.PureTheme` NuGet package into your Blazor Server Web project.
 
-* Add `DigniteAbpAspNetCoreComponentsServerPureThemeModule` to the `[DependsOn(...)]` property list in the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `AbpAspNetCoreComponentsServerPureThemeModule` to the `[DependsOn(...)]` property list in the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 * Make the following changes in the `Pages/_Host.cshtml` file:
   * At the top of the page, include the following namespaces:

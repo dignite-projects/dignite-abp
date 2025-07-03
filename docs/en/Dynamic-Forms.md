@@ -13,7 +13,7 @@ The difference between `Dignite.Abp.DynamicForms` and [Volo.Abp.ObjectExtending]
 
 - Install the `Dignite.Abp.DynamicForms` NuGet package into the `Domain.Shared` project of the Abp project.
 
-- Add `DigniteAbpDynamicFormsModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+- Add `AbpDynamicFormsModule` to the `[DependsOn(...)]` property list of the [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 ## Get a Dynamic Form with a Specific Name
 

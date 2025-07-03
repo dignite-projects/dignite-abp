@@ -19,7 +19,7 @@ The Blazor version of Ckeditor is suitable for both Blazor Server and Blazor Web
 
 * Install the `Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly` NuGet package in your Blazor WebAssembly Web project.
 
-* Add `DigniteAbpAspNetCoreComponentsCkEditorWebAssemblyModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `AbpAspNetCoreComponentsCkEditorWebAssemblyModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 * Run [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle) once in your Blazor project.
 
@@ -37,7 +37,7 @@ The Blazor version of Ckeditor is suitable for both Blazor Server and Blazor Web
 
 * Install the `Dignite.Abp.AspNetCore.Components.CkEditor.Server` NuGet package in your Blazor Server Web project.
 
-* Add `DigniteAbpAspNetCoreComponentsCkEditorServerModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+* Add `AbpAspNetCoreComponentsCkEditorServerModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 {{end}}
 

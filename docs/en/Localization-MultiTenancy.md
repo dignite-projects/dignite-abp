@@ -5,7 +5,7 @@ Multi-tenant localization allows each tenant to have its own set of localized co
 ## Installation
 
 1. Install the `Dignite.Abp.Localization` NuGet package in your web project.
-2. Add `DigniteAbpLocalizationModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+2. Add `AbpLocalizationModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 ## Creating a Localization Resource File
 

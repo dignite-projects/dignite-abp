@@ -9,7 +9,7 @@ Dignite Abp Points 积分规则使用 Microsoft [RulesEngine](https://github.com
 要开始使用Dignite Abp Points，首先需要执行以下步骤：
 
 1. 在您的 Domain 项目中安装 `Dignite.Abp.Points` NuGet 包。
-2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpPointsModule`。
+2. 在您的模块类的 `[DependsOn(...)]` 属性列表中添加 `AbpPointsModule`。
 
 如果您已经安装了[用户积分模块](User-Points.md)，则无需单独安装 `Dignite.Abp.Points` 模块。
 

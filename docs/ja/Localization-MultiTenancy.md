@@ -5,7 +5,7 @@
 ## インストール
 
 1. `Dignite.Abp.Localization` NuGet パッケージを Web プロジェクトにインストールします。
-2. `[DependsOn(...)]` 属性リストに `DigniteAbpLocalizationModule` を追加します。
+2. `[DependsOn(...)]` 属性リストに `AbpLocalizationModule` を追加します。
 
 ## ローカライゼーション リソース ファイルの作成
 

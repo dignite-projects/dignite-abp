@@ -10,15 +10,15 @@
 
 1. 将 `Dignite.Abp.Files.Domain.Shared` NuGet 包安装到 `Domain.Shared` 项目中。
 
-2. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpFilesDomainSharedModule`。
+2. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpFilesDomainSharedModule`。
 
 3. 将 `Dignite.Abp.Files.Domain` NuGet 包安装到 Domain 项目中。
 
-4. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpFilesDomainModule`。
+4. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpFilesDomainModule`。
 
 5. 将 `Dignite.Abp.Files.EntityFrameworkCore` NuGet 包安装到 EntityFrameworkCore 项目中。
 
-6. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpFilesEntityFrameworkCoreModule`。
+6. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpFilesEntityFrameworkCoreModule`。
 
 ## 文件存储处理器
 

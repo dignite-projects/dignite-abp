@@ -10,15 +10,15 @@
 
 1. `Dignite.Abp.Files.Domain.Shared` NuGet パッケージを `Domain.Shared` プロジェクトにインストールします。
 
-2. `DigniteAbpFilesDomainSharedModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
+2. `AbpFilesDomainSharedModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
 
 3. `Dignite.Abp.Files.Domain` NuGet パッケージを Domain プロジェクトにインストールします。
 
-4. `DigniteAbpFilesDomainModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
+4. `AbpFilesDomainModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
 
 5. `Dignite.Abp.Files.EntityFrameworkCore` NuGet パッケージを EntityFrameworkCore プロジェクトにインストールします。
 
-6. `DigniteAbpFilesEntityFrameworkCoreModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
+6. `AbpFilesEntityFrameworkCoreModule` を [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに追加します。
 
 ## ファイルストレージハンドラ
 

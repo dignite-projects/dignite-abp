@@ -11,17 +11,17 @@
 
 - 将 `Dignite.Abp.NotificationCenter.Blazor` Nuget 包安装到 Blazor 项目中。
 
-  添加 `DigniteAbpNotificationCenterBlazorModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+  添加 `AbpNotificationCenterBlazorModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 {{if UI == "Blazor"}}
 
 - 将 `Dignite.Abp.NotificationCenter.HttpApi.Client` Nuget 包安装到 HttpApi.Client 项目中。
 
-  添加 `DigniteAbpNotificationCenterHttpApiClientModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+  添加 `AbpNotificationCenterHttpApiClientModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 - 将 `Dignite.Abp.NotificationCenter.Blazor.WebAssembly` Nuget 包安装到 Blazor.WebAssembly 项目中。
 
-  添加 `DigniteAbpNotificationCenterBlazorWebAssemblyModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+  添加 `AbpNotificationCenterBlazorWebAssemblyModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 - 在 Blazor 项目中执行一次 [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)。
 
@@ -31,7 +31,7 @@
 
 - 将 `Dignite.Abp.NotificationCenter.Blazor.Server` Nuget 包安装到 Blazor.Server 项目中。
 
-  添加 `DigniteAbpNotificationCenterBlazorServerModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+  添加 `AbpNotificationCenterBlazorServerModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 {{end}}
 

@@ -8,7 +8,7 @@
 
 * 将 `Dignite.Abp.DynamicForms.Components` NuGet 包安装到即将开发Blazor动态表单组件的项目中。
 
-* 添加 `DigniteAbpDynamicFormsComponentsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的`[DependsOn(...)]`属性列表中。
+* 添加 `AbpDynamicFormsComponentsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的`[DependsOn(...)]`属性列表中。
 
 ## 表单配置组件
 

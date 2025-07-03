@@ -11,17 +11,17 @@
 
 - `Dignite.Abp.NotificationCenter.Blazor` NuGet パッケージを Blazor プロジェクトにインストールします。
 
-  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpNotificationCenterBlazorModule` を追加します。
+  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpNotificationCenterBlazorModule` を追加します。
 
 {{if UI == "Blazor"}}
 
 - `Dignite.Abp.NotificationCenter.HttpApi.Client` NuGet パッケージを HttpApi.Client プロジェクトにインストールします。
 
-  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpNotificationCenterHttpApiClientModule` を追加します。
+  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpNotificationCenterHttpApiClientModule` を追加します。
 
 - `Dignite.Abp.NotificationCenter.Blazor.WebAssembly` NuGet パッケージを Blazor.WebAssembly プロジェクトにインストールします。
 
-  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpNotificationCenterBlazorWebAssemblyModule` を追加します。
+  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpNotificationCenterBlazorWebAssemblyModule` を追加します。
 
 - Blazor プロジェクトで [abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle) を実行します。
 
@@ -31,7 +31,7 @@
 
 - `Dignite.Abp.NotificationCenter.Blazor.Server` NuGet パッケージを Blazor.Server プロジェクトにインストールします。
 
-  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpNotificationCenterBlazorServerModule` を追加します。
+  [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpNotificationCenterBlazorServerModule` を追加します。
 
 {{end}}
 

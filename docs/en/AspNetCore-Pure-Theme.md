@@ -10,7 +10,7 @@ To install the Pure Theme in your web project, follow these steps:
 
 1. Install the `Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure` NuGet package.
 
-2. Add `DigniteAbpAspNetCoreMvcUiPureThemeModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+2. Add `AbpAspNetCoreMvcUiPureThemeModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 3. Configure the default theme in the `ConfigureServices` method:
 

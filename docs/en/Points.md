@@ -9,7 +9,7 @@ Dignite Abp Points leverages the Microsoft [RulesEngine](https://github.com/micr
 To start using Dignite Abp Points, follow these steps:
 
 1. Install the `Dignite.Abp.Points` NuGet package in your Domain project.
-2. Add `DigniteAbpPointsModule` to the `[DependsOn(...)]` attribute list in your module class.
+2. Add `AbpPointsModule` to the `[DependsOn(...)]` attribute list in your module class.
 
 If you have already installed the [User Points module](User-Points.md), you do not need to install the `Dignite.Abp.Points` module separately.
 

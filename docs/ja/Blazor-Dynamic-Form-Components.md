@@ -8,7 +8,7 @@
 
 * Blazorダイナミックフォームコンポーネントを開発するプロジェクトに `Dignite.Abp.DynamicForms.Components` NuGet パッケージをインストールします。
 
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `DigniteAbpDynamicFormsComponentsModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` プロパティリストに `AbpDynamicFormsComponentsModule` を追加します。
 
 ## フォーム構成コンポーネント
 

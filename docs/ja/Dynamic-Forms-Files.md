@@ -8,11 +8,11 @@
 
 1. `Dignite.Abp.DynamicForms.FileExplorer` NuGet パッケージを `Application Layer` 内の `Contracts` プロジェクトにインストールします。
 
-2. `[DependsOn(...)]` 属性リストで `DigniteAbpDynamicFormsFileExplorerModule` を指定して、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に追加します。
+2. `[DependsOn(...)]` 属性リストで `AbpDynamicFormsFileExplorerModule` を指定して、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に追加します。
 
 3. `Dignite.Abp.DynamicForms.Components.FileExplorer` NuGet パッケージを Blazor プロジェクトにインストールします。
 
-4. `[DependsOn(...)]` 属性リストで `DigniteAbpDynamicFormsComponentsFileExplorerModule` を指定して、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に追加します。
+4. `[DependsOn(...)]` 属性リストで `AbpDynamicFormsComponentsFileExplorerModule` を指定して、[モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) に追加します。
 
 以下は [Dignite CMS](https://dignite.com/dignite-cms) のバックエンドでのファイルダイナミックフォームの設定スクリーンショットです：
 

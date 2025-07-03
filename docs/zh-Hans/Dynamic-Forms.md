@@ -13,7 +13,7 @@
 
 - 将 `Dignite.Abp.DynamicForms` Nuget 包安装到 Abp项目的 `Domain.Shared` 项目中
 
-- 添加 `DigniteAbpDynamicFormsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
+- 添加 `AbpDynamicFormsModule` 到 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) `[DependsOn(...)]` 属性列表中。
 
 ## 获取指定名称的动态表单
 

@@ -5,7 +5,7 @@ Dignite Abp Notification System is developed based on the [Asp.Net Boilerplate N
 ## Installation
 
 - Install the `Dignite.Abp.Notifications` NuGet package in the Domain project.
-- Add `DigniteAbpNotificationsModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+- Add `AbpNotificationsModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 > If you have already installed the [Notification Center Module](Notification-Center.md), the `Dignite.Abp.Notifications` module is already installed.
 
@@ -207,7 +207,7 @@ The Notification System includes a built-in real-time notification event system 
 ### Installing SignalRNotifier
 
 - Install the `Dignite.Abp.Notifications.SignalRNotifier` NuGet package in the server-side project.
-- Add `DigniteAbpNotificationsSignalRNotifierModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+- Add `AbpNotificationsSignalRNotifierModule` to the `[DependsOn(...)]` attribute list in your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 See also: [Blazor Notification Center](Blazor-Notification-Center.md)
 

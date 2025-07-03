@@ -19,7 +19,7 @@ CkeditorのBlazorバージョンは、Blazor ServerとBlazor WebAssemblyに適�
 
 * Blazor WebAssembly Webプロジェクトに`Dignite.Abp.AspNetCore.Components.CkEditor.WebAssembly` NuGet パッケージをインストールします。
 
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに `DigniteAbpAspNetCoreComponentsCkEditorWebAssemblyModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに `AbpAspNetCoreComponentsCkEditorWebAssemblyModule` を追加します。
 
 * Blazorプロジェクトで[abp bundle](https://docs.abp.io/en/abp/latest/CLI#bundle)を実行します。
 
@@ -37,7 +37,7 @@ CkeditorのBlazorバージョンは、Blazor ServerとBlazor WebAssemblyに適�
 
 * Blazor Server Webプロジェクトに`Dignite.Abp.AspNetCore.Components.CkEditor.Server` NuGet パッケージをインストールします。
 
-* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに `DigniteAbpAspNetCoreComponentsCkEditorServerModule` を追加します。
+* [モジュールクラス](https://docs.abp.io/en/abp/latest/Module-Development-Basics) の `[DependsOn(...)]` 属性リストに `AbpAspNetCoreComponentsCkEditorServerModule` を追加します。
 
 {{end}}
 

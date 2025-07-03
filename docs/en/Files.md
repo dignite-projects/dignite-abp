@@ -10,15 +10,15 @@ Here are the steps to install the File Management module:
 
 1. Install the `Dignite.Abp.Files.Domain.Shared` NuGet package into your `Domain.Shared` project.
 
-2. Add `DigniteAbpFilesDomainSharedModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+2. Add `AbpFilesDomainSharedModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 3. Install the `Dignite.Abp.Files.Domain` NuGet package into your Domain project.
 
-4. Add `DigniteAbpFilesDomainModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+4. Add `AbpFilesDomainModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 5. Install the `Dignite.Abp.Files.EntityFrameworkCore` NuGet package into your EntityFrameworkCore project.
 
-6. Add `DigniteAbpFilesEntityFrameworkCoreModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
+6. Add `AbpFilesEntityFrameworkCoreModule` to the `[DependsOn(...)]` attribute list of your [module class](https://docs.abp.io/en/abp/latest/Module-Development-Basics).
 
 ## File Storage Handlers
 

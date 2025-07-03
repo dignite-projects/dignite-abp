@@ -8,11 +8,11 @@
 
 1. 将 `Dignite.Abp.DynamicForms.FileExplorer` NuGet 包安装到 `Application Layer` 中的 `Contracts` 项目中。
 
-2. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpDynamicFormsFileExplorerModule`。
+2. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpDynamicFormsFileExplorerModule`。
 
 3. 将 `Dignite.Abp.DynamicForms.Components.FileExplorer` NuGet 包安装到 Blazor 项目中。
 
-4. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `DigniteAbpDynamicFormsComponentsFileExplorerModule`。
+4. 在 [模块类](https://docs.abp.io/en/abp/latest/Module-Development-Basics) 的 `[DependsOn(...)]` 属性列表中添加 `AbpDynamicFormsComponentsFileExplorerModule`。
 
 以下是文件动态表单在 [Dignite CMS](https://dignite.com/dignite-cms) 后台配置的截图：
 

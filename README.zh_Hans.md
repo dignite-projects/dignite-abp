@@ -51,13 +51,13 @@ Dignite Cms是一款基于Abp Framework的CMS解决方案。它允许开发者�
 
 开发人员能够为每个租户定制独立的Asp.net mvc 视图 UI.
 
-- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Views-MultiTenancy)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Tenant-Theme)
 
 #### 多租户本地化
 
 为每个租户提供独立的本地化支持，用于个性化租户内容呈现。
 
-- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Localization-MultiTenancy)
+- [文档](https://learn.dignite.com/zh-Hans/abp/latest/Tenant-Localization)
 
 #### 多租户区域化
 

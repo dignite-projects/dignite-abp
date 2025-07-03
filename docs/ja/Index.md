@@ -46,13 +46,13 @@ Dignite Abpチームによって開発されたAbpテーマパッケージには
 
 各テナントは個別のビュー UIを持つことができ、開発者はテナントのUIを簡単にパーソナライズできる。
 
-- [ドキュメント](Views-MultiTenancy.md)
+- [ドキュメント](Tenant-Theme.md)
 
 ### 多テナント ローカライズ
 
 各テナントは、個別の言語パックを持つことができ、テナントごとにコンテンツを表示することができます。
 
-- [ドキュメント](Localization-MultiTenancy.md)
+- [ドキュメント](Tenant-Localization.md)
 
 ### BlazoriseUI コンポーネント
 

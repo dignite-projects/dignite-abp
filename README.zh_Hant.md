@@ -51,13 +51,13 @@ Dignite CMS 是基於 ABP 框架的 CMS 解決方案，可在線定義欄位以�
 
 開發者可以為每個租戶自定義自己的 Asp.net MVC 視圖 UI。
 
-- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Views-MultiTenancy)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Tenant-Theme)
 
 #### 多租戶本地化
 
 為每個租戶提供獨立的本地化支持，可單獨顯示租戶內容。
 
-- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Localization-MultiTenancy)
+- [文檔](https://learn.dignite.com/zh-tw/abp/latest/Tenant-Localization)
 
 #### 多租戶區域化
 

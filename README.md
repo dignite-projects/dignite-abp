@@ -51,13 +51,13 @@ Dignite CMS is a CMS solution based on the ABP Framework. It enables developers 
 
 Developers can customize unique ASP.NET MVC view UIs for each tenant.
 
-- [Documentation](https://learn.dignite.com/en/abp/latest/Views-MultiTenancy)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Tenant-Theme)
 
 #### Multi-Tenant Localization
 
 Provides independent localization support for each tenant, personalizing content presentation.
 
-- [Documentation](https://learn.dignite.com/en/abp/latest/Localization-MultiTenancy)
+- [Documentation](https://learn.dignite.com/en/abp/latest/Tenant-Localization)
 
 #### Multi-Tenant Regionalization
 

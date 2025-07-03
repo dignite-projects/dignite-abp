@@ -51,13 +51,13 @@ Dignite CMS は ABP フレームワークに基づいた CMS ソリューショ�
 
 開発者は各テナントに独自の Asp.net MVC ビュー UI をカスタマイズできます。
 
-- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Views-MultiTenancy)
+- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Tenant-Theme)
 
 #### マルチテナントローカリゼーション
 
 各テナントに独自のローカリゼーションサポートを提供し、テナントのコンテンツを個別に表示できます。
 
-- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Localization-MultiTenancy)
+- [ドキュメント](https://learn.dignite.com/ja/abp/latest/Tenant-Localization)
 
 #### マルチテナント地域化
 

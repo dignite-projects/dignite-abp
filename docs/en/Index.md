@@ -46,13 +46,13 @@ Abp theme packages developed by Dignite Abp team, including both Blazor and MVC 
 
 Each tenant can have a separate set of View UI, and developers can easily personalize the tenant UI.
 
-- [Document](Views-MultiTenancy.md)
+- [Document](Tenant-Theme.md)
 
 ### Multi-Tenant Localization
 
 Each tenant can have a separate set of language packs for personalized tenant content presentation.
 
-- [Document](Localization-MultiTenancy.md)
+- [Document](Tenant-Localization.md)
 
 ### BlazoriseUI Component
 

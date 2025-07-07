@@ -1,10 +1,10 @@
 {
   "culture": "zh-Hant",
   "texts": {
-    "Regionalization": "±¾µØ»¯",
-    "Default": "îAÔO",
-    "SetDefault": "ÔOéîAÔO",
-    "DefaultCultureName": "îAÔO…^ÓòÃû·Q",
-    "AvailableCultureNames": "¿ÉÓÃ…^ÓòÃû·Q"
+    "Regionalization": "æœ¬åœ°åŒ–",
+    "Default": "é è¨­",
+    "SetDefault": "è¨­ç‚ºé è¨­",
+    "DefaultCultureName": "é è¨­å€åŸŸåç¨±",
+    "AvailableCultureNames": "å¯ç”¨å€åŸŸåç¨±"
   }
 }

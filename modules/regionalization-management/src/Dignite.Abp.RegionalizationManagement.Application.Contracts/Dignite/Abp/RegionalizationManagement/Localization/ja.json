@@ -1,10 +1,10 @@
 {
   "culture": "ja",
   "texts": {
-    "Regionalization": "¥í©`¥«¥ê¥¼©`¥·¥ç¥ó",
-    "Default": "¥Ç¥Õ¥©¥ë¥È",
-    "SetDefault": "¥Ç¥Õ¥©¥ë¥È¤ËÔO¶¨",
-    "DefaultCultureName": "¥Ç¥Õ¥©¥ë¥ÈµØÓòÃû",
-    "AvailableCultureNames": "ÀûÓÃ¿ÉÄÜ¤ÊµØÓòÃû"
+    "Regionalization": "ãƒ­ãƒ¼ã‚«ãƒªã‚¼ãƒ¼ã‚·ãƒ§ãƒ³",
+    "Default": "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ",
+    "SetDefault": "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«è¨­å®š",
+    "DefaultCultureName": "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®åœ°åŸŸå",
+    "AvailableCultureNames": "åˆ©ç”¨å¯èƒ½ãªåœ°åŸŸå"
   }
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.MongoDB.Tests</AssemblyName>
 		<PackageId>Dignite.FileExplorer.MongoDB.Tests</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -11,14 +11,16 @@
 		<RootNamespace />
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Dignite.FileExplorer.MongoDB\Dignite.FileExplorer.MongoDB.csproj" />
+		<ProjectReference Include="..\Dignite.FileExplorer.TestBase\Dignite.FileExplorer.TestBase.csproj" />
+	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-	  <PackageReference Include="EphemeralMongo.Core" />
-	  <PackageReference Include="EphemeralMongo6.runtime.linux-x64" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
-	  <PackageReference Include="EphemeralMongo6.runtime.osx-x64" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
-	  <PackageReference Include="EphemeralMongo6.runtime.win-x64" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
-    <ProjectReference Include="..\..\src\Dignite.FileExplorer.MongoDB\Dignite.FileExplorer.MongoDB.csproj" />
-    <ProjectReference Include="..\Dignite.FileExplorer.TestBase\Dignite.FileExplorer.TestBase.csproj" />
+	  <PackageReference Include="MongoSandbox.Core" />
+	  <PackageReference Include="MongoSandbox8.runtime.linux-x64" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
+	  <PackageReference Include="MongoSandbox8.runtime.osx-arm64" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
+	  <PackageReference Include="MongoSandbox8.runtime.win-x64" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
   </ItemGroup>
 
 </Project>

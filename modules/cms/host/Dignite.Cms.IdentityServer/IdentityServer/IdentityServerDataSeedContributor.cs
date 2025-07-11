@@ -226,7 +226,7 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
         string postLogoutRedirectUri = null,
         string frontChannelLogoutUri = null,
         bool requireClientSecret = true,
-        bool requirePkce = false,
+        bool requirePkce = true,
         IEnumerable<string> permissions = null,
         IEnumerable<string> corsOrigins = null)
     {
@@ -251,7 +251,7 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
                     RequireConsent = false,
                     FrontChannelLogoutUri = frontChannelLogoutUri,
                     RequireClientSecret = requireClientSecret,
-                    RequirePkce = requirePkce
+                    RequirePkce = requirePkce,
                 },
                 autoSave: true
             );

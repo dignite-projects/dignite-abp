@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dignite.Abp.BlazoriseUI;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Components.Web.Theming;
 using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AutoMapper;
@@ -9,7 +10,8 @@ namespace Dignite.FileExplorer.Blazor;
 [DependsOn(
     typeof(FileExplorerApplicationContractsModule),
     typeof(AbpAspNetCoreComponentsWebThemingModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(DigniteAbpBlazoriseUiModule)
     )]
 public class FileExplorerBlazorModule : AbpModule
 {

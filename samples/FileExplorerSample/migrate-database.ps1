@@ -1,1 +1,1 @@
-dotnet run --project FileExplorerSample --migrate-database
+dotnet run --project FileExplorerSample/FileExplorerSample.csproj --migrate-database

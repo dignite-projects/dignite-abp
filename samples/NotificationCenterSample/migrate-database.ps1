@@ -1,1 +1,1 @@
-dotnet run --project NotificationCenterSample --migrate-database
+dotnet run --project src/NotificationCenterSample.csproj --migrate-database

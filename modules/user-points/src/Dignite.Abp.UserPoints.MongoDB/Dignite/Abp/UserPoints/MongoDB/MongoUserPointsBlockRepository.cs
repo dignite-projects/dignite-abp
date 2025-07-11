@@ -25,12 +25,11 @@ public class MongoUserPointsBlockRepository : MongoDbRepository<IUserPointsMongo
         CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await(await GetMongoQueryableAsync(cancellationToken))
+        return await(await GetQueryableAsync(cancellationToken))
             .Where(e => !e.UserPointsItem.IsDeleted && e.UserPointsItem.UserId == userId && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
             .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upb => upb.UserPointsItem.PointsType == PointsType.General)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.UserPointsItem.PointsWorkflowName == pointsWorkflowName)
-            .As<IMongoQueryable<UserPointsBlock>>()
             .OrderBy(un => un.UserPointsItem.ExpirationDate)
             .Take(top)
             .ToListAsync(cancellationToken);
@@ -40,13 +39,12 @@ public class MongoUserPointsBlockRepository : MongoDbRepository<IUserPointsMongo
         CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await(await GetMongoQueryableAsync(cancellationToken))
+        return await(await GetQueryableAsync(cancellationToken))
             .Where(e => !e.UserPointsItem.IsDeleted && e.UserPointsItem.UserId == userId && !e.IsLocked && e.UserPointsItem.ExpirationDate > _clock.Now)
             .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upb => upb.UserPointsItem.PointsType == PointsType.General)
             .WhereIf(expirationDate.HasValue, e => e.UserPointsItem.ExpirationDate < expirationDate)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.UserPointsItem.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.UserPointsItem.PointsWorkflowName == pointsWorkflowName)
-            .As<IMongoQueryable<UserPointsBlock>>()
             .CountAsync(cancellationToken);
     }
 }

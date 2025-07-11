@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Dignite.Abp.TenantDomain.TenantRouteConfigs;
+using Dignite.Abp.TenantDomain.Caddy.CaddyConfig;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Volo.Abp;
@@ -22,12 +22,12 @@ public class CaddyWebServerManagerTests : AbpIntegratedTest<AbpTenantDomainCaddy
         _httpClientFactoryMock = new Mock<IHttpClientFactory>();
         _loggerMock = new Mock<ILogger<CaddyWebServerManager>>();
 
-        var caddyTenantConfigManager = GetRequiredService<CaddyTenantConfigManager>();
+        var client = GetRequiredService<CaddyClient>();
 
         _caddyWebServerManager = new CaddyWebServerManager(
             _httpClientFactoryMock.Object,
             _loggerMock.Object,
-            caddyTenantConfigManager
+            client
         );
     }
 

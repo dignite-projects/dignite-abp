@@ -21,31 +21,29 @@ public class MongoUserPointsOrderRepository : MongoDbRepository<IUserPointsMongo
     public async Task<UserPointsOrder> FindByBusinessOrderAsync(string businessOrderType, string businessOrderNumber, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .FirstOrDefaultAsync(upo => upo.BusinessOrderType == businessOrderType && upo.BusinessOrderNumber == businessOrderNumber, cancellationToken);
     }
 
     public virtual async Task<int> GetCountAsync(Guid userId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await(await GetMongoQueryableAsync(cancellationToken))
+        return await(await GetQueryableAsync(cancellationToken))
             .Where(e => e.UserId == userId)
             .WhereIf(startTime.HasValue, e => e.CreationTime >= startTime.Value)
             .WhereIf(endTime.HasValue, e => e.CreationTime < endTime.Value)
-            .As<IMongoQueryable<UserPointsOrder>>()
             .CountAsync(cancellationToken);
     }
 
     public virtual async Task<List<UserPointsOrder>> GetListAsync(Guid userId, DateTime? startTime = null, DateTime? endTime = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .Where(e => e.UserId == userId)
             .WhereIf(startTime.HasValue, e => e.CreationTime >= startTime.Value)
             .WhereIf(endTime.HasValue, e => e.CreationTime < endTime.Value)
-            .As<IMongoQueryable<UserPointsOrder>>()
             .OrderByDescending(un => un.CreationTime)
-            .PageBy<UserPointsOrder, IMongoQueryable<UserPointsOrder>>(skipCount, maxResultCount)
+            .PageBy(skipCount, maxResultCount)
             .ToListAsync(cancellationToken);
     }
 }

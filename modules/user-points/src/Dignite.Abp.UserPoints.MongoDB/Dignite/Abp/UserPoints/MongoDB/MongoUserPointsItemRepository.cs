@@ -21,28 +21,26 @@ public class MongoUserPointsItemRepository : MongoDbRepository<IUserPointsMongoD
     public virtual async Task<int> GetCountAsync(Guid userId, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken)).Where(e => e.UserId == userId)
+        return await (await GetQueryableAsync(cancellationToken)).Where(e => e.UserId == userId)
             .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upi => upi.PointsType == PointsType.General)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
             .WhereIf(startTime.HasValue, e => e.CreationTime >= startTime.Value)
             .WhereIf(endTime.HasValue, e => e.CreationTime < endTime.Value)
-            .As<IMongoQueryable<UserPointsItem>>()
             .CountAsync(cancellationToken);
     }
 
     public virtual async Task<List<UserPointsItem>> GetListAsync(Guid userId, string pointsDefinitionName = null, string pointsWorkflowName = null, DateTime? startTime = null, DateTime? endTime = null, int maxResultCount = int.MaxValue, int skipCount = 0, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken)).Where(e => e.UserId == userId)
+        return await (await GetQueryableAsync(cancellationToken)).Where(e => e.UserId == userId)
             .WhereIf(pointsDefinitionName.IsNullOrEmpty() && pointsWorkflowName.IsNullOrEmpty(), upi => upi.PointsType == PointsType.General)
             .WhereIf(!pointsDefinitionName.IsNullOrEmpty(), e => e.PointsDefinitionName == pointsDefinitionName)
             .WhereIf(!pointsWorkflowName.IsNullOrEmpty(), e => e.PointsWorkflowName == pointsWorkflowName)
             .WhereIf(startTime.HasValue, e => e.CreationTime >= startTime.Value)
             .WhereIf(endTime.HasValue, e => e.CreationTime < endTime.Value)
-            .As<IMongoQueryable<UserPointsItem>>()
             .OrderByDescending(un => un.CreationTime)
-            .PageBy<UserPointsItem, IMongoQueryable<UserPointsItem>>(skipCount, maxResultCount)
+            .PageBy(skipCount, maxResultCount)
             .ToListAsync(cancellationToken);
     }
 }

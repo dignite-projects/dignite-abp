@@ -4,11 +4,14 @@
 	<Import Project="..\..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\Dignite.Abp.BlazoriseUI\Dignite.Abp.BlazoriseUI.csproj" />
+		<PackageReference Include="Volo.Abp.BlazoriseUI" />
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <ProjectReference Include="..\Dignite.Abp.DynamicForms.Components\Dignite.Abp.DynamicForms.Components.csproj" />
 	</ItemGroup>
 

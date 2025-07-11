@@ -22,7 +22,7 @@ public class MongoNotificationRepository : MongoDbRepository<INotificationCenter
     public async Task<List<Notification>> GetListAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .Where(n =>
                 ids.Contains(n.Id)
             )

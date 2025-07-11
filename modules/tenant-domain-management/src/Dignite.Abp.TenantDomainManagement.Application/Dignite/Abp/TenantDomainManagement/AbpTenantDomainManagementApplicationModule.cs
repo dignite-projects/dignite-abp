@@ -2,8 +2,8 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
-using Dignite.Abp.TenantDomain.WebServer;
 using Volo.Abp.SettingManagement;
+using Dignite.Abp.TenantDomain;
 
 namespace Dignite.Abp.TenantDomainManagement;
 

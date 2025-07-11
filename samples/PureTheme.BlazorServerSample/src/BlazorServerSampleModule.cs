@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using PureTheme.BlazorServerSample.Data;
 using PureTheme.BlazorServerSample.Localization;
 using PureTheme.BlazorServerSample.Menus;
+using PureTheme.BlazorServerSample.Toolbars;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -18,6 +19,7 @@ using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
@@ -147,6 +149,13 @@ public class BlazorServerSampleModule : AbpModule
         ConfigureRouter(context);
         ConfigureAuthentication(context, configuration);
         ConfigureEfCore(context);
+
+
+
+        Configure<AbpToolbarOptions>(options =>
+        {
+            options.Contributors.Add(new BlazorServerSampleToolbarContributor());
+        });
 
         //Disable the security log to run successfully
         Configure<AbpSecurityLogOptions>(x =>

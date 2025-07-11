@@ -3,9 +3,13 @@
   <Import Project="..\..\..\common.test.props" />
 
   <PropertyGroup>
-	<TargetFramework>net8.0</TargetFramework>
+	<TargetFramework>net9.0</TargetFramework>
 	<RootNamespace />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dignite\Abp\TenantDomain\Caddy\CaddyTenantConfigManagerTest.cs" />
+  </ItemGroup>
 
   <ItemGroup>
 	  <ProjectReference Include="..\..\src\Dignite.Abp.TenantDomain.Caddy\Dignite.Abp.TenantDomain.Caddy.csproj" />

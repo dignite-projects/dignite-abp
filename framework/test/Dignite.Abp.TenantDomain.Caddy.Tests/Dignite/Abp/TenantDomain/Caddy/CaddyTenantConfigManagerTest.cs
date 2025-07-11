@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Dignite.Abp.TenantDomain.Caddy.CaddyConfig;
 using Dignite.Abp.TenantDomain.TenantRouteConfigs;
 using Shouldly;
 using Volo.Abp.Testing;

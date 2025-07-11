@@ -4,18 +4,21 @@
 	<Import Project="..\..\..\..\common.props" />
 	
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net9.0</TargetFrameworks>
     <RootNamespace>Dignite.Abp.NotificationCenter</RootNamespace>
   </PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Dignite.Abp.NotificationCenter.MongoDB\Dignite.Abp.NotificationCenter.MongoDB.csproj" />
+		<ProjectReference Include="..\Dignite.Abp.NotificationCenter.TestBase\Dignite.Abp.NotificationCenter.TestBase.csproj" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-	  <PackageReference Include="EphemeralMongo.Core" />
-	  <PackageReference Include="EphemeralMongo6.runtime.linux-x64" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
-	  <PackageReference Include="EphemeralMongo6.runtime.osx-x64" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
-	  <PackageReference Include="EphemeralMongo6.runtime.win-x64" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
-    <ProjectReference Include="..\..\src\Dignite.Abp.NotificationCenter.MongoDB\Dignite.Abp.NotificationCenter.MongoDB.csproj" />
-    <ProjectReference Include="..\Dignite.Abp.NotificationCenter.TestBase\Dignite.Abp.NotificationCenter.TestBase.csproj" />
+	  <PackageReference Include="MongoSandbox.Core" />
+	  <PackageReference Include="MongoSandbox8.runtime.linux-x64" Condition="$([MSBuild]::IsOSPlatform('Linux'))" />
+	  <PackageReference Include="MongoSandbox8.runtime.osx-arm64" Condition="$([MSBuild]::IsOSPlatform('OSX'))" />
+	  <PackageReference Include="MongoSandbox8.runtime.win-x64" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
   </ItemGroup>
 
 </Project>

@@ -61,6 +61,14 @@
     <script src="~/themes/pure/color-mode-switch.js"></script>
     @await RenderSectionAsync("styles", false)
 
+    <script type="text/javascript">
+        var dignite = dignite || {};
+        dignite.brand = dignite.brand || {};
+        dignite.brand.appName='@BrandingProvider.AppName';
+        dignite.brand.logoUrl='@BrandingProvider.LogoUrl';
+        dignite.brand.logoReverseUrl='@BrandingProvider.LogoReverseUrl';
+    </script>
+
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)

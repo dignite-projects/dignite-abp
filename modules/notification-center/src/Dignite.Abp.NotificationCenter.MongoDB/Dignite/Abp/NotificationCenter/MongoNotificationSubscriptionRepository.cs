@@ -24,9 +24,8 @@ public class MongoNotificationSubscriptionRepository : MongoDbRepository<INotifi
     public async Task<NotificationSubscription> FindAsync(Guid userId, string notificationName, [CanBeNull] string entityTypeName, [CanBeNull] string entityId, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .WhereIf(entityTypeName != null, un => un.EntityTypeName == entityTypeName && un.EntityId == entityId)
-            .As<IMongoQueryable<NotificationSubscription>>()
             .FirstOrDefaultAsync(un =>
                 un.UserId == userId && un.NotificationName == notificationName,
                 GetCancellationToken(cancellationToken)
@@ -36,9 +35,8 @@ public class MongoNotificationSubscriptionRepository : MongoDbRepository<INotifi
     public async Task<List<NotificationSubscription>> GetListAsync(string notificationName, [CanBeNull] string entityTypeName, [CanBeNull] string entityId, CancellationToken cancellationToken = default)
     {
         cancellationToken = GetCancellationToken(cancellationToken);
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .WhereIf(entityTypeName != null, un => un.EntityTypeName == entityTypeName && un.EntityId == entityId)
-            .As<IMongoQueryable<NotificationSubscription>>()
             .Where(un => un.NotificationName == notificationName)
             .ToListAsync(
                 cancellationToken
@@ -49,7 +47,7 @@ public class MongoNotificationSubscriptionRepository : MongoDbRepository<INotifi
     {
         cancellationToken = GetCancellationToken(cancellationToken);
 
-        return await (await GetMongoQueryableAsync(cancellationToken))
+        return await (await GetQueryableAsync(cancellationToken))
             .Where(un => un.UserId == userId)
             .ToListAsync(
                 cancellationToken

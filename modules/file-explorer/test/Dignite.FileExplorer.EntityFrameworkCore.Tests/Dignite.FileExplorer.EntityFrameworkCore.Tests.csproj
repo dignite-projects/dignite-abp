@@ -2,7 +2,7 @@
 
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<AssemblyName>Dignite.FileExplorer.EntityFrameworkCore.Tests</AssemblyName>
 		<PackageId>Dignite.FileExplorer.EntityFrameworkCore.Tests</PackageId>
 		<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>

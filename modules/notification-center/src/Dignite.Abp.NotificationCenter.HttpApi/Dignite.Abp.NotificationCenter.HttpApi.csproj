@@ -5,7 +5,7 @@
 
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
+		<TargetFrameworks>net9.0</TargetFrameworks>
 		<AssemblyName>Dignite.Abp.NotificationCenter.HttpApi</AssemblyName>
 		<PackageId>Dignite.Abp.NotificationCenter.HttpApi</PackageId>
 		<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>

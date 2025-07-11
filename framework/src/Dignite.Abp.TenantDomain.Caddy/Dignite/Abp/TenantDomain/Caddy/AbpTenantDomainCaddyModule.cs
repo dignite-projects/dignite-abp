@@ -1,11 +1,9 @@
-﻿using Caddy;
-using Caddy.Client;
-using Dignite.Abp.TenantDomain.WebServer;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.Modularity;
+using Dignite.Abp.TenantDomain.Caddy.CaddyConfig;
 
 namespace Dignite.Abp.TenantDomain.Caddy;
 

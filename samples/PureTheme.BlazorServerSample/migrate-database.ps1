@@ -1,1 +1,1 @@
-dotnet run --project PureTheme.BlazorServerSample --migrate-database
+dotnet run --project src/PureTheme.BlazorServerSample.csproj --migrate-database

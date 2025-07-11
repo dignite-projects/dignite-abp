@@ -1,34 +1,46 @@
-# Dignite CMS
-
-A good helper for website building
-
 ## ℹ️ Description
 
-This package is a part of the [Dignite CMS](https://dignite.com/dignite-cms).
+This package is a part of the [Dignite ABP](https://dignite.com/dignite-abp).
 
 ### Adding to the ecology of the ABP framework
 
-Based on .net core development headless CMS
+Adds Notification system, Dynamic Forms, User Points system, File Explorer, Cms, and other enhancements.
 
 ### For more information, check out the below links
 
-🔗Official Website: <https://dignite.com/dignite-cms>
+🔗Official Website: <https://dignite.com/dignite-abp>
 
-🔗GitHub Repository: <https://github.com/dignite-projects/dignite-cms>
+🔗GitHub Repository: <https://github.com/dignite-projects/dignite-abp>
 
-🔗Samples: <https://github.com/dignite-projects/dignite-cms/tree/main/host/Dignite.Cms.Blazor.Server.Host>
+🔗Samples: <https://github.com/dignite-projects/dignite-abp/tree/main/samples>
 
-🔗Documentation: <https://learn.dignite.com/en/cms>
+🔗Documentation: <https://learn.dignite.com/documents/en/abp>
 
-## 🚀 Key Features of the Dignite CMS
+## 🚀 Key Features of the Dignite ABP
 
-🟡 multi-tenant
+🟡 Notification System
 
-🟡 multi-site
+🟡 Dynamic Forms
 
-🟡 Internationalized
+🟡 User Points system
 
-🟡 Custom Fields
+🟡 Files Explorer
+
+🟡 CMS
+
+🟡 Multi-Tenancy Theme
+
+🟡 Multi-Tenancy Localization
+
+🟡 Regionalization
+
+🟡 Multi-Tenancy Domains
+
+🟡 Pure Theme
+
+🟡 BlazoriseUI Component
+
+🟡 Ckeditor Component
 
 ### 📘 Supported Database Providers
 
@@ -40,10 +52,12 @@ Based on .net core development headless CMS
 
 🔵 Razor Pages
 
+🔵 Angular
+
 🔵 Blazor Web Assembly
 
 🔵 Blazor Server
 
 ## 📫 Bug & Support
 
-Support for open-source Dignite Cms client-side packages is available at [GitHub Issues](https://github.com/dignite-projects/dignite-cms/issues).
+Support for open-source Dignite Abp client-side packages is available at [GitHub Issues](https://github.com/dignite-projects/dignite-abp/issues).

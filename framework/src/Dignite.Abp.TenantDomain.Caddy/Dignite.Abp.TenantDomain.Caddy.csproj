@@ -4,7 +4,7 @@
 	<Import Project="..\..\..\common.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
+		<TargetFrameworks>net9.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<AssemblyName>Dignite.Abp.TenantDomain.Caddy</AssemblyName>
 		<PackageId>Dignite.Abp.TenantDomain.Caddy</PackageId>
@@ -18,11 +18,12 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
+		<PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" />
+		<PackageReference Include="Newtonsoft.Json" />
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" />
+	  <ProjectReference Include="..\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj" />
 	</ItemGroup>
 
 </Project>

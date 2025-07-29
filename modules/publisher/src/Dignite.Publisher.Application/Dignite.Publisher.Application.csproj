@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Volo.CmsKit.Application" />
+    <ProjectReference Include="..\Dignite.Publisher.Application.Contracts\Dignite.Publisher.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Dignite.Publisher.Admin.Application\Dignite.Publisher.Admin.Application.csproj" />
+    <ProjectReference Include="..\Dignite.Publisher.Public.Application\Dignite.Publisher.Public.Application.csproj" />
+  </ItemGroup>
+
+</Project>

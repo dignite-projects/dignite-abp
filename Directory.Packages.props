@@ -187,7 +187,8 @@
     <PackageVersion Include="Blazorise.Icons.FontAwesome" Version="1.7.6" />
     <PackageVersion Include="My.Extensions.Localization.Json" Version="3.4.0" />
     <PackageVersion Include="RulesEngine" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />    
+    <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="9.0.4" />
     <PackageVersion Include="DnsClient" Version="1.8.0" />
     <PackageVersion Include="Volo.Abp.TestBase" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI" Version="9.2.1" />
@@ -239,26 +240,29 @@
     <PackageVersion Include="Volo.Abp.Swashbuckle" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="9.2.1" />
-    <PackageVersion Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Account.Web.OpenIddict" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Account.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Account.HttpApi" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.HttpApi" Version="9.2.1" />
-    <PackageVersion Include="Volo.Abp.OpenIddict.Domain" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.OpenIddict.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.HttpApi" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Identity.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Identity.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Identity.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Identity.HttpApi" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.FeatureManagement.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.FeatureManagement.HttpApi" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.TenantManagement.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.TenantManagement.HttpApi" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AutoMapper" Version="9.2.1" />
@@ -277,6 +281,7 @@
     <PackageVersion Include="Volo.Abp.Ddd.Application" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Http.Client" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Identity.Domain.Shared" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Identity.Domain" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Json.Newtonsoft" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Ddd.Domain.Shared" Version="9.2.1" />
@@ -289,7 +294,6 @@
     <PackageVersion Include="Volo.Abp.Featuremanagement.Blazor.Server" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.SettingManagement.Blazor.Server" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="9.2.1" />
-    <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.MultiTenancy" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="4.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="9.2.1" />
@@ -314,6 +318,29 @@
     <PackageVersion Include="Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme.Bundling" Version="4.2.1" />
     <PackageVersion Include="Volo.Abp.FeatureManagement.Blazor.WebAssembly" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Bundling" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BackgroundJobs.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.AuditLogging.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.AuditLogging.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.PermissionManagement.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Database.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Database.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.OpenIddict.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.OpenIddict.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.Domain.Shared" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.TenantManagement.Domain" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.GlobalFeatures" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Emailing" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Caching" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Account.HttpApi.Client" Version="9.2.1" />
     <PackageVersion Include="Volo.Abp.Studio.Client.AspNetCore" Version="1.0.2" />
     <PackageVersion Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
@@ -321,5 +348,6 @@
     <PackageVersion Include="Sakura.AspNetCore.Mvc.PagedList" Version="3.0.2" />
     <PackageVersion Include="SeoTags" Version="2.1.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
   </ItemGroup>
 </Project>

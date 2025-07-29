@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Volo.CmsKit.MongoDB" />
+    <ProjectReference Include="..\Dignite.Publisher.Domain\Dignite.Publisher.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

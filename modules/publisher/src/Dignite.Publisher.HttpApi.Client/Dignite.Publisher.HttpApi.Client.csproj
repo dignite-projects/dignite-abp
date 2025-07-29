@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Volo.CmsKit.HttpApi.Client" />
+    <ProjectReference Include="..\Dignite.Publisher.Application.Contracts\Dignite.Publisher.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Dignite.Publisher.Admin.HttpApi.Client\Dignite.Publisher.Admin.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\Dignite.Publisher.Public.HttpApi.Client\Dignite.Publisher.Public.HttpApi.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="**\*generate-proxy.json" />
+    <Content Remove="**\*generate-proxy.json" />
+  </ItemGroup>
+
+</Project>

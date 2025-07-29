@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.Publisher.Domain": {
+      "path": "src/Dignite.Publisher.Domain/Dignite.Publisher.Domain.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.Application.Contracts": {
+      "path": "src/Dignite.Publisher.Application.Contracts/Dignite.Publisher.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.Application": {
+      "path": "src/Dignite.Publisher.Application/Dignite.Publisher.Application.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.EntityFrameworkCore": {
+      "path": "src/Dignite.Publisher.EntityFrameworkCore/Dignite.Publisher.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.MongoDB": {
+      "path": "src/Dignite.Publisher.MongoDB/Dignite.Publisher.MongoDB.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.HttpApi": {
+      "path": "src/Dignite.Publisher.HttpApi/Dignite.Publisher.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.HttpApi.Client": {
+      "path": "src/Dignite.Publisher.HttpApi.Client/Dignite.Publisher.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.TestBase": {
+      "path": "test/Dignite.Publisher.TestBase/Dignite.Publisher.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Publisher.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Publisher.EntityFrameworkCore.Tests/Dignite.Publisher.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Publisher.MongoDB.Tests": {
+      "path": "test/Dignite.Publisher.MongoDB.Tests/Dignite.Publisher.MongoDB.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Publisher.Domain.Tests": {
+      "path": "test/Dignite.Publisher.Domain.Tests/Dignite.Publisher.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Publisher.Application.Tests": {
+      "path": "test/Dignite.Publisher.Application.Tests/Dignite.Publisher.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Publisher.Domain.Shared": {
+      "path": "src/Dignite.Publisher.Domain.Shared/Dignite.Publisher.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Publisher.Installer": {
+       "path": "src/Dignite.Publisher.Installer/Dignite.Publisher.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Dignite.Publisher.Admin.Permissions;
+using Dignite.Publisher.Categories;
+using Dignite.Publisher.Posts;
+using Microsoft.AspNetCore.Authorization;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.ObjectExtending;
+
+namespace Dignite.Publisher.Admin.Posts;
+
+[Authorize(PublisherAdminPermissions.Posts.Default)]
+public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppService
+{
+    protected CategoryManager CategoryManager { get; }
+    protected IPostRepository PostRepository { get; }
+    protected IPostBuilderSelector PostBuilderSelector { get; }
+    protected PostManager PostManager { get; }
+
+    public PostAdminAppService(CategoryManager categoryManager, IPostRepository postRepository, IPostBuilderSelector postBuilderSelector, PostManager postManager)
+    {
+        CategoryManager = categoryManager;
+        PostRepository = postRepository;
+        PostBuilderSelector = postBuilderSelector;
+        PostManager = postManager;
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Create)]
+    public async Task<PostDto> CreateAsync(CreatePostDto input)
+    {
+        await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
+        if (input.CategoryIds.Any())
+        {
+            await CategoryManager.CheckExistenceAsync(input.Local, input.CategoryIds);
+        }
+
+        var postBuilder = PostBuilderSelector.Get(input.PostType);
+        var post = postBuilder.Create(input, GuidGenerator.Create(), CurrentTenant.Id);
+        input.MapExtraPropertiesTo(post);
+        await PostRepository.InsertAsync(post);
+
+        return ObjectMapper.Map<Post, PostDto>(post);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Delete)]
+    public async Task DeleteAsync(Guid id)
+    {
+        await PostManager.DeleteAsync(id);
+    }
+
+    public async Task<PostDto> GetAsync(Guid id)
+    {
+        var post = await PostRepository.GetAsync(id);
+        return ObjectMapper.Map<Post, PostDto>(post);
+    }
+
+    public async Task<PagedResultDto<PostDto>> GetListAsync(GetPostsInput input)
+    {
+        var dto = new List<PostDto>();
+        var count = await PostRepository.GetCountAsync(input.Local,input.CategoryIds,input.Status,input.PostType,input.CreatorId,input.CreationTimeFrom,input.CreationTimeTo);
+        if (count == 0)
+        {
+            return new PagedResultDto<PostDto>(count, dto);
+        }
+        var list = await PostRepository.GetPagedListAsync(input.Local, input.CategoryIds, input.Status, input.PostType, input.CreatorId, input.CreationTimeFrom, input.CreationTimeTo,
+            input.SkipCount,
+            input.MaxResultCount,
+            input.Sorting
+        );
+
+        dto = ObjectMapper.Map<List<Post>, List<PostDto>>(list);
+
+        return new PagedResultDto<PostDto>(count, dto);
+    }
+
+    public async Task<bool> SlugExistsAsync(string? local, string slug)
+    {
+        return await PostRepository.SlugExistsAsync(local, slug);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Update)]
+    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostDto input)
+    {
+        var post = await PostRepository.GetAsync(id);
+        if (post.Local != input.Local || post.Slug != input.Slug)
+        {
+            await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
+        }
+
+        if (input.CategoryIds.Any())
+        {
+            await CategoryManager.CheckExistenceAsync(input.Local, input.CategoryIds);
+        }
+
+        var postBuilder = PostBuilderSelector.Get(post.PostType);
+        postBuilder.Update(post, input);
+        input.MapExtraPropertiesTo(post);
+        await PostRepository.UpdateAsync(post);
+        return ObjectMapper.Map<Post, PostDto>(post);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Update)]
+    public async Task DraftAsync(Guid id)
+    {
+        var post = await PostRepository.GetAsync(id);
+        post.SetDraft();
+        await PostRepository.UpdateAsync(post);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Update)]
+    public async Task SendToReviewAsync(Guid id)
+    {
+        var post = await PostRepository.GetAsync(id);
+        post.SetPendingReview();
+        await PostRepository.UpdateAsync(post);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Publish)]
+    public async Task PublishAsync(Guid id)
+    {
+        var post = await PostRepository.GetAsync(id);
+        post.SetPublished();
+        await PostRepository.UpdateAsync(post);
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Publish)]
+    public async Task<bool> HasPostPendingForReviewAsync()
+    {
+        return await PostRepository.HasPostPendingForReviewAsync();
+    }
+
+    [Authorize(PublisherAdminPermissions.Posts.Update)]
+    public async Task ArchiveAsync(Guid id)
+    {
+        var post = await PostRepository.GetAsync(id);
+        post.SetArchived();
+        await PostRepository.UpdateAsync(post);
+    }
+}

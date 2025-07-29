@@ -145,6 +145,15 @@
       ]
     },
     {
+      "text": "Publisher",
+      "items": [
+        {
+          "text": "概述",
+          "path": "publisher/index.md"
+        }
+      ]
+    },
+    {
       "text": "BlazoriseUI 组件",
       "path": "BlazoriseUI-Component.md"
     },

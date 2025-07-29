@@ -1,0 +1,9 @@
+{
+  "id": "0d599887-6ae9-45dd-a1e7-3b9efad2e786",
+  "template": "empty",
+  "modules": {
+    "Dignite.Publisher": {
+      "path": "Dignite.Publisher.abpmdl"
+    }
+  }
+}

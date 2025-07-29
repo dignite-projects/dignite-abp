@@ -1,0 +1,7 @@
+{
+  "culture": "en",
+  "texts": {
+    "PostType:Article":  "Article",
+    "PostType:Video": "Video"
+  }
+}

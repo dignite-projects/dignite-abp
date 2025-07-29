@@ -9,6 +9,8 @@ public class PostSlugAlreadyExistException : BusinessException
 {
     public PostSlugAlreadyExistException([NotNull] string? local, [NotNull] string slug)
     {
+        Local = local;
+        Slug = slug;
         Code = PublisherErrorCodes.Posts.SlugAlreadyExist;
         if (!string.IsNullOrWhiteSpace(local))
         {
@@ -16,4 +18,7 @@ public class PostSlugAlreadyExistException : BusinessException
         }
         WithData(nameof(Post.Slug), slug);
     }
+
+    public virtual string? Local { get; }
+    public virtual string Slug { get; }
 }

@@ -157,7 +157,7 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
         SetSummary(summary);
         PublishedTime = publishedTime;
 
-        if (categoryIds == null)
+        if (categoryIds == null || !categoryIds.Any())
         {
             foreach (var postCategory in PostCategories)
             {
@@ -166,20 +166,14 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
         else
         {
-            foreach (var postCategory in PostCategories)
+            foreach(var categoryId in PostCategories.Select(pc=>pc.CategoryId).Except(categoryIds).ToArray())
             {
-                if (!categoryIds.Contains(postCategory.CategoryId))
-                {
-                    RemoveCategory(postCategory.CategoryId);
-                }
+                RemoveCategory(categoryId);
             }
 
-            foreach (var categoryId in categoryIds)
+            foreach (var categoryId in categoryIds.Except(PostCategories.Select(pc => pc.CategoryId)))
             {
-                if (!PostCategories.Any(pc => pc.CategoryId == categoryId))
-                {
-                    AddCategory(categoryId);
-                }
+                AddCategory(categoryId);
             }
         }
     }

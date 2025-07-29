@@ -65,9 +65,9 @@ public class PublisherDataSeedContributor : IDataSeedContributor, ITransientDepe
             autoSave: true);
 
         await _postRepository.InsertAsync(
-            new ArticlePost(
+            new VideoPost(
                 _testData.Post_2_Id, _testData.Local_En, _testData.Post_2_Title, _testData.Post_2_Slug, null, null, null,
-                new Guid[] { _testData.Category_1_Id, _testData.Category_2_Id }, _currentTenant.Id, _testData.Article_Post_2_Content),
+                new Guid[] { _testData.Category_1_Id, _testData.Category_2_Id }, _currentTenant.Id, _testData.Video_Post_2_VideoUrl, TimeSpan.FromMinutes(3.5),null),
             autoSave: true);
     }
 }

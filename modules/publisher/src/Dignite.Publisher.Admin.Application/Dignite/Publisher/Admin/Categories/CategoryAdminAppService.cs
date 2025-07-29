@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dignite.Publisher.Admin.Permissions;
 using Dignite.Publisher.Categories;
@@ -33,6 +34,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
             input.PostTypes,
             input.Order
         );
+        await CategoryRepository.InsertAsync(category);
 
         return ObjectMapper.Map<Category, CategoryDto>(category);
     }
@@ -51,7 +53,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
 
     public async Task<PagedResultDto<CategoryDto>> GetListAsync(GetCategoriesInput input)
     {
-        var list = await CategoryRepository.GetListAsync(input.Local);
+        var list = await CategoryManager.GetTreeListAsync(input.Local);
         return new PagedResultDto<CategoryDto>(
             list.Count,
             ObjectMapper.Map<List<Category>, List<CategoryDto>>(list)
@@ -79,7 +81,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
     [Authorize(PublisherAdminPermissions.Categories.Update)]
     public async Task<CategoryDto> UpdateAsync(Guid id, UpdateCategoryDto input)
     {
-        var category = await CategoryRepository.GetAsync(id);
+        var category = await CategoryRepository.GetAsync(id,false);
         if (category.Name != input.Name)
         {
             await CategoryManager.CheckNameExistenceAsync(category.ParentId, input.Name);
@@ -89,19 +91,13 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
         category.SetName(input.Name);
         category.IsActive = input.IsActive;
         category.SetDescription(input.Description);
-        foreach (var postType in input.PostTypes)
+        foreach (var item in input.PostTypes.Except(category.PostTypes))
         {
-            if (!category.PostTypes.Contains(postType))
-            {
-                category.AddPostType(postType);
-            }
+            category.AddPostType(item);
         }
-        foreach (var postType in category.PostTypes)
+        foreach (var item in category.PostTypes.Except(input.PostTypes).ToArray())
         {
-            if (!input.PostTypes.Contains(postType))
-            {
-                category.RemovePostType(postType);
-            }
+            category.RemovePostType(item);
         }
 
         await CategoryRepository.UpdateAsync(category);

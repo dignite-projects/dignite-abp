@@ -58,10 +58,22 @@ public class CategoryManager : DomainService
         {
             return;
         }
+
         // Check if the target parent exists
-        if (targetParentId.HasValue && await CategoryRepository.FindAsync(targetParentId.Value, false) == null)
+        if(targetParentId.HasValue)
         {
-            throw new CategoryNotFoundException(targetParentId.Value);
+            var targetParent = await CategoryRepository.FindAsync(targetParentId.Value, false);
+            if (targetParent == null)
+            {
+                throw new CategoryNotFoundException(targetParentId.Value);
+            }
+            else
+            {
+                if (source.Local != targetParent.Local)
+                {
+                    throw new CategoryLocalMismatchException();
+                }
+            }
         }
         // Check if the name already exists in the target parent
         await CheckNameExistenceAsync(targetParentId, source.Name);

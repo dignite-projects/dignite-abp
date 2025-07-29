@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
 namespace Dignite.Publisher.TestBase;
@@ -45,5 +41,5 @@ public class PublisherTestData : ISingletonDependency
     public string Post_2_Title => "How to use Publisher?";
 
     public string Post_2_Slug => "how-to-use-publisher";
-    public string Article_Post_2_Content => Content_2;
+    public string Video_Post_2_VideoUrl => "video.mp4";
 }

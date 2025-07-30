@@ -22,7 +22,7 @@ public interface IPostBuilder : ITransientDependency
     /// <param name="postId"></param>
     /// <param name="tenantId"></param>
     /// <returns></returns>
-    Post Create(CreatePostDto input, Guid postId, Guid? tenantId);
+    Post Create(CreatePostInput input, Guid postId, Guid? tenantId);
 
     /// <summary>
     /// Builds a post entity from the provided update DTO.
@@ -30,5 +30,5 @@ public interface IPostBuilder : ITransientDependency
     /// <param name="post"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    void Update(Post post, UpdatePostDto input);
+    void Update(Post post, UpdatePostInput input);
 }

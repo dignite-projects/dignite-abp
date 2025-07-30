@@ -12,9 +12,9 @@ public class PostManager: DomainService
         PostRepository = postRepository;
     }
 
-    public virtual async Task DeleteAsync(Guid id)
+    public virtual async Task DeleteAsync(Post post)
     {
-        await PostRepository.DeleteAsync(id);
+        await PostRepository.DeleteAsync(post);
     }
 
     public virtual async Task CheckSlugExistenceAsync(string? local, string slug)

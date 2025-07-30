@@ -12,12 +12,12 @@ namespace Dignite.Publisher.Admin.Posts.Serialization;
 public class VideoPostAdminDeserializer : IPostAdminDeserializer
 {
     public string PostTypeName => PostTypeConsts.VideoPostTypeName;
-    public CreatePostDto DeserializeForCreate(JsonElement element, JsonSerializerOptions options)
+    public CreatePostInput DeserializeForCreate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<CreateVideoPostDto>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<CreateVideoPostInput>(element.GetRawText(), options)!;
     }
-    public UpdatePostDto DeserializeForUpdate(JsonElement element, JsonSerializerOptions options)
+    public UpdatePostInput DeserializeForUpdate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<UpdateVideoPostDto>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<UpdateVideoPostInput>(element.GetRawText(), options)!;
     }
 }

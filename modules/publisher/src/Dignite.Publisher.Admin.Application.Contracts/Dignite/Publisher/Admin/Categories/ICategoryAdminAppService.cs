@@ -7,8 +7,8 @@ public interface ICategoryAdminAppService : Volo.Abp.Application.Services.ICrudA
     CategoryDto,
     Guid,
     GetCategoriesInput,
-    CreateCategoryDto,
-    UpdateCategoryDto>
+    CreateCategoryInput,
+    UpdateCategoryInput>
 {
     Task MoveAsync(Guid id, MoveCategoryInput input);
 

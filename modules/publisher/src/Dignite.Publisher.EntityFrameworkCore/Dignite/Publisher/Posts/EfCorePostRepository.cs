@@ -29,6 +29,13 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
             .CountAsync(GetCancellationToken(cancellationToken));
     }
 
+    public async Task<List<Post>> GetListByCategoryIdAsync(Guid categoryId, CancellationToken cancellationToken = default)
+    {
+        return await(await GetQueryableAsync()).Where(x => x.PostCategories.Any(pc=>pc.CategoryId==categoryId))
+            .IncludeDetails()
+            .ToListAsync(GetCancellationToken(cancellationToken));
+    }
+
     public virtual async Task<List<Post>> GetListByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
         return await (await GetQueryableAsync()).Where(x=>ids.Contains(x.Id))

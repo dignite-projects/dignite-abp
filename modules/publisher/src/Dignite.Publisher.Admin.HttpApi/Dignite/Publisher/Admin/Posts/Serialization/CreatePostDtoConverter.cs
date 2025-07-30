@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Dignite.Publisher.Admin.Posts.Serialization;
-public class CreatePostDtoConverter : JsonConverter<CreatePostDto>
+public class CreatePostDtoConverter : JsonConverter<CreatePostInput>
 {
     protected IEnumerable<IPostAdminDeserializer> Deserializers { get; }
     public CreatePostDtoConverter(IEnumerable<IPostAdminDeserializer> deserializers)
@@ -13,11 +13,11 @@ public class CreatePostDtoConverter : JsonConverter<CreatePostDto>
         Deserializers = deserializers;
     }
 
-    public override CreatePostDto Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override CreatePostInput Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using var jsonDoc = JsonDocument.ParseValue(ref reader);
         var root = jsonDoc.RootElement;
-        var postTypePropertyName = nameof(CreateOrUpdatePostDtoBase.PostType);
+        var postTypePropertyName = nameof(CreateOrUpdatePostInputBase.PostType);
         postTypePropertyName = char.ToLowerInvariant(postTypePropertyName[0]) + postTypePropertyName.Substring(1);  // Convert to camelCase
 
         if (!root.TryGetProperty(postTypePropertyName, out var typeProperty))
@@ -35,7 +35,7 @@ public class CreatePostDtoConverter : JsonConverter<CreatePostDto>
         return deserializer.DeserializeForCreate(root, options);
     }
 
-    public override void Write(Utf8JsonWriter writer, CreatePostDto value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, CreatePostInput value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value, value.GetType(), options);
     }

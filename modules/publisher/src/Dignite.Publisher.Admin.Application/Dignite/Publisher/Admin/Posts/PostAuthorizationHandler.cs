@@ -1,0 +1,66 @@
+﻿using System.Security.Principal;
+using System.Threading.Tasks;
+using Dignite.Publisher.Admin.Permissions;
+using Dignite.Publisher.Posts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Volo.Abp.Authorization.Permissions;
+
+namespace Dignite.Publisher.Admin.Posts;
+public class PostAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Post>
+{
+    protected IPermissionChecker PermissionChecker { get; }
+
+    public PostAuthorizationHandler(IPermissionChecker permissionChecker)
+    {
+        PermissionChecker = permissionChecker;
+    }
+
+    protected async override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        OperationAuthorizationRequirement requirement,
+        Post resource)
+    {
+        if (requirement.Name == CommonOperations.Delete.Name && await HasDeletePermission(context, resource))
+        {
+            context.Succeed(requirement);
+            return;
+        }
+
+        if (requirement.Name == CommonOperations.Update.Name && await HasUpdatePermission(context, resource))
+        {
+            context.Succeed(requirement);
+            return;
+        }
+    }
+
+    private async Task<bool> HasDeletePermission(AuthorizationHandlerContext context, Post resource)
+    {
+        if (resource.CreatorId != null && resource.CreatorId == context.User.FindUserId())
+        {
+            return true;
+        }
+
+        if (await PermissionChecker.IsGrantedAsync(context.User, PublisherAdminPermissions.Posts.Delete))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private async Task<bool> HasUpdatePermission(AuthorizationHandlerContext context, Post resource)
+    {
+        if (resource.CreatorId != null && resource.CreatorId == context.User.FindUserId())
+        {
+            return true;
+        }
+
+        if (await PermissionChecker.IsGrantedAsync(context.User, PublisherAdminPermissions.Posts.Update))
+        {
+            return true;
+        }
+
+        return false;
+    }
+}

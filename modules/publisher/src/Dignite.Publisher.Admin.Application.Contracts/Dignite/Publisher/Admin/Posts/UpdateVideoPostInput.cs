@@ -6,9 +6,9 @@ using Volo.Abp.Validation;
 namespace Dignite.Publisher.Admin.Posts;
 
 [Serializable]
-public class CreateVideoPostDto : CreatePostDto
+public class UpdateVideoPostInput : UpdatePostInput
 {
-    public CreateVideoPostDto():base(PostTypeConsts.VideoPostTypeName)
+    public UpdateVideoPostInput():base(PostTypeConsts.VideoPostTypeName)
     {
     }
 

@@ -48,7 +48,13 @@ public abstract class PostDto : ExtensibleEntityDto<Guid>, IMayHaveCreator, IHas
     /// </summary>
     public DateTime? PublishedTime { get; set; }
 
-    public int ViewCount { get; set; }
+    public virtual int ReadCount { get; set; }
+
+    public virtual int CommentCount { get; set; }
+
+    public virtual int LikeCount { get; set; }
+
+    public virtual int FavoriteCount { get; set; }
 
     public ICollection<PostCategoryDto> PostCategories { get; set; } = new List<PostCategoryDto>();
 

@@ -33,7 +33,7 @@ public class PublisherCommonHttpApiModule : AbpModule
                 .AddBaseTypes(typeof(AbpUiResource));
         });
 
-        //
+        // Register the custom JSON serialization options for PostDto
         context.Services.AddControllers()
             .AddJsonOptions(options =>
             {

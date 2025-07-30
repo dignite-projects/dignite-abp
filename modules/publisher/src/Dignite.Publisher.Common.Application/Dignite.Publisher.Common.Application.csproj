@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Dignite\Publisher\Categories\" />
+    <Folder Include="Dignite\Publisher\Posts\" />
   </ItemGroup>
 
 </Project>

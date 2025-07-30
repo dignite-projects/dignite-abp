@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Publisher.Posts;
 using Volo.Abp.Domain.Services;
 
 namespace Dignite.Publisher.Categories;
 public class CategoryManager : DomainService
 {
     protected ICategoryRepository CategoryRepository { get; }
-    public CategoryManager(ICategoryRepository categoryRepository)
+
+    protected IPostRepository PostRepository { get; }
+    public CategoryManager(ICategoryRepository categoryRepository, IPostRepository postRepository)
     {
         CategoryRepository = categoryRepository;
+        PostRepository = postRepository;
     }
 
     public virtual async Task<Category> CreateAsync(
@@ -46,12 +50,28 @@ public class CategoryManager : DomainService
         // TODO: How should posts under this category be handled?
     }
 
+    /// <summary>
+    /// Retrieves a list of categories in a tree structure based on the specified local identifier.
+    /// </summary>
+    /// <param name="local"></param>
+    /// <returns></returns>
     public virtual async Task<List<Category>> GetTreeListAsync(string? local)
     {
         var allCategories = await CategoryRepository.GetListAsync(local);
 
         return BuildTree(allCategories);
     }
+
+    /// <summary>
+    /// Moves a category to a new parent category or changes its order within the same parent category.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="targetParentId"></param>
+    /// <param name="insertPosition"></param>
+    /// <returns></returns>
+    /// <exception cref="CategoryNotFoundException"></exception>
+    /// <exception cref="CategoryLocalMismatchException"></exception>
+    /// <exception cref="CategoryCannotMoveToChildException"></exception>
     public virtual async Task MoveAsync(Category source, Guid? targetParentId, int insertPosition)
     {
         if (source.ParentId == targetParentId && source.Order == insertPosition)
@@ -79,8 +99,50 @@ public class CategoryManager : DomainService
         await CheckNameExistenceAsync(targetParentId, source.Name);
 
         var allCategories = await CategoryRepository.GetListAsync(source.Local);
-        var targetChildren = allCategories.Where(c => c.ParentId == targetParentId).ToList();
-        foreach (var item in targetChildren)
+        var sourceChildrenTree = BuildTree(allCategories, source.Id);
+
+        //
+        if (sourceChildrenTree.Any())
+        {
+            var sourceChildren = FlattenTree(sourceChildrenTree);
+            // Check if the target parent is a child of the source category
+            if (sourceChildren.Any(c => c.Id == targetParentId))
+            {
+                throw new CategoryCannotMoveToChildException();
+            }
+        }
+
+        var sourceParents = GetAllParents(allCategories, source.Id);
+        var targetAndParents = GetAllParents(allCategories, targetParentId ?? Guid.Empty);
+        if (targetParentId.HasValue)
+        {
+            targetAndParents.Add(allCategories.First(c => c.Id == targetParentId.Value));
+        }
+        var posts = await PostRepository.GetListByCategoryIdAsync(source.Id);
+        // If the source category has posts, we need to update the post categories
+        if (posts.Any())
+        {
+            var sourceOnlyParentCategoryIds = sourceParents.Select(c => c.Id).Except(targetAndParents.Select(c => c.Id));
+            var targetOnlyParentCategoryIds = targetAndParents.Select(c => c.Id).Except(sourceParents.Select(c => c.Id));
+            foreach (var post in posts)
+            {
+                var postCategoryIds = post.PostCategories.Select(pc => pc.CategoryId).ToList();
+
+                // Remove the source category from the post categories
+                postCategoryIds.RemoveAll(x => sourceOnlyParentCategoryIds.Contains(x));
+
+                // Add the target parent category to the post categories
+                postCategoryIds.AddRange(targetOnlyParentCategoryIds);
+
+                // 
+                post.SetCategoies(postCategoryIds);
+                await PostRepository.UpdateAsync(post);
+            }
+        }
+
+
+        // Adjust the sort values of the child nodes under the target parent node.
+        foreach (var item in allCategories.Where(c => c.ParentId == targetParentId))
         {
             if (item.Order >= insertPosition)
             {
@@ -115,6 +177,12 @@ public class CategoryManager : DomainService
         }
     }
 
+    /// <summary>
+    /// Builds a tree structure from a flat list of categories, where each category can have children based on its ParentId.
+    /// </summary>
+    /// <param name="all"></param>
+    /// <param name="parentId"></param>
+    /// <returns></returns>
     protected virtual List<Category> BuildTree(List<Category> all, Guid? parentId = null)
     {
         return all.Where(c => c.ParentId == parentId)
@@ -122,5 +190,55 @@ public class CategoryManager : DomainService
                       c.Children = BuildTree(all, c.Id);
                       return c;
                   }).ToList();
+    }
+
+    /// <summary>
+    /// Flattens a tree structure into a flat list of categories.
+    /// </summary>
+    /// <param name="tree"></param>
+    /// <returns></returns>
+    protected virtual List<Category> FlattenTree(List<Category> tree)
+    {
+        var list = new List<Category>();
+
+        foreach (var node in tree)
+        {
+            list.Add(node); // 添加当前节点
+
+            if (node.Children != null && node.Children.Any())
+            {
+                list.AddRange(FlattenTree(node.Children)); // 递归添加子节点
+            }
+        }
+
+        return list;
+    }
+
+    /// <summary>
+    /// Retrieves all parent categories for a given category ID from a flat list of categories.
+    /// </summary>
+    /// <param name="all"></param>
+    /// <param name="categoryId"></param>
+    /// <returns></returns>
+    protected virtual List<Category> GetAllParents(List<Category> all, Guid categoryId)
+    {
+        var parents = new List<Category>();
+        var current = all.FirstOrDefault(c => c.Id == categoryId);
+
+        while (current != null && current.ParentId.HasValue)
+        {
+            var parent = all.FirstOrDefault(c => c.Id == current.ParentId.Value);
+            if (parent != null)
+            {
+                parents.Add(parent);
+                current = parent;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return parents;
     }
 }

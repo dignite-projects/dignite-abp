@@ -12,12 +12,12 @@ namespace Dignite.Publisher.Admin.Posts.Serialization;
 public class ArticlePostAdminDeserializer : IPostAdminDeserializer
 {
     public string PostTypeName => PostTypeConsts.ArticlePostTypeName;
-    public CreatePostDto DeserializeForCreate(JsonElement element, JsonSerializerOptions options)
+    public CreatePostInput DeserializeForCreate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<CreateArticlePostDto>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<CreateArticlePostInput>(element.GetRawText(), options)!;
     }
-    public UpdatePostDto DeserializeForUpdate(JsonElement element, JsonSerializerOptions options)
+    public UpdatePostInput DeserializeForUpdate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<UpdateArticlePostDto>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<UpdateArticlePostInput>(element.GetRawText(), options)!;
     }
 }

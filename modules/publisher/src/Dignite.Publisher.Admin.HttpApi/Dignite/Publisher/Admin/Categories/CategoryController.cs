@@ -26,7 +26,7 @@ public class CategoryController : PublisherAdminController, ICategoryAdminAppSer
     }
 
     [HttpPost]
-    public async Task<CategoryDto> CreateAsync(CreateCategoryDto input)
+    public async Task<CategoryDto> CreateAsync(CreateCategoryInput input)
     {
         return await CategoryAdminAppService.CreateAsync(input);
     }
@@ -67,7 +67,7 @@ public class CategoryController : PublisherAdminController, ICategoryAdminAppSer
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<CategoryDto> UpdateAsync(Guid id, UpdateCategoryDto input)
+    public async Task<CategoryDto> UpdateAsync(Guid id, UpdateCategoryInput input)
     {
         return await CategoryAdminAppService.UpdateAsync(id, input);
     }

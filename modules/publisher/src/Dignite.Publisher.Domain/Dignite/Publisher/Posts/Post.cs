@@ -82,16 +82,16 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
     /// </summary>
     public virtual Guid? TenantId { get; protected set; }
 
-    public virtual int ViewCount { get; protected set; }
+    public virtual int ReadCount { get; protected set; }
+
+    public virtual int CommentCount { get; protected set; }
+
+    public virtual int LikeCount { get; protected set; }
+
+    public virtual int FavoriteCount { get; protected set; }
 
     public virtual ICollection<PostCategory> PostCategories { get; protected set; } = new List<PostCategory>();
 
-
-
-    public virtual void IncreaseViewCount()
-    {
-        ViewCount++;
-    }
     public virtual void SetTitle([NotNull] string title)
     {
         Title = Check.NotNullOrWhiteSpace(title, nameof(title), PostConsts.MaxTitleLength, 1);
@@ -135,7 +135,30 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
         Status = PostStatus.Archived;
     }
 
-    public virtual void AddCategory(Guid categoryId)
+    public virtual void SetCategoies(IEnumerable<Guid> categoryIds)
+    {
+        if (categoryIds == null || !categoryIds.Any())
+        {
+            foreach (var postCategory in PostCategories)
+            {
+                RemoveCategory(postCategory.CategoryId);
+            }
+        }
+        else
+        {
+            foreach (var categoryId in PostCategories.Select(pc => pc.CategoryId).Except(categoryIds).ToArray())
+            {
+                RemoveCategory(categoryId);
+            }
+
+            foreach (var categoryId in categoryIds.Except(PostCategories.Select(pc => pc.CategoryId)))
+            {
+                AddCategory(categoryId);
+            }
+        }
+    }
+
+    protected virtual void AddCategory(Guid categoryId)
     {
         if (!PostCategories.Any(pc => pc.CategoryId == categoryId))
         {
@@ -143,7 +166,7 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
     }
 
-    public virtual void RemoveCategory(Guid categoryId)
+    protected virtual void RemoveCategory(Guid categoryId)
     {
         PostCategories.RemoveAll(t => t.CategoryId == categoryId);
     }
@@ -156,25 +179,23 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
         SetCoverImageUrl(coverImageUrl);
         SetSummary(summary);
         PublishedTime = publishedTime;
+        SetCategoies(categoryIds);
+    }
 
-        if (categoryIds == null || !categoryIds.Any())
-        {
-            foreach (var postCategory in PostCategories)
-            {
-                RemoveCategory(postCategory.CategoryId);
-            }
-        }
-        else
-        {
-            foreach(var categoryId in PostCategories.Select(pc=>pc.CategoryId).Except(categoryIds).ToArray())
-            {
-                RemoveCategory(categoryId);
-            }
-
-            foreach (var categoryId in categoryIds.Except(PostCategories.Select(pc => pc.CategoryId)))
-            {
-                AddCategory(categoryId);
-            }
-        }
+    public virtual void IncreaseReadCount(int count)
+    {
+        ReadCount += count;
+    }
+    public virtual void IncreaseCommentCount(int count)
+    {
+        CommentCount += count;
+    }
+    public virtual void IncreaseLikeCount(int count)
+    {
+        LikeCount += count;
+    }
+    public virtual void IncreaseFavoriteCount(int count)
+    {
+        FavoriteCount += count;
     }
 }

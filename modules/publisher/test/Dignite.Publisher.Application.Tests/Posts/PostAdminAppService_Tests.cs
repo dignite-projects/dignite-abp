@@ -29,7 +29,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     [Fact]
     public async Task CreateAsync_ShouldWorkProperly_WithCorrectData()
     {
-        var createPostDto = new CreateArticlePostDto()
+        var createPostInput = new CreateArticlePostInput()
         {
             Local = _testData.Local_En,
             Title = "Test Article Post",
@@ -39,7 +39,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
             CategoryIds = new List<Guid> { _testData.Category_2_Id },
             Content = "<p>Test Article Post Content</p>"
         };
-        var result = await _postAdminAppService.CreateAsync(createPostDto);
+        var result = await _postAdminAppService.CreateAsync(createPostInput);
 
         var newPost = await _postAdminAppService.GetAsync(result.Id);
         newPost.ShouldNotBeNull();
@@ -83,7 +83,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     public async Task UpdateAsync_ShouldWorkProperly_WithRegularDatas()
     {
         var newSlug = "test-new-Post";
-        await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostDto
+        await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
         {
             Local = _testData.Local_En,
             Title = _testData.Post_1_Title,
@@ -104,7 +104,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     public async Task UpdateAsync_ShouldThrowException_WhileUpdatingWithAlreadyExistingSlug()
     { 
         var exception = await Should.ThrowAsync<PostSlugAlreadyExistException>(async () =>
-                            await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostDto
+                            await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
                             {
                                 Local = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
@@ -123,7 +123,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     {
         var newCategoryId = Guid.NewGuid();
         var exception = await Should.ThrowAsync<CategoryNotFoundException>(async () =>
-                            await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostDto
+                            await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
                             {
                                 Local = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
@@ -183,7 +183,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
 
     private async Task<PostDto> CreateArticlePost()
     {
-        var createPostDto = new CreateArticlePostDto()
+        var createPostInput = new CreateArticlePostInput()
         {
             Local = _testData.Local_En,
             Title = "Test Article Post",
@@ -193,7 +193,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
             CategoryIds = new List<Guid> { _testData.Category_2_Id },
             Content = "<p>Test Article Post Content</p>"
         };
-        var result = await _postAdminAppService.CreateAsync(createPostDto);
+        var result = await _postAdminAppService.CreateAsync(createPostInput);
 
         return await _postAdminAppService.GetAsync(result.Id);
     }

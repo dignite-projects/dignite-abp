@@ -42,7 +42,7 @@ public class ClientDemoService : ITransientDependency
         Console.WriteLine();
 
         // Create a new post
-        var newArticlePost = new CreateArticlePostDto();
+        var newArticlePost = new CreateArticlePostInput();
         newArticlePost.Local = "en";
         newArticlePost.Title = "Title";
         newArticlePost.Slug = Guid.NewGuid().ToString();
@@ -52,7 +52,7 @@ public class ClientDemoService : ITransientDependency
         Console.WriteLine();
 
         // Create a new video post
-        var newVideoPost = new CreateVideoPostDto();
+        var newVideoPost = new CreateVideoPostInput();
         newVideoPost.Local = "en";
         newVideoPost.Title = "Title";
         newVideoPost.Slug = Guid.NewGuid().ToString();

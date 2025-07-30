@@ -8,9 +8,9 @@ using Volo.Abp.Validation;
 namespace Dignite.Publisher.Admin.Posts;
 
 [Serializable]
-public abstract class CreateOrUpdatePostDtoBase: ExtensibleObject
+public abstract class CreateOrUpdatePostInputBase: ExtensibleObject
 {
-    public CreateOrUpdatePostDtoBase(string postType)
+    public CreateOrUpdatePostInputBase(string postType)
     {
         PostType = postType;
     }

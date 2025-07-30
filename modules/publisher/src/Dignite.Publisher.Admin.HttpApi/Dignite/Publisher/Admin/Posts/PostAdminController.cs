@@ -30,7 +30,7 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
     }
 
     [HttpPost]
-    public async Task<PostDto> CreateAsync(CreatePostDto input)
+    public async Task<PostDto> CreateAsync(CreatePostInput input)
     {
         return await PostAdminAppService.CreateAsync(input);
     }
@@ -91,7 +91,7 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
     }
 
     [HttpPut]
-    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostDto input)
+    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostInput input)
     {
         return await  PostAdminAppService.UpdateAsync(id, input);
     }

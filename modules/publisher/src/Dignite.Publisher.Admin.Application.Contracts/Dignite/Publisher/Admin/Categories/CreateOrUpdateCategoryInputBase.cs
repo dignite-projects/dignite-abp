@@ -4,7 +4,7 @@ using Dignite.Publisher.Categories;
 using Volo.Abp.Validation;
 
 namespace Dignite.Publisher.Admin.Categories;
-public abstract class CreateOrUpdateCategoryDtoBase
+public abstract class CreateOrUpdateCategoryInputBase
 {
     /// <summary>
     /// The display name of the category.

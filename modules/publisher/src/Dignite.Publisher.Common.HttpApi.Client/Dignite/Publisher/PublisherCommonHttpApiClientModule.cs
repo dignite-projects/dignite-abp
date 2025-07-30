@@ -27,7 +27,7 @@ public class PublisherCommonHttpApiClientModule : AbpModule
             options.FileSets.AddEmbedded<PublisherCommonHttpApiClientModule>();
         });
 
-        //
+        // Register the custom JSON serialization options for PostDto
         Configure<AbpSystemTextJsonSerializerOptions>(options =>
         {
             options.JsonSerializerOptions.ConfigurePostDtoConverters(serviceProvider);

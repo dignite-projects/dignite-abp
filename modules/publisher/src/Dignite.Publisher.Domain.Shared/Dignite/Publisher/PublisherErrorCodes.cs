@@ -7,6 +7,7 @@ public static class PublisherErrorCodes
         public const string NameAlreadyExist = "Publisher:Category:0001";
         public const string NotFound = "Publisher:Category:0002";
         public const string LocalMismatch = "Publisher:Category:0003";
+        public const string CannotMoveToChild = "Publisher:Category:0004";
     }
     public static class Posts
     {

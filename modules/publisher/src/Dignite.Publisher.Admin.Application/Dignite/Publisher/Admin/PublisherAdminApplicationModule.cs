@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Dignite.Publisher.Admin.Posts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.CmsKit.Admin;
@@ -19,5 +21,14 @@ public class PublisherAdminApplicationModule : AbpModule
         {
             options.AddMaps<PublisherAdminApplicationModule>(validate: true);
         });
+
+        Configure<AuthorizationOptions>(options =>
+        {
+            //TODO: Rename UpdatePolicy/DeletePolicy since it's candidate to conflicts with other modules!
+            options.AddPolicy("PublisherUpdatePolicy", policy => policy.Requirements.Add(CommonOperations.Update));
+            options.AddPolicy("PublisherDeletePolicy", policy => policy.Requirements.Add(CommonOperations.Delete));
+        });
+
+        context.Services.AddSingleton<IAuthorizationHandler, PostAuthorizationHandler>();
     }
 }

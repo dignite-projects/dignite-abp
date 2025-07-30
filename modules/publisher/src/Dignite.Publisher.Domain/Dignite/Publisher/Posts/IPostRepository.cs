@@ -35,6 +35,10 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
 
     Task<List<Post>> GetListByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default);
 
+    Task<List<Post>> GetListByCategoryIdAsync(
+        Guid categoryId,
+        CancellationToken cancellationToken = default);
+
     Task<bool> SlugExistsAsync(string? local, string slug, CancellationToken cancellationToken = default);
 
     Task<bool> HasPostPendingForReviewAsync(CancellationToken cancellationToken = default);

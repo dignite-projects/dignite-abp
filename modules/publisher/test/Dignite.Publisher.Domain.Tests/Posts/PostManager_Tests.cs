@@ -24,7 +24,8 @@ public abstract class PostManager_Tests<TStartupModule> : PublisherDomainTestBas
     [Fact]
     public async Task DeleteAsync()
     {
-        await _postManager.DeleteAsync(_testData.Post_1_Id);
+        var post = await _postRepository.GetAsync(_testData.Post_1_Id);
+        await _postManager.DeleteAsync(post);
         var exception = await Should.ThrowAsync<EntityNotFoundException>(async () =>
                             await _postRepository.GetAsync(_testData.Post_1_Id));
         exception.EntityType.ShouldBe(typeof(Post));

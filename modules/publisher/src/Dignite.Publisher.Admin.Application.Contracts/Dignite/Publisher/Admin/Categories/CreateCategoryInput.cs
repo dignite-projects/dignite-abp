@@ -3,7 +3,7 @@ using Dignite.Publisher.Categories;
 using Volo.Abp.Validation;
 
 namespace Dignite.Publisher.Admin.Categories;
-public class CreateCategoryDto : CreateOrUpdateCategoryDtoBase
+public class CreateCategoryInput : CreateOrUpdateCategoryInputBase
 {
     /// <summary>
     /// The local identifier for the category.

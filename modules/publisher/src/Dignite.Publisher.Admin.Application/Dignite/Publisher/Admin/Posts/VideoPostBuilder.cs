@@ -16,11 +16,11 @@ public class VideoPostBuilder : IPostBuilder
 {
     public string PostTypeName => PostTypeConsts.VideoPostTypeName;
 
-    public Post Create(CreatePostDto post, Guid postId, Guid? tenantId)
+    public Post Create(CreatePostInput post, Guid postId, Guid? tenantId)
     {
-        if (post is not CreateVideoPostDto videoPostDto)
+        if (post is not CreateVideoPostInput videoPostDto)
         {
-            throw new ArgumentException($"Invalid post type: {post.GetType().Name}. Expected: {nameof(CreateVideoPostDto)}");
+            throw new ArgumentException($"Invalid post type: {post.GetType().Name}. Expected: {nameof(CreateVideoPostInput)}");
         }
 
         return new VideoPost(
@@ -39,15 +39,15 @@ public class VideoPostBuilder : IPostBuilder
             );
     }
 
-    public void Update(Post post, UpdatePostDto input)
+    public void Update(Post post, UpdatePostInput input)
     {
         if (post is not VideoPost videoPost)
         {
             throw new ArgumentException($"Invalid post type: {post.GetType().Name}. Expected: {nameof(VideoPost)}");
         }
-        if (input is not UpdateVideoPostDto updateVideoPostDto)
+        if (input is not UpdateVideoPostInput updateVideoPostDto)
         {
-            throw new ArgumentException($"Invalid input type: {input.GetType().Name}. Expected: {nameof(UpdateVideoPostDto)}");
+            throw new ArgumentException($"Invalid input type: {input.GetType().Name}. Expected: {nameof(UpdateVideoPostInput)}");
         }
 
 

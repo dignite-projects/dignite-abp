@@ -3,9 +3,9 @@
 namespace Dignite.Publisher.Admin.Posts;
 
 [Serializable]
-public abstract class UpdatePostDto : CreateOrUpdatePostDtoBase
+public abstract class UpdatePostInput : CreateOrUpdatePostInputBase
 {
-    protected UpdatePostDto(string postType) : base(postType)
+    protected UpdatePostInput(string postType) : base(postType)
     {
     }
 

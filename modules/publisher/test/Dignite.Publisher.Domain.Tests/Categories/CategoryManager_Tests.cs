@@ -15,12 +15,14 @@ public abstract class CategoryManager_Tests<TStartupModule> : PublisherDomainTes
     private readonly CategoryManager _categoryManager;
     private readonly ICategoryRepository _categoryRepository;
     private readonly PublisherTestData _testData;
+    private readonly IPostRepository _postRepository;
 
     public CategoryManager_Tests()
     {
         _categoryManager = GetRequiredService<CategoryManager>();
         _categoryRepository = GetRequiredService<ICategoryRepository>();
         _testData = GetRequiredService<PublisherTestData>();
+        _postRepository = GetRequiredService<IPostRepository>();
     }
 
     [Fact]
@@ -146,8 +148,6 @@ public abstract class CategoryManager_Tests<TStartupModule> : PublisherDomainTes
     [Fact]
     public async Task CategoryMove_ShouldWorkProperly()
     {
-        var targetParentCategory = await _categoryRepository.GetAsync(_testData.Category_1_Id, false);
-
         var category = await _categoryManager.CreateAsync(
             _testData.Local_En, null, "Test Category", "test-category", "This is a test category.", true,
             new List<string>() {
@@ -156,7 +156,8 @@ public abstract class CategoryManager_Tests<TStartupModule> : PublisherDomainTes
             }, 0
         );
         await _categoryRepository.InsertAsync(category, true);
-        await _categoryManager.MoveAsync(category, targetParentCategory.Id,2);
+
+        await _categoryManager.MoveAsync(category, _testData.Category_1_Id, 2);
         await _categoryRepository.UpdateAsync(category, true);
 
         var categories = await _categoryManager.GetTreeListAsync(_testData.Local_En);

@@ -20,7 +20,7 @@ public interface IPostAdminDeserializer : ITransientDependency
     /// <param name="element"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    CreatePostDto DeserializeForCreate(JsonElement element, JsonSerializerOptions options);
+    CreatePostInput DeserializeForCreate(JsonElement element, JsonSerializerOptions options);
 
     /// <summary>
     /// Deserializes a JSON element into a PostDto.
@@ -28,5 +28,5 @@ public interface IPostAdminDeserializer : ITransientDependency
     /// <param name="element"></param>
     /// <param name="options"></param>
     /// <returns></returns>
-    UpdatePostDto DeserializeForUpdate(JsonElement element, JsonSerializerOptions options);
+    UpdatePostInput DeserializeForUpdate(JsonElement element, JsonSerializerOptions options);
 }

@@ -22,7 +22,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
     }
 
     [Authorize(PublisherAdminPermissions.Categories.Create)]
-    public async Task<CategoryDto> CreateAsync(CreateCategoryDto input)
+    public async Task<CategoryDto> CreateAsync(CreateCategoryInput input)
     {
         var category = await CategoryManager.CreateAsync(
             input.Local,
@@ -79,7 +79,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
     }
 
     [Authorize(PublisherAdminPermissions.Categories.Update)]
-    public async Task<CategoryDto> UpdateAsync(Guid id, UpdateCategoryDto input)
+    public async Task<CategoryDto> UpdateAsync(Guid id, UpdateCategoryInput input)
     {
         var category = await CategoryRepository.GetAsync(id,false);
         if (category.Name != input.Name)

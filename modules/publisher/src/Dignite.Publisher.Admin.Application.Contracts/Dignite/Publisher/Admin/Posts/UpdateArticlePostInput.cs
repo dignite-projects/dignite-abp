@@ -4,9 +4,9 @@ using Dignite.Publisher.Posts;
 namespace Dignite.Publisher.Admin.Posts;
 
 [Serializable]
-public class UpdateArticlePostDto : UpdatePostDto
+public class UpdateArticlePostInput : UpdatePostInput
 {
-    public UpdateArticlePostDto() : base(PostTypeConsts.ArticlePostTypeName)
+    public UpdateArticlePostInput() : base(PostTypeConsts.ArticlePostTypeName)
     {
     }
 

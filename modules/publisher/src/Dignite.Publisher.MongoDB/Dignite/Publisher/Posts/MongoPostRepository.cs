@@ -34,6 +34,14 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
         return await query.CountAsync(token);
     }
 
+    public async Task<List<Post>> GetListByCategoryIdAsync(Guid categoryId, CancellationToken cancellationToken = default)
+    {
+        var token = GetCancellationToken(cancellationToken);
+        return await (await GetQueryableAsync(token))
+                .Where(x => x.PostCategories.Any(pc => pc.CategoryId == categoryId))
+                .ToListAsync(token);
+    }
+
     public virtual async Task<List<Post>> GetListByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);

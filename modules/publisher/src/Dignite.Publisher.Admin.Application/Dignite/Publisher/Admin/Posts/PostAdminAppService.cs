@@ -28,7 +28,7 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
     }
 
     [Authorize(PublisherAdminPermissions.Posts.Create)]
-    public async Task<PostDto> CreateAsync(CreatePostDto input)
+    public async Task<PostDto> CreateAsync(CreatePostInput input)
     {
         await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
         if (input.CategoryIds.Any())
@@ -44,10 +44,11 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return ObjectMapper.Map<Post, PostDto>(post);
     }
 
-    [Authorize(PublisherAdminPermissions.Posts.Delete)]
     public async Task DeleteAsync(Guid id)
     {
-        await PostManager.DeleteAsync(id);
+        var post = await PostRepository.GetAsync(id,false);
+        await AuthorizationService.CheckAsync(post, CommonOperations.Delete);
+        await PostManager.DeleteAsync(post);
     }
 
     public async Task<PostDto> GetAsync(Guid id)
@@ -80,10 +81,10 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return await PostRepository.SlugExistsAsync(local, slug);
     }
 
-    [Authorize(PublisherAdminPermissions.Posts.Update)]
-    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostDto input)
+    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostInput input)
     {
         var post = await PostRepository.GetAsync(id);
+        await AuthorizationService.CheckAsync(post, CommonOperations.Update);
         if (post.Local != input.Local || post.Slug != input.Slug)
         {
             await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
@@ -101,18 +102,18 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return ObjectMapper.Map<Post, PostDto>(post);
     }
 
-    [Authorize(PublisherAdminPermissions.Posts.Update)]
     public async Task DraftAsync(Guid id)
     {
         var post = await PostRepository.GetAsync(id);
+        await AuthorizationService.CheckAsync(post, CommonOperations.Update);
         post.SetDraft();
         await PostRepository.UpdateAsync(post);
     }
 
-    [Authorize(PublisherAdminPermissions.Posts.Update)]
     public async Task SendToReviewAsync(Guid id)
     {
         var post = await PostRepository.GetAsync(id);
+        await AuthorizationService.CheckAsync(post, CommonOperations.Update);
         post.SetPendingReview();
         await PostRepository.UpdateAsync(post);
     }
@@ -131,10 +132,10 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return await PostRepository.HasPostPendingForReviewAsync();
     }
 
-    [Authorize(PublisherAdminPermissions.Posts.Update)]
     public async Task ArchiveAsync(Guid id)
     {
         var post = await PostRepository.GetAsync(id);
+        await AuthorizationService.CheckAsync(post, CommonOperations.Update);
         post.SetArchived();
         await PostRepository.UpdateAsync(post);
     }

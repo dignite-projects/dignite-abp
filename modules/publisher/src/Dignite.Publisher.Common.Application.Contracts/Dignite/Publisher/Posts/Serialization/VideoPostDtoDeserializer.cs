@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 
 namespace Dignite.Publisher.Posts.Serialization;
-public class VideoPostDeserializer : IPostDeserializer
+public class VideoPostDtoDeserializer : IPostDtoDeserializer
 {
     public string PostTypeName => PostTypeConsts.VideoPostTypeName;
 
-    public PostDto Deserialize(JsonElement element, JsonSerializerOptions options)
+    public PostDtoBase Deserialize(JsonElement element, JsonSerializerOptions options)
     {
         return JsonSerializer.Deserialize<VideoPostDto>(element.GetRawText(), options);
     }

@@ -11,7 +11,7 @@ public class PublisherCommonApplicationAutoMapperProfile : Profile
         CreateMap<Category, CategoryDto>()
             .MapExtraProperties();
 
-        CreateMap<Post, PostDto>()
+        CreateMap<Post, PostDtoBase>()
             .IncludeAllDerived()
             .MapExtraProperties();
 

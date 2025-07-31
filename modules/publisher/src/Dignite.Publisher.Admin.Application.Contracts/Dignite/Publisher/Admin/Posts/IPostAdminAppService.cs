@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Dignite.Publisher.Posts;
 using Volo.Abp.Application.Services;
 
 namespace Dignite.Publisher.Admin.Posts;
 
-public interface IPostAdminAppService: ICrudAppService<PostDto, Guid, GetPostsInput, CreatePostInput, UpdatePostInput>
+public interface IPostAdminAppService: ICrudAppService<PostAdminDtoBase, Guid, GetPostsInput, CreatePostInput, UpdatePostInput>
 {
     Task<bool> SlugExistsAsync(string? local, string slug);
 

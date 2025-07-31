@@ -5,16 +5,16 @@ using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dignite.Publisher.Admin.Posts.Serialization;
-public static class PostDtoAdminConverterConfigurator
+public static class PostInputConverterConfigurator
 {
-    public static void ConfigureCreateOrUpdatePostDtoConverters(this JsonSerializerOptions options, IServiceProvider serviceProvider)
+    public static void ConfigureCreateOrUpdatePostInputConverters(this JsonSerializerOptions options, IServiceProvider serviceProvider)
     {
-        var deserializers = serviceProvider.GetRequiredService<IEnumerable<IPostAdminDeserializer>>();
+        var deserializers = serviceProvider.GetRequiredService<IEnumerable<IPostInputDeserializer>>();
 
         if (deserializers.Any())
         {
-            options.Converters.Add(new CreatePostDtoConverter(deserializers));
-            options.Converters.Add(new UpdatePostDtoConverter(deserializers));
+            options.Converters.Add(new CreatePostInputConverter(deserializers));
+            options.Converters.Add(new UpdatePostInputConverter(deserializers));
         }
         else
         {

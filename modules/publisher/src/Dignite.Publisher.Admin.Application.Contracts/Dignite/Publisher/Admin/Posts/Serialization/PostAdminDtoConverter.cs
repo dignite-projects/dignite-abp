@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Dignite.Publisher.Posts.Serialization;
-public class PostDtoConverter : JsonConverter<PostDtoBase>
+namespace Dignite.Publisher.Admin.Posts.Serialization;
+public class PostAdminDtoConverter : JsonConverter<PostAdminDtoBase>
 {
-    protected IEnumerable<IPostDtoDeserializer> PostDtoDeserializers { get; }
-    public PostDtoConverter(IEnumerable<IPostDtoDeserializer> deserializers)
+    protected IEnumerable<IPostAdminDtoDeserializer> PostAdminDtoDeserializers { get; }
+    public PostAdminDtoConverter(IEnumerable<IPostAdminDtoDeserializer> deserializers)
     {
-        PostDtoDeserializers = deserializers;
+        PostAdminDtoDeserializers = deserializers;
     }
 
-    public override PostDtoBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override PostAdminDtoBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using var jsonDoc = JsonDocument.ParseValue(ref reader);
         var root = jsonDoc.RootElement;
-        var postTypePropertyName = nameof(PostDtoBase.PostType);
+        var postTypePropertyName = nameof(PostAdminDtoBase.PostType);
         postTypePropertyName= char.ToLowerInvariant(postTypePropertyName[0]) + postTypePropertyName.Substring(1);  // Convert to camelCase
 
         if (!root.TryGetProperty(postTypePropertyName, out var typeProperty))
@@ -26,7 +26,7 @@ public class PostDtoConverter : JsonConverter<PostDtoBase>
         }
 
         var postType = typeProperty.GetString();
-        var postTypeHandler = PostDtoDeserializers.FirstOrDefault(handler => handler.PostTypeName == postType);
+        var postTypeHandler = PostAdminDtoDeserializers.FirstOrDefault(handler => handler.PostTypeName == postType);
         if (postTypeHandler == null)
         {
             throw new JsonException($"Unknown post type: {postType}");
@@ -35,7 +35,7 @@ public class PostDtoConverter : JsonConverter<PostDtoBase>
         return postTypeHandler.Deserialize(root, options);
     }
 
-    public override void Write(Utf8JsonWriter writer, PostDtoBase value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, PostAdminDtoBase value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, value, value.GetType(), options);
     }

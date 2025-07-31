@@ -7,7 +7,7 @@ namespace Dignite.Publisher.Admin.Posts.Serialization;
 /// 用于从 JSON 元素反序列化创建和更新的 DTO。
 /// 注意：实现类必须以 "PostAdminDeserializer" 结尾，以确保依赖注入机制能正确识别。
 /// </summary>
-public interface IPostAdminDeserializer : ITransientDependency
+public interface IPostInputDeserializer : ITransientDependency
 {
     /// <summary>
     /// The name of the post type, e.g. "Article", "Video", etc.

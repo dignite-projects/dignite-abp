@@ -30,7 +30,7 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
     }
 
     [HttpPost]
-    public async Task<PostDto> CreateAsync(CreatePostInput input)
+    public async Task<PostAdminDtoBase> CreateAsync(CreatePostInput input)
     {
         return await PostAdminAppService.CreateAsync(input);
     }
@@ -51,13 +51,13 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<PostDto> GetAsync(Guid id)
+    public async Task<PostAdminDtoBase> GetAsync(Guid id)
     {
         return await PostAdminAppService.GetAsync(id);
     }
 
     [HttpGet]
-    public async Task<PagedResultDto<PostDto>> GetListAsync(GetPostsInput input)
+    public async Task<PagedResultDto<PostAdminDtoBase>> GetListAsync(GetPostsInput input)
     {
         return await PostAdminAppService.GetListAsync(input);
     }
@@ -91,7 +91,7 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
     }
 
     [HttpPut]
-    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostInput input)
+    public async Task<PostAdminDtoBase> UpdateAsync(Guid id, UpdatePostInput input)
     {
         return await  PostAdminAppService.UpdateAsync(id, input);
     }

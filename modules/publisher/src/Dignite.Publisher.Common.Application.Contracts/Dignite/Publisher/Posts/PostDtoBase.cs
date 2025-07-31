@@ -6,7 +6,7 @@ using Volo.Abp.Auditing;
 namespace Dignite.Publisher.Posts;
 
 [Serializable]
-public abstract class PostDto : ExtensibleEntityDto<Guid>, IMayHaveCreator, IHasCreationTime, IHasModificationTime
+public abstract class PostDtoBase : ExtensibleEntityDto<Guid>, IMayHaveCreator, IHasCreationTime, IHasModificationTime
 {
     /// <summary>
     /// 

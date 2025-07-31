@@ -52,7 +52,8 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     {
         var result = await _postAdminAppService.GetAsync(_testData.Post_1_Id);
         result.ShouldNotBeNull();
-        result.GetType().Name.ShouldBe("ArticlePostDto");
+        result.GetType().ShouldBe(typeof(ArticlePostAdminDto));
+        result.CreatorId.ShouldBe(_testData.User1Id);
     }
 
     [Fact]
@@ -181,7 +182,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
         post.Status.ShouldBe(PostStatus.Archived);
     }
 
-    private async Task<PostDto> CreateArticlePost()
+    private async Task<PostDtoBase> CreateArticlePost()
     {
         var createPostInput = new CreateArticlePostInput()
         {

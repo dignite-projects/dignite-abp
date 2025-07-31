@@ -8,7 +8,7 @@ public static class PostDtoConverterConfigurator
 {
     public static void ConfigurePostDtoConverters(this JsonSerializerOptions options, IServiceProvider serviceProvider)
     {
-        var deserializers = serviceProvider.GetRequiredService<IEnumerable<IPostDeserializer>>();
+        var deserializers = serviceProvider.GetRequiredService<IEnumerable<IPostDtoDeserializer>>();
         options.Converters.Add(new PostDtoConverter(deserializers));
     } 
 }

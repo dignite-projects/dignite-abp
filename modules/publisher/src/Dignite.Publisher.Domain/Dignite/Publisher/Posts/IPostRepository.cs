@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Volo.Abp.Domain.Repositories;
+using Volo.CmsKit.Users;
 
 namespace Dignite.Publisher.Posts;
 public interface IPostRepository : IBasicRepository<Post, Guid>
 {
-    Task<Post> FindBySlugAsync(string? local, string slug, CancellationToken cancellationToken = default);
+    Task<Post> GetBySlugAsync(string? local, [NotNull] string slug, CancellationToken cancellationToken = default);
 
     Task<int> GetCountAsync(
         string? local,
@@ -42,4 +44,12 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
     Task<bool> SlugExistsAsync(string? local, string slug, CancellationToken cancellationToken = default);
 
     Task<bool> HasPostPendingForReviewAsync(CancellationToken cancellationToken = default);
+
+    Task<List<CmsUser>> GetCreatorsHasPostsAsync(
+        int skipCount,
+        int maxResultCount,
+        string sorting,
+        CancellationToken cancellationToken = default);
+
+    Task<int> GetCreatorsHasPostsCountAsync( CancellationToken cancellationToken = default);
 }

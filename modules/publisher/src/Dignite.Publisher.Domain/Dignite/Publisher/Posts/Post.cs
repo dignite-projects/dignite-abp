@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Volo.Abp;
+using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
+using Volo.CmsKit.Users;
 
 namespace Dignite.Publisher.Posts;
 
 /// <summary>
 /// Represents a post in the publishing system.
 /// </summary>
-public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
+public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEntityVersion
 {
     protected Post()
     {
@@ -78,6 +80,11 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual DateTime? PublishedTime { get; set; }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public virtual CmsUser Creator { get; set; }
+
+    /// <summary>
     /// The identifier of the tenant to which this category belongs.
     /// </summary>
     public virtual Guid? TenantId { get; protected set; }
@@ -91,6 +98,8 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual int FavoriteCount { get; protected set; }
 
     public virtual ICollection<PostCategory> PostCategories { get; protected set; } = new List<PostCategory>();
+
+    public virtual int EntityVersion { get; protected set; }
 
     public virtual void SetTitle([NotNull] string title)
     {

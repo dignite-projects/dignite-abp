@@ -7,6 +7,7 @@ using Dignite.Publisher.Categories;
 using Dignite.Publisher.Posts;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Data;
 using Volo.Abp.ObjectExtending;
 
 namespace Dignite.Publisher.Admin.Posts;
@@ -28,7 +29,7 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
     }
 
     [Authorize(PublisherAdminPermissions.Posts.Create)]
-    public async Task<PostDto> CreateAsync(CreatePostInput input)
+    public async Task<PostAdminDtoBase> CreateAsync(CreatePostInput input)
     {
         await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
         if (input.CategoryIds.Any())
@@ -41,7 +42,7 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         input.MapExtraPropertiesTo(post);
         await PostRepository.InsertAsync(post);
 
-        return ObjectMapper.Map<Post, PostDto>(post);
+        return ObjectMapper.Map<Post, PostAdminDtoBase>(post);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -51,19 +52,19 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         await PostManager.DeleteAsync(post);
     }
 
-    public async Task<PostDto> GetAsync(Guid id)
+    public async Task<PostAdminDtoBase> GetAsync(Guid id)
     {
         var post = await PostRepository.GetAsync(id);
-        return ObjectMapper.Map<Post, PostDto>(post);
+        return ObjectMapper.Map<Post, PostAdminDtoBase>(post);
     }
 
-    public async Task<PagedResultDto<PostDto>> GetListAsync(GetPostsInput input)
+    public async Task<PagedResultDto<PostAdminDtoBase>> GetListAsync(GetPostsInput input)
     {
-        var dto = new List<PostDto>();
+        var dto = new List<PostAdminDtoBase>();
         var count = await PostRepository.GetCountAsync(input.Local,input.CategoryIds,input.Status,input.PostType,input.CreatorId,input.CreationTimeFrom,input.CreationTimeTo);
         if (count == 0)
         {
-            return new PagedResultDto<PostDto>(count, dto);
+            return new PagedResultDto<PostAdminDtoBase>(count, dto);
         }
         var list = await PostRepository.GetPagedListAsync(input.Local, input.CategoryIds, input.Status, input.PostType, input.CreatorId, input.CreationTimeFrom, input.CreationTimeTo,
             input.SkipCount,
@@ -71,9 +72,9 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
             input.Sorting
         );
 
-        dto = ObjectMapper.Map<List<Post>, List<PostDto>>(list);
+        dto = ObjectMapper.Map<List<Post>, List<PostAdminDtoBase>>(list);
 
-        return new PagedResultDto<PostDto>(count, dto);
+        return new PagedResultDto<PostAdminDtoBase>(count, dto);
     }
 
     public async Task<bool> SlugExistsAsync(string? local, string slug)
@@ -81,7 +82,7 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return await PostRepository.SlugExistsAsync(local, slug);
     }
 
-    public async Task<PostDto> UpdateAsync(Guid id, UpdatePostInput input)
+    public async Task<PostAdminDtoBase> UpdateAsync(Guid id, UpdatePostInput input)
     {
         var post = await PostRepository.GetAsync(id);
         await AuthorizationService.CheckAsync(post, CommonOperations.Update);
@@ -95,11 +96,15 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
             await CategoryManager.CheckExistenceAsync(input.Local, input.CategoryIds);
         }
 
+        // Set the concurrency stamp if it is not null to ensure optimistic concurrency control
+        post.SetConcurrencyStampIfNotNull(input.ConcurrencyStamp);
+
+        // Get the appropriate post builder based on the post type
         var postBuilder = PostBuilderSelector.Get(post.PostType);
         postBuilder.Update(post, input);
         input.MapExtraPropertiesTo(post);
         await PostRepository.UpdateAsync(post);
-        return ObjectMapper.Map<Post, PostDto>(post);
+        return ObjectMapper.Map<Post, PostAdminDtoBase>(post);
     }
 
     public async Task DraftAsync(Guid id)

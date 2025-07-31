@@ -5,10 +5,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Dignite.Publisher.Admin.Posts.Serialization;
-public class CreatePostDtoConverter : JsonConverter<CreatePostInput>
+public class CreatePostInputConverter : JsonConverter<CreatePostInput>
 {
-    protected IEnumerable<IPostAdminDeserializer> Deserializers { get; }
-    public CreatePostDtoConverter(IEnumerable<IPostAdminDeserializer> deserializers)
+    protected IEnumerable<IPostInputDeserializer> Deserializers { get; }
+    public CreatePostInputConverter(IEnumerable<IPostInputDeserializer> deserializers)
     {
         Deserializers = deserializers;
     }

@@ -1,5 +1,8 @@
 ﻿
+using System;
+using Dignite.Publisher.Admin.Posts.Serialization;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 using Volo.CmsKit.Admin;
@@ -14,6 +17,8 @@ public class PublisherAdminHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        var serviceProvider = context.Services.BuildServiceProvider();
+
         context.Services.AddHttpClientProxies(
             typeof(PublisherAdminApplicationContractsModule).Assembly,
             PublisherAdminRemoteServiceConsts.RemoteServiceName
@@ -22,6 +27,12 @@ public class PublisherAdminHttpApiClientModule : AbpModule
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
             options.FileSets.AddEmbedded<PublisherAdminHttpApiClientModule>();
+        });
+
+        // Register the custom JSON serialization options for PostDto
+        Configure<AbpSystemTextJsonSerializerOptions>(options =>
+        {
+            options.JsonSerializerOptions.ConfigurePostAdminDtoConverters(serviceProvider);
         });
     }
 }

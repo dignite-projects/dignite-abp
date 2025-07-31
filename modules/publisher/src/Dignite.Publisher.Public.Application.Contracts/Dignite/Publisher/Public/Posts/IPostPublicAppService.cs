@@ -5,6 +5,6 @@ using Dignite.Publisher.Posts;
 using Volo.Abp.Application.Services;
 
 namespace Dignite.Publisher.Public.Posts;
-public interface IPostPublicAppService: IReadOnlyAppService<PostDto,Guid, GetPostsInput>
+public interface IPostPublicAppService: IReadOnlyAppService<PostDtoBase,Guid, GetPostsInput>
 {
 }

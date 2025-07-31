@@ -9,15 +9,15 @@ namespace Dignite.Publisher.Admin.Posts.Serialization;
 
 [RequiresGlobalFeature(typeof(ArticlePostsFeature))]
 [RequiresFeature(PublisherFeatures.ArticlePostEnable)]
-public class VideoPostAdminDeserializer : IPostAdminDeserializer
+public class ArticlePostInputDeserializer : IPostInputDeserializer
 {
-    public string PostTypeName => PostTypeConsts.VideoPostTypeName;
+    public string PostTypeName => PostTypeConsts.ArticlePostTypeName;
     public CreatePostInput DeserializeForCreate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<CreateVideoPostInput>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<CreateArticlePostInput>(element.GetRawText(), options)!;
     }
     public UpdatePostInput DeserializeForUpdate(JsonElement element, JsonSerializerOptions options)
     {
-        return JsonSerializer.Deserialize<UpdateVideoPostInput>(element.GetRawText(), options)!;
+        return JsonSerializer.Deserialize<UpdateArticlePostInput>(element.GetRawText(), options)!;
     }
 }

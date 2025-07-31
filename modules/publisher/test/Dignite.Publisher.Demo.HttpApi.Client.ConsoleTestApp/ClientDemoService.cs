@@ -48,7 +48,7 @@ public class ClientDemoService : ITransientDependency
         newArticlePost.Slug = Guid.NewGuid().ToString();
         newArticlePost.Content = "This is a test article post content.";
         var articlePostDto = await _postAdminAppService.CreateAsync(newArticlePost);
-        Console.WriteLine($"Created a new article post:{articlePostDto.Id} - {((ArticlePostDto)articlePostDto).Content}");
+        Console.WriteLine($"Created a new article post:{articlePostDto.Id} - {((ArticlePostAdminDto)articlePostDto).Content}");
         Console.WriteLine();
 
         // Create a new video post
@@ -59,15 +59,15 @@ public class ClientDemoService : ITransientDependency
         newVideoPost.VideoUrl = "test/abc.mp4";
         newVideoPost.Duration = TimeSpan.FromMinutes(3.5); //3分30秒
         var videoPostDto = await _postAdminAppService.CreateAsync(newVideoPost);
-        Console.WriteLine($"Created a new video post:{videoPostDto.Id} - {((VideoPostDto)videoPostDto).VideoUrl}");
+        Console.WriteLine($"Created a new video post:{videoPostDto.Id} - {((VideoPostAdminDto)videoPostDto).VideoUrl}");
         Console.WriteLine();
 
         // Get the created post
         var articlePost = await _postAdminAppService.GetAsync(articlePostDto.Id);
-        Console.WriteLine($"Get a article post:{articlePost.Id} - {((ArticlePostDto)articlePost).Content}");
+        Console.WriteLine($"Get a article post:{articlePost.Id} - {((ArticlePostAdminDto)articlePost).Content}");
         Console.WriteLine();
         var videoPost = await _postAdminAppService.GetAsync(videoPostDto.Id);
-        Console.WriteLine($"Get a video post:{videoPost.Id} - {((VideoPostDto)videoPost).VideoUrl}");
+        Console.WriteLine($"Get a video post:{videoPost.Id} - {((VideoPostAdminDto)videoPost).VideoUrl}");
         Console.WriteLine();
 
         // Get the list of posts
@@ -81,12 +81,12 @@ public class ClientDemoService : ITransientDependency
             Console.WriteLine($"- [{post.Id}] {post.Title} ({post.PostType})");
             if (post.PostType == PostTypeConsts.ArticlePostTypeName)
             {
-                var postItem = (ArticlePostDto)post;
+                var postItem = (ArticlePostAdminDto)post;
                 Console.WriteLine($"- article content: [{postItem.Content}]");
             }
             if (post.PostType == PostTypeConsts.VideoPostTypeName)
             {
-                var postItem = (VideoPostDto)post;
+                var postItem = (VideoPostAdminDto)post;
                 Console.WriteLine($"- video url：[{postItem.VideoUrl}] [{postItem.Duration}]");
             }
         }

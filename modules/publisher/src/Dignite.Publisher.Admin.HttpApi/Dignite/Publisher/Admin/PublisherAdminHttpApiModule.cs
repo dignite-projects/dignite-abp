@@ -25,7 +25,8 @@ public class PublisherAdminHttpApiModule : AbpModule
         context.Services.AddControllers()
             .AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.ConfigureCreateOrUpdatePostDtoConverters(serviceProvider);
+                options.JsonSerializerOptions.ConfigureCreateOrUpdatePostInputConverters(serviceProvider);
+                options.JsonSerializerOptions.ConfigurePostAdminDtoConverters(serviceProvider);
             });
     }
 }

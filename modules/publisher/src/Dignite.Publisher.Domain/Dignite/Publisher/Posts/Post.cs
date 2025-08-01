@@ -19,13 +19,13 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
     {
     }
 
-    protected Post(Guid id, string? local, string title, string slug, string? coverImageUrl, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId)
+    protected Post(Guid id, string? local, string title, string slug, string? coverBlobName, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId)
         :base(id)
     {
         SetLocal(local);
         SetTitle(title);
         SetSlug(slug);
-        SetCoverImageUrl(coverImageUrl);
+        SetCoverBlobName(coverBlobName);
         SetSummary(summary);
         PublishedTime = publishedTime;
         TenantId = tenantId;
@@ -60,9 +60,9 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
     public virtual string Slug { get; protected set; }
 
     /// <summary>
-    /// The URL of the cover image for the post.
+    /// The Blob Name of the cover image for the post.
     /// </summary>
-    public virtual string? CoverImageUrl { get; protected set; }
+    public virtual string? CoverBlobName { get; protected set; }
 
     /// <summary>
     /// 
@@ -110,9 +110,9 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
     {
         Slug = Check.NotNullOrWhiteSpace(slug, nameof(slug), PostConsts.MaxSlugLength, PostConsts.MinSlugLength);
     }
-    public virtual void SetCoverImageUrl([NotNull] string coverImageUrl)
+    public virtual void SetCoverBlobName([NotNull] string coverBlobName)
     {
-        CoverImageUrl = Check.Length(coverImageUrl, nameof(coverImageUrl), PostConsts.MaxCoverImageUrlLength);
+        CoverBlobName = Check.Length(coverBlobName, nameof(coverBlobName), PostConsts.MaxCoverBlobNameLength);
     }
     public virtual void SetSummary([NotNull] string summary)
     {
@@ -180,12 +180,12 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
         PostCategories.RemoveAll(t => t.CategoryId == categoryId);
     }
 
-    protected virtual void Update(string? local, string title, string slug, string? coverImageUrl, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds)
+    protected virtual void Update(string? local, string title, string slug, string? coverBlobName, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds)
     {
         SetLocal(local);
         SetTitle(title);
         SetSlug(slug);
-        SetCoverImageUrl(coverImageUrl);
+        SetCoverBlobName(coverBlobName);
         SetSummary(summary);
         PublishedTime = publishedTime;
         SetCategoies(categoryIds);

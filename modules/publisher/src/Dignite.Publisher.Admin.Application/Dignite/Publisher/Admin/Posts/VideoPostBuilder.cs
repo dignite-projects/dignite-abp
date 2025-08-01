@@ -28,7 +28,7 @@ public class VideoPostBuilder : IPostBuilder
             post.Local,
             post.Title,
             post.Slug,
-            post.CoverImageUrl,
+            post.CoverBlobName,
             post.Summary,
             post.PublishedTime,
             post.CategoryIds,
@@ -52,7 +52,7 @@ public class VideoPostBuilder : IPostBuilder
 
 
         videoPost.Update(
-            input.Local, input.Title, input.Slug, input.CoverImageUrl, input.Summary,
+            input.Local, input.Title, input.Slug, input.CoverBlobName, input.Summary,
             input.PublishedTime, input.CategoryIds, 
             updateVideoPostDto.VideoUrl, updateVideoPostDto.Duration, updateVideoPostDto.Description);
     }

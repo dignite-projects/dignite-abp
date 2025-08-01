@@ -29,9 +29,9 @@ public abstract class PostDtoBase : ExtensibleEntityDto<Guid>, IMayHaveCreator, 
     public string Slug { get; set; }
 
     /// <summary>
-    /// The URL of the cover image for the post.
+    /// The Blob Name of the cover image for the post.
     /// </summary>
-    public string? CoverImageUrl { get; set; }
+    public string? CoverBlobName { get; set; }
 
     /// <summary>
     /// 

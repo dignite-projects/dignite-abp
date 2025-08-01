@@ -75,7 +75,7 @@ public static class PublisherDbContextModelCreatingExtensions
             //Properties
             b.Property(q => q.Title).IsRequired().HasMaxLength(PostConsts.MaxTitleLength);
             b.Property(q => q.Slug).IsRequired().HasMaxLength(PostConsts.MaxSlugLength);
-            b.Property(q => q.CoverImageUrl).HasMaxLength(PostConsts.MaxCoverImageUrlLength);
+            b.Property(q => q.CoverBlobName).HasMaxLength(PostConsts.MaxCoverBlobNameLength);
             b.Property(q => q.Summary).HasMaxLength(PostConsts.MaxSummaryLength);
             b.Property(q => q.Local).HasMaxLength(PostConsts.MaxLocalLength);
             b.Property(p => p.CreationTime).HasColumnType("smalldatetime");

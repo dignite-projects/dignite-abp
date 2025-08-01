@@ -12,7 +12,7 @@ public static class PostConsts
     /// </summary>
     public const string SlugRegularExpression = "^[a-zA-Z0-9_\\-\\.]+$";
 
-    public static int MaxCoverImageUrlLength { get; set; } = 128;
+    public static int MaxCoverBlobNameLength { get; set; } = 128;
 
     public static int MaxSummaryLength { get; set; } = 256;
 

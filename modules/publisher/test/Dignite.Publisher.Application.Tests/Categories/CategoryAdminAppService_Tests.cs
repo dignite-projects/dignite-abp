@@ -81,7 +81,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
             Local = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
-            CoverImageUrl = "img.jpeg",
+            CoverBlobName = "img.jpeg",
             Summary = "Test Article Post Summary",
             CategoryIds = new List<Guid> { category.Id },
             Content = "<p>Test Article Post Content</p>"

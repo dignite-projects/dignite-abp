@@ -44,7 +44,7 @@ public abstract class CreateOrUpdatePostInputBase: ExtensibleObject
     /// <summary>
     /// The URL of the cover image for the post.
     /// </summary>
-    public string? CoverImageUrl { get; set; }
+    public string? CoverBlobName { get; set; }
 
     /// <summary>
     /// 

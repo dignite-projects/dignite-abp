@@ -10,10 +10,10 @@ public class VideoPost : Post
     {
     }
 
-    public VideoPost(Guid id, string? local, string title, string slug, string? coverImageUrl, string? summary, 
+    public VideoPost(Guid id, string? local, string title, string slug, string? coverBlobName, string? summary, 
         DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId,
         string videoUrl, TimeSpan duration, string? description) 
-        : base(id, local, title, slug, coverImageUrl, summary, publishedTime, categoryIds, tenantId)
+        : base(id, local, title, slug, coverBlobName, summary, publishedTime, categoryIds, tenantId)
     {
         SetVideoUrl(videoUrl);
         Duration = duration;
@@ -49,9 +49,9 @@ public class VideoPost : Post
     {
         Description = Check.NotNullOrWhiteSpace(description, nameof(description), VideoPostConsts.MaxDescriptionLength);
     }
-    public virtual void Update(string? local, string title, string slug, string? coverImageUrl, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds, string videoUrl, TimeSpan duration, string? description)
+    public virtual void Update(string? local, string title, string slug, string? coverBlobName, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds, string videoUrl, TimeSpan duration, string? description)
     {
-        base.Update(local, title, slug, coverImageUrl, summary, publishedTime, categoryIds);
+        base.Update(local, title, slug, coverBlobName, summary, publishedTime, categoryIds);
         SetVideoUrl(videoUrl);
         Duration = duration;
         SetDescription(description);

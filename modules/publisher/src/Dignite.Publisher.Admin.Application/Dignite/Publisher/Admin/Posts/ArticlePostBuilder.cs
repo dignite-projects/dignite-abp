@@ -28,7 +28,7 @@ public class ArticlePostBuilder : IPostBuilder
             input.Local,
             input.Title,
             input.Slug,
-            input.CoverImageUrl,
+            input.CoverBlobName,
             input.Summary,
             input.PublishedTime,
             input.CategoryIds,
@@ -49,7 +49,7 @@ public class ArticlePostBuilder : IPostBuilder
         }
 
         articlePost.Update(
-            input.Local,input.Title, input.Slug, input.CoverImageUrl, input.Summary, 
+            input.Local,input.Title, input.Slug, input.CoverBlobName, input.Summary, 
             input.PublishedTime,input.CategoryIds, updateArticlePostDto.Content);
     }
 }

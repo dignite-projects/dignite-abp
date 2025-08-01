@@ -34,7 +34,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
             Local = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
-            CoverImageUrl = "img.jpeg",
+            CoverBlobName = "img.jpeg",
             Summary = "Test Article Post Summary",
             CategoryIds = new List<Guid> { _testData.Category_2_Id },
             Content = "<p>Test Article Post Content</p>"
@@ -89,7 +89,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
             Local = _testData.Local_En,
             Title = _testData.Post_1_Title,
             Slug = newSlug,
-            CoverImageUrl = "new-img.jpeg",
+            CoverBlobName = "new-img.jpeg",
             Summary = "Test Article Post Summary",
             CategoryIds = new List<Guid> { _testData.Category_2_Id },
             Content = "<p>Test Article Post Content</p>"
@@ -110,7 +110,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
                                 Local = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
                                 Slug = _testData.Post_2_Slug,
-                                CoverImageUrl = "new-img.jpeg",
+                                CoverBlobName = "new-img.jpeg",
                                 Summary = "Test Article Post Summary",
                                 CategoryIds = new List<Guid> { _testData.Category_2_Id },
                                 Content = "<p>Test Article Post Content</p>"
@@ -129,7 +129,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
                                 Local = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
                                 Slug = _testData.Post_1_Slug,
-                                CoverImageUrl = "new-img.jpeg",
+                                CoverBlobName = "new-img.jpeg",
                                 Summary = "Test Article Post Summary",
                                 CategoryIds = new List<Guid> { _testData.Category_2_Id, newCategoryId },
                                 Content = "<p>Test Article Post Content</p>"
@@ -189,7 +189,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
             Local = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
-            CoverImageUrl = "img.jpeg",
+            CoverBlobName = "img.jpeg",
             Summary = "Test Article Post Summary",
             CategoryIds = new List<Guid> { _testData.Category_2_Id },
             Content = "<p>Test Article Post Content</p>"

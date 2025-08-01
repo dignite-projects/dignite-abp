@@ -13,7 +13,7 @@ $solutionPaths = @(
 		"../modules/files",
 		"../modules/notification-center",
 		"../modules/pure-theme",
-		"../modules/regionalization-management",
+		"../modules/locale-management",
 		"../modules/user-points",
 		"../modules/tenant-domain-management"
 	)

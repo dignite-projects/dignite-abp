@@ -1,0 +1,11 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "Locale": "本地化",
+    "Default": "默认",
+    "SetDefault": "设为默认",
+    "DefaultCultureName": "默认区域名称",
+    "AvailableCultureNames": "可用区域名称"
+    
+  }
+}

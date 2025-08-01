@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\configureawait.props" />
+  <Import Project="..\..\..\common.props" />
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <AssemblyName>Dignite.Abp.Locales</AssemblyName>
+    <PackageId>Dignite.Abp.Locales</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Dignite\Abp\Locales\Localization\*.json" />
+    <EmbeddedResource Include="Dignite\Abp\Locales\Localization\*.json" />
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="Volo.Abp.Localization" />
+  </ItemGroup>
+</Project>

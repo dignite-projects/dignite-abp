@@ -37,9 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Points", "src\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Points.Tests", "test\Dignite.Abp.Points.Tests\Dignite.Abp.Points.Tests.csproj", "{929C7920-03E5-4D47-A36E-F3D225357481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Regionalization", "src\Dignite.Abp.Regionalization\Dignite.Abp.Regionalization.csproj", "{3D5E3D77-8032-483C-9111-F3C8B70F1B6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Locales", "src\Dignite.Abp.Locales\Dignite.Abp.Locales.csproj", "{3D5E3D77-8032-483C-9111-F3C8B70F1B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.Regionalization", "src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj", "{CB2883AD-4FAF-4AEF-AD18-0214817E5521}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Locales", "src\Dignite.Abp.AspNetCore.Locales\Dignite.Abp.AspNetCore.Locales.csproj", "{CB2883AD-4FAF-4AEF-AD18-0214817E5521}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantDomain", "src\Dignite.Abp.TenantDomain\Dignite.Abp.TenantDomain.csproj", "{0C165EE8-CD87-4A03-912E-2D9D8F18A559}"
 EndProject

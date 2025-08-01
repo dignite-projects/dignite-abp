@@ -1,0 +1,106 @@
+{
+  "modules": {
+    "localeManagement": {
+      "rootPath": "localeManagement",
+      "remoteServiceName": "AbpLocaleManagement",
+      "controllers": {
+        "Dignite.Abp.LocaleManagement.LocaleController": {
+          "controllerName": "Locale",
+          "controllerGroupName": "Locale",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dignite.Abp.LocaleManagement.LocaleController",
+          "interfaces": [
+            {
+              "type": "Dignite.Abp.LocaleManagement.ILocaleAppService",
+              "name": "ILocaleAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [],
+                  "returnValue": {
+                    "type": "Dignite.Abp.LocaleManagement.LocaleDto",
+                    "typeSimple": "Dignite.Abp.LocaleManagement.LocaleDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Dignite.Abp.LocaleManagement.UpdateLocaleInput, Dignite.Abp.LocaleManagement.Application.Contracts",
+                      "type": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                      "typeSimple": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Dignite.Abp.LocaleManagement.LocaleDto",
+                    "typeSimple": "Dignite.Abp.LocaleManagement.LocaleDto"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/locale-management/locale",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Dignite.Abp.LocaleManagement.LocaleDto",
+                "typeSimple": "Dignite.Abp.LocaleManagement.LocaleDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.LocaleManagement.ILocaleAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/locale-management/locale",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dignite.Abp.LocaleManagement.UpdateLocaleInput, Dignite.Abp.LocaleManagement.Application.Contracts",
+                  "type": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                  "typeSimple": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                  "typeSimple": "Dignite.Abp.LocaleManagement.UpdateLocaleInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dignite.Abp.LocaleManagement.LocaleDto",
+                "typeSimple": "Dignite.Abp.LocaleManagement.LocaleDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Dignite.Abp.LocaleManagement.ILocaleAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

@@ -1,9 +1,0 @@
-{
-  "culture": "zh-Hans",
-  "texts": {
-    "DisplayName:Abp.Regionalization.DefaultCultureName": "默认国家或区域的文化名称",
-    "Description:Abp.Regionalization.DefaultCultureName": "应用程序可能会使用您的国家或地区为您提供本地的内容。",
-    "DisplayName:Abp.Regionalization.AvailableCultureNames": "可用国家或区域的文化名称",
-    "Description:Abp.Regionalization.AvailableCultureNames": "应用程序提供的可用国家或地区的文化名称。"
-  }
-}

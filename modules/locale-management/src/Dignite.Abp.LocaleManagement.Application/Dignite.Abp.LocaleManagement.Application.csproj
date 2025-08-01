@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\..\configureawait.props" />
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>Dignite.Abp.LocaleManagement.Application</AssemblyName>
+    <PackageId>Dignite.Abp.LocaleManagement.Application</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain" />
+    <ProjectReference Include="..\Dignite.Abp.LocaleManagement.Application.Contracts\Dignite.Abp.LocaleManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

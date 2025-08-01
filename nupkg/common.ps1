@@ -76,7 +76,7 @@ $solutions = (
     "modules/pure-theme",
     "modules/user-points",
     "modules/cms",
-    "modules/regionalization-management",
+    "modules/locale-management",
     "modules/tenant-domain-management"
 )
 
@@ -95,8 +95,8 @@ $projects = (
     "framework/src/Dignite.Abp.Notifications.Shared",
     "framework/src/Dignite.Abp.Notifications.SignalRNotifier",
     "framework/src/Dignite.Abp.Points",
-    "framework/src/Dignite.Abp.AspNetCore.Mvc.Regionalization",
-    "framework/src/Dignite.Abp.Regionalization",
+    "framework/src/Dignite.Abp.AspNetCore.Locales",
+    "framework/src/Dignite.Abp.Locales",
     "framework/src/Dignite.Abp.Seo",
     "framework/src/Dignite.Abp.TenantDomain",
     "framework/src/Dignite.Abp.TenantDomain.Caddy",
@@ -187,12 +187,12 @@ $projects = (
     "modules/cms/src/Dignite.Cms.Public.HttpApi.Client",
     "modules/cms/src/Dignite.Cms.Public.Web",
 
-    # modules/regionalization-management
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Application",
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Application.Contracts",
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi",
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.HttpApi.Client",      
-    "modules/regionalization-management/src/Dignite.Abp.RegionalizationManagement.Installer",
+    # modules/locales-management
+    "modules/locales-management/src/Dignite.Abp.LocalesManagement.Application",
+    "modules/locales-management/src/Dignite.Abp.LocalesManagement.Application.Contracts",
+    "modules/locales-management/src/Dignite.Abp.LocalesManagement.HttpApi",
+    "modules/locales-management/src/Dignite.Abp.LocalesManagement.HttpApi.Client",      
+    "modules/locales-management/src/Dignite.Abp.LocalesManagement.Installer",
     
     # modules/tenant-domain-management
     "modules/tenant-domain-management/src/Dignite.Abp.TenantDomainManagement.Application",

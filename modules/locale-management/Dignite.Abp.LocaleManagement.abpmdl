@@ -1,0 +1,54 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Dignite.Abp.LocaleManagement.Domain": {
+      "path": "src/Dignite.Abp.LocaleManagement.Domain/Dignite.Abp.LocaleManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.Application.Contracts": {
+      "path": "src/Dignite.Abp.LocaleManagement.Application.Contracts/Dignite.Abp.LocaleManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.Application": {
+      "path": "src/Dignite.Abp.LocaleManagement.Application/Dignite.Abp.LocaleManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.EntityFrameworkCore": {
+      "path": "src/Dignite.Abp.LocaleManagement.EntityFrameworkCore/Dignite.Abp.LocaleManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.HttpApi": {
+      "path": "src/Dignite.Abp.LocaleManagement.HttpApi/Dignite.Abp.LocaleManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.HttpApi.Client": {
+      "path": "src/Dignite.Abp.LocaleManagement.HttpApi.Client/Dignite.Abp.LocaleManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Dignite.Abp.LocaleManagement.TestBase": {
+      "path": "test/Dignite.Abp.LocaleManagement.TestBase/Dignite.Abp.LocaleManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.LocaleManagement.EntityFrameworkCore.Tests": {
+      "path": "test/Dignite.Abp.LocaleManagement.EntityFrameworkCore.Tests/Dignite.Abp.LocaleManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.LocaleManagement.Domain.Tests": {
+      "path": "test/Dignite.Abp.LocaleManagement.Domain.Tests/Dignite.Abp.LocaleManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.LocaleManagement.Application.Tests": {
+      "path": "test/Dignite.Abp.LocaleManagement.Application.Tests/Dignite.Abp.LocaleManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Dignite.Abp.LocaleManagement.Domain.Shared": {
+      "path": "src/Dignite.Abp.LocaleManagement.Domain.Shared/Dignite.Abp.LocaleManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    }
+  }
+}

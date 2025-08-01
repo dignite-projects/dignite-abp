@@ -1,0 +1,10 @@
+{
+  "culture": "en",
+  "texts": {
+    "Locale": "Locale",
+    "Default": "Default",
+    "SetDefault": "Set as Default",
+    "DefaultCultureName": "Default Culture Name",
+    "AvailableCultureNames": "Available Culture Names"
+  }
+}

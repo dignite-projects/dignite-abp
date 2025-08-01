@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+    "texts": {
+        "DisplayName:Abp.Locale.DefaultCultureName": "Default locale's cultural name",
+        "Description:Abp.Locale.DefaultCultureName": "App might use your locale to give you local content.",
+        "DisplayName:Abp.Locale.AvailableCultureNames": "Cultural names of available locales",
+        "Description:Abp.Locale.AvailableCultureNames": "Cultural names of available locales provided by the application."
+    }
+}

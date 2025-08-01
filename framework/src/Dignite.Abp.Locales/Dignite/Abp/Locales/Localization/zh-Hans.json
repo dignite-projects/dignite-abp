@@ -1,0 +1,9 @@
+{
+  "culture": "zh-Hans",
+  "texts": {
+    "DisplayName:Abp.Locales.DefaultCultureName": "默认语言/地区的名称",
+    "Description:Abp.Locales.DefaultCultureName": "应用程序会使用默认的语言/地区的提供本地化的内容。",
+    "DisplayName:Abp.Locales.AvailableCultureNames": "可用的语言/地区名称",
+    "Description:Abp.Locales.AvailableCultureNames": "应用程序提供的可用的语言/地区名称。"
+  }
+}

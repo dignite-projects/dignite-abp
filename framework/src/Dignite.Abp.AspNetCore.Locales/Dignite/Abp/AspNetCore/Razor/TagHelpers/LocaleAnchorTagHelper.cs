@@ -11,14 +11,14 @@ using Volo.Abp.Threading;
 namespace Dignite.Abp.AspNetCore.Razor.TagHelpers;
 
 
-[HtmlTargetElement("a", Attributes = "[add-locale]")]
+[HtmlTargetElement("a", Attributes = "[use-locale]")]
 public class LocaleAnchorTagHelper : TagHelper
 {
     /// <summary>
-    /// if or not the link address is prefixed with a Culture, 
-    /// if true, a Culture will be added to the link address
+    /// if or not the link is prefixed with a locale, 
+    /// if true, a locale will be added to the link
     /// </summary>
-    public bool AddLocale { get; set; } = false;
+    public bool UseLocale { get; set; } = false;
 
 
     [ViewContext, HtmlAttributeNotBound]
@@ -32,7 +32,7 @@ public class LocaleAnchorTagHelper : TagHelper
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        if (!AddLocale)
+        if (!UseLocale)
         {
             return;
         }
@@ -69,7 +69,7 @@ public class LocaleAnchorTagHelper : TagHelper
                         url = cultureName.EnsureStartsWith('/') + url.RemovePostFix("/");
                     }
                 }
-                output.Attributes.SetAttribute("href", url); //以上代码对href值处理完成后,其他的 TagHelper 将继续处理,例如 asp.net 内置的 UrlResolutionTagHelper
+                output.Attributes.SetAttribute("href", url); // 以上代码对href值处理完成后,其他的 TagHelper 将继续处理,例如 asp.net 内置的 UrlResolutionTagHelper
             }
         }
     }

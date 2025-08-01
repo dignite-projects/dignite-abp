@@ -12,7 +12,7 @@ namespace Dignite.Abp.AspNetCore.Mvc.Razor;
 public class TenantViewLocationExpander : IViewLocationExpander
 {
     private const string _cultureKey = "___culture";
-    private const string _tenancyNameKey = "___tenantName";
+    private const string _tenantNameKey = "___tenantName";
     private const string _themeNameKey = "___themeName";
     private const string _webComponentPathKey = "___webComponentPath";
 
@@ -37,12 +37,12 @@ public class TenantViewLocationExpander : IViewLocationExpander
         }
 
         // Using CurrentTenant so it loads the tenant specific resources for the views.
-        if (context.Values.GetOrDefault(_tenancyNameKey) == null)
+        if (context.Values.GetOrDefault(_tenantNameKey) == null)
         {
             if (_currentTenantLazy.Value.IsAvailable)
             {
                 var tenantName = _currentTenantLazy.Value.Name;
-                context.Values[_tenancyNameKey] = tenantName;
+                context.Values[_tenantNameKey] = tenantName;
             }
         }
 
@@ -80,7 +80,7 @@ public class TenantViewLocationExpander : IViewLocationExpander
     public IEnumerable<string> ExpandViewLocations([NotNull] ViewLocationExpanderContext context, [NotNull] IEnumerable<string> viewLocations)
     {
         var _viewLocations = GetViewLocations(context);
-        var tenantName = context.Values.GetOrDefault(_tenancyNameKey);
+        var tenantName = context.Values.GetOrDefault(_tenantNameKey);
         var currentThemeName = context.Values.GetOrDefault(_themeNameKey);
 
         if (!string.IsNullOrEmpty(tenantName))

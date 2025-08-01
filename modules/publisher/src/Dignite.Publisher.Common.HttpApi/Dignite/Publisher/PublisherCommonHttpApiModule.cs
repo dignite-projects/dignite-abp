@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Localization;
+﻿using Dignite.FileExplorer;
+using Dignite.Publisher.Localization;
 using Dignite.Publisher.Posts.Serialization;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ namespace Dignite.Publisher;
 
 [DependsOn(
     typeof(CmsKitCommonHttpApiModule),
+    typeof(FileExplorerHttpApiModule),
     typeof(PublisherCommonApplicationContractsModule)
     )]
 public class PublisherCommonHttpApiModule : AbpModule

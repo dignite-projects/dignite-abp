@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Posts.Serialization;
+﻿using Dignite.FileExplorer;
+using Dignite.Publisher.Posts.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Modularity;
@@ -9,6 +10,7 @@ namespace Dignite.Publisher;
 
 [DependsOn(
     typeof(CmsKitCommonHttpApiClientModule),
+    typeof(FileExplorerHttpApiClientModule),
     typeof(PublisherCommonApplicationContractsModule)
     )]
 public class PublisherCommonHttpApiClientModule : AbpModule

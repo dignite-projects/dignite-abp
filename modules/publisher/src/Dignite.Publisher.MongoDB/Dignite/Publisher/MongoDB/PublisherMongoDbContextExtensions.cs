@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Categories;
+﻿using Dignite.FileExplorer.MongoDB;
+using Dignite.Publisher.Categories;
 using Dignite.Publisher.Posts;
 using MongoDB.Bson.Serialization;
 using Volo.Abp;
@@ -15,6 +16,7 @@ public static class PublisherMongoDbContextExtensions
         Check.NotNull(builder, nameof(builder));
 
         builder.ConfigureCmsKit();
+        builder.ConfigureFileExplorer();
 
         builder.Entity<Post>(x =>
         {

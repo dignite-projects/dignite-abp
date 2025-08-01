@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Categories;
+﻿using Dignite.FileExplorer.EntityFrameworkCore;
+using Dignite.Publisher.Categories;
 using Dignite.Publisher.Posts;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -8,6 +9,7 @@ namespace Dignite.Publisher.EntityFrameworkCore;
 
 [DependsOn(
     typeof(PublisherDomainModule),
+    typeof(FileExplorerEntityFrameworkCoreModule),
     typeof(CmsKitEntityFrameworkCoreModule)
 )]
 public class PublisherEntityFrameworkCoreModule : AbpModule

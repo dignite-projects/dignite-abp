@@ -1,10 +1,12 @@
-﻿using Volo.Abp.Modularity;
+﻿using Dignite.FileExplorer;
+using Volo.Abp.Modularity;
 using Volo.CmsKit;
 
 namespace Dignite.Publisher;
 
 [DependsOn(
     typeof(CmsKitCommonApplicationContractsModule),
+    typeof(FileExplorerApplicationContractsModule),
     typeof(PublisherDomainSharedModule)
     )]
 public class PublisherCommonApplicationContractsModule : AbpModule

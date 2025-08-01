@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Categories;
+﻿using Dignite.FileExplorer.EntityFrameworkCore;
+using Dignite.Publisher.Categories;
 using Dignite.Publisher.GlobalFeatures;
 using Dignite.Publisher.Posts;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public static class PublisherDbContextModelCreatingExtensions
 
         //
         builder.ConfigureCmsKit();
+        builder.ConfigureFileExplorer();
 
         /* Configure all entities here. Example:
 

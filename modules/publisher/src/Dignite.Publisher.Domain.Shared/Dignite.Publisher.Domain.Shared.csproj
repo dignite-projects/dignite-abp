@@ -12,10 +12,11 @@
 
   <ItemGroup>
 	<PackageReference Include="Volo.CmsKit.Domain.Shared" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" />
+	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.FileExplorer.Domain.Shared\Dignite.FileExplorer.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

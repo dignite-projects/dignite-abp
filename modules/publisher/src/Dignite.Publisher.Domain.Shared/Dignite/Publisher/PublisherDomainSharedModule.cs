@@ -1,4 +1,5 @@
-﻿using Dignite.Publisher.Localization;
+﻿using Dignite.FileExplorer;
+using Dignite.Publisher.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
 using Volo.Abp.Modularity;
@@ -9,7 +10,8 @@ using Volo.CmsKit;
 namespace Dignite.Publisher;
 
 [DependsOn(
-    typeof(CmsKitDomainSharedModule)
+    typeof(CmsKitDomainSharedModule),
+    typeof(FileExplorerDomainSharedModule)
 )]
 public class PublisherDomainSharedModule : AbpModule
 {

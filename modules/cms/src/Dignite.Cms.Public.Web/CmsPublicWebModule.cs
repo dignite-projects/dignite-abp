@@ -1,4 +1,5 @@
 ﻿using Dignite.Abp.AspNetCore.Locales;
+using Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 using Dignite.Abp.TenantLocalization;
 using Dignite.Cms.Localization;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using Volo.CmsKit.Public.Web;
 namespace Dignite.Cms.Public.Web;
 
 [DependsOn(
+    typeof(AbpAspNetCoreMvcUiTenantThemeModule),
     typeof(CmsPublicApplicationContractsModule),
     typeof(CmsKitPublicWebModule),
     typeof(AbpTenantLocalizationModule),

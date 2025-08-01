@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>			
+    <ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme\Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme.csproj" />			
     <ProjectReference Include="..\Dignite.Cms.Public.Application.Contracts\Dignite.Cms.Public.Application.Contracts.csproj" />
 	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.TenantLocalization\Dignite.Abp.TenantLocalization.csproj" />
 	<ProjectReference Include="..\..\..\..\framework\src\Dignite.Abp.AspNetCore.Locales\Dignite.Abp.AspNetCore.Locales.csproj" />

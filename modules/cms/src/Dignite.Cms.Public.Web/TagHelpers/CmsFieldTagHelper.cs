@@ -1,7 +1,7 @@
 ﻿using Dignite.Abp.Data;
 using Dignite.Abp.DynamicForms;
 using Dignite.Cms.Public.Web.Models;
-using Dignite.Cms.Public.Web.Razor;
+using Dignite.Abp.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Threading.Tasks;

@@ -1,5 +1,5 @@
 ﻿using Dignite.Cms.Public.Sections;
-using Dignite.Cms.Public.Web.Razor;
+using Dignite.Abp.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Threading.Tasks;
 

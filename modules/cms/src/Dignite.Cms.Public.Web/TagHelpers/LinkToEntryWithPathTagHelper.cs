@@ -1,17 +1,16 @@
-﻿using Dignite.Abp.AspNetCore.Locales.Routing;
-using Dignite.Cms.Public.Web.Routing;
+﻿using System;
+using Dignite.Abp.AspNetCore.Locales.Routing;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing;
-using System;
 
 namespace Dignite.Cms.Public.Web.TagHelpers
 {
     /// <summary>
     /// Link to entry
     /// </summary>
-    [Obsolete("Use dignite-abp\\framework\\src\\Dignite.Abp.AspNetCore.Locales\\Dignite\\Abp\\AspNetCore\\Razor\\TagHelpers\\CultureAnchorTagHelper.cs instead.")]
+    [Obsolete("Use dignite-abp\\framework\\src\\Dignite.Abp.AspNetCore.Locales\\Dignite\\Abp\\AspNetCore\\Razor\\TagHelpers\\LocaleAnchorTagHelper.cs instead.")]
     [HtmlTargetElement("a", Attributes = "[entry-path]")]
     public class LinkToEntryWithPathTagHelper : TagHelper
     {

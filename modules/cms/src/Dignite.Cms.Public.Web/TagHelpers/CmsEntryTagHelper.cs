@@ -2,7 +2,7 @@
 using Dignite.Cms.Public.Entries;
 using Dignite.Cms.Public.Sections;
 using Dignite.Cms.Public.Web.Models;
-using Dignite.Cms.Public.Web.Razor;
+using Dignite.Abp.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Threading.Tasks;

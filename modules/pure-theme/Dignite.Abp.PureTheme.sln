@@ -21,9 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo", "test\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Demo.csproj", "{DE55F664-EB2F-47A7-A46A-FE50D80D34BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.Regionalization", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj", "{E0C2FB57-0CF9-5014-A6FC-40719257C961}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Locales", "..\..\framework\src\Dignite.Abp.AspNetCore.Locales\Dignite.Abp.AspNetCore.Locales.csproj", "{E0C2FB57-0CF9-5014-A6FC-40719257C961}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Seo", "..\..\framework\src\Dignite.Abp.Seo\Dignite.Abp.Seo.csproj", "{7E8C5E68-D1B1-C33E-10A0-A5BCD8D6FE99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.Locales", "..\..\framework\src\Dignite.Abp.Locales\Dignite.Abp.Locales.csproj", "{985371DB-D211-3C03-66EB-EF701D74B339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{7E8C5E68-D1B1-C33E-10A0-A5BCD8D6FE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E8C5E68-D1B1-C33E-10A0-A5BCD8D6FE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E8C5E68-D1B1-C33E-10A0-A5BCD8D6FE99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{985371DB-D211-3C03-66EB-EF701D74B339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{985371DB-D211-3C03-66EB-EF701D74B339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{985371DB-D211-3C03-66EB-EF701D74B339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{985371DB-D211-3C03-66EB-EF701D74B339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{DE55F664-EB2F-47A7-A46A-FE50D80D34BB} = {237F113C-20F0-4E0A-9E9E-2E7303C43F89}
 		{E0C2FB57-0CF9-5014-A6FC-40719257C961} = {3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}
 		{7E8C5E68-D1B1-C33E-10A0-A5BCD8D6FE99} = {3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}
+		{985371DB-D211-3C03-66EB-EF701D74B339} = {3A5F7377-9F94-48A4-8ACE-D7AFD4DF2BD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B9AF205-9F61-4087-ADCC-2E8728C3E4EB}

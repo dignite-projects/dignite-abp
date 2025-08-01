@@ -11,7 +11,7 @@
   <ItemGroup>
 	<PackageReference Include="Volo.CmsKit.Admin.HttpApi.Client" />
     <ProjectReference Include="..\Dignite.Cms.Admin.Application.Contracts\Dignite.Cms.Admin.Application.Contracts.csproj" />
-	<ProjectReference Include="..\..\..\regionalization-management\src\Dignite.Abp.RegionalizationManagement.HttpApi.Client\Dignite.Abp.RegionalizationManagement.HttpApi.Client.csproj" />
+	<ProjectReference Include="..\..\..\locale-management\src\Dignite.Abp.LocaleManagement.HttpApi.Client\Dignite.Abp.LocaleManagement.HttpApi.Client.csproj" />
 	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.FileExplorer.HttpApi.Client\Dignite.FileExplorer.HttpApi.Client.csproj" />
   </ItemGroup>
 </Project>

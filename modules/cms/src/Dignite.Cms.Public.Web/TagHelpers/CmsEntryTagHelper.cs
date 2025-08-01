@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.Regionalization;
+﻿using Dignite.Abp.Locales;
 using Dignite.Cms.Public.Entries;
 using Dignite.Cms.Public.Sections;
 using Dignite.Cms.Public.Web.Models;
@@ -32,28 +32,28 @@ namespace Dignite.Cms.Public.Web.TagHelpers
         private readonly IRazorPartialRenderer _renderer;
         private readonly IEntryPublicAppService _entryAppService;
         private readonly ISectionPublicAppService _sectionAppService;
-        private readonly IRegionalizationProvider _regionalizationProvider;
+        private readonly ILocaleProvider _localeProvider;
 
         public CmsEntryTagHelper(
             IRazorPartialRenderer renderer,
             IEntryPublicAppService entryAppService, 
             ISectionPublicAppService sectionAppService,
-            IRegionalizationProvider regionalizationProvider
+            ILocaleProvider localeProvider
             )
         {
             _renderer = renderer;
             _entryAppService = entryAppService;
             _sectionAppService = sectionAppService;
-            _regionalizationProvider = regionalizationProvider;
+            _localeProvider = localeProvider;
         }
 
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var section = await _sectionAppService.FindByNameAsync(SectionName);
-            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
+            var locale = await _localeProvider.GetLocaleAsync();
             if (Culture.IsNullOrEmpty())
             {
-                Culture= regionalization.DefaultCulture.Name;
+                Culture= locale.DefaultCulture.Name;
             }
 
             var findEntryBySlugInput = new FindBySlugInput
@@ -65,9 +65,9 @@ namespace Dignite.Cms.Public.Web.TagHelpers
             var model = await _entryAppService.FindBySlugAsync(findEntryBySlugInput);
             if (model == null)
             {
-                if (!Culture.Equals(regionalization.DefaultCulture.Name, StringComparison.OrdinalIgnoreCase))
+                if (!Culture.Equals(locale.DefaultCulture.Name, StringComparison.OrdinalIgnoreCase))
                 {
-                    findEntryBySlugInput.Culture = regionalization.DefaultCulture.Name;
+                    findEntryBySlugInput.Culture = locale.DefaultCulture.Name;
                     model = await _entryAppService.FindBySlugAsync(findEntryBySlugInput);
                 }
             }

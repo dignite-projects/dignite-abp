@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
+﻿using Dignite.Abp.AspNetCore.Locales.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System;
@@ -38,7 +38,7 @@ public class LocaleSwitchViewComponentModel
         // Parse route pattern segments
         var patternSegments = RoutePattern.TrimStart('/').Split('/');
         var urlSegments = url.Trim('/').Split('/');
-        var cultureSegment = $"{{{RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey}:{RegionalizationRouteConstraint.ConstraintName}}}";
+        var cultureSegment = $"{{{LocaleRouteDataRequestCultureProvider.LocaleRouteDataStringKey}:{LocaleRouteConstraint.ConstraintName}}}";
 
         // Find culture parameter position in pattern
         int culturePosition = -1;
@@ -55,7 +55,7 @@ public class LocaleSwitchViewComponentModel
 
         // Insert culture parameter
         var newSegments = new List<string>(urlSegments);
-        if (httpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)!=null)
+        if (httpContext.GetRouteValue(LocaleRouteDataRequestCultureProvider.LocaleRouteDataStringKey)!=null)
         {
             if (culture.Equals(DefaultCultureName, StringComparison.OrdinalIgnoreCase))
             {

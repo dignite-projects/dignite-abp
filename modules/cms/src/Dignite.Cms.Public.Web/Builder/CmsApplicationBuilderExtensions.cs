@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
+using Dignite.Abp.AspNetCore.Locales.Routing;
 using Dignite.Cms.Public.Web.Controllers;
 using Dignite.Cms.Public.Web.Routing;
 using Microsoft.AspNetCore.Builder;
@@ -32,8 +32,8 @@ namespace Dignite.Cms.Public.Web.Builder
                         defaults: new { controller = CmsController.ControllerName, action = nameof(CmsController.Default) });
                 }
                 endpoints.MapControllerRoute(
-                    name: CmsEndpointNames.RegionalizationEntryEndpointName,
-                    pattern: "{culture:" + RegionalizationRouteConstraint.ConstraintName + "}/{*path}",
+                    name: CmsEndpointNames.LocaleEntryEndpointName,
+                    pattern: "{culture:" + LocaleRouteConstraint.ConstraintName + "}/{*path}",
                     defaults: new { controller = CmsController.ControllerName, action = nameof(CmsController.CultureEntry) });
                 endpoints.MapControllerRoute(
                     name: CmsEndpointNames.EntryEndpointName,

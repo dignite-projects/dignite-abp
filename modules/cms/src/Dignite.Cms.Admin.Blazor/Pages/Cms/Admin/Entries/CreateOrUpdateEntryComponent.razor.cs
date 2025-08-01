@@ -1,7 +1,7 @@
 ﻿using Blazorise;
 using Dignite.Abp.Data;
 using Dignite.Abp.DynamicForms;
-using Dignite.Abp.Regionalization;
+using Dignite.Abp.Locales;
 using Dignite.Cms.Admin.Entries;
 using Dignite.Cms.Admin.Sections;
 using Dignite.Cms.Localization;
@@ -28,7 +28,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
         Guid? EditingEntryId { get; set; }
 
         protected EntryTypeDto CurrentEntryType { get; set; }
-        public Regionalization Regionalization { get; private set; }
+        public LocaleInfo Locale { get; private set; }
         protected IReadOnlyList<EntryDto> AllEntriesOfStructure;
         protected List<EntryDto> AllVersions = null;
 
@@ -51,7 +51,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
         {
             await base.OnInitializedAsync();
             CurrentEntryType = Section.EntryTypes.FirstOrDefault(et => et.Id == Entry.EntryTypeId);
-            Regionalization = await RegionalizationProvider.GetRegionalizationAsync();
+            Locale = await LocaleProvider.GetLocaleAsync();
             await SetCultureAsync(Entry.Culture);
             await GetVersionsAsync();
         }
@@ -175,7 +175,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
                 ? ValidationStatus.Error
                 : ValidationStatus.Success;
 
-            e.ErrorText = L["EntriesAlreadyExistEntryType", CurrentEntryType.DisplayName, Regionalization.AvailableCultures.FirstOrDefault(l=>l.Name==Entry.Culture)?.DisplayName];
+            e.ErrorText = L["EntriesAlreadyExistEntryType", CurrentEntryType.DisplayName, Locale.AvailableCultures.FirstOrDefault(l=>l.Name==Entry.Culture)?.DisplayName];
         }
     }
 }

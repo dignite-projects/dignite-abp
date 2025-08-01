@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Localization;
 using Volo.Abp.Threading;
 
-namespace Dignite.Abp.AspNetCore.Locals.Routing;
+namespace Dignite.Abp.AspNetCore.Locales.Routing;
 
 /// <summary>
 /// This is a constraint class for the route parameter Culture. 

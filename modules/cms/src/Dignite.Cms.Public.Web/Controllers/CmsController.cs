@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using Dignite.Abp.AspNetCore.Mvc.Regionalization;
-using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
-using Dignite.Abp.Regionalization;
+using Dignite.Abp.AspNetCore.Locales;
+using Dignite.Abp.AspNetCore.Locales.Routing;
+using Dignite.Abp.Locales;
 using Dignite.Cms.Entries;
 using Dignite.Cms.Localization;
 using Dignite.Cms.Public.Entries;
@@ -19,18 +19,18 @@ using Volo.Abp.Text.Formatting;
 namespace Dignite.Cms.Public.Web.Controllers
 {
     [ControllerName(ControllerName)]
-    public class CmsController : AbpController, IRegionalizationRouteable
+    public class CmsController : AbpController, ILocaleRouteable
     {
         public const string ControllerName = "Cms";
 
-        private readonly IRegionalizationProvider _regionalizationProvider;
+        private readonly ILocaleProvider _localeProvider;
         private readonly ISectionPublicAppService _sectionPublicAppService;
         private readonly IEntryPublicAppService _entryPublicAppService;
 
-        public CmsController(IRegionalizationProvider regionalizationProvider, ISectionPublicAppService sectionPublicAppService, IEntryPublicAppService entryPublicAppService)
+        public CmsController(ILocaleProvider localeProvider, ISectionPublicAppService sectionPublicAppService, IEntryPublicAppService entryPublicAppService)
         {
             LocalizationResource = typeof(CmsResource);
-            _regionalizationProvider = regionalizationProvider;
+            _localeProvider = localeProvider;
             _sectionPublicAppService = sectionPublicAppService;
             _entryPublicAppService = entryPublicAppService;
         }
@@ -82,8 +82,8 @@ namespace Dignite.Cms.Public.Web.Controllers
             }
 
             //
-            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
-            var defaultCultureName = regionalization.DefaultCulture.Name;
+            var locale = await _localeProvider.GetLocaleAsync();
+            var defaultCultureName = locale.DefaultCulture.Name;
             if (culture.IsNullOrEmpty())
             {
                 culture = defaultCultureName;
@@ -100,7 +100,7 @@ namespace Dignite.Cms.Public.Web.Controllers
                 }
 
                 if (!culture.Equals(defaultCultureName, StringComparison.OrdinalIgnoreCase) 
-                    && !Request.RouteValues.Any(r=>r.Key.Equals(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey,StringComparison.OrdinalIgnoreCase)))
+                    && !Request.RouteValues.Any(r=>r.Key.Equals(LocaleRouteDataRequestCultureProvider.LocaleRouteDataStringKey,StringComparison.OrdinalIgnoreCase)))
                 {
                     return Redirect(culture.ToLower());
                 }

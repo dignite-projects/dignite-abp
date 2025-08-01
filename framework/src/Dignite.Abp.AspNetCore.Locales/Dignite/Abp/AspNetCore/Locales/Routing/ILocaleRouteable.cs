@@ -1,4 +1,4 @@
-﻿namespace Dignite.Abp.AspNetCore.Locals.Routing;
+﻿namespace Dignite.Abp.AspNetCore.Locales.Routing;
 
 /// <summary>
 /// <see cref="ILocaleRouteable"/> 是一个标记接口，用于指示页面是否需要通过 <see cref="LocaleRouteDataRequestCultureProvider"/> 进行区域化。

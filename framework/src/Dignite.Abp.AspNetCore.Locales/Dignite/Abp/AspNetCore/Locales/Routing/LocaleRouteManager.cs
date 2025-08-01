@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.Extensions.Caching.Memory;
 using Volo.Abp.DependencyInjection;
 
-namespace Dignite.Abp.AspNetCore.Locals.Routing;
+namespace Dignite.Abp.AspNetCore.Locales.Routing;
 
 public class LocaleRouteManager : ILocaleRouteManager, ISingletonDependency
 {

@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
+﻿using Dignite.Abp.AspNetCore.Locales.Routing;
 using Dignite.Cms.Public.Web.Routing;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -11,7 +11,7 @@ namespace Dignite.Cms.Public.Web.TagHelpers
     /// <summary>
     /// Link to entry
     /// </summary>
-    [Obsolete("Use dignite-abp\\framework\\src\\Dignite.Abp.AspNetCore.Mvc.Regionalization\\Dignite\\Abp\\AspNetCore\\Razor\\TagHelpers\\CultureAnchorTagHelper.cs instead.")]
+    [Obsolete("Use dignite-abp\\framework\\src\\Dignite.Abp.AspNetCore.Locales\\Dignite\\Abp\\AspNetCore\\Razor\\TagHelpers\\CultureAnchorTagHelper.cs instead.")]
     [HtmlTargetElement("a", Attributes = "[entry-path]")]
     public class LinkToEntryWithPathTagHelper : TagHelper
     {
@@ -38,7 +38,7 @@ namespace Dignite.Cms.Public.Web.TagHelpers
             {
                 if (Culture.IsNullOrEmpty())
                 {
-                    Culture = ViewContext.HttpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)?.ToString();
+                    Culture = ViewContext.HttpContext.GetRouteValue(LocaleRouteDataRequestCultureProvider.LocaleRouteDataStringKey)?.ToString();
                 }
 
                 EntryPath = ("~/" + Culture).EnsureEndsWith('/') + EntryPath.RemovePreFix("~").RemovePreFix("/");

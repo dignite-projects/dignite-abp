@@ -1,5 +1,5 @@
-using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
-using Dignite.Abp.Regionalization;
+using Dignite.Abp.AspNetCore.Locales.Routing;
+using Dignite.Abp.Locales;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -13,26 +13,26 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolba
 [ViewComponent(Name = "Toolbar/LocaleSwitch")]
 public class LocaleSwitchViewComponent : AbpViewComponent
 {
-    protected IRegionalizationRouteManager _regionalizationRouteManager { get; }
-    protected IRegionalizationProvider _regionalizationProvider { get; }
+    protected ILocaleRouteManager _localeRouteManager { get; }
+    protected ILocaleProvider _localeProvider { get; }
 
     public LocaleSwitchViewComponent(
-        IRegionalizationRouteManager regionalizationRouteManager,
-        IRegionalizationProvider regionalizationProvider)
+        ILocaleRouteManager localeRouteManager,
+        ILocaleProvider localeProvider)
     {
-        _regionalizationRouteManager = regionalizationRouteManager;
-        _regionalizationProvider = regionalizationProvider;
+        _localeRouteManager = localeRouteManager;
+        _localeProvider = localeProvider;
     }
 
     public virtual async Task<IViewComponentResult> InvokeAsync()
     {
-        var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
-        var defaultRegionCultureName = regionalization.DefaultCulture.Name;
-        var availableCultures = regionalization.AvailableCultures;
-        var retionCultureNameInRoute = HttpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)?.ToString();
-        var isMatchingRegionalizationRoute = _regionalizationRouteManager.TryMatchUrl(HttpContext,out string routePattern);
+        var locale = await _localeProvider.GetLocaleAsync();
+        var defaultRegionCultureName = locale.DefaultCulture.Name;
+        var availableCultures = locale.AvailableCultures;
+        var retionCultureNameInRoute = HttpContext.GetRouteValue(LocaleRouteDataRequestCultureProvider.LocaleRouteDataStringKey)?.ToString();
+        var isMatchingLocaleRoute = _localeRouteManager.TryMatchUrl(HttpContext,out string routePattern);
         var currentRegionCultureName = retionCultureNameInRoute == null ?
-            (isMatchingRegionalizationRoute ? defaultRegionCultureName : CultureInfo.CurrentCulture.Name) :
+            (isMatchingLocaleRoute ? defaultRegionCultureName : CultureInfo.CurrentCulture.Name) :
             availableCultures.FirstOrDefault(r => r.Name.Equals(retionCultureNameInRoute, System.StringComparison.OrdinalIgnoreCase))?.Name;
 
         var model = new LocaleSwitchViewComponentModel
@@ -40,7 +40,7 @@ public class LocaleSwitchViewComponent : AbpViewComponent
             defaultRegionCultureName,
             currentRegionCultureName,
             availableCultures,
-            isMatchingRegionalizationRoute,
+            isMatchingLocaleRoute,
             routePattern
         );
 

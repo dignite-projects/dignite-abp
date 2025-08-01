@@ -13,8 +13,8 @@
         public const string EntryEndpointName = "entry";
 
         /// <summary>
-        /// Value: regionalization-entry
+        /// Value: locale-entry
         /// </summary>
-        public const string RegionalizationEntryEndpointName = "regionalization-entry";
+        public const string LocaleEntryEndpointName = "locale-entry";
     }
 }

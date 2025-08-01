@@ -1,10 +1,10 @@
-﻿using Dignite.Abp.AspNetCore.Locals.Routing;
+﻿using Dignite.Abp.AspNetCore.Locales.Routing;
 using Dignite.Abp.Locales;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 
-namespace Dignite.Abp.AspNetCore.Locals;
+namespace Dignite.Abp.AspNetCore.Locales;
 
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
 [DependsOn(typeof(AbpLocalesModule))]

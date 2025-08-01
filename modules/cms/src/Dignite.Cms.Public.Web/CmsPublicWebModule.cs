@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.AspNetCore.Mvc.Regionalization;
+﻿using Dignite.Abp.AspNetCore.Locales;
 using Dignite.Abp.TenantLocalization;
 using Dignite.Cms.Localization;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +14,7 @@ namespace Dignite.Cms.Public.Web;
     typeof(CmsPublicApplicationContractsModule),
     typeof(CmsKitPublicWebModule),
     typeof(AbpTenantLocalizationModule),
-    typeof(AbpAspNetCoreMvcRegionalizationModule)
+    typeof(AbpAspNetCoreLocalesModule)
     )]
 public class CmsPublicWebModule : AbpModule
 {

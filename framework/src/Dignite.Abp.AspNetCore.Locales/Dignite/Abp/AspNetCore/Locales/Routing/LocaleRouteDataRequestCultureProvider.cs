@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.RequestLocalization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dignite.Abp.AspNetCore.Locals.Routing;
+namespace Dignite.Abp.AspNetCore.Locales.Routing;
 
 public class LocaleRouteDataRequestCultureProvider : RouteDataRequestCultureProvider
 {

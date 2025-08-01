@@ -14,7 +14,7 @@
 	<PackageReference Include="Volo.CmsKit.Admin.Application" />
     <ProjectReference Include="..\Dignite.Cms.Admin.Application.Contracts\Dignite.Cms.Admin.Application.Contracts.csproj" />
     <ProjectReference Include="..\Dignite.Cms.Domain\Dignite.Cms.Domain.csproj" />
-	<ProjectReference Include="..\..\..\regionalization-management\src\Dignite.Abp.RegionalizationManagement.Application\Dignite.Abp.RegionalizationManagement.Application.csproj" />
+	<ProjectReference Include="..\..\..\locale-management\src\Dignite.Abp.LocaleManagement.Application\Dignite.Abp.LocaleManagement.Application.csproj" />
 	<ProjectReference Include="..\..\..\file-explorer\src\Dignite.FileExplorer.Application\Dignite.FileExplorer.Application.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.RegionalizationManagement;
+﻿using Dignite.Abp.LocaleManagement;
 using Volo.CmsKit.Admin;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -10,7 +10,7 @@ namespace Dignite.Cms.Admin;
 [DependsOn(
     typeof(CmsAdminApplicationContractsModule),
     typeof(CmsKitAdminHttpApiClientModule),
-    typeof(AbpRegionalizationManagementHttpApiClientModule),
+    typeof(AbpLocaleManagementHttpApiClientModule),
     typeof(FileExplorerHttpApiClientModule))]
 public class CmsAdminHttpApiClientModule : AbpModule
 {

@@ -1,5 +1,5 @@
 ﻿@page "/cms/admin/entries"
-@using Dignite.Abp.Regionalization
+@using Dignite.Abp.Locales
 @using Dignite.Cms.Admin.Entries;
 @using Dignite.Cms.Admin.Sections;
 @using Dignite.Cms.Localization;
@@ -10,7 +10,7 @@
 @using Volo.Abp.Settings
 @inject ISectionAdminAppService SectionAppService
 @inject NavigationManager Navigation
-@inject IRegionalizationProvider RegionalizationProvider
+@inject ILocaleProvider LocaleProvider
 @attribute [Authorize(CmsAdminPermissions.Entry.Default)]
 @inherits AbpCrudPageBase<IEntryAdminAppService, EntryDto, Guid, GetEntriesInput, CreateEntryInput, UpdateEntryInput>
 
@@ -34,9 +34,9 @@
             </Column>
             <Column ColumnSize="ColumnSize.Is3.OnDesktop">
                 <Select TValue="string" SelectedValue="@GetListInput.Culture" SelectedValueChanged="@OnCultureChangedAsync">
-                    @if (Regionalization!=null)
+                    @if (Locale!=null)
                     {
-                    foreach (var sl in Regionalization.AvailableCultures)
+                    foreach (var sl in Locale.AvailableCultures)
                     {
                         <SelectItem Value="sl">
                             @sl.DisplayName

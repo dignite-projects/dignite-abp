@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Dignite.Abp.AspNetCore.Locals.Routing;
+namespace Dignite.Abp.AspNetCore.Locales.Routing;
 
 /// <summary>
 /// <see cref="ILocaleRouteManager"/> is an interface for managing localized routes.

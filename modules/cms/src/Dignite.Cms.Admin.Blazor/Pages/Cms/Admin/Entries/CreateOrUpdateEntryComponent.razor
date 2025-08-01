@@ -1,7 +1,7 @@
 ﻿@using Dignite.Abp.DynamicForms;
 @using Dignite.Abp.DynamicForms.Components;
 @using Dignite.Abp.Data;
-@using Dignite.Abp.Regionalization
+@using Dignite.Abp.Locales;
 @using Dignite.Cms.Admin.Blazor.Components
 @using Dignite.Cms.Admin.Entries;
 @using Dignite.Cms.Admin.Sections;
@@ -12,7 +12,7 @@
 @inject ISectionAdminAppService SectionAppService
 @inject IFormControlComponentSelector FormControlComponentSelector
 @inject AbpBlazorMessageLocalizerHelper<CmsResource> LH
-@inject IRegionalizationProvider RegionalizationProvider
+@inject ILocaleProvider LocaleProvider
 @inherits AbpComponentBase
 
 <Row>
@@ -62,9 +62,9 @@
                 <Blazorise.FieldLabel>@L["Language"]</Blazorise.FieldLabel>
                     <Select TValue="string" SelectedValue="Entry.Culture" SelectedValueChanged="@OnCultureSelectedValueChanged" Disabled>
                     <ChildContent>
-                        @if (Regionalization!=null)
+                        @if (Locale!=null)
                     {
-                        @foreach (var item in Regionalization.AvailableCultures)
+                        @foreach (var item in Locale.AvailableCultures)
                         {
                             <SelectItem Value="@item">@item.DisplayName</SelectItem>
                         }

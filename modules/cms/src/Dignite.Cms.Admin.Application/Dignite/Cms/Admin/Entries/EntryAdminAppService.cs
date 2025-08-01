@@ -167,6 +167,7 @@ namespace Dignite.Cms.Admin.Entries
             if (section.Type == SectionType.Structure)
             {
                 await _entryManager.MoveAsync(entry, input.ParentId, input.Order);
+                await _entryRepository.UpdateAsync(entry);
             }
             else
             {

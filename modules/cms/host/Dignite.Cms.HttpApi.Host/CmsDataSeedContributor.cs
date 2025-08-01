@@ -7,7 +7,7 @@ using Dignite.Abp.DynamicForms.Matrix;
 using Dignite.Abp.DynamicForms.Select;
 using Dignite.Abp.DynamicForms.Switch;
 using Dignite.Abp.DynamicForms.TextEdit;
-using Dignite.Abp.Regionalization;
+using Dignite.Abp.Locales;
 using Dignite.Cms.Entries;
 using Dignite.Cms.Fields;
 using Dignite.Cms.Sections;
@@ -65,8 +65,8 @@ public class CmsDataSeedContributor : IDataSeedContributor, ITransientDependency
                 return;
             }
 
-            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, RegionalizationSettingNames.DefaultCultureName, _cmsData.EntryDefaultCulture);
-            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, RegionalizationSettingNames.AvailableCultureNames, "ja,en,zh-Hant");
+            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, LocaleSettingNames.DefaultCultureName, _cmsData.EntryDefaultCulture);
+            await _settingManager.SetForTenantOrGlobalAsync(_currentTenant.Id, LocaleSettingNames.AvailableCultureNames, "ja,en,zh-Hant");
 
             await SeedFieldsAsync();
             await SeedSectionsAsync();

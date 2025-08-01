@@ -1,4 +1,4 @@
-﻿using Dignite.Abp.Regionalization;
+﻿using Dignite.Abp.Locales;
 using Dignite.Cms.Admin.Entries;
 using Dignite.Cms.Admin.Sections;
 using Dignite.Cms.Entries;
@@ -26,7 +26,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
         [SupplyParameterFromQuery]
         public string CultureName { get; set; }
 
-        public Regionalization Regionalization { get; private set; }
+        public LocaleInfo Locale { get; private set; }
 
         protected PageToolbar Toolbar { get; private set; } = new();
         protected List<TableColumn> EntryManagementTableColumns => TableColumns.Get<EntryManagement>();
@@ -151,7 +151,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
         {
             GetListInput.SectionId = SectionId.HasValue ? SectionId.Value : Guid.Empty;
             GetListInput.Culture = CultureName.IsNullOrEmpty()
-                ? Regionalization.DefaultCulture.Name
+                ? Locale.DefaultCulture.Name
                 : CultureName;
             return base.UpdateGetListInputAsync();
         }
@@ -159,7 +159,7 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
 
         protected async Task InitializePageDataAsync()
         {
-            Regionalization = await RegionalizationProvider.GetRegionalizationAsync();
+            Locale = await LocaleProvider.GetLocaleAsync();
             if (SectionId.HasValue)
             {
                 CurrentSection = await SectionAppService.GetAsync(SectionId.Value);
@@ -203,8 +203,8 @@ namespace Dignite.Cms.Admin.Blazor.Pages.Cms.Admin.Entries
             SectionId = sectionId;
             CurrentSection = Sections.FirstOrDefault(s => s.Id == sectionId);
             CultureName = CultureName.IsNullOrEmpty()?
-                Regionalization.DefaultCulture.Name:
-                Regionalization.AvailableCultures.Any(l=>l.Name== CultureName) ? CultureName : Regionalization.AvailableCultures.First().Name;
+                Locale.DefaultCulture.Name:
+                Locale.AvailableCultures.Any(l=>l.Name== CultureName) ? CultureName : Locale.AvailableCultures.First().Name;
             
             await OnCultureChangedAsync(CultureName);
         }

@@ -85,7 +85,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dignite-abp", "dignite-abp"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure", "..\pure-theme\src\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure\Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.csproj", "{1E8B587B-B19D-6D5E-440A-81288AE81A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Mvc.Regionalization", "..\..\framework\src\Dignite.Abp.AspNetCore.Mvc.Regionalization\Dignite.Abp.AspNetCore.Mvc.Regionalization.csproj", "{E0C2FB57-0CF9-5014-A6FC-40719257C961}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.AspNetCore.Locales", "..\..\framework\src\Dignite.Abp.AspNetCore.Locales\Dignite.Abp.AspNetCore.Locales.csproj", "{E0C2FB57-0CF9-5014-A6FC-40719257C961}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dignite.Abp.TenantLocalization", "..\..\framework\src\Dignite.Abp.TenantLocalization\Dignite.Abp.TenantLocalization.csproj", "{072AEF61-90A1-16E9-8592-FF879054297D}"
 EndProject

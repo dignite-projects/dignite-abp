@@ -1,5 +1,5 @@
 ﻿using Dignite.Abp.BlobStoring;
-using Dignite.Abp.RegionalizationManagement;
+using Dignite.Abp.LocaleManagement;
 using Dignite.Cms.Admin.Entries;
 using Dignite.Cms.Permissions;
 using Volo.CmsKit.Admin;
@@ -15,7 +15,7 @@ namespace Dignite.Cms.Admin;
 [DependsOn(
     typeof(CmsDomainModule),
     typeof(CmsAdminApplicationContractsModule),
-    typeof(AbpRegionalizationManagementApplicationModule),
+    typeof(AbpLocaleManagementApplicationModule),
     typeof(CmsKitAdminApplicationModule),
     typeof(FileExplorerApplicationModule)
     )]

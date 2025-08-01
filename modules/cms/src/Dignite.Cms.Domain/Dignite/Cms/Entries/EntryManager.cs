@@ -146,7 +146,7 @@ namespace Dignite.Cms.Entries
 
         public virtual async Task MoveAsync(Entry entry, Guid? parentId,int order)
         {
-            if (entry.Order != order)
+            if (entry.Order != order || entry.ParentId != parentId)
             {
                 var allEntries = (await _entryRepository.GetListAsync(entry.Culture, entry.SectionId))
                     .Where(e => e.ParentId == parentId && e.Order >= order);

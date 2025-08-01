@@ -32,7 +32,7 @@ Adds Notification system, Dynamic Forms, User Points system, File Explorer, Cms,
 
 🟡 Multi-Tenancy Localization
 
-🟡 Regionalization
+🟡 Locale
 
 🟡 Multi-Tenancy Domains
 

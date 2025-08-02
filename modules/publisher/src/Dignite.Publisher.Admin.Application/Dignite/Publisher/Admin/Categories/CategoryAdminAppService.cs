@@ -25,7 +25,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
     public async Task<CategoryDto> CreateAsync(CreateCategoryInput input)
     {
         var category = await CategoryManager.CreateAsync(
-            input.Local,
+            input.Locale,
             input.ParentId,
             input.DisplayName,
             input.Name,
@@ -53,7 +53,7 @@ public class CategoryAdminAppService : PublisherAdminAppService, ICategoryAdminA
 
     public async Task<PagedResultDto<CategoryDto>> GetListAsync(GetCategoriesInput input)
     {
-        var list = await CategoryManager.GetTreeListAsync(input.Local);
+        var list = await CategoryManager.GetTreeListAsync(input.Locale);
         return new PagedResultDto<CategoryDto>(
             list.Count,
             ObjectMapper.Map<List<Category>, List<CategoryDto>>(list)

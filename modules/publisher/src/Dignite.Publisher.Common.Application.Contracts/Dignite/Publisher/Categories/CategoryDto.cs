@@ -23,9 +23,9 @@ public class CategoryDto : ExtensibleEntityDto<Guid>
     public string? Description { get; set; }
 
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    public string? Local { get; set; }
+    public string? Locale { get; set; }
 
     /// <summary>
     /// Sorting value, the smaller the value, the higher the ranking

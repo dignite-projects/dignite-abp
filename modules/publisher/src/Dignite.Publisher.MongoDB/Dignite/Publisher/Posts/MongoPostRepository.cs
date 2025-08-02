@@ -22,14 +22,14 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
     {
     }
 
-    public virtual async Task<Post> GetBySlugAsync(string? local, string slug,  CancellationToken cancellationToken = default)
+    public virtual async Task<Post> GetBySlugAsync(string? locale, string slug,  CancellationToken cancellationToken = default)
     {
         Check.NotNullOrEmpty(slug, nameof(slug));
 
         var token = GetCancellationToken(cancellationToken);
 
         var post = await GetAsync(x =>
-                x.Local == local &&
+                x.Locale == locale &&
                 x.Slug.ToLower() == slug,
             cancellationToken: token);
 
@@ -38,11 +38,11 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
         return post;
     }
 
-    public virtual async Task<int> GetCountAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
+    public virtual async Task<int> GetCountAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
-        var query = await GetListQueryAsync(local, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo, token);
+        var query = await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo, token);
 
         return await query.CountAsync(token);
     }
@@ -64,13 +64,13 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
                 .ToListAsync(token);
     }
 
-    public virtual async Task<List<Post>> GetPagedListAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
+    public virtual async Task<List<Post>> GetPagedListAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
         var dbContext = await GetDbContextAsync(cancellationToken);
         var usersQueryable = dbContext.Collection<CmsUser>().AsQueryable();
 
-        var queryable = await GetListQueryAsync(local, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo, token);
+        var queryable = await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo, token);
 
 
         queryable = queryable.OrderBy(sorting.IsNullOrEmpty() ? $"{nameof(BlogPost.CreationTime)} desc" : sorting);
@@ -99,10 +99,10 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
         return await (await GetQueryableAsync(token)).AnyAsync(x => x.Status == PostStatus.PendingReview, token);
     }
 
-    public virtual async Task<bool> SlugExistsAsync(string? local, string slug, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> SlugExistsAsync(string? locale, string slug, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
-        return await (await GetQueryableAsync(token)).AnyAsync(x => x.Local == local && x.Slug == slug, token);
+        return await (await GetQueryableAsync(token)).AnyAsync(x => x.Locale == locale && x.Slug == slug, token);
     }
 
     public virtual async Task<List<CmsUser>> GetCreatorsHasPostsAsync(int skipCount, int maxResultCount, string sorting, CancellationToken cancellationToken = default)
@@ -139,10 +139,10 @@ public class MongoPostRepository : MongoDbRepository<IPublisherMongoDbContext, P
                         .Distinct();
     }
 
-    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
+    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
     {
         return (await GetQueryableAsync(cancellationToken))
-            .Where(p => p.Local == local)
+            .Where(p => p.Locale == locale)
             .WhereIf(categoryIds != null && categoryIds.Count() == 1, b => b.PostCategories.Any(pc => pc.CategoryId == categoryIds.First()))
             .WhereIf(categoryIds != null && categoryIds.Count() > 1, b => b.PostCategories.Any(pc => categoryIds.Contains(pc.CategoryId)))
             .WhereIf(status.HasValue, b => b.Status == status.Value)

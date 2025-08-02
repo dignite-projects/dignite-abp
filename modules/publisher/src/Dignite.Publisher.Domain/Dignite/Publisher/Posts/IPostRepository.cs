@@ -9,10 +9,10 @@ using Volo.CmsKit.Users;
 namespace Dignite.Publisher.Posts;
 public interface IPostRepository : IBasicRepository<Post, Guid>
 {
-    Task<Post> GetBySlugAsync(string? local, [NotNull] string slug, CancellationToken cancellationToken = default);
+    Task<Post> GetBySlugAsync(string? locale, [NotNull] string slug, CancellationToken cancellationToken = default);
 
     Task<int> GetCountAsync(
-        string? local,
+        string? locale,
         IEnumerable<Guid> categoryIds,
         PostStatus? status = null,
         string? postType = null,
@@ -23,7 +23,7 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
         );
 
     Task<List<Post>> GetPagedListAsync(
-        string? local,
+        string? locale,
         IEnumerable<Guid> categoryIds,
         PostStatus? status = null,
         string? postType = null,
@@ -41,7 +41,7 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
         Guid categoryId,
         CancellationToken cancellationToken = default);
 
-    Task<bool> SlugExistsAsync(string? local, string slug, CancellationToken cancellationToken = default);
+    Task<bool> SlugExistsAsync(string? locale, string slug, CancellationToken cancellationToken = default);
 
     Task<bool> HasPostPendingForReviewAsync(CancellationToken cancellationToken = default);
 

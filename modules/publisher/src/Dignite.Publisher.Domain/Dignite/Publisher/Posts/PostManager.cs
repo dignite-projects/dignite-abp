@@ -17,11 +17,11 @@ public class PostManager: DomainService
         await PostRepository.DeleteAsync(post);
     }
 
-    public virtual async Task CheckSlugExistenceAsync(string? local, string slug)
+    public virtual async Task CheckSlugExistenceAsync(string? locale, string slug)
     {
-        if (await PostRepository.SlugExistsAsync(local, slug))
+        if (await PostRepository.SlugExistsAsync(locale, slug))
         {
-            throw new PostSlugAlreadyExistException(local, slug);
+            throw new PostSlugAlreadyExistException(locale, slug);
         }
     }
 }

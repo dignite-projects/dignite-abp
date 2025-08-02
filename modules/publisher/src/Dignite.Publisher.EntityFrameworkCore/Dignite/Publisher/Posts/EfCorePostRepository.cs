@@ -21,12 +21,12 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
     {
     }
 
-    public virtual async Task<Post> GetBySlugAsync(string? local, [NotNull] string slug, CancellationToken cancellationToken = default)
+    public virtual async Task<Post> GetBySlugAsync(string? locale, [NotNull] string slug, CancellationToken cancellationToken = default)
     {
         Check.NotNullOrEmpty(slug, nameof(slug));
 
         var post = await GetAsync(
-                                x => x.Local == local && x.Slug.ToLower() == slug,
+                                x => x.Locale == locale && x.Slug.ToLower() == slug,
                                 cancellationToken: GetCancellationToken(cancellationToken));
 
         post.Creator = await (await GetDbContextAsync())
@@ -36,9 +36,9 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
         return post;
     }
 
-    public virtual async Task<int> GetCountAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
+    public virtual async Task<int> GetCountAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
     {
-        return await (await GetListQueryAsync(local, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo))
+        return await (await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo))
             .CountAsync(GetCancellationToken(cancellationToken));
     }
 
@@ -56,11 +56,11 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
             .ToListAsync(GetCancellationToken(cancellationToken));
     }
 
-    public virtual async Task<List<Post>> GetPagedListAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
+    public virtual async Task<List<Post>> GetPagedListAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
     {
         var dbContext = await GetDbContextAsync();
         var usersDbSet = dbContext.Set<CmsUser>();
-        var queryable = await GetListQueryAsync(local, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo);
+        var queryable = await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo);
         queryable = queryable.OrderBy(sorting.IsNullOrEmpty() ? $"{nameof(BlogPost.CreationTime)} desc" : sorting);
 
         var combinedResult = await queryable
@@ -86,10 +86,10 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
             .AnyAsync(x => x.Status == PostStatus.PendingReview, GetCancellationToken(cancellationToken));
     }
 
-    public virtual async Task<bool> SlugExistsAsync(string? local, string slug, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> SlugExistsAsync(string? locale, string slug, CancellationToken cancellationToken = default)
     {
         return await (await GetQueryableAsync())
-            .AnyAsync(x => x.Local == local && x.Slug == slug, GetCancellationToken(cancellationToken));
+            .AnyAsync(x => x.Locale == locale && x.Slug == slug, GetCancellationToken(cancellationToken));
     }
     public virtual async Task<List<CmsUser>> GetCreatorsHasPostsAsync(int skipCount, int maxResultCount, string sorting, CancellationToken cancellationToken = default)
     {
@@ -111,10 +111,10 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
         return (await GetDbContextAsync()).Posts.Select(x => x.Creator).Distinct();
     }
 
-    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? local, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null)
+    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null)
     {
         return (await GetQueryableAsync())
-            .Where(p => p.Local == local)
+            .Where(p => p.Locale == locale)
             .WhereIf(categoryIds != null && categoryIds.Count() == 1, b => b.PostCategories.Any(pc => pc.CategoryId == categoryIds.First()))
             .WhereIf(categoryIds != null && categoryIds.Count() > 1, b => b.PostCategories.Any(pc => categoryIds.Contains(pc.CategoryId)))
             .WhereIf(status.HasValue, b => b.Status == status.Value)

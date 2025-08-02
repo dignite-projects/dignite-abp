@@ -17,12 +17,12 @@ public class MongoCategoryRepository : MongoDbRepository<IPublisherMongoDbContex
     {
     }
 
-    public virtual async Task<List<Category>> GetListAsync(string? local, CancellationToken cancellationToken = default)
+    public virtual async Task<List<Category>> GetListAsync(string? locale, CancellationToken cancellationToken = default)
     {
         var token = GetCancellationToken(cancellationToken);
 
         return await (await GetQueryableAsync(token))
-                .Where(b => b.Local == local)
+                .Where(b => b.Locale == locale)
                 .ToListAsync(token);
     }
 

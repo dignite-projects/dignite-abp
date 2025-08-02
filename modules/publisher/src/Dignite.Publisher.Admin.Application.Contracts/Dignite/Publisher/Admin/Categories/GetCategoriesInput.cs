@@ -2,7 +2,7 @@
 public class GetCategoriesInput
 {
     /// <summary>
-    /// The local identifier of the category.
+    /// The locale identifier of the category.
     /// </summary>
-    public string? Local { get; set; }
+    public string? Locale { get; set; }
 }

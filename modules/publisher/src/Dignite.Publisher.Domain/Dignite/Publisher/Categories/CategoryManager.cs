@@ -18,7 +18,7 @@ public class CategoryManager : DomainService
     }
 
     public virtual async Task<Category> CreateAsync(
-        string? local, Guid? parentId, string displayName, string name, string? description, bool isActive, List<string> postTypes, int order
+        string? locale, Guid? parentId, string displayName, string name, string? description, bool isActive, List<string> postTypes, int order
         )
     {
         await CheckNameExistenceAsync(parentId, name);
@@ -29,14 +29,14 @@ public class CategoryManager : DomainService
             throw new CategoryNotFoundException(parentId.Value);
         }
 
-        var category = new Category(GuidGenerator.Create(), local, parentId, displayName, name, description, isActive, postTypes, order, CurrentTenant.Id);
+        var category = new Category(GuidGenerator.Create(), locale, parentId, displayName, name, description, isActive, postTypes, order, CurrentTenant.Id);
         return category;
     }
 
     public virtual async Task DeleteAsync(Guid id)
     {
         var category = await CategoryRepository.GetAsync(id, false);
-        var allCategories = await GetTreeListAsync(category.Local);
+        var allCategories = await GetTreeListAsync(category.Locale);
         var children = BuildTree(allCategories, id);
         foreach (var child in children)
         {
@@ -51,13 +51,13 @@ public class CategoryManager : DomainService
     }
 
     /// <summary>
-    /// Retrieves a list of categories in a tree structure based on the specified local identifier.
+    /// Retrieves a list of categories in a tree structure based on the specified locale identifier.
     /// </summary>
-    /// <param name="local"></param>
+    /// <param name="locale"></param>
     /// <returns></returns>
-    public virtual async Task<List<Category>> GetTreeListAsync(string? local)
+    public virtual async Task<List<Category>> GetTreeListAsync(string? locale)
     {
-        var allCategories = await CategoryRepository.GetListAsync(local);
+        var allCategories = await CategoryRepository.GetListAsync(locale);
 
         return BuildTree(allCategories);
     }
@@ -89,7 +89,7 @@ public class CategoryManager : DomainService
             }
             else
             {
-                if (source.Local != targetParent.Local)
+                if (source.Locale != targetParent.Locale)
                 {
                     throw new CategoryLocalMismatchException();
                 }
@@ -98,7 +98,7 @@ public class CategoryManager : DomainService
         // Check if the name already exists in the target parent
         await CheckNameExistenceAsync(targetParentId, source.Name);
 
-        var allCategories = await CategoryRepository.GetListAsync(source.Local);
+        var allCategories = await CategoryRepository.GetListAsync(source.Locale);
         var sourceChildrenTree = BuildTree(allCategories, source.Id);
 
         //
@@ -165,9 +165,9 @@ public class CategoryManager : DomainService
         }
     }
 
-    public virtual async Task CheckExistenceAsync(string? local, IEnumerable<Guid> ids)
+    public virtual async Task CheckExistenceAsync(string? locale, IEnumerable<Guid> ids)
     {
-        var allCategories = await CategoryRepository.GetListAsync(local);
+        var allCategories = await CategoryRepository.GetListAsync(locale);
         foreach (var id in ids)
         {
             if (!allCategories.Any(c => c.Id == id))

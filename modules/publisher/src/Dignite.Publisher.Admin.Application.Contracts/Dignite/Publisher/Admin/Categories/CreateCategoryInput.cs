@@ -6,10 +6,10 @@ namespace Dignite.Publisher.Admin.Categories;
 public class CreateCategoryInput : CreateOrUpdateCategoryInputBase
 {
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    [DynamicMaxLength(typeof(CategoryConsts), nameof(CategoryConsts.MaxLocalLength))]
-    public string? Local { get; set; }
+    [DynamicMaxLength(typeof(CategoryConsts), nameof(CategoryConsts.MaxLocaleLength))]
+    public string? Locale { get; set; }
 
     /// <summary>
     /// Parent category ID (supports multi-level category structure)

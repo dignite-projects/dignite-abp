@@ -15,10 +15,10 @@ public class EfCoreCategoryRepository : EfCoreRepository<IPublisherDbContext, Ca
     {
     }
 
-    public virtual async Task<List<Category>> GetListAsync(string? local, CancellationToken cancellationToken = default)
+    public virtual async Task<List<Category>> GetListAsync(string? locale, CancellationToken cancellationToken = default)
     {
         return await (await GetQueryableAsync())
-            .Where(x=>x.Local==local)
+            .Where(x=>x.Locale==locale)
             .ToListAsync(GetCancellationToken(cancellationToken));
     }
 

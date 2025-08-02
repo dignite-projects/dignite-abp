@@ -21,10 +21,10 @@ public abstract class CreateOrUpdatePostInputBase: ExtensibleObject
     public string PostType { get; protected set; }
 
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    [DynamicMaxLength(typeof(PostConsts), nameof(PostConsts.MaxLocalLength))]
-    public string? Local { get; set; }
+    [DynamicMaxLength(typeof(PostConsts), nameof(PostConsts.MaxLocaleLength))]
+    public string? Locale { get; set; }
 
     /// <summary>
     /// The title of the post

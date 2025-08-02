@@ -13,10 +13,10 @@ namespace Dignite.Publisher.Categories;
 /// </summary>
 public class Category : AggregateRoot<Guid>, IMultiTenant
 {
-    public Category(Guid id, string? local, Guid? parentId, string displayName, string name, string? description, bool isActive, List<string> postTypes, int order, Guid? tenantId)
+    public Category(Guid id, string? locale, Guid? parentId, string displayName, string name, string? description, bool isActive, List<string> postTypes, int order, Guid? tenantId)
         :base(id)
     {
-        Local = local;
+        Locale = locale;
         ParentId = parentId;
         DisplayName = displayName;
         Name = name;
@@ -28,9 +28,9 @@ public class Category : AggregateRoot<Guid>, IMultiTenant
     }
 
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    public virtual string? Local { get; protected set; }
+    public virtual string? Locale { get; protected set; }
 
     /// <summary>
     /// Parent category ID (supports multi-level category structure)
@@ -98,9 +98,9 @@ public class Category : AggregateRoot<Guid>, IMultiTenant
         return this;
     }
 
-    public virtual Category SetLocal([NotNull] string local)
+    public virtual Category SetLocal([NotNull] string locale)
     {
-        Local = Check.Length(local, nameof(local), CategoryConsts.MaxLocalLength);
+        Locale = Check.Length(locale, nameof(locale), CategoryConsts.MaxLocaleLength);
         return this;
     }
 

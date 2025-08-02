@@ -14,9 +14,9 @@ public abstract class PostDtoBase : ExtensibleEntityDto<Guid>, IMayHaveCreator, 
     public string PostType { get; set; }
 
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    public string? Local { get; set; }
+    public string? Locale { get; set; }
 
     /// <summary>
     /// The title of the post

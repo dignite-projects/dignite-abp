@@ -43,7 +43,7 @@ public class ClientDemoService : ITransientDependency
 
         // Create a new post
         var newArticlePost = new CreateArticlePostInput();
-        newArticlePost.Local = "en";
+        newArticlePost.Locale = "en";
         newArticlePost.Title = "Title";
         newArticlePost.Slug = Guid.NewGuid().ToString();
         newArticlePost.Content = "This is a test article post content.";
@@ -53,7 +53,7 @@ public class ClientDemoService : ITransientDependency
 
         // Create a new video post
         var newVideoPost = new CreateVideoPostInput();
-        newVideoPost.Local = "en";
+        newVideoPost.Locale = "en";
         newVideoPost.Title = "Title";
         newVideoPost.Slug = Guid.NewGuid().ToString();
         newVideoPost.VideoUrl = "test/abc.mp4";
@@ -73,7 +73,7 @@ public class ClientDemoService : ITransientDependency
         // Get the list of posts
         var list = await _postAdminAppService.GetListAsync(
             new GetPostsInput() {
-                Local = "en",
+                Locale = "en",
             });
         Console.WriteLine($"{list.TotalCount} posts found");
         foreach (var post in list.Items)

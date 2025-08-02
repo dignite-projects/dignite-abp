@@ -31,10 +31,10 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
     [Authorize(PublisherAdminPermissions.Posts.Create)]
     public async Task<PostAdminDtoBase> CreateAsync(CreatePostInput input)
     {
-        await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
+        await PostManager.CheckSlugExistenceAsync(input.Locale, input.Slug);
         if (input.CategoryIds.Any())
         {
-            await CategoryManager.CheckExistenceAsync(input.Local, input.CategoryIds);
+            await CategoryManager.CheckExistenceAsync(input.Locale, input.CategoryIds);
         }
 
         var postBuilder = PostBuilderSelector.Get(input.PostType);
@@ -61,12 +61,12 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
     public async Task<PagedResultDto<PostAdminDtoBase>> GetListAsync(GetPostsInput input)
     {
         var dto = new List<PostAdminDtoBase>();
-        var count = await PostRepository.GetCountAsync(input.Local,input.CategoryIds,input.Status,input.PostType,input.CreatorId,input.CreationTimeFrom,input.CreationTimeTo);
+        var count = await PostRepository.GetCountAsync(input.Locale,input.CategoryIds,input.Status,input.PostType,input.CreatorId,input.CreationTimeFrom,input.CreationTimeTo);
         if (count == 0)
         {
             return new PagedResultDto<PostAdminDtoBase>(count, dto);
         }
-        var list = await PostRepository.GetPagedListAsync(input.Local, input.CategoryIds, input.Status, input.PostType, input.CreatorId, input.CreationTimeFrom, input.CreationTimeTo,
+        var list = await PostRepository.GetPagedListAsync(input.Locale, input.CategoryIds, input.Status, input.PostType, input.CreatorId, input.CreationTimeFrom, input.CreationTimeTo,
             input.SkipCount,
             input.MaxResultCount,
             input.Sorting
@@ -77,23 +77,23 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
         return new PagedResultDto<PostAdminDtoBase>(count, dto);
     }
 
-    public async Task<bool> SlugExistsAsync(string? local, string slug)
+    public async Task<bool> SlugExistsAsync(string? locale, string slug)
     {
-        return await PostRepository.SlugExistsAsync(local, slug);
+        return await PostRepository.SlugExistsAsync(locale, slug);
     }
 
     public async Task<PostAdminDtoBase> UpdateAsync(Guid id, UpdatePostInput input)
     {
         var post = await PostRepository.GetAsync(id);
         await AuthorizationService.CheckAsync(post, CommonOperations.Update);
-        if (post.Local != input.Local || post.Slug != input.Slug)
+        if (post.Locale != input.Locale || post.Slug != input.Slug)
         {
-            await PostManager.CheckSlugExistenceAsync(input.Local, input.Slug);
+            await PostManager.CheckSlugExistenceAsync(input.Locale, input.Slug);
         }
 
         if (input.CategoryIds.Any())
         {
-            await CategoryManager.CheckExistenceAsync(input.Local, input.CategoryIds);
+            await CategoryManager.CheckExistenceAsync(input.Locale, input.CategoryIds);
         }
 
         // Set the concurrency stamp if it is not null to ensure optimistic concurrency control

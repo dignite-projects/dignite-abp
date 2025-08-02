@@ -25,7 +25,7 @@ public class ArticlePostBuilder : IPostBuilder
 
         return new ArticlePost(
             postId,
-            input.Local,
+            input.Locale,
             input.Title,
             input.Slug,
             input.CoverBlobName,
@@ -49,7 +49,7 @@ public class ArticlePostBuilder : IPostBuilder
         }
 
         articlePost.Update(
-            input.Local,input.Title, input.Slug, input.CoverBlobName, input.Summary, 
+            input.Locale,input.Title, input.Slug, input.CoverBlobName, input.Summary, 
             input.PublishedTime,input.CategoryIds, updateArticlePostDto.Content);
     }
 }

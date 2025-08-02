@@ -25,7 +25,7 @@ public class VideoPostBuilder : IPostBuilder
 
         return new VideoPost(
             postId,
-            post.Local,
+            post.Locale,
             post.Title,
             post.Slug,
             post.CoverBlobName,
@@ -52,7 +52,7 @@ public class VideoPostBuilder : IPostBuilder
 
 
         videoPost.Update(
-            input.Local, input.Title, input.Slug, input.CoverBlobName, input.Summary,
+            input.Locale, input.Title, input.Slug, input.CoverBlobName, input.Summary,
             input.PublishedTime, input.CategoryIds, 
             updateVideoPostDto.VideoUrl, updateVideoPostDto.Duration, updateVideoPostDto.Description);
     }

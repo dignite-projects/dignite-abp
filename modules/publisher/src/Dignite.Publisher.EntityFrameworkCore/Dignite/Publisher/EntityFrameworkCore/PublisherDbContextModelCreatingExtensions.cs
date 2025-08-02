@@ -53,7 +53,7 @@ public static class PublisherDbContextModelCreatingExtensions
             //Properties
             b.Property(q => q.DisplayName).IsRequired().HasMaxLength(CategoryConsts.MaxDisplayNameLength);
             b.Property(q => q.Name).IsRequired().HasMaxLength(CategoryConsts.MaxNameLength);
-            b.Property(q => q.Local).HasMaxLength(CategoryConsts.MaxLocalLength);
+            b.Property(q => q.Locale).HasMaxLength(CategoryConsts.MaxLocaleLength);
             b.Property(q => q.Description).HasMaxLength(CategoryConsts.MaxDescriptionLength);
 
             //Relations
@@ -79,7 +79,7 @@ public static class PublisherDbContextModelCreatingExtensions
             b.Property(q => q.Slug).IsRequired().HasMaxLength(PostConsts.MaxSlugLength);
             b.Property(q => q.CoverBlobName).HasMaxLength(PostConsts.MaxCoverBlobNameLength);
             b.Property(q => q.Summary).HasMaxLength(PostConsts.MaxSummaryLength);
-            b.Property(q => q.Local).HasMaxLength(PostConsts.MaxLocalLength);
+            b.Property(q => q.Locale).HasMaxLength(PostConsts.MaxLocaleLength);
             b.Property(p => p.CreationTime).HasColumnType("smalldatetime");
             b.Property(p => p.PublishedTime).HasColumnType("smalldatetime");
 

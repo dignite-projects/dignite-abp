@@ -85,9 +85,9 @@ public class PostAdminController : PublisherAdminController, IPostAdminAppServic
 
     [HttpGet]
     [Route("slug-exists")]
-    public async Task<bool> SlugExistsAsync(string local, string slug)
+    public async Task<bool> SlugExistsAsync(string locale, string slug)
     {
-        return await PostAdminAppService.SlugExistsAsync(local, slug);
+        return await PostAdminAppService.SlugExistsAsync(locale, slug);
     }
 
     [HttpPut]

@@ -31,7 +31,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     {
         var createPostInput = new CreateArticlePostInput()
         {
-            Local = _testData.Local_En,
+            Locale = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
             CoverBlobName = "img.jpeg",
@@ -72,7 +72,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     {
         var result = await _postAdminAppService.GetListAsync(new GetPostsInput
         {
-            Local = _testData.Local_En
+            Locale = _testData.Local_En
         });
         result.TotalCount.ShouldBe(2);
         result.Items.Single(x => x.Slug == _testData.Post_1_Slug).PostType.ShouldBe(PostTypeConsts.ArticlePostTypeName);
@@ -86,7 +86,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
         var newSlug = "test-new-Post";
         await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
         {
-            Local = _testData.Local_En,
+            Locale = _testData.Local_En,
             Title = _testData.Post_1_Title,
             Slug = newSlug,
             CoverBlobName = "new-img.jpeg",
@@ -107,7 +107,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
         var exception = await Should.ThrowAsync<PostSlugAlreadyExistException>(async () =>
                             await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
                             {
-                                Local = _testData.Local_En,
+                                Locale = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
                                 Slug = _testData.Post_2_Slug,
                                 CoverBlobName = "new-img.jpeg",
@@ -126,7 +126,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
         var exception = await Should.ThrowAsync<CategoryNotFoundException>(async () =>
                             await _postAdminAppService.UpdateAsync(_testData.Post_1_Id, new UpdateArticlePostInput
                             {
-                                Local = _testData.Local_En,
+                                Locale = _testData.Local_En,
                                 Title = _testData.Post_1_Title,
                                 Slug = _testData.Post_1_Slug,
                                 CoverBlobName = "new-img.jpeg",
@@ -186,7 +186,7 @@ public abstract class PostAdminAppService_Tests<TStartupModule> : PublisherAppli
     {
         var createPostInput = new CreateArticlePostInput()
         {
-            Local = _testData.Local_En,
+            Locale = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
             CoverBlobName = "img.jpeg",

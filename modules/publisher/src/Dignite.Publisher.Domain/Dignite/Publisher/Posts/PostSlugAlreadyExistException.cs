@@ -7,18 +7,18 @@ namespace Dignite.Publisher.Posts;
 [Serializable]
 public class PostSlugAlreadyExistException : BusinessException
 {
-    public PostSlugAlreadyExistException([NotNull] string? local, [NotNull] string slug)
+    public PostSlugAlreadyExistException([NotNull] string? locale, [NotNull] string slug)
     {
-        Local = local;
+        Locale = locale;
         Slug = slug;
         Code = PublisherErrorCodes.Posts.SlugAlreadyExist;
-        if (!string.IsNullOrWhiteSpace(local))
+        if (!string.IsNullOrWhiteSpace(locale))
         {
-            WithData(nameof(Post.Local), local);
+            WithData(nameof(Post.Locale), locale);
         }
         WithData(nameof(Post.Slug), slug);
     }
 
-    public virtual string? Local { get; }
+    public virtual string? Locale { get; }
     public virtual string Slug { get; }
 }

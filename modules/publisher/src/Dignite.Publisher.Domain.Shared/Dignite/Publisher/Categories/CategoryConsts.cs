@@ -10,6 +10,6 @@ public static class CategoryConsts
     /// </summary>
     public const string NameRegularExpression = "^[a-zA-Z0-9_\\-\\. ]+$";
 
-    public static int MaxLocalLength { get; set; } = 16;
+    public static int MaxLocaleLength { get; set; } = 16;
     public static int MaxDescriptionLength { get; set; } = 256;
 }

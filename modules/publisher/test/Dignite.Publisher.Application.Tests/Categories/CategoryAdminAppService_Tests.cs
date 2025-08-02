@@ -31,7 +31,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
     {
         var createCategoryInput = new CreateCategoryInput
         {
-            Local = "en",
+            Locale = "en",
             ParentId = null,
             DisplayName = "Test Category",
             Name = "test-category",
@@ -52,7 +52,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
     public async Task GetListAsync()
     {
         var result = await _categoryAdminAppService.GetListAsync(new GetCategoriesInput { 
-            Local = "en",
+            Locale = "en",
         });
         result.TotalCount.ShouldBe(1);
         result.Items.Any(x => x.Name == _testData.Category_1_Name).ShouldBeTrue();
@@ -64,7 +64,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
         // Create a new category to move
         var createCategoryDto = new CreateCategoryInput
         {
-            Local = _testData.Local_En,
+            Locale = _testData.Local_En,
             ParentId = null,
             DisplayName = "Test Category",
             Name = "test-category",
@@ -78,7 +78,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
         // Create a post to ensure the category can be moved with posts
         var createPostInput = new CreateArticlePostInput()
         {
-            Local = _testData.Local_En,
+            Locale = _testData.Local_En,
             Title = "Test Article Post",
             Slug = "test-post",
             CoverBlobName = "img.jpeg",

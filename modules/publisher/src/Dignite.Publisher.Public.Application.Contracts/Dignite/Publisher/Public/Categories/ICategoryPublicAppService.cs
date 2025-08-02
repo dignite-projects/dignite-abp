@@ -15,11 +15,11 @@ public interface ICategoryPublicAppService: IApplicationService
     Task<CategoryDto> GetAsync(Guid id);
 
     /// <summary>
-    /// Get a category by its local identifier.
+    /// Get a category by its locale identifier.
     /// </summary>
-    /// <param name="local"></param>
+    /// <param name="locale"></param>
     /// <returns>
     /// Return a list of multi-level structures
     /// </returns>
-    Task<ListResultDto<CategoryDto>> GetListAsync(string? local);
+    Task<ListResultDto<CategoryDto>> GetListAsync(string? locale);
 }

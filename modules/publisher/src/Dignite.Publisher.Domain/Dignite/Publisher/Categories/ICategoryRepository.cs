@@ -8,7 +8,7 @@ namespace Dignite.Publisher.Categories;
 public interface ICategoryRepository : IBasicRepository<Category, Guid>
 {
     Task<List<Category>> GetListAsync(
-        string? local,
+        string? locale,
         CancellationToken cancellationToken = default);
 
     Task<bool> NameExistsAsync(Guid? parentId, string name, CancellationToken cancellationToken = default);

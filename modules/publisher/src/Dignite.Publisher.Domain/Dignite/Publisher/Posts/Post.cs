@@ -19,10 +19,10 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
     {
     }
 
-    protected Post(Guid id, string? local, string title, string slug, string? coverBlobName, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId)
+    protected Post(Guid id, string? locale, string title, string slug, string? coverBlobName, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId)
         :base(id)
     {
-        SetLocal(local);
+        SetLocale(locale);
         SetTitle(title);
         SetSlug(slug);
         SetCoverBlobName(coverBlobName);
@@ -45,9 +45,9 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
     public abstract string PostType { get; }
 
     /// <summary>
-    /// The local identifier for the category.
+    /// The locale identifier for the category.
     /// </summary>
-    public virtual string? Local { get; protected set; }
+    public virtual string? Locale { get; protected set; }
 
     /// <summary>
     /// The title of the post
@@ -119,9 +119,9 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
         Summary = Check.Length(summary, nameof(summary), PostConsts.MaxSummaryLength);
     }
 
-    public virtual void SetLocal([NotNull] string local)
+    public virtual void SetLocale([NotNull] string locale)
     {
-        Local = Check.Length(local, nameof(local), PostConsts.MaxLocalLength);
+        Locale = Check.Length(locale, nameof(locale), PostConsts.MaxLocaleLength);
     }
 
     public virtual void SetDraft()
@@ -180,9 +180,9 @@ public abstract class Post: FullAuditedAggregateRoot<Guid>, IMultiTenant, IHasEn
         PostCategories.RemoveAll(t => t.CategoryId == categoryId);
     }
 
-    protected virtual void Update(string? local, string title, string slug, string? coverBlobName, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds)
+    protected virtual void Update(string? locale, string title, string slug, string? coverBlobName, string? summary, DateTime? publishedTime, IEnumerable<Guid> categoryIds)
     {
-        SetLocal(local);
+        SetLocale(locale);
         SetTitle(title);
         SetSlug(slug);
         SetCoverBlobName(coverBlobName);

@@ -12,8 +12,8 @@ public class GetPostsInput : PagedAndSortedResultRequestDto
         MaxResultCount = 20;
     }
 
-    [DynamicMaxLength(typeof(PostConsts), nameof(PostConsts.MaxLocalLength))]
-    public string? Local { get; set; }
+    [DynamicMaxLength(typeof(PostConsts), nameof(PostConsts.MaxLocaleLength))]
+    public string? Locale { get; set; }
 
     public IEnumerable<Guid>? CategoryIds { get; set; }
 

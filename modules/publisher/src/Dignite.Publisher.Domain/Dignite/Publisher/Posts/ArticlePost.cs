@@ -10,10 +10,10 @@ public class ArticlePost : Post
     }
 
     public ArticlePost(
-        Guid id, string? local, string title, string slug, string? coverBlobName, string? summary,
+        Guid id, string? locale, string title, string slug, string? coverBlobName, string? summary,
         DateTime? publishedTime, IEnumerable<Guid> categoryIds, Guid? tenantId,
         string content)
-        : base(id, local, title, slug, coverBlobName, summary, publishedTime, categoryIds, tenantId)
+        : base(id, locale, title, slug, coverBlobName, summary, publishedTime, categoryIds, tenantId)
     {
         SetContent(content);
     }
@@ -33,9 +33,9 @@ public class ArticlePost : Post
     {
         Content = content;
     }
-    public virtual void Update(string? local, string title, string slug, string? coverBlobName, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, string content)        
+    public virtual void Update(string? locale, string title, string slug, string? coverBlobName, string? summary,  DateTime? publishedTime, IEnumerable<Guid> categoryIds, string content)        
     {
-        base.Update(local, title, slug, coverBlobName, summary, publishedTime, categoryIds);
+        base.Update(locale, title, slug, coverBlobName, summary, publishedTime, categoryIds);
         SetContent(content);
     }
 }

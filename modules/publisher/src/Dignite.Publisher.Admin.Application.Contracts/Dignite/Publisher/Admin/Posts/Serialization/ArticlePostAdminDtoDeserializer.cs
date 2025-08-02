@@ -2,7 +2,7 @@
 using Dignite.Publisher.Posts;
 
 namespace Dignite.Publisher.Admin.Posts.Serialization;
-public class ArticleAdminPostDtoDeserializer : IPostAdminDtoDeserializer
+public class ArticlePostAdminDtoDeserializer : IPostAdminDtoDeserializer
 {
     public string PostTypeName => PostTypeConsts.ArticlePostTypeName;
 

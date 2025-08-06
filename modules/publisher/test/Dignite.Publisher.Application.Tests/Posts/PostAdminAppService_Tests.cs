@@ -8,8 +8,6 @@ using Dignite.Publisher.TestBase;
 using Shouldly;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Modularity;
-using Volo.CmsKit.Admin.Blogs;
-using Volo.CmsKit.Blogs;
 using Xunit;
 
 namespace Dignite.Publisher.Posts;

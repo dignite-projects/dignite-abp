@@ -61,15 +61,20 @@ public class PostAdminAppService : PublisherAdminAppService, IPostAdminAppServic
     public async Task<PagedResultDto<PostAdminDtoBase>> GetListAsync(GetPostsInput input)
     {
         var dto = new List<PostAdminDtoBase>();
-        var count = await PostRepository.GetCountAsync(input.Locale,input.CategoryIds,input.Status,input.PostType,input.CreatorId,input.CreationTimeFrom,input.CreationTimeTo);
+        var count = await PostRepository.GetCountAsync(input.Locale, input.CategoryIds, input.Status, input.PostType, input.CreatorId,
+            creationTimeFrom: input.CreationTimeFrom,
+            creationTimeTo: input.CreationTimeTo);
         if (count == 0)
         {
             return new PagedResultDto<PostAdminDtoBase>(count, dto);
         }
-        var list = await PostRepository.GetPagedListAsync(input.Locale, input.CategoryIds, input.Status, input.PostType, input.CreatorId, input.CreationTimeFrom, input.CreationTimeTo,
-            input.SkipCount,
-            input.MaxResultCount,
-            input.Sorting
+        var list = await PostRepository.GetPagedListAsync(
+            input.Locale, input.CategoryIds, input.Status, input.PostType, input.CreatorId,
+            creationTimeFrom: input.CreationTimeFrom,
+            creationTimeTo: input.CreationTimeTo,
+            skipCount: input.SkipCount,
+            maxResultCount: input.MaxResultCount,
+            sorting: input.Sorting
         );
 
         dto = ObjectMapper.Map<List<Post>, List<PostAdminDtoBase>>(list);

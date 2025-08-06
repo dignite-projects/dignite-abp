@@ -8,17 +8,26 @@ using Dignite.Publisher.EntityFrameworkCore;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
-using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.CmsKit.Blogs;
+using Volo.CmsKit.MarkedItems;
+using Volo.CmsKit.Tags;
 using Volo.CmsKit.Users;
 
 namespace Dignite.Publisher.Posts;
 public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, Guid>, IPostRepository
 {
-    public EfCorePostRepository(IDbContextProvider<IPublisherDbContext> dbContextProvider) : base(dbContextProvider)
+    private readonly MarkedItemManager _markedItemManager;
+    private EntityTagManager _entityTagManager;
+
+    public EfCorePostRepository(
+        IDbContextProvider<IPublisherDbContext> dbContextProvider,
+        MarkedItemManager markedItemManager,
+        EntityTagManager entityTagManager) : base(dbContextProvider)
     {
+        _markedItemManager = markedItemManager;
+        _entityTagManager = entityTagManager;
     }
 
     public virtual async Task<Post> GetBySlugAsync(string? locale, [NotNull] string slug, CancellationToken cancellationToken = default)
@@ -36,9 +45,11 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
         return post;
     }
 
-    public virtual async Task<int> GetCountAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
+    public virtual async Task<int> GetCountAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null,
+        Guid? tagId = null,
+        Guid? favoriteUserId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, CancellationToken cancellationToken = default)
     {
-        return await (await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo))
+        return await (await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, tagId,favoriteUserId, creationTimeFrom, creationTimeTo, cancellationToken))
             .CountAsync(GetCancellationToken(cancellationToken));
     }
 
@@ -56,11 +67,13 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
             .ToListAsync(GetCancellationToken(cancellationToken));
     }
 
-    public virtual async Task<List<Post>> GetPagedListAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
+    public virtual async Task<List<Post>> GetPagedListAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null,
+        Guid? tagId = null,
+        Guid? favoriteUserId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null, int skipCount = 0, int maxResultCount = int.MaxValue, string sorting = null, CancellationToken cancellationToken = default)
     {
         var dbContext = await GetDbContextAsync();
         var usersDbSet = dbContext.Set<CmsUser>();
-        var queryable = await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, creationTimeFrom, creationTimeTo);
+        var queryable = await GetListQueryAsync(locale, categoryIds, status, postType, creatorId, tagId, favoriteUserId, creationTimeFrom, creationTimeTo, cancellationToken);
         queryable = queryable.OrderBy(sorting.IsNullOrEmpty() ? $"{nameof(BlogPost.CreationTime)} desc" : sorting);
 
         var combinedResult = await queryable
@@ -111,8 +124,20 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
         return (await GetDbContextAsync()).Posts.Select(x => x.Creator).Distinct();
     }
 
-    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null)
+    protected virtual async Task<IQueryable<Post>> GetListQueryAsync(string? locale, IEnumerable<Guid> categoryIds, PostStatus? status = null, string? postType = null, Guid? creatorId = null,
+        Guid? tagId = null,
+        Guid? favoriteUserId = null, DateTime? creationTimeFrom = null, DateTime? creationTimeTo = null,
+        CancellationToken cancellationToken = default)
     {
+        List<Guid> tagFilteredEntityIds = tagId.HasValue
+            ? (await _entityTagManager.GetEntityIdsFilteredByTagAsync(tagId.Value, CurrentTenant.Id, cancellationToken)).Select(Guid.Parse).ToList()
+            : null;
+
+        var favoriteUserFilteredEntityIds = favoriteUserId.HasValue
+            ? (await _markedItemManager.GetEntityIdsFilteredByUserAsync(favoriteUserId.Value, BlogPostConsts.EntityType, CurrentTenant.Id)).Select(Guid.Parse).ToList()
+            : null;
+
+
         return (await GetQueryableAsync())
             .Where(p => p.Locale == locale)
             .WhereIf(categoryIds != null && categoryIds.Count() == 1, b => b.PostCategories.Any(pc => pc.CategoryId == categoryIds.First()))
@@ -120,9 +145,12 @@ public class EfCorePostRepository : EfCoreRepository<IPublisherDbContext, Post, 
             .WhereIf(status.HasValue, b => b.Status == status.Value)
             .WhereIf(!string.IsNullOrWhiteSpace(postType), b => b.PostType == postType)
             .WhereIf(creatorId.HasValue, b => b.CreatorId == creatorId.Value)
+            .WhereIf(tagFilteredEntityIds != null, x => tagFilteredEntityIds.Contains(x.Id))
+            .WhereIf(favoriteUserFilteredEntityIds != null, x => favoriteUserFilteredEntityIds.Contains(x.Id))
             .WhereIf(creationTimeFrom.HasValue, b => b.CreationTime >= creationTimeFrom.Value)
             .WhereIf(creationTimeTo.HasValue, b => b.CreationTime <= creationTimeTo.Value);
     }
+
     public override async Task<IQueryable<Post>> WithDetailsAsync()
     {
         return (await GetQueryableAsync()).IncludeDetails();

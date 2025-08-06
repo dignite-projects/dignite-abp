@@ -17,4 +17,6 @@ public static class PostConsts
     public static int MaxSummaryLength { get; set; } = 256;
 
     public static int MaxLocaleLength { get; set; } = 16;
+
+    public const string EntityType = "PublisherPost";
 }

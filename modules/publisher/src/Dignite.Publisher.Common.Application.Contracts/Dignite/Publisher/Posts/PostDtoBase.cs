@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
+using Volo.CmsKit.Users;
 
 namespace Dignite.Publisher.Posts;
 
@@ -60,6 +61,8 @@ public abstract class PostDtoBase : ExtensibleEntityDto<Guid>, IMayHaveCreator, 
 
 
     public Guid? CreatorId { get; set; }
+
+    public virtual CmsUserDto Creator { get; set; }
 
     public DateTime CreationTime { get; set; }
 

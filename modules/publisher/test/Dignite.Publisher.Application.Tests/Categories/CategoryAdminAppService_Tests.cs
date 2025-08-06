@@ -31,7 +31,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
     {
         var createCategoryInput = new CreateCategoryInput
         {
-            Locale = "en",
+            Locale = _testData.Local_En,
             ParentId = null,
             DisplayName = "Test Category",
             Name = "test-category",
@@ -52,7 +52,7 @@ public abstract class CategoryAdminAppService_Tests<TStartupModule> : PublisherA
     public async Task GetListAsync()
     {
         var result = await _categoryAdminAppService.GetListAsync(new GetCategoriesInput { 
-            Locale = "en",
+            Locale = _testData.Local_En,
         });
         result.TotalCount.ShouldBe(1);
         result.Items.Any(x => x.Name == _testData.Category_1_Name).ShouldBeTrue();

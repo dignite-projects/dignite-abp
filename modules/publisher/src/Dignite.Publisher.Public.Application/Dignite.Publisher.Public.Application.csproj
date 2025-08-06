@@ -15,9 +15,4 @@
     <ProjectReference Include="..\Dignite.Publisher.Public.Application.Contracts\Dignite.Publisher.Public.Application.Contracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dignite\Publisher\Public\Categories\" />
-    <Folder Include="Dignite\Publisher\Public\Posts\" />
-  </ItemGroup>
-
 </Project>

@@ -17,11 +17,12 @@ public class GetPostsInput: PagedResultRequestDto
 
     public IEnumerable<Guid>? CategoryIds { get; set; }
 
-    public PostStatus? Status { get; set; }
-
     public string? PostType { get; set; }
 
     public Guid? CreatorId { get; set; }
+
+    public Guid? TagId { get; set; }
+    public bool? FilterOnFavorites { get; set; }
 
     public DateTime? CreationTimeFrom { get; set; }
 

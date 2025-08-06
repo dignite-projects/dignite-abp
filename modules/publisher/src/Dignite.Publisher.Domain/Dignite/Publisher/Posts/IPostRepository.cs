@@ -17,6 +17,8 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
         PostStatus? status = null,
         string? postType = null,
         Guid? creatorId = null,
+        Guid? tagId = null,
+        Guid? favoriteUserId = null,
         DateTime? creationTimeFrom = null,
         DateTime? creationTimeTo = null,
         CancellationToken cancellationToken = default
@@ -28,6 +30,8 @@ public interface IPostRepository : IBasicRepository<Post, Guid>
         PostStatus? status = null,
         string? postType = null,
         Guid? creatorId = null,
+        Guid? tagId = null,
+        Guid? favoriteUserId = null,
         DateTime? creationTimeFrom = null,
         DateTime? creationTimeTo = null,
         int skipCount = 0,

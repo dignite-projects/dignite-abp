@@ -3,11 +3,11 @@
 @using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
 
-<footer class="container-fluid bg-body-tertiary py-5 d-none d-sm-none d-md-none d-lg-block" id="layout-footer">
+<footer class="container-fluid bg-body-tertiary py-5" id="layout-footer">
     <div class="container">
         @(await Component.InvokeAsync<ShortcutMenuViewComponent>())
         <hr />
-        <nav class="d-flex align-items-center justify-content-between">
+        <nav class="d-flex flex-column-reverse flex-sm-row align-items-center justify-content-between">
             <div class="text-secondary">
                 Copyright @DateTime.Now.Year © @BrandingProvider.AppName
             </div>

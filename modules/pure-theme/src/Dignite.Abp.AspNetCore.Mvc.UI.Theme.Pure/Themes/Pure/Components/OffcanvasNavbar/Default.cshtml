@@ -5,22 +5,20 @@
 @using Volo.Abp.Ui.Branding
 @inject IBrandingProvider BrandingProvider
 <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="mainOffcanvasNavbarLabel">
+    <h5 class="offcanvas-title p-3" id="mainOffcanvasNavbarLabel">
         @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
     </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button type="button" class="btn-close d-inline-block d-sm-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body d-flex flex-column">
     <nav class="navbar">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav w-100">
             @(await Component.InvokeAsync<MainNavbarMenuViewComponent>())
         </ul>
     </nav>
     <div class="mt-auto">
-        <hr />
-        @(await Component.InvokeAsync<FooterLinksViewComponent>())
-        <div class="text-secondary text-center">
-            Copyright @DateTime.Now.Year © @BrandingProvider.AppName
-        </div>
+        <ul class="nav ms-auto main-navbar-toolbar">
+            @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
+        </ul>
     </div>
 </div>

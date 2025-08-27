@@ -1,5 +1,6 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure;
 @inject IThemeManager ThemeManager
 @{
-    Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+    Layout = ThemeManager.CurrentTheme.GetApplicationLayout(PureMvcLayouts.SideMenu);
 }

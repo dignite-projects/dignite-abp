@@ -1,7 +1,4 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Volo.Abp.AspNetCore.Mvc.UI.Theming;
-using Volo.Abp.DependencyInjection;
+﻿using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.MultiTenancy;
 
 namespace Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
@@ -11,16 +8,18 @@ namespace Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 /// </summary>
 public abstract class TenantThemeBase : ITheme
 {
-    public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
-    protected IWebHostEnvironment HostingEnvironment => LazyServiceProvider.LazyGetRequiredService<IWebHostEnvironment>();
-    protected ICurrentTenant CurrentTenant => LazyServiceProvider.LazyGetRequiredService<ICurrentTenant>();
-    protected IThemeSelector ThemeSelector => LazyServiceProvider.LazyGetRequiredService<IThemeSelector>();
+    protected readonly ICurrentTenant CurrentTenant;
+    protected readonly IThemeSelector ThemeSelector;
 
-
-
-    public virtual string GetLayout(string name, bool fallbackToDefault = false)
+    public TenantThemeBase( ICurrentTenant currentTenant, IThemeSelector themeSelector)
     {
-        return fallbackToDefault ? GetLayoutFilePath(name) : null;
+        CurrentTenant = currentTenant;
+        ThemeSelector = themeSelector;
+    }
+
+    public virtual string GetLayout(string name, bool fallbackToDefault = true)
+    {
+        return GetLayoutFilePath(name);
     }
 
     protected virtual string GetLayoutFilePath(string name)
@@ -30,12 +29,7 @@ public abstract class TenantThemeBase : ITheme
 
         if (CurrentTenant.IsAvailable)
         {
-            var tenantLayout = $"/Tenants/{CurrentTenant.Name}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
-            var tenantLayoutPath = HostingEnvironment.ContentRootPath + tenantLayout;
-            if (File.Exists(tenantLayoutPath))
-            {
-                return "~" + tenantLayout;
-            }
+            return $"~/Tenants/{CurrentTenant.Name}/Themes/{currentThemeName}/Layouts/{name}.cshtml";
         }
 
         return layout;

@@ -1,5 +1,6 @@
 ﻿using Dignite.Abp.AspNetCore.Mvc.UI.TenantTheme;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
@@ -17,8 +18,9 @@ public class PureTheme : TenantThemeBase, ITheme, ITransientDependency
     private readonly PureThemeMvcOptions _options;
     public PureTheme(IConfiguration configuration,
         IOptions<PureThemeMvcOptions> options,
+        IWebHostEnvironment hostingEnvironment,
         ICurrentTenant currentTenant, 
-        IThemeSelector themeSelector) : base(currentTenant,themeSelector)
+        IThemeSelector themeSelector) : base(hostingEnvironment, currentTenant, themeSelector)
     {
         _configuration = configuration;
         _options = options.Value;
@@ -41,7 +43,7 @@ public class PureTheme : TenantThemeBase, ITheme, ITransientDependency
                 name = GetLayoutFromConfig("Empty") ?? $"{StandardLayouts.Empty}/default";
                 break;
             default:
-                name = fallbackToDefault ? name : null;
+                // No assignment needed; just use the name as is.
                 break;
         }
 

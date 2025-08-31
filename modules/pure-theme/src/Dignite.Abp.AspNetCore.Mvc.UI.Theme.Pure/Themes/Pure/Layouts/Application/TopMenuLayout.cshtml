@@ -69,14 +69,14 @@
 
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
     <!-- Offcanvas Navbar -->
-    <nav class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="mainOffcanvasNavbarLabel" id="main-offcanvas-navbar">
+    <nav class="offcanvas offcanvas-start" tabindex="-1" aria-labelledby="mainOffcanvasNavbarLabel" id="main-offcanvas-navbar">
         @(await Component.InvokeAsync<MainOffcanvasNavbarViewComponent>())
     </nav>
     @(await Component.InvokeAsync<MobileNavbarViewComponent>())
 
     <div class="@containerClass">
         <!-- page content toolbar -->
-        <div id="AbpContentToolbar" class="d-flex align-items-center sticky-top px-2 py-2 backdrop-blur content-toolbar">
+        <div id="AbpContentToolbar" class="d-flex align-items-center sticky-top px-2 backdrop-blur content-toolbar">
             @(await Component.InvokeAsync<BreadCrumbsViewComponent>())
             @await RenderSectionAsync("content_toolbar", false)
         </div>

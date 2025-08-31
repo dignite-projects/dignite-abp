@@ -3,7 +3,6 @@ using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.Co
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LanguageSwitch;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LocaleSwitch;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.LoginLink;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.NavbarToggler;
 using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.UserMenu;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
@@ -42,8 +41,5 @@ public class PureThemeMainTopToolbarContributor : IToolbarContributor
 
         //Color Mode Switch Component
         context.Toolbar.Items.Add(new ToolbarItem(typeof(ColorModeSwitchViewComponent)));
-
-        //Navbar Toggler Component
-        context.Toolbar.Items.Add(new ToolbarItem(typeof(NavbarTogglerViewComponent),100));
     }
 }

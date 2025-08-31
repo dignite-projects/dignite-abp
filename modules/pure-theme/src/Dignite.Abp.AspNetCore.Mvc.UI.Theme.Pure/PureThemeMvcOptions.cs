@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.Components.Toolbar.NavbarToggler;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.UI.Navigation;
 
@@ -22,5 +21,5 @@ public class PureThemeMvcOptions
     /// <summary>
     /// A selector that defines which toolbar items will be displayed at mobile layout.
     /// </summary>
-    public Func<IReadOnlyList<ToolbarItem>, IEnumerable<ToolbarItem>> MobileToolbarSelector { get; set; } = (menuItems) => menuItems.Where(x => x.ComponentType == typeof(NavbarTogglerViewComponent));
+    public Func<IReadOnlyList<ToolbarItem>, IEnumerable<ToolbarItem>> MobileToolbarSelector { get; set; }
 }

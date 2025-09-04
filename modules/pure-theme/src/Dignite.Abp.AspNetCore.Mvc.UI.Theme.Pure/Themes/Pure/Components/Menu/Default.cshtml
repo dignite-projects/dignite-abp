@@ -22,7 +22,7 @@
         {
             var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
             <li class="nav-item my-1 @cssClass" @Html.Raw(elementId)>
-                <a class="nav-link px-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
+                <a class="nav-link underline-animate px-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {
                         <i class="@menuItem.Icon"></i>
@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                    <a class="nav-link dropdown-toggle px-3 @disabled @isActive" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link underline-animate dropdown-toggle px-3 @disabled @isActive" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if (menuItem.Icon != null)
                         {
                             <i class="@menuItem.Icon"></i>

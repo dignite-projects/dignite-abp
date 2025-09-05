@@ -31,7 +31,14 @@ public class DefaultRegionalizationProvider :
         }
         if (availableCultureNames.IsNullOrEmpty())
         {
-            throw new ArgumentNullException(nameof(availableCultureNames), "The data cannot be null.");
+            availableCultureNames = defaultCultureName;
+        }
+        else
+        {
+            if (!availableCultureNames.Split(',').Contains(defaultCultureName))
+            {
+                availableCultureNames = defaultCultureName + "," + availableCultureNames;
+            }
         }
 
         return new Regionalization(

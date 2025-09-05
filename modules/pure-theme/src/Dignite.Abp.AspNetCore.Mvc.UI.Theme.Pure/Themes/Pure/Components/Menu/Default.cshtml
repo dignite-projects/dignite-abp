@@ -14,15 +14,15 @@
     {
         if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
         {
-            <li class="nav-item my-1 @cssClass" @Html.Raw(elementId)>
+            <li class="nav-item @cssClass" @Html.Raw(elementId)>
                 @(await Component.InvokeAsync(customComponentType))
             </li>
         }
         else if (menuItem.Url != null)
         {
             var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
-            <li class="nav-item my-1 @cssClass" @Html.Raw(elementId)>
-                <a class="nav-link underline-animate px-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
+            <li class="nav-item px-3 @cssClass" @Html.Raw(elementId)>
+                <a class="nav-link underline-animate @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
                     {
                         <i class="@menuItem.Icon"></i>
@@ -34,7 +34,7 @@
     }
     else
     {
-        <li class="nav-item my-1">
+        <li class="nav-item px-3">
             <div class="dropdown">
                 @if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
                 {
@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                    <a class="nav-link underline-animate dropdown-toggle px-3 @disabled @isActive" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link underline-animate dropdown-toggle @disabled @isActive" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if (menuItem.Icon != null)
                         {
                             <i class="@menuItem.Icon"></i>

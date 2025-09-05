@@ -32,7 +32,7 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
         var regionalizationEndpoints = GetRegionalizationEndpoints();
 
         //
-        var regionCultureName = httpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)?.ToString();
+        var cultureName = httpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)?.ToString();
 
         //
         foreach (var endpoint in regionalizationEndpoints)
@@ -41,12 +41,12 @@ public class RegionalizationRouteManager : IRegionalizationRouteManager, ISingle
             var routePatternRawText = routeEndpoint.RoutePattern.RawText;
             var requestPath = httpContext.Request.Path.Value;
 
-            //如果当前请求的页面路径(requestPath)中不包含 region 路由参数
-            //则根据本次循环的routePattern格式，向当前请求的页面路径(requestPath)中添加一个默认的region路由参数
-            if (regionCultureName.IsNullOrEmpty())
+            //如果当前请求的页面路径(requestPath)中不包含 culture 路由参数
+            //则根据本次循环的routePattern格式，向当前请求的页面路径(requestPath)中添加一个默认的 culture 路由参数
+            if (cultureName.IsNullOrEmpty())
             {
                 var cultureSegment = $"{{{RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey}:{RegionalizationRouteConstraint.ConstraintName}}}";
-                var matchingCulture = "en";
+                var matchingCulture = "en"; // 默认文化
                 if (routePatternRawText.StartsWith(cultureSegment))
                 {
                     requestPath = matchingCulture + requestPath;

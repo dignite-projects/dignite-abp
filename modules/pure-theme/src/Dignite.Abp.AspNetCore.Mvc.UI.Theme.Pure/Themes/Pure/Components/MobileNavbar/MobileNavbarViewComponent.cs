@@ -27,8 +27,8 @@ public class MobileNavbarViewComponent : AbpViewComponent
         var menu = await MenuManager.GetMainMenuAsync();
         var toolbar = await ToolbarManager.GetAsync(StandardToolbars.Main);
         var model = new MobileNavbarViewModel(
-            Options.MobileMenuSelector(menu.Items?.AsReadOnly()).ToList(),
-            Options.MobileToolbarSelector(toolbar.Items?.AsReadOnly()).ToList());
+            Options.MobileMenuSelector(menu.Items.AsReadOnly()).ToList(),
+            Options.MobileToolbarSelector(toolbar.Items.AsReadOnly()).ToList());
         return View(model);
     }
 }

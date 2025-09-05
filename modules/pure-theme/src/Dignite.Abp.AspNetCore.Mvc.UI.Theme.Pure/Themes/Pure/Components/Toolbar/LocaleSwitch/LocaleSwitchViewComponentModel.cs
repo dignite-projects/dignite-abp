@@ -57,6 +57,7 @@ public class LocaleSwitchViewComponentModel
         var newSegments = new List<string>(urlSegments);
         if (httpContext.GetRouteValue(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey)!=null)
         {
+            /*
             if (culture.Equals(DefaultCultureName, StringComparison.OrdinalIgnoreCase))
             {
                 newSegments.RemoveAt(culturePosition);
@@ -65,6 +66,8 @@ public class LocaleSwitchViewComponentModel
             {
                 newSegments[culturePosition] = culture;
             }
+            */
+            newSegments[culturePosition] = culture;
         }
         else
         {

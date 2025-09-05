@@ -37,7 +37,16 @@ namespace Dignite.Cms.Public.Web.Controllers
 
         public async Task<IActionResult> Default()
         {
-            return await GetEntryActionResult();
+            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
+            var defaultCultureName = regionalization.DefaultCulture.Name;
+            if (regionalization.AvailableCultures.Count == 1)
+            {
+                return await GetEntryActionResult(defaultCultureName);
+            }
+            else
+            {
+                return RedirectToAction(nameof(CultureEntry), new { culture = defaultCultureName });
+            }
         }
 
         /// <summary>
@@ -47,7 +56,16 @@ namespace Dignite.Cms.Public.Web.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Entry(string path)
         {
-            return await GetEntryActionResult(null, path);
+            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
+            var defaultCultureName = regionalization.DefaultCulture.Name;
+            if (regionalization.AvailableCultures.Count == 1)
+            {
+                return await GetEntryActionResult(defaultCultureName, path);
+            }
+            else
+            {
+                return RedirectToAction(nameof(CultureEntry), new { culture = defaultCultureName, path });
+            }
         }
 
         /// <summary>
@@ -57,10 +75,10 @@ namespace Dignite.Cms.Public.Web.Controllers
         /// <param name="path">
         /// There are several formats:
         /// 1.{culture}
-        /// 2.{culture}/{route}
+        /// 2.{culture}/{path}
         /// </param>
         /// <returns></returns>
-        public async Task<IActionResult> CultureEntry(string culture, string path)
+        public async Task<IActionResult> CultureEntry(string culture, string path="/")
         {
             return await GetEntryActionResult(culture, path);
         }
@@ -71,9 +89,9 @@ namespace Dignite.Cms.Public.Web.Controllers
         /// <param name="culture"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        protected async Task<IActionResult> GetEntryActionResult(string culture = null, string path = "/")
+        protected async Task<IActionResult> GetEntryActionResult(string culture,string path="/")
         {
-            path = path.IsNullOrEmpty() ? "/" : path.EnsureStartsWith('/');
+            path = path.EnsureStartsWith('/');
             var section = await GetSectionByEntityPath(path);
             if (section == null)
             {
@@ -81,30 +99,6 @@ namespace Dignite.Cms.Public.Web.Controllers
                 return NotFound();
             }
 
-            //
-            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
-            var defaultCultureName = regionalization.DefaultCulture.Name;
-            if (culture.IsNullOrEmpty())
-            {
-                culture = defaultCultureName;
-            }
-            else
-            {
-                /* Remove the default culture prefix and redirect to the new route.
-                 * Example: the default culture is en, the current request route is /en/about, will jump to /about route
-                 */
-                if (culture.Equals(defaultCultureName, StringComparison.OrdinalIgnoreCase) 
-                    && Request.Path.Value.EnsureEndsWith('/').StartsWith($"/{culture}/"))
-                {
-                    return LocalRedirectPermanent(Request.GetEncodedPathAndQuery().RemovePreFix($"/{culture}").EnsureStartsWith('/').EnsureStartsWith('~'));
-                }
-
-                if (!culture.Equals(defaultCultureName, StringComparison.OrdinalIgnoreCase) 
-                    && !Request.RouteValues.Any(r=>r.Key.Equals(RegionalizationRouteDataRequestCultureProvider.RegionalizationRouteDataStringKey,StringComparison.OrdinalIgnoreCase)))
-                {
-                    return Redirect(culture.ToLower());
-                }
-            }
 
             //
             var entry = await GetEntry(culture, path, section);
@@ -115,15 +109,8 @@ namespace Dignite.Cms.Public.Web.Controllers
             }
             else
             {
-                if (!culture.Equals(defaultCultureName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return Redirect(path);
-                }
-                else
-                {
-                    Logger.LogError("Entry not found for path: {Path}, culture: {Culture}", path, culture);
-                    return NotFound();
-                }
+                Logger.LogError("Entry not found for path: {Path}, culture: {Culture}", path, culture);
+                return NotFound();
             }
         }
 

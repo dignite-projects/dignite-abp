@@ -54,22 +54,22 @@ public class LocaleAnchorTagHelper : TagHelper
             }
 
             var cultureFeature = ViewContext.HttpContext?.Features.Get<IRequestCultureFeature>();
-            var cultureName = cultureFeature?.RequestCulture.Culture.Name;
+            var requestCultureName = cultureFeature?.RequestCulture.Culture.Name;
 
-            if (!string.IsNullOrEmpty(cultureName))
+            if (!string.IsNullOrEmpty(requestCultureName))
             {
                 var regionalizationProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IRegionalizationProvider>();
                 var regionalization = AsyncHelper.RunSync(regionalizationProvider.GetRegionalizationAsync);
                 var defaultCulture = regionalization.DefaultCulture.Name;
-                if (!cultureName.Equals(defaultCulture, StringComparison.OrdinalIgnoreCase))
+                if (regionalization.AvailableCultures.Count > 1)
                 {
                     if (url.StartsWith("~/"))
                     {
-                        url = cultureName.EnsureStartsWith('/').EnsureStartsWith('~') + url.RemovePreFix("~").RemovePostFix("/");
+                        url = requestCultureName.EnsureStartsWith('/').EnsureStartsWith('~') + url.RemovePreFix("~").RemovePostFix("/");
                     }
                     else
                     {
-                        url = cultureName.EnsureStartsWith('/') + url.RemovePostFix("/");
+                        url = requestCultureName.EnsureStartsWith('/') + url.RemovePostFix("/");
                     }
                 }
                 output.Attributes.SetAttribute("href", url); //以上代码对href值处理完成后,其他的 TagHelper 将继续处理,例如 asp.net 内置的 UrlResolutionTagHelper

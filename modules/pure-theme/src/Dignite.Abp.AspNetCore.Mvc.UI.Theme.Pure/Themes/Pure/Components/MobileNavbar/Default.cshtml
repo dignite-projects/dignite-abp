@@ -6,53 +6,31 @@
 @model MobileNavbarViewModel
 @if(Model.MenuItems!=null || Model.ToolbarItems!=null)
 {
-<nav class="mobile-navbar backdrop-blur rounded-pill d-block d-sm-block d-md-block d-lg-none">
-    <ul class="nav justify-content-around align-items-center">
-        @if(Model.MenuItems!=null)
-        {
-            foreach (var menuItem in Model.MenuItems)
+    <nav class="mobile-navbar backdrop-blur rounded-pill d-block d-sm-block d-md-block d-lg-none">
+        <ul class="nav justify-content-around align-items-center">
+            @if(Model.MenuItems!=null)
             {
-                var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"mobile-nav-{menuItem.ElementId}\"";
-                var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
-                var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
-                var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
-                var customComponentType = menuItem.GetComponentTypeOrDefault();
-                var isActive = menuItem.Name == PageLayout.Content.MenuItemName ? "active" : string.Empty;
-                if (menuItem.IsLeaf)
+                foreach (var menuItem in Model.MenuItems)
                 {
-                    if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+                    var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"mobile-nav-{menuItem.ElementId}\"";
+                    var cssClass = string.IsNullOrEmpty(menuItem.CssClass) ? string.Empty : menuItem.CssClass;
+                    var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
+                    var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
+                    var customComponentType = menuItem.GetComponentTypeOrDefault();
+                    var isActive = menuItem.Name == PageLayout.Content.MenuItemName ? "active" : string.Empty;
+                    if (menuItem.IsLeaf)
                     {
-                        <li class="nav-item @cssClass" @Html.Raw(elementId)>
-                            @(await Component.InvokeAsync(customComponentType))
-                        </li>
-                    }
-                    else if (menuItem.Url != null)
-                    {
-                        var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
-                        <li class="nav-item @cssClass" @Html.Raw(elementId)>
-                            <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
-                                @if (menuItem.Icon != null)
-                                {
-                                    <i class="@menuItem.Icon"></i>
-                                }
-                                <small class="d-block">
-                                    @menuItem.DisplayName
-                                </small>
-                            </a>
-                        </li>
-                    }
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            @if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
-                            {
+                        if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+                        {
+                            <li class="nav-item @cssClass" @Html.Raw(elementId)>
                                 @(await Component.InvokeAsync(customComponentType))
-                            }
-                            else
-                            {
-                                <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="#" id="mobile-nav_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </li>
+                        }
+                        else if (menuItem.Url != null)
+                        {
+                            var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
+                            <li class="nav-item @cssClass" @Html.Raw(elementId)>
+                                <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                                     @if (menuItem.Icon != null)
                                     {
                                         <i class="@menuItem.Icon"></i>
@@ -61,18 +39,40 @@
                                         @menuItem.DisplayName
                                     </small>
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="mobile-nav_@(menuItem.Name)">
-                                    @foreach (var childMenuItem in menuItem.Items)
-                                    {
-                                        @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
-                                    }
-                                </div>
-                            }
-                        </div>
-                    </li>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                @if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
+                                {
+                                    @(await Component.InvokeAsync(customComponentType))
+                                }
+                                else
+                                {
+                                    <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="#" id="mobile-nav_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @if (menuItem.Icon != null)
+                                        {
+                                            <i class="@menuItem.Icon"></i>
+                                        }
+                                        <small class="d-block">
+                                            @menuItem.DisplayName
+                                        </small>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="mobile-nav_@(menuItem.Name)">
+                                        @foreach (var childMenuItem in menuItem.Items)
+                                        {
+                                            @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </li>
+                    }
                 }
             }
-        }
             @if (Model.ToolbarItems != null)
             {
                 foreach (var toolbarItem in Model.ToolbarItems.OrderBy(i => i.Order))
@@ -81,5 +81,5 @@
                 }
             }
         </ul>
-</nav>
+    </nav>
 }

@@ -28,9 +28,9 @@
                         }
                         else if (menuItem.Url != null)
                         {
-                            var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
+                            var useLocalePrefix = menuItem.IsSupportsLocale();
                             <li class="nav-item @cssClass" @Html.Raw(elementId)>
-                                <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
+                                <a class="nav-link underline-animate text-body text-center px-0 py-1 mx-3 @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                                     @if (menuItem.Icon != null)
                                     {
                                         <i class="@menuItem.Icon"></i>
@@ -52,7 +52,7 @@
                                 }
                                 else
                                 {
-                                    <a class="nav-link underline-animate text-body fw-medium text-center px-0 py-1 mx-3 @disabled @isActive" href="#" id="mobile-nav_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link underline-animate text-body text-center px-0 py-1 mx-3 @disabled @isActive" href="#" id="mobile-nav_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         @if (menuItem.Icon != null)
                                         {
                                             <i class="@menuItem.Icon"></i>

@@ -76,7 +76,7 @@
 
     <div class="@containerClass">
         <!-- page content toolbar -->
-        <div id="AbpContentToolbar" class="d-flex align-items-center sticky-top px-2 backdrop-blur content-toolbar">
+        <div id="AbpContentToolbar" class="d-flex align-items-center sticky-top backdrop-blur content-toolbar">
             @(await Component.InvokeAsync<BreadCrumbsViewComponent>())
             @await RenderSectionAsync("content_toolbar", false)
         </div>

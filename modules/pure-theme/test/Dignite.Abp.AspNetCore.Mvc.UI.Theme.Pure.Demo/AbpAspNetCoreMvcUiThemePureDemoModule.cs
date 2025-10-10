@@ -43,18 +43,23 @@ public class AbpAspNetCoreMvcUiThemePureDemoModule : AbpModule
 
         Configure<AbpBundlingOptions>(options =>
         {
+            var standardStyleBundles = options.StyleBundles.Get(StandardBundles.Styles.Global);
+            var standardScriptBundles = options.ScriptBundles.Get(StandardBundles.Styles.Global);
+
+            /* remove datatable styles */
+            standardStyleBundles.Contributors.Remove<DatatablesNetBs5StyleContributor>();
+            standardStyleBundles.Contributors.Remove<SharedThemeGlobalStyleContributor>();
+
+            /* remove datatable scripts */
+            standardScriptBundles.Contributors.Remove<DatatablesNetScriptContributor>();
+            standardScriptBundles.Contributors.Remove<DatatablesNetBs5ScriptContributor>();
+
+
+
+            /*  */
             var globalStyleBundles = options.StyleBundles.Get(PureThemeBundles.Styles.Global);
             var globalScriptBundles = options.ScriptBundles.Get(PureThemeBundles.Scripts.Global);
 
-            /* remove datatable styles */
-            globalStyleBundles.Contributors.Remove<DatatablesNetBs5StyleContributor>();
-            globalStyleBundles.Contributors.Remove<SharedThemeGlobalStyleContributor>();
-
-            /* remove datatable scripts */
-            globalScriptBundles.Contributors.Remove<DatatablesNetScriptContributor>();
-            globalScriptBundles.Contributors.Remove<DatatablesNetBs5ScriptContributor>();
-
-            /*  */
             globalStyleBundles.AddContributors(typeof(PureThemeGlobalStyleDemoContributor));
             globalScriptBundles.AddContributors(typeof(PureThemeGlobalScriptDemoContributor));
         });

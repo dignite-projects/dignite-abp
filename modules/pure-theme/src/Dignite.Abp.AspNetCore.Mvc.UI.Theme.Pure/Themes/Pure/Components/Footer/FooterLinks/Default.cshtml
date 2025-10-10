@@ -21,7 +21,7 @@
                 }
                 else if (menuItem.Url != null)
                 {
-                    var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
+                    var useLocalePrefix = menuItem.IsSupportsLocale();
                     <li class="nav-item @cssClass" @elementId>
                         <a class="nav-link link-secondary @disabled" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                             @if (menuItem.Icon != null)
@@ -55,7 +55,7 @@
                             @foreach (var childMenuItem in menuItem.Items)
                             {
                                 var childMenuItemUrl = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
-                                var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
+                                var useLocalePrefix = menuItem.IsSupportsLocale();
                                 <li>
                                     <a class="dropdown-item" href="@childMenuItemUrl" add-culture="useLocalePrefix">
                                         @if (menuItem.Icon != null)

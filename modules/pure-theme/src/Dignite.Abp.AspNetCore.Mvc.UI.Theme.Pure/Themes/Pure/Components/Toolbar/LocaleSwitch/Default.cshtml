@@ -7,14 +7,14 @@
 {
     var currentCulture = Model.AvailableCultures.FirstOrDefault(l => l.Name.Equals(Model.CurrentCultureName, System.StringComparison.OrdinalIgnoreCase))??
         Model.AvailableCultures.FirstOrDefault(l => l.Name.Equals(Model.DefaultCultureName, System.StringComparison.OrdinalIgnoreCase));
-    <div class="dropdown">
+    <div class="dropdown-center">
         <a class="btn" href="#" id="Menu_CultureSwitch" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="@currentCulture?.NativeName">
             <i class="fa fa-globe" aria-hidden="true"></i>
-            <small>
+            <small class="d-block d-lg-inline">
                 @currentCulture?.NativeName
             </small>
         </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Menu_CultureSwitch">
+        <div class="dropdown-menu" aria-labelledby="Menu_CultureSwitch">
             @foreach (var culture in Model.AvailableCultures)
             {
                 if (Model.CurrentCultureName == culture.Name)

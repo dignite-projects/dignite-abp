@@ -11,14 +11,18 @@ body {
 }
 
 .dropdown-toggle::after {
+    transition: transform .2s;
     line-height: 1rem;
     content: '›';
     font-size: 1.75rem;
-    font-weight: 500;
     border: none;
-    vertical-align: -.25rem;
+    vertical-align: -.375rem;
     -moz-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
+}
+.show.dropdown-toggle::after {
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
 }
 
 .backdrop-blur {
@@ -43,11 +47,15 @@ body {
         margin-right: -.75rem;
     }
 }
-
-.offcanvas .navbar .nav-link:hover,
-.offcanvas .navbar .nav-link:focus,
-.offcanvas .navbar .nav-link.active {
+.navbar .nav-link:hover {
     background-color: var(--bs-tertiary-bg);
+}
+.navbar .nav-link.show {
+    background-size: 100% 1px;
+}
+.navbar .nav-link:focus,
+.navbar .nav-link.active {
+    font-weight: 600;
 }
 
 .offcanvas .navbar .dropdown-menu {
@@ -119,9 +127,6 @@ body {
 }
 
 
-.underline-animate:focus,
-.underline-animate.active,
-.underline-animate.show,
 .underline-animate:hover {
     background-size: 100% 1px;
 }
@@ -132,13 +137,7 @@ body {
 }
 
 .underline-animate.fw-medium:hover,
-.underline-animate.fw-semibold:hover,
-.underline-animate.fw-medium:focus,
-.underline-animate.fw-semibold:focus,
-.underline-animate.fw-medium.active,
-.underline-animate.fw-semibold.active,
-.underline-animate.fw-medium.show,
-.underline-animate.fw-semibold.show {
+.underline-animate.fw-semibold:hover {
     background-size: 100% 2px;
 }
 
@@ -148,12 +147,6 @@ body {
 }
 
 .underline-animate.fw-bold:hover,
-.underline-animate.fw-bolder:hover,
-.underline-animate.fw-bold:focus,
-.underline-animate.fw-bolder:focus,
-.underline-animate.fw-bold.active,
-.underline-animate.fw-bolder.active,
-.underline-animate.fw-bold.show,
-.underline-animate.fw-bolder.show {
+.underline-animate.fw-bolder:hover {
     background-size: 100% 4px;
 }

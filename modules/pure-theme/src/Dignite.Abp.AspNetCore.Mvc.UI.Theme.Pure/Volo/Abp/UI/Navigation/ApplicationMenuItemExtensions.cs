@@ -3,14 +3,14 @@
 namespace Volo.Abp.UI.Navigation;
 public static class ApplicationMenuItemExtensions
 {
-    public static ApplicationMenuItem SetSupportsLocalePrefix(this ApplicationMenuItem menuItem, bool enabled)
+    public static ApplicationMenuItem SupportsLocale(this ApplicationMenuItem menuItem, bool enabled)
     {
-        return menuItem.WithCustomData(ApplicationMenuItemConsts.SupportsLocalePrefixKeyName, enabled);
+        return menuItem.WithCustomData(ApplicationMenuItemConsts.SupportsLocaleKeyName, enabled);
     }
 
-    public static bool IsSupportsLocalePrefix(this ApplicationMenuItem menuItem)
+    public static bool IsSupportsLocale(this ApplicationMenuItem menuItem)
     {
-        if (menuItem.CustomData.TryGetValue(ApplicationMenuItemConsts.SupportsLocalePrefixKeyName, out object isSupportsLocalization))
+        if (menuItem.CustomData.TryGetValue(ApplicationMenuItemConsts.SupportsLocaleKeyName, out object isSupportsLocalization))
         {
             if (isSupportsLocalization is bool isSupportsLocalizationBool)
             {

@@ -8,17 +8,16 @@
 @inject IHtmlLocalizer<AbpUiResource> L
 @model ApplicationMenu
 
-<div class="dropdown">
-    <a class="btn d-flex align-items-center" href="#" id="Toolbar_UserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-user me-1"></i>
-        <small class="d-none d-sm-none d-md-none d-lg-block" title="@(CurrentUser.TenantId.HasValue?CurrentTenant.Name+"\\":"") @CurrentUser.UserName">
+<div class="dropdown-center">
+    <a class="btn" href="#" id="Toolbar_UserMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user"></i>
+        <small class="d-block d-lg-inline" title="@(CurrentUser.TenantId.HasValue? CurrentTenant.Name + "\\":"") @CurrentUser.UserName">
             @CurrentUser.UserName
         </small>
     </a>
-
     @if (Model.Items.Any())
     {
-        <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="Toolbar_UserMenu">
+        <div class="dropdown-menu" aria-labelledby="Toolbar_UserMenu">
             @foreach (var menuItem in Model.Items)
             {
                 var elementId = string.IsNullOrEmpty(menuItem.ElementId) ? string.Empty : $"id=\"{menuItem.ElementId}\"";

@@ -9,7 +9,8 @@
     var disabled = menuItem.IsDisabled ? "disabled" : string.Empty;
     var url = string.IsNullOrEmpty(menuItem.Url) ? "#" : Url.IsLocalUrl(menuItem.Url) ? Url.Content(menuItem.Url.EnsureStartsWith('~')) : menuItem.Url;
     var customComponentType = menuItem.GetComponentTypeOrDefault();
-    var isActive = menuItem.Name == PageLayout.Content.MenuItemName ? "active" : string.Empty;
+    var currentMenuChains = Model.GetMenuChains(PageLayout.Content.MenuItemName);
+    var isActive = (menuItem.Name == PageLayout.Content.MenuItemName) || menuItem.FindMenuItem(PageLayout.Content.MenuItemName) != null ? "active" : string.Empty;
     if (menuItem.IsLeaf)
     {
         if (customComponentType != null && typeof(ViewComponent).IsAssignableFrom(customComponentType))
@@ -20,7 +21,7 @@
         }
         else if (menuItem.Url != null)
         {
-            var useLocalePrefix = menuItem.IsSupportsLocalePrefix();
+            var useLocalePrefix = menuItem.IsSupportsLocale();
             <li class="nav-item px-3 @cssClass" @Html.Raw(elementId)>
                 <a class="nav-link underline-animate @disabled @isActive" href="@url" add-culture="useLocalePrefix" target="@menuItem.Target">
                     @if (menuItem.Icon != null)
@@ -49,7 +50,7 @@
                         }
                         @menuItem.DisplayName
                     </a>
-                    <div class="dropdown-menu ms-3" aria-labelledby="Menu_@(menuItem.Name)">
+                    <div class="dropdown-menu" aria-labelledby="Menu_@(menuItem.Name)">
                         @foreach (var childMenuItem in menuItem.Items)
                         {
                             @await Html.PartialAsync("Components/Menu/_MenuItem", childMenuItem)

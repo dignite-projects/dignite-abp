@@ -13,7 +13,7 @@
                 <nav class="nav flex-column">
                     @foreach (var item in menuItems)
                     {
-                        var useLocalePrefix = item.IsSupportsLocalePrefix();
+                        var useLocalePrefix = item.IsSupportsLocale();
                         var url = string.IsNullOrEmpty(item.Url) ? "#" : Url.IsLocalUrl(item.Url) ? Url.Content(item.Url.EnsureStartsWith('~')) : item.Url;
                         <a class="nav-link link-secondary ps-0" href="@url" add-culture="useLocalePrefix" target="@item.Target">@item.DisplayName</a>
                     }

@@ -17,8 +17,8 @@
     }
     else if (Model.Url != null)
     {
-        var useLocalePrefix = Model.IsSupportsLocalePrefix();
-        <a class="dropdown-item @cssClass @disabled @isActive" href="@url" add-culture="@useLocalePrefix" target="@Model.Target" id="Model.ElementId">
+        var useLocalePrefix = Model.IsSupportsLocale();
+        <a class="dropdown-item @cssClass @disabled @isActive" href="@url" add-culture="@useLocalePrefix" target="@Model.Target" id="@Model.ElementId">
             @if (Model.Icon != null)
             {
                 <i class="@Model.Icon"></i>

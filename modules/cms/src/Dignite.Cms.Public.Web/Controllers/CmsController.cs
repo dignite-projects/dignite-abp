@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
@@ -37,16 +38,7 @@ namespace Dignite.Cms.Public.Web.Controllers
 
         public async Task<IActionResult> Default()
         {
-            var regionalization = await _regionalizationProvider.GetRegionalizationAsync();
-            var defaultCultureName = regionalization.DefaultCulture.Name;
-            if (regionalization.AvailableCultures.Count == 1)
-            {
-                return await GetEntryActionResult(defaultCultureName);
-            }
-            else
-            {
-                return RedirectToAction(nameof(CultureEntry), new { culture = defaultCultureName });
-            }
+            return await Entry(null);
         }
 
         /// <summary>
@@ -64,7 +56,15 @@ namespace Dignite.Cms.Public.Web.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(CultureEntry), new { culture = defaultCultureName, path });
+                var cultureName = CultureInfo.CurrentCulture.Name;
+                if (regionalization.AvailableCultures.Any(c => c.Name.Equals(cultureName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return RedirectToAction(nameof(CultureEntry), new { culture = cultureName, path });
+                }
+                else
+                {
+                    return RedirectToAction(nameof(CultureEntry), new { culture = defaultCultureName, path });
+                }
             }
         }
 
@@ -78,8 +78,9 @@ namespace Dignite.Cms.Public.Web.Controllers
         /// 2.{culture}/{path}
         /// </param>
         /// <returns></returns>
-        public async Task<IActionResult> CultureEntry(string culture, string path="/")
+        public async Task<IActionResult> CultureEntry(string culture, string path = null)
         {
+            path = path ?? "/";
             return await GetEntryActionResult(culture, path);
         }
 

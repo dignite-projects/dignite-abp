@@ -35,6 +35,13 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
                 这可能是因为CmsApplicationBuilderExtensions.UseCmsEndpoints方法中{*path:regex(^(?!swagger/|abp/|account/|libs/|.well-known/).*)}还缺少一些未知的前缀,
                 因此,请通过断点调式来查看请求的路径, 以确定是否需要添加到正则表达式中.
                  */
+                /* 2025-10-10 注释掉, 将这里的逻辑取消，不再使用默认文化, 而是直接返回NullProviderCultureResult.Result
+                 * 而是交给更上层的开发者处理.
+                 * 否则会导致在多语言站点中, 如果用户访问了不带语言前缀的URL, 会被强制重定向到默认语言, 这不是我们想要的.
+                 * 我们希望用户访问不带语言前缀的URL时, 能够看到当前浏览器的首选语言(如果支持的话), 而不是默认语言.
+                 * 
+                 * 另外, 这里也不再设置CultureCookie, 让开发者来处理.
+                 *
                 var regionalizationRouteManager = httpContext.RequestServices.GetRequiredService<IRegionalizationRouteManager>();
                 if (regionalizationRouteManager.TryMatchUrl(httpContext, out string? routePattern))
                 {
@@ -50,6 +57,9 @@ public class RegionalizationRouteDataRequestCultureProvider : RouteDataRequestCu
                     // No values specified for either so no match
                     return NullProviderCultureResult.Result;
                 }
+                */
+                // No values specified for either so no match
+                return NullProviderCultureResult.Result;
             }
             else
             {

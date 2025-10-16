@@ -42,14 +42,14 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
         var authorizationConfiguration = containerConfiguration.GetAuthorizationConfiguration();
         var permissionName = GetPermissionName(authorizationConfiguration, requirement);
 
-        if ((resource.CreatorId.HasValue && resource.CreatorId == context.User.FindUserId())
-            || ((!permissionName.IsNullOrEmpty() && await PermissionChecker.IsGrantedAsync(context.User, permissionName))
-                || (permissionName.IsNullOrEmpty() && requirement.Name == CommonOperations.Get.Name) // When permissions are not set, all users will be authorized to get files;
-                )
+        if ((permissionName.IsNullOrEmpty() && requirement.Name == CommonOperations.Get.Name) // When permissions are not set, all users will be authorized to get files;         
+            || (resource.CreatorId.HasValue && resource.CreatorId == context.User.FindUserId())
+            || (!permissionName.IsNullOrEmpty() && await PermissionChecker.IsGrantedAsync(context.User, permissionName))   
             || await PermissionChecker.IsGrantedAsync(context.User, FileExplorerPermissions.Files.Management)
             )
         {
             // Directory authorization verification
+            /* 
             if (resource.DirectoryId.HasValue && resource.DirectoryId.Value!= Guid.Empty)
             {
                 var directory = await DirectoryDescriptorRepository.FindAsync(resource.DirectoryId.Value, false);
@@ -62,6 +62,7 @@ public class FileDescriptorAuthorizationHandler : AuthorizationHandler<Operation
                     return;
                 }
             }
+            */
 
             if(resource.EntityId.IsNullOrEmpty() && authorizationConfiguration.FileEntityAuthorizationHandler != null && !permissionName.IsNullOrEmpty())
             {

@@ -31,6 +31,7 @@
     "FormatSpecifier": "Format Specifier",
     "Max": "Maximum Value",
     "Min": "Minimum Value",
+    "FormControl:TreeView": "TreeView",
     "Validate:Required": "{0} Field Required!",
     "Validate:NotDateType": "{0} value is not a date type!",
     "Validate:CannotBeGreaterThan": "{0} value cannot be greater than {1}!",

@@ -1,7 +1,7 @@
 <form [formGroup]="_entity">
     <div formGroupName="extraProperties">
         <div class="mb-3 position-relative">
-           <div class="d-flex align-items-center justify-content-between position-sticky  bg-white py-1" style="top: 42px;z-index: 10;">
+           <div class="d-flex align-items-center justify-content-between position-sticky   py-1" style="top: 42px;z-index: 10;">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
             @if(fieldNameControl?.controls?.length>0){
                 <button  type="button" class="btn btn-sm btn-light" (click)="toggleAll()">

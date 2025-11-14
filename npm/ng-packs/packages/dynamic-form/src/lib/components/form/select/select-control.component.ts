@@ -68,12 +68,12 @@ export class SelectControlComponent implements OnDestroy {
           const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
           element[capitalizedKey] = item;
         }
-        if (!this._selected) {
-          if (Array.isArray(this._selected) && element.Selected && this._selected.length === 0) {
-            selectValue = isMultiple ? [...selectValue, element.Value] : [element.Value];
-            this._selected = selectValue;
-          }
+        if (element.Selected && this._selected.length === 0) {
+          selectValue = isMultiple ? [...selectValue, element.Value] : [element.Value];
         }
+      }
+      if (this._selected.length === 0 && selectValue.length > 0) {
+        this._selected = selectValue;
       }
       // this._selected = selectValue;
       const newControl = this.fb.control(this._selected, ValidatorsArray);

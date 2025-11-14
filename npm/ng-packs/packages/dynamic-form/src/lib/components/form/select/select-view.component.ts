@@ -29,11 +29,18 @@ export class SelectViewComponent {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     const valueOptions = this._value;
+   
     if (this.type && valueOptions) {
+      const options = this.fields?.field?.formConfiguration?.['Select.Options'] || [];
+      const getTextByValue = (val: any) => {
+        const option = options.find((opt: any) => opt.value === val || opt.Value === val);
+        return option?.text || option?.Text || val;
+      };
+      
       if (Array.isArray(valueOptions)) {
-        this.showValue = valueOptions.join(',');
+        this.showValue = valueOptions.map(getTextByValue).join(',');
       } else {
-        this.showValue = valueOptions;
+        this.showValue = getTextByValue(valueOptions);
       }
     }
   }

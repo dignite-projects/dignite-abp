@@ -1,0 +1,112 @@
+ ::ng-deep  .dignite-form-tree-select.ant-select {
+    color: var(--bs-body-color) !important;
+
+    .ant-select-selector {
+      background: transparent !important;
+      border: none !important;
+      padding: 0.475rem 1.25rem !important;
+      box-shadow: none !important;
+      height: auto !important;
+      display: flex !important;
+      align-items: center !important;
+
+      .ant-select-selection-search {
+        margin-inline-start: 0 !important;
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        .ant-select-selection-search-input {
+          background-color: transparent !important;
+          color: var(--bs-body-color) !important;
+          caret-color: var(--bs-body-color) !important;
+          height: 100%;
+        }
+      }
+
+      .ant-select-selection-overflow {
+        display: flex;
+        align-items: center;
+
+        .ant-select-selection-overflow-item {
+          display: flex;
+          align-items: center;
+
+          .ant-select-selection-item {
+            display: flex;
+            align-items: center;
+            color: var(--bs-body-color) !important;
+           
+          }
+        }
+      }
+    }
+
+    .anticon-search,
+    .anticon-down {
+      display: none;
+    }
+
+    .ant-select-arrow,
+    .ant-select-clear {
+      right: 36px !important;
+    }
+
+    .ant-select-selection-item {
+      color: var(--bs-body-color) !important;
+    }
+
+    .ant-select-selection-placeholder {
+      color: var(--bs-body-color) !important;
+      opacity: 0.6;
+    }
+
+    &.ant-select-multiple .ant-select-selection-item {
+      max-width: 60% !important;
+    }
+
+    .ant-select-selection-item-remove {
+      color: var(--bs-body-color) !important;
+    }
+  }
+
+::ng-deep .dignite-form-tree-select-dropdown {
+  max-height: 256px;
+  overflow-y: auto;
+  background: var(--bs-light) !important;
+
+  .ant-select-dropdown {
+    background: var(--bs-light) !important;
+  } 
+  .ant-select-tree-switcher{
+      color: var(--bs-body-color);
+  }
+
+  .ant-select-tree {
+    background: transparent !important;
+    .ant-select-tree-treenode {
+      padding: 4px 0;
+
+      .ant-select-tree-node-content-wrapper {
+        padding: 5px 8px;
+        border-radius: 4px;
+        transition: all 0.3s;
+        color: var(--bs-body-color);
+
+        &:hover {
+          background-color: var(--bs-primary) !important;
+          color: var(--bs-white) !important;
+        }
+      }
+
+      &.ant-select-tree-treenode-selected .ant-select-tree-node-content-wrapper {
+        background-color: var(--lpx-brand) !important;
+        color: var(--bs-white) !important;
+      }
+    }
+
+    .ant-select-tree-checkbox {
+      margin-right: 8px;
+    }
+  }
+}

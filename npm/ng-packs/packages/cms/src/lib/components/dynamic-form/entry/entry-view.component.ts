@@ -30,10 +30,22 @@ export class EntryViewComponent {
   async ngAfterContentInit(): Promise<void> {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-   
+    console.log('valueOptions',this.fields)
     if (this.type && this._value) {
-     
-      if (Array.isArray(this._value)) {
+      const options = this.fields?.field?.formConfiguration?.['Entry.Options'] || [];
+      
+      if (options.length > 0) {
+        const getTextByValue = (val: any) => {
+          const option = options.find((opt: any) => opt.value === val || opt.Value === val);
+          return option?.text || option?.Text || val;
+        };
+        
+        if (Array.isArray(this._value)) {
+          this.showValue = this._value.map(getTextByValue).join(',');
+        } else {
+          this.showValue = getTextByValue(this._value);
+        }
+      } else if (Array.isArray(this._value)) {
         this.showValue = await this.getListByIds(this._value);
       } else {
         this.showValue = this._value;
@@ -49,7 +61,7 @@ export class EntryViewComponent {
         .subscribe((res: any) => {
           const result = res.items
             .map((item: any) => {
-              return item.title;
+              return item.slug;
             })
             .join(',');
           resolve(result);

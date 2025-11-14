@@ -1,0 +1,109 @@
+<form [formGroup]="formEntity">
+    <div formGroupName="formConfiguration">
+        <div class="mb-3">
+            <label class="form-label">{{'AbpDynamicForm::Nodes' | abpLocalization}}</label>
+            <button class="btn btn-sm btn-dark soft ms-2 float-end" type="button"
+                (click.stop)="addNodeBtn()">{{'AbpDynamicForm::AddNode' |
+                abpLocalization}}</button>
+            <abp-tree [nodes]="nodes" [checkable]="false" (dropOver)="dropOver($event)"
+                (nzExpandChange)="nzExpandChange($event)" [expandedKeys]="anExpandedNode" [draggable]="true">
+                <ng-template #menu let-node>
+                    <button ngbDropdownItem (click.stop)="editItemBtn(node)"><i
+                            class=" me-1 fa fa-pencil"></i>{{'AbpUi::Edit' |
+                        abpLocalization}}</button>
+                    <button ngbDropdownItem (click.stop)="createChildItemBtn(node)"><i
+                            class=" me-1 fa fa-plus"></i>{{'AbpDynamicForm::AddSubNode' |
+                        abpLocalization}}</button>
+                    <button ngbDropdownItem (click.stop)="deleteMenuItemBtn(node)"><i
+                            class=" me-1 fa fa-remove"></i>{{'AbpUi::Delete' |
+                        abpLocalization}}</button>
+                </ng-template>
+                <ng-template abpTreeNodeTemplate let-node>
+                    <div (click)="toggleNodeChecked($event, node)">
+                        <input type="checkbox" [checked]="node.origin?.isChecked"
+                            [attr.data-indeterminate]="hasChildrenChecked(node)" class="form-check-input me-2">
+                        {{node.title}}
+                    </div>
+                </ng-template>
+                <ng-template abpTreeExpandedIconTemplate let-node let-origin="origin">
+                    <i aria-hidden="true" *ngIf="node.children.length>0">
+                        <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
+                </ng-template>
+
+                <ng-template #minusIcon>
+                    <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        fill-rule="evenodd" clip-rule="evenodd">
+                        <path
+                            d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
+                    </svg>
+                </ng-template>
+
+                <ng-template #plusIcon>
+                    <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        fill-rule="evenodd" clip-rule="evenodd">
+                        <path
+                            d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z" />
+                    </svg>
+                </ng-template>
+            </abp-tree>
+            <div *ngIf="nodes.length === 0" class="text-muted mt-2">{{'AbpDynamicForm::PleaseAddNode' |
+                abpLocalization}}</div>
+            <div *ngIf="TreeOptions?.errors?.required" class="invalid-feedback ">
+                {{'AbpValidation::ThisFieldIsRequired.' | abpLocalization: 'Nodes'}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" (change)="toggleMultiple($event)"
+                    formControlName="TreeView.Multiple" id="Multiple">
+                <label class="form-check-label" for="Multiple">
+                    {{'AbpDynamicForm::Multiple' | abpLocalization}}
+                </label>
+            </div>
+        </div>
+        <button type="submit" (abpInit)="submitclick?.nativeElement?.click()" style="display: none;"
+            #submitclick></button>
+    </div>
+</form>
+
+
+<!-- [options]="{ size: CurrentSelectionTableControlName==='Matrix'?'xl':'' ,scrollable:false }" (visibleChange)="tableSelectVisibleChange($event)"-->
+<abp-modal [(visible)]="isVisible" [busy]="modalBusy">
+    <ng-template #abpHeader>
+        <h3>{{isCreateChild ? ('AbpDynamicForm::AddSubNode' | abpLocalization) : (selectTree ? ('AbpUi::Edit' |
+            abpLocalization) : ('Cms::New' | abpLocalization))}}</h3>
+    </ng-template>
+    <ng-template #abpBody>
+        <ng-template #loaderRef>
+            <div class="text-center"><i class="fa fa-pulse fa-spinner" aria-hidden="true"></i></div>
+        </ng-template>
+        <ng-container *ngIf="nodeForm; else loaderRef">
+            <form class="sites-modal-form" #myForm="ngForm" [formGroup]="nodeForm" (submit)="createOrEditSave()">
+                <button type="submit" #nodeModalSubmit style="display: none"></button>
+                <div class="mb-3">
+                    <label class="form-label">{{ 'AbpDynamicForm::NodeItemText' | abpLocalization }}</label>
+                    <input type="text" class="form-control" formControlName="title" [placeholder]=""
+                        (blur)="disPlayNameInputBlur($event)" />
+                </div>
+                <!-- <div class="mb-3">
+                    <label class="form-label">{{ 'AbpDynamicForm::SelectListItemValue' | abpLocalization }}</label>
+                    <input type="text" class="form-control" formControlName="key" [placeholder]="" />
+                </div> -->
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="isChecked" id="isSelected">
+                        <label class="form-check-label" for="isSelected">
+                            {{'AbpDynamicForm::Selected' | abpLocalization}}
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </ng-container>
+    </ng-template>
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>{{'AbpUi::Close' | abpLocalization}}</button>
+        <abp-button iconClass="fa fa-check" [disabled]="!nodeForm.valid"
+            (abpClick)="nodeModalSubmit.nativeElement.click()">{{'AbpUi::Save' |
+            abpLocalization}}</abp-button>
+    </ng-template>
+</abp-modal>

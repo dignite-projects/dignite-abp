@@ -80,6 +80,12 @@ export class CreateOrEditComponent implements OnInit {
   enableSearchTypeList: any[] = [];
   /**不需要展示的动态表单类型 */
   disableshowinTypeList: any[] = [];
+
+  /**检查字段类型是否支持搜索 */
+  getEnableSearchTypeList(field: any): boolean {
+    const formControlName = field?.field?.formControlName || field?.formControlName;
+    return formControlName ? this.enableSearchTypeList.includes(formControlName) : false;
+  }
   async ngOnInit() {
     const sectionId = this.route.snapshot.params.sectionsId;
     //条目类型id
@@ -87,7 +93,8 @@ export class CreateOrEditComponent implements OnInit {
     //板块id
     this.sectionId = sectionId;
     this.newEntity = this.fb.group(new CreateOrEditEntryTypeInputBase());
-   
+    //获取支持搜索的字段类型列表
+    this.enableSearchTypeList = await this._FormControlsService.getEnableSearchTypeList();
     //获取条目类型详情
     if(this.entryTypesId){
       await this.getEntryTypes();
@@ -540,6 +547,7 @@ export class CreateOrEditComponent implements OnInit {
   allSelectChange(event,name){
     const {checked}=event.target;
     this.resultSource[this.navActive].fields.forEach(el=>{
+      if (name === 'enableSearch' && !this.getEnableSearchTypeList(el)) return;
       el[name]=checked;
     })
     console.log(this.resultSource[this.navActive].fields,'this.resultSource[this.navActive].fields',name,checked);

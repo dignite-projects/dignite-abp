@@ -31,9 +31,16 @@ import { SelectSearchComponent } from './components/form/select/select-search.co
 import { TextEditSearchComponent } from './components/form/text-edit/text-edit-search.component';
 import { SwitchSearchComponent } from './components/form/switch/switch-search.component';
 import { NumericEditSearchComponent } from './components/form/numeric-edit/numeric-edit-search.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ExtensibleModule } from '@abp/ng.components/extensible';
-
+import {
+  TreeConfigComponent,
+  TreeControlComponent,
+  TreeSearchComponent,
+  TreeViewComponent,
+} from './components/form/tree';
+import { TreeModule } from '@abp/ng.components/tree';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 @NgModule({
   declarations: [
@@ -61,7 +68,10 @@ import { ExtensibleModule } from '@abp/ng.components/extensible';
     TextEditSearchComponent,
     SwitchSearchComponent,
     NumericEditSearchComponent,
-
+    TreeConfigComponent,
+    TreeControlComponent,
+    TreeSearchComponent,
+    TreeViewComponent,
   ],
   imports: [
     FormsModule,
@@ -69,10 +79,12 @@ import { ExtensibleModule } from '@abp/ng.components/extensible';
     ThemeSharedModule,
     ReactiveFormsModule,
     NgbDropdownModule,
-      NzSelectModule,
-      DragDropModule,
-      NgbDatepickerModule,
-      ExtensibleModule
+    NzSelectModule,
+    DragDropModule,
+    NgbDatepickerModule,
+    ExtensibleModule,
+    TreeModule,
+    NzTreeSelectModule,
     // NzTreeModule,
   ],
   exports: [
@@ -95,18 +107,19 @@ import { ExtensibleModule } from '@abp/ng.components/extensible';
     DynamicConfigComponent,
     DynamicViewComponent,
     DynamicControlComponent,
-    DynamicSearchComponent
+    DynamicSearchComponent,
+    TreeConfigComponent,
+    TreeControlComponent,
+    TreeSearchComponent,
+    TreeViewComponent,
   ],
-  providers: [
-  ],
+  providers: [],
 })
 export class DynamicFormModule {
   static forRoot(config?: any): ModuleWithProviders<DynamicFormModule> {
     return {
       ngModule: DynamicFormModule,
-      providers: [
-      ]
+      providers: [],
     };
   }
-
 }

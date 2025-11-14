@@ -43,6 +43,7 @@ export class FieldsDataService {
    */
   getControlsfieldTypes():Promise<any[]>{
     return new Promise((resolve,reject)=>{
+     
       if(this.fieldControlsTypesList.length > 0){
         resolve(this.fieldControlsTypesList);
         return;

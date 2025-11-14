@@ -14,6 +14,9 @@ export default `
 .was-validated .form-control:invalid, .form-control.is-invalid{
     border-color: #c00d49 !important;
 }
+.was-validated .invalid-feedback{
+    display: block;
+}
 /*** 表单验证样式 end */
 
  .dignite-form-select {

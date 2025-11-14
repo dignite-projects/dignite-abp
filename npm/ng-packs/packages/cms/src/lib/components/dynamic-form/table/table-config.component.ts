@@ -139,7 +139,6 @@ export class TableConfigComponent {
   modalBusy: boolean | any = false;
   /**创建站点表单 */
   tableSelectForm: FormGroup | undefined;
-
   /**表格已选择数据 */
   _tableSelected: any;
 

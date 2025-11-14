@@ -21,7 +21,7 @@
                                 <label class="form-label">{{'Cms::FieldLayout' | abpLocalization}}</label>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-sm-8 border rounded">
+                                        <div class="col-sm-8 border rounded pb-sm-2">
                                             <ul ngbNav #nav="ngbNav" [(activeId)]="navActive" class="nav nav-tabs">
                                                 <ng-container *ngFor="let item of resultSource; let i = index">
                                                     <li [ngbNavItem]="i" ngbDropdown class="nav-item"
@@ -95,8 +95,8 @@
                                                                                 <td>
                                                                                     <input type="checkbox"  role="button" class="form-check-input" [checked]="el.showInList"  name="showInList" (change)="checkboxChange($event,{row:el,index:iel})"  />
                                                                                 </td>
-                                                                                <td>
-                                                                                    <input type="checkbox"  role="button" class="form-check-input" [checked]="el.enableSearch"    name="enableSearch" (change)="checkboxChange($event,{row:el,index:iel})"   />
+                                                                                <td  [style.cursor]="getEnableSearchTypeList(el) ? 'pointer' : 'not-allowed'">
+                                                                                    <input type="checkbox"  role="button" class="form-check-input" [checked]="el.enableSearch" [disabled]="!getEnableSearchTypeList(el)" name="enableSearch" (change)="checkboxChange($event,{row:el,index:iel})"   />
                                                                                 </td>
                                                                                 <td style="width: 1%;"> 
                                                                                     <button

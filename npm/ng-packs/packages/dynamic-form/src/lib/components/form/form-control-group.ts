@@ -15,6 +15,7 @@ import { SwitchViewComponent } from './switch/switch-view.component';
 import { TextEditComponent, TextEditConfigComponent } from './text-edit';
 import { TextEditSearchComponent } from './text-edit/text-edit-search.component';
 import { TextEditViewComponent } from './text-edit/text-edit-view.component';
+import { TreeConfigComponent, TreeControlComponent, TreeSearchComponent, TreeViewComponent } from './tree';
 
 /**
  * 表单控件分组-包含配置，控件，显示的数组
@@ -58,6 +59,14 @@ export const FieldControlGroup: FieldControlGroupInterfaces[] = [
     fieldConfigComponent: DateEditConfigComponent,
     fieldComponent: DateEditControlComponent,
     fieldViewComponent:DateEditViewComponent,
+  },
+  {
+    displayName: 'Tree',
+    name: 'TreeView',
+    fieldConfigComponent: TreeConfigComponent,
+    fieldComponent: TreeControlComponent,
+    fieldSearchComponent: TreeSearchComponent,
+    fieldViewComponent:TreeViewComponent,
   },
 ];
 

@@ -116,6 +116,11 @@
                 "bundleName": "ng-zorro-antd-tree"
               },
               {
+                "input": "node_modules/ng-zorro-antd/tree-select/style/index.min.css",
+                "inject": true,
+                "bundleName": "ng-zorro-antd-tree-select"
+              },
+              {
                 "input": "ckeditor5/ckeditor5.css",
                 "inject": false,
                 "bundleName": "ckeditor5"
@@ -125,6 +130,7 @@
                 "inject": false,
                 "bundleName": "ng-select2.min"
               },
+               
               "apps/dev-app/src/styles.scss"
             ],
             "scripts": [

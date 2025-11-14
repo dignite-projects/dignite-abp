@@ -95,7 +95,6 @@ export class EntriesComponent implements OnInit {
     await this.getSectionLanguagesList();
     this.filters.sorting = 'creationTime desc';
     this.hookToQuery();
-    console.log(this.entryTypeList,'entryTypeList',this.data.items);
   }
   /**需要查询的动态表单类型 */
   enableSearchTypeList: any[] = [];
@@ -198,7 +197,6 @@ export class EntriesComponent implements OnInit {
     // _entryTypeList.length === 1
     if (true) {
       // this.filters.entryTypeId = this.entryTypeList[0].id;
-
       // 使用for...of替代forEach来处理异步
       for (const el of _entryTypeList) {
         for (const el1 of el.fieldTabs) {

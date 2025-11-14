@@ -1,0 +1,14 @@
+<form [formGroup]="_entity">
+    <div formGroupName="extraProperties" class="selectcontrol">
+        <div class="mb-3">
+            <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <nz-tree-select class="form-select dignite-form-tree-select " [nzMaxTagCount]="1"
+                nzShowSearch [nzMultiple]="_fields?.field?.formConfiguration?.['TreeView.Multiple'] || false" 
+                formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true" 
+                [nzDropdownClassName]="'dignite-form-tree-select-dropdown'" [nzNodes]="nodes" 
+                nzDefaultExpandAll (ngModelChange)="onChange($event)"></nz-tree-select>
+        </div>
+
+    </div>
+    <button type="submit" style="display: none;" #submitclick></button>
+</form>

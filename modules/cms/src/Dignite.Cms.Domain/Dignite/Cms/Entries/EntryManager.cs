@@ -115,7 +115,7 @@ namespace Dignite.Cms.Entries
 
             if (section.Type== SectionType.Structure && parentId != entry.ParentId)
             {
-                await MoveAsync(entry, parentId, entry.Order);
+                await MoveAsync(entry, parentId);
             }
 
 
@@ -144,18 +144,18 @@ namespace Dignite.Cms.Entries
             }
         }
 
-        public virtual async Task MoveAsync(Entry entry, Guid? parentId,int order)
+        public virtual async Task MoveAsync(Entry entry, Guid? parentId, int? order = null)
         {
-            if (entry.Order != order)
+            var allEntries = (await _entryRepository.GetListAsync(entry.Culture, entry.SectionId));
+            if (order == null)
             {
-                var allEntries = (await _entryRepository.GetListAsync(entry.Culture, entry.SectionId))
-                    .Where(e => e.ParentId == parentId && e.Order >= order);
-                foreach (var item in allEntries)
-                {
-                    item.SetOrder(item.ParentId, item.Order + 1);
-                }
-                entry.SetOrder(parentId, order);
+                order = allEntries.Max(x => x.Order) + 1;
             }
+            foreach (var item in allEntries.Where(e => e.ParentId == parentId && e.Order >= order))
+            {
+                item.SetOrder(item.ParentId, item.Order + 1);
+            }
+            entry.SetOrder(parentId, order.Value);
         }
         protected virtual async Task CheckCultureExistenceAsync(string culture, EntryType entryType)
         {

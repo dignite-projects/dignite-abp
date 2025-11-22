@@ -80,6 +80,7 @@
     "The{1}FieldUnderThe{0}TAB": "The \"{1}\" field under the \"{0}\" tab",
     "NewEntry": "New Entry",
     "SaveDraft": "Save Draft",
-    "SlugValidatorsText": "Please enter English-_. and numeric characters"
+    "SlugValidatorsText": "Please enter English-_. and numeric characters",
+    "CannotDragToSelfOrDescendant": "Cannot be dragged to itself or its descendant"
   }
 }

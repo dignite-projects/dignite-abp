@@ -11,6 +11,9 @@ export const environment = {
     name: 'Cms',
     logoUrl: '',
   },
+   localization: {
+    defaultResourceName: 'Cms',
+  },
   oAuthConfig: {
     issuer: 'https://localhost:44322',
     redirectUri: baseUrl,

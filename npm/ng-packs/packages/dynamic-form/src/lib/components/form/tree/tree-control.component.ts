@@ -104,6 +104,9 @@ export class TreeControlComponent implements OnDestroy, AfterViewChecked {
   /**已展开的节点 */
   anExpandedNode: any[] = [];
 
+  /**是否全部展开 */
+  isAllExpanded = false;
+
   /**点击展开树节点图标触发 */
   nzExpandChange(event: any) {
     let anExpandedNode = this.anExpandedNode;
@@ -113,6 +116,48 @@ export class TreeControlComponent implements OnDestroy, AfterViewChecked {
       anExpandedNode.push(event.node.key);
     }
     this.anExpandedNode = anExpandedNode;
+    
+    // 检查是否所有有子节点的节点都已展开
+    const allKeys = this.getAllNodeKeys(this.nodes);
+    this.isAllExpanded = allKeys.length > 0 && allKeys.every(key => anExpandedNode.includes(key));
+  }
+
+  /**切换展开/收缩所有节点 */
+  toggleExpandAll() {
+    this.isAllExpanded = !this.isAllExpanded;
+    this.anExpandedNode = this.isAllExpanded ? this.getAllNodeKeys(this.nodes) : [];
+    if (!this.isAllExpanded) {
+      this.nodes = [...this.setExpanded(this.nodes, false)];
+    }
+    this.cdr.detectChanges();
+  }
+
+  /**递归设置nodes中的expanded值 并且返回一个数组 */
+  private setExpanded(nodes: any[], expanded: boolean): any[] {
+    for (const node of nodes) {
+      node.expanded = expanded;
+      if (node.children?.length) {
+        node.children = this.setExpanded(node.children, expanded);
+      }
+    }
+    return nodes;
+  }
+
+  /**获取所有有子节点的节点的key */
+  private getAllNodeKeys(nodes: any[]): string[] {
+    const keys: string[] = [];
+    for (const node of nodes) {
+      if (node.children?.length) {
+        keys.push(node.key);
+        keys.push(...this.getAllNodeKeys(node.children));
+      }
+    }
+    return keys;
+  }
+
+  /**检查是否有任何节点包含子节点 */
+  hasAnyNodeWithChildren(): boolean {
+    return this.getAllNodeKeys(this.nodes).length > 0;
   }
 
   /**切换节点选中状态 */

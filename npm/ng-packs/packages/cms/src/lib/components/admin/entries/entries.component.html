@@ -131,7 +131,7 @@
                                 </ng-container>
                             </ng-template>
                         </ngx-datatable-column> -->
-                        
+
                         <ngx-datatable-column [name]="'Cms::Status' | abpLocalization" prop="status" [width]="80"
                             [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
@@ -188,13 +188,14 @@
 
                 @if(SiteOfSectionType===SectionType.Structure){
                 <div class="table-responsive table-fixed-header">
-                    <table class="table overflow-nowrap mb-0" cdkDropList (cdkDropListDropped)="drop($event)">
+                    <table class="table overflow-nowrap mb-0" cdkDropList [cdkDropListSortingDisabled]="true" (cdkDropListDropped)="drop($event)">
                         <thead>
                             <tr>
                                 <th class="sticky-left-card-bg"> <span
                                         class="bi bi-arrows-move fs-5 drag-handle me-2 opacity-0"></span>{{'AbpUi::Actions'
                                     | abpLocalization}}</th>
-                                      <th>{{'Cms::Slug' | abpLocalization}}</th>
+                                <th>{{'Cms::Slug' | abpLocalization}}</th>
+                                <th>{{'Cms::ParentEntry' | abpLocalization}}</th>
                                 <!-- <th>{{'Cms::Title' | abpLocalization}}</th> -->
                                 <th>{{'Cms::SectionType' | abpLocalization}}</th>
                                 <th>{{'Cms::EntryType' | abpLocalization}}</th>
@@ -206,7 +207,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of data.items" cdkDrag>
+                            <ng-container *ngFor="let item of data.items">
+                                <ng-container *ngTemplateOutlet="treeRow; context: {item: item, level: 0}"></ng-container>
+                            </ng-container>
+                        </tbody>
+                        
+                        <ng-template #treeRow let-item="item" let-level="level">
+                            <tr cdkDrag [cdkDragData]="{item: item, level: level}"
+                                [class.drop-above]="dropPosition === 'above' && dropTargetId === item.id && !isInvalidDropTarget"
+                                [class.drop-below]="dropPosition === 'below' && dropTargetId === item.id && !isInvalidDropTarget"
+                                [class.drop-inside]="dropPosition === 'inside' && dropTargetId === item.id && !isInvalidDropTarget"
+                                [class.drop-invalid]="dropTargetId === item.id && isInvalidDropTarget"
+                                [style.cursor]="dropTargetId === item.id && isInvalidDropTarget ? 'not-allowed' : ''"
+                                (cdkDragStarted)="onDragStarted($event)"
+                                (cdkDragEnded)="onDragEnded($event)"
+                                (cdkDragEntered)="onDragEntered($event, item)"
+                                (mousemove)="onMouseMove($event, item)">
                                 <td class="sticky-left-card-bg">
                                     <div ngbDropdown container="body">
                                         <span class="bi bi-arrows-move fs-5 drag-handle me-2" cdkDragHandle></span>
@@ -235,8 +251,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <!-- <td class="white-space-normal">{{item.title}}</td> -->
-                                <td class="white-space-normal">{{item.slug}}</td>
+                                <td class="white-space-normal" (mousemove)="onMouseMove($event, item)">
+                                    <span [style.padding-left.px]="level * 20">{{item.slug}}</span>
+                                </td>
+                                <td class="white-space-normal">{{(item.parentId|getSlugById:copylistItem)||'---'}}</td>
                                 <td>
                                     {{ 'Cms::Enum:SectionType:'+SectionType[item.sectionType] |
                                     abpLocalization }}
@@ -247,7 +265,7 @@
                                             *ngIf="item1.id === item.entryTypeId">{{item1.displayName}}</ng-container>
                                     </ng-container>
                                 </td>
-                                
+
                                 <td>
                                     <ng-container *ngFor="let item2 of _entryStatusOptions">
                                         <ng-container *ngIf="item.status=== item2.value">{{
@@ -265,7 +283,12 @@
                                 }
                                 <td>{{item.publishTime | shortDateTime }}</td>
                             </tr>
-                        </tbody>
+                            <ng-container *ngIf="item.children && item.children.length > 0">
+                                <ng-container *ngFor="let child of item.children">
+                                    <ng-container *ngTemplateOutlet="treeRow; context: {item: child, level: level + 1}"></ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-template>
                         @if(data.items.length === 0){
                         <div class="text-muted p-2">
                             {{ 'Cms::NoDataAvailableInDatatable' | abpLocalization}}

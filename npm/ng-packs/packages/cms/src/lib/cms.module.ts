@@ -41,6 +41,8 @@ import { EntrySearchComponent } from './components/dynamic-form/entry/entry-sear
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from '@angular/forms';
 import { GetLocalizedEntriesBySlugPipe } from './pipes/get-localized-entries-by-slug.pipe';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { GetSlugByIdPipe } from './pipes/get-slug-by-id.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { GetLocalizedEntriesBySlugPipe } from './pipes/get-localized-entries-by-
     FormsModule,
     // CommercialUiModule,
     GetLocalizedEntriesBySlugPipe,
+    GetSlugByIdPipe,
+    NzTreeSelectModule,
   ],
   exports: [
     TableConfigComponent,

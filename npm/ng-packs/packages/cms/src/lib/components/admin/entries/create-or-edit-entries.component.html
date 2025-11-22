@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <div class="form-label">{{'Cms::Slug' | abpLocalization}}</div>
-                        <input type="text" class="form-control" formControlName="slug"  (change)="slugChange($event)">
+                        <input type="text" class="form-control" formControlName="slug" (change)="slugChange($event)">
                         <div class="text-danger" *ngIf="slugInput.dirty">
                             {{slugInput?.errors?.repetition}}
                         </div>
@@ -62,10 +62,10 @@
                     </div>
                     <div class="mb-3" *ngIf="sectionInfo.type===1">
                         <label class="form-label" for="parentId">{{'Cms::ParentEntry' | abpLocalization}}</label>
-                        <select class="form-select " formControlName="parentId">
+                        <!-- <select class="form-select " formControlName="parentId">
                             <option value=""></option>
                             <ng-container *ngFor="let item of entryList;let i =index">
-                                <option [value]="item.id">{{item.title}}</option>
+                                <option [value]="item.id">{{item.slug}}</option>
                                 <ng-container *ngFor="let el of item.children">
                                     <ng-container *ngTemplateOutlet="childTemplate; context: {
                                         $implicit: {
@@ -75,7 +75,7 @@
                                     <ng-template #childTemplate let-data>
                                         <option [value]="data.value.id">
                                             <ng-container *ngFor="let item of data.value.layer">--</ng-container>
-                                            {{data.value.title}}
+                                            {{data.value.slug}}
                                         </option>
                                         <ng-container *ngFor="let el of data.value.children">
                                             <ng-container *ngTemplateOutlet="childTemplate; context: {
@@ -87,7 +87,11 @@
                                     </ng-template>
                                 </ng-container>
                             </ng-container>
-                        </select>
+                        </select> -->
+                        <nz-tree-select class="form-select dignite-form-tree-select " [nzMaxTagCount]="1" nzShowSearch
+                            formControlName="parentId" [nzDropdownMatchSelectWidth]="true"
+                            [nzDropdownClassName]="'dignite-form-tree-select-dropdown'" [nzNodes]="entryList"
+                            nzDefaultExpandAll (ngModelChange)="onChange($event)"></nz-tree-select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="publishTime">{{'Cms::PublishTime' | abpLocalization}}</label>

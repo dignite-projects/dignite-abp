@@ -76,7 +76,7 @@
     "@ckeditor/ckeditor5-build-decoupled-document": "^43.3.1",
     "@ctrl/tinycolor": "^4.1.0",
     "@fortawesome/fontawesome-free": "^6.0.0",
-    "@ng-bootstrap/ng-bootstrap": "~16.0.0",
+    "@ng-bootstrap/ng-bootstrap": "~17.0.0",
     "@ngneat/spectator": "^15.0.0",
     "@ngx-validate/core": "^0.2.0",
     "@nx/angular": "~18.1.0",

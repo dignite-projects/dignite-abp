@@ -3,6 +3,8 @@ import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, inject } fr
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries/entry-admin.service';
 import { EntryStatus } from '../../../proxy/dignite/cms/entries';
+import { SectionAdminService } from '../../../proxy/dignite/cms/admin/sections';
+import { SectionType } from '../../../proxy/dignite/cms/sections';
 
 @Component({
   selector: 'cms-entry-search',
@@ -13,6 +15,9 @@ export class EntrySearchComponent {
   constructor() {}
   private fb = inject(FormBuilder);
   private _EntryAdminService = inject(EntryAdminService);
+  private _SectionAdminService = inject(SectionAdminService);
+
+  SectionType = SectionType;
 
   /**表单实体 */
   _entity: FormGroup | any;
@@ -55,14 +60,23 @@ export class EntrySearchComponent {
 
   extraProperties: FormGroup | undefined;
 
+  /**板块信息 */
+  sectionInfo: any = null;
+
   /** */
   listOfOption: any[] = [];
+  
+  /**树形节点 */
+  treeNodes: any[] = [];
+  treeSelectValue: any;
+  selectValue: any;
   private cdr = inject(ChangeDetectorRef);
   async dataLoaded() {
     if (this._fields && this._entity && this._parentFiledName && this._culture) {
       await this.AfterInit();
+      await this.getSectionById();
       await this.getEntryAssignList();
-      this.cdr.detectChanges(); // 手动触发变更检测
+      this.cdr.detectChanges();
       this.submitclick?.nativeElement?.click();
     }
   }
@@ -86,9 +100,14 @@ export class EntrySearchComponent {
   get selectInput() {
     return this._entity?.get(this._parentFiledName)?.get(this._fields.field.name) as FormControl;
   }
-  listOfSelectedValue: any = '';
-  ModelChange(event) {
-    this.selectInput.patchValue(event?[event]:'');
+  onSelectChange(value: any) {
+    const arrayValue = this._fields.field.formConfiguration['Entry.Multiple'] ? value : (value ? [value] : []);
+    this.selectInput?.setValue(arrayValue, { emitEvent: false });
+  }
+
+  onTreeSelectChange(value: any) {
+    const arrayValue = this._fields.field.formConfiguration['Entry.Multiple'] ? value : (value ? [value] : []);
+    this.selectInput?.setValue(arrayValue, { emitEvent: false });
   }
 
   /**获取对应的条目 */
@@ -105,8 +124,53 @@ export class EntrySearchComponent {
         })
         .subscribe((res: any) => {
           this.listOfOption = res.items;
+          if (this.isStructureType()) {
+            this.treeNodes = this.convertToTreeNodes(res.items);
+          }
           resolve(true);
         });
+    });
+  }
+  
+  /**判断是否为结构类型 */
+  isStructureType(): boolean {
+    return this.sectionInfo?.type === 1 || this.sectionInfo?.type === SectionType.Structure;
+  }
+  
+  /**转换为树形节点 */
+  private convertToTreeNodes(items: any[]): any[] {
+    const map = new Map();
+    const roots: any[] = [];
+    
+    items.forEach(item => {
+      map.set(item.id, { title: item.slug, key: item.id, isLeaf: true, children: [] });
+    });
+    
+    items.forEach(item => {
+      const node = map.get(item.id);
+      if (item.parentId) {
+        const parent = map.get(item.parentId);
+        if (parent) {
+          parent.children.push(node);
+          parent.isLeaf = false;
+        } else {
+          roots.push(node);
+        }
+      } else {
+        roots.push(node);
+      }
+    });
+    
+    return roots;
+  }
+
+  /**获取对应的板块 */
+  getSectionById() {
+    return new Promise((resolve, rejects) => {
+      this._SectionAdminService.get(this._fields.field.formConfiguration['Entry.SectionId']).subscribe((res: any) => {
+        this.sectionInfo = res;
+        resolve(true);
+      });
     });
   }
 

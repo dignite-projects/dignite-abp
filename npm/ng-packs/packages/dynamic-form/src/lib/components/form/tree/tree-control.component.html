@@ -2,37 +2,42 @@
     <div formGroupName="extraProperties" class="selectcontrol">
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
+            <button *ngIf="hasAnyNodeWithChildren()" class="btn btn-sm btn-light ms-2"
+                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" type="button"
+                (click.stop)="toggleExpandAll()">
+                <i class="fa" [ngClass]="isAllExpanded ? 'fa-compress' : 'fa-expand'"></i>
+            </button>
+            <div class="border p-2 rounded-2 mt-2">
+                <abp-tree [nodes]="nodes" (nzExpandChange)="nzExpandChange($event)" [expandedKeys]="anExpandedNode">
+                    <ng-template abpTreeNodeTemplate let-node>
+                        <div (click)="toggleNodeChecked($event, node)">
+                            <input #checkbox type="checkbox" [checked]="node.origin?.isChecked"
+                                [attr.data-indeterminate]="hasChildrenChecked(node)" class="form-check-input me-2">
+                            {{node.title}}
+                        </div>
+                    </ng-template>
+                    <ng-template abpTreeExpandedIconTemplate let-node let-origin="origin">
+                        <i aria-hidden="true" *ngIf="node.children.length>0">
+                            <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
+                    </ng-template>
 
-            <abp-tree [nodes]="nodes" (nzExpandChange)="nzExpandChange($event)" [expandedKeys]="anExpandedNode">
-                <ng-template abpTreeNodeTemplate let-node>
-                    <div (click)="toggleNodeChecked($event, node)">
-                        <input #checkbox type="checkbox" [checked]="node.origin?.isChecked" [attr.data-indeterminate]="hasChildrenChecked(node)" class="form-check-input me-2">
-                        {{node.title}}
-                    </div>
-                </ng-template>
-                <ng-template abpTreeExpandedIconTemplate let-node let-origin="origin">
-                    <i aria-hidden="true" *ngIf="node.children.length>0">
-                        <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
-                </ng-template>
+                    <ng-template #minusIcon>
+                        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            fill-rule="evenodd" clip-rule="evenodd">
+                            <path
+                                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
+                        </svg>
+                    </ng-template>
 
-                <ng-template #minusIcon>
-                    <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                        fill-rule="evenodd" clip-rule="evenodd">
-                        <path
-                            d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
-                    </svg>
-                </ng-template>
-
-                <ng-template #plusIcon>
-                    <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                        fill-rule="evenodd" clip-rule="evenodd">
-                        <path
-                            d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z" />
-                    </svg>
-                </ng-template>
-            </abp-tree>
-
-
+                    <ng-template #plusIcon>
+                        <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            fill-rule="evenodd" clip-rule="evenodd">
+                            <path
+                                d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z" />
+                        </svg>
+                    </ng-template>
+                </abp-tree>
+            </div>
         </div>
 
     </div>

@@ -2,23 +2,49 @@
     <div [formGroupName]="_parentFiledName" class="entry-control-page">
         <div class="mb-3">
             <label class="form-label" *ngIf="_fields.displayName">{{ _fields.displayName }}</label>
-            <ng-container *ngIf="_fields.field.formConfiguration['Entry.Multiple']; else elseTemplate">
-                <nz-select class="form-select dignite-form-select form-select-multiple" [nzMaxTagCount]="1"
-                     nzMode="multiple"
+            <ng-container *ngIf="isStructureType(); else normalSelect">
+                <nz-tree-select
+                    class="form-select dignite-form-tree-select"
+                    [nzMaxTagCount]="1"
                     [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
-                    formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true"
-                    [nzDropdownClassName]="'dignite-form-select-dropdown'">
-                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
-                </nz-select>
+                    [(ngModel)]="treeSelectValue"
+                    [ngModelOptions]="{standalone: true}"
+                    [nzNodes]="treeNodes"
+                    [nzMultiple]="_fields.field.formConfiguration['Entry.Multiple'] || false"
+                    [nzShowSearch]="true"
+                    [nzDropdownMatchSelectWidth]="true"
+                    [nzDropdownClassName]="'dignite-form-tree-select-dropdown'"
+                    (ngModelChange)="onSelectChange($event)"
+                    nzDefaultExpandAll>
+                </nz-tree-select>
             </ng-container>
-            <ng-template #elseTemplate>
-                <nz-select class="form-select dignite-form-select form-select-multiple" 
-                    [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
-                    formControlName="{{_fields.field.name}}" [nzDropdownMatchSelectWidth]="true"
-                    [nzDropdownClassName]="'dignite-form-select-dropdown'">
-                    <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
-                </nz-select>
+            
+            <ng-template #normalSelect>
+                <ng-container *ngIf="_fields.field.formConfiguration['Entry.Multiple']; else elseTemplate">
+                    <nz-select class="form-select dignite-form-select form-select-multiple" [nzMaxTagCount]="1"
+                         nzMode="multiple"
+                        [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                        [(ngModel)]="selectValue" nzAllowClear
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="onSelectChange($event)"
+                        [nzDropdownMatchSelectWidth]="true"
+                        [nzDropdownClassName]="'dignite-form-select-dropdown'">
+                        <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <nz-select class="form-select dignite-form-select form-select-multiple"
+                        [nzPlaceHolder]="_fields.field.formConfiguration['Entry.Placeholder']"
+                        [(ngModel)]="selectValue" nzAllowClear
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="onSelectChange($event)"
+                        [nzDropdownMatchSelectWidth]="true"
+                        [nzDropdownClassName]="'dignite-form-select-dropdown'">
+                        <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.slug" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </ng-template>
             </ng-template>
+            
             <small class="form-text text-muted d-block"
                 *ngIf="_fields.field.description">{{_fields.field.description}}</small>
         </div>

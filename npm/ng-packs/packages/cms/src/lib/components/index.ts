@@ -1,2 +1,2 @@
-export * from './admin'
-export * from './dynamic-form'
+export * from './admin';
+export * from './dynamic-form';

@@ -4,14 +4,21 @@
 import { EXTENSIONS_IDENTIFIER } from '@abp/ng.components/extensible';
 import { LocalizationService } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import {  Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 // import { EntryAdminService } from '../../../proxy/admin/entries';
 import { ECmsComponent } from '../../../enums';
-import { DigniteValidatorsService, LocationBackService, UpdateListService } from '@dignite-ng/expand.core';
-import { CreateOrUpdateEntryInputBase, EntriesToFormLabelMap } from './create-or-update-entry-input-base';
+import {
+  DigniteValidatorsService,
+  LocationBackService,
+  UpdateListService,
+} from '@dignite-ng/expand.core';
+import {
+  CreateOrUpdateEntryInputBase,
+  EntriesToFormLabelMap,
+} from './create-or-update-entry-input-base';
 // import { ValidatorsService } from '@dignite-ng/expand.core';
 import { finalize } from 'rxjs';
 import { EntryAdminService } from '../../../proxy/dignite/cms/admin/entries';
@@ -114,30 +121,29 @@ export class EditComponent implements OnInit {
           //   const keyNameArrNumStr = keyNameArrNum.join('.');
 
           // } else {
-            //将keyName的首字母转为小写
-            const keyNameLower = keyName;
-            // const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
-            if (this.showEntryTypeInfo && this.showEntryTypeInfo.fieldTabs.length > 0) {
-              for (const item of this.showEntryTypeInfo.fieldTabs) {
-                for (const el of item.fields) {
-                  if (el.field.name == keyNameLower) {
-                    // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
-                    info = `${this._LocalizationService.instant(
-                      `${module}::The{1}FieldUnderThe{0}TAB`,
-                      item.name,
-                      el.field.displayName,
-                    )}`;
-                  }
+          //将keyName的首字母转为小写
+          const keyNameLower = keyName;
+          // const keyNameLower = keyName.charAt(0).toLowerCase() + keyName.slice(1);
+          if (this.showEntryTypeInfo && this.showEntryTypeInfo.fieldTabs.length > 0) {
+            for (const item of this.showEntryTypeInfo.fieldTabs) {
+              for (const el of item.fields) {
+                if (el.field.name == keyNameLower) {
+                  // info = `"${this._LocalizationService.instant(`${module}::${item.name}下的${el.field.displayName}字段`)}"`;
+                  info = `${this._LocalizationService.instant(
+                    `${module}::The{1}FieldUnderThe{0}TAB`,
+                    item.name,
+                    el.field.displayName,
+                  )}`;
                 }
               }
             }
+          }
           // }
         } else {
           const displayName = key.charAt(0).toUpperCase() + key.slice(1);
           info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
-        
         }
-        console.log('info', info,input[key]);
+        console.log('info', info, input[key]);
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);
@@ -193,17 +199,17 @@ export class EditComponent implements OnInit {
   //   const traverseForm = (form: FormGroup | FormArray, prefix = '') => {
   //     //检查form是否为FormGroup还是formArray,如果是FormGroup则继续遍历,如果是FormArray则遍历FormArray
   //     if (form instanceof FormGroup) {
-        
+
   //     } else if (form instanceof FormArray) {
-        
-  //     } 
+
+  //     }
 
   //   }
   //   traverseForm(formEntity);
   //   return validationStatus
   // }
-private _LocationBackService=inject(LocationBackService);
-private _DigniteValidatorsService=inject(DigniteValidatorsService);
+  private _LocationBackService = inject(LocationBackService);
+  private _DigniteValidatorsService = inject(DigniteValidatorsService);
   /**提交 */
   save() {
     this.cultureInput.enable();
@@ -227,26 +233,27 @@ private _DigniteValidatorsService=inject(DigniteValidatorsService);
     // }
     // this.formValidation = this.getFormValidationStatus(this.formEntity);
     // return this.isSubmit=false;
-    this.formValidation=true;
+    console.log('保存', input);
+    this.formValidation = true;
     if (!this.formEntity.valid) {
       for (const item of this.showEntryTypeInfo.fieldTabs) {
         for (const el of item.fields) {
-            const info = `${this._LocalizationService.instant(
-              `Cms::The{1}FieldUnderThe{0}TAB`,
-              item.name,
-              el.field.displayName,
-            )}`;
-          EntriesToFormLabelMap[el.field.name]=info
+          const info = `${this._LocalizationService.instant(
+            `Cms::The{1}FieldUnderThe{0}TAB`,
+            item.name,
+            el.field.displayName,
+          )}`;
+          EntriesToFormLabelMap[el.field.name] = info;
         }
       }
 
       this._DigniteValidatorsService.getErrorMessage({
-        form:this.formEntity,
-        map:EntriesToFormLabelMap,
+        form: this.formEntity,
+        map: EntriesToFormLabelMap,
       });
 
-         this.isSubmit = false;
-       this.cultureInput.disable();
+      this.isSubmit = false;
+      this.cultureInput.disable();
       return;
     }
     this._EntryAdminService
@@ -260,8 +267,8 @@ private _DigniteValidatorsService=inject(DigniteValidatorsService);
         this.toaster.success(this._LocalizationService.instant(`AbpUi::SavedSuccessfully`));
         this._LocationBackService.backTo({
           url: `/cms/admin/entries`,
-          replenish: '/edit' 
-        })
+          replenish: '/edit',
+        });
         this._updateListService.updateList();
       });
   }

@@ -1,8 +1,16 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild, AfterViewChecked } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  ViewChild,
+  AfterViewChecked,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TreeConfig } from './tree-config';
-import {ToPinyinService} from '@dignite-ng/expand.core';
+import { ToPinyinService } from '@dignite-ng/expand.core';
 
 @Component({
   selector: 'df-tree-config',
@@ -10,7 +18,7 @@ import {ToPinyinService} from '@dignite-ng/expand.core';
   styleUrls: ['./tree-config.component.scss'],
 })
 export class TreeConfigComponent implements AfterViewChecked {
-  constructor(private fb: FormBuilder,private toPinyinService:ToPinyinService) {}
+  constructor(private fb: FormBuilder, private toPinyinService: ToPinyinService) {}
   /**表单控件类型 */
   _type: any;
   @Input()
@@ -91,7 +99,7 @@ export class TreeConfigComponent implements AfterViewChecked {
   //     Value: structuredClone(value),
   //   });
   // }
-   /**字段标签input失去标点生成字段名字 */
+  /**字段标签input失去标点生成字段名字 */
   disPlayNameInputBlur(event) {
     if (!this.nodeForm) return;
     const value = event.target.value;
@@ -113,6 +121,9 @@ export class TreeConfigComponent implements AfterViewChecked {
   /**已展开的节点 */
   anExpandedNode: any[] = [];
 
+  /**是否全部展开 */
+  isAllExpanded = false;
+
   /**点击展开树节点图标触发 */
   nzExpandChange(event: any) {
     let anExpandedNode = this.anExpandedNode;
@@ -122,6 +133,53 @@ export class TreeConfigComponent implements AfterViewChecked {
       anExpandedNode.push(event.node.key);
     }
     this.anExpandedNode = anExpandedNode;
+    
+    // 检查是否所有有子节点的节点都已展开
+    // const allKeys = this.getAllNodeKeys(this.nodes);
+    this.isAllExpanded = anExpandedNode.length > 0;
+  }
+
+  /**切换展开/收缩所有节点 */
+  toggleExpandAll() {
+    this.isAllExpanded = !this.isAllExpanded;
+    this.anExpandedNode = this.isAllExpanded ? this.getAllNodeKeys(this.nodes) : [];
+    if (!this.isAllExpanded) {
+      this.nodes = [...this.setExpanded(this.nodes, false)];
+    }
+    this.cdr.detectChanges();
+  }
+  //递归设置nodes中的expanded值 并且返回一个数组
+  setExpanded(nodes: any[], expanded: boolean): string[] {
+    for (const node of nodes) {
+      node.expanded = expanded;
+      if (node.children?.length) {
+        node.children = this.setExpanded(node.children, expanded);
+      }
+    }
+    return nodes;
+  }
+
+  /**获取所有有子节点的节点的key */
+  private getAllNodeKeys(nodes: any[]): string[] {
+    const keys: string[] = [];
+    for (const node of nodes) {
+      if (node.children?.length) {
+        keys.push(node.key);
+        keys.push(...this.getAllNodeKeys(node.children));
+      }
+    }
+    return keys;
+  }
+
+  /**检查是否有任何节点包含子节点 */
+  hasAnyNodeWithChildren(): boolean {
+    return this.getAllNodeKeys(this.nodes).length > 0;
+  }
+
+  /**更新展开状态 */
+  private updateExpandedState() {
+    const allKeys = this.getAllNodeKeys(this.nodes);
+    this.isAllExpanded = allKeys.length > 0 && allKeys.every(key => this.anExpandedNode.includes(key));
   }
   /**正在操作的节点项 */
   selectTree: any;
@@ -140,7 +198,7 @@ export class TreeConfigComponent implements AfterViewChecked {
 
   /**生成GUID */
   private generateGuid(): string {
-    return crypto.randomUUID()
+    return crypto.randomUUID();
   }
 
   /**创建节点 */
@@ -216,6 +274,7 @@ export class TreeConfigComponent implements AfterViewChecked {
 
     this.nodes = [...nodes];
     this.syncTreeOptionsFromNodes();
+    this.updateExpandedState();
     this.cdr.detectChanges();
     this.resetModal();
   }
@@ -255,6 +314,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.deleteNode(this.nodes, node.key);
     this.nodes = [...this.nodes];
     this.syncTreeOptionsFromNodes();
+    this.updateExpandedState();
     this.cdr.detectChanges();
   }
 
@@ -325,12 +385,12 @@ export class TreeConfigComponent implements AfterViewChecked {
   /**设置 */
   toggleMultiple(event: any) {
     this.clearAllChecked(this.nodes);
-    return
+    return;
     const isMultiple = this.formConfiguration.controls['TreeView.Multiple'] as FormControl;
-    if(!isMultiple.value){
-       this.clearAllChecked(this.nodes);
+    if (!isMultiple.value) {
+      this.clearAllChecked(this.nodes);
     } else {
-       this.applyMultipleLogic(this.nodes);
+      this.applyMultipleLogic(this.nodes);
     }
     this.nodes = [...this.nodes];
     this.syncTreeOptionsFromNodes();
@@ -364,7 +424,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     event.stopPropagation();
     const isMultiple = this.formConfiguration.controls['TreeView.Multiple'] as FormControl;
     const newChecked = !node.origin?.isChecked;
-    
+
     if (!isMultiple.value) {
       this.clearAllChecked(this.nodes);
       if (newChecked) {
@@ -376,7 +436,7 @@ export class TreeConfigComponent implements AfterViewChecked {
         this.setParentNodesChecked(this.nodes, node.key);
       }
     }
-    
+
     this.nodes = [...this.nodes];
     this.syncTreeOptionsFromNodes();
     this.cdr.detectChanges();
@@ -450,7 +510,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     return false;
   }
 
-    /**拖拽 */
+  /**拖拽 */
   dropOver(event: any) {
     const dragNode = event.dragNode;
     const targetNode = event.node;
@@ -478,7 +538,12 @@ export class TreeConfigComponent implements AfterViewChecked {
   }
 
   /**移除并返回节点 */
-  private removeNodeByKey(nodes: any[], targetKey: string, parent: any[] = null, index: number = -1): any {
+  private removeNodeByKey(
+    nodes: any[],
+    targetKey: string,
+    parent: any[] = null,
+    index: number = -1
+  ): any {
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].key === targetKey) {
         return nodes.splice(i, 1)[0];
@@ -492,14 +557,22 @@ export class TreeConfigComponent implements AfterViewChecked {
   }
 
   /**在目标节点旁边插入节点 */
-  private insertNodeBeside(nodes: any[], targetKey: string, newNode: any, position: number): boolean {
+  private insertNodeBeside(
+    nodes: any[],
+    targetKey: string,
+    newNode: any,
+    position: number
+  ): boolean {
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].key === targetKey) {
         const insertIndex = position === -1 ? i : i + 1;
         nodes.splice(insertIndex, 0, newNode);
         return true;
       }
-      if (nodes[i].children?.length && this.insertNodeBeside(nodes[i].children, targetKey, newNode, position)) {
+      if (
+        nodes[i].children?.length &&
+        this.insertNodeBeside(nodes[i].children, targetKey, newNode, position)
+      ) {
         return true;
       }
     }

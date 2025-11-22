@@ -98,6 +98,15 @@
             left: 0;
             background: var(--bs-card-bg);
         }
+
+        .drag-handle {
+            cursor: move;
+            cursor: grab;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
     }
     .entries-advanced-form{
         transition: all 0.3s linear;
@@ -106,4 +115,33 @@
     //     display: block;
     //     height: auto;
     // }
+}
+
+.drop-above {
+    border-top: 3px solid #28a745 !important;
+}
+
+.drop-below {
+    border-bottom: 3px solid #28a745 !important;
+}
+
+.drop-inside {
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.drop-invalid {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+tr[cdkDrag] td {
+    vertical-align: middle;
+}
+
+.drag-handle {
+    cursor: move;
+    cursor: grab;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
 }

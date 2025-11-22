@@ -81,7 +81,8 @@
     "NotShowInList": "此格式不支持在列表中展示",
     "NewEntry": "新建条目",
     "SaveDraft": "保存草稿",
-    "SlugValidatorsText": "请输入英文-_.和数字字符"
+    "SlugValidatorsText": "请输入英文-_.和数字字符",
+    "CannotDragToSelfOrDescendant": "不能拖拽到自身子节点 "
 
   }
 }

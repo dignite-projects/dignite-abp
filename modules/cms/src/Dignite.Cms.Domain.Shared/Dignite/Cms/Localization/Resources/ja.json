@@ -80,6 +80,7 @@
     "The{1}FieldUnderThe{0}TAB": "タブ「{0}」の「{1}」フィールド",
     "NewEntry": "新規エントリー",
     "SaveDraft": "下書きを保存",
-    "SlugValidatorsText": "英字-_.および数字の文字を入力してください"
+    "SlugValidatorsText": "英字-_.および数字の文字を入力してください",
+    "CannotDragToSelfOrDescendant": "自身または子ノードへドラッグすることはできません"
   }
 }

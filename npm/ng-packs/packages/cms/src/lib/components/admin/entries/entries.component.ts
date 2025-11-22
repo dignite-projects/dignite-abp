@@ -105,7 +105,6 @@ export class EntriesComponent implements OnInit {
   /**需要展示的动态列表字段 */
   showinFieldList: any[] = [];
 
-
   /**切换板块 */
   async sectionIdChange() {
     this.getSectionOfEntryType();
@@ -125,7 +124,8 @@ export class EntriesComponent implements OnInit {
           maxResultCount: 1000,
         })
         .subscribe(async (res: any) => {
-          this.SiteOfSectionList = res.items.filter(el => el.isActive );
+          this.SiteOfSectionList = res.items.filter(el => el.isActive);
+          // this.filters.sectionId = res.items[res.items.length-1]?.id || '';
           this.filters.sectionId = res.items[0]?.id || '';
           await this.getSectionOfEntryType();
           resolve(res.items);
@@ -219,7 +219,6 @@ export class EntriesComponent implements OnInit {
         }
       }
     }
-    
   }
   async abpInitss() {
     await this.setfiltersValue();
@@ -297,7 +296,7 @@ export class EntriesComponent implements OnInit {
     this.filters = {
       sectionId: this.filters.sectionId,
       culture: this.filters.culture,
-     sorting : 'creationTime desc',
+      sorting: 'creationTime desc',
     } as GetEntriesInput;
     this.list.filter = '';
     this.list.maxResultCount = this.maxResultCount;
@@ -336,6 +335,8 @@ export class EntriesComponent implements OnInit {
   filters = {} as GetEntriesInput;
 
   maxResultCount = 10;
+  copylistItem: any[] = [];
+  shouldScrollToTop = true;
 
   hookToQuery() {
     const getData = (query: ABP.PageQueryParams) =>
@@ -347,17 +348,20 @@ export class EntriesComponent implements OnInit {
     const setData = (list: PagedResultDto<EntryDto> | any) => {
       this.data.items = [];
       this.data.totalCount = 0;
-      if (this.SiteOfSectionType == SectionType.Structure) {
-        list.items = list.items.sort((a, b) => {
-          return new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime();
-        });
-      }
       for (const element of list.items) {
-        const sectionItem=this.SiteOfSectionList.find(el=>el.id==element.sectionId);
-        element.sectionType=sectionItem.type;
+        const sectionItem = this.SiteOfSectionList.find(el => el.id == element.sectionId);
+        element.sectionType = sectionItem.type;
       }
+      if (this.SiteOfSectionType == SectionType.Structure) {
+        this.copylistItem = list.items;
+        list.items = this.buildTree(list.items);
+      }
+
       this.data = list;
-      this.scrollToTop();
+      if (this.shouldScrollToTop) {
+        this.scrollToTop();
+      }
+      this.shouldScrollToTop = true;
     };
     this.list.hookToQuery(getData).subscribe(setData);
   }
@@ -388,37 +392,275 @@ export class EntriesComponent implements OnInit {
       });
   }
 
-  drop(event: any) {
-    const previousId: any = this.data.items[event.previousIndex].id;
-    const previousIndexOrder = this.data.items[event.previousIndex].order;
-    const currentIndexOrder = this.data.items[event.currentIndex].order;
-    let moveorder = currentIndexOrder;
-    if (event.previousIndex == event.currentIndex) return
-    if (previousIndexOrder < currentIndexOrder) {
-      moveorder = currentIndexOrder + 1;
+  /** 当前拖拽目标节点的ID */
+  dropTargetId: string | null = null;
+  /** 拖拽位置：above-上方, below-下方, inside-内部 */
+  dropPosition: 'above' | 'below' | 'inside' | null = null;
+  /** 当前被拖拽的节点 */
+  draggedItem: any = null;
+  /** 是否正在拖拽 */
+  isDragging: boolean = false;
+  /** 是否为无效拖拽目标（拖拽到自身或子节点） */
+  isInvalidDropTarget: boolean = false;
+
+  /**
+   * CDK拖拽开始事件
+   */
+  onDragStarted(event: any) {
+    this.isDragging = true;
+    this.draggedItem = event.source.data?.item;
+  }
+
+  /**
+   * CDK拖拽结束事件
+   */
+  onDragEnded(event: any) {
+    // 不立即清除状态,让drop方法先执行
+    setTimeout(() => {
+      this.isDragging = false;
+      this.draggedItem = null;
+      this.isInvalidDropTarget = false;
+    }, 100);
+  }
+
+  /**
+   * CDK拖拽进入事件
+   */
+  onDragEntered(event: any, targetItem: any) {
+    if (!this.isDragging) return;
+    this.dropTargetId = targetItem.id;
+  }
+
+  /**
+   * 鼠标移动事件,判断位置
+   */
+  onMouseMove(event: MouseEvent, targetItem: any) {
+    if (!this.isDragging || !this.draggedItem) return;
+    
+    const target = (event.currentTarget as HTMLElement).closest('tr');
+    if (!target) return;
+    
+    this.dropTargetId = targetItem.id;
+    
+    const rect = target.getBoundingClientRect();
+    const y = event.clientY - rect.top;
+    const height = rect.height;
+    
+    if (y < height * 0.25) {
+      this.dropPosition = 'above';
+    } else if (y > height * 0.75) {
+      this.dropPosition = 'below';
+    } else {
+      this.dropPosition = 'inside';
     }
-    moveItemInArray(this.data.items, event.previousIndex, event.currentIndex);
+    
+    // 检查是否为无效拖拽目标
+    this.isInvalidDropTarget = this.isDescendantOrSelf(this.draggedItem.id, targetItem.id);
+    // console.log('拖拽节点ID:', this.draggedItem.id, '目标节点ID:', targetItem.id, '是否无效:', this.isInvalidDropTarget);
+  }
+
+  /**
+   * 拖拽离开事件处理
+   * 清除拖拽目标和位置标识
+   */
+  onDragLeave(event: DragEvent) {
+    // 不立即清除状态，让drop事件能够获取到dropTargetId和dropPosition
+    // 状态会在drop事件中清除
+  }
+
+  /**
+   * 拖拽释放事件处理
+   * 根据拖拽位置调用后端API移动节点
+   * @param event CDK拖拽事件
+   */
+  drop(event: any) {
+    // 获取被拖拽的节点数据
+    const draggedData = event.item.data;
+    if (!draggedData) {
+      console.log('无draggedData');
+      this.clearDropState();
+      return;
+    }
+    
+    const draggedItem = draggedData.item;
+    
+    // 验证拖拽目标和位置是否有效
+    if (!this.dropTargetId || !this.dropPosition) {
+      console.log('无拖拽目标或位置');
+      this.clearDropState();
+      return;
+    }
+    
+    // 在原始平铺数据中查找目标节点
+    const targetItem = this.findItemById(this.copylistItem, this.dropTargetId);
+    
+    // 验证目标节点存在且不是自己或子节点
+    if (!targetItem || this.isDescendantOrSelf(draggedItem.id, targetItem.id)) {
+      this.toaster.warn(this._LocalizationService.instant('Cms::CannotDragToSelfOrDescendant'));
+      this.clearDropState();
+      return;
+    }
+  
+    console.log('拖拽节点:', draggedItem);
+    /* 
+     拖拽位置：above-上方, below-下方, inside-内部 
+      dropPosition: 'above' | 'below' | 'inside' | null = null;
+    */
+    console.log('目标节点:', targetItem);
+    console.log('位置:', this.dropPosition);
+    
+    // 构建移动参数
+    const moveParams: any = {};
+    
+    // 如果是放置到内部，设置parentId为目标节点ID
+    if (this.dropPosition === 'inside') {
+      moveParams.parentId = targetItem.id;
+    } 
+    // 如果是放置在上方或下方，使用目标节点的parentId和order
+    else {
+      moveParams.parentId = targetItem.parentId;
+      // 上方使用目标节点的order，下方使用order+1
+      moveParams.order = this.dropPosition === 'above' ? targetItem.order : targetItem.order + 1;
+    }
+
+    console.log('移动参数:', moveParams);
+
+    // 立即更新本地数据
+    this.updateLocalData(draggedItem, moveParams);
+    this.clearDropState();
+    // 调用后端API
     this._EntryAdminService
-      .move(previousId, {
-        order: moveorder,
-        // order: event.currentIndex,
-      })
-      .pipe(
-        finalize(() => {
-          this.list.get();
-        }),
-      )
+      .move(draggedItem.id, moveParams)
       .subscribe(
-        res => {},
-        err => {},
+        () => {
+          this.toaster.success(this._LocalizationService.instant('AbpUi::SavedSuccessfully'));
+          this.shouldScrollToTop = false;
+          this.list.get();
+        },
+        () => {
+          this.shouldScrollToTop = false;
+          this.list.get();
+        }
       );
-    // moveItemInArray(this.rows, event.previousIndex, event.currentIndex);
-    // this.rows = [...this.rows];
+
+  }
+
+  /**
+   * 清除拖拽状态
+   */
+  private clearDropState() {
+    this.dropTargetId = null;
+    this.dropPosition = null;
+    this.isDragging = false;
+    this.draggedItem = null;
+    this.isInvalidDropTarget = false;
+  }
+
+  /**
+   * 检查目标节点是否是拖拽节点的后代或自身
+   */
+  private isDescendantOrSelf(draggedId: string, targetId: string): boolean {
+    if (draggedId === targetId) {
+      // console.log('目标是自身');
+      return true;
+    }
+    const result = this.isDescendant(draggedId, targetId);
+    // console.log('目标是子节点:', result);
+    return result;
+  }
+
+  /**
+   * 递归检查目标节点是否是拖拽节点的子节点
+   */
+  private isDescendant(parentId: string, childId: string): boolean {
+    const parent = this.findItemById(this.data.items, parentId);
+    if (!parent) return false;
+    
+    const checkChildren = (node: any): boolean => {
+      if (!node.children || node.children.length === 0) return false;
+      for (const child of node.children) {
+        if (child.id === childId) return true;
+        if (checkChildren(child)) return true;
+      }
+      return false;
+    };
+    
+    return checkChildren(parent);
+  }
+
+  /**
+   * 在树形结构或平铺数组中递归查找指定ID的节点
+   * @param items 节点数组
+   * @param id 要查找的节点ID
+   * @returns 找到的节点或null
+   */
+  findItemById(items: any[], id: string): any {
+    for (const item of items) {
+      if (item.id === id) return item;
+      // 如果有子节点，递归查找
+      if (item.children) {
+        const found = this.findItemById(item.children, id);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * 更新本地数据
+   */
+  private updateLocalData(draggedItem: any, moveParams: any) {
+    const flatItem = this.copylistItem.find(item => item.id === draggedItem.id);
+    if (!flatItem) return;
+
+    flatItem.parentId = moveParams.parentId;
+    if (moveParams.order !== undefined) {
+      flatItem.order = moveParams.order;
+    } else {
+      // 拖拽到内部时，设置为0（子节点开头）
+      flatItem.order = 0;
+    }
+
+    this.data.items = this.buildTree(this.copylistItem);
   }
 
   isexpanded: boolean | any = false;
   /**高级筛选切换 */
   expandedChange(event) {
     this.isexpanded = event;
+  }
+
+  /**将平铺数据转换为树形结构并排序 */
+  buildTree(items: any[]): any[] {
+    const map = new Map();
+    const roots: any[] = [];
+
+    items.forEach(item => {
+      map.set(item.id, { ...item, children: [] });
+    });
+
+    items.forEach(item => {
+      const node = map.get(item.id);
+      if (item.parentId === null || item.parentId === undefined) {
+        roots.push(node);
+      } else {
+        const parent = map.get(item.parentId);
+        if (parent) {
+          parent.children.push(node);
+        }
+      }
+    });
+
+    const sortByOrder = (nodes: any[]) => {
+      nodes.sort((a, b) => a.order - b.order);
+      nodes.forEach(node => {
+        if (node.children && node.children.length > 0) {
+          sortByOrder(node.children);
+        }
+      });
+    };
+
+    sortByOrder(roots);
+    return roots;
   }
 }

@@ -289,17 +289,36 @@ export class CreateOrEditEntriesComponent {
         })
         .subscribe((res: any) => {
           const entryList = res.items.filter(el => el.id !== this.entryInfo?.id);
+          console.log(entryList,'entryList');
+          entryList.forEach(el=>{
+            el.title=el.slug;
+            el.key=el.id;
+          })
           const parentList = entryList.filter(el => !el.parentId);
           parentList.forEach(el => {
             const layer: number | any = 0;
             el.layer = new Array(layer);
             el.children = this.groupByParentId(entryList, el.id, layer + 1);
+            el.isLeaf= !el.children || el.children.length === 0
           });
+          console.log(parentList,'parentList');
           this.entryList = parentList;
           resolve(res);
         });
     });
   }
+//  nodes: any[] = [
+//   {
+//       title: 'parent 1',
+//       key: '100',
+//       children:[]
+//   }
+//  ];
+
+  onChange($event: string[]): void {
+    console.log($event);
+  }
+
   /**对数组按照父子关系进行分组 */
   groupByParentId(arr, id = '', layer) {
     let result = [];
@@ -307,6 +326,7 @@ export class CreateOrEditEntriesComponent {
     result.forEach(el => {
       el.layer = new Array(layer);
       el.children = this.groupByParentId(arr, el.id, layer + 1);
+      el.isLeaf= !el.children || el.children.length === 0
     });
     return result;
   }

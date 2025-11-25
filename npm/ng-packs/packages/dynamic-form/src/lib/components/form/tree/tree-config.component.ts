@@ -8,7 +8,14 @@ import {
   ViewChild,
   AfterViewChecked,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TreeConfig } from './tree-config';
 import { ToPinyinService } from '@dignite-ng/expand.core';
 import { LocalizationService } from '@abp/ng.core';
@@ -134,7 +141,7 @@ export class TreeConfigComponent implements AfterViewChecked {
       anExpandedNode.push(event.node.key);
     }
     this.anExpandedNode = anExpandedNode;
-    
+
     // 检查是否所有有子节点的节点都已展开
     // const allKeys = this.getAllNodeKeys(this.nodes);
     this.isAllExpanded = anExpandedNode.length > 0;
@@ -180,7 +187,8 @@ export class TreeConfigComponent implements AfterViewChecked {
   /**更新展开状态 */
   private updateExpandedState() {
     const allKeys = this.getAllNodeKeys(this.nodes);
-    this.isAllExpanded = allKeys.length > 0 && allKeys.every(key => this.anExpandedNode.includes(key));
+    this.isAllExpanded =
+      allKeys.length > 0 && allKeys.every(key => this.anExpandedNode.includes(key));
   }
   /**正在操作的节点项 */
   selectTree: any;
@@ -202,18 +210,18 @@ export class TreeConfigComponent implements AfterViewChecked {
     return crypto.randomUUID();
   }
   get keyInput() {
-    return this.nodeForm?.get('key');
+    return this.nodeForm?.get('key') as FormControl;
   }
-  private _LocalizationService=inject(LocalizationService)
-    SlugRegExValidator() {
-      return (control: AbstractControl): { [key: string]: any } | null => {
-        const regex = /^[a-zA-Z0-9_-]+$/;
-        if (control.value && !regex.test(control.value)) {
-          return { repetition: this._LocalizationService.instant(`Cms::SlugValidatorsText`) };
-        }
-        return null;
-      };
-    }
+  private _LocalizationService = inject(LocalizationService);
+  SlugRegExValidator() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const regex = /^[a-zA-Z0-9_-]+$/;
+      if (control.value && !regex.test(control.value)) {
+        return { repetition: this._LocalizationService.instant(`Cms::SlugValidatorsText`) };
+      }
+      return null;
+    };
+  }
 
   /**创建节点 */
   addNodeBtn() {
@@ -222,7 +230,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = null;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: ['', [Validators.required,this.SlugRegExValidator()]],
+      key: ['', [Validators.required, this.SlugRegExValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });
@@ -234,7 +242,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: [node.title, Validators.required],
-      key: [node.key, [Validators.required,this.SlugRegExValidator()]],
+      key: [node.key, [Validators.required, this.SlugRegExValidator()]],
       isChecked: [node.origin?.isChecked ?? false],
       children: new FormArray([]),
     });
@@ -246,7 +254,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: ['', [Validators.required,this.SlugRegExValidator()]],
+      key: ['', [Validators.required, this.SlugRegExValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });
@@ -273,7 +281,7 @@ export class TreeConfigComponent implements AfterViewChecked {
         }
       } else {
         // 编辑节点
-        this.updateNode(nodes, selectTree.key, value);
+        this.updateNodeByReference(selectTree.origin, value);
       }
     } else {
       // 创建根节点
@@ -308,19 +316,11 @@ export class TreeConfigComponent implements AfterViewChecked {
     return false;
   }
 
-  /**递归更新节点 */
-  private updateNode(nodes: any[], targetKey: string, updatedData: any): boolean {
-    for (const node of nodes) {
-      if (node.key === targetKey) {
-        node.title = updatedData.title;
-        node.isChecked = updatedData.isChecked;
-        return true;
-      }
-      if (node.children?.length && this.updateNode(node.children, targetKey, updatedData)) {
-        return true;
-      }
-    }
-    return false;
+  /**通过引用更新节点 */
+  private updateNodeByReference(node: any, updatedData: any): void {
+    node.title = updatedData.title;
+    node.key = updatedData.key;
+    node.isChecked = updatedData.isChecked;
   }
 
   /**删除节点 */
@@ -395,7 +395,6 @@ export class TreeConfigComponent implements AfterViewChecked {
     }
     return result;
   }
-  
 
   /**设置 */
   toggleMultiple(event: any) {

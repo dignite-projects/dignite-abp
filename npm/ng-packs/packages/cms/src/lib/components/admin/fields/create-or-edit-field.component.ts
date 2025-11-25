@@ -16,7 +16,7 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
   _selected: any;
   @Input()
   public set selected(v: any) {
-    this._selected = JSON.parse(JSON.stringify(v));
+    this._selected = v?JSON.parse(JSON.stringify(v)):v;
   }
 
   @Input() public service: any;

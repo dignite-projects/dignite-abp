@@ -11,7 +11,8 @@
                 (click.stop)="addNodeBtn()">{{'AbpDynamicForm::AddNode' |
                 abpLocalization}}</button>
             <div class="border p-2 rounded-2 mt-2">
-                <abp-tree class="mb-2" [nodes]="nodes" [checkable]="false" (dropOver)="dropOver($event)"
+                @if (nodes.length>0) {
+ <abp-tree class="mb-2" [nodes]="nodes" [checkable]="false" (dropOver)="dropOver($event)"
                     (nzExpandChange)="nzExpandChange($event)" [expandedKeys]="anExpandedNode" [draggable]="true">
                     <ng-template #menu let-node>
                         <button ngbDropdownItem (click.stop)="editItemBtn(node)"><i
@@ -35,7 +36,6 @@
                         <i aria-hidden="true" *ngIf="node.children.length>0">
                             <ng-container *ngTemplateOutlet="node.isExpanded ? minusIcon : plusIcon"></ng-container></i>
                     </ng-template>
-
                     <ng-template #minusIcon>
                         <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                             fill-rule="evenodd" clip-rule="evenodd">
@@ -43,7 +43,6 @@
                                 d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm-6.5 10h13v1h-13v-1z" />
                         </svg>
                     </ng-template>
-
                     <ng-template #plusIcon>
                         <svg width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                             fill-rule="evenodd" clip-rule="evenodd">
@@ -52,6 +51,7 @@
                         </svg>
                     </ng-template>
                 </abp-tree>
+                }
                 <div *ngIf="nodes.length === 0" class="text-muted ">{{'AbpDynamicForm::PleaseAddNode' |
                     abpLocalization}}</div>
             </div>
@@ -91,13 +91,12 @@
                     <label class="form-label">{{ 'AbpDynamicForm::NodeItemText' | abpLocalization }}</label>
                     <input type="text" class="form-control" formControlName="title" [placeholder]=""
                         (blur)="disPlayNameInputBlur($event)" />
-                        
                 </div>
                 <div class="mb-3">
                     <label class="form-label">{{ 'AbpDynamicForm::SelectListItemValue' | abpLocalization }}</label>
                     <input type="text" class="form-control" formControlName="key" [placeholder]="" />
-                     <div class="text-danger invalid-feedback" *ngIf="keyInput.errors?.repetition">
-                    {{keyInput.errors?.repetition}}
+                     <div class="text-danger invalid-feedback" *ngIf="keyInput?.errors?.repetition">
+                    {{keyInput?.errors?.repetition}}
                 </div>
                 </div>
                 <div class="mb-3">

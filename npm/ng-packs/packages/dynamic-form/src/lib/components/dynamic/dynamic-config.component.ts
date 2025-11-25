@@ -59,7 +59,7 @@ export class DynamicConfigComponent implements AfterContentInit {
     //在容器中创建组件
     const { instance }:any = this.FormconfigRef?.createComponent(fieldControlItem.fieldConfigComponent); //创建组件模板
     // /**向创建的组件模板中传值 */
-    instance.selected = JSON.parse(JSON.stringify(this.selected));
+    instance.selected = this.selected?JSON.parse(JSON.stringify(this.selected)):this.selected;
     instance.type = formControlName;
     instance.Entity = this.formEntity;
   }

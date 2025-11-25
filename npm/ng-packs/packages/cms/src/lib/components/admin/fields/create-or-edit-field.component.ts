@@ -16,7 +16,7 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
   _selected: any;
   @Input()
   public set selected(v: any) {
-    this._selected = v;
+    this._selected = JSON.parse(JSON.stringify(v));
   }
 
   @Input() public service: any;
@@ -38,6 +38,7 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
     if(!this.formControlNameInput.value&&this.fromControlList.length>0){
       this.formControlNameInput.patchValue(this.fromControlList[0].name)
     }
+     console.log(this._selected,'_selected')
     this.submitclick.nativeElement.click()
   }
 
@@ -51,6 +52,9 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
   }
   get formControlNameInput() {
     return this.formEntity?.get('formControlName') as FormControl;
+  }
+  get formConfigurationInput(){
+    return this.formEntity?.get('formConfiguration') as FormGroup;
   }
 
   /**获取提交按钮替身，用于真实触发表单提交 */
@@ -89,5 +93,20 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
         });
       });
     };
+  }
+  /** */
+  changeFormControlName(e){
+    console.log(this._selected,'_selected')
+  //  for (const element in this.formConfigurationInput.controls) {
+  //     const control = this.formConfigurationInput.controls[element];
+  //     const value = control.value;
+  //     if (Array.isArray(value)) {
+  //       control.patchValue([]);
+  //     } else if (typeof value === 'boolean') {
+  //       control.patchValue(false);
+  //     } else {
+  //       control.patchValue('');
+  //     }
+  //   }
   }
 }

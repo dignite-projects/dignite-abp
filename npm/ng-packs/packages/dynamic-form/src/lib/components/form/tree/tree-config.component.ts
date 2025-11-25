@@ -8,9 +8,10 @@ import {
   ViewChild,
   AfterViewChecked,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TreeConfig } from './tree-config';
 import { ToPinyinService } from '@dignite-ng/expand.core';
+import { LocalizationService } from '@abp/ng.core';
 
 @Component({
   selector: 'df-tree-config',
@@ -200,6 +201,19 @@ export class TreeConfigComponent implements AfterViewChecked {
   private generateGuid(): string {
     return crypto.randomUUID();
   }
+  get keyInput() {
+    return this.nodeForm?.get('key');
+  }
+  private _LocalizationService=inject(LocalizationService)
+    SlugRegExValidator() {
+      return (control: AbstractControl): { [key: string]: any } | null => {
+        const regex = /^[a-zA-Z0-9_-]+$/;
+        if (control.value && !regex.test(control.value)) {
+          return { repetition: this._LocalizationService.instant(`Cms::SlugValidatorsText`) };
+        }
+        return null;
+      };
+    }
 
   /**创建节点 */
   addNodeBtn() {
@@ -208,7 +222,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = null;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: [this.generateGuid(), Validators.required],
+      key: ['', [Validators.required,this.SlugRegExValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });
@@ -220,7 +234,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: [node.title, Validators.required],
-      key: [node.key, Validators.required],
+      key: [node.key, [Validators.required,this.SlugRegExValidator()]],
       isChecked: [node.origin?.isChecked ?? false],
       children: new FormArray([]),
     });
@@ -232,7 +246,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: [this.generateGuid(), Validators.required],
+      key: ['', [Validators.required,this.SlugRegExValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });
@@ -381,6 +395,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     }
     return result;
   }
+  
 
   /**设置 */
   toggleMultiple(event: any) {

@@ -494,12 +494,7 @@ export class EntriesComponent implements OnInit {
     // 在原始平铺数据中查找目标节点
     const targetItem = this.findItemById(this.copylistItem, this.dropTargetId);
     
-    // 验证目标节点存在且不是自己或子节点
-    if (!targetItem || this.isDescendantOrSelf(draggedItem.id, targetItem.id)) {
-      this.toaster.warn(this._LocalizationService.instant('Cms::CannotDragToSelfOrDescendant'));
-      this.clearDropState();
-      return;
-    }
+  
   
     console.log('拖拽节点:', draggedItem);
     /* 
@@ -508,7 +503,12 @@ export class EntriesComponent implements OnInit {
     */
     console.log('目标节点:', targetItem);
     console.log('位置:', this.dropPosition);
-    
+      // 验证目标节点存在且不是自己或子节点
+    if (!targetItem || this.isDescendantOrSelf(draggedItem.id, targetItem.id)) {
+      this.toaster.warn(this._LocalizationService.instant('Cms::CannotDragToSelfOrDescendant'));
+      this.clearDropState();
+      return;
+    }
     // 构建移动参数
     const moveParams: any = {};
     

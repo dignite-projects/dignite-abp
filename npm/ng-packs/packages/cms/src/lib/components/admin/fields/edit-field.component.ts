@@ -155,7 +155,6 @@ export class EditFieldComponent implements OnInit {
       return;
     }
       console.log(this.formEntity.value, '提交表单', this.formEntity);
-    // return
     if (this.isSubmitted) return;
     this.isSubmitted = true;
     const input = this.formEntity.value;

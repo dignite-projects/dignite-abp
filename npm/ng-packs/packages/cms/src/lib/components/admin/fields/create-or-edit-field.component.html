@@ -31,7 +31,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="formControlName">*{{'Cms::FieldType' | abpLocalization}}</label>
-                <select class="form-select" formControlName="formControlName">
+                <select class="form-select" formControlName="formControlName" (change)="changeFormControlName($event)">
                     <ng-container *ngFor="let item of fromControlList;let i =index">
                         <option [value]="item.name">{{item.displayName|abpLocalization}}</option>
                     </ng-container>

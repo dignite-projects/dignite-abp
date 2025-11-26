@@ -1,0 +1,34 @@
+﻿@using Dignite.Abp.DynamicForms.Table;
+@using Dignite.Cms.Public.Web.Models;
+@using Dignite.Abp.DynamicForms;
+@using Dignite.Abp.Data;
+@model EntryFieldViewModel
+@{
+    var items = Model.Entry.GetField<IEnumerable<TableRow>>(Model.Field.Name, null);
+    var configuration = new TableConfiguration(Model.Field.FormConfiguration);
+}
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var column in configuration.TableColumns)
+            {
+                <th scope="Column">
+                    @column.DisplayName
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in items)
+        {
+            <tr>
+                @foreach (var column in configuration.TableColumns)
+                {
+                    <td>
+                        <cms-field field="column" entry="row"></cms-field>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

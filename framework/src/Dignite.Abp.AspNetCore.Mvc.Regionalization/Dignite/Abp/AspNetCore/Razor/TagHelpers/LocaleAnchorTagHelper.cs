@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Threading;
 
-namespace Dignite.Abp.AspNetCore.Mvc.UI.Theme.Pure.Themes.Pure.TagHelpers;
+namespace Dignite.Abp.AspNetCore.Razor.TagHelpers;
 
 
 [HtmlTargetElement("a", Attributes = "[add-culture]")]

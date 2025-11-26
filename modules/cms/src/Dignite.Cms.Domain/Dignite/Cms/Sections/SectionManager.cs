@@ -31,7 +31,7 @@ namespace Dignite.Cms.Sections
                 isDefault,
                 isActive,
                 route,
-                template,
+                template.RemovePreFix("/"),
                 tenantId);
 
             //
@@ -81,7 +81,7 @@ namespace Dignite.Cms.Sections
             section.SetDefault(isDefault);
             section.SetDisplayName(displayName);
             section.Route = route;
-            section.Template = template;
+            section.Template = template.RemovePreFix("/");
             section.SetName(name);
             section.SetType(type);
 

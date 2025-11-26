@@ -20,7 +20,7 @@ namespace Dignite.Cms.Sections
             IsDefault = isDefault;
             IsActive = isActive;
             Route = route;
-            Template = template;
+            Template = template.RemovePreFix("/");
             TenantId = tenantId;
             EntryTypes = new List<EntryType>();
         }

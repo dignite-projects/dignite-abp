@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Dignite.Abp.Points;
 using RulesEngine.Models;
+using Shouldly;
 using Volo.Abp.Guids;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Timing;
@@ -37,7 +38,6 @@ public class UserPointsItemManager_Tests : UserPointsDomainTestBase
             Age = 20
         });
 
-        // return 10 points
         var points = await _pointsManager.CalculatePointsAsync(
             _testData.PointsDefinitionName,
             _testData.PointsWorkflow1Name,
@@ -45,7 +45,7 @@ public class UserPointsItemManager_Tests : UserPointsDomainTestBase
             input1,
             input2);
 
-        await _userPointsItemManager.CreateAsync(
+        var userPointsItem = await _userPointsItemManager.CreateAsync(
             PointsType.General,
             _testData.PointsDefinitionName,
             _testData.PointsWorkflow1Name,
@@ -54,5 +54,8 @@ public class UserPointsItemManager_Tests : UserPointsDomainTestBase
             _testData.User1Id,
             _currentTenant.Id
              );
+
+        points.ShouldBe(15);
+        userPointsItem.Points.ShouldBe(points);
     }
 }

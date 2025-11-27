@@ -182,7 +182,7 @@
     <PackageVersion Include="Blazorise.TreeView" Version="1.5.2" />
     <PackageVersion Include="Blazorise.SpinKit" Version="1.5.2" />
     <PackageVersion Include="My.Extensions.Localization.Json" Version="3.3.0" />
-    <PackageVersion Include="RulesEngine" Version="5.0.3" />
+    <PackageVersion Include="RulesEngine" Version="6.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.4" />
     <PackageVersion Include="Volo.Abp.TestBase" Version="8.3.1" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI" Version="8.3.1" />

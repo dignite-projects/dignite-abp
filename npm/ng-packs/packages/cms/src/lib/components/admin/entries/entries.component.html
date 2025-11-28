@@ -160,22 +160,22 @@
                             [frozenLeft]="true" [width]="110" [maxWidth]="110">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <div ngbDropdown container="body">
-                                    <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                    <button type="button" *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'" class="btn btn-primary btn-sm" ngbDropdownToggle>
                                         <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                     </button>
                                     <div ngbDropdownMenu>
-                                        <button ngbDropdownItem
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Update'"
                                             routerLink="/cms/admin/entries/{{row.id}}/edit">{{'Cms::Edit' |
                                             abpLocalization}}</button>
                                         @if
                                         (((row|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
                                         {
-                                        <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Create'" [routerLink]="['/cms/admin/entries/create']"
                                             [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                             |
                                             abpLocalization}} </button>
                                         }
-                                        <button ngbDropdownItem (click)="deletefield(row)">{{'Cms::Delete' |
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'" (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
                                     </div>
                                 </div>
@@ -226,17 +226,17 @@
                                 <td class="sticky-left-card-bg">
                                     <div ngbDropdown container="body">
                                         <span class="bi bi-arrows-move fs-5 drag-handle me-2" cdkDragHandle></span>
-                                        <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                        <button type="button" class="btn btn-primary btn-sm" *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'" ngbDropdownToggle>
                                             <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                         </button>
                                         <div ngbDropdownMenu>
-                                            <button ngbDropdownItem
+                                            <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Update'"
                                                 routerLink="/cms/admin/entries/{{item.id}}/edit">{{'AbpUi::Edit' |
                                                 abpLocalization}}</button>
                                             @if
                                             (((item|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
                                             {
-                                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']" *abpPermission="'CmsAdmin.Entry.Create'"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.entryTypeId,entryVersionId:item.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
                                                 abpLocalization}}</button>
@@ -246,7 +246,7 @@
                                                 |
                                                 abpLocalization}} </button> -->
 
-                                            <button ngbDropdownItem (click)="deletefield(item)">{{'AbpUi::Delete' |
+                                            <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'" (click)="deletefield(item)">{{'AbpUi::Delete' |
                                                 abpLocalization}}</button>
                                         </div>
                                     </div>

@@ -81,6 +81,7 @@
     "NewEntry": "New Entry",
     "SaveDraft": "Save Draft",
     "SlugValidatorsText": "Please enter English-_. and numeric characters",
-    "CannotDragToSelfOrDescendant": "Cannot be dragged to itself or its descendant"
+    "CannotDragToSelfOrDescendant": "Cannot be dragged to itself or its descendant",
+    "ValueAlreadyExis": "This option value already exists"
   }
 }

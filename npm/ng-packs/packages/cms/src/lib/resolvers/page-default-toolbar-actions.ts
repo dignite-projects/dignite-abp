@@ -23,7 +23,7 @@ export const Fields_Defaults_Toolbar_Action = ToolbarAction.createMany<any[]>([
       component.toFieldsCreateBtn();
     },
     btnClass: '',
-    permission: 'CmsAdmin.Entry.Create',
+    permission: 'CmsAdmin.Field.Create',
     icon: 'fa fa-plus',
   },
 ]);
@@ -38,7 +38,7 @@ export const Fields_Create_Defaults_Toolbar_Action = ToolbarAction.createMany<an
       component.submitclick?.nativeElement?.click();
     },
     btnClass: '',
-    permission: 'CmsAdmin.Entry.Create',
+    permission: 'CmsAdmin.Field.Create',
     icon: 'fas fa-save',
   },
 ]);
@@ -52,7 +52,7 @@ export const Fields_Edit_Defaults_Toolbar_Action = ToolbarAction.createMany<any[
       component.submitclick?.nativeElement?.click();
     },
     btnClass: '',
-    permission: 'CmsAdmin.Entry.Create',
+    permission: 'CmsAdmin.Field.Update',
     icon: 'fas fa-save',
   },
 ]);
@@ -66,7 +66,7 @@ export const Sections_Defaults_Toolbar_Action = ToolbarAction.createMany<any[]>(
       component.createBtn();
     },
     btnClass: '',
-    permission: 'CmsAdmin.Entry.Create',
+    permission: 'CmsAdmin.Section.Create',
     icon: 'fa fa-plus',
   },
 ]);
@@ -79,7 +79,7 @@ export const Sections_Create_Or_Edit_Defaults_Toolbar_Action = ToolbarAction.cre
       component.submitclickBtn();
     },
     btnClass: '',
-    permission: 'CmsAdmin.Entry.Create',
+    permission: 'CmsAdmin.Section.Create',
     icon: 'fas fa-save',
   },
 ]);

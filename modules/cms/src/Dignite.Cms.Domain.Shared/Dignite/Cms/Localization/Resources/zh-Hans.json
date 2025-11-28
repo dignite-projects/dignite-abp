@@ -82,7 +82,8 @@
     "NewEntry": "新建条目",
     "SaveDraft": "保存草稿",
     "SlugValidatorsText": "请输入英文-_.和数字字符",
-    "CannotDragToSelfOrDescendant": "不能拖拽到自身子节点 "
+    "CannotDragToSelfOrDescendant": "不能拖拽到自身子节点 ",
+    "ValueAlreadyExis": "该选项值已存在"
 
   }
 }

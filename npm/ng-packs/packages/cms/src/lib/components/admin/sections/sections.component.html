@@ -68,12 +68,12 @@
                                             <li ngbDropdownItem
                                                 class="d-flex align-items-center justify-content-between" [routerLink]="'/cms/admin/sections/'+row.id+'/entry-types/'+item.id+'/edit'"
                                                 >{{item.displayName}}
-                                                <button class="btn btn-light btn-sm p-0"
+                                                <button *abpPermission="'CmsAdmin.Section.Delete'" class="btn btn-light btn-sm p-0"
                                                     (click.stop)="deleteEntryType(item)"><i class="fas fa-trash p-sm-1"
                                                         style="font-size: 12px;" role="button"></i></button>
                                             </li>
                                         </ng-container>
-                                        <li ngbDropdownItem [routerLink]="'/cms/admin/sections/'+row.id+'/entry-types/create'"><i
+                                        <li ngbDropdownItem *abpPermission="'CmsAdmin.Section.Create'" [routerLink]="'/cms/admin/sections/'+row.id+'/entry-types/create'"><i
                                                 class="fas fa-plus-circle me-2"></i>{{'Cms::New' |
                                             abpLocalization}}</li>
                                     </div>
@@ -85,16 +85,16 @@
                                 {{ value | shortDateTime }}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column [sortable]="false"  [name]="'AbpUi::Actions' | abpLocalization"   [frozenLeft]="true" [width]="110" [maxWidth]="110">
+                        <ngx-datatable-column [sortable]="false"  [name]="'AbpUi::Actions' | abpLocalization" *abpPermission="'CmsAdmin.Section.Update||CmsAdmin.Section.Delete'"  [frozenLeft]="true" [width]="110" [maxWidth]="110">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <div ngbDropdown container="body">
-                                    <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                    <button type="button" class="btn btn-primary btn-sm"  ngbDropdownToggle>
                                         <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                     </button>
                                     <div ngbDropdownMenu>
-                                        <button ngbDropdownItem (click)="editSectionBtn(row)">{{'AbpUi::Edit' |
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Section.Update'" (click)="editSectionBtn(row)">{{'AbpUi::Edit' |
                                             abpLocalization}}</button>
-                                        <button ngbDropdownItem (click)="deletefield(row)">{{'AbpUi::Delete' |
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Section.Delete'" (click)="deletefield(row)">{{'AbpUi::Delete' |
                                             abpLocalization}}</button>
                                     </div>
                                 </div>

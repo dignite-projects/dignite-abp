@@ -1,7 +1,7 @@
 <div class="card h-100 mb-0" >
     <div class="card-header px-2 py-sm-2 d-flex justify-content-between align-items-center">
         <h6 class="h6 mb-0">{{'Cms::FieldGroup' | abpLocalization}}</h6>
-        <button type="button" class="btn btn-link btn-sm ms-2" (click.stop)="createGroupBtn()"><i class="fas fa-plus-circle"
+        <button type="button" class="btn btn-link btn-sm ms-2" *abpPermission="'CmsAdmin.Field.Create'" (click.stop)="createGroupBtn()"><i class="fas fa-plus-circle"
                 aria-hidden="true"></i></button>
     </div>
     <div class="card-body p-0">
@@ -13,8 +13,8 @@
                         [class.active]="selectedGroupId===item.id" (click)="groupChangeBtn(item.id)">
                         <div>{{item.name}}</div>
                         <div *ngIf="selectedGroupId===item.id">
-                            <i class="fas fa-trash px-1" role="button" (click.stop)="deleteGroupBtn(item)"></i>
-                            <i class="fas fa-edit px-1" role="button" (click.stop)="editGroupBtn(item.name)"></i>
+                            <i class="fas fa-trash px-1" role="button" *abpPermission="'CmsAdmin.Field.Delete'" (click.stop)="deleteGroupBtn(item)"></i>
+                            <i class="fas fa-edit px-1" role="button" *abpPermission="'CmsAdmin.Field.Update'" (click.stop)="editGroupBtn(item.name)"></i>
                         </div>
                     </li>
                 </ng-container>

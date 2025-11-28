@@ -213,14 +213,50 @@ export class TreeConfigComponent implements AfterViewChecked {
     return this.nodeForm?.get('key') as FormControl;
   }
   private _LocalizationService = inject(LocalizationService);
-  SlugRegExValidator() {
+  /**
+   * 验证器：检查字符串格式和唯一性
+   * @description 格式只允许字母、数字、下划线和短横线，且值在树中必须唯一
+   */
+  keyValidator() {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const regex = /^[a-zA-Z0-9_-]+$/;
       if (control.value && !regex.test(control.value)) {
         return { repetition: this._LocalizationService.instant(`Cms::SlugValidatorsText`) };
       }
+      // 检查唯一性
+      if (control.value && this.isKeyExists(control.value)) {
+        return { repetition: this._LocalizationService.instant(`Cms::ValueAlreadyExis`) };
+      }
       return null;
     };
+  }
+  /**
+   * 检查 key 是否在树中已存在
+   * @param key 要检查的 key 值
+   * @returns 如果存在返回 true，否则返回 false
+   */
+  private isKeyExists(key: string): boolean {
+    const currentKey = this.selectTree?.key;
+    return this.findKeyInNodes(this.nodes, key, currentKey);
+  }
+
+  /**
+   * 递归查找 key 是否存在于节点中
+   * @param nodes 节点数组
+   * @param targetKey 要查找的 key
+   * @param excludeKey 要排除的 key（编辑时排除当前节点）
+   * @returns 如果找到返回 true，否则返回 false
+   */
+  private findKeyInNodes(nodes: any[], targetKey: string, excludeKey?: string): boolean {
+    for (const node of nodes) {
+      if (node.key === targetKey && node.key !== excludeKey) {
+        return true;
+      }
+      if (node.children?.length && this.findKeyInNodes(node.children, targetKey, excludeKey)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**创建节点 */
@@ -230,7 +266,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = null;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: ['', [Validators.required, this.SlugRegExValidator()]],
+      key: ['', [Validators.required, this.keyValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });
@@ -242,7 +278,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: [node.title, Validators.required],
-      key: [node.key, [Validators.required, this.SlugRegExValidator()]],
+      key: [node.key, [Validators.required, this.keyValidator()]],
       isChecked: [node.origin?.isChecked ?? false],
       children: new FormArray([]),
     });
@@ -254,7 +290,7 @@ export class TreeConfigComponent implements AfterViewChecked {
     this.selectTree = node;
     this.nodeForm = this.fb.group({
       title: ['', Validators.required],
-      key: ['', [Validators.required, this.SlugRegExValidator()]],
+      key: ['', [Validators.required, this.keyValidator()]],
       isChecked: [false],
       children: new FormArray([]),
     });

@@ -81,6 +81,7 @@
     "NewEntry": "新規エントリー",
     "SaveDraft": "下書きを保存",
     "SlugValidatorsText": "英字-_.および数字の文字を入力してください",
-    "CannotDragToSelfOrDescendant": "自身または子ノードへドラッグすることはできません"
+    "CannotDragToSelfOrDescendant": "自身または子ノードへドラッグすることはできません",
+    "ValueAlreadyExis": "このオプションの値は既に存在します"
   }
 }

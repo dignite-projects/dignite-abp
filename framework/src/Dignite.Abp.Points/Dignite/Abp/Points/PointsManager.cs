@@ -10,7 +10,7 @@ namespace Dignite.Abp.Points;
 /// <summary>
 /// Points Manager
 /// </summary>
-public class PointsManager : IPointsManager, ISingletonDependency
+public class PointsManager : IPointsManager, ITransientDependency
 {
     private readonly IPointsWorkflowStore _pointsWorkflowStore;
 

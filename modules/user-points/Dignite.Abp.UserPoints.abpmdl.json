@@ -2,8 +2,7 @@
   "folders": {
     "items": {
       "src": {},
-      "test": {},
-      "host": {}
+      "test": {}
     }
   },
   "packages": {
@@ -58,22 +57,6 @@
     "Dignite.Abp.UserPoints.Application.Tests": {
       "path": "test/Dignite.Abp.UserPoints.Application.Tests/Dignite.Abp.UserPoints.Application.Tests.abppkg.json",
       "folder": "test"
-    },
-    "Dignite.Abp.UserPoints.HttpApi.Host": {
-      "path": "host/Dignite.Abp.UserPoints.HttpApi.Host/Dignite.Abp.UserPoints.HttpApi.Host.abppkg.json",
-      "folder": "host"
-    },
-    "Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp": {
-      "path": "test/Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp/Dignite.Abp.UserPoints.HttpApi.Client.ConsoleTestApp.abppkg.json",
-      "folder": "test"
-    },
-    "Dignite.Abp.UserPoints.AuthServer": {
-      "path": "host/Dignite.Abp.UserPoints.AuthServer/Dignite.Abp.UserPoints.AuthServer.abppkg.json",
-      "folder": "host"
-    },
-    "Dignite.Abp.UserPoints.Host.Shared": {
-      "path": "host/Dignite.Abp.UserPoints.Host.Shared/Dignite.Abp.UserPoints.Host.Shared.abppkg.json",
-      "folder": "host"
     }
   }
 }

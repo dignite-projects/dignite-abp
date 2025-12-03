@@ -2,10 +2,9 @@
 
 public static class UserPointsErrorCodes
 {
-    public static class UserPointsItems
+    public static class UserPoint
     {
-        public const string PointsNonFactorValue = "UserPoints:0001";
-        public const string RelatedLockedPoints = "UserPoints:0002";
-        public const string InsufficientAvailablePoints = "UserPoints:0003";
+        public const string EntityNotPointable = "Abp:UserPoints:0002"; // The entity is not pointable.
+        public const string InsufficientPoint = "Abp:UserPoints:0003"; // User has insufficient point for the operation.
     }
 }

@@ -12,6 +12,8 @@ public class UnsupportedPointTypeException : BusinessException
     public UnsupportedPointTypeException(string pointType)
         : base(code: UserPointsErrorCodes.UserPoint.UnsupportedPointType)
     {
+        PointType = pointType;
         WithData(nameof(UserPoint.PointType), pointType);
     }
+    public string PointType { get; }
 }

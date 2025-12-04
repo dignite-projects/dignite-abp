@@ -94,7 +94,6 @@ $projects = (
     "framework/src/Dignite.Abp.Notifications.Components",
     "framework/src/Dignite.Abp.Notifications.Shared",
     "framework/src/Dignite.Abp.Notifications.SignalRNotifier",
-    "framework/src/Dignite.Abp.Points",
     "framework/src/Dignite.Abp.AspNetCore.Mvc.Regionalization",
     "framework/src/Dignite.Abp.Regionalization",
     "framework/src/Dignite.Abp.Seo",

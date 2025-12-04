@@ -9,13 +9,13 @@ namespace Dignite.Abp.UserPoints;
 /// </summary>
 public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
 {
-    public UserPoint(Guid id, Guid userId, int amount, DateTime? expirationTime, string pointType, string entityType, string entityId, string description, int balance, DateTime? nextExpirationAt,  Guid? tenantId)
+    public UserPoint(Guid id, Guid userId, int amount, string pointType, DateTime? expirationTime, string entityType, string entityId, string description, int balance, DateTime? nextExpirationAt,  Guid? tenantId)
         :base(id)
     {
         UserId = userId;
         Amount = amount;
-        ExpirationTime = expirationTime;
         PointType = pointType;
+        ExpirationTime = expirationTime;
         EntityType = entityType;
         EntityId = entityId;
         Description = description;
@@ -29,14 +29,19 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     }
 
     /// <summary>
-    /// Gets the name of the point type associated with this instance.
+    /// Gets or sets the of the primary key of the user associated with this point
     /// </summary>
-    public string PointType { get; protected set; }
+    public virtual Guid UserId { get; protected set; }
 
     /// <summary>
     /// Gets the amount associated with the current instance.
     /// </summary>
     public virtual int Amount { get; protected set; }
+
+    /// <summary>
+    /// Gets the name of the point type associated with this instance.
+    /// </summary>
+    public string PointType { get; protected set; }
 
     /// <summary>
     /// Getting or setting the expiration time of point
@@ -70,11 +75,6 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     /// If a subsequent expiration time exists and is earlier than the current time, the user's points balance must be recalculated.
     /// </remarks>
     public DateTime? NextExpirationAt { get; protected set; }
-
-    /// <summary>
-    /// Gets or sets the of the primary key of the user associated with this point
-    /// </summary>
-    public virtual Guid UserId { get; protected set; }
 
     public Guid? TenantId { get; protected set; }
 

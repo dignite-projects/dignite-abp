@@ -6,5 +6,8 @@ namespace Dignite.Abp.UserPoints;
 public class UserPointOptions
 {
     [NotNull]
-    public List<UserPointEntityTypeDefinition> EntityTypes { get; }
+    public List<UserPointEntityTypeDefinition> EntityTypes { get; } = new List<UserPointEntityTypeDefinition>();
+
+    [NotNull]
+    public List<UserPointTypeDefinition> PointTypes { get; } = new List<UserPointTypeDefinition>();
 }

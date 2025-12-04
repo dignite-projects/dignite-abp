@@ -5,24 +5,32 @@ using Volo.Abp.Domain.Services;
 
 namespace Dignite.Abp.UserPoints;
 public class UserPointManager: DomainService
-{
-    protected IUserPointEntityTypeDefinitionStore DefinitionStore { get; }
+{    
+    protected IUserPointTypeDefinitionStore PointTypeDefinitionStore { get; }
+
+    protected IUserPointEntityTypeDefinitionStore EntityTypeDefinitionStore { get; }
 
     protected IUserPointRepository UserPointsItemRepository { get; }
 
-    public UserPointManager(IUserPointEntityTypeDefinitionStore definitionStore, IUserPointRepository userPointsItemRepository)
+    public UserPointManager(IUserPointTypeDefinitionStore pointTypeDefinitionStore, IUserPointEntityTypeDefinitionStore entityTypeDefinitionStore,  IUserPointRepository userPointsItemRepository)
     {
-        DefinitionStore = definitionStore;
+        PointTypeDefinitionStore = pointTypeDefinitionStore;
+        EntityTypeDefinitionStore = entityTypeDefinitionStore;
         UserPointsItemRepository = userPointsItemRepository;
     }
 
     public virtual async Task<UserPoint> CreateAsync(
-        Guid userId, int amount, DateTime? expirationTime = null, 
+        Guid userId, int amount, [NotNull] string pointType, DateTime? expirationTime = null,        
         [CanBeNull] string entityType = null, [CanBeNull] string entityId = null,
         [CanBeNull] string description = null
         )
     {
-        if (!entityType.IsNullOrEmpty() && !await DefinitionStore.IsDefinedAsync(entityType))
+        if (!await PointTypeDefinitionStore.IsDefinedAsync(pointType))
+        {
+            throw new UnsupportedPointTypeException(pointType);
+        }
+
+        if (!entityType.IsNullOrEmpty() && !await EntityTypeDefinitionStore.IsDefinedAsync(entityType))
         {
             throw new EntityNotPointableException(entityType);
         }
@@ -35,13 +43,10 @@ public class UserPointManager: DomainService
         // Creating User Point Object
         var userPoint = new UserPoint(
             GuidGenerator.Create(),
-            userId,
-            amount, expirationTime,
-            null, 
+            userId, amount, pointType, expirationTime,
             entityType, entityId,
             description,
-            balance,
-            nextExpirationAt,
+            balance, nextExpirationAt,
             CurrentTenant.Id);
 
         // returning

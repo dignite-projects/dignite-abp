@@ -10,19 +10,9 @@ public static class UserPointsMongoDbContextExtensions
     {
         Check.NotNull(builder, nameof(builder));
 
-        builder.Entity<UserPointsItem>(b =>
+        builder.Entity<UserPoint>(b =>
         {
-            b.CollectionName = UserPointsDbProperties.DbTablePrefix + "UserPointsItems";
-        });
-
-        builder.Entity<UserPointsOrder>(b =>
-        {
-            b.CollectionName = UserPointsDbProperties.DbTablePrefix + "UserPointsOrders";
-        });
-
-        builder.Entity<UserPointsBlock>(b =>
-        {
-            b.CollectionName = UserPointsDbProperties.DbTablePrefix + "UserPointsBlocks";
+            b.CollectionName = UserPointsDbProperties.DbTablePrefix + "UserPoints";
         });
     }
 }

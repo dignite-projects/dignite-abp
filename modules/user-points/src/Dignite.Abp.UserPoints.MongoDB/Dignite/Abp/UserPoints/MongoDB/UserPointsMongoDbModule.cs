@@ -14,9 +14,7 @@ public class UserPointsMongoDbModule : AbpModule
     {
         context.Services.AddMongoDbContext<UserPointsMongoDbContext>(options =>
         {
-            options.AddRepository<UserPointsItem, MongoUserPointsItemRepository>();
-            options.AddRepository<UserPointsOrder, MongoUserPointsOrderRepository>();
-            options.AddRepository<UserPointsBlock, MongoUserPointsBlockRepository>();
+            options.AddRepository<UserPoint, MongoUserPointRepository>();
         });
     }
 }

@@ -1,7 +1,7 @@
 {
   "culture": "en",
   "texts": {
-    "MyAccount":  "My account",
-    "SamplePageMessage": "A sample page for the UserPoints module"
+    "Abp:UserPoints:0002": "The entity {EntityType} is not pointable.",
+    "Abp:UserPoints:0003": "User has insufficient point for the operation."
   }
 }

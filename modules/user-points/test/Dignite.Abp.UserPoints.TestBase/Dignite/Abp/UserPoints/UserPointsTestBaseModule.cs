@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.Authorization;
 using Volo.Abp.Autofac;
@@ -19,6 +20,12 @@ public class UserPointsTestBaseModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddAlwaysAllowAuthorization();
+
+        Configure<UserPointOptions>(options =>
+        {
+                options.PointTypes.AddIfNotContains(
+                    new UserPointTypeDefinition(UserPointsTestData.PointType));
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

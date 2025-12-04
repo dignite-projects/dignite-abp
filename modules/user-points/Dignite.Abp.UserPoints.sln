@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.7.34202.233
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.Domain.Shared", "src\Dignite.Abp.UserPoints.Domain.Shared\Dignite.Abp.UserPoints.Domain.Shared.csproj", "{D64C1577-4929-4B60-939E-96DE1534891A}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{649A3FFA-182F-4E56-9717-E6A9A2BEC545}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{E400416D-2895-4512-9D17-90681EEC7E0A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.EntityFrameworkCore", "src\Dignite.Abp.UserPoints.EntityFrameworkCore\Dignite.Abp.UserPoints.EntityFrameworkCore.csproj", "{0CE86223-D31D-4315-A1F5-87BA3EE1B844}"
 EndProject
@@ -35,17 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.Application.Tests", "test\Dignite.Abp.UserPoints.Application.Tests\Dignite.Abp.UserPoints.Application.Tests.csproj", "{90CB5DC4-C040-45C7-8900-9688B26405BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.HttpApi.Host", "host\Dignite.Abp.UserPoints.HttpApi.Host\Dignite.Abp.UserPoints.HttpApi.Host.csproj", "{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.AuthServer", "host\Dignite.Abp.UserPoints.AuthServer\Dignite.Abp.UserPoints.AuthServer.csproj", "{690203F4-3CD5-4569-88D9-EE831EEA5F5F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.Host.Shared", "host\Dignite.Abp.UserPoints.Host.Shared\Dignite.Abp.UserPoints.Host.Shared.csproj", "{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.UserPoints.Installer", "src\Dignite.Abp.UserPoints.Installer\Dignite.Abp.UserPoints.Installer.csproj", "{BE39FD00-745B-4049-8161-FC129817CBE4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dignite Abp", "Dignite Abp", "{24FE3D7C-C9DD-40BF-9685-F8CCFE561039}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dignite.Abp.Points", "..\..\framework\src\Dignite.Abp.Points\Dignite.Abp.Points.csproj", "{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,26 +93,10 @@ Global
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90CB5DC4-C040-45C7-8900-9688B26405BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE39FD00-745B-4049-8161-FC129817CBE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,11 +115,7 @@ Global
 		{D0AD9179-125C-40B2-A8EE-CD4C1EE24BB6} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
 		{E60895E5-79C4-447D-88B7-85CB5BA336A4} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
 		{90CB5DC4-C040-45C7-8900-9688B26405BC} = {CCD2960C-23CC-4AB4-B84D-60C7AAA52F4D}
-		{37B135B0-DAFE-4616-B25C-1BDF32FC44A2} = {E400416D-2895-4512-9D17-90681EEC7E0A}
-		{690203F4-3CD5-4569-88D9-EE831EEA5F5F} = {E400416D-2895-4512-9D17-90681EEC7E0A}
-		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{BE39FD00-745B-4049-8161-FC129817CBE4} = {649A3FFA-182F-4E56-9717-E6A9A2BEC545}
-		{0F5F5C6B-1D91-4C38-9CF0-DED92AC5B661} = {24FE3D7C-C9DD-40BF-9685-F8CCFE561039}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

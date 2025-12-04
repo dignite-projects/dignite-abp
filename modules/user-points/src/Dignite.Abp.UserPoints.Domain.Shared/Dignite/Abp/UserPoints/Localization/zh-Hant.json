@@ -1,7 +1,7 @@
 {
   "culture": "zh-Hant",
   "texts": {
-    "MyAccount": "我的賬戶",
-    "SamplePageMessage": "UserPoints 模塊的示例頁面"
+    "Abp:UserPoints:0002": "{EntityType} 類型的實體無法使用點數。",
+    "Abp:UserPoints:0003": "使用者點數不足，無法執行此操作。"
   }
 }

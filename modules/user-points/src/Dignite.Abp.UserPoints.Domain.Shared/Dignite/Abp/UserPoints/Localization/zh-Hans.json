@@ -1,7 +1,7 @@
 {
   "culture": "zh-Hans",
   "texts": {
-    "MyAccount": "我的账户",
-    "SamplePageMessage": "UserPoints模块的示例页面"
+    "Abp:UserPoints:0002": "{EntityType} 类型实体不能用于积分。",
+    "Abp:UserPoints:0003": "用户积分不足，无法执行该操作。"
   }
 }

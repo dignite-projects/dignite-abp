@@ -32,7 +32,7 @@ public class UserPointsDomainSharedModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("UserPoints", typeof(UserPointsResource));
+            options.MapCodeNamespace("Dignite.Abp.UserPoints", typeof(UserPointsResource));
         });
     }
 }

@@ -7,9 +7,7 @@ namespace Dignite.Abp.UserPoints.MongoDB;
 [ConnectionStringName(UserPointsDbProperties.ConnectionStringName)]
 public class UserPointsMongoDbContext : AbpMongoDbContext, IUserPointsMongoDbContext
 {
-    public IMongoCollection<UserPointsItem> UserPointsItems => Collection<UserPointsItem>();
-    public IMongoCollection<UserPointsOrder> UserPointsOrders => Collection<UserPointsOrder>();
-    public IMongoCollection<UserPointsBlock> UserPointsBlocks => Collection<UserPointsBlock>();
+    public IMongoCollection<UserPoint> UserPoints => Collection<UserPoint>();
 
     protected override void CreateModel(IMongoModelBuilder modelBuilder)
     {

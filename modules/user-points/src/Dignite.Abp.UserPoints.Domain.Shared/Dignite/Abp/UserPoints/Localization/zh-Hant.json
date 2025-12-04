@@ -1,6 +1,7 @@
 {
   "culture": "zh-Hant",
   "texts": {
+    "Abp:UserPoints:0001": "{TypeType} 點數類型不支援。",
     "Abp:UserPoints:0002": "{EntityType} 類型的實體無法使用點數。",
     "Abp:UserPoints:0003": "使用者點數不足，無法執行此操作。"
   }

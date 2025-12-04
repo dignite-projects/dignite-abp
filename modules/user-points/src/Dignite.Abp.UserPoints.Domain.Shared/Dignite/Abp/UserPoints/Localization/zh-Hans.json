@@ -1,6 +1,7 @@
 {
   "culture": "zh-Hans",
   "texts": {
+    "Abp:UserPoints:0001": "{TypeType} 积分类型不被支持。",
     "Abp:UserPoints:0002": "{EntityType} 类型实体不能用于积分。",
     "Abp:UserPoints:0003": "用户积分不足，无法执行该操作。"
   }

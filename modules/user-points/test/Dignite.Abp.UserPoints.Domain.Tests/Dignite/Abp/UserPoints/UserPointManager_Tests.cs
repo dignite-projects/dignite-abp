@@ -24,12 +24,12 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
     public async Task CreateAsync_ShouldWorkProperly()
     {
         var oneYearLater = _clock.Now.AddYears(1);
-        var userPoint = await _userPointsManager.CreateAsync(
+        var userPoint = await _userPointsManager.AddAsync(
             _testData.User1Id,
-            15, UserPointsTestData.PointType,
+            UserPointsTestData.PointType,
+            15, 
             oneYearLater
              );
-        await _userPointRepository.InsertAsync(userPoint, true);
 
         userPoint.Balance.ShouldBe(25);
 
@@ -41,13 +41,12 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
     [Fact]
     public async Task ConsumerAsync_ShouldWorkProperly()
     {
-        var userPoint = await _userPointsManager.CreateAsync(
+        var userPoint = await _userPointsManager.ConsumeAsync(
             _testData.User1Id,
-            -5, UserPointsTestData.PointType
+            -5
              );
 
         userPoint.Balance.ShouldBe(5);
-        await _userPointRepository.InsertAsync(userPoint, true);
 
         userPoint = await _userPointRepository.CalibrateBalanceAsync(_testData.User1Id);
         userPoint.Balance.ShouldBe(5);
@@ -56,11 +55,10 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
     [Fact]
     public async Task CreateAsync_ShouldThrowException_WithInsufficientPoint()
     {
-
         var exception = await Should.ThrowAsync<InsufficientPointException>(async () =>
-                            await _userPointsManager.CreateAsync(
-                            _testData.User1Id,
-                            -15, UserPointsTestData.PointType
+                            await _userPointsManager.ConsumeAsync(
+                            _testData.User1Id, 
+                            -150
                              ));
 
         exception.ShouldNotBeNull();

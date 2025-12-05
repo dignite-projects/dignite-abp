@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Volo.Abp.Domain.Repositories;
 
 namespace Dignite.Abp.UserPoints;
@@ -18,6 +19,19 @@ public interface IUserPointRepository: IBasicRepository<UserPoint, Guid>
         Guid userId,
         CancellationToken cancellationToken = default
          );
+
+    /// <summary>
+    /// Consumes resources for the specified user that are set to expire, up to the given amount, in an asynchronous
+    /// operation.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user whose expiring resources are to be consumed.</param>
+    /// <param name="amount">The maximum number of expiring resources to consume. Must be less than or equal to -1.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>A task that represents the asynchronous consume operation.</returns>
+    Task ConsumeByExpirationAsync(
+        Guid userId,
+        [ValueRange(int.MinValue, -1)] int amount,
+        CancellationToken cancellationToken = default);
 
     Task<int> GetCountAsync(
         Guid userId,

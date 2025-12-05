@@ -20,7 +20,7 @@ public static class UserPointsDbContextModelCreatingExtensions
             b.ConfigureByConvention();
 
             //Properties
-            b.Property(up => up.PointType).IsRequired().HasMaxLength(UserPointConsts.MaxPointTypeLength);
+            b.Property(up => up.PointType).HasMaxLength(UserPointConsts.MaxPointTypeLength);
             b.Property(up => up.EntityType).HasMaxLength(UserPointConsts.MaxEntityTypeLength);
             b.Property(up => up.EntityId).HasMaxLength(UserPointConsts.MaxEntityIdLength);
 

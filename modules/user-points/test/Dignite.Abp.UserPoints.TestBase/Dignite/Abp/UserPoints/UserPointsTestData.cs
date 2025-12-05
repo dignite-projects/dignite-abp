@@ -8,10 +8,7 @@ public class UserPointsTestData: ISingletonDependency
 
     public string User1UserName => "fake.user";
 
+    public const int Points = 10;
+
     public const string PointType = "BlackFridayActivity";
-
-    public string PointsDefinitionName => "BlackFridayActivities";
-
-    public string PointsWorkflow1Name => "DailySignIn";
-    public string PointsWorkflow2Name => "ShareToFriends";
 }

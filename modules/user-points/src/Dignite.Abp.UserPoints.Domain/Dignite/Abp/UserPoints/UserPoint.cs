@@ -22,6 +22,12 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
         Balance = balance;
         NextExpirationAt = nextExpirationAt;
         TenantId = tenantId;
+
+        // Set Available Amount
+        if (expirationTime.HasValue && amount > 0)
+        {
+            AvailableAmount = amount;
+        }
     }
 
     protected UserPoint()
@@ -37,6 +43,11 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     /// Gets the amount associated with the current instance.
     /// </summary>
     public virtual int Amount { get; protected set; }
+
+    /// <summary>
+    /// Gets the available amount for the current entity, if specified.
+    /// </summary>
+    public virtual int? AvailableAmount { get; protected set; }
 
     /// <summary>
     /// Gets the name of the point type associated with this instance.
@@ -74,9 +85,9 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     /// <remarks>
     /// If a subsequent expiration time exists and is earlier than the current time, the user's points balance must be recalculated.
     /// </remarks>
-    public DateTime? NextExpirationAt { get; protected set; }
+    public virtual DateTime? NextExpirationAt { get; protected set; }
 
-    public Guid? TenantId { get; protected set; }
+    public virtual Guid? TenantId { get; protected set; }
 
     /// <summary>
     /// Sets the current balance and the optional next expiration date.
@@ -87,5 +98,14 @@ public class UserPoint : CreationAuditedAggregateRoot<Guid>, IMultiTenant
     {
         Balance = balance;
         NextExpirationAt = nextExpirationAt;
+    }
+
+    /// <summary>
+    /// Sets the available amount for the current instance.
+    /// </summary>
+    /// <param name="availableAmount">The new available amount to assign. Must be a non-negative integer.</param>
+    public virtual void SetAvailableAmount(int availableAmount)
+    {
+        AvailableAmount = availableAmount;
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
 using Volo.Abp.Timing;
 
 namespace Dignite.Abp.UserPoints.EntityFrameworkCore;
@@ -39,13 +40,55 @@ public class EfCoreUserPointRepository : EfCoreRepository<IUserPointsDbContext, 
                 .OrderBy(up => up.ExpirationTime)
                 .FirstOrDefaultAsync(cancellationToken);
             userPoint.SetBalance(
-                userPoint.Balance - expiredUserPoints.Sum(ep => ep.Amount),
+                userPoint.Balance - expiredUserPoints.Sum(ep => ep.AvailableAmount.Value),
                 nextExpiringUserPoint?.ExpirationTime
                 );
             await UpdateAsync(userPoint, cancellationToken: cancellationToken);
         }
 
         return userPoint;
+    }
+
+    public async Task ConsumeByExpirationAsync(
+        Guid userId, 
+        [ValueRange(int.MinValue, -1)] int amount,
+        CancellationToken cancellationToken = default)
+    {
+        cancellationToken = GetCancellationToken(cancellationToken);
+
+        // amount 为负数，表示需要扣多少
+        // 例如：amount = -20
+
+        // 取得所有仍未过期的积分记录（按过期时间升序）
+        var expiredUserPoints = await (await GetDbSetAsync())
+            .Where(up => up.UserId == userId
+                && up.ExpirationTime.HasValue
+                && up.ExpirationTime >= _clock.Now)
+            .OrderBy(up => up.ExpirationTime)
+            .ToListAsync(cancellationToken);
+
+        foreach (var userPoint in expiredUserPoints)
+        {
+            if (amount == 0)
+                break;
+
+            // remaining needed points as positive number
+            var needed = -amount; // 例如：amount = -20 → needed = 20
+
+            var consumableAmount = Math.Min(needed, userPoint.AvailableAmount.Value);
+            // consumableAmount 的含义：在本条记录中最多能扣多少
+
+            // 扣减可用积分
+            userPoint.SetAvailableAmount(userPoint.AvailableAmount.Value - consumableAmount);
+
+            // 更新剩余 amount（仍为负数）
+            amount += consumableAmount;
+            // 例如：amount = -20 + 6 → -14  
+
+            await UpdateAsync(userPoint, cancellationToken: cancellationToken);
+        }
+
+        // 退出循环后，如果 amount < 0，表示本阶段已扣尽可扣分数        
     }
 
     public async Task<int> GetCountAsync(

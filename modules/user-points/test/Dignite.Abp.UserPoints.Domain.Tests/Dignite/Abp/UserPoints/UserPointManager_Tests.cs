@@ -26,16 +26,25 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
         var oneYearLater = _clock.Now.AddYears(1);
         var userPoint = await _userPointsManager.AddAsync(
             _testData.User1Id,
-            UserPointsTestData.PointType,
+            UserPointsTestData.PointType1,
             15, 
             oneYearLater
              );
 
         userPoint.Balance.ShouldBe(25);
 
-        userPoint = await _userPointRepository.CalibrateBalanceAsync(_testData.User1Id);
-        userPoint.Balance.ShouldBe(25);
-        userPoint.NextExpirationAt.ShouldBe(oneYearLater);
+        var otherUserPoint = await _userPointsManager.AddAsync(
+            _testData.User1Id,
+            UserPointsTestData.PointType,
+            10,
+            oneYearLater
+             );
+
+        otherUserPoint.Balance.ShouldBe(35);
+
+        var lastUserPoint = await _userPointRepository.CalibrateBalanceAsync(_testData.User1Id);
+        lastUserPoint.Balance.ShouldBe(35);
+        lastUserPoint.NextExpirationAt.ShouldBe(oneYearLater);
     }
 
     [Fact]

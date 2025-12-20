@@ -26,8 +26,8 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
         var oneYearLater = _clock.Now.AddYears(1);
         var userPoint = await _userPointsManager.AddAsync(
             _testData.User1Id,
-            UserPointsTestData.PointType1,
             15, 
+            UserPointsTestData.PointType1,
             oneYearLater
              );
 
@@ -35,8 +35,8 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
 
         var otherUserPoint = await _userPointsManager.AddAsync(
             _testData.User1Id,
-            UserPointsTestData.PointType,
             10,
+            UserPointsTestData.PointType,
             oneYearLater
              );
 
@@ -52,7 +52,8 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
     {
         var userPoint = await _userPointsManager.ConsumeAsync(
             _testData.User1Id,
-            -5
+            -5,
+            UserPointsTestData.PointConsumeType
              );
 
         userPoint.Balance.ShouldBe(5);
@@ -67,7 +68,8 @@ public class UserPointManager_Tests : UserPointsDomainTestBase
         var exception = await Should.ThrowAsync<InsufficientPointException>(async () =>
                             await _userPointsManager.ConsumeAsync(
                             _testData.User1Id, 
-                            -150
+                            -150,
+                            UserPointsTestData.PointConsumeType
                              ));
 
         exception.ShouldNotBeNull();

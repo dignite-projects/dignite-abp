@@ -21,8 +21,8 @@ public class UserPointManager: DomainService
 
     public virtual async Task<UserPoint> AddAsync(
         Guid userId, 
-        [NotNull] string pointType, 
         [ValueRange(1,int.MaxValue)] int amount, 
+        [NotNull] string pointType, 
         DateTime? expirationTime = null,
         [CanBeNull] string entityType = null, [CanBeNull] string entityId = null,
         [CanBeNull] string description = null
@@ -62,8 +62,9 @@ public class UserPointManager: DomainService
     }
 
     public virtual async Task<UserPoint> ConsumeAsync(
-        Guid userId, 
-        [ValueRange(int.MinValue,-1)]int amount,       
+        Guid userId,
+        [ValueRange(int.MinValue,-1)]int amount,  
+        [NotNull] string pointType,     
         [CanBeNull] string entityType = null, [CanBeNull] string entityId = null,
         [CanBeNull] string description = null
         )
@@ -72,6 +73,12 @@ public class UserPointManager: DomainService
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }
+
+        if (!await PointTypeDefinitionStore.IsDefinedAsync(pointType))
+        {
+            throw new UnsupportedPointTypeException(pointType);
+        }
+
         if (!entityType.IsNullOrEmpty() && !await EntityTypeDefinitionStore.IsDefinedAsync(entityType))
         {
             throw new EntityNotPointableException(entityType);
@@ -79,7 +86,7 @@ public class UserPointManager: DomainService
 
         // 校准用户当前积分余额
         var latestPointRecord = await UserPointRepository.CalibrateBalanceAsync(userId);
-        var balance = StartConsume(latestPointRecord, amount);
+        var balance = CalculateBalanceAfterConsumption(latestPointRecord, amount);
 
         // Consuming points by expiration
         await UserPointRepository.ConsumeByExpirationAsync(userId,amount);
@@ -87,7 +94,7 @@ public class UserPointManager: DomainService
         // Creating User Point Object
         var userPoint = new UserPoint(
             GuidGenerator.Create(),
-            userId, amount, null, null,
+            userId, amount, pointType, null,
             entityType, entityId,
             description,
             balance, latestPointRecord.NextExpirationAt,
@@ -100,20 +107,20 @@ public class UserPointManager: DomainService
     /// <summary>
     /// Calculates the new balance by applying the specified amount to the latest user point record.
     /// </summary>
-    /// <param name="amount">The amount to add to the current balance. A positive value increases the balance; a negative value decreases it.</param>
+    /// <param name="consumedAmount">The amount to add to the current balance. A positive value increases the balance; a negative value decreases it.</param>
     /// <param name="latestPointRecord">The most recent user point record containing the current balance. If null, the balance is assumed to be zero.</param>
     /// <returns>The updated balance after applying the specified amount.</returns>
     /// <exception cref="InsufficientPointException">Thrown when the amount to subtract exceeds the available balance.</exception>
-    protected int StartConsume(UserPoint latestPointRecord, int amount)
+    protected virtual int CalculateBalanceAfterConsumption(UserPoint latestPointRecord, int consumedAmount)
     {
         var balance = latestPointRecord?.Balance ?? 0;
-        if (amount < 0 && balance < Math.Abs(amount))
+        if (consumedAmount < 0 && balance < Math.Abs(consumedAmount))
         {
-            throw new InsufficientPointException(balance, amount); //余额不足
+            throw new InsufficientPointException(balance, consumedAmount); //余额不足
         }
         else
         {
-            balance = balance + amount;
+            balance = balance + consumedAmount;
         }
         return balance;
     }
@@ -125,7 +132,7 @@ public class UserPointManager: DomainService
     /// <param name="latestPointRecord">The most recent user point record containing a potential expiration time. Can be null.</param>
     /// <returns>A DateTime value representing the next expiration time, or null if neither the provided expiration time nor the
     /// latest point record specify an expiration.</returns>
-    protected DateTime? GetNextExpirationAt(DateTime? expirationTime, UserPoint latestPointRecord)
+    protected virtual DateTime? GetNextExpirationAt(DateTime? expirationTime, UserPoint latestPointRecord)
     {
         if (expirationTime.HasValue)
         {

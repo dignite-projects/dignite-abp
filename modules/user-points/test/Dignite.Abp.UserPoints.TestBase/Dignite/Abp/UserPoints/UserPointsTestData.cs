@@ -13,4 +13,6 @@ public class UserPointsTestData: ISingletonDependency
     public const string PointType = "BlackFridayActivity";
 
     public const string PointType1 = "BlackFridayActivity1";
+
+    public const string PointConsumeType = "BuyProduct";
 }

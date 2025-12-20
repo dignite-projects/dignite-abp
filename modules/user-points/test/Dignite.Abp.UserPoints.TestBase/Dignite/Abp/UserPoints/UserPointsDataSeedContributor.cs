@@ -34,8 +34,8 @@ public class UserPointsDataSeedContributor : IDataSeedContributor, ITransientDep
     {
         var userPoint = await _userPointsManager.AddAsync(
             _testData.User1Id,
-            UserPointsTestData.PointType,
             UserPointsTestData.Points, 
+            UserPointsTestData.PointType,
             _clock.Now.AddYears(2)
              );
     }

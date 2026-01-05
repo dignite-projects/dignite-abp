@@ -1,6 +1,6 @@
 ﻿namespace Dignite.Abp.UserPoints.EntityFrameworkCore;
 
-public class UserPointRepository_Tests : UserPointRepository_Tests<UserPointsEntityFrameworkCoreTestModule>
+public class UserPointTransactionRepository_Tests : UserPointTransactionRepository_Tests<UserPointsEntityFrameworkCoreTestModule>
 {
     /* Don't write custom repository tests here, instead write to
      * the base class.

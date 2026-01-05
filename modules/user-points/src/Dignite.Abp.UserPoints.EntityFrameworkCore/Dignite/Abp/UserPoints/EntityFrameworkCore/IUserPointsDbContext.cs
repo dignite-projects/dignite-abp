@@ -7,5 +7,6 @@ namespace Dignite.Abp.UserPoints.EntityFrameworkCore;
 [ConnectionStringName(UserPointsDbProperties.ConnectionStringName)]
 public interface IUserPointsDbContext : IEfCoreDbContext
 {
-    DbSet<UserPoint> UserPoints { get; }
+    DbSet<UserPointAccount> Accounts { get; }
+    DbSet<UserPointTransaction> Transactions { get; }
 }

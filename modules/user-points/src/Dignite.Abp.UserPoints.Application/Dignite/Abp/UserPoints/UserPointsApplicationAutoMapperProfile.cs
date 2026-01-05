@@ -6,6 +6,7 @@ public class UserPointsApplicationAutoMapperProfile : Profile
 {
     public UserPointsApplicationAutoMapperProfile()
     {
-        CreateMap<UserPoint, UserPointDto>();
+        CreateMap<UserPointAccount, UserPointAccountDto>();
+        CreateMap<UserPointTransaction, UserPointTransactionDto>();
     }
 }

@@ -28,9 +28,6 @@ public class UserPointsTestBaseModule : AbpModule
 
             options.PointTypes.AddIfNotContains(
                 new UserPointTypeDefinition(UserPointsTestData.PointType1));
-
-            options.PointTypes.AddIfNotContains(
-                new UserPointTypeDefinition(UserPointsTestData.PointConsumeType));
         });
     }
 

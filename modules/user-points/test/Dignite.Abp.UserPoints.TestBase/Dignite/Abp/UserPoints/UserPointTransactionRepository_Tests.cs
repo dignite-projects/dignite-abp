@@ -10,16 +10,16 @@ namespace Dignite.Abp.UserPoints;
  * Then inherit these abstract classes from EF Core & MongoDB test projects.
  * In this way, both database providers are tests with the same set tests.
  */
-public abstract class UserPointRepository_Tests<TStartupModule> : UserPointsTestBase<TStartupModule>
+public abstract class UserPointTransactionRepository_Tests<TStartupModule> : UserPointsTestBase<TStartupModule>
     where TStartupModule : IAbpModule
 {
-    private readonly IUserPointRepository _userPointsItemRepository;
+    private readonly IUserPointTransactionRepository _userPointsItemRepository;
     private readonly UserPointsTestData _testData;
     private readonly IClock _clock;
 
-    protected UserPointRepository_Tests()
+    protected UserPointTransactionRepository_Tests()
     {
-        _userPointsItemRepository = GetRequiredService<IUserPointRepository>();
+        _userPointsItemRepository = GetRequiredService<IUserPointTransactionRepository>();
         _testData = GetRequiredService<UserPointsTestData>();
         _clock = GetRequiredService<IClock>();
     }
@@ -30,8 +30,6 @@ public abstract class UserPointRepository_Tests<TStartupModule> : UserPointsTest
     {
         var result = await _userPointsItemRepository.GetListAsync(_testData.User1Id);
 
-        result.ShouldNotBeNull();
-        result.ShouldNotBeEmpty();
-        result.Count.ShouldBe(1);
+        result.Count.ShouldBe(2);
     }
 }

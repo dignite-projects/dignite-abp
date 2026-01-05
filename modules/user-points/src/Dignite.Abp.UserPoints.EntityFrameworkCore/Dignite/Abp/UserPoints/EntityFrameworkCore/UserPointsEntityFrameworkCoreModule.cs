@@ -14,7 +14,8 @@ public class UserPointsEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<UserPointsDbContext>(options =>
         {
-            options.AddRepository<UserPoint, EfCoreUserPointRepository>();
+            options.AddRepository<UserPointAccount, EfCoreUserPointAccountRepository>();
+            options.AddRepository<UserPointTransaction, EfCoreUserPointTransactionRepository>();
         });
     }
 }

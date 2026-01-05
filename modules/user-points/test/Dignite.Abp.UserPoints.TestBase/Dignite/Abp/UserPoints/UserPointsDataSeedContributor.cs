@@ -11,10 +11,10 @@ public class UserPointsDataSeedContributor : IDataSeedContributor, ITransientDep
     private readonly IClock _clock;
     private readonly ICurrentTenant _currentTenant;
     private readonly UserPointsTestData _testData;
-    private readonly UserPointManager _userPointsManager;
+    private readonly UserPointAccountManager _userPointsManager;
 
     public UserPointsDataSeedContributor(IClock clock,  ICurrentTenant currentTenant,
-        UserPointsTestData testData, UserPointManager userPointsItemManager)
+        UserPointsTestData testData, UserPointAccountManager userPointsItemManager)
     {
         _clock = clock;
         _currentTenant = currentTenant;
@@ -32,11 +32,16 @@ public class UserPointsDataSeedContributor : IDataSeedContributor, ITransientDep
 
     private async Task SeedUserPointsItemAsync()
     {
-        var userPoint = await _userPointsManager.AddAsync(
+        await _userPointsManager.EarnAsync(
             _testData.User1Id,
             UserPointsTestData.Points, 
             UserPointsTestData.PointType,
             _clock.Now.AddYears(2)
+             );
+        await _userPointsManager.EarnAsync(
+            _testData.User1Id,
+            UserPointsTestData.Points,
+            UserPointsTestData.PointType1
              );
     }
 

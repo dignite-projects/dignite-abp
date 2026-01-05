@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -19,16 +18,15 @@ public class MyPointController : UserPointsController, IMyPointAppService
     }
 
     [HttpGet]
-    [Route("available-point")]
-    [Authorize]
-    public async Task<int> GetAvailableAsync()
+    [Route("accounts")]
+    public async Task<ListResultDto<UserPointAccountDto>> GetAccountsAsync()
     {
-        return await _pointsAppService.GetAvailableAsync();
+        return await _pointsAppService.GetAccountsAsync();
     }
 
     [HttpGet]
-    [Authorize]
-    public async Task<PagedResultDto<UserPointDto>> GetListAsync(GetUserPointListInput input)
+    [Route("transactions")]
+    public async Task<PagedResultDto<UserPointTransactionDto>> GetListAsync(GetUserPointTransactionsInput input)
     {
         return await _pointsAppService.GetListAsync(input);
     }

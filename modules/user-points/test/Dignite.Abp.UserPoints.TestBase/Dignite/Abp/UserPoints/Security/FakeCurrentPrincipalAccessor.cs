@@ -8,6 +8,13 @@ namespace Dignite.Abp.UserPoints.Security;
 [Dependency(ReplaceServices = true)]
 public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
 {
+    private readonly UserPointsTestData _testData;
+
+    public FakeCurrentPrincipalAccessor(UserPointsTestData testData)
+    {
+        this._testData = testData;
+    }
+
     protected override ClaimsPrincipal GetClaimsPrincipal()
     {
         return GetPrincipal();
@@ -17,8 +24,8 @@ public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
     {
         return new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
                 {
-                    new Claim(AbpClaimTypes.UserId, "2e701e62-0953-4dd3-910b-dc6cc93ccb0d"),
-                    new Claim(AbpClaimTypes.UserName, "admin"),
+                    new Claim(AbpClaimTypes.UserId, _testData.User1Id.ToString()),
+                    new Claim(AbpClaimTypes.UserName, _testData.User1UserName),
                     new Claim(AbpClaimTypes.Email, "admin@abp.io")
                 }
             )

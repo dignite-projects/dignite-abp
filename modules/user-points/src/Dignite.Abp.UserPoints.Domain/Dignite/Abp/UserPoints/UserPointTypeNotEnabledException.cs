@@ -7,10 +7,10 @@ namespace Dignite.Abp.UserPoints;
 /// Exception thrown when the point type is unsupported.
 /// </summary>
 [Serializable]
-public class UnsupportedPointTypeException : BusinessException
+public class UserPointTypeNotEnabledException : BusinessException
 {
-    public UnsupportedPointTypeException(string pointTypeName)
-        : base(code: UserPointsErrorCodes.UserPoint.UnsupportedPointType)
+    public UserPointTypeNotEnabledException(string pointTypeName)
+        : base(code: UserPointsErrorCodes.UserPoint.UserPointTypeNotEnabled)
     {
         PointTypeName = pointTypeName;
         WithData(nameof(UserPointAccount.PointTypeName), pointTypeName);

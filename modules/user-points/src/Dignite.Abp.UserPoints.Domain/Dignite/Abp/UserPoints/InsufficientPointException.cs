@@ -12,7 +12,7 @@ public class InsufficientPointException : BusinessException
     public InsufficientPointException(int balance, int amount)
         : base(code: UserPointsErrorCodes.UserPoint.InsufficientPoint)
     {
-        WithData(nameof(UserPoint.Balance), balance);
-        WithData(nameof(UserPoint.Amount), amount);
+        WithData(nameof(UserPointTransaction.Balance), balance);
+        WithData(nameof(UserPointTransaction.Amount), amount);
     }
 }

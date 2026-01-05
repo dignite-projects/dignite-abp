@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Shouldly;
 using Xunit;
 
@@ -14,18 +15,18 @@ public class MyPointAppService_Tests : UserPointsApplicationTestBase
     }
 
     [Fact]
-    public async Task GetMyPointsAsync()
+    public async Task GetTransactionsAsync()
     {
-        var myPoints = await _myPointAppService.GetListAsync(new GetUserPointListInput());
+        var myPoints = await _myPointAppService.GetListAsync(new GetUserPointTransactionsInput());
 
         myPoints.TotalCount.ShouldBeGreaterThan(0);
     }
 
     [Fact]
-    public async Task CalculatePointsAsync()
+    public async Task GetAccountsAsync()
     {
-        var availablePoint = await _myPointAppService.GetAvailableAsync();
-
-        availablePoint.ShouldBe(10);
+        var accounts = await _myPointAppService.GetAccountsAsync();
+        accounts.Items.Count.ShouldBe(2);
+        accounts.Items.Sum(a => a.CurrentBalance).ShouldBe(20);
     }
 }

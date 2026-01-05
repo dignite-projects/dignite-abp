@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -16,21 +17,26 @@ public class DefaultUserPointTypeDefinitionStore : IUserPointTypeDefinitionStore
         Options = options.Value;
     }
 
-    public virtual Task<UserPointTypeDefinition> GetAsync([NotNull] string pointType)
+    public virtual Task<UserPointTypeDefinition> GetAsync([NotNull] string pointTypeName)
     {
-        Check.NotNullOrWhiteSpace(pointType, nameof(pointType));
+        Check.NotNullOrWhiteSpace(pointTypeName, nameof(pointTypeName));
 
-        var result = Options.PointTypes.SingleOrDefault(x => x.PointType.Equals(pointType, StringComparison.InvariantCultureIgnoreCase)) ??
-                     throw new UnsupportedPointTypeException(pointType);
+        var result = Options.PointTypes.SingleOrDefault(x => x.Name.Equals(pointTypeName, StringComparison.InvariantCultureIgnoreCase)) ??
+                     throw new UnsupportedPointTypeException(pointTypeName);
 
         return Task.FromResult(result);
     }
 
-    public virtual Task<bool> IsDefinedAsync([NotNull] string pointType)
+    public virtual Task<List<UserPointTypeDefinition>> GetAllAsync()
     {
-        Check.NotNullOrWhiteSpace(pointType, nameof(pointType));
+        return Task.FromResult(Options.PointTypes);
+    }
 
-        var isDefined = Options.PointTypes.Any(x => x.PointType == pointType);
+    public virtual Task<bool> IsDefinedAsync([NotNull] string pointTypeName)
+    {
+        Check.NotNullOrWhiteSpace(pointTypeName, nameof(pointTypeName));
+
+        var isDefined = Options.PointTypes.Any(x => x.Name == pointTypeName);
 
         return Task.FromResult(isDefined);
     }

@@ -7,5 +7,6 @@ namespace Dignite.Abp.UserPoints.MongoDB;
 [ConnectionStringName(UserPointsDbProperties.ConnectionStringName)]
 public interface IUserPointsMongoDbContext : IAbpMongoDbContext
 {
-    IMongoCollection<UserPoint> UserPoints { get; }
+    IMongoCollection<UserPointAccount> Accounts { get; }
+    IMongoCollection<UserPointTransaction> Transactions { get; }
 }

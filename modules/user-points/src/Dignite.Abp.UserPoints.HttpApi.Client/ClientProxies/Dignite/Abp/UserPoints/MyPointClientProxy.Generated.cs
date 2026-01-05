@@ -17,16 +17,16 @@ namespace Dignite.Abp.UserPoints;
 [ExposeServices(typeof(IMyPointAppService), typeof(MyPointClientProxy))]
 public partial class MyPointClientProxy : ClientProxyBase<IMyPointAppService>, IMyPointAppService
 {
-    public virtual async Task<int> GetAvailableAsync()
+    public virtual async Task<ListResultDto<UserPointAccountDto>> GetAccountsAsync()
     {
-        return await RequestAsync<int>(nameof(GetAvailableAsync));
+        return await RequestAsync<ListResultDto<UserPointAccountDto>>(nameof(GetAccountsAsync));
     }
 
-    public virtual async Task<PagedResultDto<UserPointDto>> GetListAsync(GetUserPointListInput input)
+    public virtual async Task<PagedResultDto<UserPointTransactionDto>> GetListAsync(GetUserPointTransactionsInput input)
     {
-        return await RequestAsync<PagedResultDto<UserPointDto>>(nameof(GetListAsync), new ClientProxyRequestTypeValue
+        return await RequestAsync<PagedResultDto<UserPointTransactionDto>>(nameof(GetListAsync), new ClientProxyRequestTypeValue
         {
-            { typeof(GetUserPointListInput), input }
+            { typeof(GetUserPointTransactionsInput), input }
         });
     }
 }

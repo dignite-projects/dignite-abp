@@ -1,8 +1,9 @@
 {
   "culture": "en-GB",
   "texts": {
-    "Abp:UserPoints:0001": "The points type {TypeType}  is not supported.",
+    "Abp:UserPoints:0001": "The points type {PointTypeName}  is not supported.",
     "Abp:UserPoints:0002": "The entity {EntityType} is not pointable.",
-    "Abp:UserPoints:0003": "User has insufficient point for the operation."
+    "Abp:UserPoints:0003": "User has insufficient point for the operation.",
+    "Abp:UserPoints:0004": "The points type {PointTypeName}  is not Enable."
   }
 }

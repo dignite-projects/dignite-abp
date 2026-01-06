@@ -1,8 +1,9 @@
 {
   "culture": "ja",
   "texts": {
-    "Abp:UserPoints:0001": "{TypeType} ポイント タイプはサポートされていません。",
+    "Abp:UserPoints:0001": "{PointTypeName} ポイント タイプはサポートされていません。",
     "Abp:UserPoints:0002": "{EntityType} タイプのエンティティはポイントに利用できません.",
-    "Abp:UserPoints:0003": "ユーザーは操作に必要なポイントが不足しています."
+    "Abp:UserPoints:0003": "ユーザーは操作に必要なポイントが不足しています.",
+    "Abp:UserPoints:0004": "{PointTypeName}」ポイントタイプは現在未使用です。"
   }
 }

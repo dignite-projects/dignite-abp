@@ -11,11 +11,13 @@ public class MyPointAppService : UserPointsAppService, IMyPointAppService
 {
     private readonly IUserPointAccountRepository _accountRepository;
     private readonly IUserPointTransactionRepository _transactionRepository;
+    private readonly IUserPointTypeDefinitionStore _userPointTypeDefinitionStore;
 
-    public MyPointAppService(IUserPointAccountRepository accountRepository, IUserPointTransactionRepository transactionRepository)
+    public MyPointAppService(IUserPointAccountRepository accountRepository, IUserPointTransactionRepository transactionRepository, IUserPointTypeDefinitionStore userPointTypeDefinitionStore)
     {
         _accountRepository = accountRepository;
         _transactionRepository = transactionRepository;
+        _userPointTypeDefinitionStore = userPointTypeDefinitionStore;
     }
 
     /// <summary>
@@ -24,11 +26,13 @@ public class MyPointAppService : UserPointsAppService, IMyPointAppService
     /// <returns></returns>
     public async Task<ListResultDto<UserPointAccountDto>> GetAccountsAsync()
     {
+        var pointTypes = await _userPointTypeDefinitionStore.GetAllAsync();
         var allAccounts = await _accountRepository.GetListAsync(
             x => x.UserId == CurrentUser.GetId() 
         );
 
         var dto = ObjectMapper.Map<List<UserPointAccount>, List<UserPointAccountDto>>(allAccounts);
+        dto.ForEach(upa => upa.DisplayName = pointTypes.Find(pt => pt.Name == upa.PointTypeName).DisplayName.Localize(StringLocalizerFactory));
         return new ListResultDto<UserPointAccountDto>(dto);
     }
 

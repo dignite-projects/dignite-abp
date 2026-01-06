@@ -15,18 +15,18 @@ public class MyPointAppService_Tests : UserPointsApplicationTestBase
     }
 
     [Fact]
-    public async Task GetTransactionsAsync()
-    {
-        var myPoints = await _myPointAppService.GetListAsync(new GetUserPointTransactionsInput());
-
-        myPoints.TotalCount.ShouldBeGreaterThan(0);
-    }
-
-    [Fact]
     public async Task GetAccountsAsync()
     {
         var accounts = await _myPointAppService.GetAccountsAsync();
         accounts.Items.Count.ShouldBe(2);
         accounts.Items.Sum(a => a.CurrentBalance).ShouldBe(20);
+    }
+
+    [Fact]
+    public async Task GetTransactionsAsync()
+    {
+        var transactions = await _myPointAppService.GetListAsync(new GetUserPointTransactionsInput());
+
+        transactions.TotalCount.ShouldBeGreaterThan(0);
     }
 }

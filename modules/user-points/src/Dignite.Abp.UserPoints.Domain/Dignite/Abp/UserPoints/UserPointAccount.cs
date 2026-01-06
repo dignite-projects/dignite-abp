@@ -71,7 +71,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
         CurrentBalance += amount;
         FrozenBalance += amount;
-        LastModificationTime = lastTransactionTime;
+        LastTransactionTime = lastTransactionTime;
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
         CurrentBalance += amount;
         TotalEarned += amount;
-        LastModificationTime = lastTransactionTime;
+        LastTransactionTime = lastTransactionTime;
     }
 
     public virtual void AddTotalSpent(int amount, DateTime lastTransactionTime)
@@ -98,7 +98,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
         CurrentBalance += amount;
         TotalSpent += amount;
-        LastModificationTime = lastTransactionTime;
+        LastTransactionTime = lastTransactionTime;
     }
 
     public virtual void AddTotalExpired(int amount, DateTime lastTransactionTime)
@@ -109,7 +109,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
         CurrentBalance += amount;
         TotalExpired += amount;
-        LastModificationTime = lastTransactionTime;
+        LastTransactionTime = lastTransactionTime;
     }
 
     public virtual void SetStatus(UserPointAccountStatus status)

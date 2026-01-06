@@ -1,12 +1,15 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
 
 namespace Dignite.Abp.UserPoints;
 
 [Serializable]
-public class UserPointAccountDto
+public class UserPointAccountDto:EntityDto<Guid>
 {
 
     public string PointTypeName { get; set; }
+
+    public string DisplayName { get; set; }
 
     /// <summary>
     /// 当前可用余额（快照字段，避免每次聚合计算）

@@ -30,7 +30,7 @@ public class MongoUserPointTransactionRepository : MongoDbRepository<IUserPoints
         [CanBeNull] string remark = null,
         CancellationToken cancellationToken = default)
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }
@@ -69,6 +69,9 @@ public class MongoUserPointTransactionRepository : MongoDbRepository<IUserPoints
 
             // 在本条记录中最多能扣多少
             var consumableAmount = Math.Min(needed, userPointTransaction.AvailableAmount.Value);
+
+            if (consumableAmount == 0)
+                continue;
 
             // 扣减可用积分
             userPointTransaction.SetAvailableAmount(userPointTransaction.AvailableAmount.Value - consumableAmount);

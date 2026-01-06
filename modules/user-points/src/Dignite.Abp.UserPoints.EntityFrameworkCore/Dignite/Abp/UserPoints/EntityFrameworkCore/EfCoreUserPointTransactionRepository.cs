@@ -28,7 +28,7 @@ public class EfCoreUserPointTransactionRepository : EfCoreRepository<IUserPoints
         [CanBeNull] string remark = null,
         CancellationToken cancellationToken = default)
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }
@@ -67,6 +67,9 @@ public class EfCoreUserPointTransactionRepository : EfCoreRepository<IUserPoints
             // 在本条记录中最多能扣多少
             var consumableAmount = Math.Min(needed, userPointTransaction.AvailableAmount.Value);
 
+            if (consumableAmount == 0)
+                continue;
+
             // 扣减可用积分
             userPointTransaction.SetAvailableAmount(userPointTransaction.AvailableAmount.Value - consumableAmount);
 
@@ -79,13 +82,14 @@ public class EfCoreUserPointTransactionRepository : EfCoreRepository<IUserPoints
             if (newTransactions.Any(t => t.AccountId == userPointTransaction.AccountId))
             {
                 var transaction = newTransactions.First(t=> t.AccountId == userPointTransaction.AccountId);
-                transaction.SetAmount(transaction.Amount + userPointTransaction.Amount);
+                transaction.SetAmount(transaction.Amount + (-consumableAmount));
             }
             else
             {
                 newTransactions.Add(new UserPointTransaction(
                     GuidGenerator.Create(),
-                    userId,-consumableAmount,
+                    userId,
+                    -consumableAmount,
                     UserPointTransactionType.Spend,
                     userPointTransaction.AccountId,
                     entityType,entityId,

@@ -65,7 +65,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual void AddFrozenBalance(int amount, DateTime lastTransactionTime)
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }
@@ -81,7 +81,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
     /// <param name="lastTransactionTime"></param>
     public virtual void AddTotalEarned(int amount, DateTime lastTransactionTime)
     {
-        if (amount <= 0)
+        if (amount < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "When adding points, the amount must be a positive number.");
         }
@@ -92,7 +92,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual void AddTotalSpent(int amount, DateTime lastTransactionTime)
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }
@@ -103,7 +103,7 @@ public class UserPointAccount: FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual void AddTotalExpired(int amount, DateTime lastTransactionTime)
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }

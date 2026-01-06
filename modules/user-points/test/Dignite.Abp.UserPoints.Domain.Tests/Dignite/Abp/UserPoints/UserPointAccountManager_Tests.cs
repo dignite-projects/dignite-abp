@@ -6,14 +6,14 @@ using Xunit;
 
 namespace Dignite.Abp.UserPoints;
 
-public class UserPointTransactionManager_Tests : UserPointsDomainTestBase
+public class UserPointAccountManager_Tests : UserPointsDomainTestBase
 {
     private readonly UserPointAccountManager _userPointsManager;
     private readonly UserPointsTestData _testData;
     private readonly IUserPointAccountRepository _accountRepository;
     private readonly IClock _clock;
 
-    public UserPointTransactionManager_Tests()
+    public UserPointAccountManager_Tests()
     {
         _userPointsManager = GetRequiredService<UserPointAccountManager>();
         _testData = GetRequiredService<UserPointsTestData>();
@@ -49,12 +49,23 @@ public class UserPointTransactionManager_Tests : UserPointsDomainTestBase
     [Fact]
     public async Task ConsumerAsync_ShouldWorkProperly()
     {
-        var accounts = await _userPointsManager.ConsumeAsync(
+        await _userPointsManager.EarnAsync(
             _testData.User1Id,
-            -5
+            80,
+            UserPointsTestData.PointType
+             );
+        await _userPointsManager.EarnAsync(
+            _testData.User1Id,
+            10,
+            UserPointsTestData.PointType1
              );
 
-        accounts.Sum(a => a.CurrentBalance).ShouldBe(15);
+        var accounts = await _userPointsManager.ConsumeAsync(
+            _testData.User1Id,
+            -100
+             );
+
+        accounts.Sum(a => a.CurrentBalance).ShouldBe(10);
     }
 
     [Fact]

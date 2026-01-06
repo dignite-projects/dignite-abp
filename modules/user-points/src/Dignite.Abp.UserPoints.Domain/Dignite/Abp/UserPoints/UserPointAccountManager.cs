@@ -47,7 +47,7 @@ public class UserPointAccountManager: DomainService
         [CanBeNull] string remark = null
         )
     {
-        if (amount <= 0)
+        if (amount < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "When adding points, the amount must be a positive number.");
         }
@@ -117,7 +117,7 @@ public class UserPointAccountManager: DomainService
         [CanBeNull] string remark = null
         )
     {
-        if (amount >= 0)
+        if (amount > 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
         }

@@ -28,6 +28,11 @@ public class EfCoreUserPointTransactionRepository : EfCoreRepository<IUserPoints
         [CanBeNull] string remark = null,
         CancellationToken cancellationToken = default)
     {
+        if (amount >= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be a negative number when consuming points.");
+        }
+
         cancellationToken = GetCancellationToken(cancellationToken);
 
         // amount 为负数，表示需要扣多少

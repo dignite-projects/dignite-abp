@@ -45,9 +45,6 @@ public static class UserPointsDbContextModelCreatingExtensions
             b.HasIndex(up => new { up.UserId, up.AccountId, up.ExpirationDate, up.ConsumptionPriority, up.CreationTime, up.AvailableAmount});
             b.HasIndex(up => new { up.UserId, up.AccountId, up.ExpirationDate, up.CreationTime, up.Amount, up.EntityType, up.EntityId });
 
-            //
-            b.HasOne<UserPointAccount>().WithMany().HasForeignKey(x => x.AccountId);
-
             b.ApplyObjectExtensionMappings();
         });
     }

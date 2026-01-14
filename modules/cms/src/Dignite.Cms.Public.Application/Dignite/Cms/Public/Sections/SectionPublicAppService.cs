@@ -1,10 +1,10 @@
-﻿using Dignite.Cms.Entries;
-using Dignite.Cms.Fields;
-using Dignite.Cms.Sections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dignite.Cms.Entries;
+using Dignite.Cms.Fields;
+using Dignite.Cms.Sections;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Text.Formatting;
 
@@ -46,7 +46,7 @@ namespace Dignite.Cms.Public.Sections
             var section = await MatchingSectionByEntityPath(allSections, entityPath);
 
             /**
-             * When no matching Section is found, add /index/ to the url to try again.
+             * When no matching Section is found, add /default/ to the url to try again.
              * The reason is that when the Section type is SectionType.Single, the url may not contain a slug, so the default slug (i.e. index) is used to match again.
              * **/
             if (section == null)
@@ -105,7 +105,7 @@ namespace Dignite.Cms.Public.Sections
         protected async Task<SectionDto> MatchingSectionByEntityPath(List<Section> sections, string entryPath)
         {
             entryPath = entryPath.EnsureStartsWith('/').EnsureEndsWith('/');
-            foreach (var section in sections.OrderBy(s => s.Route.EnsureStartsWith('/')))
+            foreach (var section in sections.Where(s=>!s.IsDefault).OrderBy(s => s.Route.EnsureStartsWith('/')).ToList())
             {
                 var sectionRoute = section.Route.EnsureStartsWith('/').EnsureEndsWith('/');
                 var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);
@@ -117,6 +117,22 @@ namespace Dignite.Cms.Public.Sections
                 {
                     var dto = ObjectMapper.Map<Section, SectionDto>(
                         section
+                        );
+                    await FillFields(dto);
+                    return dto;
+                }
+            }
+
+            //
+            if (sections.First(s => s.IsDefault).Route.Contains("{slug}", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var defaultSection = sections.First(s => s.IsDefault);
+                var sectionRoute = defaultSection.Route.EnsureStartsWith('/').EnsureEndsWith('/');
+                var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);
+                if (extractResult.IsMatch)
+                {
+                    var dto = ObjectMapper.Map<Section, SectionDto>(
+                        defaultSection
                         );
                     await FillFields(dto);
                     return dto;

@@ -23,26 +23,26 @@ namespace Dignite.Cms.Sections
 
         public async Task<Section> GetDefaultAsync(bool includeDetails = true, CancellationToken cancellationToken = default)
         {
-            return await(await GetQueryableAsync())
+            return await(await GetQueryableAsync()).AsNoTracking()
                 .IncludeDetails(includeDetails)
                 .FirstOrDefaultAsync(s => s.IsActive && s.IsDefault && s.Type== SectionType.Single, GetCancellationToken(cancellationToken));
         }
 
         public async Task<bool> NameExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            return await (await GetDbSetAsync())
+            return await (await GetDbSetAsync()).AsNoTracking()
                        .AnyAsync(s => s.Name == name, GetCancellationToken(cancellationToken));
         }
 
         public async Task<bool> RouteExistsAsync(string route, CancellationToken cancellationToken = default)
         {
-            return await (await GetDbSetAsync())
+            return await (await GetDbSetAsync()).AsNoTracking()
                        .AnyAsync(s => s.Route == route, GetCancellationToken(cancellationToken));
         }
 
         public async Task<Section> FindByNameAsync( string name, bool includeDetails = true, CancellationToken cancellationToken = default)
         {
-            return await ((await GetQueryableAsync())
+            return await ((await GetQueryableAsync()).AsNoTracking()
                 .IncludeDetails(includeDetails))
                 .FirstOrDefaultAsync(s => s.Name == name, GetCancellationToken(cancellationToken));
         }
@@ -64,7 +64,7 @@ namespace Dignite.Cms.Sections
             string sorting = null,
             CancellationToken cancellationToken = default)
         {
-            return await (await GetQueryableAsync( filter, isActive))
+            return await (await GetQueryableAsync( filter, isActive)).AsNoTracking()
                 .IncludeDetails(includeDetails)
                 .OrderBy(sorting.IsNullOrEmpty() ? $"{nameof(Section.CreationTime)} asc" : sorting)
                 .PageBy(skipCount, maxResultCount)

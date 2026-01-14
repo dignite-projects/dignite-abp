@@ -22,8 +22,9 @@ namespace Dignite.Cms.Sections
 
         public async Task<bool> NameExistsAsync(Guid sectionId, string name, CancellationToken cancellationToken = default)
         {
-            return await (await GetDbSetAsync()).Where(s=>s.SectionId==sectionId)
-                       .AnyAsync(s => s.Name == name, GetCancellationToken(cancellationToken));
+            return await (await GetDbSetAsync()).AsNoTracking()
+                .Where(s=>s.SectionId==sectionId)
+                .AnyAsync(s => s.Name == name, GetCancellationToken(cancellationToken));
         }
     }
 }

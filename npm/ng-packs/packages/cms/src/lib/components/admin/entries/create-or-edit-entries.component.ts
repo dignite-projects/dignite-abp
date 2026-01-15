@@ -289,7 +289,6 @@ export class CreateOrEditEntriesComponent {
         })
         .subscribe((res: any) => {
           const entryList = res.items.filter(el => el.id !== this.entryInfo?.id);
-          console.log(entryList,'entryList');
           entryList.forEach(el=>{
             el.title=el.slug;
             el.key=el.id;
@@ -301,7 +300,6 @@ export class CreateOrEditEntriesComponent {
             el.children = this.groupByParentId(entryList, el.id, layer + 1);
             el.isLeaf= !el.children || el.children.length === 0
           });
-          console.log(parentList,'parentList');
           this.entryList = parentList;
           resolve(res);
         });
@@ -316,7 +314,6 @@ export class CreateOrEditEntriesComponent {
 //  ];
 
   onChange($event: string[]): void {
-    console.log($event);
   }
 
   /**对数组按照父子关系进行分组 */
@@ -332,7 +329,6 @@ export class CreateOrEditEntriesComponent {
   }
   /**别名转化 */
   slugChange(event: any) {
-    console.log(event, '别名转化');
     const val = event.target.value;
     //将val字段中的特殊字符替换为-，允许输入字母，数字，下划线，中划线，小数点
     const newVal = val.replace(/[^\-.\w\s]/g, '-');

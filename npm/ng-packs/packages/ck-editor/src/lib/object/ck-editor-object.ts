@@ -13,6 +13,7 @@ export var Simple: any = {
       'italic',
       'underline',
       'insertImage',
+      'insertTable',
       '|',
       'bulletedList',
       'numberedList',
@@ -22,6 +23,7 @@ export var Simple: any = {
     shouldNotGroupWhenFull: false,
   },
   plugins: [],
+
   heading: {
     options: [
       {
@@ -79,6 +81,15 @@ export var Simple: any = {
         },
       },
     },
+  },
+  table: {
+    contentToolbar: [
+      'tableColumn',
+      'tableRow',
+      'mergeTableCells',
+      'tableProperties',
+      'tableCellProperties',
+    ],
   },
 };
 

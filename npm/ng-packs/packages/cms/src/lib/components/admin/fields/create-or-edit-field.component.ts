@@ -38,7 +38,6 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
     if(!this.formControlNameInput.value&&this.fromControlList.length>0){
       this.formControlNameInput.patchValue(this.fromControlList[0].name)
     }
-     console.log(this._selected,'_selected')
     this.submitclick.nativeElement.click()
   }
 
@@ -96,17 +95,6 @@ export class CreateOrEditFieldComponent implements AfterContentInit {
   }
   /** */
   changeFormControlName(e){
-    console.log(this._selected,'_selected')
-  //  for (const element in this.formConfigurationInput.controls) {
-  //     const control = this.formConfigurationInput.controls[element];
-  //     const value = control.value;
-  //     if (Array.isArray(value)) {
-  //       control.patchValue([]);
-  //     } else if (typeof value === 'boolean') {
-  //       control.patchValue(false);
-  //     } else {
-  //       control.patchValue('');
-  //     }
-  //   }
+ 
   }
 }

@@ -152,6 +152,11 @@ export class SetCkEditorConfigsService {
       await import(
         `@ckeditor/ckeditor5-build-decoupled-document/build/translations/${LanguagesMap[language]}`
       );
+      if (configs.toolbar.items.includes('removeFormat')) {
+        await import(
+          `@ckeditor/ckeditor5-remove-format/build/translations/${LanguagesMap[language]}`
+        );
+      }
       resolve(configs);
     });
   }

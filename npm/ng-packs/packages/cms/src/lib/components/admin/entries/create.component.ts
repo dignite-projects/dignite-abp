@@ -121,7 +121,6 @@ export class CreateComponent implements OnInit {
     ).toISOString();
     this.formEntity.markAllAsTouched();
     this.formValidation=true;
-console.log(input,'提交',this.formEntity)
     if (!this.formEntity.valid) {
       for (const item of this.showEntryTypeInfo.fieldTabs) {
         for (const el of item.fields) {

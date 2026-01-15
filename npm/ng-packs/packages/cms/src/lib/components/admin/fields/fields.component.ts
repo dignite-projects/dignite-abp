@@ -47,7 +47,6 @@ export class FieldsComponent implements OnInit {
     //Add 'implements OnInit' to the class.
     await Promise.all([this._service.getfieldGroups(), this._service.getControlsfieldTypes()]);
     this.hookToQuery();
-   console.log(this.list,'1111');
 
     this._UpdateListService.updateListEvent.subscribe(() => {
       this.getData();

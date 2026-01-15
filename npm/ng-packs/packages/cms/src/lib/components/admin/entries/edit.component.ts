@@ -143,7 +143,6 @@ export class EditComponent implements OnInit {
           const displayName = key.charAt(0).toUpperCase() + key.slice(1);
           info = `"${this._LocalizationService.instant(`${module}::${displayName}`)}" `;
         }
-        console.log('info', info, input[key]);
         info = info + this._LocalizationService.instant(`AbpValidation::ThisFieldIsNotValid.`);
         //使用abp多语言提示
         this.toaster.warn(info);
@@ -233,7 +232,6 @@ export class EditComponent implements OnInit {
     // }
     // this.formValidation = this.getFormValidationStatus(this.formEntity);
     // return this.isSubmit=false;
-    console.log('保存', input);
     this.formValidation = true;
     if (!this.formEntity.valid) {
       for (const item of this.showEntryTypeInfo.fieldTabs) {

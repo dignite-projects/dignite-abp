@@ -30,7 +30,6 @@ export class EntryViewComponent {
   async ngAfterContentInit(): Promise<void> {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-    console.log('valueOptions',this.fields)
     if (this.type && this._value) {
       const options = this.fields?.field?.formConfiguration?.['Entry.Options'] || [];
       

@@ -97,7 +97,7 @@
                 <div class="table-responsive table-fixed-header">
                     <ngx-datatable class="material " [rows]="data.items" [list]="list" [columnMode]="ColumnMode.force"
                         [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [virtualization]="false"
-                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true">
+                        [externalPaging]="true" [count]="data.totalCount" [scrollbarH]="true" >
                         <!-- <ngx-datatable-column [name]="'Cms::Title' | abpLocalization" prop="title" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 {{ value }}
@@ -146,7 +146,7 @@
                             [prop]="item?.field?.name" [sortable]="false">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <df-dynamic-view [type]="item.field.formControlName" [showInList]="true" [fields]="item"
-                                    [value]="row?.extraProperties[item.field.name]"></df-dynamic-view>
+                                    [value]="item.entryTypeId===row.entryTypeId?(row?.extraProperties[item.field.name]?row?.extraProperties[item.field.name]:'---'):'---'"></df-dynamic-view>
                             </ng-template>
                         </ngx-datatable-column>
                         }
@@ -160,7 +160,9 @@
                             [frozenLeft]="true" [width]="110" [maxWidth]="110">
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <div ngbDropdown container="body">
-                                    <button type="button" *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'" class="btn btn-primary btn-sm" ngbDropdownToggle>
+                                    <button type="button"
+                                        *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'"
+                                        class="btn btn-primary btn-sm" ngbDropdownToggle>
                                         <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                     </button>
                                     <div ngbDropdownMenu>
@@ -170,12 +172,14 @@
                                         @if
                                         (((row|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
                                         {
-                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Create'" [routerLink]="['/cms/admin/entries/create']"
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Create'"
+                                            [routerLink]="['/cms/admin/entries/create']"
                                             [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:row.entryTypeId,entryVersionId:row.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                             |
                                             abpLocalization}} </button>
                                         }
-                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'" (click)="deletefield(row)">{{'Cms::Delete' |
+                                        <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'"
+                                            (click)="deletefield(row)">{{'Cms::Delete' |
                                             abpLocalization}}</button>
                                     </div>
                                 </div>
@@ -188,7 +192,8 @@
 
                 @if(SiteOfSectionType===SectionType.Structure){
                 <div class="table-responsive table-fixed-header">
-                    <table class="table overflow-nowrap mb-0" cdkDropList [cdkDropListSortingDisabled]="true" (cdkDropListDropped)="drop($event)">
+                    <table class="table overflow-nowrap mb-0" cdkDropList [cdkDropListSortingDisabled]="true"
+                        (cdkDropListDropped)="drop($event)">
                         <thead>
                             <tr>
                                 <th class="sticky-left-card-bg"> <span
@@ -208,10 +213,11 @@
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let item of data.items">
-                                <ng-container *ngTemplateOutlet="treeRow; context: {item: item, level: 0}"></ng-container>
+                                <ng-container
+                                    *ngTemplateOutlet="treeRow; context: {item: item, level: 0}"></ng-container>
                             </ng-container>
                         </tbody>
-                        
+
                         <ng-template #treeRow let-item="item" let-level="level">
                             <tr cdkDrag [cdkDragData]="{item: item, level: level}"
                                 [class.drop-above]="dropPosition === 'above' && dropTargetId === item.id && !isInvalidDropTarget"
@@ -219,14 +225,14 @@
                                 [class.drop-inside]="dropPosition === 'inside' && dropTargetId === item.id && !isInvalidDropTarget"
                                 [class.drop-invalid]="dropTargetId === item.id && isInvalidDropTarget"
                                 [style.cursor]="dropTargetId === item.id && isInvalidDropTarget ? 'not-allowed' : ''"
-                                (cdkDragStarted)="onDragStarted($event)"
-                                (cdkDragEnded)="onDragEnded($event)"
-                                (cdkDragEntered)="onDragEntered($event, item)"
-                                (mousemove)="onMouseMove($event, item)">
+                                (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)"
+                                (cdkDragEntered)="onDragEntered($event, item)" (mousemove)="onMouseMove($event, item)">
                                 <td class="sticky-left-card-bg">
                                     <div ngbDropdown container="body">
                                         <span class="bi bi-arrows-move fs-5 drag-handle me-2" cdkDragHandle></span>
-                                        <button type="button" class="btn btn-primary btn-sm" *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'" ngbDropdownToggle>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                            *abpPermission="'CmsAdmin.Entry.Delete||CmsAdmin.Entry.Create||CmsAdmin.Entry.Update'"
+                                            ngbDropdownToggle>
                                             <i class="me-1 fa fa-cog"></i> {{'AbpUi::Actions' | abpLocalization}}
                                         </button>
                                         <div ngbDropdownMenu>
@@ -236,7 +242,8 @@
                                             @if
                                             (((item|getLocalizedEntriesBySlug:filters.sectionId:sectionLanguagesList)|async)===false)
                                             {
-                                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']" *abpPermission="'CmsAdmin.Entry.Create'"
+                                            <button ngbDropdownItem [routerLink]="['/cms/admin/entries/create']"
+                                                *abpPermission="'CmsAdmin.Entry.Create'"
                                                 [queryParams]="{cultureName: filters.culture,sectionId:filters.sectionId,entryTypeId:item.entryTypeId,entryVersionId:item.id,isOther:1}">{{'Cms::CreateOtherLanguages'
                                                 |
                                                 abpLocalization}}</button>
@@ -246,7 +253,8 @@
                                                 |
                                                 abpLocalization}} </button> -->
 
-                                            <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'" (click)="deletefield(item)">{{'AbpUi::Delete' |
+                                            <button ngbDropdownItem *abpPermission="'CmsAdmin.Entry.Delete'"
+                                                (click)="deletefield(item)">{{'AbpUi::Delete' |
                                                 abpLocalization}}</button>
                                         </div>
                                     </div>
@@ -277,15 +285,15 @@
                                 <td>
                                     <df-dynamic-view [type]="item1.field.formControlName" [showInList]="true"
                                         [fields]="item1"
-                                        [value]="item?.extraProperties[item1.field.name]"></df-dynamic-view>
-
+                                        [value]="item.entryTypeId===item1.entryTypeId?(item?.extraProperties[item1.field.name]?item?.extraProperties[item1.field.name]:'---'):'---'"></df-dynamic-view>
                                 </td>
                                 }
                                 <td>{{item.publishTime | shortDateTime }}</td>
                             </tr>
                             <ng-container *ngIf="item.children && item.children.length > 0">
                                 <ng-container *ngFor="let child of item.children">
-                                    <ng-container *ngTemplateOutlet="treeRow; context: {item: child, level: level + 1}"></ng-container>
+                                    <ng-container
+                                        *ngTemplateOutlet="treeRow; context: {item: child, level: level + 1}"></ng-container>
                                 </ng-container>
                             </ng-container>
                         </ng-template>

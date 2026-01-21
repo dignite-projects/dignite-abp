@@ -201,7 +201,7 @@ export class EntriesComponent implements OnInit {
       for (const el of _entryTypeList) {
         for (const el1 of el.fieldTabs) {
           for (const el2 of el1.fields) {
-            // el2.field = await this.getDynamicFormEntity(el2.fieldId);
+            el2.entryTypeId = el.id;
             if (el2.enableSearch && this.enableSearchTypeList.includes(el2.field.formControlName)) {
               this.enableSearchFieldList.push({
                 ...el2,
@@ -348,20 +348,24 @@ export class EntriesComponent implements OnInit {
     const setData = (list: PagedResultDto<EntryDto> | any) => {
       this.data.items = [];
       this.data.totalCount = 0;
-      for (const element of list.items) {
-        const sectionItem = this.SiteOfSectionList.find(el => el.id == element.sectionId);
-        element.sectionType = sectionItem.type;
-      }
-      if (this.SiteOfSectionType == SectionType.Structure) {
-        this.copylistItem = list.items;
-        list.items = this.buildTree(list.items);
-      }
+      setTimeout(() => {
+        for (const element of list.items) {
+          const sectionItem = this.SiteOfSectionList.find(el => el.id == element.sectionId);
+          element.sectionType = sectionItem.type;
+        }
+        if (this.SiteOfSectionType == SectionType.Structure) {
+          this.copylistItem = list.items;
+          list.items = this.buildTree(list.items);
+        }
 
-      this.data = list;
-      if (this.shouldScrollToTop) {
-        this.scrollToTop();
-      }
-      this.shouldScrollToTop = true;
+        this.data = list;
+        this.cdRef.detectChanges();
+
+        if (this.shouldScrollToTop) {
+          this.scrollToTop();
+        }
+        this.shouldScrollToTop = true;
+      });
     };
     this.list.hookToQuery(getData).subscribe(setData);
   }
@@ -436,16 +440,16 @@ export class EntriesComponent implements OnInit {
    */
   onMouseMove(event: MouseEvent, targetItem: any) {
     if (!this.isDragging || !this.draggedItem) return;
-    
+
     const target = (event.currentTarget as HTMLElement).closest('tr');
     if (!target) return;
-    
+
     this.dropTargetId = targetItem.id;
-    
+
     const rect = target.getBoundingClientRect();
     const y = event.clientY - rect.top;
     const height = rect.height;
-    
+
     if (y < height * 0.25) {
       this.dropPosition = 'above';
     } else if (y > height * 0.75) {
@@ -453,7 +457,7 @@ export class EntriesComponent implements OnInit {
     } else {
       this.dropPosition = 'inside';
     }
-    
+
     // 检查是否为无效拖拽目标
     this.isInvalidDropTarget = this.isDescendantOrSelf(this.draggedItem.id, targetItem.id);
     // console.log('拖拽节点ID:', this.draggedItem.id, '目标节点ID:', targetItem.id, '是否无效:', this.isInvalidDropTarget);
@@ -481,21 +485,19 @@ export class EntriesComponent implements OnInit {
       this.clearDropState();
       return;
     }
-    
+
     const draggedItem = draggedData.item;
-    
+
     // 验证拖拽目标和位置是否有效
     if (!this.dropTargetId || !this.dropPosition) {
       console.log('无拖拽目标或位置');
       this.clearDropState();
       return;
     }
-    
+
     // 在原始平铺数据中查找目标节点
     const targetItem = this.findItemById(this.copylistItem, this.dropTargetId);
-    
-  
-  
+
     console.log('拖拽节点:', draggedItem);
     /* 
      拖拽位置：above-上方, below-下方, inside-内部 
@@ -503,7 +505,7 @@ export class EntriesComponent implements OnInit {
     */
     console.log('目标节点:', targetItem);
     console.log('位置:', this.dropPosition);
-      // 验证目标节点存在且不是自己或子节点
+    // 验证目标节点存在且不是自己或子节点
     if (!targetItem || this.isDescendantOrSelf(draggedItem.id, targetItem.id)) {
       this.toaster.warn(this._LocalizationService.instant('Cms::CannotDragToSelfOrDescendant'));
       this.clearDropState();
@@ -511,11 +513,11 @@ export class EntriesComponent implements OnInit {
     }
     // 构建移动参数
     const moveParams: any = {};
-    
+
     // 如果是放置到内部，设置parentId为目标节点ID
     if (this.dropPosition === 'inside') {
       moveParams.parentId = targetItem.id;
-    } 
+    }
     // 如果是放置在上方或下方，使用目标节点的parentId和order
     else {
       moveParams.parentId = targetItem.parentId;
@@ -529,20 +531,17 @@ export class EntriesComponent implements OnInit {
     this.updateLocalData(draggedItem, moveParams);
     this.clearDropState();
     // 调用后端API
-    this._EntryAdminService
-      .move(draggedItem.id, moveParams)
-      .subscribe(
-        () => {
-          this.toaster.success(this._LocalizationService.instant('AbpUi::SavedSuccessfully'));
-          this.shouldScrollToTop = false;
-          this.list.get();
-        },
-        () => {
-          this.shouldScrollToTop = false;
-          this.list.get();
-        }
-      );
-
+    this._EntryAdminService.move(draggedItem.id, moveParams).subscribe(
+      () => {
+        this.toaster.success(this._LocalizationService.instant('AbpUi::SavedSuccessfully'));
+        this.shouldScrollToTop = false;
+        this.list.get();
+      },
+      () => {
+        this.shouldScrollToTop = false;
+        this.list.get();
+      },
+    );
   }
 
   /**
@@ -575,7 +574,7 @@ export class EntriesComponent implements OnInit {
   private isDescendant(parentId: string, childId: string): boolean {
     const parent = this.findItemById(this.data.items, parentId);
     if (!parent) return false;
-    
+
     const checkChildren = (node: any): boolean => {
       if (!node.children || node.children.length === 0) return false;
       for (const child of node.children) {
@@ -584,7 +583,7 @@ export class EntriesComponent implements OnInit {
       }
       return false;
     };
-    
+
     return checkChildren(parent);
   }
 

@@ -27,6 +27,7 @@ export class TextEditViewComponent {
   async ngAfterContentInit(): Promise<void> {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
+    
     let valueOptions = this._value;
     if (this.type && valueOptions) {
       this.showValue = valueOptions;

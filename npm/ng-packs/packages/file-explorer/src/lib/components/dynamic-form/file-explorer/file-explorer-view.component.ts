@@ -22,7 +22,11 @@ export class FileExplorerViewComponent {
   _value: any = '';
   @Input()
   public set value(v: any) {
-    this._value = v;
+    if(v instanceof Array){
+      this._value = v;
+      return
+    }
+    this._value = [];
   }
 
   async ngAfterContentInit(): Promise<void> {

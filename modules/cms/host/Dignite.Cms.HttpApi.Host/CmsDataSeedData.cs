@@ -32,7 +32,7 @@ public class CmsDataSeedData : ISingletonDependency
 
     public Guid HomeSectionId { get; } = Guid.NewGuid();
     public string HomeSectionName = "home";
-    public string HomeSectionRoute = "/";
+    public string HomeSectionRoute = "/{slug}";
     public string HomeSectionTemplate = "HomePage";
     public Guid BlogSectionId { get; } = Guid.NewGuid();
     public string BlogSectionName = "blog-index";

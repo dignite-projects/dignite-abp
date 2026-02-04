@@ -1,19 +1,17 @@
-﻿using Asp.Versioning;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Asp.Versioning;
 using Dignite.Abp.AspNetCore.Mvc.Regionalization;
-using Dignite.Abp.AspNetCore.Mvc.Regionalization.Routing;
 using Dignite.Abp.Regionalization;
 using Dignite.Cms.Entries;
 using Dignite.Cms.Localization;
 using Dignite.Cms.Public.Entries;
 using Dignite.Cms.Public.Sections;
 using Dignite.Cms.Public.Web.Models;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Text.Formatting;
 
@@ -92,7 +90,14 @@ namespace Dignite.Cms.Public.Web.Controllers
         /// <returns></returns>
         protected async Task<IActionResult> GetEntryActionResult(string culture,string path="/")
         {
-            path = path.EnsureStartsWith('/');
+            path = path.EnsureStartsWith('/').EnsureEndsWith('/');
+
+            if (path.EndsWith($"/{EntryConsts.DefaultSlug}/", StringComparison.OrdinalIgnoreCase))
+            {
+                path = path.Substring(0, path.Length - (EntryConsts.DefaultSlug.Length + 2)).Trim('/');
+                return RedirectToAction(nameof(CultureEntry), new { culture, path });
+            }
+
             var section = await GetSectionByEntityPath(path);
             if (section == null)
             {

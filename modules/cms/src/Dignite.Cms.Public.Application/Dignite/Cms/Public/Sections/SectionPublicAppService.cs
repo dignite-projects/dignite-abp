@@ -23,14 +23,8 @@ namespace Dignite.Cms.Public.Sections
 
         public async Task<SectionDto> FindByNameAsync(string name)
         {
-            var dto = ObjectMapper.Map<Section, SectionDto>(
-                await _sectionRepository.FindByNameAsync(name)
-                );
-            if (dto != null)
-            {
-                await FillFields(dto);
-            }
-            return dto;
+            var result = await _sectionRepository.FindByNameAsync(name);
+            return await MapToSectionDto(result);
         }
 
         /// <summary>
@@ -44,16 +38,6 @@ namespace Dignite.Cms.Public.Sections
         {
             var allSections = await _sectionRepository.GetListAsync(null, true, true);
             var section = await MatchingSectionByEntityPath(allSections, entityPath);
-
-            /**
-             * When no matching Section is found, add /default/ to the url to try again.
-             * The reason is that when the Section type is SectionType.Single, the url may not contain a slug, so the default slug (i.e. index) is used to match again.
-             * **/
-            if (section == null)
-            {
-                entityPath = entityPath.EnsureEndsWith('/') + EntryConsts.DefaultSlug;
-                section= await MatchingSectionByEntityPath(allSections,entityPath);
-            }
 
             return section;
         }
@@ -72,78 +56,61 @@ namespace Dignite.Cms.Public.Sections
 
         public async Task<SectionDto> GetAsync(Guid id)
         {
-            var dto = ObjectMapper.Map<Section, SectionDto>(
-                await _sectionRepository.GetAsync(id)
-                );
-
-            if (dto != null)
-            {
-                await FillFields(dto);
-            }
-            return dto;
+            var result = await _sectionRepository.GetAsync(id);
+            return await MapToSectionDto(result);
         }
 
         public async Task<SectionDto> GetDefaultAsync()
         {
             var result = await _sectionRepository.GetDefaultAsync();
-
-            if (result == null)
-            {
-                return null;
-            }
-            else
-            {
-                var dto = ObjectMapper.Map<Section, SectionDto>(
-                    result
-                    );
-
-                await FillFields(dto);
-                return dto;
-            }
+            return await MapToSectionDto(result);
         }
 
         protected async Task<SectionDto> MatchingSectionByEntityPath(List<Section> sections, string entryPath)
         {
+            var reorderedSections = sections
+                .OrderBy(s => s.IsDefault)
+                .ThenBy(s => s.Route.EnsureStartsWith('/').EnsureEndsWith('/'))
+                .ToList();
             entryPath = entryPath.EnsureStartsWith('/').EnsureEndsWith('/');
-            foreach (var section in sections.Where(s=>!s.IsDefault).OrderBy(s => s.Route.EnsureStartsWith('/')).ToList())
+            foreach (var section in reorderedSections)
             {
                 var sectionRoute = section.Route.EnsureStartsWith('/').EnsureEndsWith('/');
-                var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);
-                if (
-                    (!sectionRoute.Contains("{slug}", StringComparison.InvariantCultureIgnoreCase) && sectionRoute.Equals(entryPath,StringComparison.InvariantCultureIgnoreCase))
-                    ||
-                    (sectionRoute.Contains("{slug}", StringComparison.InvariantCultureIgnoreCase) && extractResult.IsMatch)
-                    )
+                if (!sectionRoute.Contains("{slug}", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var dto = ObjectMapper.Map<Section, SectionDto>(
-                        section
-                        );
-                    await FillFields(dto);
-                    return dto;
+                    if (sectionRoute.Equals(entryPath, StringComparison.InvariantCultureIgnoreCase))
+                        return await MapToSectionDto(section);
                 }
-            }
-
-            //
-            if (sections.First(s => s.IsDefault).Route.Contains("{slug}", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var defaultSection = sections.First(s => s.IsDefault);
-                var sectionRoute = defaultSection.Route.EnsureStartsWith('/').EnsureEndsWith('/');
-                var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);
-                if (extractResult.IsMatch)
+                else
                 {
-                    var dto = ObjectMapper.Map<Section, SectionDto>(
-                        defaultSection
-                        );
-                    await FillFields(dto);
-                    return dto;
+                    var extractResult = FormattedStringValueExtracter.Extract(entryPath, sectionRoute, ignoreCase: true);
+                    if (extractResult.IsMatch)
+                    {
+                        return await MapToSectionDto(section);
+                    }
+                    else
+                    {
+                        extractResult = FormattedStringValueExtracter.Extract(entryPath + EntryConsts.DefaultSlug, sectionRoute, ignoreCase: true); 
+                        if (extractResult.IsMatch)
+                        {
+                            return await MapToSectionDto(section);
+                        }
+                    }
                 }
             }
 
             return null;
         }
 
-        protected async Task FillFields(SectionDto dto)
-        { 
+        protected async Task<SectionDto> MapToSectionDto(Section section)
+        {
+            if (section == null)
+                return null;
+
+            var dto = ObjectMapper.Map<Section, SectionDto>(
+                section
+                );
+
             var allFields = await _fieldRepository.GetListAsync(false);
             var fieldsDto = ObjectMapper.Map<List<Field>, List<FieldDto>>(allFields);
             foreach (var entryType in dto.EntryTypes)
@@ -156,6 +123,7 @@ namespace Dignite.Cms.Public.Sections
                     }
                 }
             }
+            return dto;
         }
     }
 }

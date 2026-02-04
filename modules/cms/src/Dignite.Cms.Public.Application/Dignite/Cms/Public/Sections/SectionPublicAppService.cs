@@ -30,14 +30,14 @@ namespace Dignite.Cms.Public.Sections
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="entityPath">
+        /// <param name="entryPath">
         /// The entry path does not contain culture.
         /// </param>
         /// <returns></returns>
-        public async Task<SectionDto> FindByEntityPathAsync( string entityPath)
+        public async Task<SectionDto> FindByEntryPathAsync( string entryPath)
         {
             var allSections = await _sectionRepository.GetListAsync(null, true, true);
-            var section = await MatchingSectionByEntityPath(allSections, entityPath);
+            var section = await MatchingSectionByEntryPath(allSections, entryPath);
 
             return section;
         }
@@ -66,7 +66,7 @@ namespace Dignite.Cms.Public.Sections
             return await MapToSectionDto(result);
         }
 
-        protected async Task<SectionDto> MatchingSectionByEntityPath(List<Section> sections, string entryPath)
+        protected async Task<SectionDto> MatchingSectionByEntryPath(List<Section> sections, string entryPath)
         {
             var reorderedSections = sections
                 .OrderBy(s => s.IsDefault)
@@ -90,7 +90,7 @@ namespace Dignite.Cms.Public.Sections
                     }
                     else
                     {
-                        extractResult = FormattedStringValueExtracter.Extract(entryPath + EntryConsts.DefaultSlug, sectionRoute, ignoreCase: true); 
+                        extractResult = FormattedStringValueExtracter.Extract($"{entryPath}{EntryConsts.DefaultSlug}/", sectionRoute, ignoreCase: true);
                         if (extractResult.IsMatch)
                         {
                             return await MapToSectionDto(section);

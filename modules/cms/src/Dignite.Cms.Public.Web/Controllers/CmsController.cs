@@ -98,7 +98,7 @@ namespace Dignite.Cms.Public.Web.Controllers
                 return RedirectToAction(nameof(CultureEntry), new { culture, path });
             }
 
-            var section = await GetSectionByEntityPath(path);
+            var section = await GetSectionByEntryPath(path);
             if (section == null)
             {
                 Logger.LogError("Section not found for path: {Path}", path);  
@@ -120,21 +120,21 @@ namespace Dignite.Cms.Public.Web.Controllers
             }
         }
 
-        protected async Task<SectionDto> GetSectionByEntityPath(string entityPath)
+        protected async Task<SectionDto> GetSectionByEntryPath(string entryPath)
         {
-            if (entityPath.IsNullOrEmpty() || entityPath == "/")
+            if (entryPath.IsNullOrEmpty() || entryPath == "/")
             {
                 return await _sectionPublicAppService.GetDefaultAsync();
             }
             else
             {
-                return await _sectionPublicAppService.FindByEntityPathAsync(entityPath);
+                return await _sectionPublicAppService.FindByEntryPathAsync(entryPath);
             }
         }
 
-        protected async Task<EntryDto> GetEntry(string culture, string entityPath, SectionDto section)
+        protected async Task<EntryDto> GetEntry(string culture, string entryPath, SectionDto section)
         {
-            var slug = ExtractSlug(section.Route, entityPath);
+            var slug = ExtractSlug(section.Route, entryPath);
             if (slug.IsNullOrEmpty())
             {
                 slug = EntryConsts.DefaultSlug;

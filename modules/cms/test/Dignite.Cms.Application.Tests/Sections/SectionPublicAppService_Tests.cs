@@ -50,7 +50,7 @@ public class SectionPublicAppService_Tests : CmsApplicationTestBase
     [Fact]
     public async Task FindByEntryPathAsync_ShouldWorkProperly_WithEntryPath()
     {
-        var section = await sectionPublicAppService.FindByEntityPathAsync( "blog/a-post-slug");
+        var section = await sectionPublicAppService.FindByEntryPathAsync( "blog/a-post-slug");
 
         section.Name.ShouldBe(testData.ChannelSectionName);
         section.EntryTypes.ShouldNotBeEmpty();

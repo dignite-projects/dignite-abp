@@ -7,6 +7,21 @@
 
 # Dignite ABP
 
+> [!WARNING]
+> **This repository has been archived and is no longer actively maintained.**
+>
+> This project was hand-coded over several years around an idealistic vision for its features, but the implementation gradually fell behind that vision from an engineering standpoint. Over the past few months I've been using AI coding tools extensively in my day-to-day work, and it's become clear that AI's coding ability now far exceeds what I can produce by hand.
+>
+> This project was also structured in imitation of the [ABP Framework](https://abp.io/)'s architecture, which made it fairly large and heavyweight overall. Going forward, I'm extracting the genuinely valuable modules from this codebase one at a time and publishing each as its own lightweight, independent open-source project that developers can adopt individually.
+>
+> Modules extracted so far:
+>
+> - **Notifications** → [dignite-projects/abp-notifications](https://github.com/dignite-projects/abp-notifications)
+>
+> More modules will be extracted over time — stay tuned. This repository remains available for reference but will not receive further feature development.
+>
+> Thank you to everyone who has followed, used, or contributed to this project!
+
 Empowering the [ABP Framework](https://abp.io/) ecosystem with enhancements such as notification systems, dynamic forms, user points, file management, CMS, multi-tenant themes, multi-tenant localization, multi-tenant domain names, and multi-tenant regionalization.
 
 ## Dignite ABP Modules

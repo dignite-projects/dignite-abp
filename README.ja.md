@@ -12,13 +12,14 @@
 >
 > このプロジェクトは、数年かけて手作業でコーディングしてきたもので、機能面では理想を追い求めていましたが、実装面ではその理想と徐々にギャップが生まれていました。ここ数か月、日々の開発で AI コーディングツールを積極的に活用する中で、AI のコーディング能力が私個人の手作業によるコーディング能力をはるかに上回っていることを実感しました。
 >
-> また、本プロジェクトは構造面で [ABP Framework](https://abp.io/) の構成を模倣しており、全体として規模が大きく、重量級のものになっていました。そこで、プロジェクトの中から本当に価値のあるモジュールを一つずつ切り出し、開発者が個別に導入できる軽量な独立オープンソースプロジェクトとして公開していくことにしました。
+> また、本プロジェクトは構造面で [ABP Framework](https://abp.io/) のアーキテクチャを模倣しており、全体として規模が大きく、重量級のものになっていました。そこで今後は、本プロジェクトの中から本当に価値のある ABP モジュールを、新設の [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) リポジトリへ移行し、軽量で個別に導入可能なモジュールとしてまとめて開発・リリースしていきます。
 >
-> これまでに切り出したモジュール:
+> これまでに移行したモジュール:
 >
-> - **Notifications** → [dignite-projects/abp-notifications](https://github.com/dignite-projects/abp-notifications)
+> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
+> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
 >
-> 今後も残りのモジュールを継続的に評価し、価値のある部分を順次独立したオープンソースプロジェクトとして切り出していく予定です。本リポジトリは参考用として残しますが、新機能の開発は行いません。
+> 今後も他のモジュールを順次移行していく予定です。続報にご期待ください。本リポジトリは参考用として残りますが、新機能の開発は行いません。
 >
 > これまでこのプロジェクトを見守り、利用し、貢献してくださったすべての方々に感謝いたします！
 

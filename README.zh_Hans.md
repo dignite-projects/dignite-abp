@@ -12,13 +12,14 @@
 >
 > 这个项目是我花费数年时间纯手工编码打造的，功能理念比较理想化，但在工程实现上逐渐与这个理念产生了差距。近几个月来，我在日常开发中大量使用 AI 编程工具，发现 AI 的编码能力已经远远超过了我个人手写代码的能力。
 >
-> 同时，本项目在结构上模仿了 [ABP Framework](https://abp.io/) 的组织方式，整体规模较大、比较厚重。因此，我决定将项目中真正有价值的模块逐一抽离，独立发布为轻量级的开源项目，方便开发者按需引入。
+> 同时，本项目在结构上模仿了 [ABP Framework](https://abp.io/) 的架构，整体规模较大、比较厚重。因此，项目中真正有价值的 ABP 模块将陆续迁移到全新的 [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) 仓库，在那里以轻量级、可独立安装的模块形式统一开发和发布。
 >
-> 目前已完成抽离的模块：
+> 目前已迁移的模块：
 >
-> - **Notifications** → [dignite-projects/abp-notifications](https://github.com/dignite-projects/abp-notifications)
+> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
+> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
 >
-> 后续会持续评估项目中的其他模块，将有价值的部分陆续抽离为独立的开源项目，欢迎关注。本仓库仍会保留供参考，但不再接受新功能开发。
+> 后续会持续将其他模块迁移过去，欢迎关注。本仓库仍会保留供参考，但不再接受新功能开发。
 >
 > 感谢所有曾经关注、使用和贡献过这个项目的朋友们！
 

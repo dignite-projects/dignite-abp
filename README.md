@@ -12,11 +12,12 @@
 >
 > This project was hand-coded over several years around an idealistic vision for its features, but the implementation gradually fell behind that vision from an engineering standpoint. Over the past few months I've been using AI coding tools extensively in my day-to-day work, and it's become clear that AI's coding ability now far exceeds what I can produce by hand.
 >
-> This project was also structured in imitation of the [ABP Framework](https://abp.io/)'s architecture, which made it fairly large and heavyweight overall. Going forward, I'm extracting the genuinely valuable modules from this codebase one at a time and publishing each as its own lightweight, independent open-source project that developers can adopt individually.
+> This project was also structured in imitation of the [ABP Framework](https://abp.io/)'s architecture, which made it fairly large and heavyweight overall. Going forward, the genuinely valuable ABP modules from this codebase are moving to the new [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) repository, where they are developed and released together as lightweight, independently installable modules.
 >
-> Modules extracted so far:
+> Modules migrated so far:
 >
-> - **Notifications** → [dignite-projects/abp-notifications](https://github.com/dignite-projects/abp-notifications)
+> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
+> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
 >
 > More modules will be extracted over time — stay tuned. This repository remains available for reference but will not receive further feature development.
 >

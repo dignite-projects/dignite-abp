@@ -14,12 +14,7 @@
 >
 > また、本プロジェクトは構造面で [ABP Framework](https://abp.io/) のアーキテクチャを模倣しており、全体として規模が大きく、重量級のものになっていました。そこで今後は、本プロジェクトの中から本当に価値のある ABP モジュールを、新設の [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) リポジトリへ移行し、軽量で個別に導入可能なモジュールとしてまとめて開発・リリースしていきます。
 >
-> これまでに移行したモジュール:
->
-> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
-> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
->
-> 今後も他のモジュールを順次移行していく予定です。続報にご期待ください。本リポジトリは参考用として残りますが、新機能の開発は行いません。
+> 本リポジトリは参考用として残りますが、新機能の開発は行いません。
 >
 > これまでこのプロジェクトを見守り、利用し、貢献してくださったすべての方々に感謝いたします！
 

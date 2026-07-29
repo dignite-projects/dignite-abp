@@ -14,12 +14,7 @@
 >
 > This project was also structured in imitation of the [ABP Framework](https://abp.io/)'s architecture, which made it fairly large and heavyweight overall. Going forward, the genuinely valuable ABP modules from this codebase are moving to the new [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) repository, where they are developed and released together as lightweight, independently installable modules.
 >
-> Modules migrated so far:
->
-> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
-> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
->
-> More modules will be extracted over time — stay tuned. This repository remains available for reference but will not receive further feature development.
+> This repository remains available for reference but will not receive further feature development.
 >
 > Thank you to everyone who has followed, used, or contributed to this project!
 

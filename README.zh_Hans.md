@@ -14,12 +14,7 @@
 >
 > 同时，本项目在结构上模仿了 [ABP Framework](https://abp.io/) 的架构，整体规模较大、比较厚重。因此，项目中真正有价值的 ABP 模块将陆续迁移到全新的 [dignite-projects/abp-modules](https://github.com/dignite-projects/abp-modules) 仓库，在那里以轻量级、可独立安装的模块形式统一开发和发布。
 >
-> 目前已迁移的模块：
->
-> - **File Storing / File Explorer** → [dignite-projects/abp-modules/file-storing](https://github.com/dignite-projects/abp-modules/tree/main/file-storing)
-> - **Notifications / Notification Center** → [dignite-projects/abp-modules/notifications](https://github.com/dignite-projects/abp-modules/tree/main/notifications)
->
-> 后续会持续将其他模块迁移过去，欢迎关注。本仓库仍会保留供参考，但不再接受新功能开发。
+> 本仓库仍会保留供参考，但不再接受新功能开发。
 >
 > 感谢所有曾经关注、使用和贡献过这个项目的朋友们！
 
